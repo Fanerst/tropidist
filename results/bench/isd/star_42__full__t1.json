@@ -1,0 +1,107 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "star_42",
+  "variant": "full",
+  "rows": 252,
+  "cols": 13902,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 6,
+  "witness": [
+    280,
+    358,
+    484,
+    525,
+    1025,
+    1529
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.375,
+      "ub": 84
+    },
+    {
+      "t": 0.414,
+      "ub": 63
+    },
+    {
+      "t": 0.452,
+      "ub": 58
+    },
+    {
+      "t": 0.489,
+      "ub": 38
+    },
+    {
+      "t": 0.536,
+      "ub": 35
+    },
+    {
+      "t": 0.594,
+      "ub": 34
+    },
+    {
+      "t": 0.647,
+      "ub": 18
+    },
+    {
+      "t": 0.782,
+      "ub": 17
+    },
+    {
+      "t": 1.226,
+      "ub": 9
+    },
+    {
+      "t": 1.263,
+      "ub": 7
+    },
+    {
+      "t": 5.971,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 65.2,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "search calls: 2057; valid outputs: 11; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/star_42",
+    "family": "star",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T13:16:51.573407+00:00",
+    "ended_at": "2026-10-04T13:26:51.751710+00:00",
+    "wall_seconds": 600.142246,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.089246,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/star_42__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/star_42__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,259 @@
+{
+ "paper": "hypsurf_pick",
+ "code": [
+  150,
+  4,
+  10
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "Z",
+ "rounds": 5,
+ "noise": "full",
+ "circuit": "circuits/papers/hypsurf_pickq6_L5_ZZ_v040336_r5_Z.stim",
+ "threads": 1,
+ "model": {
+  "qubits": 366,
+  "detectors": 1008,
+  "observables": 4,
+  "dem_mechanisms": 17578,
+  "sector_rows": 578,
+  "sector_columns": 2770,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 108,
+  "collapsed_columns": 330
+ },
+ "sector_symmetries_kept": null,
+ "symmetries_expected": 0,
+ "collapsed": {
+  "rows": 108,
+  "columns": 330,
+  "k_table": 3,
+  "orbits": null,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 597,
+    "false_hits": 267,
+    "seconds": 0.0
+   },
+   {
+    "K": 6,
+    "status": "found",
+    "best": 6,
+    "nodes": 1087,
+    "false_hits": 489,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 6,
+  "n_min_solution_orbits": 33,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 1
+ },
+ "certified_lower_bound": 7,
+ "window_t0_at_d_coll": {
+  "columns": 162,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 162,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "witness": {
+  "weight": 7,
+  "dem_error_indices": [
+   2004,
+   2008,
+   6201,
+   6357,
+   9584,
+   13760,
+   17007
+  ],
+  "dem_errors": [
+   "error(0.000266707) D118 D300",
+   "error(0.00953789) D118 D308",
+   "error(0.000200036) D300 D478",
+   "error(0.000200036) D308 D922",
+   "error(0.000200036) D478 D682 L1 L2",
+   "error(0.000200036) D682 D882",
+   "error(0.00186509) D882 D922"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    1,
+    2
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 16,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      349
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      55,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 28,
+    "instruction": "M",
+    "paulis": [],
+    "flipped_measurement": 188,
+    "stack": [
+     [
+      96,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 38,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      337
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      249,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 38,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      145
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      249,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 60,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      301
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      515,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 94,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      313
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      843,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 100,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      120
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      863,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    1,
+    2
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 7,
+ "seconds": 1.1
+}

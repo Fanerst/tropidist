@@ -1,0 +1,116 @@
+{
+  "A": [
+    2,
+    1,
+    3
+  ],
+  "B": [
+    3,
+    2,
+    1
+  ],
+  "valid_s": true,
+  "d_s": {
+    "Z": 10,
+    "X": 10
+  },
+  "valid_d": false,
+  "shift_d": "none",
+  "d_d": null,
+  "bounds_s": {
+    "Z": [
+      10,
+      10
+    ],
+    "X": [
+      10,
+      10
+    ]
+  },
+  "bounds_d": {},
+  "results_s": {
+    "Z": {
+      "result": "results/papers3/shift/numberings_170/A213_B321/s_Z.json",
+      "resumed": false,
+      "lower_bound": 10,
+      "upper_bound": 10,
+      "distance": 10,
+      "witness_verified": true,
+      "seconds": 25.7,
+      "model": {
+        "qubits": 340,
+        "detectors": 1020,
+        "observables": 16,
+        "dem_mechanisms": 38165,
+        "sector_rows": 595,
+        "sector_columns": 5270,
+        "sector_reduction_exact": true,
+        "collapsed_rows": 85,
+        "collapsed_columns": 425
+      },
+      "sector_symmetries_kept": 84,
+      "symmetries_expected": 84
+    },
+    "X": {
+      "result": "results/papers3/shift/numberings_170/A213_B321/s_X.json",
+      "resumed": false,
+      "lower_bound": 10,
+      "upper_bound": 10,
+      "distance": 10,
+      "witness_verified": true,
+      "seconds": 9.2,
+      "model": {
+        "qubits": 340,
+        "detectors": 1020,
+        "observables": 16,
+        "dem_mechanisms": 38250,
+        "sector_rows": 595,
+        "sector_columns": 5270,
+        "sector_reduction_exact": true,
+        "collapsed_rows": 85,
+        "collapsed_columns": 425
+      },
+      "sector_symmetries_kept": 84,
+      "symmetries_expected": 84
+    }
+  },
+  "results_d": {},
+  "status": "complete",
+  "pid": 577172,
+  "validation_s": {
+    "valid": true,
+    "layers_disjoint": true,
+    "deterministic": {
+      "Z": true,
+      "X": true
+    }
+  },
+  "validation_d": {
+    "valid": false,
+    "layers_disjoint": true,
+    "deterministic": {},
+    "error": "The circuit contains non-deterministic observables.",
+    "error_type": "ValueError"
+  },
+  "logical_d": {
+    "shift": "none",
+    "exponents": null,
+    "predicted_exponents": [
+      1,
+      0
+    ],
+    "predicted_matches": false,
+    "stabilizers_preserved": {
+      "X": false,
+      "Z": false
+    },
+    "logical_generators": {
+      "X": 16,
+      "Z": 16
+    },
+    "matching_translation_representatives": [],
+    "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+  },
+  "seconds": 35.74,
+  "peak_rss_mib": 375.68
+}

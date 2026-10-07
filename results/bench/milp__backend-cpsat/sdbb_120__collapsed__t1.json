@@ -1,0 +1,77 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "sdbb_120",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 420,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 10,
+  "witness": [
+    36,
+    43,
+    58,
+    134,
+    143,
+    158,
+    209,
+    265,
+    314,
+    339
+  ],
+  "witness_ok": true,
+  "seconds": 600.009,
+  "trace": [
+    {
+      "t": 1.832,
+      "ub": 11
+    },
+    {
+      "t": 1.832,
+      "lb": 0
+    },
+    {
+      "t": 3.617,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 140.2,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-04T16:14:29.152293+00:00",
+    "ended_at": "2026-10-04T16:24:29.280605+00:00",
+    "wall_seconds": 600.126887,
+    "adapter_seconds": 600.009,
+    "trace_offset_seconds": 0.117887,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/sdbb_120__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/sdbb_120__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

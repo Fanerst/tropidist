@@ -1,0 +1,81 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "mitten_150",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 510,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 10,
+  "witness": [
+    58,
+    71,
+    124,
+    137,
+    308,
+    310,
+    392,
+    406,
+    412,
+    438
+  ],
+  "witness_ok": true,
+  "seconds": 600.0,
+  "trace": [
+    {
+      "t": 1.426,
+      "ub": 34
+    },
+    {
+      "t": 1.426,
+      "lb": 0
+    },
+    {
+      "t": 1.597,
+      "ub": 20
+    },
+    {
+      "t": 1.616,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 152.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T15:58:57.015453+00:00",
+    "ended_at": "2026-10-04T16:08:57.077638+00:00",
+    "wall_seconds": 600.060322,
+    "adapter_seconds": 600.0,
+    "trace_offset_seconds": 0.060322,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/mitten_150__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/mitten_150__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

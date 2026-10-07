@@ -1,0 +1,119 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "mitten_150",
+  "variant": "sector",
+  "rows": 660,
+  "cols": 9750,
+  "obs": 30,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": 9,
+  "witness": [
+    2637,
+    2638,
+    2891,
+    2908,
+    2940,
+    2942,
+    3007,
+    3010,
+    3019
+  ],
+  "witness_ok": true,
+  "seconds": 3600.609,
+  "trace": [
+    {
+      "t": 2.311,
+      "ub": 12
+    },
+    {
+      "t": 2.311,
+      "lb": 1
+    },
+    {
+      "t": 5.616,
+      "ub": 10
+    },
+    {
+      "t": 5.616,
+      "lb": 2
+    },
+    {
+      "t": 90.958,
+      "ub": 9
+    },
+    {
+      "t": 3600.418,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 9294.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-05T01:27:55.171571+00:00",
+    "ended_at": "2026-10-05T02:27:55.903748+00:00",
+    "wall_seconds": 3600.704799,
+    "adapter_seconds": 3600.609,
+    "trace_offset_seconds": 0.095799,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/mitten_150__sector__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/mitten_150__sector__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

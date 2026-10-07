@@ -1,0 +1,62 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "cornucopia_576",
+  "variant": "full",
+  "rows": 1728,
+  "cols": 149760,
+  "obs": 292,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 50.726,
+  "trace": [],
+  "peak_rss_mb": 16362.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -6); shots=1; completed_shots=0; valid_outputs=0; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_576",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-04T10:26:48.251627+00:00",
+    "ended_at": "2026-10-04T10:27:39.198803+00:00",
+    "wall_seconds": 50.946981,
+    "adapter_seconds": 50.726,
+    "trace_offset_seconds": 0.220981,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "terminate called after throwing an instance of 'std::bad_alloc'",
+      "  what():  std::bad_alloc"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/cornucopia_576__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/cornucopia_576__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

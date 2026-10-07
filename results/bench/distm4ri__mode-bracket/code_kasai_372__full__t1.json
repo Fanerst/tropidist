@@ -1,0 +1,124 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-x_vfcxbh/codewords.nz",
+    "timeout": "599.891215419"
+  },
+  "instance": "code_kasai_372",
+  "variant": "full",
+  "rows": 124,
+  "cols": 372,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": 10,
+  "upper_bound": 20,
+  "witness": [
+    4,
+    7,
+    20,
+    25,
+    37,
+    142,
+    151,
+    162,
+    174,
+    198,
+    237,
+    242,
+    254,
+    268,
+    293,
+    295,
+    318,
+    326,
+    330,
+    331
+  ],
+  "witness_ok": true,
+  "seconds": 541.284,
+  "trace": [
+    {
+      "t": 0.039,
+      "lb": 2
+    },
+    {
+      "t": 0.065,
+      "lb": 3
+    },
+    {
+      "t": 0.09,
+      "lb": 4
+    },
+    {
+      "t": 0.119,
+      "lb": 5
+    },
+    {
+      "t": 0.16,
+      "lb": 6
+    },
+    {
+      "t": 0.648,
+      "lb": 7
+    },
+    {
+      "t": 5.481,
+      "lb": 8
+    },
+    {
+      "t": 55.869,
+      "lb": 9
+    },
+    {
+      "t": 541.281,
+      "lb": 10
+    },
+    {
+      "t": 541.284,
+      "ub": 20
+    }
+  ],
+  "peak_rss_mb": 41.1,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 10 20 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T10:59:55.958489+00:00",
+    "ended_at": "2026-10-04T11:08:57.316145+00:00",
+    "wall_seconds": 541.353686,
+    "adapter_seconds": 541.284,
+    "trace_offset_seconds": 0.069686,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/code_kasai_372__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/code_kasai_372__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

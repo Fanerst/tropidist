@@ -1,0 +1,95 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "fx_bb72_code",
+  "variant": "full",
+  "rows": 36,
+  "cols": 72,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    0,
+    9,
+    12,
+    15,
+    21,
+    27
+  ],
+  "witness_ok": true,
+  "seconds": 0.13,
+  "trace": [
+    {
+      "t": 0.062,
+      "lb": 1
+    },
+    {
+      "t": 0.115,
+      "lb": 2
+    },
+    {
+      "t": 0.116,
+      "lb": 3
+    },
+    {
+      "t": 0.116,
+      "lb": 4
+    },
+    {
+      "t": 0.117,
+      "lb": 5
+    },
+    {
+      "t": 0.117,
+      "lb": 6
+    },
+    {
+      "t": 0.117,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 64.6,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 72, \"rows\": 36, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010538101196289062, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.4345855712890625e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.744529724121094e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.271766662597656e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.14984130859375e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 5.364418029785156e-05, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/fx_bb72_code",
+    "family": "fixture",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T10:48:34.665981+00:00",
+    "ended_at": "2026-10-04T10:48:34.931786+00:00",
+    "wall_seconds": 0.265307,
+    "adapter_seconds": 0.13,
+    "trace_offset_seconds": 0.135307,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/fx_bb72_code__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/fx_bb72_code__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

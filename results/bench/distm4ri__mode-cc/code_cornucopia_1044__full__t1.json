@@ -1,0 +1,96 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-a2pq7kk8/codewords.nz",
+    "timeout": "599.854233148"
+  },
+  "instance": "code_cornucopia_1044",
+  "variant": "full",
+  "rows": 261,
+  "cols": 1044,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 96.861,
+  "trace": [
+    {
+      "t": 0.068,
+      "lb": 2
+    },
+    {
+      "t": 0.068,
+      "lb": 3
+    },
+    {
+      "t": 0.069,
+      "lb": 4
+    },
+    {
+      "t": 0.077,
+      "lb": 5
+    },
+    {
+      "t": 0.155,
+      "lb": 6
+    },
+    {
+      "t": 1.018,
+      "lb": 7
+    },
+    {
+      "t": 9.448,
+      "lb": 8
+    },
+    {
+      "t": 96.858,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 40.4,
+  "truth": 12,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 9 0 0 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T09:59:11.300856+00:00",
+    "ended_at": "2026-10-04T10:00:48.305828+00:00",
+    "wall_seconds": 97.004792,
+    "adapter_seconds": 96.861,
+    "trace_offset_seconds": 0.143792,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/code_cornucopia_1044__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/code_cornucopia_1044__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

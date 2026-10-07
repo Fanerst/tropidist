@@ -1,0 +1,64 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "bb72_r6",
+  "variant": "full",
+  "rows": 432,
+  "cols": 16164,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.038,
+  "trace": [
+    {
+      "t": 0.049,
+      "lb": 1
+    },
+    {
+      "t": 39.923,
+      "lb": 2
+    },
+    {
+      "t": 442.411,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 1358.3,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-04T09:20:36.693706+00:00",
+    "ended_at": "2026-10-04T09:30:37.952131+00:00",
+    "wall_seconds": 601.258249,
+    "adapter_seconds": 601.038,
+    "trace_offset_seconds": 0.220249,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/bb72_r6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/bb72_r6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

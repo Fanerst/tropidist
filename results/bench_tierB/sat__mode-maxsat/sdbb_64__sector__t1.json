@@ -1,0 +1,72 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "sdbb_64",
+  "variant": "sector",
+  "rows": 224,
+  "cols": 2752,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.042,
+  "trace": [
+    {
+      "t": 0.009,
+      "lb": 1
+    },
+    {
+      "t": 1.964,
+      "lb": 2
+    },
+    {
+      "t": 10.318,
+      "lb": 3
+    },
+    {
+      "t": 72.699,
+      "lb": 4
+    },
+    {
+      "t": 837.157,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 559.9,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-05T12:43:19.814995+00:00",
+    "ended_at": "2026-10-05T13:43:20.955382+00:00",
+    "wall_seconds": 3601.140315,
+    "adapter_seconds": 3601.042,
+    "trace_offset_seconds": 0.098315,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/sdbb_64__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/sdbb_64__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

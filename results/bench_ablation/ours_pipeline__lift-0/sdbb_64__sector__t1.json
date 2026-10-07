@@ -1,0 +1,105 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 0,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "sdbb_64",
+  "variant": "sector",
+  "rows": 224,
+  "cols": 2752,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    448,
+    449,
+    454,
+    458,
+    528,
+    530,
+    649,
+    794
+  ],
+  "witness_ok": true,
+  "seconds": 3.751,
+  "trace": [
+    {
+      "t": 0.069,
+      "lb": 1
+    },
+    {
+      "t": 0.701,
+      "lb": 2
+    },
+    {
+      "t": 0.702,
+      "lb": 3
+    },
+    {
+      "t": 0.702,
+      "lb": 4
+    },
+    {
+      "t": 0.722,
+      "ub": 8
+    },
+    {
+      "t": 1.517,
+      "lb": 5
+    },
+    {
+      "t": 1.546,
+      "lb": 6
+    },
+    {
+      "t": 1.747,
+      "lb": 7
+    },
+    {
+      "t": 3.736,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 181.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 31, \"stages\": {\"collapsed\": {\"cols\": 224, \"rows\": 32, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013899803161621094, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.414817810058594e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001423358917236328, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.0011410713195800781, \"status\": \"found\"}]}, \"sector\": {\"cols\": 2752, \"rows\": 224, \"runs\": [{\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02788829803466797, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.028819799423217773, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.20057153701782227, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.9886465072631836, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 64, \"rows\": 32, \"runs\": [{\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.7738037109375e-05, \"status\": \"exhausted\"}]}, \"window_t1\": {\"cols\": 64, \"rows\": 32, \"runs\": [{\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.936622619628906e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.462501525878906e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.512901306152344e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002028942108154297, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": 8, \"nsol_recorded\": 1, \"seconds\": 0.00015282630920410156, \"status\": \"found\"}]}, \"window_t1_at_d_coll\": {\"cols\": 64, \"rows\": 32, \"runs\": [{\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.745887756347656e-05, \"status\": \"exhausted\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:lift=0",
+    "adapter": "ours_pipeline",
+    "config_string": "lift=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T17:12:00.822984+00:00",
+    "ended_at": "2026-10-04T17:12:04.684137+00:00",
+    "wall_seconds": 3.855457,
+    "adapter_seconds": 3.751,
+    "trace_offset_seconds": 0.104457,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/sdbb_64__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/sdbb_64__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

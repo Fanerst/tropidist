@@ -1,0 +1,73 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "bb108_best_r6",
+  "variant": "sector",
+  "rows": 378,
+  "cols": 3348,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 10,
+  "witness": [
+    44,
+    50,
+    61,
+    134,
+    149,
+    222,
+    226,
+    233,
+    361,
+    414
+  ],
+  "witness_ok": true,
+  "seconds": 3600.674,
+  "trace": [
+    {
+      "t": 3600.26,
+      "ub": 10
+    },
+    {
+      "t": 3600.26,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 6607.6,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-05T20:12:20.965633+00:00",
+    "ended_at": "2026-10-05T21:12:21.822389+00:00",
+    "wall_seconds": 3600.851108,
+    "adapter_seconds": 3600.674,
+    "trace_offset_seconds": 0.177108,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-scipy/bb108_best_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-scipy/bb108_best_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

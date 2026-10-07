@@ -1,0 +1,122 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "surface_d13",
+  "variant": "collapsed",
+  "rows": 84,
+  "cols": 229,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 13,
+  "upper_bound": 13,
+  "witness": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "witness_ok": true,
+  "seconds": 463.933,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.122,
+      "lb": 2
+    },
+    {
+      "t": 0.122,
+      "lb": 3
+    },
+    {
+      "t": 0.122,
+      "lb": 4
+    },
+    {
+      "t": 0.122,
+      "lb": 5
+    },
+    {
+      "t": 0.259,
+      "lb": 6
+    },
+    {
+      "t": 0.681,
+      "lb": 7
+    },
+    {
+      "t": 2.585,
+      "lb": 8
+    },
+    {
+      "t": 9.236,
+      "lb": 9
+    },
+    {
+      "t": 34.772,
+      "lb": 10
+    },
+    {
+      "t": 133.706,
+      "lb": 11
+    },
+    {
+      "t": 463.872,
+      "lb": 12
+    },
+    {
+      "t": 463.929,
+      "lb": 13
+    },
+    {
+      "t": 463.931,
+      "ub": 13
+    }
+  ],
+  "peak_rss_mb": 128.4,
+  "truth": 13,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T16:20:28.192739+00:00",
+    "ended_at": "2026-10-04T16:28:12.188135+00:00",
+    "wall_seconds": 463.994936,
+    "adapter_seconds": 463.933,
+    "trace_offset_seconds": 0.061936,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/surface_d13__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/surface_d13__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

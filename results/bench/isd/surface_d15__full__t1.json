@@ -1,0 +1,93 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d15",
+  "variant": "full",
+  "rows": 3360,
+  "cols": 66087,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 20,
+  "witness": [
+    25235,
+    25236,
+    28586,
+    28594,
+    28606,
+    28915,
+    29236,
+    29241,
+    29260,
+    31611,
+    31620,
+    31926,
+    32240,
+    32265,
+    33547,
+    34962,
+    34970,
+    35610,
+    35948,
+    36233
+  ],
+  "witness_ok": true,
+  "seconds": 600.057,
+  "trace": [
+    {
+      "t": 0.929,
+      "ub": 40
+    },
+    {
+      "t": 1.278,
+      "ub": 31
+    },
+    {
+      "t": 56.205,
+      "ub": 30
+    },
+    {
+      "t": 74.855,
+      "ub": 20
+    }
+  ],
+  "peak_rss_mb": 165.8,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "search calls: 167; valid outputs: 4; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-04T14:38:52.550949+00:00",
+    "ended_at": "2026-10-04T14:48:52.884726+00:00",
+    "wall_seconds": 600.261412,
+    "adapter_seconds": 600.057,
+    "trace_offset_seconds": 0.204412,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d15__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d15__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

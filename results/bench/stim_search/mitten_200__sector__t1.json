@@ -1,0 +1,72 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "mitten_200",
+  "variant": "sector",
+  "rows": 1040,
+  "cols": 15560,
+  "obs": 40,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 12,
+  "witness": [
+    14133,
+    14134,
+    14139,
+    14159,
+    14182,
+    14218,
+    14219,
+    14225,
+    14267,
+    14272,
+    14296,
+    14324
+  ],
+  "witness_ok": true,
+  "seconds": 208.13,
+  "trace": [
+    {
+      "t": 5.265,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 2052.6,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (2, 2, True): ValueError: Failed to find any graphlike logical errors.; search (3, 3, True): ValueError: Failed to find any logical errors.; search (4, 6, True): worker exited without a result (exitcode None); search (4, 10, True): worker exited without a result (exitcode None); search (4, 10, False): worker exited without a result (exitcode None); search calls: 6; valid outputs: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_200",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T11:38:01.263560+00:00",
+    "ended_at": "2026-10-04T11:41:29.632141+00:00",
+    "wall_seconds": 208.322406,
+    "adapter_seconds": 208.13,
+    "trace_offset_seconds": 0.192406,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "cannot allocate memory for thread-local data: ABORT"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/mitten_200__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/mitten_200__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

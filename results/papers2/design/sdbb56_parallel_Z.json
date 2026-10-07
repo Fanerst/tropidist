@@ -1,0 +1,266 @@
+{
+ "paper": "sdbb_parallel",
+ "code": [
+  56,
+  6,
+  8
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "Z",
+ "rounds": 6,
+ "noise": "full",
+ "circuit": "circuits/papers/sdbb_parallel56_r6_Z.stim",
+ "threads": 1,
+ "model": {
+  "qubits": 112,
+  "detectors": 336,
+  "observables": 6,
+  "dem_mechanisms": 18592,
+  "sector_rows": 196,
+  "sector_columns": 2408,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 28,
+  "collapsed_columns": 196
+ },
+ "sector_symmetries_kept": 27,
+ "symmetries_expected": 27,
+ "collapsed": {
+  "rows": 28,
+  "columns": 196,
+  "k_table": 2,
+  "orbits": 7,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 159,
+    "false_hits": 152,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 3485,
+    "false_hits": 40,
+    "seconds": 0.0
+   },
+   {
+    "K": 6,
+    "status": "found",
+    "best": 6,
+    "nodes": 4124,
+    "false_hits": 0,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 6,
+  "n_min_solution_orbits": 48,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 1
+ },
+ "certified_lower_bound": 7,
+ "window_t0_at_d_coll": {
+  "columns": 56,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 56,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "witness": {
+  "weight": 7,
+  "dem_error_indices": [
+   5,
+   166,
+   267,
+   681,
+   948,
+   1686,
+   1724
+  ],
+  "dem_errors": [
+   "error(0.000133387) D0 D1 D6 D7 D14 D17 D53 D54 L1 L2 L5",
+   "error(0.00286092) D0 D28",
+   "error(0.000133387) D1 D4 D28 D31 D40 D41 D50 D53 L2 L4",
+   "error(0.0012662) D4 D7 D13 D14 L0 L1 L4",
+   "error(0.000133387) D6 D13 D31 D40 L1 L2 L3 L4 L5",
+   "error(0.000200067) D16 D17 D23 D54",
+   "error(0.000133387) D16 D23 D41 D50 L0 L1 L2 L5"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    3,
+    4,
+    5
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 4,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      91
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      15,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 1,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      56
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      4,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 6,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      106
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      21,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      14
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 5,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      13
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      18,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 3,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      44
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      12,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 5,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      23
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      18,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    3,
+    4,
+    5
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 7,
+ "seconds": 9.4
+}

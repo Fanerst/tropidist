@@ -1,0 +1,94 @@
+{
+ "code": [
+  126,
+  22,
+  6
+ ],
+ "family": "sequential X round then Z round; one gate order for every check and both types",
+ "orders": 5040,
+ "orders_processed": 5040,
+ "single_hook_bound_max": 6,
+ "best_circuit_distance": 6,
+ "orders_with_best": 48,
+ "example_order": [
+  "L0",
+  "L1",
+  "L2",
+  "L3",
+  "R0",
+  "R1",
+  "R2",
+  "R3"
+ ],
+ "exact_values_histogram_of_orders_not_abandoned": {
+  "3": 23,
+  "4": 1,
+  "5": 25,
+  "6": 48
+ },
+ "orders_left_open_by_time_limit": [],
+ "optimal_over_family": true,
+ "seconds": 0.6,
+ "verification": {
+  "Z": {
+   "circuit": "circuits/papers/sdbb126_seq_r3_Z.stim",
+   "rounds": 3,
+   "sector_reduction_exact": true,
+   "effective_columns_equal_window_columns": true,
+   "weight": 6,
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     3,
+     4,
+     5,
+     6,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21
+    ]
+   },
+   "verified": true,
+   "effective_distance": 6
+  },
+  "X": {
+   "circuit": "circuits/papers/sdbb126_seq_r3_X.stim",
+   "rounds": 3,
+   "sector_reduction_exact": true,
+   "effective_columns_equal_window_columns": true,
+   "weight": 6,
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     2,
+     3,
+     5,
+     6,
+     7,
+     9,
+     10,
+     11,
+     12,
+     13,
+     15,
+     16,
+     18,
+     20,
+     21
+    ]
+   },
+   "verified": true,
+   "effective_distance": 6
+  }
+ }
+}

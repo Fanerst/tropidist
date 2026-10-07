@@ -1,0 +1,96 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "gross_best_r6",
+  "variant": "sector",
+  "rows": 504,
+  "cols": 4464,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 11,
+  "witness": [
+    3,
+    5,
+    59,
+    66,
+    91,
+    276,
+    279,
+    474,
+    641,
+    942,
+    950
+  ],
+  "witness_ok": true,
+  "seconds": 600.063,
+  "trace": [
+    {
+      "t": 0.51,
+      "ub": 21
+    },
+    {
+      "t": 0.564,
+      "ub": 20
+    },
+    {
+      "t": 0.633,
+      "ub": 17
+    },
+    {
+      "t": 0.799,
+      "ub": 14
+    },
+    {
+      "t": 0.896,
+      "ub": 13
+    },
+    {
+      "t": 7.489,
+      "ub": 12
+    },
+    {
+      "t": 43.126,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 58.0,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "search calls: 2148; valid outputs: 7; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/gross_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T08:46:38.917844+00:00",
+    "ended_at": "2026-10-04T08:56:39.209265+00:00",
+    "wall_seconds": 600.282524,
+    "adapter_seconds": 600.063,
+    "trace_offset_seconds": 0.219524,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/gross_best_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/gross_best_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

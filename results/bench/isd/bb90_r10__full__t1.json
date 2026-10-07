@@ -1,0 +1,92 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "bb90_r10",
+  "variant": "full",
+  "rows": 900,
+  "cols": 34965,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 11,
+  "witness": [
+    19099,
+    19115,
+    20418,
+    21132,
+    21178,
+    21592,
+    21663,
+    22636,
+    22720,
+    22774,
+    23259
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 3.792,
+      "ub": 100
+    },
+    {
+      "t": 4.404,
+      "ub": 93
+    },
+    {
+      "t": 6.808,
+      "ub": 78
+    },
+    {
+      "t": 12.385,
+      "ub": 19
+    },
+    {
+      "t": 262.607,
+      "ub": 14
+    },
+    {
+      "t": 342.062,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 77.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 1677; valid outputs: 6; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-04T09:27:22.329849+00:00",
+    "ended_at": "2026-10-04T09:37:22.608110+00:00",
+    "wall_seconds": 600.205918,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.152918,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb90_r10__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb90_r10__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "routing_54",
+  "variant": "full",
+  "rows": 324,
+  "cols": 14958,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.029,
+  "trace": [
+    {
+      "t": 600.011,
+      "lb": 0
+    }
+  ],
+  "peak_rss_mb": 434.5,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; UNKNOWN",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_54",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-04T12:14:20.519992+00:00",
+    "ended_at": "2026-10-04T12:24:20.768530+00:00",
+    "wall_seconds": 600.248361,
+    "adapter_seconds": 600.029,
+    "trace_offset_seconds": 0.219361,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_54__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_54__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

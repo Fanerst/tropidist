@@ -1,0 +1,68 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "routing_90",
+  "variant": "sector",
+  "rows": 315,
+  "cols": 3330,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 4,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.027,
+  "trace": [
+    {
+      "t": 0.008,
+      "lb": 1
+    },
+    {
+      "t": 4.672,
+      "lb": 2
+    },
+    {
+      "t": 30.025,
+      "lb": 3
+    },
+    {
+      "t": 273.212,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 311.9,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T12:06:09.910661+00:00",
+    "ended_at": "2026-10-04T12:16:11.014958+00:00",
+    "wall_seconds": 601.104121,
+    "adapter_seconds": 601.027,
+    "trace_offset_seconds": 0.077121,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/routing_90__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/routing_90__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

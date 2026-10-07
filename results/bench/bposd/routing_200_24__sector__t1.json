@@ -1,0 +1,103 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "routing_200_24",
+  "variant": "sector",
+  "rows": 700,
+  "cols": 11700,
+  "obs": 24,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    11404,
+    11495,
+    11515,
+    11523,
+    11543,
+    11573,
+    11586,
+    11590,
+    11614,
+    11639,
+    11642,
+    11652,
+    11666,
+    11670,
+    11673,
+    11676,
+    11680,
+    11694
+  ],
+  "witness_ok": true,
+  "seconds": 600.016,
+  "trace": [
+    {
+      "t": 4.787,
+      "ub": 84
+    },
+    {
+      "t": 17.962,
+      "ub": 54
+    },
+    {
+      "t": 21.685,
+      "ub": 31
+    },
+    {
+      "t": 29.776,
+      "ub": 23
+    },
+    {
+      "t": 190.331,
+      "ub": 19
+    },
+    {
+      "t": 217.857,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 397.8,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=48; completed_shots=47; valid_outputs=47; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_200_24",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-04T12:11:43.921809+00:00",
+    "ended_at": "2026-10-04T12:21:44.118021+00:00",
+    "wall_seconds": 600.151991,
+    "adapter_seconds": 600.016,
+    "trace_offset_seconds": 0.135991,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_200_24__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_200_24__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

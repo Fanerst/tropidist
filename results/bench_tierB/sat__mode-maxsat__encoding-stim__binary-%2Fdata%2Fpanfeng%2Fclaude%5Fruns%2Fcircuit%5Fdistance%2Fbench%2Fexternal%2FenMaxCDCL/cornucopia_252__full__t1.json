@@ -1,0 +1,58 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL"
+  },
+  "instance": "cornucopia_252",
+  "variant": "full",
+  "rows": 756,
+  "cols": 65450,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3600.243,
+  "trace": [
+    {
+      "t": 0.679,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 3370.2,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "threads unused while building/dumping encoding; Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; external backend has no standard thread option; threads ignored; external exit=-9; status=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-06T00:54:04.682955+00:00",
+    "ended_at": "2026-10-06T01:54:04.984816+00:00",
+    "wall_seconds": 3600.301694,
+    "adapter_seconds": 3600.243,
+    "trace_offset_seconds": 0.058694,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/cornucopia_252__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/cornucopia_252__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

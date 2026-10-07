@@ -1,0 +1,306 @@
+{
+ "code": "[[150,30,10]]",
+ "basis": "Z",
+ "claimed_distance": 10,
+ "threads": 1,
+ "rows": 60,
+ "columns": 510,
+ "observables": 30,
+ "symmetries": 5,
+ "orbits": 102,
+ "runs": [
+  {
+   "K": 1,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 102,
+   "lookups": 0,
+   "false_hits": 0,
+   "seconds": 0.0002129077911376953
+  },
+  {
+   "K": 2,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 102,
+   "lookups": 102,
+   "false_hits": 0,
+   "seconds": 0.0002219676971435547
+  },
+  {
+   "K": 3,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 102,
+   "lookups": 102,
+   "false_hits": 0,
+   "seconds": 0.0002071857452392578
+  },
+  {
+   "K": 4,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 3933,
+   "lookups": 3831,
+   "false_hits": 0,
+   "seconds": 0.0005171298980712891
+  },
+  {
+   "K": 5,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 156906,
+   "lookups": 152973,
+   "false_hits": 0,
+   "seconds": 0.005434989929199219
+  },
+  {
+   "K": 6,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 5850630,
+   "lookups": 5693724,
+   "false_hits": 0,
+   "seconds": 0.25773119926452637
+  },
+  {
+   "K": 7,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 200910713,
+   "lookups": 195060083,
+   "false_hits": 0,
+   "seconds": 3.4532148838043213
+  },
+  {
+   "K": 8,
+   "status": "found",
+   "best": 8,
+   "nodes": 54699723,
+   "lookups": 53178296,
+   "false_hits": 0,
+   "seconds": 0.8930370807647705
+  }
+ ],
+ "certified_lower_bound": 8,
+ "distance": 8,
+ "solution_faults": [
+  [
+   "data",
+   0
+  ],
+  [
+   "data",
+   146
+  ],
+  [
+   "data",
+   148
+  ],
+  [
+   "hook",
+   0,
+   2
+  ],
+  [
+   "hook",
+   2,
+   4
+  ],
+  [
+   "hook",
+   10,
+   5
+  ],
+  [
+   "hook",
+   34,
+   5
+  ],
+  [
+   "hook",
+   39,
+   3
+  ]
+ ],
+ "witness": {
+  "circuit": "circuits/papers/mitten150_r10_Z.stim",
+  "rounds": 10,
+  "weight": 8,
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    12,
+    13,
+    17,
+    18,
+    19,
+    22,
+    23,
+    29
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 4,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      189
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      13,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 6,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      160
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "DEPOLARIZE1",
+    "paulis": [
+     [
+      "X",
+      0
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 3,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      150
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      10,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 6,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      184
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "DEPOLARIZE1",
+    "paulis": [
+     [
+      "X",
+      148
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 5,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      152
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      16,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "DEPOLARIZE1",
+    "paulis": [
+     [
+      "X",
+      146
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    12,
+    13,
+    17,
+    18,
+    19,
+    22,
+    23,
+    29
+   ]
+  },
+  "verified": true,
+  "collapsed_columns_equal_window_columns": true
+ },
+ "certified_upper_bound": 8
+}

@@ -1,0 +1,95 @@
+{
+  "method": "ours_search",
+  "version": null,
+  "config": {},
+  "instance": "shift_120d",
+  "variant": "sector",
+  "rows": 420,
+  "cols": 3720,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    13,
+    14,
+    78,
+    79,
+    747,
+    812,
+    1020,
+    1055
+  ],
+  "witness_ok": true,
+  "seconds": 1.414,
+  "trace": [
+    {
+      "t": 0.695,
+      "lb": 1
+    },
+    {
+      "t": 1.046,
+      "lb": 2
+    },
+    {
+      "t": 1.048,
+      "lb": 3
+    },
+    {
+      "t": 1.05,
+      "lb": 4
+    },
+    {
+      "t": 1.055,
+      "lb": 5
+    },
+    {
+      "t": 1.059,
+      "lb": 6
+    },
+    {
+      "t": 1.079,
+      "lb": 7
+    },
+    {
+      "t": 1.22,
+      "lb": 8
+    },
+    {
+      "t": 1.414,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 190.2,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "symmetries used: 59",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours",
+    "adapter": "ours",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/shift_120d",
+    "family": "shift",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T13:03:11.301399+00:00",
+    "ended_at": "2026-10-04T13:03:12.996611+00:00",
+    "wall_seconds": 1.688133,
+    "adapter_seconds": 1.414,
+    "trace_offset_seconds": 0.274133,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours/shift_120d__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours/shift_120d__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d19",
+  "variant": "sector",
+  "rows": 3600,
+  "cols": 19495,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 19,
+  "witness": [
+    2243,
+    2297,
+    2298,
+    2350,
+    2413,
+    2472,
+    2697,
+    2700,
+    2811,
+    2814,
+    3535,
+    3589,
+    3878,
+    3990,
+    4995,
+    5106,
+    5157,
+    5204,
+    6160
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.405,
+      "ub": 27
+    },
+    {
+      "t": 1.556,
+      "ub": 26
+    },
+    {
+      "t": 1.635,
+      "ub": 25
+    },
+    {
+      "t": 1.713,
+      "ub": 23
+    },
+    {
+      "t": 5.91,
+      "ub": 21
+    },
+    {
+      "t": 7.52,
+      "ub": 20
+    },
+    {
+      "t": 442.657,
+      "ub": 19
+    }
+  ],
+  "peak_rss_mb": 97.4,
+  "truth": 19,
+  "truth_kind": "exact",
+  "notes": "search calls: 391; valid outputs: 7; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d19",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T14:27:49.300071+00:00",
+    "ended_at": "2026-10-04T14:37:49.567683+00:00",
+    "wall_seconds": 600.252863,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.199863,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d19__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d19__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

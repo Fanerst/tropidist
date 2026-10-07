@@ -1,0 +1,71 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "bb72_r6",
+  "variant": "sector",
+  "rows": 252,
+  "cols": 2232,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 6,
+  "witness": [
+    0,
+    8,
+    22,
+    30,
+    36,
+    50
+  ],
+  "witness_ok": true,
+  "seconds": 600.022,
+  "trace": [
+    {
+      "t": 0.5,
+      "ub": 7
+    },
+    {
+      "t": 0.511,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 60.8,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "search calls: 2308; valid outputs: 2; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T09:04:37.128705+00:00",
+    "ended_at": "2026-10-04T09:14:37.386384+00:00",
+    "wall_seconds": 600.25356,
+    "adapter_seconds": 600.022,
+    "trace_offset_seconds": 0.23156,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb72_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb72_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

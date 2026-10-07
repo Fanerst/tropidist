@@ -1,0 +1,72 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "sdbb_120",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 420,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.011,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.276,
+      "lb": 2
+    },
+    {
+      "t": 1.702,
+      "lb": 3
+    },
+    {
+      "t": 14.019,
+      "lb": 4
+    },
+    {
+      "t": 132.45,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 176.2,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T16:16:11.258128+00:00",
+    "ended_at": "2026-10-04T16:26:12.353729+00:00",
+    "wall_seconds": 601.095436,
+    "adapter_seconds": 601.011,
+    "trace_offset_seconds": 0.084436,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/sdbb_120__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/sdbb_120__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

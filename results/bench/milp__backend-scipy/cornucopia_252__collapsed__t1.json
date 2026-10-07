@@ -1,0 +1,68 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "cornucopia_252",
+  "variant": "collapsed",
+  "rows": 63,
+  "cols": 819,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 5,
+  "witness": [
+    66,
+    85,
+    173,
+    183,
+    233
+  ],
+  "witness_ok": true,
+  "seconds": 600.049,
+  "trace": [
+    {
+      "t": 600.039,
+      "ub": 5
+    },
+    {
+      "t": 600.039,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 332.1,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T15:40:53.288417+00:00",
+    "ended_at": "2026-10-04T15:50:53.539760+00:00",
+    "wall_seconds": 600.239698,
+    "adapter_seconds": 600.049,
+    "trace_offset_seconds": 0.190698,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/cornucopia_252__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/cornucopia_252__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

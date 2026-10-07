@@ -1,0 +1,105 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 0,
+    "lift": 0,
+    "window": 0,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "sdbb_64",
+  "variant": "sector",
+  "rows": 224,
+  "cols": 2752,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    0,
+    1,
+    6,
+    10,
+    80,
+    82,
+    201,
+    346
+  ],
+  "witness_ok": true,
+  "seconds": 4.656,
+  "trace": [
+    {
+      "t": 0.068,
+      "lb": 1
+    },
+    {
+      "t": 1.304,
+      "lb": 2
+    },
+    {
+      "t": 1.306,
+      "lb": 3
+    },
+    {
+      "t": 1.31,
+      "lb": 4
+    },
+    {
+      "t": 1.334,
+      "lb": 5
+    },
+    {
+      "t": 1.361,
+      "lb": 6
+    },
+    {
+      "t": 1.546,
+      "lb": 7
+    },
+    {
+      "t": 3.547,
+      "lb": 8
+    },
+    {
+      "t": 4.64,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 145.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 31, \"stages\": {\"sector\": {\"cols\": 2752, \"rows\": 224, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001020193099975586, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001027822494506836, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0038721561431884766, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.024633407592773438, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.026144742965698242, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.18512582778930664, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 2.000617027282715, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": 8, \"nsol_recorded\": 1, \"seconds\": 1.0921673774719238, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:collapse=0,lift=0,window=0",
+    "adapter": "ours_pipeline",
+    "config_string": "collapse=0,lift=0,window=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T17:11:52.777289+00:00",
+    "ended_at": "2026-10-04T17:11:57.667478+00:00",
+    "wall_seconds": 4.884511,
+    "adapter_seconds": 4.656,
+    "trace_offset_seconds": 0.228511,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__collapse-0__lift-0__window-0/sdbb_64__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__collapse-0__lift-0__window-0/sdbb_64__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

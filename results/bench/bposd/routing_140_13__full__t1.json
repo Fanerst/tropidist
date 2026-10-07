@@ -1,0 +1,89 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "routing_140_13",
+  "variant": "full",
+  "rows": 840,
+  "cols": 38920,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 12,
+  "witness": [
+    5225,
+    5280,
+    6921,
+    7037,
+    7391,
+    7500,
+    7616,
+    8080,
+    8172,
+    10144,
+    10394,
+    16324
+  ],
+  "witness_ok": true,
+  "seconds": 600.108,
+  "trace": [
+    {
+      "t": 7.849,
+      "ub": 34
+    },
+    {
+      "t": 13.344,
+      "ub": 19
+    },
+    {
+      "t": 18.798,
+      "ub": 16
+    },
+    {
+      "t": 133.49,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 2998.4,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=77; completed_shots=76; valid_outputs=76; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_140_13",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-04T12:23:05.056692+00:00",
+    "ended_at": "2026-10-04T12:33:05.362196+00:00",
+    "wall_seconds": 600.213018,
+    "adapter_seconds": 600.108,
+    "trace_offset_seconds": 0.105018,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_140_13__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_140_13__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

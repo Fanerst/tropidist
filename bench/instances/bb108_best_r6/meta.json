@@ -1,0 +1,78 @@
+{
+ "family": "bb6_depth7",
+ "n": 108,
+ "k": 8,
+ "basis": "Z",
+ "rounds": 6,
+ "description": "bb108 best r6",
+ "source": {
+  "track": "circuit",
+  "family": "bb6_depth7",
+  "builder": "best_bb6",
+  "key": "bb108",
+  "basis": "Z",
+  "rounds": 6,
+  "truth_file": "results/papers3/bb6/bb108_ibm.json",
+  "n": 108,
+  "k": 8,
+  "schedule": [
+   [
+    2,
+    3,
+    4,
+    1,
+    5,
+    6
+   ],
+   [
+    5,
+    0,
+    1,
+    3,
+    2,
+    4
+   ]
+  ],
+  "schedule_row": 195,
+  "raw_mechanisms": null
+ },
+ "source_sha256": {
+  "results/papers3/bb6/bb108_ibm.json": "6b4661667594e5390b6db4cd8676c191145af2e76e2bafd51093015475b3f128"
+ },
+ "name": "bb108_best_r6",
+ "track": "circuit",
+ "variants": {
+  "full": {
+   "rows": 648,
+   "cols": 24246,
+   "obs": 8,
+   "symmetries": 53,
+   "distance": 10,
+   "distance_kind": "exact",
+   "distance_source": "results/papers3/bb6/bb108_ibm.json#rows[195].Z"
+  },
+  "sector": {
+   "rows": 378,
+   "cols": 3348,
+   "obs": 8,
+   "symmetries": 53,
+   "distance": 10,
+   "distance_kind": "exact",
+   "distance_source": "results/papers3/bb6/bb108_ibm.json#rows[195].Z"
+  },
+  "collapsed": {
+   "rows": 54,
+   "cols": 270,
+   "obs": 8,
+   "symmetries": 53,
+   "distance": 8,
+   "distance_kind": "exact",
+   "distance_source": "results/papers3/bb6/bb108_ibm.json#rows[195].Z[2]",
+   "is_relaxation_of": "sector"
+  }
+ },
+ "raw_mechanisms": 24246,
+ "qubits": 216,
+ "detectors": 648,
+ "observables": 8
+}

@@ -1,0 +1,121 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "routing_54",
+  "variant": "sector",
+  "rows": 189,
+  "cols": 1998,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 6,
+  "witness": [
+    1821,
+    1822,
+    1984,
+    1987,
+    1990,
+    1993
+  ],
+  "witness_ok": true,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 52.996,
+      "ub": 25
+    },
+    {
+      "t": 52.996,
+      "lb": 0
+    },
+    {
+      "t": 53.272,
+      "ub": 24
+    },
+    {
+      "t": 53.406,
+      "ub": 23
+    },
+    {
+      "t": 53.537,
+      "ub": 22
+    },
+    {
+      "t": 53.672,
+      "ub": 21
+    },
+    {
+      "t": 53.788,
+      "ub": 20
+    },
+    {
+      "t": 55.028,
+      "ub": 15
+    },
+    {
+      "t": 55.465,
+      "ub": 14
+    },
+    {
+      "t": 56.89,
+      "ub": 13
+    },
+    {
+      "t": 58.3,
+      "ub": 12
+    },
+    {
+      "t": 75.987,
+      "ub": 11
+    },
+    {
+      "t": 76.954,
+      "ub": 10
+    },
+    {
+      "t": 114.585,
+      "ub": 9
+    },
+    {
+      "t": 121.641,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 228.8,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_54",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T11:54:31.813332+00:00",
+    "ended_at": "2026-10-04T12:04:31.900502+00:00",
+    "wall_seconds": 600.083473,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.066473,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_54__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_54__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

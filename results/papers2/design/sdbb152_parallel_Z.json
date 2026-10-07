@@ -1,0 +1,461 @@
+{
+ "paper": "sdbb_parallel",
+ "code": [
+  152,
+  6,
+  16
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "Z",
+ "rounds": 6,
+ "noise": "full",
+ "circuit": "circuits/papers/sdbb_parallel152_r6_Z.stim",
+ "threads": 96,
+ "model": {
+  "qubits": 304,
+  "detectors": 912,
+  "observables": 6,
+  "dem_mechanisms": 50008,
+  "sector_rows": 532,
+  "sector_columns": 6536,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 76,
+  "collapsed_columns": 532
+ },
+ "sector_symmetries_kept": 75,
+ "symmetries_expected": 75,
+ "collapsed": {
+  "rows": 76,
+  "columns": 532,
+  "k_table": 3,
+  "orbits": 7,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 158,
+    "false_hits": 151,
+    "seconds": 0.01
+   },
+   {
+    "K": 6,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 3557,
+    "false_hits": 3399,
+    "seconds": 0.01
+   },
+   {
+    "K": 7,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 80489,
+    "false_hits": 2480,
+    "seconds": 0.01
+   },
+   {
+    "K": 8,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 1778486,
+    "false_hits": 9777,
+    "seconds": 0.03
+   },
+   {
+    "K": 9,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 37359794,
+    "false_hits": 26852,
+    "seconds": 0.12
+   },
+   {
+    "K": 10,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 746384279,
+    "false_hits": 120217,
+    "seconds": 0.74
+   },
+   {
+    "K": 11,
+    "status": "found",
+    "best": 11,
+    "nodes": 721668118,
+    "false_hits": 25247,
+    "seconds": 0.45
+   }
+  ],
+  "distance": 11,
+  "n_min_solution_orbits": 37,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 0
+ },
+ "certified_lower_bound": 12,
+ "window_t0_at_d_coll": {
+  "columns": 228,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 304,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1": {
+  "columns": 304,
+  "distance": 13,
+  "lower_bound": 13,
+  "runs": [
+   {
+    "K": 12,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 4348284619,
+    "seconds": 2.7732555866241455
+   },
+   {
+    "K": 13,
+    "status": "found",
+    "best": 13,
+    "nodes": 372752674,
+    "seconds": 0.2084975242614746
+   }
+  ],
+  "witness_verified": true
+ },
+ "witness": {
+  "weight": 13,
+  "dem_error_indices": [
+   5173,
+   5248,
+   5277,
+   5291,
+   5609,
+   7629,
+   7850,
+   8581,
+   9100,
+   10224,
+   10341,
+   10641,
+   11499
+  ],
+  "dem_errors": [
+   "error(0.000133387) D76 D77 D89 D99 D103 D112 L1 L3 L4",
+   "error(0.000133387) D76 D85 D125 D126 D138 D148",
+   "error(0.000133387) D76 D86 D90 D99 D139 D140 L1 L3 L4",
+   "error(0.000266738) D76 D89 D90 D143 L0 L4",
+   "error(0.000133387) D77 D90 D99 D129 D130 D143 L1 L3 L4",
+   "error(0.000266738) D85 D94 D107 D108 L2 L4",
+   "error(0.000666578) D86 D95 D148 D149",
+   "error(0.000266738) D90 D99 D112 D113 L0 L2 L3",
+   "error(0.000666578) D94 D95 D108 D117",
+   "error(0.000133387) D103 D104 D117 D127 D140 D149",
+   "error(0.000266738) D104 D113 D126 D127 L1 L4",
+   "error(0.000266738) D107 D116 D129 D130 L0 L4",
+   "error(0.000266738) D116 D125 D138 D139 L0 L1 L2 L5"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    1,
+    2,
+    4,
+    5
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 7,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      242
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 7,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      291
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 7,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      229
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      14
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      228
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      122,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      32
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 7,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      148
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      37
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 7,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      94
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      278
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      122,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      51
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      54
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 9,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      63
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      30,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    1,
+    2,
+    4,
+    5
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 13,
+ "sector": {
+  "runs": [
+   {
+    "K": 12,
+    "status": "timeout",
+    "best": null,
+    "nodes": 878193862773,
+    "seconds": 1800.0
+   }
+  ]
+ },
+ "seconds": 1834.5
+}

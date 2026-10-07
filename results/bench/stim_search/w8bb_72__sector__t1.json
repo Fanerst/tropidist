@@ -1,0 +1,66 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "w8bb_72",
+  "variant": "sector",
+  "rows": 252,
+  "cols": 3096,
+  "obs": 14,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": null,
+  "upper_bound": 8,
+  "witness": [
+    19,
+    31,
+    170,
+    174,
+    239,
+    242,
+    263,
+    383
+  ],
+  "witness_ok": true,
+  "seconds": 229.911,
+  "trace": [
+    {
+      "t": 3.964,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 2023.8,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (2, 2, True): ValueError: Failed to find any graphlike logical errors.; search (3, 3, True): ValueError: Failed to find any logical errors.; search calls: 6; valid outputs: 4",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/w8bb_72",
+    "family": "bb8_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T09:40:17.079953+00:00",
+    "ended_at": "2026-10-04T09:44:07.190058+00:00",
+    "wall_seconds": 230.101871,
+    "adapter_seconds": 229.911,
+    "trace_offset_seconds": 0.190871,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/w8bb_72__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/w8bb_72__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

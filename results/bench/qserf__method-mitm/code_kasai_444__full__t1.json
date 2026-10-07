@@ -1,0 +1,54 @@
+{
+  "method": "qubitserf_mitm",
+  "version": null,
+  "config": {
+    "method": "mitm"
+  },
+  "instance": "code_kasai_444",
+  "variant": "full",
+  "rows": 148,
+  "cols": 444,
+  "obs": 154,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 42.043,
+  "trace": [],
+  "peak_rss_mb": 14658.8,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "child ended without a result (terminated by SIGABRT); the memory limit of the run is the usual cause; d=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "qserf:method=mitm",
+    "adapter": "qserf",
+    "config_string": "method=mitm",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_444",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T15:09:46.758807+00:00",
+    "ended_at": "2026-10-04T15:10:28.944089+00:00",
+    "wall_seconds": 42.185041,
+    "adapter_seconds": 42.043,
+    "trace_offset_seconds": 0.142041,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "terminate called after throwing an instance of 'St9bad_alloc'",
+      "  what():  std::bad_alloc"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/qserf__method-mitm/code_kasai_444__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/qserf__method-mitm/code_kasai_444__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

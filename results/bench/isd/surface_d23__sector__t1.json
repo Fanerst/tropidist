@@ -1,0 +1,100 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d23",
+  "variant": "sector",
+  "rows": 6336,
+  "cols": 34915,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 27,
+  "witness": [
+    30227,
+    30578,
+    30978,
+    30981,
+    31047,
+    31662,
+    31720,
+    31860,
+    31931,
+    32066,
+    32206,
+    32338,
+    32400,
+    32401,
+    32542,
+    32613,
+    32678,
+    32755,
+    32889,
+    32890,
+    32954,
+    33029,
+    33098,
+    33283,
+    33559,
+    33694,
+    33695
+  ],
+  "witness_ok": true,
+  "seconds": 600.055,
+  "trace": [
+    {
+      "t": 4.765,
+      "ub": 38
+    },
+    {
+      "t": 5.3,
+      "ub": 34
+    },
+    {
+      "t": 10.622,
+      "ub": 31
+    },
+    {
+      "t": 39.943,
+      "ub": 27
+    }
+  ],
+  "peak_rss_mb": 160.8,
+  "truth": 23,
+  "truth_kind": "exact",
+  "notes": "search calls: 871; valid outputs: 4; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d23",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T14:35:17.826375+00:00",
+    "ended_at": "2026-10-04T14:45:18.086552+00:00",
+    "wall_seconds": 600.232944,
+    "adapter_seconds": 600.055,
+    "trace_offset_seconds": 0.177944,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d23__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d23__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

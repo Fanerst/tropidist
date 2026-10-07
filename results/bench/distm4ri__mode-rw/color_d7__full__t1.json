@@ -1,0 +1,72 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "rw",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d7/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d7/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-eekopg0c/codewords.nz",
+    "timeout": "599.890521926"
+  },
+  "instance": "color_d7",
+  "variant": "full",
+  "rows": 126,
+  "cols": 3651,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": null,
+  "upper_bound": 4,
+  "witness": [
+    279,
+    281,
+    1166,
+    1321
+  ],
+  "witness_ok": true,
+  "seconds": 0.222,
+  "trace": [
+    {
+      "t": 0.222,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 47.0,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. RW is heuristic; printed dmin is not a certified lower bound. Native triple: 1 4 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:mode=rw",
+    "adapter": "distm4ri",
+    "config_string": "mode=rw",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d7",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T13:44:27.815363+00:00",
+    "ended_at": "2026-10-04T13:44:28.105585+00:00",
+    "wall_seconds": 0.285243,
+    "adapter_seconds": 0.222,
+    "trace_offset_seconds": 0.063243,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-rw/color_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-rw/color_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

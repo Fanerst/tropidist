@@ -1,0 +1,86 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_d5",
+  "variant": "full",
+  "rows": 45,
+  "cols": 1104,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 3,
+  "upper_bound": 3,
+  "witness": [
+    1059,
+    1062,
+    1097
+  ],
+  "witness_ok": true,
+  "seconds": 35.083,
+  "trace": [
+    {
+      "t": 0.468,
+      "ub": 10
+    },
+    {
+      "t": 0.468,
+      "lb": 1
+    },
+    {
+      "t": 0.645,
+      "ub": 5
+    },
+    {
+      "t": 0.645,
+      "lb": 2
+    },
+    {
+      "t": 1.1,
+      "ub": 4
+    },
+    {
+      "t": 3.635,
+      "ub": 3
+    },
+    {
+      "t": 35.076,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 156.9,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d5",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-04T13:44:27.606446+00:00",
+    "ended_at": "2026-10-04T13:45:02.807883+00:00",
+    "wall_seconds": 35.199986,
+    "adapter_seconds": 35.083,
+    "trace_offset_seconds": 0.116986,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/color_d5__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/color_d5__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

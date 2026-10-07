@@ -1,0 +1,388 @@
+{
+ "paper": "gala_parallel",
+ "code": [
+  132,
+  30,
+  12
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "Z",
+ "rounds": 6,
+ "noise": "full",
+ "circuit": "circuits/papers/gala_parallel132_r6_Z.stim",
+ "threads": 96,
+ "model": {
+  "qubits": 242,
+  "detectors": 660,
+  "observables": 30,
+  "dem_mechanisms": 59653,
+  "sector_rows": 385,
+  "sector_columns": 7392,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 55,
+  "collapsed_columns": 627
+ },
+ "sector_symmetries_kept": 10,
+ "symmetries_expected": 10,
+ "collapsed": {
+  "rows": 55,
+  "columns": 627,
+  "k_table": 3,
+  "orbits": 57,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 57,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 57,
+    "false_hits": 57,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 57,
+    "false_hits": 57,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 57,
+    "false_hits": 57,
+    "seconds": 0.14
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 2694,
+    "false_hits": 2637,
+    "seconds": 0.18
+   },
+   {
+    "K": 6,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 152855,
+    "false_hits": 150161,
+    "seconds": 1.48
+   },
+   {
+    "K": 7,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 8820478,
+    "false_hits": 49195,
+    "seconds": 0.78
+   },
+   {
+    "K": 8,
+    "status": "found",
+    "best": 8,
+    "nodes": 2167796,
+    "false_hits": 340,
+    "seconds": 0.03
+   }
+  ],
+  "distance": 8,
+  "n_min_solution_orbits": 61,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 0
+ },
+ "certified_lower_bound": 9,
+ "window_t0_at_d_coll": {
+  "columns": 187,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 242,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1": {
+  "columns": 242,
+  "distance": 10,
+  "lower_bound": 10,
+  "runs": [
+   {
+    "K": 9,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 160523138,
+    "seconds": 0.06022167205810547
+   },
+   {
+    "K": 10,
+    "status": "found",
+    "best": 10,
+    "nodes": 194258127,
+    "seconds": 0.06596255302429199
+   }
+  ],
+  "witness_verified": true
+ },
+ "witness": {
+  "weight": 10,
+  "dem_error_indices": [
+   7137,
+   7203,
+   7570,
+   7604,
+   8152,
+   9039,
+   10757,
+   11671,
+   11759,
+   12278
+  ],
+  "dem_errors": [
+   "error(0.000133387) D55 D56 D66 D72 D79 D80 D100 D104 L1 L2 L3 L8 L10 L11 L15 L20 L27 L29",
+   "error(0.000133387) D55 D58 D69 D73 D92 D98 D101 D107 L0 L1 L4 L9 L10 L11 L13 L14 L15 L18 L20 L21 L23 L27",
+   "error(0.000266738) D55 D74 D80 D95 D108",
+   "error(0.000266738) D55 D76 D79 D98 D104",
+   "error(0.000266738) D56 D73 D77 D90 D100",
+   "error(0.000133387) D58 D61 D72 D76 D90 D95 D99 D104 L1 L2 L3 L5 L7 L8 L10 L11 L12 L14 L15 L16 L17 L20 L23 L24 L26 L27",
+   "error(0.000666578) D61 D67 D86 D89 D99 L0 L1 L4 L7 L8 L9 L12 L13 L14 L17 L19 L20 L24 L25 L27 L29",
+   "error(0.000133387) D63 D64 D69 D74 D77 D87 D101 D108 L0 L1 L2 L3 L4 L9 L10 L11 L12 L13 L19 L20 L21 L22 L25 L26 L27 L29",
+   "error(0.000466698) D63 D66 D87 D89 D104 L1 L5 L6 L7 L8 L9 L11 L13 L14 L15 L19 L20 L21 L23 L27",
+   "error(0.000266738) D64 D67 D86 D92 D107"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    0,
+    2,
+    3,
+    4,
+    6,
+    7,
+    11,
+    12,
+    16,
+    18,
+    19,
+    21,
+    22,
+    23,
+    29
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 17,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      226
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      113,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 11,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      211
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      36,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      104
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      42,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      128
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      42,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      97
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      42,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 11,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      214
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      36,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 11,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      59
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      36,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 17,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      223
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      113,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 11,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      36
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      36,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 13,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      116
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      42,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    0,
+    2,
+    3,
+    4,
+    6,
+    7,
+    11,
+    12,
+    16,
+    18,
+    19,
+    21,
+    22,
+    23,
+    29
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 10,
+ "seconds": 14.7
+}

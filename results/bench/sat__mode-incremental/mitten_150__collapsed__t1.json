@@ -1,0 +1,72 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "mitten_150",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 510,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.007,
+  "trace": [
+    {
+      "t": 0.004,
+      "lb": 1
+    },
+    {
+      "t": 0.442,
+      "lb": 2
+    },
+    {
+      "t": 2.83,
+      "lb": 3
+    },
+    {
+      "t": 20.242,
+      "lb": 4
+    },
+    {
+      "t": 240.293,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 187.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T15:59:42.949073+00:00",
+    "ended_at": "2026-10-04T16:09:44.016772+00:00",
+    "wall_seconds": 601.067532,
+    "adapter_seconds": 601.007,
+    "trace_offset_seconds": 0.060532,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/mitten_150__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/mitten_150__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

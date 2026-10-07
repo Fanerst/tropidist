@@ -1,0 +1,110 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 0,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "routing_90",
+  "variant": "sector",
+  "rows": 315,
+  "cols": 3330,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 9,
+  "upper_bound": 9,
+  "witness": [
+    540,
+    558,
+    579,
+    596,
+    709,
+    781,
+    855,
+    875,
+    887
+  ],
+  "witness_ok": true,
+  "seconds": 5.358,
+  "trace": [
+    {
+      "t": 0.068,
+      "lb": 1
+    },
+    {
+      "t": 0.916,
+      "lb": 2
+    },
+    {
+      "t": 0.916,
+      "lb": 3
+    },
+    {
+      "t": 0.917,
+      "lb": 4
+    },
+    {
+      "t": 0.917,
+      "lb": 5
+    },
+    {
+      "t": 0.919,
+      "lb": 6
+    },
+    {
+      "t": 0.926,
+      "lb": 7
+    },
+    {
+      "t": 0.963,
+      "ub": 9
+    },
+    {
+      "t": 2.254,
+      "lb": 8
+    },
+    {
+      "t": 5.341,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 298.0,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 44, \"stages\": {\"collapsed\": {\"cols\": 270, \"rows\": 45, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013875961303710938, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.771087646484375e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.012222290039062e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00023674964904785156, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0009233951568603516, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00754547119140625, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 0.0038709640502929688, \"status\": \"found\"}]}, \"sector\": {\"cols\": 3330, \"rows\": 315, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.328535795211792, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.0868980884552, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 90, \"rows\": 45, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011110305786132812, \"status\": \"exhausted\"}]}, \"window_t1\": {\"cols\": 90, \"rows\": 45, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011038780212402344, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00023412704467773438, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.00045180320739746094, \"status\": \"found\"}]}, \"window_t1_at_d_coll\": {\"cols\": 90, \"rows\": 45, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010180473327636719, \"status\": \"exhausted\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:lift=0",
+    "adapter": "ours_pipeline",
+    "config_string": "lift=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-04T17:08:30.206064+00:00",
+    "ended_at": "2026-10-04T17:08:35.712990+00:00",
+    "wall_seconds": 5.500616,
+    "adapter_seconds": 5.358,
+    "trace_offset_seconds": 0.142616,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/routing_90__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/routing_90__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

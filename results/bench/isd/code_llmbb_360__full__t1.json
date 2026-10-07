@@ -1,0 +1,93 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "code_llmbb_360",
+  "variant": "full",
+  "rows": 180,
+  "cols": 360,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 24,
+  "witness": [
+    42,
+    48,
+    54,
+    61,
+    75,
+    88,
+    102,
+    108,
+    118,
+    135,
+    139,
+    162,
+    215,
+    220,
+    236,
+    264,
+    265,
+    266,
+    268,
+    288,
+    318,
+    342,
+    343,
+    347
+  ],
+  "witness_ok": true,
+  "seconds": 600.015,
+  "trace": [
+    {
+      "t": 0.327,
+      "ub": 36
+    },
+    {
+      "t": 0.327,
+      "ub": 34
+    },
+    {
+      "t": 0.328,
+      "ub": 24
+    }
+  ],
+  "peak_rss_mb": 64.3,
+  "truth": 24,
+  "truth_kind": "exact",
+  "notes": "search calls: 2391; valid outputs: 3; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_llmbb_360",
+    "family": "estimated_codes",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T10:38:32.539758+00:00",
+    "ended_at": "2026-10-04T10:48:32.746416+00:00",
+    "wall_seconds": 600.205827,
+    "adapter_seconds": 600.015,
+    "trace_offset_seconds": 0.190827,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_llmbb_360__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_llmbb_360__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d15",
+  "variant": "sector",
+  "rows": 1792,
+  "cols": 9451,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 15,
+  "witness": [
+    1977,
+    2590,
+    2812,
+    3166,
+    3251,
+    3337,
+    3338,
+    3425,
+    3466,
+    3515,
+    3602,
+    3691,
+    3732,
+    4215,
+    4256
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.336,
+      "ub": 20
+    },
+    {
+      "t": 0.36,
+      "ub": 19
+    },
+    {
+      "t": 0.502,
+      "ub": 16
+    },
+    {
+      "t": 2.657,
+      "ub": 15
+    }
+  ],
+  "peak_rss_mb": 75.6,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "search calls: 1784; valid outputs: 4; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T14:24:31.576901+00:00",
+    "ended_at": "2026-10-04T14:34:31.844582+00:00",
+    "wall_seconds": 600.260992,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.207992,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d15__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d15__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

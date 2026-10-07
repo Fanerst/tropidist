@@ -1,0 +1,54 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "bb144_r12",
+  "variant": "full",
+  "rows": 1728,
+  "cols": 67752,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 311.153,
+  "trace": [],
+  "peak_rss_mb": 2072.3,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (2, 2, True): ValueError: Failed to find any graphlike logical errors.; search (3, 3, True): ValueError: Failed to find any logical errors.; search (4, 4, True): worker exited without a result (exitcode None); search (4, 6, True): worker exited without a result (exitcode None); search (4, 10, True): MemoryError: std::bad_alloc; search (4, 10, False): worker exited without a result (exitcode None); search calls: 6; valid outputs: 0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb144_r12",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-04T09:34:27.560132+00:00",
+    "ended_at": "2026-10-04T09:39:38.895967+00:00",
+    "wall_seconds": 311.335657,
+    "adapter_seconds": 311.153,
+    "trace_offset_seconds": 0.182657,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "cannot allocate memory for thread-local data: ABORT"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/bb144_r12__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/bb144_r12__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

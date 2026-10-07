@@ -1,0 +1,85 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "bb108_r10",
+  "variant": "sector",
+  "rows": 594,
+  "cols": 5508,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 8,
+  "witness": [
+    5396,
+    5437,
+    5473,
+    5475,
+    5477,
+    5480,
+    5498,
+    5506
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.31,
+      "ub": 29
+    },
+    {
+      "t": 0.321,
+      "ub": 13
+    },
+    {
+      "t": 0.464,
+      "ub": 12
+    },
+    {
+      "t": 0.568,
+      "ub": 10
+    },
+    {
+      "t": 0.748,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 63.6,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 2258; valid outputs: 5; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-04T09:14:33.173880+00:00",
+    "ended_at": "2026-10-04T09:24:33.436014+00:00",
+    "wall_seconds": 600.254114,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.201114,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb108_r10__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb108_r10__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "method": "ours_search",
+  "version": null,
+  "config": {},
+  "instance": "bb90_r10",
+  "variant": "sector",
+  "rows": 495,
+  "cols": 4590,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    405,
+    410,
+    439,
+    504,
+    571,
+    642,
+    659,
+    674
+  ],
+  "witness_ok": true,
+  "seconds": 1.319,
+  "trace": [
+    {
+      "t": 0.053,
+      "lb": 1
+    },
+    {
+      "t": 0.574,
+      "lb": 2
+    },
+    {
+      "t": 0.576,
+      "lb": 3
+    },
+    {
+      "t": 0.579,
+      "lb": 4
+    },
+    {
+      "t": 0.587,
+      "lb": 5
+    },
+    {
+      "t": 0.596,
+      "lb": 6
+    },
+    {
+      "t": 0.642,
+      "lb": 7
+    },
+    {
+      "t": 0.946,
+      "lb": 8
+    },
+    {
+      "t": 1.319,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 334.1,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "symmetries used: 2",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours",
+    "adapter": "ours",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      10
+    ],
+    "started_at": "2026-10-04T09:12:50.621591+00:00",
+    "ended_at": "2026-10-04T09:12:52.129224+00:00",
+    "wall_seconds": 1.500701,
+    "adapter_seconds": 1.319,
+    "trace_offset_seconds": 0.181701,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours/bb90_r10__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours/bb90_r10__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0; 1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim"
+  },
+  "instance": "lrgross",
+  "variant": "full",
+  "rows": 864,
+  "cols": 31488,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.121,
+  "trace": [
+    {
+      "t": 0.077,
+      "lb": 1
+    },
+    {
+      "t": 372.566,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 1712.6,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/lrgross",
+    "family": "lrgross",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-05T22:54:01.570738+00:00",
+    "ended_at": "2026-10-05T23:54:02.772568+00:00",
+    "wall_seconds": 3601.201754,
+    "adapter_seconds": 3601.121,
+    "trace_offset_seconds": 0.080754,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim/lrgross__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim/lrgross__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

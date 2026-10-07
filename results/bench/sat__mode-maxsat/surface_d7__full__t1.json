@@ -1,0 +1,72 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "surface_d7",
+  "variant": "full",
+  "rows": 336,
+  "cols": 5471,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.014,
+  "trace": [
+    {
+      "t": 0.008,
+      "lb": 1
+    },
+    {
+      "t": 0.586,
+      "lb": 2
+    },
+    {
+      "t": 2.657,
+      "lb": 3
+    },
+    {
+      "t": 32.96,
+      "lb": 4
+    },
+    {
+      "t": 543.223,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 402.6,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d7",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T14:15:07.075235+00:00",
+    "ended_at": "2026-10-04T14:25:08.159363+00:00",
+    "wall_seconds": 601.083956,
+    "adapter_seconds": 601.014,
+    "trace_offset_seconds": 0.069956,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/surface_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/surface_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

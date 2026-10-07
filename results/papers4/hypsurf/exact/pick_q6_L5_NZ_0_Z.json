@@ -1,0 +1,261 @@
+{
+ "paper": "hypsurf_pick",
+ "code": [
+  150,
+  4,
+  10
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "Z",
+ "rounds": 5,
+ "noise": "full",
+ "circuit": "circuits/papers/hypsurf_pickq6_L5_NZ_v040336_r5_Z.stim",
+ "threads": 1,
+ "model": {
+  "qubits": 366,
+  "detectors": 1008,
+  "observables": 4,
+  "dem_mechanisms": 17874,
+  "sector_rows": 578,
+  "sector_columns": 2770,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 108,
+  "collapsed_columns": 330
+ },
+ "sector_symmetries_kept": null,
+ "symmetries_expected": 0,
+ "collapsed": {
+  "rows": 108,
+  "columns": 330,
+  "k_table": 3,
+  "orbits": null,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 330,
+    "false_hits": 330,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 667,
+    "false_hits": 337,
+    "seconds": 0.0
+   },
+   {
+    "K": 6,
+    "status": "found",
+    "best": 6,
+    "nodes": 1074,
+    "false_hits": 406,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 6,
+  "n_min_solution_orbits": 33,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 1
+ },
+ "certified_lower_bound": 7,
+ "window_t0_at_d_coll": {
+  "columns": 162,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 162,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "witness": {
+  "weight": 7,
+  "dem_error_indices": [
+   1096,
+   1102,
+   6689,
+   4319,
+   8411,
+   13916,
+   17180
+  ],
+  "dem_errors": [
+   "error(0.000266707) D64 D212",
+   "error(0.00438663) D64 D325 L1 L2",
+   "error(0.0361464) D325 D916",
+   "error(0.000200036) D212 D414 L0 L2 L3",
+   "error(0.000200036) D414 D679",
+   "error(0.000200036) D679 D873",
+   "error(0.00186509) D873 D916 L1 L2"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    0,
+    2,
+    3
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 16,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      241
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      55,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      70
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 38,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      229
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      249,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 78,
+    "instruction": "M",
+    "paulis": [],
+    "flipped_measurement": 400,
+    "stack": [
+     [
+      576,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 60,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      301
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      515,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 94,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      303
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      843,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 100,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      104
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      863,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    0,
+    2,
+    3
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 7,
+ "seconds": 1.0
+}

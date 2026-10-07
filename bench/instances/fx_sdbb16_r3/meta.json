@@ -1,0 +1,45 @@
+{
+ "family": "fixture",
+ "description": "[[16,4,4]] self-dual BB code, mirror depth-8 circuit, 3 cycles, Z basis",
+ "n": 16,
+ "k": 4,
+ "basis": "Z",
+ "rounds": 3,
+ "source": "sdbb_parallel.build(16, 'Z', 3, order=L0 R3 L1 R0 R2 L2 R1 L3)",
+ "name": "fx_sdbb16_r3",
+ "track": "circuit",
+ "variants": {
+  "full": {
+   "rows": 48,
+   "cols": 2402,
+   "obs": 4,
+   "symmetries": 7,
+   "distance": 4,
+   "distance_kind": "exact",
+   "distance_source": "results/papers2/design/sdbb16_parallel_family.json and bench/adapters/ours.py"
+  },
+  "sector": {
+   "rows": 32,
+   "cols": 352,
+   "obs": 4,
+   "symmetries": 7,
+   "distance": 4,
+   "distance_kind": "exact",
+   "distance_source": "results/papers2/design/sdbb16_parallel_family.json and bench/adapters/ours.py"
+  },
+  "collapsed": {
+   "rows": 8,
+   "cols": 56,
+   "obs": 4,
+   "symmetries": 0,
+   "distance": null,
+   "distance_kind": "unknown",
+   "distance_source": null,
+   "is_relaxation_of": "sector"
+  }
+ },
+ "raw_mechanisms": 2402,
+ "qubits": 32,
+ "detectors": 48,
+ "observables": 4
+}

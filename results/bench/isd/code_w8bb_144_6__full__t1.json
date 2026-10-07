@@ -1,0 +1,84 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "code_w8bb_144_6",
+  "variant": "full",
+  "rows": 72,
+  "cols": 144,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 15,
+  "witness": [
+    29,
+    32,
+    35,
+    54,
+    57,
+    60,
+    91,
+    94,
+    97,
+    100,
+    103,
+    106,
+    135,
+    138,
+    141
+  ],
+  "witness_ok": true,
+  "seconds": 600.013,
+  "trace": [
+    {
+      "t": 0.311,
+      "ub": 23
+    },
+    {
+      "t": 0.311,
+      "ub": 17
+    },
+    {
+      "t": 0.312,
+      "ub": 15
+    }
+  ],
+  "peak_rss_mb": 64.4,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "search calls: 2398; valid outputs: 3; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_w8bb_144_6",
+    "family": "estimated_codes",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-04T10:31:08.610073+00:00",
+    "ended_at": "2026-10-04T10:41:08.722615+00:00",
+    "wall_seconds": 600.11203,
+    "adapter_seconds": 600.013,
+    "trace_offset_seconds": 0.09903,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_w8bb_144_6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_w8bb_144_6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "surface_d3",
+  "variant": "collapsed",
+  "rows": 4,
+  "cols": 9,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 0.133,
+  "trace": [
+    {
+      "t": 0.069,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 54.4,
+  "truth": 3,
+  "truth_kind": "exact",
+  "notes": "{\"error\": \"ValueError: circuit pipeline requires variant full or sector\", \"kernel_threads\": 1, \"stages\": {}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d3",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T16:19:56.026087+00:00",
+    "ended_at": "2026-10-04T16:19:56.287812+00:00",
+    "wall_seconds": 0.261646,
+    "adapter_seconds": 0.133,
+    "trace_offset_seconds": 0.128646,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/surface_d3__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/surface_d3__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

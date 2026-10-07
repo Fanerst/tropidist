@@ -1,0 +1,138 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "bb108_r10",
+  "variant": "full",
+  "rows": 1080,
+  "cols": 41958,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 53,
+  "witness": [
+    207,
+    218,
+    223,
+    244,
+    344,
+    357,
+    467,
+    483,
+    487,
+    492,
+    493,
+    766,
+    798,
+    817,
+    835,
+    937,
+    987,
+    1070,
+    1082,
+    1166,
+    1169,
+    1247,
+    1258,
+    1315,
+    1530,
+    1613,
+    1615,
+    1638,
+    1678,
+    1716,
+    1719,
+    2583,
+    2718,
+    3392,
+    3651,
+    3674,
+    3688,
+    3836,
+    3914,
+    3951,
+    4400,
+    4408,
+    4587,
+    4654,
+    4696,
+    4988,
+    5070,
+    5844,
+    5847,
+    5935,
+    5945,
+    5996,
+    6514
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 2.95,
+      "ub": 120
+    },
+    {
+      "t": 12.779,
+      "ub": 94
+    },
+    {
+      "t": 12.929,
+      "ub": 86
+    },
+    {
+      "t": 98.338,
+      "ub": 81
+    },
+    {
+      "t": 195.322,
+      "ub": 79
+    },
+    {
+      "t": 255.897,
+      "ub": 77
+    },
+    {
+      "t": 311.023,
+      "ub": 53
+    }
+  ],
+  "peak_rss_mb": 83.0,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 1242; valid outputs: 7; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      13
+    ],
+    "started_at": "2026-10-04T09:28:01.047466+00:00",
+    "ended_at": "2026-10-04T09:38:01.290010+00:00",
+    "wall_seconds": 600.158795,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.105795,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb108_r10__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb108_r10__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

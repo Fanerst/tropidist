@@ -1,0 +1,83 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "mitten_300",
+  "variant": "sector",
+  "rows": 840,
+  "cols": 11820,
+  "obs": 60,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 14,
+  "witness": [
+    11706,
+    11711,
+    11713,
+    11717,
+    11747,
+    11752,
+    11753,
+    11759,
+    11760,
+    11775,
+    11799,
+    11807,
+    11815,
+    11819
+  ],
+  "witness_ok": true,
+  "seconds": 600.016,
+  "trace": [
+    {
+      "t": 1.419,
+      "ub": 22
+    },
+    {
+      "t": 7.358,
+      "ub": 14
+    }
+  ],
+  "peak_rss_mb": 383.8,
+  "truth": 12,
+  "truth_kind": "lower_bound",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=296; completed_shots=295; valid_outputs=295; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T11:34:54.999187+00:00",
+    "ended_at": "2026-10-04T11:44:55.248223+00:00",
+    "wall_seconds": 600.211244,
+    "adapter_seconds": 600.016,
+    "trace_offset_seconds": 0.195244,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/mitten_300__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/mitten_300__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

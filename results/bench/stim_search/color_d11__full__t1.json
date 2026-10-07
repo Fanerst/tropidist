@@ -1,0 +1,64 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "color_d11",
+  "variant": "full",
+  "rows": 495,
+  "cols": 16422,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 6,
+  "witness": [
+    256,
+    273,
+    1039,
+    1648,
+    2061,
+    2252
+  ],
+  "witness_ok": true,
+  "seconds": 60.58,
+  "trace": [
+    {
+      "t": 0.241,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 2063.6,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (4, 10, False): worker exited without a result (exitcode None); search calls: 6; valid outputs: 5",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d11",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      17
+    ],
+    "started_at": "2026-10-04T13:54:27.408344+00:00",
+    "ended_at": "2026-10-04T13:55:28.092076+00:00",
+    "wall_seconds": 60.661676,
+    "adapter_seconds": 60.58,
+    "trace_offset_seconds": 0.081676,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/color_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/color_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

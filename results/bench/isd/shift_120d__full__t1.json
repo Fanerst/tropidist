@@ -1,0 +1,111 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "shift_120d",
+  "variant": "full",
+  "rows": 720,
+  "cols": 27000,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    5396,
+    5400,
+    6134,
+    6136,
+    8210,
+    8247,
+    8315,
+    8337,
+    8846,
+    10342,
+    10907,
+    10953,
+    11433,
+    11457,
+    11608,
+    11613,
+    12646,
+    16937
+  ],
+  "witness_ok": true,
+  "seconds": 600.054,
+  "trace": [
+    {
+      "t": 6.438,
+      "ub": 114
+    },
+    {
+      "t": 9.788,
+      "ub": 111
+    },
+    {
+      "t": 19.258,
+      "ub": 102
+    },
+    {
+      "t": 32.016,
+      "ub": 101
+    },
+    {
+      "t": 50.291,
+      "ub": 92
+    },
+    {
+      "t": 55.958,
+      "ub": 82
+    },
+    {
+      "t": 72.886,
+      "ub": 61
+    },
+    {
+      "t": 80.382,
+      "ub": 37
+    },
+    {
+      "t": 143.779,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 75.1,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 1714; valid outputs: 9; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/shift_120d",
+    "family": "shift",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-04T13:06:14.004872+00:00",
+    "ended_at": "2026-10-04T13:16:14.350471+00:00",
+    "wall_seconds": 600.28664,
+    "adapter_seconds": 600.054,
+    "trace_offset_seconds": 0.23264,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/shift_120d__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/shift_120d__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

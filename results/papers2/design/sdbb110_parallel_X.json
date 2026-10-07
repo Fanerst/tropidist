@@ -1,0 +1,294 @@
+{
+ "paper": "sdbb_parallel",
+ "code": [
+  110,
+  10,
+  8
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "X",
+ "rounds": 6,
+ "noise": "full",
+ "circuit": "circuits/papers/sdbb_parallel110_r6_X.stim",
+ "threads": 32,
+ "model": {
+  "qubits": 220,
+  "detectors": 660,
+  "observables": 10,
+  "dem_mechanisms": 36410,
+  "sector_rows": 385,
+  "sector_columns": 4730,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 55,
+  "collapsed_columns": 385
+ },
+ "sector_symmetries_kept": 54,
+ "symmetries_expected": 54,
+ "collapsed": {
+  "rows": 55,
+  "columns": 385,
+  "k_table": 2,
+  "orbits": 7,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 7,
+    "false_hits": 7,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 166,
+    "false_hits": 159,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 3871,
+    "false_hits": 24,
+    "seconds": 0.0
+   },
+   {
+    "K": 6,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 90491,
+    "false_hits": 55,
+    "seconds": 0.0
+   },
+   {
+    "K": 7,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 2057186,
+    "false_hits": 252,
+    "seconds": 0.0
+   },
+   {
+    "K": 8,
+    "status": "found",
+    "best": 8,
+    "nodes": 262705,
+    "false_hits": 0,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 8
+ },
+ "certified_lower_bound": 8,
+ "window_t0_at_d_coll": {
+  "columns": 110,
+  "distance": 8,
+  "status": "found"
+ },
+ "witness": {
+  "weight": 8,
+  "dem_error_indices": [
+   11,
+   12,
+   25,
+   30,
+   262,
+   267,
+   447,
+   453
+  ],
+  "dem_errors": [
+   "error(0.00153227) D0 D1 D13 D21 L0 L1 L5",
+   "error(0.0012662) D0 D1 D46 D54 L0",
+   "error(0.0012662) D0 D3 D12 D13 L0 L1 L4 L6",
+   "error(0.00153227) D0 D3 D45 D46",
+   "error(0.0012662) D1 D9 D11 D21 L0 L1 L4 L6",
+   "error(0.00153227) D1 D9 D44 D54",
+   "error(0.0012662) D2 D10 D11 D12 L6",
+   "error(0.00153227) D2 D10 D44 D45 L3 L5"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    1,
+    3,
+    6
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      55
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      1
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      13
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      100
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      11
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      109
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      12
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "Z_ERROR",
+    "paulis": [
+     [
+      "Z",
+      99
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    1,
+    3,
+    6
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 8,
+ "seconds": 2.8
+}

@@ -1,0 +1,64 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "mitten_200",
+  "variant": "collapsed",
+  "rows": 80,
+  "cols": 680,
+  "obs": 40,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 0.135,
+  "trace": [
+    {
+      "t": 0.074,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 55.0,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "{\"error\": \"ValueError: circuit pipeline requires variant full or sector\", \"kernel_threads\": 1, \"stages\": {}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_200",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T16:00:54.915808+00:00",
+    "ended_at": "2026-10-04T16:00:55.182753+00:00",
+    "wall_seconds": 0.266759,
+    "adapter_seconds": 0.135,
+    "trace_offset_seconds": 0.131759,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/mitten_200__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/mitten_200__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

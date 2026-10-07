@@ -1,0 +1,69 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "walkingcat_54",
+  "variant": "sector",
+  "rows": 189,
+  "cols": 2322,
+  "obs": 2,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    0,
+    16,
+    47,
+    73,
+    93,
+    116,
+    340,
+    345,
+    413
+  ],
+  "witness_ok": true,
+  "seconds": 321.735,
+  "trace": [
+    {
+      "t": 22.802,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 2055.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (2, 2, True): ValueError: Failed to find any graphlike logical errors.; search (3, 3, True): ValueError: Failed to find any logical errors.; search (4, 6, True): MemoryError: std::bad_alloc; search (4, 10, True): worker exited without a result (exitcode None); search (4, 10, False): worker exited without a result (exitcode None); search calls: 6; valid outputs: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54",
+    "family": "walkingcat",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-04T13:26:27.263225+00:00",
+    "ended_at": "2026-10-04T13:31:49.143290+00:00",
+    "wall_seconds": 321.875897,
+    "adapter_seconds": 321.735,
+    "trace_offset_seconds": 0.140897,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "cannot allocate memory for thread-local data: ABORT"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/walkingcat_54__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/walkingcat_54__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

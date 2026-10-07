@@ -1,0 +1,108 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "bb288_r18",
+  "variant": "sector",
+  "rows": 2736,
+  "cols": 26208,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 35,
+  "witness": [
+    17438,
+    17445,
+    17506,
+    18522,
+    18583,
+    18753,
+    18832,
+    19108,
+    19114,
+    19160,
+    19166,
+    19205,
+    19226,
+    19229,
+    19245,
+    19249,
+    19266,
+    19334,
+    19498,
+    19506,
+    19534,
+    19566,
+    19797,
+    19943,
+    19994,
+    20103,
+    20124,
+    20332,
+    20413,
+    20666,
+    20800,
+    20959,
+    21069,
+    21126,
+    21184
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 1.438,
+      "ub": 119
+    },
+    {
+      "t": 1.633,
+      "ub": 106
+    },
+    {
+      "t": 3.876,
+      "ub": 57
+    },
+    {
+      "t": 175.106,
+      "ub": 35
+    }
+  ],
+  "peak_rss_mb": 92.8,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "search calls: 643; valid outputs: 4; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb288_r18",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-04T09:24:33.537040+00:00",
+    "ended_at": "2026-10-04T09:34:33.852317+00:00",
+    "wall_seconds": 600.269557,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.216557,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb288_r18__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/bb288_r18__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

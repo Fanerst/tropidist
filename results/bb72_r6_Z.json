@@ -1,0 +1,420 @@
+{
+ "circuit": "circuits/bb72_r6_Z.stim",
+ "threads": 128,
+ "stages": {
+  "collapsed": {
+   "problem": "collapsed",
+   "rows": 36,
+   "columns": 180,
+   "symmetry_generators": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "orbits": 5,
+   "k_table": 3,
+   "table_entries": 784729,
+   "lower_bound": 5,
+   "distance": 5,
+   "n_solutions_recorded": 4,
+   "runs": [
+    {
+     "K": 1,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 5,
+     "nodes_by_depth": [
+      0,
+      5,
+      0
+     ],
+     "lookups": 0,
+     "false_hits": 0,
+     "seconds": 0.003
+    },
+    {
+     "K": 2,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 5,
+     "nodes_by_depth": [
+      0,
+      5,
+      0,
+      0
+     ],
+     "lookups": 5,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 3,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 5,
+     "nodes_by_depth": [
+      0,
+      5,
+      0,
+      0,
+      0
+     ],
+     "lookups": 5,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 4,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 5,
+     "nodes_by_depth": [
+      0,
+      5,
+      0,
+      0,
+      0,
+      0
+     ],
+     "lookups": 5,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 5,
+     "status": "exhausted",
+     "best": 5,
+     "nodes": 63,
+     "nodes_by_depth": [
+      0,
+      5,
+      58,
+      0,
+      0,
+      0,
+      0
+     ],
+     "lookups": 58,
+     "false_hits": 0,
+     "seconds": 0.0
+    }
+   ],
+   "seconds": 0.06
+  },
+  "fold2": {
+   "problem": "fold2",
+   "rows": 72,
+   "columns": 684,
+   "symmetry_generators": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "orbits": 19,
+   "k_table": 2,
+   "table_entries": 223327,
+   "lower_bound": 6,
+   "distance": 6,
+   "n_solutions_recorded": 2,
+   "runs": [
+    {
+     "K": 5,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 512,
+     "nodes_by_depth": [
+      0,
+      19,
+      271,
+      222,
+      0,
+      0,
+      0
+     ],
+     "lookups": 504,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 6,
+     "status": "found",
+     "best": 6,
+     "nodes": 5693,
+     "nodes_by_depth": [
+      0,
+      19,
+      271,
+      5143,
+      260,
+      0,
+      0,
+      0
+     ],
+     "lookups": 5416,
+     "false_hits": 2,
+     "seconds": 0.001
+    }
+   ],
+   "seconds": 0.03
+  },
+  "fold3": {
+   "problem": "fold3",
+   "rows": 108,
+   "columns": 1080,
+   "symmetry_generators": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "orbits": 30,
+   "k_table": 2,
+   "table_entries": 569269,
+   "lower_bound": 6,
+   "distance": 6,
+   "n_solutions_recorded": 1,
+   "runs": [
+    {
+     "K": 6,
+     "status": "found",
+     "best": 6,
+     "nodes": 25265,
+     "nodes_by_depth": [
+      0,
+      30,
+      355,
+      6621,
+      18259,
+      0,
+      0,
+      0
+     ],
+     "lookups": 25613,
+     "false_hits": 5,
+     "seconds": 0.001
+    }
+   ],
+   "seconds": 0.06
+  },
+  "full": {
+   "problem": "sector(full circuit)",
+   "rows": 252,
+   "columns": 2232,
+   "symmetry_generators": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "orbits": 62,
+   "k_table": 2,
+   "table_entries": 2466397,
+   "lower_bound": 6,
+   "distance": 6,
+   "n_solutions_recorded": 1,
+   "runs": [
+    {
+     "K": 6,
+     "status": "found",
+     "best": 6,
+     "nodes": 6598,
+     "nodes_by_depth": [
+      0,
+      62,
+      396,
+      4923,
+      1217,
+      0,
+      0,
+      0
+     ],
+     "lookups": 6253,
+     "false_hits": 4,
+     "seconds": 0.001
+    }
+   ],
+   "seconds": 0.2
+  }
+ },
+ "model": {
+  "qubits": 144,
+  "detectors": 432,
+  "observables": 12,
+  "dem_mechanisms": 16164,
+  "dem_distinct_columns": 16164,
+  "sector_rows": 252,
+  "sector_columns": 2232,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 36,
+  "collapsed_columns": 180
+ },
+ "certified_lower_bound": 6,
+ "witness": {
+  "weight": 6,
+  "dem_error_indices": [
+   5,
+   18,
+   152,
+   153,
+   422,
+   768
+  ],
+  "dem_errors": [
+   "error(0.00412234) D0 D6 D33 L0 L1 L2 L4 L5 L7 L8",
+   "error(0.00412234) D0 D27 D30 L4 L5 L8 L9 L10",
+   "error(0.00412234) D3 D6 D12 L0 L1 L3 L4 L5 L6 L11",
+   "error(0.00412234) D3 D9 D30",
+   "error(0.00412234) D9 D12 D18 L0 L3 L5 L7 L9 L10 L11",
+   "error(0.00412234) D18 D27 D33"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    0,
+    2,
+    4,
+    6
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      30
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      24
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      0
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      33
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      6
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      21
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      145,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    0,
+    2,
+    4,
+    6
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 6,
+ "seconds": 0.78
+}

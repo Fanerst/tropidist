@@ -1,0 +1,74 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "surface_d9",
+  "variant": "sector",
+  "rows": 400,
+  "cols": 1945,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    1492,
+    1516,
+    1519,
+    1572,
+    1597,
+    1617,
+    1618,
+    1646,
+    1673
+  ],
+  "witness_ok": true,
+  "seconds": 600.004,
+  "trace": [
+    {
+      "t": 0.354,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 120.0,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=48642; completed_shots=48641; valid_outputs=48641; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d9",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T14:05:06.810420+00:00",
+    "ended_at": "2026-10-04T14:15:06.974238+00:00",
+    "wall_seconds": 600.162268,
+    "adapter_seconds": 600.004,
+    "trace_offset_seconds": 0.158268,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d9__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d9__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "routing_54",
+  "variant": "sector",
+  "rows": 189,
+  "cols": 1998,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 6,
+  "witness": [
+    4,
+    13,
+    32,
+    41,
+    111,
+    135
+  ],
+  "witness_ok": true,
+  "seconds": 600.019,
+  "trace": [
+    {
+      "t": 0.376,
+      "ub": 10
+    },
+    {
+      "t": 0.38,
+      "ub": 8
+    },
+    {
+      "t": 0.386,
+      "ub": 7
+    },
+    {
+      "t": 0.403,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 67.2,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "search calls: 2354; valid outputs: 4; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_54",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T11:53:51.656622+00:00",
+    "ended_at": "2026-10-04T12:03:51.904299+00:00",
+    "wall_seconds": 600.244031,
+    "adapter_seconds": 600.019,
+    "trace_offset_seconds": 0.225031,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/routing_54__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/routing_54__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

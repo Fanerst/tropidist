@@ -1,0 +1,53 @@
+{
+  "method": "milp",
+  "version": null,
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "mitten_300",
+  "variant": "sector",
+  "rows": 840,
+  "cols": 11820,
+  "obs": 60,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.015,
+  "trace": [],
+  "peak_rss_mb": 410.2,
+  "truth": 12,
+  "truth_kind": "lower_bound",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); wall-time watchdog stopped worker",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      13
+    ],
+    "started_at": "2026-10-04T11:41:03.268727+00:00",
+    "ended_at": "2026-10-04T11:51:04.475047+00:00",
+    "wall_seconds": 601.206156,
+    "adapter_seconds": 601.015,
+    "trace_offset_seconds": 0.191156,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/mitten_300__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/mitten_300__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

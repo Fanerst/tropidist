@@ -1,0 +1,90 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-1_cok4i1/codewords.nz",
+    "timeout": "599.792210967"
+  },
+  "instance": "cornucopia_252",
+  "variant": "sector",
+  "rows": 441,
+  "cols": 8568,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 5,
+  "upper_bound": 5,
+  "witness": [
+    4,
+    26,
+    151,
+    294,
+    305
+  ],
+  "witness_ok": true,
+  "seconds": 47.285,
+  "trace": [
+    {
+      "t": 0.165,
+      "lb": 2
+    },
+    {
+      "t": 0.172,
+      "lb": 3
+    },
+    {
+      "t": 1.898,
+      "lb": 4
+    },
+    {
+      "t": 42.452,
+      "lb": 5
+    },
+    {
+      "t": 47.285,
+      "ub": 5
+    }
+  ],
+  "peak_rss_mb": 41.4,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 5 5 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T10:05:40.316523+00:00",
+    "ended_at": "2026-10-04T10:06:27.759264+00:00",
+    "wall_seconds": 47.336894,
+    "adapter_seconds": 47.285,
+    "trace_offset_seconds": 0.051894,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/cornucopia_252__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/cornucopia_252__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

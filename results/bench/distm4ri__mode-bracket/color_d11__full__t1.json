@@ -1,0 +1,93 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d11/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d11/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-wg4v4ejz/codewords.nz",
+    "timeout": "599.871946319"
+  },
+  "instance": "color_d11",
+  "variant": "full",
+  "rows": 495,
+  "cols": 16422,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": 9,
+  "witness": [
+    1989,
+    1994,
+    2150,
+    2314,
+    2776,
+    2806,
+    2965,
+    3411,
+    3429
+  ],
+  "witness_ok": true,
+  "seconds": 599.916,
+  "trace": [
+    {
+      "t": 0.2,
+      "lb": 2
+    },
+    {
+      "t": 0.343,
+      "lb": 3
+    },
+    {
+      "t": 1.111,
+      "lb": 4
+    },
+    {
+      "t": 58.072,
+      "lb": 5
+    },
+    {
+      "t": 599.916,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 49.2,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 5 9 125 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d11",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-04T13:54:28.358739+00:00",
+    "ended_at": "2026-10-04T14:04:28.372326+00:00",
+    "wall_seconds": 599.991513,
+    "adapter_seconds": 599.916,
+    "trace_offset_seconds": 0.075513,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/color_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/color_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

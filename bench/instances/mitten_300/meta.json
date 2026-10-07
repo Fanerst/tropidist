@@ -1,0 +1,67 @@
+{
+ "family": "mitten",
+ "n": 300,
+ "k": 60,
+ "basis": "Z",
+ "rounds": 6,
+ "description": "mitten 300",
+ "source": {
+  "track": "circuit",
+  "family": "mitten",
+  "builder": "mitten",
+  "key": 300,
+  "basis": "Z",
+  "rounds": 6,
+  "truth_file": "results/papers/mitten300_Z.json",
+  "n": 300,
+  "k": 60,
+  "code_dir": "papers/mitten/mitten/[[300,60,14]]",
+  "extra_sources": [
+   "results/papers/mitten300_Z_K11.json",
+   "PAPERS.md"
+  ],
+  "truth_note": "Named result files certify only a lower bound; PAPERS.md describes an additional weight-12 witness.",
+  "raw_mechanisms": null
+ },
+ "source_sha256": {
+  "results/papers/mitten300_Z.json": "bb0f5f91f4b80725cae7701f1fb691001efd7d2c67e8a1852d72a84a65e4a6f3",
+  "results/papers/mitten300_Z_K11.json": "5d26ea00aa4828b05c8287341f0faed5322c32de15597f7220c4157402e66a81",
+  "PAPERS.md": "adec2a7964455e447ce4d0822de1e19878a3338da5d4863a5b6dce10b43261ee"
+ },
+ "name": "mitten_300",
+ "track": "circuit",
+ "variants": {
+  "full": {
+   "rows": 1440,
+   "cols": 87780,
+   "obs": 60,
+   "symmetries": 9,
+   "distance": 12,
+   "distance_kind": "lower_bound",
+   "distance_source": "results/papers/mitten300_Z_K11.json"
+  },
+  "sector": {
+   "rows": 840,
+   "cols": 11820,
+   "obs": 60,
+   "symmetries": 9,
+   "distance": 12,
+   "distance_kind": "lower_bound",
+   "distance_source": "results/papers/mitten300_Z_K11.json"
+  },
+  "collapsed": {
+   "rows": 120,
+   "cols": 1020,
+   "obs": 60,
+   "symmetries": 9,
+   "distance": 12,
+   "distance_kind": "lower_bound",
+   "distance_source": "results/papers/mitten300_Z_K11.json",
+   "is_relaxation_of": "sector"
+  }
+ },
+ "raw_mechanisms": 87780,
+ "qubits": 540,
+ "detectors": 1440,
+ "observables": 60
+}

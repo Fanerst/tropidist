@@ -1,0 +1,83 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "star_42",
+  "variant": "collapsed",
+  "rows": 21,
+  "cols": 147,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    8,
+    16,
+    124,
+    126
+  ],
+  "witness_ok": true,
+  "seconds": 1.153,
+  "trace": [
+    {
+      "t": 0.29,
+      "ub": 7
+    },
+    {
+      "t": 0.29,
+      "lb": 0
+    },
+    {
+      "t": 0.345,
+      "ub": 6
+    },
+    {
+      "t": 0.353,
+      "ub": 5
+    },
+    {
+      "t": 0.359,
+      "ub": 4
+    },
+    {
+      "t": 1.149,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 117.1,
+  "truth": 4,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/star_42",
+    "family": "star",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T16:19:50.485454+00:00",
+    "ended_at": "2026-10-04T16:19:51.860767+00:00",
+    "wall_seconds": 1.374662,
+    "adapter_seconds": 1.153,
+    "trace_offset_seconds": 0.221662,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/star_42__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/star_42__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

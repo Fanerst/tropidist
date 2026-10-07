@@ -1,0 +1,97 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "w8bb_144_16",
+  "variant": "collapsed",
+  "rows": 72,
+  "cols": 504,
+  "obs": 16,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 6,
+  "witness": [
+    175,
+    188,
+    215,
+    307,
+    443,
+    495
+  ],
+  "witness_ok": true,
+  "seconds": 600.001,
+  "trace": [
+    {
+      "t": 1.009,
+      "ub": 26
+    },
+    {
+      "t": 1.009,
+      "lb": 0
+    },
+    {
+      "t": 1.122,
+      "ub": 12
+    },
+    {
+      "t": 1.247,
+      "ub": 11
+    },
+    {
+      "t": 1.87,
+      "ub": 10
+    },
+    {
+      "t": 2.08,
+      "ub": 9
+    },
+    {
+      "t": 3.148,
+      "ub": 8
+    },
+    {
+      "t": 3.243,
+      "ub": 7
+    },
+    {
+      "t": 3.324,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 144.1,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/w8bb_144_16",
+    "family": "bb8_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T15:30:52.981190+00:00",
+    "ended_at": "2026-10-04T15:40:53.187484+00:00",
+    "wall_seconds": 600.20398,
+    "adapter_seconds": 600.001,
+    "trace_offset_seconds": 0.20298,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/w8bb_144_16__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/w8bb_144_16__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

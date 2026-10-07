@@ -1,0 +1,116 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-5kmpdcdq/codewords.nz",
+    "timeout": "599.878544393"
+  },
+  "instance": "code_bb288",
+  "variant": "full",
+  "rows": 144,
+  "cols": 288,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 14,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 275.113,
+  "trace": [
+    {
+      "t": 0.063,
+      "lb": 2
+    },
+    {
+      "t": 0.065,
+      "lb": 3
+    },
+    {
+      "t": 0.065,
+      "lb": 4
+    },
+    {
+      "t": 0.066,
+      "lb": 5
+    },
+    {
+      "t": 0.07,
+      "lb": 6
+    },
+    {
+      "t": 0.073,
+      "lb": 7
+    },
+    {
+      "t": 0.124,
+      "lb": 8
+    },
+    {
+      "t": 0.226,
+      "lb": 9
+    },
+    {
+      "t": 0.81,
+      "lb": 10
+    },
+    {
+      "t": 3.446,
+      "lb": 11
+    },
+    {
+      "t": 14.579,
+      "lb": 12
+    },
+    {
+      "t": 58.803,
+      "lb": 13
+    },
+    {
+      "t": 275.11,
+      "lb": 14
+    }
+  ],
+  "peak_rss_mb": 34.7,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 14 0 0 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T08:34:39.231766+00:00",
+    "ended_at": "2026-10-04T08:39:14.442768+00:00",
+    "wall_seconds": 275.210783,
+    "adapter_seconds": 275.113,
+    "trace_offset_seconds": 0.097783,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/code_bb288__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/code_bb288__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0; 1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim"
+  },
+  "instance": "routing_90",
+  "variant": "full",
+  "rows": 540,
+  "cols": 25020,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.045,
+  "trace": [
+    {
+      "t": 0.062,
+      "lb": 1
+    },
+    {
+      "t": 274.459,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 859.2,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-05T22:23:11.646169+00:00",
+    "ended_at": "2026-10-05T22:33:12.905960+00:00",
+    "wall_seconds": 601.259597,
+    "adapter_seconds": 601.045,
+    "trace_offset_seconds": 0.214597,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim/routing_90__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim/routing_90__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "bb108_best_r6",
+  "variant": "full",
+  "rows": 648,
+  "cols": 24246,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 12,
+  "witness": [
+    17018,
+    17050,
+    17179,
+    17261,
+    17330,
+    17411,
+    17629,
+    17664,
+    17793,
+    18098,
+    18161,
+    21443
+  ],
+  "witness_ok": true,
+  "seconds": 600.031,
+  "trace": [
+    {
+      "t": 5.11,
+      "ub": 20
+    },
+    {
+      "t": 10.013,
+      "ub": 14
+    },
+    {
+      "t": 225.965,
+      "ub": 13
+    },
+    {
+      "t": 230.71,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 1234.4,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=100; completed_shots=99; valid_outputs=99; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T08:48:16.055625+00:00",
+    "ended_at": "2026-10-04T08:58:16.357049+00:00",
+    "wall_seconds": 600.253058,
+    "adapter_seconds": 600.031,
+    "trace_offset_seconds": 0.222058,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/bb108_best_r6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/bb108_best_r6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

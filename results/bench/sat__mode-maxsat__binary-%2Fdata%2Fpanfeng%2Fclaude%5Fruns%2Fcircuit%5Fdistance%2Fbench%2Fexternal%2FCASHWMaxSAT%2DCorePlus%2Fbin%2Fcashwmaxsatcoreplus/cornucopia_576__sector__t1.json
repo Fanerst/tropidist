@@ -1,0 +1,57 @@
+{
+  "method": "sat_maxsat",
+  "version": null,
+  "config": {
+    "mode": "maxsat",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus"
+  },
+  "instance": "cornucopia_576",
+  "variant": "sector",
+  "rows": 1008,
+  "cols": 19584,
+  "obs": 292,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.244,
+  "trace": [
+    {
+      "t": 0.495,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 23.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads unused while building/dumping encoding; external backend has no standard thread option; threads ignored; external exit=-9; status=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_576",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T10:19:10.733358+00:00",
+    "ended_at": "2026-10-04T10:29:11.187678+00:00",
+    "wall_seconds": 600.45415,
+    "adapter_seconds": 600.244,
+    "trace_offset_seconds": 0.21015,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FCASHWMaxSAT%2DCorePlus%2Fbin%2Fcashwmaxsatcoreplus/cornucopia_576__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FCASHWMaxSAT%2DCorePlus%2Fbin%2Fcashwmaxsatcoreplus/cornucopia_576__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "source": "https://arxiv.org/html/2601.09911v1#S2.T3",
+  "pdf": "https://arxiv.org/pdf/2601.09911v1",
+  "locator": "Table III, printed p.5 (PDF index 4); HTML Table 3",
+  "review": "Independent HTML and PDF-text review of arrows and row placement; all four reversed entries match builder. PDF visual rendering unavailable.",
+  "reversed_rows": [
+    {
+      "round": 1,
+      "step": "7",
+      "label": "CNOT_A1",
+      "entry": [
+        "Z",
+        "A",
+        1,
+        true
+      ],
+      "control": "q(Z,delta)",
+      "target": "q(L,bar(A1)*delta)",
+      "cnot_layer": 6
+    },
+    {
+      "round": 1,
+      "step": "8",
+      "label": "CNOT_A2",
+      "entry": [
+        "X",
+        "A",
+        2,
+        true
+      ],
+      "control": "q(R,A2*delta)",
+      "target": "q(X,delta)",
+      "cnot_layer": 7
+    },
+    {
+      "round": 2,
+      "step": "2",
+      "label": "CNOT_A2",
+      "entry": [
+        "Z",
+        "A",
+        2,
+        true
+      ],
+      "control": "q(Z,delta)",
+      "target": "q(L,bar(A2)*delta)",
+      "cnot_layer": 1
+    },
+    {
+      "round": 2,
+      "step": "3",
+      "label": "CNOT_A1",
+      "entry": [
+        "X",
+        "A",
+        1,
+        true
+      ],
+      "control": "q(R,A1*delta)",
+      "target": "q(X,delta)",
+      "cnot_layer": 2
+    }
+  ],
+  "layer_convention": "cnot_layer is 1-based within a cycle, after reset; printed Step is cnot_layer+1",
+  "literal_first_duplicates": [
+    "ZA1: Steps 7/8",
+    "XA2: Steps 8/9"
+  ],
+  "literal_first_cancellation": "The duplicate gates commute through the intervening gates (which act on disjoint pairs), so both ZA1 and XA2 vanish. The resulting memory measurements are incomplete checks.",
+  "recovered_first_equals_second": true,
+  "recovery": "Remove first-column ordinary ZA1 Step8 and XA2 Step9 introduced by SWAP absorption, unreverse first-column ZA1 Step7/XA2 Step8, and drop empty Step9. This gives exactly the un-reversed second column, with X order A1 B3 B2 B1 A3 A2 and Z order A2 A3 B3 B1 B2 A1.",
+  "cases": [
+    {
+      "schedule": "literal_unrev_first",
+      "code": "72",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic observables.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "72",
+      "basis": "X",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic detectors.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "120",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic observables.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "120",
+      "basis": "X",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic detectors.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "144",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic observables.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "144",
+      "basis": "X",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic detectors.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "170",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic observables.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_first",
+      "code": "170",
+      "basis": "X",
+      "rounds": 2,
+      "valid": false,
+      "diagnostic": "The circuit contains non-deterministic detectors.",
+      "detector_diagnostic_without_observables": "The circuit contains non-deterministic detectors."
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "72",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "72",
+      "basis": "X",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "120",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "120",
+      "basis": "X",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "144",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "144",
+      "basis": "X",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "170",
+      "basis": "Z",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    },
+    {
+      "schedule": "literal_unrev_second",
+      "code": "170",
+      "basis": "X",
+      "rounds": 2,
+      "valid": true,
+      "dem_errors": 0
+    }
+  ],
+  "command": "OMP_NUM_THREADS=2 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python logs/papers3/shift/tableiii_rev_audit.py",
+  "tool_failures": [
+    "web PDF screenshot: cache miss",
+    "pdftoppm unavailable in PATH and checked Homebrew/local bin directories",
+    "Swift PDFKit render failed: compiler 6.3.3 / SDK Swift 6.4 mismatch",
+    "Clang PDFKit render failed: linker does not recognize arm64e.x1 SDK architecture"
+  ]
+}

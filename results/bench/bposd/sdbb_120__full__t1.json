@@ -1,0 +1,92 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "sdbb_120",
+  "variant": "full",
+  "rows": 720,
+  "cols": 39840,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 19,
+  "witness": [
+    16973,
+    16977,
+    17372,
+    17375,
+    17925,
+    17928,
+    19922,
+    19985,
+    21106,
+    21665,
+    21791,
+    21889,
+    22457,
+    23227,
+    24283,
+    25118,
+    25324,
+    26817,
+    30518
+  ],
+  "witness_ok": true,
+  "seconds": 600.098,
+  "trace": [
+    {
+      "t": 112.219,
+      "ub": 42
+    },
+    {
+      "t": 132.462,
+      "ub": 37
+    },
+    {
+      "t": 183.085,
+      "ub": 19
+    }
+  ],
+  "peak_rss_mb": 3172.4,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=18; completed_shots=17; valid_outputs=17; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T12:48:46.920147+00:00",
+    "ended_at": "2026-10-04T12:58:47.200876+00:00",
+    "wall_seconds": 600.17064,
+    "adapter_seconds": 600.098,
+    "trace_offset_seconds": 0.07264,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/sdbb_120__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/sdbb_120__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

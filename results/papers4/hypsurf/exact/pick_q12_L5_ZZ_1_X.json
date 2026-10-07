@@ -1,0 +1,261 @@
+{
+ "paper": "hypsurf_pick",
+ "code": [
+  300,
+  10,
+  10
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "X",
+ "rounds": 5,
+ "noise": "full",
+ "circuit": "circuits/papers/hypsurf_pickq12_L5_ZZ_v723217341336_r5_X.stim",
+ "threads": 1,
+ "model": {
+  "qubits": 732,
+  "detectors": 2016,
+  "observables": 10,
+  "dem_mechanisms": 35236,
+  "sector_rows": 1154,
+  "sector_columns": 5560,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 216,
+  "collapsed_columns": 672
+ },
+ "sector_symmetries_kept": null,
+ "symmetries_expected": 0,
+ "collapsed": {
+  "rows": 216,
+  "columns": 672,
+  "k_table": 3,
+  "orbits": null,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 672,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 672,
+    "false_hits": 672,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 672,
+    "false_hits": 672,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 672,
+    "false_hits": 672,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 1277,
+    "false_hits": 605,
+    "seconds": 0.01
+   },
+   {
+    "K": 6,
+    "status": "found",
+    "best": 6,
+    "nodes": 1337,
+    "false_hits": 59,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 6,
+  "n_min_solution_orbits": 66,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 1
+ },
+ "certified_lower_bound": 7,
+ "window_t0_at_d_coll": {
+  "columns": 324,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 324,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "witness": {
+  "weight": 7,
+  "dem_error_indices": [
+   84,
+   88,
+   4332,
+   4381,
+   13233,
+   22251,
+   29817
+  ],
+  "dem_errors": [
+   "error(0.0101261) D7 D250",
+   "error(0.000266707) D7 D252",
+   "error(0.000200036) D250 D1822 L1",
+   "error(0.000200036) D252 D661",
+   "error(0.000200036) D661 D1112",
+   "error(0.000200036) D1112 D1494",
+   "error(0.00186509) D1494 D1822 L0 L4"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    0,
+    1,
+    4
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 38,
+    "instruction": "M",
+    "paulis": [],
+    "flipped_measurement": 10,
+    "stack": [
+     [
+      129,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 26,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      308
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      88,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 48,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      0
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      402,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 48,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      310
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      402,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 70,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      346
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      860,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 122,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      344
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1464,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 128,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      25
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1484,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    0,
+    1,
+    4
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 7,
+ "seconds": 4.4
+}

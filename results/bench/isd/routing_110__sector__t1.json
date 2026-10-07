@@ -1,0 +1,111 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "routing_110",
+  "variant": "sector",
+  "rows": 385,
+  "cols": 4070,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 10,
+  "witness": [
+    3329,
+    3385,
+    3396,
+    3504,
+    3510,
+    3536,
+    3623,
+    3738,
+    3809,
+    3923
+  ],
+  "witness_ok": true,
+  "seconds": 600.025,
+  "trace": [
+    {
+      "t": 0.321,
+      "ub": 57
+    },
+    {
+      "t": 0.33,
+      "ub": 48
+    },
+    {
+      "t": 0.341,
+      "ub": 46
+    },
+    {
+      "t": 0.349,
+      "ub": 35
+    },
+    {
+      "t": 0.381,
+      "ub": 34
+    },
+    {
+      "t": 0.391,
+      "ub": 24
+    },
+    {
+      "t": 0.403,
+      "ub": 22
+    },
+    {
+      "t": 0.466,
+      "ub": 15
+    },
+    {
+      "t": 1.064,
+      "ub": 13
+    },
+    {
+      "t": 5.488,
+      "ub": 11
+    },
+    {
+      "t": 23.403,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 67.2,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "search calls: 2271; valid outputs: 11; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_110",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T12:03:52.005250+00:00",
+    "ended_at": "2026-10-04T12:13:52.241293+00:00",
+    "wall_seconds": 600.228658,
+    "adapter_seconds": 600.025,
+    "trace_offset_seconds": 0.203658,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/routing_110__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/routing_110__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

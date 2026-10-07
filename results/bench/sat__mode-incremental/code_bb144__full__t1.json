@@ -1,0 +1,117 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "code_bb144",
+  "variant": "full",
+  "rows": 72,
+  "cols": 144,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    2,
+    8,
+    23,
+    26,
+    32,
+    35,
+    38,
+    44,
+    59,
+    62,
+    68,
+    71
+  ],
+  "witness_ok": true,
+  "seconds": 168.492,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.198,
+      "lb": 2
+    },
+    {
+      "t": 0.198,
+      "lb": 3
+    },
+    {
+      "t": 0.282,
+      "lb": 4
+    },
+    {
+      "t": 0.445,
+      "lb": 5
+    },
+    {
+      "t": 0.898,
+      "lb": 6
+    },
+    {
+      "t": 2.491,
+      "lb": 7
+    },
+    {
+      "t": 6.063,
+      "lb": 8
+    },
+    {
+      "t": 17.747,
+      "lb": 9
+    },
+    {
+      "t": 48.465,
+      "lb": 10
+    },
+    {
+      "t": 168.365,
+      "lb": 11
+    },
+    {
+      "t": 168.482,
+      "lb": 12
+    },
+    {
+      "t": 168.49,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 82.6,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb144",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T08:35:09.605771+00:00",
+    "ended_at": "2026-10-04T08:37:58.341277+00:00",
+    "wall_seconds": 168.734796,
+    "adapter_seconds": 168.492,
+    "trace_offset_seconds": 0.242796,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/code_bb144__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/code_bb144__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

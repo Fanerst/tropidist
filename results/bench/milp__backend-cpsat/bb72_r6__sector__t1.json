@@ -1,0 +1,97 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "bb72_r6",
+  "variant": "sector",
+  "rows": 252,
+  "cols": 2232,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 6,
+  "witness": [
+    150,
+    157,
+    162,
+    172,
+    182,
+    197
+  ],
+  "witness_ok": true,
+  "seconds": 600.014,
+  "trace": [
+    {
+      "t": 1.602,
+      "ub": 41
+    },
+    {
+      "t": 1.602,
+      "lb": 0
+    },
+    {
+      "t": 2.205,
+      "ub": 40
+    },
+    {
+      "t": 3.15,
+      "ub": 37
+    },
+    {
+      "t": 4.24,
+      "ub": 36
+    },
+    {
+      "t": 4.761,
+      "ub": 35
+    },
+    {
+      "t": 5.475,
+      "ub": 34
+    },
+    {
+      "t": 6.739,
+      "ub": 7
+    },
+    {
+      "t": 7.185,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 215.8,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-04T09:04:39.816363+00:00",
+    "ended_at": "2026-10-04T09:14:40.118507+00:00",
+    "wall_seconds": 600.298062,
+    "adapter_seconds": 600.014,
+    "trace_offset_seconds": 0.284062,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/bb72_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/bb72_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

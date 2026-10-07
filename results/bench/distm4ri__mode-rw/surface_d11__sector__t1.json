@@ -1,0 +1,79 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "rw",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-58orzodg/codewords.nz",
+    "timeout": "599.892022508"
+  },
+  "instance": "surface_d11",
+  "variant": "sector",
+  "rows": 720,
+  "cols": 3631,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": null,
+  "upper_bound": 11,
+  "witness": [
+    1652,
+    1804,
+    1839,
+    1872,
+    1913,
+    1942,
+    2091,
+    2307,
+    2339,
+    2340,
+    2368
+  ],
+  "witness_ok": true,
+  "seconds": 1.22,
+  "trace": [
+    {
+      "t": 1.219,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 48.5,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. RW is heuristic; printed dmin is not a certified lower bound. Native triple: 1 11 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=rw",
+    "adapter": "distm4ri",
+    "config_string": "mode=rw",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T14:06:03.799525+00:00",
+    "ended_at": "2026-10-04T14:06:05.157784+00:00",
+    "wall_seconds": 1.355649,
+    "adapter_seconds": 1.22,
+    "trace_offset_seconds": 0.135649,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-rw/surface_d11__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-rw/surface_d11__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

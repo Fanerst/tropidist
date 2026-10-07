@@ -1,0 +1,51 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "papers/run_parallel.py",
+    "star",
+    "78",
+    "Z",
+    "results/papers3/star/78_Z_k3.json",
+    "6",
+    "3",
+    "10",
+    "180"
+  ],
+  "environment": {
+    "OMP_NUM_THREADS": "2"
+  },
+  "cwd": "/Users/feng/Documents/Research/projects/qec/mld/circuit_distance",
+  "started_utc": "2026-10-03T14:52:54.528709+00:00",
+  "wall_cap_seconds": 590,
+  "status": "completed",
+  "log": "logs/papers3/star/78_Z_k3.log",
+  "memory_estimate_note": "Collapsed table k=3,ncols=273:2^23 slots; label-free table approx72MiB; substantially below2GiB total budget.",
+  "returncode": 0,
+  "wall_seconds": 226.041,
+  "peak_child_rss_bytes": 284278784,
+  "peak_child_rss_mib": 271.109,
+  "rss_units": "macOS getrusage reports bytes",
+  "finished_utc": "2026-10-03T14:56:40.566572+00:00",
+  "result_file": "results/papers3/star/78_Z_k3.json",
+  "result_bounds": [
+    9,
+    10
+  ],
+  "witness_verified": true,
+  "result_model": {
+    "qubits": 156,
+    "detectors": 468,
+    "observables": 6,
+    "dem_mechanisms": 25818,
+    "sector_rows": 273,
+    "sector_columns": 3354,
+    "sector_reduction_exact": true,
+    "collapsed_rows": 39,
+    "collapsed_columns": 273
+  },
+  "model_matches_baseline_78_Z": true,
+  "circuit": "circuits/papers/star78_r6_Z.stim",
+  "circuit_sha256": "7a7321cc1cd952265ae5efce20ad6a981b18794c73284febe1e88e859f9ba80a",
+  "platform": "darwin",
+  "verification": "Result bounds and verified witness checked; model exactly matches prior 78_Z.json; sector symmetries38."
+}

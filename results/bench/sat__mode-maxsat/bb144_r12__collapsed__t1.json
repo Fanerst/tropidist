@@ -1,0 +1,76 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "bb144_r12",
+  "variant": "collapsed",
+  "rows": 72,
+  "cols": 360,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.013,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.216,
+      "lb": 2
+    },
+    {
+      "t": 0.706,
+      "lb": 3
+    },
+    {
+      "t": 3.541,
+      "lb": 4
+    },
+    {
+      "t": 29.643,
+      "lb": 5
+    },
+    {
+      "t": 312.084,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 181.8,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb144_r12",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      17
+    ],
+    "started_at": "2026-10-04T15:36:27.632582+00:00",
+    "ended_at": "2026-10-04T15:46:28.871198+00:00",
+    "wall_seconds": 601.238452,
+    "adapter_seconds": 601.013,
+    "trace_offset_seconds": 0.225452,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/bb144_r12__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/bb144_r12__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

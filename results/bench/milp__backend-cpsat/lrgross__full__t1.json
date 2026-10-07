@@ -1,0 +1,58 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "lrgross",
+  "variant": "full",
+  "rows": 864,
+  "cols": 31488,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.033,
+  "trace": [
+    {
+      "t": 600.016,
+      "lb": 0
+    }
+  ],
+  "peak_rss_mb": 456.1,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; UNKNOWN",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/lrgross",
+    "family": "lrgross",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T11:25:20.140390+00:00",
+    "ended_at": "2026-10-04T11:35:20.274655+00:00",
+    "wall_seconds": 600.134094,
+    "adapter_seconds": 600.033,
+    "trace_offset_seconds": 0.101094,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/lrgross__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/lrgross__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

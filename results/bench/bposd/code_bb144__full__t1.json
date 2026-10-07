@@ -1,0 +1,77 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "code_bb144",
+  "variant": "full",
+  "rows": 72,
+  "cols": 144,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 12,
+  "witness": [
+    0,
+    15,
+    56,
+    62,
+    73,
+    81,
+    90,
+    91,
+    113,
+    132,
+    136,
+    137
+  ],
+  "witness_ok": true,
+  "seconds": 600.004,
+  "trace": [
+    {
+      "t": 0.298,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 101.2,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=337167; completed_shots=337167; valid_outputs=337167; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb144",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T08:34:31.253277+00:00",
+    "ended_at": "2026-10-04T08:44:31.469225+00:00",
+    "wall_seconds": 600.215217,
+    "adapter_seconds": 600.004,
+    "trace_offset_seconds": 0.211217,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/code_bb144__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/code_bb144__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

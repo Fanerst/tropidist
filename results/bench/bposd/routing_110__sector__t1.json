@@ -1,0 +1,87 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "routing_110",
+  "variant": "sector",
+  "rows": 385,
+  "cols": 4070,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 10,
+  "witness": [
+    193,
+    194,
+    647,
+    936,
+    940,
+    952,
+    966,
+    970,
+    1143,
+    1150
+  ],
+  "witness_ok": true,
+  "seconds": 600.005,
+  "trace": [
+    {
+      "t": 0.44,
+      "ub": 21
+    },
+    {
+      "t": 0.535,
+      "ub": 12
+    },
+    {
+      "t": 4.299,
+      "ub": 11
+    },
+    {
+      "t": 141.538,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 147.4,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=4214; completed_shots=4213; valid_outputs=4213; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_110",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      17
+    ],
+    "started_at": "2026-10-04T12:03:25.759062+00:00",
+    "ended_at": "2026-10-04T12:13:25.950911+00:00",
+    "wall_seconds": 600.18437,
+    "adapter_seconds": 600.005,
+    "trace_offset_seconds": 0.17937,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_110__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/routing_110__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "method": "bposd",
+  "version": null,
+  "config": {},
+  "instance": "surface_d23",
+  "variant": "full",
+  "rows": 12144,
+  "cols": 252399,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 6.840595,
+  "trace": [],
+  "peak_rss_mb": null,
+  "truth": 23,
+  "truth_kind": "exact",
+  "agrees_with_truth": null,
+  "notes": "killed by memory limit (process-group RSS exceeded 16.000 GiB)",
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d23",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T14:45:59.694348+00:00",
+    "ended_at": "2026-10-04T14:46:06.535043+00:00",
+    "wall_seconds": 6.840595,
+    "adapter_seconds": 6.840595,
+    "trace_offset_seconds": 0.0,
+    "exit_code": -9,
+    "error_reason": "killed by memory limit (process-group RSS exceeded 16.000 GiB)",
+    "stderr_tail": [
+      "terminate called after throwing an instance of 'std::bad_alloc'",
+      "  what():  std::bad_alloc"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d23__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d23__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

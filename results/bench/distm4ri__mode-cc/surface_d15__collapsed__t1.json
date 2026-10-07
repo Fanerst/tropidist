@@ -1,0 +1,140 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15/collapsed.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15/collapsed.L.mtx",
+    "outC": "/tmp/bench-distm4ri-rgkgqbfo/codewords.nz",
+    "timeout": "599.894655335"
+  },
+  "instance": "surface_d15",
+  "variant": "collapsed",
+  "rows": 112,
+  "cols": 309,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 15,
+  "upper_bound": 15,
+  "witness": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    15
+  ],
+  "witness_ok": true,
+  "seconds": 96.125,
+  "trace": [
+    {
+      "t": 0.008,
+      "lb": 2
+    },
+    {
+      "t": 0.009,
+      "lb": 3
+    },
+    {
+      "t": 0.009,
+      "lb": 4
+    },
+    {
+      "t": 0.009,
+      "lb": 5
+    },
+    {
+      "t": 0.009,
+      "lb": 6
+    },
+    {
+      "t": 0.011,
+      "lb": 7
+    },
+    {
+      "t": 0.015,
+      "lb": 8
+    },
+    {
+      "t": 0.031,
+      "lb": 9
+    },
+    {
+      "t": 0.096,
+      "lb": 10
+    },
+    {
+      "t": 0.362,
+      "lb": 11
+    },
+    {
+      "t": 1.449,
+      "lb": 12
+    },
+    {
+      "t": 5.844,
+      "lb": 13
+    },
+    {
+      "t": 23.785,
+      "lb": 14
+    },
+    {
+      "t": 95.843,
+      "lb": 15
+    },
+    {
+      "t": 96.125,
+      "ub": 15
+    }
+  ],
+  "peak_rss_mb": 34.5,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 15 15 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T16:21:43.843082+00:00",
+    "ended_at": "2026-10-04T16:23:20.056428+00:00",
+    "wall_seconds": 96.212837,
+    "adapter_seconds": 96.125,
+    "trace_offset_seconds": 0.087837,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/surface_d15__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc/surface_d15__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

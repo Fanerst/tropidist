@@ -1,0 +1,78 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d9",
+  "variant": "full",
+  "rows": 720,
+  "cols": 12705,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    6,
+    7,
+    9,
+    10,
+    23,
+    25,
+    31,
+    644,
+    647
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.33,
+      "ub": 16
+    },
+    {
+      "t": 0.455,
+      "ub": 11
+    },
+    {
+      "t": 0.52,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 74.3,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "search calls: 2052; valid outputs: 3; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d9",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T14:25:17.570685+00:00",
+    "ended_at": "2026-10-04T14:35:17.725312+00:00",
+    "wall_seconds": 600.142106,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.089106,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

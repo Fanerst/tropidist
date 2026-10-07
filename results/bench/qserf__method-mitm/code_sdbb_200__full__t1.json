@@ -1,0 +1,54 @@
+{
+  "method": "qubitserf_mitm",
+  "version": null,
+  "config": {
+    "method": "mitm"
+  },
+  "instance": "code_sdbb_200",
+  "variant": "full",
+  "rows": 100,
+  "cols": 200,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 55.228,
+  "trace": [],
+  "peak_rss_mb": 13597.1,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "child ended without a result (terminated by SIGABRT); the memory limit of the run is the usual cause; d=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "qserf:method=mitm",
+    "adapter": "qserf",
+    "config_string": "method=mitm",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_sdbb_200",
+    "family": "selfdual_bb",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T15:10:04.012639+00:00",
+    "ended_at": "2026-10-04T15:10:59.320377+00:00",
+    "wall_seconds": 55.307499,
+    "adapter_seconds": 55.228,
+    "trace_offset_seconds": 0.079499,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "terminate called after throwing an instance of 'St9bad_alloc'",
+      "  what():  std::bad_alloc"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/qserf__method-mitm/code_sdbb_200__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/qserf__method-mitm/code_sdbb_200__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

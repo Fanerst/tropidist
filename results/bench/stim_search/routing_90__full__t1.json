@@ -1,0 +1,67 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "routing_90",
+  "variant": "full",
+  "rows": 540,
+  "cols": 25020,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    80,
+    81,
+    578,
+    579,
+    1008,
+    1009,
+    1348,
+    1349,
+    1688
+  ],
+  "witness_ok": true,
+  "seconds": 242.545,
+  "trace": [
+    {
+      "t": 0.378,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 2056.3,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (4, 4, True): MemoryError: std::bad_alloc; search (4, 6, True): MemoryError: std::bad_alloc; search (4, 10, True): MemoryError: std::bad_alloc; search (4, 10, False): MemoryError: std::bad_alloc; search calls: 6; valid outputs: 2",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-04T12:19:02.257266+00:00",
+    "ended_at": "2026-10-04T12:23:04.955278+00:00",
+    "wall_seconds": 242.63901,
+    "adapter_seconds": 242.545,
+    "trace_offset_seconds": 0.09401,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/routing_90__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/routing_90__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,5388 @@
+{
+  "source": "arXiv:2601.09911v1",
+  "key": "120",
+  "code": [
+    120,
+    8,
+    12
+  ],
+  "paper_circuit_distance_upper_bound": 10,
+  "rounds": 6,
+  "seconds_per_threshold": 3600.0,
+  "k_coll": 2,
+  "kmax": 12,
+  "noise": "full",
+  "processes": 24,
+  "threads_per_process": 1,
+  "numberings": 36,
+  "reported_numberings": 36,
+  "completed_numberings": 36,
+  "valid_s": 36,
+  "valid_d": 12,
+  "invalid_s": 0,
+  "invalid_d": 24,
+  "distance_histograms_Z_X": {
+    "s": {
+      "10/10": 27,
+      "10/8": 4,
+      "10/9": 4,
+      "9/10": 1
+    },
+    "d": {
+      "10/10": 7,
+      "10/9": 3,
+      "8/10": 2
+    }
+  },
+  "rows": [
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 8,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          8,
+          8
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 21.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 31.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B123/d_Z.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 8.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1633
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B123/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 31.8,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1611
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518720,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 94.55,
+      "peak_rss_mib": 306.61,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 9
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 33.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B132/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1629
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B132/d_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 13.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1627
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518721,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 100.28,
+      "peak_rss_mib": 305.87,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B213/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 23.8,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1633
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B213/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 36.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1611
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518722,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 89.75,
+      "peak_rss_mib": 305.76,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 19.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B231/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1629
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B231/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 34.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1631
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518723,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 84.5,
+      "peak_rss_mib": 306.59,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 32.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B312/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 21.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1625
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B312/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 31.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1619
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518724,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 115.61,
+      "peak_rss_mib": 307.46,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        2,
+        3
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 9
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A123_B321/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 23.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1625
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A123_B321/d_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 14.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1623
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518725,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^-1",
+        "exponents": [
+          -1,
+          0
+        ],
+        "predicted_exponents": [
+          -1,
+          0
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 85.5,
+      "peak_rss_mib": 305.34,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 8,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          8,
+          8
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 32.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B123/d_Z.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 13.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1657
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B123/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 48.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1642
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518726,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 120.93,
+      "peak_rss_mib": 307.57,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 9
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 30.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B132/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 23.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1649
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B132/d_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 13.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1638
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518727,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 89.54,
+      "peak_rss_mib": 309.59,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 27.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B213/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 22.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1657
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B213/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 36.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1642
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518728,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 107.06,
+      "peak_rss_mib": 307.41,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 23.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 34.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B231/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1649
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B231/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 36.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1636
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518729,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 118.39,
+      "peak_rss_mib": 307.62,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 8
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          8,
+          8
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 2.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B312/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 27.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1637
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B312/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 34.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1642
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518730,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 87.15,
+      "peak_rss_mib": 306.07,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        1,
+        3,
+        2
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 8
+      },
+      "valid_d": true,
+      "shift_d": "x^2 y^-1",
+      "d_d": {
+        "Z": 10,
+        "X": 10
+      },
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          8,
+          8
+        ]
+      },
+      "bounds_d": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 21.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 3.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A132_B321/d_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1637
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A132_B321/d_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 33.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 1640
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "status": "complete",
+      "pid": 518731,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "logical_d": {
+        "shift": "x^2 y^-1",
+        "exponents": [
+          2,
+          -1
+        ],
+        "predicted_exponents": [
+          2,
+          -1
+        ],
+        "predicted_matches": true,
+        "stabilizers_preserved": {
+          "X": true,
+          "Z": true
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 83.63,
+      "peak_rss_mib": 306.0,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 21.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518732,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 48.42,
+      "peak_rss_mib": 221.12,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518733,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 46.73,
+      "peak_rss_mib": 220.13,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 31.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518734,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 35.31,
+      "peak_rss_mib": 220.35,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 27.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518735,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 31.32,
+      "peak_rss_mib": 219.6,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 8
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          8,
+          8
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 4.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518736,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 33.06,
+      "peak_rss_mib": 215.71,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        1,
+        3
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 8
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          8,
+          8
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A213_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 22.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A213_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 8,
+          "upper_bound": 8,
+          "distance": 8,
+          "witness_verified": true,
+          "seconds": 3.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518737,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          1,
+          0
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 26.16,
+      "peak_rss_mib": 218.94,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 29.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518738,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 56.16,
+      "peak_rss_mib": 221.11,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 36.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518739,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 65.33,
+      "peak_rss_mib": 220.53,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 9
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 5.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 5.8,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518740,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 12.13,
+      "peak_rss_mib": 64.01,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 9
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 4.8,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 4.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518741,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 10.09,
+      "peak_rss_mib": 64.18,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 25.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 29.2,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518742,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 55.9,
+      "peak_rss_mib": 220.58,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        2,
+        3,
+        1
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 9,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          9,
+          9
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A231_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 6.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A231_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 34.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 518743,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          3,
+          -1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 40.63,
+      "peak_rss_mib": 217.81,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 22.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 25.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 519698,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 48.2,
+      "peak_rss_mib": 221.64,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 22.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 519813,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 51.58,
+      "peak_rss_mib": 221.65,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 33.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 521265,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 37.41,
+      "peak_rss_mib": 219.35,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 522141,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 32.24,
+      "peak_rss_mib": 218.9,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 9
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 4.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 522402,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 25.39,
+      "peak_rss_mib": 220.34,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        1,
+        2
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 9
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          9,
+          9
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A312_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A312_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 9,
+          "upper_bound": 9,
+          "distance": 9,
+          "witness_verified": true,
+          "seconds": 4.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 522552,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -2,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 29.77,
+      "peak_rss_mib": 221.23,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B123/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.3,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B123/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 26.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 522778,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 51.61,
+      "peak_rss_mib": 220.8,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        1,
+        3,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B132/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 20.9,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B132/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 27.5,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 523774,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 49.13,
+      "peak_rss_mib": 221.8,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        2,
+        1,
+        3
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B213/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.1,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B213/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 4.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 523904,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 28.57,
+      "peak_rss_mib": 216.96,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        2,
+        3,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B231/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 18.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B231/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 3.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 524543,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 22.7,
+      "peak_rss_mib": 215.29,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        3,
+        1,
+        2
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B312/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 19.6,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B312/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 24.0,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 524606,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 44.31,
+      "peak_rss_mib": 221.75,
+      "worker_exitcode": 0
+    },
+    {
+      "A": [
+        3,
+        2,
+        1
+      ],
+      "B": [
+        3,
+        2,
+        1
+      ],
+      "valid_s": true,
+      "d_s": {
+        "Z": 10,
+        "X": 10
+      },
+      "valid_d": false,
+      "shift_d": "none",
+      "d_d": null,
+      "bounds_s": {
+        "Z": [
+          10,
+          10
+        ],
+        "X": [
+          10,
+          10
+        ]
+      },
+      "bounds_d": {},
+      "results_s": {
+        "Z": {
+          "result": "results/papers3/shift/numberings_120/A321_B321/s_Z.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 25.4,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 26940,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        },
+        "X": {
+          "result": "results/papers3/shift/numberings_120/A321_B321/s_X.json",
+          "resumed": false,
+          "lower_bound": 10,
+          "upper_bound": 10,
+          "distance": 10,
+          "witness_verified": true,
+          "seconds": 28.7,
+          "model": {
+            "qubits": 240,
+            "detectors": 720,
+            "observables": 8,
+            "dem_mechanisms": 27000,
+            "sector_rows": 420,
+            "sector_columns": 3720,
+            "sector_reduction_exact": true,
+            "collapsed_rows": 60,
+            "collapsed_columns": 300
+          },
+          "sector_symmetries_kept": 59,
+          "symmetries_expected": 59
+        }
+      },
+      "results_d": {},
+      "status": "complete",
+      "pid": 524837,
+      "validation_s": {
+        "valid": true,
+        "layers_disjoint": true,
+        "deterministic": {
+          "Z": true,
+          "X": true
+        }
+      },
+      "validation_d": {
+        "valid": false,
+        "layers_disjoint": true,
+        "deterministic": {},
+        "error": "The circuit contains non-deterministic observables.",
+        "error_type": "ValueError"
+      },
+      "logical_d": {
+        "shift": "none",
+        "exponents": null,
+        "predicted_exponents": [
+          -3,
+          1
+        ],
+        "predicted_matches": false,
+        "stabilizers_preserved": {
+          "X": false,
+          "Z": false
+        },
+        "logical_generators": {
+          "X": 8,
+          "Z": 8
+        },
+        "matching_translation_representatives": [],
+        "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+      },
+      "seconds": 54.91,
+      "peak_rss_mib": 221.78,
+      "worker_exitcode": 0
+    }
+  ],
+  "printed_order": {
+    "A": [
+      1,
+      2,
+      3
+    ],
+    "B": [
+      1,
+      2,
+      3
+    ],
+    "valid_s": true,
+    "d_s": {
+      "Z": 10,
+      "X": 10
+    },
+    "valid_d": true,
+    "shift_d": "x^-1",
+    "d_d": {
+      "Z": 8,
+      "X": 10
+    },
+    "bounds_s": {
+      "Z": [
+        10,
+        10
+      ],
+      "X": [
+        10,
+        10
+      ]
+    },
+    "bounds_d": {
+      "Z": [
+        8,
+        8
+      ],
+      "X": [
+        10,
+        10
+      ]
+    },
+    "results_s": {
+      "Z": {
+        "result": "results/papers3/shift/numberings_120/A123_B123/s_Z.json",
+        "resumed": false,
+        "lower_bound": 10,
+        "upper_bound": 10,
+        "distance": 10,
+        "witness_verified": true,
+        "seconds": 21.7,
+        "model": {
+          "qubits": 240,
+          "detectors": 720,
+          "observables": 8,
+          "dem_mechanisms": 26940,
+          "sector_rows": 420,
+          "sector_columns": 3720,
+          "sector_reduction_exact": true,
+          "collapsed_rows": 60,
+          "collapsed_columns": 300
+        },
+        "sector_symmetries_kept": 59,
+        "symmetries_expected": 59
+      },
+      "X": {
+        "result": "results/papers3/shift/numberings_120/A123_B123/s_X.json",
+        "resumed": false,
+        "lower_bound": 10,
+        "upper_bound": 10,
+        "distance": 10,
+        "witness_verified": true,
+        "seconds": 31.6,
+        "model": {
+          "qubits": 240,
+          "detectors": 720,
+          "observables": 8,
+          "dem_mechanisms": 27000,
+          "sector_rows": 420,
+          "sector_columns": 3720,
+          "sector_reduction_exact": true,
+          "collapsed_rows": 60,
+          "collapsed_columns": 300
+        },
+        "sector_symmetries_kept": 59,
+        "symmetries_expected": 59
+      }
+    },
+    "results_d": {
+      "Z": {
+        "result": "results/papers3/shift/numberings_120/A123_B123/d_Z.json",
+        "resumed": false,
+        "lower_bound": 8,
+        "upper_bound": 8,
+        "distance": 8,
+        "witness_verified": true,
+        "seconds": 8.4,
+        "model": {
+          "qubits": 240,
+          "detectors": 720,
+          "observables": 8,
+          "dem_mechanisms": 27000,
+          "sector_rows": 420,
+          "sector_columns": 3720,
+          "sector_reduction_exact": true,
+          "collapsed_rows": 60,
+          "collapsed_columns": 1633
+        },
+        "sector_symmetries_kept": 59,
+        "symmetries_expected": 59
+      },
+      "X": {
+        "result": "results/papers3/shift/numberings_120/A123_B123/d_X.json",
+        "resumed": false,
+        "lower_bound": 10,
+        "upper_bound": 10,
+        "distance": 10,
+        "witness_verified": true,
+        "seconds": 31.8,
+        "model": {
+          "qubits": 240,
+          "detectors": 720,
+          "observables": 8,
+          "dem_mechanisms": 26940,
+          "sector_rows": 420,
+          "sector_columns": 3720,
+          "sector_reduction_exact": true,
+          "collapsed_rows": 60,
+          "collapsed_columns": 1611
+        },
+        "sector_symmetries_kept": 59,
+        "symmetries_expected": 59
+      }
+    },
+    "status": "complete",
+    "pid": 518720,
+    "validation_s": {
+      "valid": true,
+      "layers_disjoint": true,
+      "deterministic": {
+        "Z": true,
+        "X": true
+      }
+    },
+    "validation_d": {
+      "valid": true,
+      "layers_disjoint": true,
+      "deterministic": {
+        "Z": true,
+        "X": true
+      }
+    },
+    "logical_d": {
+      "shift": "x^-1",
+      "exponents": [
+        -1,
+        0
+      ],
+      "predicted_exponents": [
+        -1,
+        0
+      ],
+      "predicted_matches": true,
+      "stabilizers_preserved": {
+        "X": true,
+        "Z": true
+      },
+      "logical_generators": {
+        "X": 8,
+        "Z": 8
+      },
+      "matching_translation_representatives": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "method": "exact Pauli conjugation, all X/Z logical generators modulo code and prepared-ancilla stabilizers"
+    },
+    "seconds": 94.55,
+    "peak_rss_mib": 306.61,
+    "worker_exitcode": 0
+  },
+  "status": "complete",
+  "seconds": 121.2,
+  "limits": {
+    "worker_seconds": 0.0,
+    "total_seconds": 0.0
+  }
+}

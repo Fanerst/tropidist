@@ -1,0 +1,194 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "walkingcat_54",
+  "variant": "sector",
+  "rows": 189,
+  "cols": 2322,
+  "obs": 2,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": 8,
+  "witness": [
+    1927,
+    1948,
+    1959,
+    1971,
+    1990,
+    2009,
+    2079,
+    2123
+  ],
+  "witness_ok": true,
+  "seconds": 3600.633,
+  "trace": [
+    {
+      "t": 0.498,
+      "ub": 124
+    },
+    {
+      "t": 0.498,
+      "lb": 1
+    },
+    {
+      "t": 0.544,
+      "ub": 123
+    },
+    {
+      "t": 0.665,
+      "ub": 122
+    },
+    {
+      "t": 0.667,
+      "ub": 121
+    },
+    {
+      "t": 0.797,
+      "ub": 120
+    },
+    {
+      "t": 0.87,
+      "ub": 119
+    },
+    {
+      "t": 0.915,
+      "ub": 28
+    },
+    {
+      "t": 0.927,
+      "ub": 27
+    },
+    {
+      "t": 0.929,
+      "ub": 26
+    },
+    {
+      "t": 0.962,
+      "ub": 25
+    },
+    {
+      "t": 1.112,
+      "ub": 24
+    },
+    {
+      "t": 1.112,
+      "lb": 2
+    },
+    {
+      "t": 1.223,
+      "ub": 23
+    },
+    {
+      "t": 1.232,
+      "ub": 20
+    },
+    {
+      "t": 1.366,
+      "ub": 18
+    },
+    {
+      "t": 1.527,
+      "ub": 17
+    },
+    {
+      "t": 1.601,
+      "ub": 15
+    },
+    {
+      "t": 2.043,
+      "ub": 12
+    },
+    {
+      "t": 2.074,
+      "ub": 11
+    },
+    {
+      "t": 2.293,
+      "ub": 10
+    },
+    {
+      "t": 2.317,
+      "ub": 9
+    },
+    {
+      "t": 113.518,
+      "ub": 8
+    },
+    {
+      "t": 113.518,
+      "lb": 3
+    },
+    {
+      "t": 3600.514,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 3250.0,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54",
+    "family": "walkingcat",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-05T03:27:58.757530+00:00",
+    "ended_at": "2026-10-05T04:27:59.606614+00:00",
+    "wall_seconds": 3600.844867,
+    "adapter_seconds": 3600.633,
+    "trace_offset_seconds": 0.211867,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/walkingcat_54__sector__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/walkingcat_54__sector__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

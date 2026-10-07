@@ -1,0 +1,92 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "routing_110",
+  "variant": "collapsed",
+  "rows": 55,
+  "cols": 330,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 7,
+  "upper_bound": 7,
+  "witness": [
+    79,
+    88,
+    99,
+    196,
+    214,
+    230,
+    302
+  ],
+  "witness_ok": true,
+  "seconds": 349.463,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.186,
+      "lb": 2
+    },
+    {
+      "t": 0.731,
+      "lb": 3
+    },
+    {
+      "t": 3.837,
+      "lb": 4
+    },
+    {
+      "t": 27.745,
+      "lb": 5
+    },
+    {
+      "t": 300.631,
+      "lb": 6
+    },
+    {
+      "t": 300.97,
+      "lb": 7
+    },
+    {
+      "t": 349.46,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 147.9,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_110",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T16:06:41.417601+00:00",
+    "ended_at": "2026-10-04T16:12:30.961828+00:00",
+    "wall_seconds": 349.543288,
+    "adapter_seconds": 349.463,
+    "trace_offset_seconds": 0.080288,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/routing_110__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/routing_110__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,47 @@
+# environments, caches, build products
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.so
+*.dylib
+*.dSYM/
+*.tmp
+*.part
+
+# run logs (two are kept: scripts/summarize.py reads their wall times)
+logs/*
+!logs/server/
+logs/server/*
+!logs/server/enum_bb288_r18_X.log
+!logs/server/enum_bb288_r18_Z.log
+phase4/logs/
+phase4/cache/
+
+# third-party material: not redistributed here, see "External data" in README.md
+papers/downloads/
+papers/amplified/repo/
+papers/mitten/mitten/
+papers/mitten/README.md
+papers/new/*_fulltext.txt
+bench/external/
+
+# generated on demand
+circuits/papers/
+bench/instances/*/*
+!bench/instances/*/meta.json
+
+# scratch and development runs
+results/bench_dev/
+results/bench_scratch/
+results/bench_shakeout/
+results/papers4/hypsurf/*.stim
+# large tiling lists that no reported result uses (regenerate with papers/hyperbolic_lins.g)
+results/papers4/hyperbolic/lins_444_4096.jsonl
+results/papers4/hyperbolic/lins_666_2184.jsonl
+# stale outputs of an early partial report
+results/bench/BENCHMARK_partial.md
+results/bench/summary.csv
+results/bench/profile.csv
+# reading note with long verbatim quotations from the paper; kept locally
+papers/new/2608.02773.md

@@ -1,0 +1,58 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL"
+  },
+  "instance": "sdbb_120",
+  "variant": "full",
+  "rows": 720,
+  "cols": 39840,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.066,
+  "trace": [
+    {
+      "t": 0.112,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 582.6,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "threads unused while building/dumping encoding; Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; external backend has no standard thread option; threads ignored; external exit=-9; status=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      10
+    ],
+    "started_at": "2026-10-05T22:33:08.444366+00:00",
+    "ended_at": "2026-10-05T22:43:08.717651+00:00",
+    "wall_seconds": 600.273207,
+    "adapter_seconds": 600.066,
+    "trace_offset_seconds": 0.207207,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/sdbb_120__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/sdbb_120__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

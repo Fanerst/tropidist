@@ -1,0 +1,75 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": 12,
+  "witness": [
+    8,
+    20,
+    27,
+    59,
+    61,
+    64,
+    85,
+    96,
+    98,
+    99,
+    112,
+    125
+  ],
+  "witness_ok": true,
+  "seconds": 600.03,
+  "trace": [
+    {
+      "t": 600.016,
+      "ub": 12
+    },
+    {
+      "t": 600.016,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 339.6,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      17
+    ],
+    "started_at": "2026-10-04T10:54:45.383162+00:00",
+    "ended_at": "2026-10-04T11:04:45.504645+00:00",
+    "wall_seconds": 600.120729,
+    "adapter_seconds": 600.03,
+    "trace_offset_seconds": 0.090729,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

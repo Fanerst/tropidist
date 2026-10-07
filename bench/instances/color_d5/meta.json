@@ -1,0 +1,57 @@
+{
+ "family": "stim_color",
+ "n": 19,
+ "k": 1,
+ "basis": "Z",
+ "rounds": 5,
+ "description": "Stim color-code XYZ memory, distance 5, rounds 5",
+ "source": {
+  "track": "circuit",
+  "family": "stim_color",
+  "builder": "stim_color",
+  "key": 5,
+  "basis": "Z",
+  "rounds": 5,
+  "truth_file": "results/bench_truth/color_d5.json",
+  "variants": [
+   "full"
+  ],
+  "extra_sources": [
+   "bench/stim_families.py",
+   "bench/instances.py"
+  ],
+  "n": 19,
+  "k": 1,
+  "description": "Stim color-code XYZ memory, distance 5, rounds 5",
+  "generator": "color_code:memory_xyz",
+  "noise": {
+   "after_clifford_depolarization": 0.001,
+   "before_round_data_depolarization": 0.001,
+   "before_measure_flip_probability": 0.001,
+   "after_reset_flip_probability": 0.001
+  },
+  "stim_version": "1.15.0"
+ },
+ "source_sha256": {
+  "bench/stim_families.py": "40c6b6afefca201cd418f5a4428b13c78c0124bc7b154d37c549c2693cc9f66b",
+  "bench/instances.py": "2124fcec48fce7afe2415de81332decc5bcff9eae1d2f9767acfa08897adf201"
+ },
+ "used_qubits": 28,
+ "name": "color_d5",
+ "track": "circuit",
+ "variants": {
+  "full": {
+   "rows": 45,
+   "cols": 1104,
+   "obs": 1,
+   "symmetries": 0,
+   "distance": null,
+   "distance_kind": "unknown",
+   "distance_source": null
+  }
+ },
+ "raw_mechanisms": 1104,
+ "qubits": 28,
+ "detectors": 45,
+ "observables": 1
+}

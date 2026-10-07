@@ -1,0 +1,88 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "gross_best_r6",
+  "variant": "collapsed",
+  "rows": 72,
+  "cols": 360,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 9,
+  "witness": [
+    1,
+    55,
+    57,
+    144,
+    165,
+    180,
+    264,
+    310,
+    351
+  ],
+  "witness_ok": true,
+  "seconds": 600.01,
+  "trace": [
+    {
+      "t": 3.468,
+      "ub": 13
+    },
+    {
+      "t": 3.468,
+      "lb": 0
+    },
+    {
+      "t": 4.02,
+      "ub": 12
+    },
+    {
+      "t": 4.117,
+      "ub": 11
+    },
+    {
+      "t": 4.836,
+      "ub": 10
+    },
+    {
+      "t": 4.859,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 133.6,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/gross_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T15:38:53.904728+00:00",
+    "ended_at": "2026-10-04T15:48:54.113959+00:00",
+    "wall_seconds": 600.208035,
+    "adapter_seconds": 600.01,
+    "trace_offset_seconds": 0.198035,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/gross_best_r6__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/gross_best_r6__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "code_bb288",
+  "variant": "full",
+  "rows": 144,
+  "cols": 288,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 11,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.015,
+  "trace": [
+    {
+      "t": 0.012,
+      "lb": 1
+    },
+    {
+      "t": 0.192,
+      "lb": 2
+    },
+    {
+      "t": 0.283,
+      "lb": 3
+    },
+    {
+      "t": 0.297,
+      "lb": 4
+    },
+    {
+      "t": 0.47,
+      "lb": 5
+    },
+    {
+      "t": 1.126,
+      "lb": 6
+    },
+    {
+      "t": 5.862,
+      "lb": 7
+    },
+    {
+      "t": 5.872,
+      "lb": 8
+    },
+    {
+      "t": 16.089,
+      "lb": 9
+    },
+    {
+      "t": 44.437,
+      "lb": 10
+    },
+    {
+      "t": 158.219,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 137.6,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      13
+    ],
+    "started_at": "2026-10-04T08:38:20.118206+00:00",
+    "ended_at": "2026-10-04T08:48:21.329264+00:00",
+    "wall_seconds": 601.210881,
+    "adapter_seconds": 601.015,
+    "trace_offset_seconds": 0.195881,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/code_bb288__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/code_bb288__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

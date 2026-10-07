@@ -1,0 +1,76 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "surface_d11",
+  "variant": "sector",
+  "rows": 720,
+  "cols": 3631,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 11,
+  "witness": [
+    2327,
+    2591,
+    2615,
+    2640,
+    2680,
+    2841,
+    2843,
+    2904,
+    3028,
+    3098,
+    3379
+  ],
+  "witness_ok": true,
+  "seconds": 600.005,
+  "trace": [
+    {
+      "t": 0.356,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 134.5,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=16841; completed_shots=16840; valid_outputs=16840; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      17
+    ],
+    "started_at": "2026-10-04T14:05:35.171812+00:00",
+    "ended_at": "2026-10-04T14:15:35.415583+00:00",
+    "wall_seconds": 600.240815,
+    "adapter_seconds": 600.005,
+    "trace_offset_seconds": 0.235815,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d11__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/surface_d11__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

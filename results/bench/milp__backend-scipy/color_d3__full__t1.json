@@ -1,0 +1,65 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_d3",
+  "variant": "full",
+  "rows": 9,
+  "cols": 72,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 2,
+  "upper_bound": 2,
+  "witness": [
+    0,
+    26
+  ],
+  "witness_ok": true,
+  "seconds": 0.259,
+  "trace": [
+    {
+      "t": 0.254,
+      "ub": 2
+    },
+    {
+      "t": 0.254,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 107.5,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d3",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T13:44:27.158535+00:00",
+    "ended_at": "2026-10-04T13:44:27.498359+00:00",
+    "wall_seconds": 0.339625,
+    "adapter_seconds": 0.259,
+    "trace_offset_seconds": 0.080625,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/color_d3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/color_d3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

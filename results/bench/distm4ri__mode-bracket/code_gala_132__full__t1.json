@@ -1,0 +1,116 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-rlvumau9/codewords.nz",
+    "timeout": "599.894634649"
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": 10,
+  "upper_bound": 12,
+  "witness": [
+    9,
+    13,
+    23,
+    39,
+    47,
+    56,
+    77,
+    83,
+    88,
+    92,
+    121,
+    126
+  ],
+  "witness_ok": true,
+  "seconds": 217.731,
+  "trace": [
+    {
+      "t": 0.013,
+      "lb": 2
+    },
+    {
+      "t": 0.018,
+      "lb": 3
+    },
+    {
+      "t": 0.023,
+      "lb": 4
+    },
+    {
+      "t": 0.03,
+      "lb": 5
+    },
+    {
+      "t": 0.053,
+      "lb": 6
+    },
+    {
+      "t": 0.288,
+      "lb": 7
+    },
+    {
+      "t": 2.479,
+      "lb": 8
+    },
+    {
+      "t": 23.729,
+      "lb": 9
+    },
+    {
+      "t": 217.728,
+      "lb": 10
+    },
+    {
+      "t": 217.731,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 40.6,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 10 12 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T10:54:24.381378+00:00",
+    "ended_at": "2026-10-04T10:58:02.190893+00:00",
+    "wall_seconds": 217.808729,
+    "adapter_seconds": 217.731,
+    "trace_offset_seconds": 0.077729,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

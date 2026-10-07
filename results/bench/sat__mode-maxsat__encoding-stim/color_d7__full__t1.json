@@ -1,0 +1,78 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0; 1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim"
+  },
+  "instance": "color_d7",
+  "variant": "full",
+  "rows": 126,
+  "cols": 3651,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    2027,
+    2028,
+    2318,
+    2473
+  ],
+  "witness_ok": true,
+  "seconds": 49.545,
+  "trace": [
+    {
+      "t": 0.007,
+      "lb": 1
+    },
+    {
+      "t": 0.428,
+      "lb": 2
+    },
+    {
+      "t": 6.178,
+      "lb": 3
+    },
+    {
+      "t": 43.274,
+      "lb": 4
+    },
+    {
+      "t": 49.54,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 130.3,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "PySAT threads ignored (single-threaded solver interface); Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d7",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-05T22:33:09.601376+00:00",
+    "ended_at": "2026-10-05T22:33:59.376775+00:00",
+    "wall_seconds": 49.770667,
+    "adapter_seconds": 49.545,
+    "trace_offset_seconds": 0.225667,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim/color_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__encoding-stim/color_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

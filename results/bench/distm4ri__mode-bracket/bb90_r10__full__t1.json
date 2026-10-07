@@ -1,0 +1,109 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-_1mn32wn/codewords.nz",
+    "timeout": "599.821411826"
+  },
+  "instance": "bb90_r10",
+  "variant": "full",
+  "rows": 900,
+  "cols": 34965,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": 5,
+  "upper_bound": 25,
+  "witness": [
+    28465,
+    28470,
+    29902,
+    29909,
+    30599,
+    31206,
+    31208,
+    31636,
+    31782,
+    31869,
+    32334,
+    32339,
+    32380,
+    32420,
+    32447,
+    32903,
+    32981,
+    33116,
+    33732,
+    33833,
+    34249,
+    34259,
+    34357,
+    34453,
+    34605
+  ],
+  "witness_ok": true,
+  "seconds": 569.609,
+  "trace": [
+    {
+      "t": 0.132,
+      "lb": 2
+    },
+    {
+      "t": 1.87,
+      "lb": 3
+    },
+    {
+      "t": 10.802,
+      "lb": 4
+    },
+    {
+      "t": 515.871,
+      "lb": 5
+    },
+    {
+      "t": 569.609,
+      "ub": 25
+    }
+  ],
+  "peak_rss_mb": 44.4,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 5 25 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T09:24:59.293929+00:00",
+    "ended_at": "2026-10-04T09:34:29.143903+00:00",
+    "wall_seconds": 569.778026,
+    "adapter_seconds": 569.609,
+    "trace_offset_seconds": 0.169026,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/bb90_r10__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/bb90_r10__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

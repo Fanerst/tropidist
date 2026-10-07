@@ -1,0 +1,118 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_d7",
+  "variant": "full",
+  "rows": 126,
+  "cols": 3651,
+  "obs": 1,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    3550,
+    3552,
+    3624,
+    3625
+  ],
+  "witness_ok": true,
+  "seconds": 378.598,
+  "trace": [
+    {
+      "t": 0.878,
+      "ub": 21
+    },
+    {
+      "t": 0.878,
+      "lb": 1
+    },
+    {
+      "t": 0.913,
+      "ub": 19
+    },
+    {
+      "t": 0.953,
+      "ub": 18
+    },
+    {
+      "t": 0.963,
+      "ub": 5
+    },
+    {
+      "t": 1.131,
+      "ub": 4
+    },
+    {
+      "t": 378.513,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 3334.4,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d7",
+    "family": "stim_color",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-05T11:55:09.596779+00:00",
+    "ended_at": "2026-10-05T12:01:28.333053+00:00",
+    "wall_seconds": 378.729817,
+    "adapter_seconds": 378.598,
+    "trace_offset_seconds": 0.131817,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB_extra2/milp__backend-cpsat/color_d7__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB_extra2/milp__backend-cpsat/color_d7__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

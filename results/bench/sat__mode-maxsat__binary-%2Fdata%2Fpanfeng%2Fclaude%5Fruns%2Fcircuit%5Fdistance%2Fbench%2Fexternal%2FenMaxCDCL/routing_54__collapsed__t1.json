@@ -1,0 +1,70 @@
+{
+  "method": "sat_maxsat",
+  "version": null,
+  "config": {
+    "mode": "maxsat",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL"
+  },
+  "instance": "routing_54",
+  "variant": "collapsed",
+  "rows": 27,
+  "cols": 162,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    45,
+    117,
+    134,
+    157
+  ],
+  "witness_ok": true,
+  "seconds": 1.008,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.968,
+      "lb": 4
+    },
+    {
+      "t": 0.968,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 48.3,
+  "truth": 4,
+  "truth_kind": "exact",
+  "notes": "threads unused while building/dumping encoding; external backend has no standard thread option; threads ignored; external exit=30; status=OPTIMUM FOUND",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_54",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T16:01:02.042614+00:00",
+    "ended_at": "2026-10-04T16:01:03.213833+00:00",
+    "wall_seconds": 1.170596,
+    "adapter_seconds": 1.008,
+    "trace_offset_seconds": 0.162596,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/routing_54__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL/routing_54__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "lrgross",
+  "variant": "full",
+  "rows": 864,
+  "cols": 31488,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    536,
+    641,
+    723,
+    726,
+    777,
+    2094,
+    2123,
+    2205,
+    2293,
+    2298,
+    2348,
+    2859,
+    2886,
+    3036,
+    3046,
+    3231,
+    3574,
+    3575
+  ],
+  "witness_ok": true,
+  "seconds": 246.424,
+  "trace": [
+    {
+      "t": 13.191,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 2059.9,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (2, 2, True): ValueError: Failed to find any graphlike logical errors.; search (3, 3, True): ValueError: Failed to find any logical errors.; search (4, 6, True): MemoryError: std::bad_alloc; search (4, 10, True): MemoryError: std::bad_alloc; search (4, 10, False): worker exited without a result (exitcode None); search calls: 6; valid outputs: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/lrgross",
+    "family": "lrgross",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-04T11:28:17.411783+00:00",
+    "ended_at": "2026-10-04T11:32:24.110000+00:00",
+    "wall_seconds": 246.620226,
+    "adapter_seconds": 246.424,
+    "trace_offset_seconds": 0.196226,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "cannot allocate memory for thread-local data: ABORT"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/lrgross__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/lrgross__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

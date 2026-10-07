@@ -1,0 +1,87 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "bb72_r6",
+  "variant": "sector",
+  "rows": 252,
+  "cols": 2232,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    468,
+    473,
+    484,
+    490,
+    495,
+    504
+  ],
+  "witness_ok": true,
+  "seconds": 3167.939,
+  "trace": [
+    {
+      "t": 0.007,
+      "lb": 1
+    },
+    {
+      "t": 1.326,
+      "lb": 2
+    },
+    {
+      "t": 4.282,
+      "lb": 3
+    },
+    {
+      "t": 27.357,
+      "lb": 4
+    },
+    {
+      "t": 245.662,
+      "lb": 5
+    },
+    {
+      "t": 3159.761,
+      "lb": 6
+    },
+    {
+      "t": 3167.929,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 346.0,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-05T12:43:19.790676+00:00",
+    "ended_at": "2026-10-05T13:36:07.815822+00:00",
+    "wall_seconds": 3168.020691,
+    "adapter_seconds": 3167.939,
+    "trace_offset_seconds": 0.081691,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/bb72_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/bb72_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

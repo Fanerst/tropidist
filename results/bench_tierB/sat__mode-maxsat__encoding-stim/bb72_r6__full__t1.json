@@ -1,0 +1,65 @@
+{
+  "method": "sat_maxsat",
+  "version": "stim 1.15.0; 1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "encoding": "stim"
+  },
+  "instance": "bb72_r6",
+  "variant": "full",
+  "rows": 432,
+  "cols": 16164,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.042,
+  "trace": [
+    {
+      "t": 0.038,
+      "lb": 1
+    },
+    {
+      "t": 65.251,
+      "lb": 2
+    },
+    {
+      "t": 555.587,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 681.1,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); Stim circuit WCNF variables mapped by flattened DEM (detectors, observables) signatures; PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,encoding=stim",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,encoding=stim",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      40
+    ],
+    "started_at": "2026-10-06T07:15:20.260058+00:00",
+    "ended_at": "2026-10-06T08:15:21.503203+00:00",
+    "wall_seconds": 3601.242851,
+    "adapter_seconds": 3601.042,
+    "trace_offset_seconds": 0.200851,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim/bb72_r6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__encoding-stim/bb72_r6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

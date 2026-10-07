@@ -1,0 +1,142 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_cornucopia_1044",
+  "variant": "full",
+  "rows": 261,
+  "cols": 1044,
+  "obs": 526,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 12,
+  "witness": [
+    43,
+    119,
+    223,
+    231,
+    291,
+    307,
+    749,
+    825,
+    832,
+    899,
+    908,
+    1012
+  ],
+  "witness_ok": true,
+  "seconds": 3600.29,
+  "trace": [
+    {
+      "t": 3.192,
+      "ub": 58
+    },
+    {
+      "t": 3.192,
+      "lb": 1
+    },
+    {
+      "t": 4.192,
+      "ub": 56
+    },
+    {
+      "t": 4.963,
+      "ub": 54
+    },
+    {
+      "t": 4.963,
+      "lb": 2
+    },
+    {
+      "t": 6.55,
+      "ub": 52
+    },
+    {
+      "t": 10.367,
+      "ub": 38
+    },
+    {
+      "t": 10.673,
+      "ub": 22
+    },
+    {
+      "t": 13.964,
+      "ub": 20
+    },
+    {
+      "t": 27.39,
+      "ub": 12
+    },
+    {
+      "t": 3600.223,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 3170.0,
+  "truth": 12,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-05T04:28:00.136241+00:00",
+    "ended_at": "2026-10-05T05:28:00.533571+00:00",
+    "wall_seconds": 3600.358237,
+    "adapter_seconds": 3600.29,
+    "trace_offset_seconds": 0.068237,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/code_cornucopia_1044__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat/code_cornucopia_1044__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

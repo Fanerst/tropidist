@@ -1,0 +1,78 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "routing_90",
+  "variant": "collapsed",
+  "rows": 45,
+  "cols": 270,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 7,
+  "witness": [
+    11,
+    32,
+    51,
+    121,
+    219,
+    231,
+    236
+  ],
+  "witness_ok": true,
+  "seconds": 600.008,
+  "trace": [
+    {
+      "t": 0.771,
+      "ub": 9
+    },
+    {
+      "t": 0.771,
+      "lb": 0
+    },
+    {
+      "t": 1.188,
+      "ub": 8
+    },
+    {
+      "t": 4.847,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 131.4,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T16:01:43.237677+00:00",
+    "ended_at": "2026-10-04T16:11:43.430171+00:00",
+    "wall_seconds": 600.191662,
+    "adapter_seconds": 600.008,
+    "trace_offset_seconds": 0.183662,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_90__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_90__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

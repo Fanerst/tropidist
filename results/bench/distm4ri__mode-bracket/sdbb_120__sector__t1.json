@@ -1,0 +1,109 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-ajweazwv/codewords.nz",
+    "timeout": "599.882686743"
+  },
+  "instance": "sdbb_120",
+  "variant": "sector",
+  "rows": 420,
+  "cols": 5160,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "bounds",
+  "lower_bound": 6,
+  "upper_bound": 21,
+  "witness": [
+    1716,
+    1719,
+    1881,
+    1964,
+    2135,
+    2143,
+    2164,
+    2212,
+    2271,
+    2309,
+    2379,
+    2500,
+    2566,
+    2726,
+    2821,
+    2883,
+    2972,
+    2989,
+    3111,
+    3162,
+    3377
+  ],
+  "witness_ok": true,
+  "seconds": 89.928,
+  "trace": [
+    {
+      "t": 0.123,
+      "lb": 2
+    },
+    {
+      "t": 0.218,
+      "lb": 3
+    },
+    {
+      "t": 0.401,
+      "lb": 4
+    },
+    {
+      "t": 3.079,
+      "lb": 5
+    },
+    {
+      "t": 87.084,
+      "lb": 6
+    },
+    {
+      "t": 89.928,
+      "ub": 21
+    }
+  ],
+  "peak_rss_mb": 43.0,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 6 21 1000 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-04T12:41:44.652245+00:00",
+    "ended_at": "2026-10-04T12:43:14.759428+00:00",
+    "wall_seconds": 90.095353,
+    "adapter_seconds": 89.928,
+    "trace_offset_seconds": 0.167353,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/sdbb_120__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/sdbb_120__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

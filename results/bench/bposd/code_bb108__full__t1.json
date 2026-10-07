@@ -1,0 +1,79 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "code_bb108",
+  "variant": "full",
+  "rows": 54,
+  "cols": 108,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 10,
+  "witness": [
+    2,
+    9,
+    18,
+    47,
+    65,
+    67,
+    82,
+    89,
+    97,
+    98
+  ],
+  "witness_ok": true,
+  "seconds": 600.004,
+  "trace": [
+    {
+      "t": 0.299,
+      "ub": 12
+    },
+    {
+      "t": 0.313,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 101.2,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=463909; completed_shots=463908; valid_outputs=463908; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb108",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T08:34:30.495569+00:00",
+    "ended_at": "2026-10-04T08:44:30.732922+00:00",
+    "wall_seconds": 600.236752,
+    "adapter_seconds": 600.004,
+    "trace_offset_seconds": 0.232752,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/code_bb108__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/code_bb108__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

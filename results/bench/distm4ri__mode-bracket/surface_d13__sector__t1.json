@@ -1,0 +1,113 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-58vunpz9/codewords.nz",
+    "timeout": "599.890123883"
+  },
+  "instance": "surface_d13",
+  "variant": "sector",
+  "rows": 1176,
+  "cols": 6085,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": 13,
+  "witness": [
+    1940,
+    1977,
+    2010,
+    2049,
+    2502,
+    2991,
+    3032,
+    3069,
+    3110,
+    3145,
+    3190,
+    3231,
+    3263
+  ],
+  "witness_ok": true,
+  "seconds": 599.908,
+  "trace": [
+    {
+      "t": 0.097,
+      "lb": 2
+    },
+    {
+      "t": 0.177,
+      "lb": 3
+    },
+    {
+      "t": 0.258,
+      "lb": 4
+    },
+    {
+      "t": 0.351,
+      "lb": 5
+    },
+    {
+      "t": 0.541,
+      "lb": 6
+    },
+    {
+      "t": 1.597,
+      "lb": 7
+    },
+    {
+      "t": 10.123,
+      "lb": 8
+    },
+    {
+      "t": 84.385,
+      "lb": 9
+    },
+    {
+      "t": 599.908,
+      "ub": 13
+    }
+  ],
+  "peak_rss_mb": 48.9,
+  "truth": 13,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. Native triple: 9 13 225 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T14:16:57.471290+00:00",
+    "ended_at": "2026-10-04T14:26:57.453007+00:00",
+    "wall_seconds": 599.977508,
+    "adapter_seconds": 599.908,
+    "trace_offset_seconds": 0.069508,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/surface_d13__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-bracket/surface_d13__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

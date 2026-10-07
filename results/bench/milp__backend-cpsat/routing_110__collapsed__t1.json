@@ -1,0 +1,114 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "routing_110",
+  "variant": "collapsed",
+  "rows": 55,
+  "cols": 330,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 7,
+  "witness": [
+    59,
+    180,
+    219,
+    224,
+    228,
+    283,
+    299
+  ],
+  "witness_ok": true,
+  "seconds": 600.009,
+  "trace": [
+    {
+      "t": 0.534,
+      "ub": 21
+    },
+    {
+      "t": 0.534,
+      "lb": 0
+    },
+    {
+      "t": 0.544,
+      "ub": 20
+    },
+    {
+      "t": 0.628,
+      "ub": 16
+    },
+    {
+      "t": 0.678,
+      "ub": 15
+    },
+    {
+      "t": 0.716,
+      "ub": 14
+    },
+    {
+      "t": 0.74,
+      "ub": 13
+    },
+    {
+      "t": 0.822,
+      "ub": 12
+    },
+    {
+      "t": 1.106,
+      "ub": 11
+    },
+    {
+      "t": 2.486,
+      "ub": 10
+    },
+    {
+      "t": 3.703,
+      "ub": 9
+    },
+    {
+      "t": 19.474,
+      "ub": 8
+    },
+    {
+      "t": 19.582,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 134.8,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_110",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T16:11:43.531130+00:00",
+    "ended_at": "2026-10-04T16:21:43.741536+00:00",
+    "wall_seconds": 600.209443,
+    "adapter_seconds": 600.009,
+    "trace_offset_seconds": 0.200443,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_110__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/routing_110__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

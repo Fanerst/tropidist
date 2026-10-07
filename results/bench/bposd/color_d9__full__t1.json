@@ -1,0 +1,70 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "color_d9",
+  "variant": "full",
+  "rows": 270,
+  "cols": 7683,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 5,
+  "witness": [
+    563,
+    587,
+    1040,
+    1311,
+    1392
+  ],
+  "witness_ok": true,
+  "seconds": 600.011,
+  "trace": [
+    {
+      "t": 0.486,
+      "ub": 5
+    }
+  ],
+  "peak_rss_mb": 230.3,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=4083; completed_shots=4082; valid_outputs=4082; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d9",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T13:44:28.206370+00:00",
+    "ended_at": "2026-10-04T13:54:28.459962+00:00",
+    "wall_seconds": 600.24318,
+    "adapter_seconds": 600.011,
+    "trace_offset_seconds": 0.23218,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/color_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/color_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

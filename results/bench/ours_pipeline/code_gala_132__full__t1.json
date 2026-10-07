@@ -1,0 +1,125 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    0,
+    7,
+    13,
+    23,
+    30,
+    36,
+    38,
+    53,
+    70,
+    93,
+    94,
+    127
+  ],
+  "witness_ok": true,
+  "seconds": 1.198,
+  "trace": [
+    {
+      "t": 0.061,
+      "lb": 1
+    },
+    {
+      "t": 0.115,
+      "lb": 2
+    },
+    {
+      "t": 0.115,
+      "lb": 3
+    },
+    {
+      "t": 0.116,
+      "lb": 4
+    },
+    {
+      "t": 0.117,
+      "lb": 5
+    },
+    {
+      "t": 0.117,
+      "lb": 6
+    },
+    {
+      "t": 0.117,
+      "lb": 7
+    },
+    {
+      "t": 0.119,
+      "lb": 8
+    },
+    {
+      "t": 0.126,
+      "lb": 9
+    },
+    {
+      "t": 0.155,
+      "lb": 10
+    },
+    {
+      "t": 0.299,
+      "lb": 11
+    },
+    {
+      "t": 1.101,
+      "lb": 12
+    },
+    {
+      "t": 1.184,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 67.5,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 132, \"rows\": 55, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011730194091796875, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.745887756347656e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.984306335449219e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011730194091796875, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011420249938964844, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002529621124267578, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0010802745819091797, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.006428241729736328, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02958393096923828, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.14288663864135742, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8020613193511963, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": 12, \"nsol_recorded\": 1, \"seconds\": 0.08227920532226562, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T10:55:17.915042+00:00",
+    "ended_at": "2026-10-04T10:55:19.259978+00:00",
+    "wall_seconds": 1.344139,
+    "adapter_seconds": 1.198,
+    "trace_offset_seconds": 0.146139,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

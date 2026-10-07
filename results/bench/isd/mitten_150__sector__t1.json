@@ -1,0 +1,113 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "mitten_150",
+  "variant": "sector",
+  "rows": 660,
+  "cols": 9750,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 8,
+  "witness": [
+    17,
+    19,
+    33,
+    45,
+    351,
+    386,
+    550,
+    827
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.344,
+      "ub": 56
+    },
+    {
+      "t": 0.386,
+      "ub": 55
+    },
+    {
+      "t": 0.417,
+      "ub": 54
+    },
+    {
+      "t": 0.445,
+      "ub": 46
+    },
+    {
+      "t": 0.487,
+      "ub": 24
+    },
+    {
+      "t": 0.598,
+      "ub": 23
+    },
+    {
+      "t": 0.692,
+      "ub": 22
+    },
+    {
+      "t": 0.848,
+      "ub": 21
+    },
+    {
+      "t": 1.052,
+      "ub": 11
+    },
+    {
+      "t": 22.755,
+      "ub": 10
+    },
+    {
+      "t": 51.137,
+      "ub": 9
+    },
+    {
+      "t": 88.626,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 65.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 2003; valid outputs: 12; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-04T11:29:27.925686+00:00",
+    "ended_at": "2026-10-04T11:39:28.138960+00:00",
+    "wall_seconds": 600.188901,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.135901,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/mitten_150__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/mitten_150__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

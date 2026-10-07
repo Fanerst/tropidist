@@ -1,0 +1,119 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "code_mm_324",
+  "variant": "full",
+  "rows": 216,
+  "cols": 324,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    55,
+    59,
+    60,
+    82,
+    86,
+    87,
+    180,
+    184,
+    188,
+    207,
+    211,
+    215,
+    280,
+    284,
+    285,
+    307,
+    311,
+    312
+  ],
+  "witness_ok": true,
+  "seconds": 600.014,
+  "trace": [
+    {
+      "t": 0.289,
+      "ub": 59
+    },
+    {
+      "t": 0.29,
+      "ub": 57
+    },
+    {
+      "t": 0.291,
+      "ub": 56
+    },
+    {
+      "t": 0.292,
+      "ub": 54
+    },
+    {
+      "t": 0.293,
+      "ub": 50
+    },
+    {
+      "t": 0.294,
+      "ub": 49
+    },
+    {
+      "t": 0.295,
+      "ub": 31
+    },
+    {
+      "t": 0.297,
+      "ub": 24
+    },
+    {
+      "t": 0.308,
+      "ub": 21
+    },
+    {
+      "t": 0.342,
+      "ub": 20
+    },
+    {
+      "t": 0.438,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 65.3,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "search calls: 2398; valid outputs: 11; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_mm_324",
+    "family": "estimated_codes",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T10:37:10.733677+00:00",
+    "ended_at": "2026-10-04T10:47:10.965067+00:00",
+    "wall_seconds": 600.229854,
+    "adapter_seconds": 600.014,
+    "trace_offset_seconds": 0.215854,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_mm_324__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_mm_324__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "surface_d15",
+  "variant": "full",
+  "rows": 3360,
+  "cols": 66087,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 15,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16,
+    18,
+    19,
+    27
+  ],
+  "witness_ok": true,
+  "seconds": 242.377,
+  "trace": [
+    {
+      "t": 3.802,
+      "ub": 15
+    }
+  ],
+  "peak_rss_mb": 2080.0,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (3, 3, True): MemoryError: std::bad_alloc; search (4, 4, True): worker exited without a result (exitcode None); search (4, 6, True): worker exited without a result (exitcode None); search (4, 10, True): worker exited without a result (exitcode None); search (4, 10, False): MemoryError: std::bad_alloc; search calls: 6; valid outputs: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d15",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T14:39:28.348686+00:00",
+    "ended_at": "2026-10-04T14:43:30.957985+00:00",
+    "wall_seconds": 242.533921,
+    "adapter_seconds": 242.377,
+    "trace_offset_seconds": 0.156921,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [
+      "cannot allocate memory for thread-local data: ABORT",
+      "cannot allocate memory for thread-local data: ABORT",
+      "cannot allocate memory for thread-local data: ABORT"
+    ],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/surface_d15__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/surface_d15__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

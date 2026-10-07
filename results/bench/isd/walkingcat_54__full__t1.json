@@ -1,0 +1,135 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "walkingcat_54",
+  "variant": "full",
+  "rows": 324,
+  "cols": 17820,
+  "obs": 2,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 14,
+  "witness": [
+    15054,
+    15246,
+    15598,
+    15896,
+    15901,
+    16235,
+    16444,
+    16486,
+    16673,
+    16852,
+    17095,
+    17544,
+    17697,
+    17777
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.395,
+      "ub": 121
+    },
+    {
+      "t": 0.445,
+      "ub": 120
+    },
+    {
+      "t": 0.494,
+      "ub": 107
+    },
+    {
+      "t": 0.544,
+      "ub": 60
+    },
+    {
+      "t": 0.595,
+      "ub": 54
+    },
+    {
+      "t": 0.66,
+      "ub": 47
+    },
+    {
+      "t": 0.71,
+      "ub": 45
+    },
+    {
+      "t": 0.888,
+      "ub": 43
+    },
+    {
+      "t": 1.031,
+      "ub": 41
+    },
+    {
+      "t": 1.29,
+      "ub": 32
+    },
+    {
+      "t": 1.778,
+      "ub": 27
+    },
+    {
+      "t": 1.949,
+      "ub": 23
+    },
+    {
+      "t": 27.764,
+      "ub": 20
+    },
+    {
+      "t": 107.347,
+      "ub": 19
+    },
+    {
+      "t": 112.094,
+      "ub": 16
+    },
+    {
+      "t": 120.009,
+      "ub": 14
+    }
+  ],
+  "peak_rss_mb": 66.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "search calls: 1888; valid outputs: 16; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54",
+    "family": "walkingcat",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      13
+    ],
+    "started_at": "2026-10-04T13:28:50.936819+00:00",
+    "ended_at": "2026-10-04T13:38:51.199211+00:00",
+    "wall_seconds": 600.220372,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.167372,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/walkingcat_54__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/walkingcat_54__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

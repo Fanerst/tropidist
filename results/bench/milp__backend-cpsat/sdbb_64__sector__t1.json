@@ -1,0 +1,219 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "sdbb_64",
+  "variant": "sector",
+  "rows": 224,
+  "cols": 2752,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 12,
+  "witness": [
+    2427,
+    2446,
+    2468,
+    2585,
+    2708,
+    2722,
+    2733,
+    2734,
+    2736,
+    2744,
+    2745,
+    2749
+  ],
+  "witness_ok": true,
+  "seconds": 600.022,
+  "trace": [
+    {
+      "t": 90.714,
+      "ub": 419
+    },
+    {
+      "t": 90.714,
+      "lb": 0
+    },
+    {
+      "t": 94.723,
+      "ub": 418
+    },
+    {
+      "t": 98.866,
+      "ub": 417
+    },
+    {
+      "t": 114.666,
+      "ub": 416
+    },
+    {
+      "t": 118.58,
+      "ub": 415
+    },
+    {
+      "t": 126.291,
+      "ub": 414
+    },
+    {
+      "t": 134.172,
+      "ub": 413
+    },
+    {
+      "t": 137.794,
+      "ub": 412
+    },
+    {
+      "t": 145.837,
+      "ub": 411
+    },
+    {
+      "t": 169.343,
+      "ub": 410
+    },
+    {
+      "t": 176.692,
+      "ub": 409
+    },
+    {
+      "t": 184.102,
+      "ub": 408
+    },
+    {
+      "t": 192.354,
+      "ub": 405
+    },
+    {
+      "t": 195.575,
+      "ub": 404
+    },
+    {
+      "t": 207.978,
+      "ub": 403
+    },
+    {
+      "t": 211.926,
+      "ub": 402
+    },
+    {
+      "t": 229.245,
+      "ub": 401
+    },
+    {
+      "t": 235.918,
+      "ub": 400
+    },
+    {
+      "t": 243.619,
+      "ub": 399
+    },
+    {
+      "t": 255.251,
+      "ub": 398
+    },
+    {
+      "t": 263.185,
+      "ub": 397
+    },
+    {
+      "t": 266.708,
+      "ub": 396
+    },
+    {
+      "t": 276.007,
+      "ub": 395
+    },
+    {
+      "t": 283.21,
+      "ub": 394
+    },
+    {
+      "t": 286.158,
+      "ub": 393
+    },
+    {
+      "t": 289.035,
+      "ub": 392
+    },
+    {
+      "t": 291.885,
+      "ub": 391
+    },
+    {
+      "t": 298.133,
+      "ub": 39
+    },
+    {
+      "t": 298.962,
+      "ub": 37
+    },
+    {
+      "t": 299.541,
+      "ub": 36
+    },
+    {
+      "t": 300.199,
+      "ub": 35
+    },
+    {
+      "t": 301.036,
+      "ub": 34
+    },
+    {
+      "t": 301.836,
+      "ub": 33
+    },
+    {
+      "t": 304.543,
+      "ub": 32
+    },
+    {
+      "t": 305.77,
+      "ub": 31
+    },
+    {
+      "t": 306.829,
+      "ub": 30
+    },
+    {
+      "t": 308.749,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 300.6,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-04T12:33:05.463965+00:00",
+    "ended_at": "2026-10-04T12:43:05.553888+00:00",
+    "wall_seconds": 600.084251,
+    "adapter_seconds": 600.022,
+    "trace_offset_seconds": 0.062251,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/sdbb_64__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/sdbb_64__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

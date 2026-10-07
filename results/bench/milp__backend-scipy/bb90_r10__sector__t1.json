@@ -1,0 +1,90 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "bb90_r10",
+  "variant": "sector",
+  "rows": 495,
+  "cols": 4590,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": 27,
+  "witness": [
+    2424,
+    2431,
+    2448,
+    2527,
+    2532,
+    2546,
+    2811,
+    2817,
+    2839,
+    2883,
+    2907,
+    2909,
+    3048,
+    3079,
+    3081,
+    3269,
+    3359,
+    3408,
+    3529,
+    3568,
+    3646,
+    3654,
+    3711,
+    3809,
+    3918,
+    3979,
+    4065
+  ],
+  "witness_ok": true,
+  "seconds": 600.442,
+  "trace": [
+    {
+      "t": 600.423,
+      "ub": 27
+    },
+    {
+      "t": 600.423,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 434.9,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb90_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T09:14:40.228851+00:00",
+    "ended_at": "2026-10-04T09:24:40.838376+00:00",
+    "wall_seconds": 600.602491,
+    "adapter_seconds": 600.442,
+    "trace_offset_seconds": 0.160491,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/bb90_r10__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/bb90_r10__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "surface_d11",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 161,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    0,
+    1,
+    2,
+    3,
+    11,
+    15,
+    27,
+    45,
+    47,
+    48,
+    62
+  ],
+  "witness_ok": true,
+  "seconds": 5.788,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.097,
+      "lb": 2
+    },
+    {
+      "t": 0.097,
+      "lb": 3
+    },
+    {
+      "t": 0.097,
+      "lb": 4
+    },
+    {
+      "t": 0.097,
+      "lb": 5
+    },
+    {
+      "t": 0.134,
+      "lb": 6
+    },
+    {
+      "t": 0.315,
+      "lb": 7
+    },
+    {
+      "t": 0.689,
+      "lb": 8
+    },
+    {
+      "t": 0.928,
+      "lb": 9
+    },
+    {
+      "t": 1.972,
+      "lb": 10
+    },
+    {
+      "t": 5.544,
+      "lb": 11
+    },
+    {
+      "t": 5.786,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 52.4,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T16:20:13.541214+00:00",
+    "ended_at": "2026-10-04T16:20:19.412288+00:00",
+    "wall_seconds": 5.870658,
+    "adapter_seconds": 5.788,
+    "trace_offset_seconds": 0.082658,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/surface_d11__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/surface_d11__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "cornucopia_900",
+  "variant": "sector",
+  "rows": 1575,
+  "cols": 30600,
+  "obs": 454,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    16139,
+    16152,
+    16453,
+    16459,
+    18425,
+    18432,
+    18691,
+    18698,
+    18700,
+    19082,
+    19581,
+    19835,
+    19837,
+    19860,
+    19939,
+    19965,
+    20836,
+    22850
+  ],
+  "witness_ok": true,
+  "seconds": 600.062,
+  "trace": [
+    {
+      "t": 17.336,
+      "ub": 20
+    },
+    {
+      "t": 63.016,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 1810.5,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=5; completed_shots=4; valid_outputs=4; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_900",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-04T10:13:06.107528+00:00",
+    "ended_at": "2026-10-04T10:23:07.513500+00:00",
+    "wall_seconds": 600.26668,
+    "adapter_seconds": 600.062,
+    "trace_offset_seconds": 0.20468,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/cornucopia_900__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/cornucopia_900__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

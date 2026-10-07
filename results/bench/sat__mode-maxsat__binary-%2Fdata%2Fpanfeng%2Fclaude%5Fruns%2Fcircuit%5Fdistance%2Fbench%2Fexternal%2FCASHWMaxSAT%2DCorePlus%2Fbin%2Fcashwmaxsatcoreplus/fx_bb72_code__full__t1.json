@@ -1,0 +1,72 @@
+{
+  "method": "sat_maxsat",
+  "version": null,
+  "config": {
+    "mode": "maxsat",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus"
+  },
+  "instance": "fx_bb72_code",
+  "variant": "full",
+  "rows": 36,
+  "cols": 72,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    8,
+    22,
+    30,
+    46,
+    54,
+    68
+  ],
+  "witness_ok": true,
+  "seconds": 0.315,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.3,
+      "ub": 6
+    },
+    {
+      "t": 0.3,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 66.5,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads unused while building/dumping encoding; external backend has no standard thread option; threads ignored; external exit=0; status=OPTIMUM FOUND",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/CASHWMaxSAT-CorePlus/bin/cashwmaxsatcoreplus",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/fx_bb72_code",
+    "family": "fixture",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T10:48:37.248045+00:00",
+    "ended_at": "2026-10-04T10:48:37.690164+00:00",
+    "wall_seconds": 0.441633,
+    "adapter_seconds": 0.315,
+    "trace_offset_seconds": 0.126633,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FCASHWMaxSAT%2DCorePlus%2Fbin%2Fcashwmaxsatcoreplus/fx_bb72_code__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FCASHWMaxSAT%2DCorePlus%2Fbin%2Fcashwmaxsatcoreplus/fx_bb72_code__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

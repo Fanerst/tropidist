@@ -1,0 +1,96 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "surface_d17",
+  "variant": "collapsed",
+  "rows": 144,
+  "cols": 401,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 11,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.013,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.102,
+      "lb": 2
+    },
+    {
+      "t": 0.102,
+      "lb": 3
+    },
+    {
+      "t": 0.102,
+      "lb": 4
+    },
+    {
+      "t": 0.171,
+      "lb": 5
+    },
+    {
+      "t": 0.406,
+      "lb": 6
+    },
+    {
+      "t": 1.233,
+      "lb": 7
+    },
+    {
+      "t": 4.507,
+      "lb": 8
+    },
+    {
+      "t": 15.014,
+      "lb": 9
+    },
+    {
+      "t": 52.723,
+      "lb": 10
+    },
+    {
+      "t": 245.488,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 157.2,
+  "truth": 17,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d17",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-04T16:38:13.619135+00:00",
+    "ended_at": "2026-10-04T16:48:14.800331+00:00",
+    "wall_seconds": 601.181043,
+    "adapter_seconds": 601.013,
+    "trace_offset_seconds": 0.168043,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/surface_d17__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/surface_d17__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

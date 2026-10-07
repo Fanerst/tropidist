@@ -1,0 +1,68 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "color_d9",
+  "variant": "full",
+  "rows": 270,
+  "cols": 7683,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 4,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.031,
+  "trace": [
+    {
+      "t": 0.012,
+      "lb": 1
+    },
+    {
+      "t": 1.208,
+      "lb": 2
+    },
+    {
+      "t": 12.377,
+      "lb": 3
+    },
+    {
+      "t": 105.777,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 390.1,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_d9",
+    "family": "stim_color",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-04T13:45:06.398047+00:00",
+    "ended_at": "2026-10-04T13:55:07.660528+00:00",
+    "wall_seconds": 601.262296,
+    "adapter_seconds": 601.031,
+    "trace_offset_seconds": 0.231296,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/color_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/color_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

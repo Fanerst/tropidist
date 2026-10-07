@@ -1,0 +1,323 @@
+{
+ "code": "[[150,30,10]]",
+ "basis": "X",
+ "claimed_distance": 10,
+ "threads": 1,
+ "rows": 60,
+ "columns": 495,
+ "observables": 30,
+ "symmetries": 5,
+ "orbits": 99,
+ "runs": [
+  {
+   "K": 1,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 99,
+   "lookups": 0,
+   "false_hits": 0,
+   "seconds": 0.0002009868621826172
+  },
+  {
+   "K": 2,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 99,
+   "lookups": 99,
+   "false_hits": 0,
+   "seconds": 0.00019216537475585938
+  },
+  {
+   "K": 3,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 99,
+   "lookups": 99,
+   "false_hits": 0,
+   "seconds": 0.00020194053649902344
+  },
+  {
+   "K": 4,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 3526,
+   "lookups": 3427,
+   "false_hits": 0,
+   "seconds": 0.00044798851013183594
+  },
+  {
+   "K": 5,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 130966,
+   "lookups": 127440,
+   "false_hits": 0,
+   "seconds": 0.0043718814849853516
+  },
+  {
+   "K": 6,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 4621020,
+   "lookups": 4490054,
+   "false_hits": 0,
+   "seconds": 0.20296001434326172
+  },
+  {
+   "K": 7,
+   "status": "exhausted",
+   "best": null,
+   "nodes": 149809040,
+   "lookups": 145188020,
+   "false_hits": 0,
+   "seconds": 2.621588945388794
+  },
+  {
+   "K": 8,
+   "status": "found",
+   "best": 8,
+   "nodes": 320026380,
+   "lookups": 310638623,
+   "false_hits": 0,
+   "seconds": 5.347261905670166
+  }
+ ],
+ "certified_lower_bound": 8,
+ "distance": 8,
+ "solution_faults": [
+  [
+   "data",
+   1
+  ],
+  [
+   "data",
+   28
+  ],
+  [
+   "hook",
+   30,
+   2
+  ],
+  [
+   "hook",
+   30,
+   5
+  ],
+  [
+   "hook",
+   32,
+   4
+  ],
+  [
+   "hook",
+   36,
+   7
+  ],
+  [
+   "hook",
+   41,
+   5
+  ],
+  [
+   "hook",
+   47,
+   2
+  ]
+ ],
+ "witness": {
+  "circuit": "circuits/papers/mitten150_r10_X.stim",
+  "rounds": 10,
+  "weight": 8,
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    12,
+    14,
+    15,
+    17,
+    19,
+    20,
+    21,
+    26,
+    27,
+    29
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 19,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      240
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      60,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 6,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      1
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 19,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      251
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      60,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 16,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      240
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      51,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 24,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      246
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      75,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 6,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      28
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 18,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      242
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      57,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 16,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      257
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      51,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    12,
+    14,
+    15,
+    17,
+    19,
+    20,
+    21,
+    26,
+    27,
+    29
+   ]
+  },
+  "verified": true,
+  "collapsed_columns_equal_window_columns": true
+ },
+ "certified_upper_bound": 8
+}

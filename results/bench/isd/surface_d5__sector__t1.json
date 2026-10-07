@@ -1,0 +1,66 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "surface_d5",
+  "variant": "sector",
+  "rows": 72,
+  "cols": 301,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 5,
+  "witness": [
+    109,
+    119,
+    120,
+    132,
+    134
+  ],
+  "witness_ok": true,
+  "seconds": 600.015,
+  "trace": [
+    {
+      "t": 0.295,
+      "ub": 5
+    }
+  ],
+  "peak_rss_mb": 70.9,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "search calls: 2394; valid outputs: 1; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d5",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T13:55:05.055641+00:00",
+    "ended_at": "2026-10-04T14:05:05.257735+00:00",
+    "wall_seconds": 600.20159,
+    "adapter_seconds": 600.015,
+    "trace_offset_seconds": 0.18659,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d5__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/surface_d5__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

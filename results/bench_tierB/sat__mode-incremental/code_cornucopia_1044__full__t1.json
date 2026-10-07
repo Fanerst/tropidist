@@ -1,0 +1,72 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "code_cornucopia_1044",
+  "variant": "full",
+  "rows": 261,
+  "cols": 1044,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.05,
+  "trace": [
+    {
+      "t": 0.046,
+      "lb": 1
+    },
+    {
+      "t": 7.822,
+      "lb": 2
+    },
+    {
+      "t": 27.614,
+      "lb": 3
+    },
+    {
+      "t": 221.254,
+      "lb": 4
+    },
+    {
+      "t": 221.259,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 997.8,
+  "truth": 12,
+  "truth_kind": "unknown",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-05T11:43:17.203501+00:00",
+    "ended_at": "2026-10-05T12:43:18.352246+00:00",
+    "wall_seconds": 3601.148602,
+    "adapter_seconds": 3601.05,
+    "trace_offset_seconds": 0.098602,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental/code_cornucopia_1044__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental/code_cornucopia_1044__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

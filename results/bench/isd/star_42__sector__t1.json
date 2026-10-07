@@ -1,0 +1,71 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "star_42",
+  "variant": "sector",
+  "rows": 147,
+  "cols": 1806,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 6,
+  "witness": [
+    8,
+    24,
+    41,
+    48,
+    156,
+    285
+  ],
+  "witness_ok": true,
+  "seconds": 600.018,
+  "trace": [
+    {
+      "t": 0.304,
+      "ub": 8
+    },
+    {
+      "t": 0.308,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 65.5,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "search calls: 2358; valid outputs: 2; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/star_42",
+    "family": "star",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-04T13:13:09.901549+00:00",
+    "ended_at": "2026-10-04T13:23:10.147450+00:00",
+    "wall_seconds": 600.242135,
+    "adapter_seconds": 600.018,
+    "trace_offset_seconds": 0.224135,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/star_42__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/star_42__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 0,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "mitten_300",
+  "variant": "sector",
+  "rows": 840,
+  "cols": 11820,
+  "obs": 60,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.039,
+  "trace": [
+    {
+      "t": 0.102,
+      "lb": 1
+    },
+    {
+      "t": 2.147,
+      "lb": 2
+    },
+    {
+      "t": 2.148,
+      "lb": 3
+    },
+    {
+      "t": 2.153,
+      "lb": 4
+    },
+    {
+      "t": 2.188,
+      "lb": 5
+    },
+    {
+      "t": 2.199,
+      "lb": 6
+    },
+    {
+      "t": 2.301,
+      "lb": 7
+    },
+    {
+      "t": 5.078,
+      "lb": 8
+    },
+    {
+      "t": 104.179,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 91.7,
+  "truth": 12,
+  "truth_kind": "lower_bound",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 9, \"stages\": {\"collapsed\": {\"cols\": 1020, \"rows\": 120, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006461143493652344, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006692409515380859, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00447392463684082, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.034388065338134766, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.011575698852539062, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.10167574882507324, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 2.7763898372650146, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 99.10010695457458, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_k_reduced\": [[1020, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:cover=0",
+    "adapter": "ours_pipeline",
+    "config_string": "cover=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-04T17:05:35.508591+00:00",
+    "ended_at": "2026-10-04T17:15:35.747485+00:00",
+    "wall_seconds": 600.23871,
+    "adapter_seconds": 600.039,
+    "trace_offset_seconds": 0.19971,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__cover-0/mitten_300__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__cover-0/mitten_300__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

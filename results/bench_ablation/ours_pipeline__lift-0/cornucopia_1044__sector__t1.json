@@ -1,0 +1,96 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 0,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "cornucopia_1044",
+  "variant": "sector",
+  "rows": 1827,
+  "cols": 35496,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.093,
+  "trace": [
+    {
+      "t": 1.59,
+      "lb": 1
+    },
+    {
+      "t": 71.675,
+      "lb": 2
+    },
+    {
+      "t": 71.678,
+      "lb": 3
+    },
+    {
+      "t": 71.691,
+      "lb": 4
+    },
+    {
+      "t": 71.887,
+      "lb": 5
+    },
+    {
+      "t": 71.938,
+      "lb": 6
+    },
+    {
+      "t": 72.953,
+      "lb": 7
+    },
+    {
+      "t": 91.11,
+      "lb": 8
+    },
+    {
+      "t": 369.082,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 307.1,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 28, \"stages\": {\"collapsed\": {\"cols\": 3393, \"rows\": 261, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0022935867309570312, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002251148223876953, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01291203498840332, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.1965019702911377, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.04997706413269043, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.0156195163726807, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 18.156015157699585, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 277.9717607498169, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_k_reduced\": [[3393, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:lift=0",
+    "adapter": "ours_pipeline",
+    "config_string": "lift=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-04T17:07:11.799611+00:00",
+    "ended_at": "2026-10-04T17:17:12.098948+00:00",
+    "wall_seconds": 600.299039,
+    "adapter_seconds": 600.093,
+    "trace_offset_seconds": 0.206039,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/cornucopia_1044__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation/ours_pipeline__lift-0/cornucopia_1044__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

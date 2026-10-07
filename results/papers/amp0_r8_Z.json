@@ -1,0 +1,266 @@
+{
+ "circuit": "circuits/papers/amp0_r8_Z.stim",
+ "threads": 1,
+ "stages": {
+  "collapsed": {
+   "problem": "collapsed",
+   "rows": 9,
+   "columns": 45,
+   "symmetry_generators": null,
+   "orbits": null,
+   "k_table": 3,
+   "table_entries": 2048,
+   "lower_bound": 3,
+   "distance": 3,
+   "n_solutions_recorded": 1,
+   "runs": [
+    {
+     "K": 1,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 45,
+     "nodes_by_depth": [
+      0,
+      45,
+      0
+     ],
+     "lookups": 0,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 2,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 45,
+     "nodes_by_depth": [
+      0,
+      45,
+      0,
+      0
+     ],
+     "lookups": 45,
+     "false_hits": 0,
+     "seconds": 0.0
+    },
+    {
+     "K": 3,
+     "status": "found",
+     "best": 3,
+     "nodes": 1,
+     "nodes_by_depth": [
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "lookups": 1,
+     "false_hits": 0,
+     "seconds": 0.0
+    }
+   ],
+   "seconds": 0.0
+  },
+  "fold2": {
+   "problem": "fold2",
+   "rows": 18,
+   "columns": 171,
+   "symmetry_generators": null,
+   "orbits": null,
+   "k_table": 2,
+   "table_entries": 11620,
+   "lower_bound": 3,
+   "distance": 3,
+   "n_solutions_recorded": 1,
+   "runs": [
+    {
+     "K": 3,
+     "status": "found",
+     "best": 3,
+     "nodes": 14,
+     "nodes_by_depth": [
+      0,
+      14,
+      0,
+      0,
+      0
+     ],
+     "lookups": 27,
+     "false_hits": 0,
+     "seconds": 0.0
+    }
+   ],
+   "seconds": 0.0
+  },
+  "full": {
+   "problem": "sector(full circuit)",
+   "rows": 81,
+   "columns": 738,
+   "symmetry_generators": null,
+   "orbits": null,
+   "k_table": 2,
+   "table_entries": 263692,
+   "lower_bound": 4,
+   "distance": 4,
+   "n_solutions_recorded": 1,
+   "runs": [
+    {
+     "K": 3,
+     "status": "exhausted",
+     "best": null,
+     "nodes": 738,
+     "nodes_by_depth": [
+      0,
+      738,
+      0,
+      0,
+      0
+     ],
+     "lookups": 1404,
+     "false_hits": 0,
+     "seconds": 0.001
+    },
+    {
+     "K": 4,
+     "status": "found",
+     "best": 4,
+     "nodes": 753,
+     "nodes_by_depth": [
+      0,
+      738,
+      15,
+      0,
+      0,
+      0
+     ],
+     "lookups": 755,
+     "false_hits": 0,
+     "seconds": 0.001
+    }
+   ],
+   "seconds": 0.02
+  }
+ },
+ "model": {
+  "qubits": 36,
+  "detectors": 144,
+  "observables": 4,
+  "dem_mechanisms": 5508,
+  "dem_distinct_columns": 5508,
+  "sector_rows": 81,
+  "sector_columns": 738,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 9,
+  "collapsed_columns": 45
+ },
+ "certified_lower_bound": 4,
+ "witness": {
+  "weight": 4,
+  "dem_error_indices": [
+   0,
+   2,
+   165,
+   209
+  ],
+  "dem_errors": [
+   "error(0.0012662) D0 D1 D3 L3",
+   "error(0.00153227) D0 D1 D7 L1 L2",
+   "error(0.0012662) D3 D4 D6",
+   "error(0.00153227) D4 D6 D7"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    1,
+    2,
+    3
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      9
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      1
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      12
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      7
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    1,
+    2,
+    3
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 4,
+ "seconds": 0.15
+}

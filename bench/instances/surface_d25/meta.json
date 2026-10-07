@@ -1,0 +1,80 @@
+{
+ "family": "surface",
+ "n": 625,
+ "k": 1,
+ "basis": "Z",
+ "rounds": 25,
+ "description": "Stim rotated surface-code Z memory, distance 25, rounds 25",
+ "source": {
+  "track": "circuit",
+  "family": "surface",
+  "builder": "stim_surface",
+  "key": 25,
+  "basis": "Z",
+  "rounds": 25,
+  "truth_file": null,
+  "variants": [
+   "full",
+   "sector",
+   "collapsed"
+  ],
+  "extra_sources": [
+   "bench/stim_families.py",
+   "bench/instances.py"
+  ],
+  "n": 625,
+  "k": 1,
+  "description": "Stim rotated surface-code Z memory, distance 25, rounds 25",
+  "generator": "surface_code:rotated_memory_z",
+  "noise": {
+   "after_clifford_depolarization": 0.001,
+   "before_round_data_depolarization": 0.001,
+   "before_measure_flip_probability": 0.001,
+   "after_reset_flip_probability": 0.001
+  },
+  "stim_version": "1.15.0",
+  "notes": "Same generator and noise arguments as the prior benchmark; our flattened d=11 raw mechanism count is 24483, theirs 24485. The difference of two is unexplained; no parameters are tuned. These are generated instances of the same family, not their circuit files."
+ },
+ "source_sha256": {
+  "bench/stim_families.py": "40c6b6afefca201cd418f5a4428b13c78c0124bc7b154d37c549c2693cc9f66b",
+  "bench/instances.py": "1747ce3dde23a5ad1b4aec040f05903a7feec91718c967dfbfc278ef7415f9df"
+ },
+ "used_qubits": 1249,
+ "notes": "Same generator and noise arguments as the prior benchmark; our flattened d=11 raw mechanism count is 24483, theirs 24485. The difference of two is unexplained; no parameters are tuned. These are generated instances of the same family, not their circuit files.",
+ "name": "surface_d25",
+ "track": "circuit",
+ "variants": {
+  "full": {
+   "rows": 15600,
+   "cols": 326897,
+   "obs": 1,
+   "symmetries": 0,
+   "distance": 25,
+   "distance_kind": "exact",
+   "distance_source": "bench/stim_families.py#graphlike_distance"
+  },
+  "sector": {
+   "rows": 8112,
+   "cols": 45001,
+   "obs": 1,
+   "symmetries": 0,
+   "distance": 25,
+   "distance_kind": "exact",
+   "distance_source": "bench/stim_families.py#graphlike_distance"
+  },
+  "collapsed": {
+   "rows": 312,
+   "cols": 889,
+   "obs": 1,
+   "symmetries": 1,
+   "distance": 25,
+   "distance_kind": "exact",
+   "distance_source": "bench/stim_families.py#graphlike_distance",
+   "is_relaxation_of": "sector"
+  }
+ },
+ "raw_mechanisms": 326897,
+ "qubits": 1324,
+ "detectors": 15600,
+ "observables": 1
+}

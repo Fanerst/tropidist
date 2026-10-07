@@ -1,0 +1,81 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "fx_sdbb16_r3",
+  "variant": "collapsed",
+  "rows": 8,
+  "cols": 56,
+  "obs": 4,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 2,
+  "upper_bound": 2,
+  "witness": [
+    11,
+    31
+  ],
+  "witness_ok": true,
+  "seconds": 0.332,
+  "trace": [
+    {
+      "t": 0.325,
+      "ub": 8
+    },
+    {
+      "t": 0.325,
+      "lb": 0
+    },
+    {
+      "t": 0.325,
+      "ub": 4
+    },
+    {
+      "t": 0.325,
+      "ub": 3
+    },
+    {
+      "t": 0.325,
+      "ub": 2
+    },
+    {
+      "t": 0.325,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 114.7,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/fx_sdbb16_r3",
+    "family": "fixture",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-04T15:48:54.967713+00:00",
+    "ended_at": "2026-10-04T15:48:55.421008+00:00",
+    "wall_seconds": 0.452913,
+    "adapter_seconds": 0.332,
+    "trace_offset_seconds": 0.120913,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/fx_sdbb16_r3__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat/fx_sdbb16_r3__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "bb108_r10",
+  "variant": "sector",
+  "rows": 594,
+  "cols": 5508,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 8,
+  "witness": [
+    4834,
+    4841,
+    4849,
+    4879,
+    4960,
+    4973,
+    5069,
+    5200
+  ],
+  "witness_ok": true,
+  "seconds": 600.007,
+  "trace": [
+    {
+      "t": 0.569,
+      "ub": 33
+    },
+    {
+      "t": 0.917,
+      "ub": 28
+    },
+    {
+      "t": 1.085,
+      "ub": 23
+    },
+    {
+      "t": 1.43,
+      "ub": 22
+    },
+    {
+      "t": 1.586,
+      "ub": 14
+    },
+    {
+      "t": 3.811,
+      "ub": 11
+    },
+    {
+      "t": 4.183,
+      "ub": 10
+    },
+    {
+      "t": 4.719,
+      "ub": 9
+    },
+    {
+      "t": 19.637,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 166.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=2342; completed_shots=2341; valid_outputs=2341; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-04T09:13:06.018606+00:00",
+    "ended_at": "2026-10-04T09:23:06.200446+00:00",
+    "wall_seconds": 600.174129,
+    "adapter_seconds": 600.007,
+    "trace_offset_seconds": 0.167129,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/bb108_r10__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/bb108_r10__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

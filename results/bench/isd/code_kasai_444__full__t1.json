@@ -1,0 +1,95 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "code_kasai_444",
+  "variant": "full",
+  "rows": 148,
+  "cols": 444,
+  "obs": 154,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 18,
+  "witness": [
+    7,
+    64,
+    65,
+    86,
+    107,
+    120,
+    184,
+    210,
+    223,
+    245,
+    287,
+    317,
+    319,
+    367,
+    372,
+    379,
+    410,
+    430
+  ],
+  "witness_ok": true,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 0.315,
+      "ub": 46
+    },
+    {
+      "t": 0.316,
+      "ub": 44
+    },
+    {
+      "t": 0.317,
+      "ub": 40
+    },
+    {
+      "t": 0.318,
+      "ub": 36
+    },
+    {
+      "t": 0.32,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 63.9,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "search calls: 2391; valid outputs: 5; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_444",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-04T11:06:32.132868+00:00",
+    "ended_at": "2026-10-04T11:16:32.366684+00:00",
+    "wall_seconds": 600.228302,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.211302,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_kasai_444__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/code_kasai_444__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

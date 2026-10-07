@@ -1,0 +1,259 @@
+{
+ "paper": "hypsurf_pick",
+ "code": [
+  200,
+  6,
+  10
+ ],
+ "paper_circuit_distance_upper_bound": null,
+ "basis": "X",
+ "rounds": 5,
+ "noise": "full",
+ "circuit": "circuits/papers/hypsurf_pickq8_L5_ZZ_v53764755_r5_X.stim",
+ "threads": 1,
+ "model": {
+  "qubits": 488,
+  "detectors": 1344,
+  "observables": 6,
+  "dem_mechanisms": 23476,
+  "sector_rows": 770,
+  "sector_columns": 3700,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 144,
+  "collapsed_columns": 444
+ },
+ "sector_symmetries_kept": null,
+ "symmetries_expected": 0,
+ "collapsed": {
+  "rows": 144,
+  "columns": 444,
+  "k_table": 3,
+  "orbits": null,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 444,
+    "false_hits": 0,
+    "seconds": 0.0
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 444,
+    "false_hits": 444,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 444,
+    "false_hits": 444,
+    "seconds": 0.0
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 444,
+    "false_hits": 444,
+    "seconds": 0.0
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 839,
+    "false_hits": 395,
+    "seconds": 0.0
+   },
+   {
+    "K": 6,
+    "status": "found",
+    "best": 6,
+    "nodes": 1247,
+    "false_hits": 407,
+    "seconds": 0.0
+   }
+  ],
+  "distance": 6,
+  "n_min_solution_orbits": 66,
+  "orbits_lifting_slack0": 0,
+  "orbits_lifting_slack1": 1
+ },
+ "certified_lower_bound": 7,
+ "window_t0_at_d_coll": {
+  "columns": 216,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "window_t1_at_d_coll": {
+  "columns": 216,
+  "distance": null,
+  "status": "exhausted"
+ },
+ "witness": {
+  "weight": 7,
+  "dem_error_indices": [
+   1455,
+   1471,
+   9785,
+   5750,
+   11289,
+   18086,
+   22381
+  ],
+  "dem_errors": [
+   "error(0.000266707) D85 D287",
+   "error(0.00458485) D85 D486",
+   "error(0.0458836) D486 D1238",
+   "error(0.000200036) D287 D564 L4 L5",
+   "error(0.000200036) D564 D899",
+   "error(0.000200036) D899 D1157",
+   "error(0.00216393) D1157 D1238"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    4,
+    5
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 20,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      330
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      68,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 0,
+    "instruction": "X_ERROR",
+    "paulis": [
+     [
+      "X",
+      99
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 42,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      318
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      302,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 85,
+    "instruction": "M",
+    "paulis": [],
+    "flipped_measurement": 587,
+    "stack": [
+     [
+      703,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 64,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      405
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      632,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 104,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      407
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1052,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 104,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "X",
+      149
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      1052,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    4,
+    5
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 7,
+ "seconds": 2.1
+}

@@ -1,0 +1,92 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "code_bb288",
+  "variant": "full",
+  "rows": 144,
+  "cols": 288,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.03,
+  "trace": [
+    {
+      "t": 0.018,
+      "lb": 1
+    },
+    {
+      "t": 0.192,
+      "lb": 2
+    },
+    {
+      "t": 0.192,
+      "lb": 3
+    },
+    {
+      "t": 0.298,
+      "lb": 4
+    },
+    {
+      "t": 0.941,
+      "lb": 5
+    },
+    {
+      "t": 2.628,
+      "lb": 6
+    },
+    {
+      "t": 7.398,
+      "lb": 7
+    },
+    {
+      "t": 22.877,
+      "lb": 8
+    },
+    {
+      "t": 77.583,
+      "lb": 9
+    },
+    {
+      "t": 272.448,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 123.5,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      12
+    ],
+    "started_at": "2026-10-04T08:37:58.442252+00:00",
+    "ended_at": "2026-10-04T08:47:59.568143+00:00",
+    "wall_seconds": 601.125716,
+    "adapter_seconds": 601.03,
+    "trace_offset_seconds": 0.095716,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/code_bb288__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental/code_bb288__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}
