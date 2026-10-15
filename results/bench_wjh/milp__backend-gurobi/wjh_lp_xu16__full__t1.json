@@ -1,0 +1,107 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "wjh_lp_xu16",
+  "variant": "full",
+  "rows": 240,
+  "cols": 544,
+  "obs": 80,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 12,
+  "witness": [
+    3,
+    4,
+    13,
+    81,
+    85,
+    93,
+    163,
+    169,
+    245,
+    321,
+    324,
+    329
+  ],
+  "witness_ok": true,
+  "seconds": 598.066,
+  "trace": [
+    {
+      "t": 0.301,
+      "ub": 32
+    },
+    {
+      "t": 0.301,
+      "lb": 1
+    },
+    {
+      "t": 2.504,
+      "ub": 18
+    },
+    {
+      "t": 5.308,
+      "lb": 2
+    },
+    {
+      "t": 18.528,
+      "ub": 14
+    },
+    {
+      "t": 20.33,
+      "ub": 12
+    },
+    {
+      "t": 55.184,
+      "lb": 3
+    },
+    {
+      "t": 130.299,
+      "lb": 4
+    },
+    {
+      "t": 285.141,
+      "lb": 5
+    },
+    {
+      "t": 491.884,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 111.8,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_xu16",
+    "family": "wjh_lp",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      73
+    ],
+    "started_at": "2026-10-15T04:53:09.631102+00:00",
+    "ended_at": "2026-10-15T05:03:07.843562+00:00",
+    "wall_seconds": 598.209193,
+    "adapter_seconds": 598.066,
+    "trace_offset_seconds": 0.143193,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_lp_xu16__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_lp_xu16__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

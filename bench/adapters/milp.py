@@ -5,15 +5,25 @@ config: backend=scipy (default), highspy, gurobi, or cpsat; mode=optimize
 All models use bounded integer parity slacks, binary fault and logical bits,
 and the solver's native thread setting. Optional packages are never required
 by the default SciPy/HiGHS adapter.
+
+backend=gurobi uses gurobipy when it is importable, and otherwise the
+command-line solver gurobi_cl ($GUROBI_HOME/bin or PATH) on the same model
+written as an LP file; incumbents and bounds are read back while it runs.
 """
 from __future__ import annotations
 
+import glob
+import json
 import math
 import importlib.util
 import multiprocessing as mp
 import os
 import queue
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import time
 import traceback
 
@@ -179,6 +189,135 @@ def _gurobi(prob, model, threads, deadline, decision_k, progress):
     return result
 
 
+def gurobi_cl_path():
+    home = os.environ.get("GUROBI_HOME")
+    exe = os.path.join(home, "bin", "gurobi_cl") if home else None
+    return exe if exe and os.access(exe, os.X_OK) else shutil.which("gurobi_cl")
+
+
+def _gurobi_cl_scan(prob, work, log, seen, state, progress):
+    """New incumbent files (SolFiles) and new best bounds in the node log."""
+    for path in sorted(glob.glob(os.path.join(work, "inc_*.sol")), key=lambda x: int(x[:-4].rsplit("_", 1)[1])):
+        if path in seen:
+            continue
+        try:
+            text = open(path).read()
+        except OSError:
+            continue
+        objective, wit = None, []
+        for line in text.splitlines():
+            if line.startswith("# Objective value ="):
+                objective = float(line.split("=")[1])
+            parts = line.split()
+            if len(parts) == 2 and parts[0].startswith("e_") and float(parts[1]) > .5:
+                wit.append(int(parts[0][2:]))
+        if objective is None or abs(len(wit) - objective) > .5:
+            continue                        # still being written: the fault count must equal the objective
+        seen.add(path)
+        progress(dict(witness=sorted(wit)))
+    try:
+        with open(log) as f:
+            f.seek(state["pos"])
+            chunk = f.read()
+    except OSError:
+        return
+    end = chunk.rfind("\n") + 1
+    state["pos"] += len(chunk[:end].encode())
+    for line in chunk[:end].splitlines():
+        m = re.match(r"Gurobi Optimizer version (\S+)", line)
+        if m:
+            state["version"] = m.group(1)
+        m = re.match(r"Best objective \S+, best bound (\S+),", line)
+        tokens = line.split()
+        bound = None
+        if m:
+            bound = m.group(1)
+        elif len(tokens) >= 6 and re.match(r"^\s*[H*]?\s*\d+\s+\d+\s", line) and re.match(r"\d+s$", tokens[-1]):
+            bound = tokens[-4]              # node log: ... Incumbent BestBd Gap It/Node Time
+        try:
+            value = float(bound) if bound is not None else None
+        except ValueError:
+            value = None
+        if value is not None and math.isfinite(value) and (state["bound"] is None or value > state["bound"]):
+            state["bound"] = value
+            progress(dict(dual=value))
+
+
+def _gurobi_cl(prob, model, threads, deadline, decision_k, progress):
+    """The same model through gurobi_cl.  Gurobi's TimeLimit counts from the start of the
+    optimisation, so a margin is left for reading the LP file; the process is killed at the
+    deadline in any case, and what it reported by then (incumbent files, logged bounds) counts."""
+    exe = gurobi_cl_path()
+    work = tempfile.mkdtemp(prefix="gurobi_")
+    try:
+        lp = os.path.join(work, "model.lp")
+        write_lp(lp, prob, model, decision_k)
+        log, res = os.path.join(work, "gurobi.log"), os.path.join(work, "result.json")
+        nnz = sum(len(row) for row in model["rows"])
+        margin = 2.0 + 2e-6 * nnz
+        limit = max(.001, deadline - time.time() - margin)
+        cmd = [exe, "Threads=%d" % threads, "TimeLimit=%.3f" % limit, "MIPGap=0", "MIPGapAbs=0",
+               "LogToConsole=0", "LogFile=" + log, "SolFiles=" + os.path.join(work, "inc"), "ResultFile=" + res, lp]
+        seen, state = set(), dict(pos=0, bound=None, version=None)
+        killed, retried = False, False
+        while True:
+            out = open(os.path.join(work, "console.txt"), "w")
+            started = time.time()
+            # cwd stays the caller's, so that per-directory memory guards see the solver
+            proc = subprocess.Popen(cmd, stdout=out, stderr=subprocess.STDOUT)
+            while proc.poll() is None:
+                if time.time() > deadline + .5:
+                    proc.kill()
+                    killed = True
+                    break
+                time.sleep(.2)
+                _gurobi_cl_scan(prob, work, log, seen, state, progress)
+            proc.wait()
+            out.close()
+            with open(os.path.join(work, "console.txt")) as f:
+                err = f.read()
+            # a licence-service hiccup ends the run within seconds and writes no result: try once more
+            if (killed or retried or os.path.exists(res) or proc.returncode == 0 or time.time() - started > 60
+                    or deadline - time.time() < 120):
+                break
+            retried = True
+            cmd = [c if not c.startswith("TimeLimit=") else "TimeLimit=%.3f" % max(.001, deadline - time.time() - margin)
+                   for c in cmd]
+        _gurobi_cl_scan(prob, work, log, seen, state, progress)
+        info, wit = {}, None
+        if os.path.exists(res):
+            with open(res) as f:
+                data = json.load(f)
+            info = data.get("SolutionInfo", {})
+            if info.get("SolCount", 0) > 0:
+                wit = sorted(int(v["VarName"][2:]) for v in data.get("Vars", [])
+                             if v["VarName"].startswith("e_") and v["X"] > .5)
+        st = info.get("Status")
+        dual = info.get("ObjBound") if decision_k is None else None
+        if dual is not None and abs(dual) >= 1e99:
+            dual = None
+        names = {2: "optimal", 3: "infeasible", 9: "time limit", 11: "interrupted", 17: "memory limit"}
+        if st not in (2, 3, 9):           # keep the end of the console and of Gurobi's own log for the record
+            err = " / ".join(x.strip() for x in err.splitlines()[-4:] if x.strip())[-400:]
+            try:
+                with open(log) as f:
+                    err += " | log: " + " / ".join(x.strip() for x in f.read().splitlines()[-4:] if x.strip())[-400:]
+            except OSError:
+                pass
+        if retried:
+            err = "first launch failed within seconds (licence service?), relaunched once; " + err
+        message = "gurobi_cl status %s (%s)%s" % (st, names.get(st, "see log"), "; " + err.strip() if st not in (2, 3, 9) and err.strip() else "") if st is not None else \
+            "gurobi_cl wrote no result (exit %s%s)%s" % (proc.returncode, ", killed at the deadline" if killed else "",
+                                                         "; " + err.strip()[-300:] if err.strip() else "")
+        if retried and st in (2, 3, 9):
+            message += "; first launch failed within seconds (licence service?), relaunched once"
+        return dict(witness=wit, dual=dual, infeasible=st == 3, optimal=st == 2,
+                    timed_out=st == 9 or (st is None and killed), error=st not in (2, 3, 9) and not killed,
+                    message=message, version="gurobi_cl " + (state["version"] or "unknown"))
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+
+
 def _cpsat(prob, model, threads, deadline, decision_k, progress):
     import ortools
     from ortools.sat.python import cp_model
@@ -217,6 +356,8 @@ def _worker(prob, cfg, threads, deadline, messages):
     try:
         backend, mode = cfg.get("backend", "scipy"), cfg.get("mode", "optimize")
         solve = {"scipy": _scipy, "highspy": _highspy, "gurobi": _gurobi, "cpsat": _cpsat}[backend]
+        if backend == "gurobi" and importlib.util.find_spec("gurobipy") is None:
+            solve = _gurobi_cl
         model = formulation(prob)
         if time.time() >= deadline:
             messages.put(("done", dict(status="timeout", message="time limit during model construction")))
@@ -255,7 +396,8 @@ def main():
     backend, mode = cfg.setdefault("backend", "scipy"), cfg.setdefault("mode", "optimize")
     cfg["threads_honoured"] = backend in ("scipy", "highspy", "gurobi", "cpsat")
     notes = ("threads honoured through " + {"scipy": "HiGHS threads option (forwarded by SciPy)",
-              "highspy": "HiGHS threads", "gurobi": "Gurobi Threads", "cpsat": "CP-SAT num_search_workers"}.get(backend, "unknown backend"))
+              "highspy": "HiGHS threads", "gurobi": "Gurobi Threads" + (
+              "" if importlib.util.find_spec("gurobipy") else " (gurobi_cl on an LP file)"), "cpsat": "CP-SAT num_search_workers"}.get(backend, "unknown backend"))
     witness, status, version = None, "error", None
     if a.threads < 1 or backend not in ("scipy", "highspy", "gurobi", "cpsat") or mode not in ("optimize", "decision"):
         cfg["threads_honoured"] = None
@@ -268,7 +410,8 @@ def main():
         status = "bounds"
         cfg["threads_honoured"] = None
     elif importlib.util.find_spec({"scipy": "scipy", "highspy": "highspy",
-                                  "gurobi": "gurobipy", "cpsat": "ortools"}[backend]) is None:
+                                  "gurobi": "gurobipy", "cpsat": "ortools"}[backend]) is None and \
+            not (backend == "gurobi" and gurobi_cl_path()):
         status = "unavailable"
         cfg["threads_honoured"] = None
         notes = "%s backend is not installed; no solver run; threads unused" % backend

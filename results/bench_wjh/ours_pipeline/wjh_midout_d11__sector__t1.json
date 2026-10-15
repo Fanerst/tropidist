@@ -1,0 +1,95 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "wjh_midout_d11",
+  "variant": "sector",
+  "rows": 300,
+  "cols": 1907,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    0,
+    4,
+    24,
+    69,
+    126,
+    162
+  ],
+  "witness_ok": true,
+  "seconds": 0.182,
+  "trace": [
+    {
+      "t": 0.067,
+      "lb": 1
+    },
+    {
+      "t": 0.159,
+      "lb": 2
+    },
+    {
+      "t": 0.159,
+      "lb": 3
+    },
+    {
+      "t": 0.16,
+      "lb": 4
+    },
+    {
+      "t": 0.163,
+      "lb": 5
+    },
+    {
+      "t": 0.166,
+      "lb": 6
+    },
+    {
+      "t": 0.168,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 94.2,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 217, \"rows\": 50, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002770423889160156, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002410411834716797, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004532337188720703, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0021483898162841797, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003094911575317383, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.00029540061950683594, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 36, \"rows\": 300, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.435943603515625e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.53131103515625e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.459785461425781e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.198883056640625e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.461143493652344e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 5.91278076171875e-05, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_midout_d11",
+    "family": "wjh_midout_circuit",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      67
+    ],
+    "started_at": "2026-10-15T04:23:34.714255+00:00",
+    "ended_at": "2026-10-15T04:23:35.035433+00:00",
+    "wall_seconds": 0.319099,
+    "adapter_seconds": 0.182,
+    "trace_offset_seconds": 0.137099,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline/wjh_midout_d11__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline/wjh_midout_d11__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

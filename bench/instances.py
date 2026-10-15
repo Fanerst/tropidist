@@ -24,6 +24,7 @@ except ImportError:
 
 ROOT = Path(common.ROOT)
 INSTANCES = OrderedDict()
+WJH = OrderedDict()          # the instances of arXiv:2603.22532, kept apart from the main suite
 
 
 class NeedsLead(ValueError):
@@ -61,8 +62,8 @@ def _collapsed(record, source):
     return (None, "unknown", None)
 
 
-def _add(name, track, family, builder, key=None, truth_file=None, **extra):
-    INSTANCES[name] = dict(track=track, family=family, builder=builder, key=key,
+def _add(name, track, family, builder, key=None, truth_file=None, registry=INSTANCES, **extra):
+    registry[name] = dict(track=track, family=family, builder=builder, key=key,
                            basis="Z", rounds=6 if track == "circuit" else None,
                            truth_file=truth_file, status="ready", **extra)
 
@@ -129,10 +130,70 @@ _add("code_gala_132", "code", "gala", "gala", 132, "results/papers2/gala_code_di
 _add("code_cornucopia_1044", "code", "cornucopia", "code_cornucopia", 29)
 _add("code_sdbb_200", "code", "selfdual_bb", "selfdual", 200, "results/papers2/selfdual_bb_code_distance.json")
 
+# The benchmark of arXiv:2603.22532 (Webster, Jacob, Higgott): their circuit files and their CSS codes, from
+# their codeDistance package (github.com/m-webster/codeDistancePYPI, commit a4afe9c, MIT licence) checked out
+# in WJH_REPO.  The codes are exported by papers/codedistance_export.py into WJH_CODES.  Circuit problems:
+# the memory-basis sector, which equals their basis-filtered DEM column for column (checked when building).
+# Codes: their quantity, the Z distance (H = HX, L = LX), which is basis "X" of stabcode.css_distance_problem.
+# The long-range-noise BB directories (06_, 07_) are not separate problems: same mechanisms as 05_.
+WJH_REPO = "papers/downloads/codedistance"
+WJH_CODES = "papers/downloads/codedistance_codes.json"
+WJH_CIRCUITS = (("surface", "01_surfacecodes"), ("midout", "03_colorcodes_midout"),
+                ("superdense", "04_colorcodes_superdense"), ("bb", "05_bivariatebicyclecodes"))
+WJH_CODE_FAMILIES = (("bb", 20), ("lp", 19), ("qt", 22), ("hsc", 21), ("hcc", 21))
+
+
+def _wjh_fields(filename):
+    import re
+    return dict(re.findall(r"(\w+)=(\[\[[^\]]*\]\]|[^,]*)", filename[3:-len(".stim")]))
+
+
+def _wjh_register():
+    base = ROOT / WJH_REPO / "examples" / "stim_circuits"
+    for family, folder in WJH_CIRCUITS:
+        for path in sorted((base / folder).glob("*.stim")) if (base / folder).is_dir() else []:
+            f = _wjh_fields(path.name)
+            if family == "bb":
+                name = "wjh_bb%s_circuit" % f["nkd"].strip("[]").split(",")[0]
+            elif f["c"] == "color_code_mpp":
+                name = "wjh_superdense_mpp_d%s" % f["d"]
+            else:
+                name = "wjh_%s_d%s" % (family, f["d"])
+            _add(name, "circuit", "wjh_" + family + "_circuit", "wjh_circuit", path.name,
+                 circuit_file=str(path.relative_to(ROOT)), sector_high=True, registry=WJH)
+    codes = []
+    if (ROOT / WJH_CODES).is_file():
+        codes = _json(WJH_CODES)["codes"]
+    for c in codes:
+        tag = {"bb": "n%d" % c["n"], "lp": c["name"].lower().replace("_", ""), "qt": c["name"],
+               "hsc": "%02d_n%d" % (c["index"], c["n"]), "hcc": "%02d_n%d" % (c["index"], c["n"])}[c["family"]]
+        _add("wjh_%s_%s" % (c["family"], tag), "code", "wjh_" + c["family"], "wjh_code", (c["family"], c["index"]),
+             truth_file=WJH_CODES, registry=WJH)
+        WJH["wjh_%s_%s" % (c["family"], tag)].update(basis="X", n=c["n"], k=c["k"])
+
+
+_wjh_register()
+
 
 def _prepare(spec):
     """Resolve file-backed metadata without building circuits or running a solver."""
     typ, key, path = spec["builder"], spec["key"], spec["truth_file"]
+    if typ == "wjh_circuit":
+        f = _wjh_fields(key)
+        d = int(f["d"])
+        if "nkd" in f:
+            n, k, _ = (int(x) for x in f["nkd"].strip("[]").split(","))
+        elif f["c"].startswith("surface"):
+            n, k = d * d, 1
+        else:
+            n, k = (3 * d * d + 1) // 4, 1
+        spec.update(n=n, k=k, basis="Z", rounds=int(f["r"]), description="arXiv:2603.22532 circuit " + key,
+                    truth={"sector": (None, "unknown", None), "collapsed": (None, "unknown", None)})
+        return
+    if typ == "wjh_code":
+        spec.update(description="arXiv:2603.22532 code %s %d (Z distance)" % key,
+                    truth={"full": (None, "unknown", None)})
+        return
     if typ in ("stim_surface", "stim_color"):
         try:
             from . import stim_families
@@ -266,7 +327,7 @@ def _prepare(spec):
         raise NeedsLead(spec["sector_selector_issue"])
 
 
-for _name, _spec in list(INSTANCES.items()):
+for _name, _spec in list(INSTANCES.items()) + list(WJH.items()):
     try:
         _prepare(_spec)
     except (OSError, ValueError, KeyError, IndexError, TypeError, StopIteration, ImportError) as exc:
@@ -286,7 +347,7 @@ for _name, _spec in list(INSTANCES.items()):
 def _circuit(spec):
     typ, key = spec["builder"], spec["key"]
     b, r = spec["basis"], spec["rounds"]
-    if typ == "stored_bb":
+    if typ in ("stored_bb", "wjh_circuit"):
         import stim
         return stim.Circuit.from_file(str(ROOT / spec["circuit_file"])), []
     if typ in ("stim_surface", "stim_color"):
@@ -315,8 +376,38 @@ def _circuit(spec):
     return mod.build(key, b, r, **kwargs), mod.translations(key) if hasattr(mod, "translations") else []
 
 
+def _wjh_code_perms(family, hx, n):
+    """Candidate check permutations for the structured families (the exporter keeps only true symmetries):
+    lattice translations of a bivariate bicycle code (rows i*m + j of the l x m torus, every factorisation
+    tried) and the cyclic shift of a quasi-cyclic lifted-product code (blocks of l consecutive or
+    interleaved rows, every l tried).  Quantum Tanner and hyperbolic codes: none."""
+    r = len(hx)
+    out = []
+    if family == "bb":
+        for l in range(2, r):
+            if r % l:
+                continue
+            m = r // l
+            for di, dj in ((1, 0), (0, 1)):
+                out.append([((i + di) % l) * m + (j + dj) % m for i in range(l) for j in range(m)])
+    elif family == "lp":
+        for l in range(2, r + 1):
+            if r % l:
+                continue
+            b = r // l
+            out.append([q * l + (i + 1) % l for q in range(b) for i in range(l)])
+            out.append([((i + 1) % l) * b + q for i in range(l) for q in range(b)])
+    return out
+
+
 def _code(spec):
     typ, key = spec["builder"], spec["key"]
+    if typ == "wjh_code":
+        family, index = key
+        c = next(c for c in _json(WJH_CODES)["codes"] if c["family"] == family and c["index"] == index)
+        hx = [sum(1 << j for j in row) for row in c["hx"]]
+        hz = [sum(1 << j for j in row) for row in c["hz"]]
+        return hx, hz, c["n"], _wjh_code_perms(family, hx, c["n"])
     if typ == "code_bb":
         if key == "bb288":
             import stabcode
@@ -347,9 +438,13 @@ def _code(spec):
 
 
 def _lattice_perms(p):
-    """Use the same coordinate translation generators as run_bb.py."""
+    """Use the same coordinate translation generators as run_bb.py (none if the detector coordinates
+    do not identify rows by (x, y, t), as for both detector types of a colour code)."""
     from cdist import symmetry
-    found = symmetry.translations(p)
+    try:
+        found = symmetry.translations(p)
+    except AssertionError:
+        return []
     if not found.get("ok"):
         return []
     x0, sx, nx = symmetry._axis(m[0] for m in p.row_meta)
@@ -433,7 +528,7 @@ def build(name, root=None, max_cols=None):
     A staging directory prevents failed builds from appearing as finished exports.
     No existing destination is changed until all variants were successfully written.
     """
-    spec = deepcopy(INSTANCES[name])
+    spec = deepcopy(INSTANCES[name] if name in INSTANCES else WJH[name])
     if spec["status"] == "needs_lead":
         raise NeedsLead(spec["reason"])
     size = spec.get("raw_mechanisms") if spec["track"] == "circuit" else spec.get("n")
@@ -470,7 +565,7 @@ def build(name, root=None, max_cols=None):
                 else:
                     out = common.export_dem_instance(name, circ, meta, root=tmp)
             else:
-                out = common.export_circuit_instance(name, circ, [], meta, root=tmp)
+                out = common.export_circuit_instance(name, circ, [], meta, root=tmp, high=spec.get("sector_high"))
             if spec["builder"] == "mitten":
                 eff = importlib.import_module("mitten_effective").effective_problem(str(ROOT / spec["code_dir"]), spec["basis"])
                 coll = common.load(os.path.join(tmp, name), "collapsed")
@@ -480,8 +575,11 @@ def build(name, root=None, max_cols=None):
                 import run_parallel
                 for variant in out["variants"]:
                     prob = common.to_cdist(common.load(os.path.join(tmp, name), variant))
-                    perms = (_lattice_perms(prob) if spec["builder"] == "stored_bb"
-                             else _fast_symmetries(prob, run_parallel.row_perms(prob, cp)))
+                    if spec["builder"] == "wjh_circuit" and variant == "full" and prob.ncols > 400000:
+                        perms = []      # the check over all columns is too slow; our searches use sector/collapsed
+                    else:
+                        perms = (_lattice_perms(prob) if spec["builder"] in ("stored_bb", "wjh_circuit")
+                                 else _fast_symmetries(prob, run_parallel.row_perms(prob, cp)))
                     counts = common.export_problem(os.path.join(tmp, name), variant, prob, perms)
                     out["variants"][variant].update(counts)
                 common.write_meta(os.path.join(tmp, name), out)

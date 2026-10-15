@@ -1,0 +1,94 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "surface_d11",
+  "variant": "collapsed",
+  "rows": 60,
+  "cols": 161,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    140,
+    141,
+    143,
+    144,
+    146,
+    147,
+    149,
+    150,
+    152,
+    153,
+    156
+  ],
+  "witness_ok": true,
+  "seconds": 15.308,
+  "trace": [
+    {
+      "t": 0.287,
+      "ub": 11
+    },
+    {
+      "t": 0.287,
+      "lb": 1
+    },
+    {
+      "t": 0.287,
+      "lb": 3
+    },
+    {
+      "t": 5.092,
+      "lb": 8
+    },
+    {
+      "t": 10.099,
+      "lb": 9
+    },
+    {
+      "t": 15.105,
+      "lb": 10
+    },
+    {
+      "t": 15.306,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 54.2,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d11",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-15T04:22:17.288226+00:00",
+    "ended_at": "2026-10-15T04:22:32.834639+00:00",
+    "wall_seconds": 15.545969,
+    "adapter_seconds": 15.308,
+    "trace_offset_seconds": 0.237969,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/surface_d11__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/surface_d11__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

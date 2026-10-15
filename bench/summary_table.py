@@ -19,7 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 
 SHORT = [("ours_pipeline", "ours"), ("ours", "ours, plain"), ("distm4ri__mode-cc", "dist-m4ri CC"),
-         ("distm4ri__mode-bracket", "dist-m4ri CC+RW"), ("milp__backend-scipy", "HiGHS"), ("milp__backend-cpsat", "CP-SAT"),
+         ("distm4ri__mode-bracket", "dist-m4ri CC+RW"), ("milp__backend-scipy", "HiGHS"), ("milp__backend-cpsat", "CP-SAT"), ("milp__backend-gurobi", "Gurobi"),
          ("sat__mode-incremental", "SAT"), ("sat__mode-maxsat", "RC2"), ("CASHW", "CASHWMaxSAT"), ("enMaxCDCL", "enMaxCDCL"),
          ("-", "RC2 (Stim WCNF)"), ("-", "CASHWMaxSAT (Stim WCNF)"), ("-", "enMaxCDCL (Stim WCNF)"),
          ("qserf__method-cc", "Qubitserf CC"), ("qserf__method-bz", "Qubitserf BZ"), ("qserf__method-mitm", "Qubitserf MITM"),

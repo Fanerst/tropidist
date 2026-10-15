@@ -1,0 +1,88 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "surface_d9",
+  "variant": "sector",
+  "rows": 400,
+  "cols": 1945,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 9,
+  "witness": [
+    1908,
+    1937,
+    1938,
+    1939,
+    1940,
+    1941,
+    1942,
+    1943,
+    1944
+  ],
+  "witness_ok": true,
+  "seconds": 599.555,
+  "trace": [
+    {
+      "t": 0.326,
+      "ub": 9
+    },
+    {
+      "t": 0.326,
+      "lb": 1
+    },
+    {
+      "t": 0.326,
+      "lb": 3
+    },
+    {
+      "t": 5.133,
+      "lb": 4
+    },
+    {
+      "t": 50.2,
+      "lb": 5
+    },
+    {
+      "t": 375.262,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 1740.1,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d9",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-15T03:55:39.418272+00:00",
+    "ended_at": "2026-10-15T04:05:39.144968+00:00",
+    "wall_seconds": 599.724984,
+    "adapter_seconds": 599.555,
+    "trace_offset_seconds": 0.169984,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/surface_d9__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/surface_d9__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

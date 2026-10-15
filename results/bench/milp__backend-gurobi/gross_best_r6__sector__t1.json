@@ -1,0 +1,83 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "gross_best_r6",
+  "variant": "sector",
+  "rows": 504,
+  "cols": 4464,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": 12,
+  "witness": [
+    4408,
+    4409,
+    4415,
+    4418,
+    4424,
+    4427,
+    4430,
+    4436,
+    4451,
+    4454,
+    4460,
+    4463
+  ],
+  "witness_ok": true,
+  "seconds": 598.797,
+  "trace": [
+    {
+      "t": 0.773,
+      "ub": 12
+    },
+    {
+      "t": 0.773,
+      "lb": 1
+    },
+    {
+      "t": 5.781,
+      "lb": 2
+    },
+    {
+      "t": 570.753,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 631.0,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/gross_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-15T03:42:18.043038+00:00",
+    "ended_at": "2026-10-15T03:52:16.984928+00:00",
+    "wall_seconds": 598.931977,
+    "adapter_seconds": 598.797,
+    "trace_offset_seconds": 0.134977,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/gross_best_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/gross_best_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

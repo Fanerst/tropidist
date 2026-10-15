@@ -1,0 +1,75 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "cornucopia_252",
+  "variant": "full",
+  "rows": 756,
+  "cols": 65450,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": 8,
+  "witness": [
+    9431,
+    9610,
+    9650,
+    9714,
+    10109,
+    13437,
+    15400,
+    16079
+  ],
+  "witness_ok": true,
+  "seconds": 594.166,
+  "trace": [
+    {
+      "t": 7.597,
+      "ub": 10
+    },
+    {
+      "t": 7.998,
+      "lb": 1
+    },
+    {
+      "t": 448.028,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 984.5,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-15T03:42:17.826445+00:00",
+    "ended_at": "2026-10-15T03:52:12.789350+00:00",
+    "wall_seconds": 594.225531,
+    "adapter_seconds": 594.166,
+    "trace_offset_seconds": 0.059531,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_252__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_252__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

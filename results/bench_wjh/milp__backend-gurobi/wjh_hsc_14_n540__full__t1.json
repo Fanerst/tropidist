@@ -1,0 +1,88 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "wjh_hsc_14_n540",
+  "variant": "full",
+  "rows": 135,
+  "cols": 540,
+  "obs": 47,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 5,
+  "upper_bound": 5,
+  "witness": [
+    140,
+    240,
+    455,
+    468,
+    486
+  ],
+  "witness_ok": true,
+  "seconds": 45.175,
+  "trace": [
+    {
+      "t": 0.317,
+      "ub": 14
+    },
+    {
+      "t": 0.317,
+      "ub": 8
+    },
+    {
+      "t": 0.317,
+      "ub": 5
+    },
+    {
+      "t": 0.317,
+      "lb": 1
+    },
+    {
+      "t": 5.323,
+      "lb": 2
+    },
+    {
+      "t": 30.152,
+      "lb": 3
+    },
+    {
+      "t": 44.972,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 59.6,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hsc_14_n540",
+    "family": "wjh_hsc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      70
+    ],
+    "started_at": "2026-10-15T04:54:37.027902+00:00",
+    "ended_at": "2026-10-15T04:55:22.443398+00:00",
+    "wall_seconds": 45.409452,
+    "adapter_seconds": 45.175,
+    "trace_offset_seconds": 0.234452,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hsc_14_n540__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hsc_14_n540__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0
+  },
+  "instance": "wjh_hsc_07_n168",
+  "variant": "full",
+  "rows": 42,
+  "cols": 168,
+  "obs": 16,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    0,
+    26,
+    43,
+    53
+  ],
+  "witness_ok": true,
+  "seconds": 0.127,
+  "trace": [
+    {
+      "t": 0.066,
+      "lb": 1
+    },
+    {
+      "t": 0.113,
+      "lb": 2
+    },
+    {
+      "t": 0.113,
+      "lb": 3
+    },
+    {
+      "t": 0.114,
+      "lb": 4
+    },
+    {
+      "t": 0.114,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 56.5,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 168, \"rows\": 42, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018024444580078125, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015044212341308594, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002543926239013672, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.00016188621520996094, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hsc_07_n168",
+    "family": "wjh_hsc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      71
+    ],
+    "started_at": "2026-10-15T04:44:21.822643+00:00",
+    "ended_at": "2026-10-15T04:44:22.128063+00:00",
+    "wall_seconds": 0.30499,
+    "adapter_seconds": 0.127,
+    "trace_offset_seconds": 0.17799,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline/wjh_hsc_07_n168__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline/wjh_hsc_07_n168__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

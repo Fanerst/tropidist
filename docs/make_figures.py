@@ -139,14 +139,15 @@ def fig_benchmark():
     a, b32, b1, metas = bench()
     main = {m["name"]: ("full" if (m["track"] == "code" or "sector" not in m["variants"]) else "sector") for m in metas}
     groups = [("this method", ["ours"]), ("dist-m4ri", ["dist-m4ri CC", "dist-m4ri CC+RW"]),
-              ("CP-SAT", ["CP-SAT"]), ("HiGHS", ["HiGHS"]), ("SAT (CaDiCaL)", ["SAT"]), ("RC2", ["RC2"]),
-              ("enMaxCDCL", ["enMaxCDCL"]), ("CASHWMaxSAT", ["CASHWMaxSAT"]),
+              ("CP-SAT", ["CP-SAT"]), ("HiGHS", ["HiGHS"]), ("Gurobi", ["Gurobi"]), ("SAT (CaDiCaL)", ["SAT"]),
+              ("RC2", ["RC2"]), ("enMaxCDCL", ["enMaxCDCL"]), ("CASHWMaxSAT", ["CASHWMaxSAT"]),
               ("Qubitserf (codes only)", ["Qubitserf CC", "Qubitserf BZ", "Qubitserf MITM"])]
     rows = []
     for label, ms in groups:
         t1 = sum(any(exact(a, m, i, v) is not None for m in ms) for i, v in main.items())
         t2 = sum(any(exact(r, m, i, v) is not None for r in (a, b32, b1) for m in ms) for i, v in main.items())
         rows.append((label, t1, t2))
+    rows = rows[:1] + sorted(rows[1:], key=lambda r: (-r[2], -r[1]))      # the others by count
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.1), sharey=True)
     fig.subplots_adjust(left=0.235, right=0.975, top=0.86, bottom=0.14, wspace=0.12)
     for ax, col, title in ((axes[0], 1, "1 thread, 600 s, 16 GB"), (axes[1], 2, "plus one hour (32 threads where supported)")):
@@ -168,11 +169,11 @@ def fig_benchmark():
     return rows
 
 
-# ---------------------------------------------------------------- figure 3: surface-code scaling
+# ---------------------------------------------------------------- figure 4: surface-code scaling
 def fig_surface():
     a, b32, b1, metas = bench()
     series = [("this method", "ours", BLUE), ("dist-m4ri", "dist-m4ri CC", GRAY), ("SAT", "SAT", GRAY),
-              ("RC2", "RC2", GRAY), ("HiGHS", "HiGHS", GRAY), ("CP-SAT", "CP-SAT", GRAY)]
+              ("RC2", "RC2", GRAY), ("HiGHS", "HiGHS", GRAY), ("CP-SAT", "CP-SAT", GRAY), ("Gurobi", "Gurobi", GRAY)]
     fig, ax = plt.subplots(figsize=(7.2, 3.3))
     fig.subplots_adjust(left=0.1, right=0.86, top=0.9, bottom=0.15)
     ax.set_yscale("log")
@@ -188,17 +189,24 @@ def fig_surface():
         xs, ys = [p[0] for p in pts], [max(p[1], 0.01) for p in pts]
         ax.plot(xs, ys, color=color, linewidth=1.5 if color == GRAY else 1.8, solid_capstyle="round", solid_joinstyle="round",
                 marker="o", markersize=6.2, markeredgecolor=SURFACE, markeredgewidth=1.5, zorder=4 if color == BLUE else 3)
-        ends[label] = (xs[-1], ys[-1])
+        if xs:
+            ends[label] = (xs[-1], ys[-1])
     # second tier of this method: 32 threads, one hour
     t2 = [(d, exact(b32, "ours", "surface_d%d" % d, "sector")) for d in (23, 25)]
     ax.plot([d for d, _ in t2], [t for _, t in t2], color=BLUE, linewidth=0, marker="o", markersize=6.2,
             markerfacecolor=SURFACE, markeredgecolor=BLUE, markeredgewidth=1.5, zorder=4)
     ax.text(24.0, 16, "32 threads,\none hour", fontsize=7.8, color=INK2, ha="center", va="center", linespacing=1.3)
     ax.text(18.7, 62, "this method", fontsize=8.5, color=INK, fontweight="bold", ha="right", va="center")
+    # labels at the end of each line; SAT and Gurobi end at the same point, so they share a label
+    shared = "SAT" in ends and "Gurobi" in ends and ends["SAT"][0] == ends["Gurobi"][0] and \
+        0.7 < ends["SAT"][1] / ends["Gurobi"][1] < 1.4
     for label, (dx, ha) in {"dist-m4ri": (0.45, "left"), "SAT": (0.45, "left"), "RC2": (0.45, "left"),
-                            "HiGHS": (0.45, "left"), "CP-SAT": (-0.45, "right")}.items():
+                            "HiGHS": (0.45, "left"), "CP-SAT": (-0.45, "right"), "Gurobi": (0.45, "left")}.items():
+        if label not in ends or (shared and label == "Gurobi"):
+            continue
         x, y = ends[label]
-        ax.text(x + dx, y, label, fontsize=8.2, color=INK2, va="center", ha=ha)
+        ax.text(x + dx, y, "SAT, Gurobi" if (shared and label == "SAT") else label, fontsize=8.2, color=INK2,
+                va="center", ha=ha)
     ax.set_xticks(range(3, 27, 2))
     ax.set_yticks([0.01, 0.1, 1, 10, 100, 1000])
     ax.set_yticklabels(["≤ 0.01", "0.1", "1", "10", "100", "1000"])
@@ -206,10 +214,10 @@ def fig_surface():
     ax.set_ylabel("seconds to the certified distance, 1 thread", fontsize=8.5)
     ax.spines["left"].set_visible(False)
     ax.minorticks_off()
-    save(fig, "fig3_surface.png")
+    save(fig, "fig4_surface.png")
 
 
-# ---------------------------------------------------------------------- figure 4: ablation
+# ---------------------------------------------------------------------- figure 5: ablation
 def fig_ablation():
     a, b32, b1, metas = bench()
     abl = T.load(ROOT / "results" / "bench_ablation", 1)
@@ -236,11 +244,11 @@ def fig_ablation():
     ax.axvline(len(circ), color=AXIS, linewidth=0.72, zorder=1)
     ax.set_xticks([0, 10, 20, 30, len(circ)])
     ax.set_xlabel("circuits solved exactly (of %d), 1 thread, 600 s" % len(circ), fontsize=8.5)
-    save(fig, "fig4_ablation.png")
+    save(fig, "fig5_ablation.png")
     return rows
 
 
-# -------------------------------------------------------- figure 5: the open ranges of 2610.03682
+# -------------------------------------------------------- figure 6: the open ranges of 2610.03682
 def fig_ranges():
     import summarize_hyperbolic as S
     res = S.load_results()
@@ -271,11 +279,11 @@ def fig_ranges():
               borderaxespad=0.2)
     ax.set_xticks(range(4, 31, 4))
     ax.set_xlabel("code distance", fontsize=8.5)
-    save(fig, "fig5_ranges.png")
+    save(fig, "fig6_ranges.png")
     return rows
 
 
-# -------------------------------------------------------- figure 6: cost per unit of weight
+# -------------------------------------------------------- figure 7: cost per unit of weight
 def fig_growth():
     runs = {}
     for tag, name, label in (("D", "lins444_96_L4", "[[5376, 88, 28]]"), ("F", "lins566_130_L4", "[[23040, 676, 28]]"),
@@ -306,8 +314,56 @@ def fig_growth():
     ax.spines["left"].set_visible(False)
     ax.legend(loc="upper left", fontsize=8.2, handlelength=1.6)
     ax.minorticks_off()
-    save(fig, "fig6_growth.png")
+    save(fig, "fig7_growth.png")
     return runs
+
+
+# ------------------------------------------- figure 3: the instances of arXiv:2603.22532
+def fig_wjh():
+    """Our first-tier time (1 thread, 600 s) against the fastest exact method of the paper (1 thread, 8 h on
+    their cluster), one point per instance; instances only one side solved sit in the margins."""
+    import wjh_compare as W
+    rows = W.per_instance()
+    NONE_X, NONE_Y, FLOOR = 2.5e5, 3000, 0.01
+    fig, ax = plt.subplots(figsize=(7.2, 4.0))
+    fig.subplots_adjust(left=0.11, right=0.97, top=0.87, bottom=0.14)
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlim(0.006, 6e5)
+    ax.set_ylim(0.006, 8000)
+    style_axes(ax, "both")
+    ax.plot([0.006, 28800], [0.006, 28800], color=AXIS, linewidth=0.9, zorder=1)
+    ax.text(900, 2600, "equal time", fontsize=7.8, color=MUTED, rotation=30, ha="center", va="center")
+    ax.axvline(28800 * 1.9, color=AXIS, linewidth=0.72, zorder=1)
+    ax.axhline(600 * 1.9, color=AXIS, linewidth=0.72, zorder=1)
+    counts = {}
+    for track, color, label in (("circuit", BLUE, "circuits"), ("code", ORANGE, "codes")):
+        xs, ys = [], []
+        for r in rows:
+            if r["track"] != track:
+                continue
+            o, t = r["ours_t1"], r["theirs"]
+            key = (o is not None, t is not None)
+            counts[key] = counts.get(key, 0) + 1
+            if o is None and t is None:
+                continue
+            xs.append(max(t[0], FLOOR) if t else NONE_X)
+            ys.append(max(o, FLOOR) if o is not None else NONE_Y)
+        ax.plot(xs, ys, linewidth=0, marker="o", markersize=6.2, color=color, markeredgecolor=SURFACE,
+                markeredgewidth=1.5, label=label, zorder=3, alpha=0.95)
+    only = sum(v for (o, t), v in counts.items() if o and not t)
+    ax.text(NONE_X, 0.035, "%d solved by\nthis method only" % only, fontsize=7.8, color=INK2, ha="center", va="center",
+            linespacing=1.3)
+    ax.set_xticks([0.01, 1, 100, 10000, NONE_X])
+    ax.set_xticklabels(["≤ 0.01", "1", "100", "10000", "not solved\nin 8 h"])
+    ax.set_yticks([0.01, 0.1, 1, 10, 100, NONE_Y])
+    ax.set_yticklabels(["≤ 0.01", "0.1", "1", "10", "100", "not solved\nin 600 s"])
+    ax.minorticks_off()
+    ax.set_xlabel("fastest exact method of arXiv:2603.22532 (seconds, 1 thread, 8 h limit, their cluster)", fontsize=8.5)
+    ax.set_ylabel("this method (seconds, 1 thread)", fontsize=8.5)
+    ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2, fontsize=8.2, handlelength=1.2, borderaxespad=0.3)
+    save(fig, "fig3_prior.png")
+    return counts
 
 
 if __name__ == "__main__":
@@ -317,3 +373,4 @@ if __name__ == "__main__":
     print(fig_ablation())
     print([(r[2], r[3], r[4], r[0]) for r in fig_ranges()])
     print({k: [(K, round(s)) for K, s in v] for k, v in fig_growth().items()})
+    print(fig_wjh())

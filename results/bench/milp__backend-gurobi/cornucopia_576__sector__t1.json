@@ -1,0 +1,112 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "cornucopia_576",
+  "variant": "sector",
+  "rows": 1008,
+  "cols": 19584,
+  "obs": 292,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": 33,
+  "witness": [
+    6967,
+    6968,
+    8411,
+    8425,
+    8614,
+    8628,
+    8653,
+    8655,
+    9452,
+    9519,
+    9541,
+    9542,
+    9562,
+    9563,
+    9583,
+    9602,
+    9633,
+    9651,
+    9664,
+    9687,
+    9718,
+    9772,
+    9828,
+    9855,
+    9859,
+    9867,
+    9912,
+    9918,
+    9923,
+    9924,
+    9928,
+    10050,
+    10055
+  ],
+  "witness_ok": true,
+  "seconds": 595.647,
+  "trace": [
+    {
+      "t": 5.621,
+      "lb": 1
+    },
+    {
+      "t": 8.235,
+      "ub": 40
+    },
+    {
+      "t": 8.236,
+      "ub": 39
+    },
+    {
+      "t": 8.236,
+      "ub": 37
+    },
+    {
+      "t": 8.243,
+      "ub": 36
+    },
+    {
+      "t": 9.248,
+      "ub": 33
+    }
+  ],
+  "peak_rss_mb": 797.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_576",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-15T03:42:16.897105+00:00",
+    "ended_at": "2026-10-15T03:52:13.520944+00:00",
+    "wall_seconds": 596.095999,
+    "adapter_seconds": 595.647,
+    "trace_offset_seconds": 0.448999,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_576__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_576__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

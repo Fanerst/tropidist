@@ -105,6 +105,9 @@ def tables():
         t["B-check"] = "\n".join("- " + b for b in bad) if bad else "All second-tier records are mutually consistent and consistent with the ground truth."
     if ABL.is_dir():
         t["ablation"] = T.table(ABL, "sector", "circuit", 1)
+    if (ROOT / "results" / "bench_wjh").is_dir():
+        import wjh_compare
+        t["wjh"] = wjh_compare.report()
     return t
 
 

@@ -1,0 +1,83 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "wjh_hcc_15_n512",
+  "variant": "full",
+  "rows": 192,
+  "cols": 512,
+  "obs": 132,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 4,
+  "upper_bound": 8,
+  "witness": [
+    29,
+    117,
+    154,
+    159,
+    188,
+    268,
+    294,
+    303
+  ],
+  "witness_ok": true,
+  "seconds": 598.171,
+  "trace": [
+    {
+      "t": 0.315,
+      "ub": 8
+    },
+    {
+      "t": 0.316,
+      "lb": 1
+    },
+    {
+      "t": 10.327,
+      "lb": 2
+    },
+    {
+      "t": 130.292,
+      "lb": 3
+    },
+    {
+      "t": 400.28,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 112.8,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hcc_15_n512",
+    "family": "wjh_hcc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      67
+    ],
+    "started_at": "2026-10-15T04:53:54.554363+00:00",
+    "ended_at": "2026-10-15T05:03:52.931850+00:00",
+    "wall_seconds": 598.371637,
+    "adapter_seconds": 598.171,
+    "trace_offset_seconds": 0.200637,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hcc_15_n512__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hcc_15_n512__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "bb108_best_r6",
+  "variant": "collapsed",
+  "rows": 54,
+  "cols": 270,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 8,
+  "witness": [
+    26,
+    63,
+    86,
+    100,
+    114,
+    168,
+    188,
+    196
+  ],
+  "witness_ok": true,
+  "seconds": 598.176,
+  "trace": [
+    {
+      "t": 0.34,
+      "ub": 22
+    },
+    {
+      "t": 0.34,
+      "ub": 20
+    },
+    {
+      "t": 0.34,
+      "ub": 19
+    },
+    {
+      "t": 0.34,
+      "ub": 17
+    },
+    {
+      "t": 0.34,
+      "ub": 16
+    },
+    {
+      "t": 0.34,
+      "ub": 10
+    },
+    {
+      "t": 0.34,
+      "ub": 9
+    },
+    {
+      "t": 0.34,
+      "lb": 1
+    },
+    {
+      "t": 5.346,
+      "lb": 3
+    },
+    {
+      "t": 12.357,
+      "ub": 8
+    },
+    {
+      "t": 15.361,
+      "lb": 4
+    },
+    {
+      "t": 85.268,
+      "lb": 5
+    },
+    {
+      "t": 315.199,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 190.6,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-15T04:22:14.396630+00:00",
+    "ended_at": "2026-10-15T04:32:12.722483+00:00",
+    "wall_seconds": 598.324618,
+    "adapter_seconds": 598.176,
+    "trace_offset_seconds": 0.148618,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/bb108_best_r6__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/bb108_best_r6__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

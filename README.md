@@ -15,9 +15,13 @@ fault set replayed in Stim. The same engine computes code distances.
   each check's detectors over time (a certified lower bound that no longer depends on the number of
   rounds), search by weight with a meet-in-the-middle table and the code's symmetry, and lift the
   relaxed solutions back to real fault sets.
-- **A benchmark** against other exact solvers (connected-cluster enumeration, integer programming,
-  SAT, MaxSAT) on 60 instances. It solves 46 with one thread in 600 s and 59 with 32 threads in an
-  hour; all other methods together solve 17 and 28, and none solves an instance it does not.
+- **A benchmark** against other exact solvers (connected-cluster enumeration, integer programming
+  including Gurobi, SAT, MaxSAT) on 60 instances. It solves 46 with one thread in 600 s and 59 with
+  32 threads in an hour; all other methods together solve 17 and 28, and none solves an
+  instance it does not.
+- **The instances of the prior benchmark** (Webster, Jacob, Higgott, arXiv:2603.22532), from its own
+  files: of its 126 CSS codes and circuits it solves 86 with one thread in 600 s and 96 with 32
+  threads in an hour; its five exact methods together solved 73, with eight hours each.
 - **Results for published circuits and codes**: bivariate bicycle codes up to [[288,12,18]]
   (circuit distance 16), circuits from 17 papers, and 15 code distances that arXiv:2610.03682 could
   only bracket, for codes of up to 31,200 qubits.
@@ -92,14 +96,16 @@ so; everything else runs without them.
 | amplified-code circuits (`papers/amplified_circuit.py`) | github.com/zijian-liang/dp_certificates_github, commit `0772a00` | `papers/amplified/repo/` |
 | cross-check of the Cornucopia circuits (`papers/cornucopia_crosscheck.py`) | github.com/ZhideLu/Cornucopia_code, commit `fc12c97` | `papers/downloads/cornucopia_repo/` |
 | Kasai's codes (`papers/kasai_codes.py`) | the `.npz` files of kasai.ict.eng.isct.ac.jp/pair_partition_cpm_css_codes_20260714.html | `papers/downloads/kasai/` |
-| benchmark competitors (`bench/adapters/`) | dist-m4ri 0.9.0, CASHWMaxSAT-CorePlus, enMaxCDCL, Qubitserf 0.1.0, OR-Tools | `bench/external/`, or pass `binary=` to the adapter |
+| benchmark competitors (`bench/adapters/`) | dist-m4ri 0.9.0, CASHWMaxSAT-CorePlus, enMaxCDCL, Qubitserf 0.1.0, OR-Tools; Gurobi (licence needed; `gurobipy`, or `gurobi_cl` from `$GUROBI_HOME/bin`) | `bench/external/`, or pass `binary=` to the adapter |
+| comparison with arXiv:2603.22532 (`bench/export_wjh.py`, `bench/wjh_compare.py`) | github.com/m-webster/codeDistancePYPI, commit `a4afe9c` (MIT licence): their circuits, code constructions and result sheets | `papers/downloads/codedistance/` |
 | new hyperbolic tilings (`papers/hyperbolic_lins.g`) | GAP 4.15 with the LINS package; the lists used for the reported results are in `results/papers4/hyperbolic/` | |
 
 Also withheld: the full text of arXiv:2610.03682 used while rebuilding its codes, and the reading
 note `papers/new/2608.02773.md`, which quotes its paper at length.
 
 Not included because they are regenerated on demand: the exported benchmark matrices
-(`python bench/export_all.py`; only each instance's `meta.json` is kept), the circuits of
+(`python bench/export_all.py` and `python bench/export_wjh.py`; only each instance's `meta.json` is
+kept), the circuits of
 `circuits/papers/`, compiled kernels, and run logs.
 
 ## Status and caveats

@@ -1,0 +1,85 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "shift_120d",
+  "variant": "full",
+  "rows": 720,
+  "cols": 27000,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 14,
+  "witness": [
+    2227,
+    2240,
+    2356,
+    2375,
+    2810,
+    2818,
+    3172,
+    3193,
+    3267,
+    3380,
+    3466,
+    3800,
+    4447,
+    5035
+  ],
+  "witness_ok": true,
+  "seconds": 597.98,
+  "trace": [
+    {
+      "t": 0.922,
+      "lb": 1
+    },
+    {
+      "t": 1.128,
+      "ub": 24
+    },
+    {
+      "t": 1.133,
+      "ub": 14
+    },
+    {
+      "t": 141.121,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 555.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/shift_120d",
+    "family": "shift",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-15T03:52:18.829870+00:00",
+    "ended_at": "2026-10-15T04:02:17.093520+00:00",
+    "wall_seconds": 598.199784,
+    "adapter_seconds": 597.98,
+    "trace_offset_seconds": 0.219784,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/shift_120d__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/shift_120d__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

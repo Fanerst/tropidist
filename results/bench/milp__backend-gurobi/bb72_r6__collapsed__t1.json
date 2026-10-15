@@ -1,0 +1,84 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "bb72_r6",
+  "variant": "collapsed",
+  "rows": 36,
+  "cols": 180,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 5,
+  "upper_bound": 5,
+  "witness": [
+    57,
+    59,
+    85,
+    87,
+    114
+  ],
+  "witness_ok": true,
+  "seconds": 2.744,
+  "trace": [
+    {
+      "t": 0.338,
+      "ub": 12
+    },
+    {
+      "t": 0.338,
+      "ub": 6
+    },
+    {
+      "t": 0.338,
+      "lb": 1
+    },
+    {
+      "t": 1.54,
+      "ub": 5
+    },
+    {
+      "t": 1.54,
+      "lb": 3
+    },
+    {
+      "t": 2.742,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 40.4,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-15T04:22:14.398547+00:00",
+    "ended_at": "2026-10-15T04:22:17.381304+00:00",
+    "wall_seconds": 2.982039,
+    "adapter_seconds": 2.744,
+    "trace_offset_seconds": 0.238039,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/bb72_r6__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/bb72_r6__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

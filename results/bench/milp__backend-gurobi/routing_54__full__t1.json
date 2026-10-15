@@ -1,0 +1,85 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "routing_54",
+  "variant": "full",
+  "rows": 324,
+  "cols": 14958,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": 6,
+  "witness": [
+    10390,
+    10524,
+    10866,
+    11061,
+    11216,
+    11347
+  ],
+  "witness_ok": true,
+  "seconds": 597.982,
+  "trace": [
+    {
+      "t": 0.68,
+      "ub": 10
+    },
+    {
+      "t": 0.68,
+      "ub": 8
+    },
+    {
+      "t": 0.68,
+      "lb": 1
+    },
+    {
+      "t": 5.09,
+      "ub": 6
+    },
+    {
+      "t": 30.328,
+      "lb": 2
+    },
+    {
+      "t": 550.501,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 401.7,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_54",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-15T03:52:16.475522+00:00",
+    "ended_at": "2026-10-15T04:02:14.643874+00:00",
+    "wall_seconds": 598.1291,
+    "adapter_seconds": 597.982,
+    "trace_offset_seconds": 0.1471,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/routing_54__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/routing_54__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

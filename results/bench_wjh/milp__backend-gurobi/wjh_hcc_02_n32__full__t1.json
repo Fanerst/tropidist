@@ -1,0 +1,75 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "wjh_hcc_02_n32",
+  "variant": "full",
+  "rows": 12,
+  "cols": 32,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    2,
+    22,
+    23,
+    27
+  ],
+  "witness_ok": true,
+  "seconds": 0.27,
+  "trace": [
+    {
+      "t": 0.268,
+      "ub": 6
+    },
+    {
+      "t": 0.268,
+      "ub": 4
+    },
+    {
+      "t": 0.268,
+      "lb": 1
+    },
+    {
+      "t": 0.268,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 36.4,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hcc_02_n32",
+    "family": "wjh_hcc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      67
+    ],
+    "started_at": "2026-10-15T04:44:19.712921+00:00",
+    "ended_at": "2026-10-15T04:44:20.253470+00:00",
+    "wall_seconds": 0.540218,
+    "adapter_seconds": 0.27,
+    "trace_offset_seconds": 0.270218,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hcc_02_n32__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi/wjh_hcc_02_n32__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

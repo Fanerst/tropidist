@@ -1,9 +1,10 @@
 # Certified circuit distances by collapse, lift and weight-bounded search
 
-Notes on the method and its numerical results, 7 October 2026. Working name of the method: **CLIMB**
-(collapse, lift, meet in the middle, bound). Full tables are in [BENCHMARK.md](BENCHMARK.md) and
-[PAPERS.md](PAPERS.md); the figures here are drawn from the result records by
-`docs/make_figures.py`.
+Notes on the method and its numerical results, 7 October 2026, updated 15 October 2026 (Gurobi in
+the benchmark; the instances of the prior benchmark, section 4.2). Working name of the method:
+**CLIMB** (collapse, lift, meet in the middle, bound). Full tables are in
+[BENCHMARK.md](BENCHMARK.md) and [PAPERS.md](PAPERS.md); the figures here are drawn from the result
+records by `docs/make_figures.py`.
 
 ## 1. Summary
 
@@ -16,7 +17,12 @@ lighter fault set, and an upper bound given by an explicit fault set replayed in
 cost is governed by the distance and by a small relaxed problem, not by the size of the circuit.
 
 - On a benchmark of 60 instances it solves 46 with one thread in 600 s and 59 with 32 threads in an
-  hour. All other exact methods together solve 17 and 28, and none solves an instance it does not.
+  hour. All other exact methods together, Gurobi included, solve 17 and 28, and none solves an
+  instance it does not.
+- On the 126 CSS instances of the most recent benchmark of distance methods (arXiv:2603.22532), run
+  from that study's own files, it solves 86 with one thread in 600 s and 96 with 32 threads in an
+  hour. That study's five exact methods together solved 73, with eight hours each, all of them among
+  these.
 - Largest circuits closed: the [[288,12,18]] bivariate bicycle circuit (distance 16, 206,352 fault
   mechanisms) and a [[1044,526,12]] circuit (distance 10, 271,440 mechanisms).
 - For a paper posted on 2 October 2026 it closed 15 code distances that the authors could only
@@ -85,7 +91,7 @@ kept sparse.
 - **Symmetry.** If a group of permutations maps the column set to itself, the solution can be
   assumed to contain a fixed representative of one orbit. For a bivariate bicycle code this divides
   the work by the number of translations (144 for [[288,12,18]]); for the hyperbolic codes of
-  section 4.5 it leaves L² starting points whatever the size of the code.
+  section 4.6 it leaves L² starting points whatever the size of the code.
 - **Pruning by the relaxation.** The table of the collapsed problem is an admissible test on the
   exact one: if the collapsed remainder cannot be cancelled within the budget, the real one cannot
   either.
@@ -125,7 +131,7 @@ sector problem, their best case. A harness checks every witness; no two records 
 ![Benchmark](figs/fig2_benchmark.png)
 
 *Figure 2. Instances solved exactly. Compared: connected-cluster enumeration (dist-m4ri, Qubitserf),
-integer programming (HiGHS, CP-SAT), SAT and three MaxSAT solvers.*
+integer programming (HiGHS, CP-SAT, Gurobi), SAT and three MaxSAT solvers.*
 
 | instance | columns | d | this method | best other exact method |
 |---|---:|---:|---|---|
@@ -134,32 +140,77 @@ integer programming (HiGHS, CP-SAT), SAT and three MaxSAT solvers.*
 | [[144,12,12]] circuit | 8784 | 10 | 1.4 s | none (dist-m4ri: 8 to 13 after an hour) |
 | [[288,12,18]] circuit | 26,208 | 16 | 209 s on 32 threads | none |
 | [[1044,526,12]] circuit | 35,496 | 10 | 881 s on 32 threads | none |
-| [[288,12,18]] code | 288 | 18 | 3.1 s | Qubitserf, 2026 s on 32 threads |
+| [[288,12,18]] code | 288 | 18 | 3.1 s | Gurobi, 2006 s on 32 threads |
 | [[625,125,20]] code | 625 | 20 | 47 s on 32 threads | none |
 
 Times without a thread count are single-thread. MaxSAT on Stim's own export of the whole circuit,
 the recipe behind the exact values published so far, proves no qLDPC circuit distance within an
-hour; its best lower bound is 3.
+hour; its best lower bound is 3. Gurobi, run when a licence became available, solves 11 instances in
+the first tier and 17 over both, each of them also solved by another method; the [[72,12,6]]
+circuit takes it 534 s on 32 threads.
 
-### 4.2 Scaling on surface-code circuits
+### 4.2 The instances of the prior benchmark
 
-The closest prior benchmark of exact solvers uses rotated surface-code memory circuits and reports
-integer programming reaching d = 11, sometimes after more than eight hours.
+Webster, Jacob and Higgott (arXiv:2603.22532) compare distance methods on instances they publish
+with their results. All of their CSS instances were run here from their files: 103 codes
+(hyperbolic surface and colour codes, lifted-product, bivariate bicycle and quantum Tanner codes) and
+23 memory circuits (surface code; colour code with the midout and the superdense cycle; bivariate
+bicycle codes). Their circuit problem, the error model filtered to the detectors of one basis, is
+exactly the sector problem of section 3.1, column for column. For a code they compute the Z
+distance, and so does this comparison. Their exact methods (Gurobi, SCIP, the MaxSAT solver CLISAT,
+dist-m4ri's connected clusters, Magma's Brouwer-Zimmermann) had one thread and eight hours each on
+their cluster; their own result sheets are used.
 
-![Surface-code scaling](figs/fig3_surface.png)
+| family | instances | this method, 1 thread, 600 s | also 32 threads, 1 h | any of their five, 8 h each |
+|---|---:|---:|---:|---:|
+| circuits (four families) | 23 | 19 | 20 | 15 |
+| hyperbolic surface and colour codes | 42 | 42 | 42 | 42 |
+| lifted-product codes | 19 | 14 | 19 | 6 |
+| bivariate bicycle codes | 20 | 6 | 8 | 5 |
+| quantum Tanner codes | 22 | 5 | 7 | 5 |
+| **all** | 126 | **86** | **96** | **73** |
 
-*Figure 3. Time to the certified distance of Stim's surface-code memory circuit (sector problem, one
-thread, 600 s limit). Each line ends at the last distance the method solved.*
+![Prior benchmark](figs/fig3_prior.png)
+
+*Figure 3. One point per instance: time of this method in the first tier (one thread, 600 s)
+against the fastest exact method of the prior benchmark (one thread, eight-hour limit, their
+machine). Points on the right are instances only this method solves; the 10 it solves only in its
+second tier are not shown. No instance that they solve is missing. Times near 0.1 s are mostly the
+start of the Python process.*
+
+Where their exact methods certified a distance (73 instances), the values agree. Of the 23 values
+certified only here, all but one confirm the best value their heuristics had found; the exception
+is the [[288,12,18]] bivariate bicycle circuit, whose distance is 16 where the best value found there
+is 24. The new values include the remaining bivariate bicycle circuits up to [[288,12,18]], the
+surface-code circuit of d = 11, every lifted-product code from n = 714 to 3230 (distances 16 to 24),
+the bivariate bicycle codes [[288,12,18]], [[360,12,24]] and [[576,8,24]], and the quantum Tanner
+codes of n = 216 and 252 (distances 18 and 22). Its [[360,12,24]] circuit, with best value 88 there,
+has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). Its seven bivariate bicycle
+circuits turn out to be the files of this project's first study, five of which are in the benchmark
+of section 4.1. Run here with first-tier limits, Gurobi and dist-m4ri solve 55 and 67 of the 126
+instances, against 70 and 71 in the paper's eight-hour runs.
+
+### 4.3 Scaling on surface-code circuits
+
+On its rotated surface-code circuits (d = 3 to 11), the exact methods of the prior benchmark certify
+up to d = 9 with one thread and eight hours (dist-m4ri in 253 s); at d = 11 integer programming stops
+at the time limit with the right value but without a proof. This method takes 0.2 s for each.
+
+![Surface-code scaling](figs/fig4_surface.png)
+
+*Figure 4. Time to the certified distance of Stim's own surface-code memory circuit, generated here
+up to d = 25 (sector problem, one thread, 600 s limit). Each line ends at the last distance the
+method solved.*
 
 The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight, and
 reaches d = 25 in 564 s on 32 threads. One caveat: surface codes are graph-like, so a shortest-path
 computation solves them at any size. The family is shown because others report on it.
 
-### 4.3 Which ingredient matters
+### 4.4 Which ingredient matters
 
-![Ablation](figs/fig4_ablation.png)
+![Ablation](figs/fig5_ablation.png)
 
-*Figure 4. The pipeline with one ingredient removed at a time, on the 39 circuits that have a sector
+*Figure 5. The pipeline with one ingredient removed at a time, on the 39 circuits that have a sector
 problem.*
 
 The time collapse and the symmetry carry the method: without the collapse 21 circuits are solved in
@@ -170,7 +221,7 @@ pay at this scale; several instances run faster without them.
 The relaxation is a contribution on its own. Given the collapsed problems, dist-m4ri solves 20 of 39
 where it solves 8 of the sector problems, and the search of section 3.3 solves 33 of them.
 
-### 4.4 Published circuits
+### 4.5 Published circuits
 
 The same pipeline was applied to the circuits of 17 papers. Typical findings:
 
@@ -187,25 +238,25 @@ Decoder upper bounds are often but not always tight, a claimed distance does not
 circuit level, and the gate order matters as much as the code. Because one evaluation takes
 seconds, whole families of schedules can be scored exactly.
 
-### 4.5 A current test: modular hyperbolic codes (arXiv:2610.03682)
+### 4.6 A current test: modular hyperbolic codes (arXiv:2610.03682)
 
 Higgott et al. construct color codes on fine-grained hyperbolic tilings and certify a distance only
 when a graph lower bound and a string-operator upper bound coincide; otherwise they print a range.
 Their exact tool, connected-cluster search, stops near 2000 qubits. No code or data is published, so
 the tilings were rebuilt with GAP and identified by three independent checks (see PAPERS.md).
 
-![Open ranges closed](figs/fig5_ranges.png)
+![Open ranges closed](figs/fig6_ranges.png)
 
-*Figure 5. The 15 ranges that could be reached. In every case the exact distance is the upper end:
+*Figure 6. The 15 ranges that could be reached. In every case the exact distance is the upper end:
 the shortest logical operator is string-like.*
 
 The 31,200-qubit code took 6.5 minutes on 32 threads; the three codes of distance 28 took between
 two and three and a half hours each. Fifteen values that the paper does certify were reproduced as
 checks.
 
-![Cost per unit of weight](figs/fig6_growth.png)
+![Cost per unit of weight](figs/fig7_growth.png)
 
-*Figure 6. Time to exhaust one more weight threshold. The cost grows by a factor of about 3 per unit
+*Figure 7. Time to exhaust one more weight threshold. The cost grows by a factor of about 3 per unit
 of weight on these lattices, and depends only weakly on the size of the code.*
 
 For the paper's modular surface-code circuits, whose circuit distance it gives only as Stim's
@@ -222,8 +273,10 @@ it reports 8.
 - The reductions need structure: a CSS memory experiment, detectors that can be assigned to a check
   and a round, and symmetries supplied by the user. Without them the method is a plain search; on
   Stim's color-code circuits it is then comparable to dist-m4ri, which is faster up to d = 7.
-- Not compared: Gurobi (no licence) and the codeDistance package. Every tool ran with default
-  settings, the method included.
+- Of the prior benchmark's exact methods, SCIP, CLISAT and Magma were not run here; their published
+  eight-hour runs are compared instead (section 4.2). Every tool ran with default settings, the
+  method included.
 - A lower bound is as trustworthy as the enumeration code. It is checked against ground truth and
-  against the bounds of ten other tools on 60 instances, and against 15 certified values of the
-  hyperbolic-code paper, without a contradiction.
+  against the bounds of eleven other tools on 60 instances, against the published results of the
+  prior benchmark on 126 instances, and against 15 certified values of the hyperbolic-code paper,
+  without a contradiction.

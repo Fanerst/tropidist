@@ -1,0 +1,85 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "cornucopia_252",
+  "variant": "sector",
+  "rows": 441,
+  "cols": 8568,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 6,
+  "witness": [
+    4140,
+    4205,
+    4221,
+    4242,
+    4332,
+    4827
+  ],
+  "witness_ok": true,
+  "seconds": 597.608,
+  "trace": [
+    {
+      "t": 1.435,
+      "lb": 1
+    },
+    {
+      "t": 12.251,
+      "ub": 22
+    },
+    {
+      "t": 27.873,
+      "ub": 8
+    },
+    {
+      "t": 28.075,
+      "ub": 7
+    },
+    {
+      "t": 28.278,
+      "ub": 6
+    },
+    {
+      "t": 150.819,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 335.7,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-15T03:32:18.809659+00:00",
+    "ended_at": "2026-10-15T03:42:16.791202+00:00",
+    "wall_seconds": 597.871548,
+    "adapter_seconds": 597.608,
+    "trace_offset_seconds": 0.263548,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_252__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/cornucopia_252__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)"
+  }
+}

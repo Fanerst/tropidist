@@ -5,7 +5,7 @@
 # run from this directory, long before that: when their total resident memory exceeds LIMIT_GB.
 # usage: nohup bash scripts/server/mem_guard.sh [LIMIT_GB] &
 LIMIT_GB=${1:-300}
-ROOT=$(cd "$(dirname "$0")/.." && pwd -P)
+ROOT=$(cd "$(dirname "$0")/../.." && pwd -P)
 while true; do
   total=0; pids=""
   for p in $(pgrep -u "$USER" ""); do            # every process of the user whose working directory is under ROOT
