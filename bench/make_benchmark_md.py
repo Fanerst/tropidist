@@ -39,10 +39,11 @@ def stim_set(m):
     return m.get("family") in STIM
 
 
-def overall():
+def overall_rows():
     """One row per instance on its main problem (sector for CSS circuits, the code itself, the raw
     model for circuits without sectors): our best time and the best other exact method, per tier.  The superseded
-    dist-m4ri 0.9.0 is left out (it solves no instance that 0.14.7 does not)."""
+    dist-m4ri 0.9.0 is left out (it solves no instance that 0.14.7 does not).
+    Rows: (is_code, family, columns, name, n, distance, ours t1, ours t2, (t, method) t1, (t, method) t2)."""
     import json
     a, b32, b1 = T.load(A, 1), T.load(B, 32), T.load(B, 1)
     ours = ("ours",)                       # one configuration: the pipeline, not the better of two
@@ -74,6 +75,12 @@ def overall():
             d = ("%d†" % closed[0]) if closed else (">=%s" % d if d is not None else "?")
         rows.append((m["track"] != "circuit", m.get("family", ""), v["cols"], name, m.get("n", ""), d, oa, ob, ca, cb))
     rows.sort()
+    return rows
+
+
+def overall():
+    """overall_rows() as a markdown table with a summary line."""
+    rows = overall_rows()
     f = lambda t: "" if t is None else T.seconds(t)
     g = lambda x: "" if x is None else "%s (%s)" % (T.seconds(x[0]), x[1])
     lines = ["| instance | n | columns | distance | ours, tier 1 | ours, tier 2 | best other, tier 1 | best other, tier 2 |",

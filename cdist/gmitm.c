@@ -606,9 +606,12 @@ static void dfs(Ctx *c, int a) {
             for (int i = 0; i < a; i++) cols[i] = c->path[i];
             uint8_t *tmp = (uint8_t *)calloc(P->N, 1);
             for (int i = 0; i < a; i++) tmp[c->path[i]] = 1;
-            // label-free: the cheapest syndrome match may have zero logical while a
-            // larger completion within the budget is a solution, so use the full budget
-            int64_t got = complete(c, st, a, (c->enum_all || P->full_lg) ? R : cost, cols, tmp, a);
+            // always search the full remaining budget R (<= table depth): the table only
+            // filters.  A fingerprint collision can report a cost below that of every true
+            // completion, and in label-free mode the cheapest syndrome match may have zero
+            // logical, so a reconstruction limited to `cost` could miss a solution.
+            (void)cost;
+            int64_t got = complete(c, st, a, R, cols, tmp, a);
             free(tmp);
             if (got > 0) c->hits++; else c->false_hits++;
             return;

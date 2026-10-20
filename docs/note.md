@@ -2,8 +2,9 @@
 
 Notes on the method and its numerical results, 7 October 2026, updated 19 October 2026 (Gurobi in
 the benchmark; the instances of the prior benchmark, section 4.2; the October version of dist-m4ri; a
-sparse logical basis for the code instances). Working name of the method:
-**CLIMB** (collapse, lift, meet in the middle, bound). Full tables are in
+sparse logical basis for the code instances). Name of the method, provisional: the **tropical partition
+function method**. The distance is a minimum of tropical partition functions; here it is evaluated by a
+weight-bounded search with certified relaxations (collapse, lift, meet in the middle, bound). Full tables are in
 [BENCHMARK.md](BENCHMARK.md) and [PAPERS.md](PAPERS.md); the figures here are drawn from the result
 records by `docs/make_figures.py`.
 

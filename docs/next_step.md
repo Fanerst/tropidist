@@ -48,8 +48,8 @@ computation, and the 15 closed code-distance ranges are a natural thing to send 
 
 ## 2. Other open items
 
-- **Name of the method.** "CLIMB" (collapse, lift, meet in the middle, bound) is used as a working
-  name in docs/note.md; not decided.
+- **Name of the method.** Provisionally the "tropical partition function method" (Feng, 20 October 2026),
+  as in the paper draft; "CLIMB" is no longer used. To be confirmed with Bin.
 - **Ablation of the lookup table.** The ablation in docs/BENCHMARK.md never switches off the
   meet-in-the-middle table. A run with the table reduced to single columns was started and stopped
   on 7 October; 32 of 39 records exist on the server under `results/bench_ablation_stopped/` and are

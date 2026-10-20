@@ -1,7 +1,8 @@
 """Figures of docs/note.md, drawn from the result records (nothing is typed in by hand except the
 sizes of the BB288 problem in figure 1, which are in README.md).
 
-Usage: .venv/bin/python docs/make_figures.py        writes docs/figs/*.png
+Usage: .venv/bin/python docs/make_figures.py                 writes docs/figs/*.png
+       .venv/bin/python docs/make_figures.py --paper DIR     writes DIR/figs/*.pdf instead (vector, white background)
 """
 import json
 import os
@@ -27,6 +28,10 @@ SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#89878
 BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"
 BLUE_LIGHT, GRAY, GRAY_LIGHT = "#86b6ef", "#898781", "#b3b1a8"
 PX = 1 / 100.0                      # one layout pixel in inches; figures are saved at 2x
+PAPER = Path(sys.argv[sys.argv.index("--paper") + 1]).resolve() if "--paper" in sys.argv else None
+if PAPER:                           # print: a white page, fonts embedded as TrueType
+    SURFACE = "#ffffff"
+    plt.rcParams.update({"pdf.fonttype": 42})
 
 plt.rcParams.update({
     "font.family": "sans-serif", "font.sans-serif": ["Arial", "Helvetica Neue", "DejaVu Sans"],
@@ -38,6 +43,13 @@ plt.rcParams.update({
 
 
 def save(fig, name):
+    if PAPER:
+        (PAPER / "figs").mkdir(parents=True, exist_ok=True)
+        out = PAPER / "figs" / (Path(name).stem + ".pdf")
+        fig.savefig(out)
+        plt.close(fig)
+        print("wrote", out)
+        return
     FIGS.mkdir(exist_ok=True)
     fig.savefig(FIGS / name, dpi=200)
     plt.close(fig)

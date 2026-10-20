@@ -11,7 +11,7 @@ fault set replayed in Stim. The same engine computes code distances.
 
 ## What is here
 
-- **A method.** Reduce the circuit's fault model to the detectors of one memory basis (exact), merge
+- **A method**, the tropical partition function method. Reduce the circuit's fault model to the detectors of one memory basis (exact), merge
   each check's detectors over time (a certified lower bound that no longer depends on the number of
   rounds), search by weight with a meet-in-the-middle table and the code's symmetry, and lift the
   relaxed solutions back to real fault sets.

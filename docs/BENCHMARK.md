@@ -9,8 +9,8 @@ records in `results/bench/`, `results/bench_tierB/`, `results/bench_ablation/`, 
 
 ## Question
 
-Is the method of this project (certified relaxations plus a weight-bounded sparse search, see
-[BB_CIRCUITS.md](BB_CIRCUITS.md)) the best available way to compute the circuit distance exactly? The test:
+Is the method of this project, the tropical partition function method (certified relaxations plus a
+weight-bounded sparse search, see [BB_CIRCUITS.md](BB_CIRCUITS.md)), the best available way to compute the circuit distance exactly? The test:
 every method gets the same problem, the same machine and the same limits, and every answer is
 checked.
 

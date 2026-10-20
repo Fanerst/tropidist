@@ -9,6 +9,7 @@ certified lower bound on the circuit distance.
 
 Usage: python scripts/run_topdown.py circuits/bb288_r18_X.stim results/enum_bb288_r18_X.json 15 results/topdown_bb288_r18_X.json
 """
+import hashlib
 import json
 import os
 import sys
@@ -42,7 +43,10 @@ def main(path, enum_path, W, out):
     assert enum["K"] >= W, "enumeration does not reach W"
     td = lift.TopDown(sector, collapsed, k_main=2)
     log(f"sector {sector.nrows}x{sector.ncols}; main table {td.table.entries} entries ({td.table.build_seconds:.1f}s)")
-    res = {"circuit": path, "W": W, "enumeration": enum_path, "by_weight": {}, "found": None}
+    with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cdist", "gmitm.c"), "rb") as f:
+        kernel = hashlib.sha256(f.read()).hexdigest()
+    res = {"circuit": path, "W": W, "enumeration": enum_path, "kernel_sha256": kernel,
+           "threads": search.lib().gm_num_threads(), "by_weight": {}, "found": None}
     found = None
     for w in sorted(int(x) for x in enum["representatives"]):
         if w > W:
@@ -51,6 +55,7 @@ def main(path, enum_path, W, out):
         slack = W - w
         t = time.time()
         nodes = 0
+        false_hits = 0
         nfound = 0
         worst = 0.0
         for i, O in enumerate(reps):
@@ -58,6 +63,7 @@ def main(path, enum_path, W, out):
             r = td.lift(O, slack)
             assert r["status"] in ("exhausted", "found"), r["status"]
             nodes += sum(r["nodes"])
+            false_hits += r["false_hits"]
             worst = max(worst, time.time() - t1)
             if r["best"] is not None:
                 nfound += 1
@@ -66,6 +72,7 @@ def main(path, enum_path, W, out):
             if (i + 1) % 500 == 0:
                 log(f"  weight {w}: {i + 1}/{len(reps)} orbits, {nfound} lift, {time.time() - t:.0f}s")
         res["by_weight"][w] = {"orbits": len(reps), "slack": slack, "lifting_orbits": nfound, "nodes": nodes,
+                               "false_hits": false_hits,
                                "seconds": round(time.time() - t, 1), "slowest_single_search": round(worst, 2)}
         log(f"collapsed weight {w} (slack {slack}): {len(reps)} orbits, {nfound} lift to weight <= {W}; "
             f"nodes={nodes} {time.time() - t:.1f}s")
