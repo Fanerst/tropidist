@@ -1,0 +1,102 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_cornucopia_1044",
+  "variant": "full",
+  "rows": 261,
+  "cols": 1044,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 16,
+  "witness": [
+    118,
+    120,
+    126,
+    171,
+    208,
+    214,
+    218,
+    302,
+    388,
+    485,
+    640,
+    660,
+    731,
+    816,
+    827,
+    988
+  ],
+  "witness_ok": true,
+  "seconds": 600.718,
+  "trace": [
+    {
+      "t": 6.765,
+      "ub": 58
+    },
+    {
+      "t": 6.765,
+      "lb": 1
+    },
+    {
+      "t": 14.783,
+      "ub": 42
+    },
+    {
+      "t": 38.431,
+      "ub": 32
+    },
+    {
+      "t": 56.669,
+      "lb": 2
+    },
+    {
+      "t": 160.454,
+      "ub": 20
+    },
+    {
+      "t": 182.092,
+      "ub": 16
+    }
+  ],
+  "peak_rss_mb": 207.6,
+  "truth": 12,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl wrote no result (exit -9, killed at the deadline); 6298 17321   14.00000   85  107   16.00000    2.00000  87.5%  33.3  577s / 36416 17405    7.00000  105  476   16.00000    2.00000  87.5%  33.3  580s / 36597 17516    6.00000   31  222   16.00000    2.00000  87.5%  33.4  585s / 36827 17667    8.00000   55  194   16.00000    2.00000  87.5%  33.5  590s",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-18T17:34:06.983858+00:00",
+    "ended_at": "2026-10-18T17:44:07.951483+00:00",
+    "wall_seconds": 600.861326,
+    "adapter_seconds": 600.718,
+    "trace_offset_seconds": 0.143326,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_cornucopia_1044__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_cornucopia_1044__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 242.6,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

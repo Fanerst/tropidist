@@ -1,0 +1,93 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "cutoff": "0",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252/collapsed.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252/collapsed.L.mtx",
+    "outC": "/tmp/bench-distm4ri-4m1za8os/codewords.nz",
+    "timeout": "1000000000"
+  },
+  "instance": "cornucopia_252",
+  "variant": "collapsed",
+  "rows": 63,
+  "cols": 819,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 5,
+  "upper_bound": 5,
+  "witness": [
+    1,
+    4,
+    586,
+    590,
+    699
+  ],
+  "witness_ok": true,
+  "seconds": 53.026,
+  "trace": [
+    {
+      "t": 0.054,
+      "lb": 2
+    },
+    {
+      "t": 0.06,
+      "lb": 3
+    },
+    {
+      "t": 0.538,
+      "lb": 4
+    },
+    {
+      "t": 31.534,
+      "lb": 5
+    },
+    {
+      "t": 53.025,
+      "ub": 5
+    }
+  ],
+  "peak_rss_mb": 34.9,
+  "truth": 5,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. cutoff=0: native timeout 1e9 s, far beyond the budget, so the program runs until the wall deadline kills it (completed rounds give the lower bound; a codeword found by CC is exported by the program before it exits). Native triple: 5 5 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc,cutoff=0",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc,cutoff=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_252",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-18T09:10:29.988291+00:00",
+    "ended_at": "2026-10-18T09:11:23.202928+00:00",
+    "wall_seconds": 53.203126,
+    "adapter_seconds": 53.026,
+    "trace_offset_seconds": 0.177126,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc__cutoff-0/cornucopia_252__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc__cutoff-0/cornucopia_252__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

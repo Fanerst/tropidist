@@ -1,0 +1,91 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "input": "dem",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "fdem": "/tmp/bench-distm4ri-fw4uuvwj/input.dem",
+    "pmin": "0",
+    "outC": "/tmp/bench-distm4ri-fw4uuvwj/codewords.nz",
+    "timeout": "569.013733422"
+  },
+  "instance": "cornucopia_576",
+  "variant": "full",
+  "rows": 1728,
+  "cols": 149760,
+  "obs": 292,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.019,
+  "trace": [
+    {
+      "t": 39.967,
+      "lb": 2
+    },
+    {
+      "t": 39.971,
+      "lb": 3
+    },
+    {
+      "t": 39.978,
+      "lb": 4
+    },
+    {
+      "t": 40.102,
+      "lb": 5
+    },
+    {
+      "t": 45.928,
+      "lb": 6
+    },
+    {
+      "t": 394.913,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 393.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Undecomposed loop-flattened DEM; pmin=0 retains every mechanism. dist-m4ri ignores probabilities after filtering, using unit weights. Raw supports map to full columns with GF(2) cancellation. maxC=1 stops at the first CC witness after exhausting lighter weights. Wall deadline reached; process group killed. Only completed proofs and available checked witnesses retained.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc,input=dem",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc,input=dem",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_576",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      10
+    ],
+    "started_at": "2026-10-18T09:48:02.874614+00:00",
+    "ended_at": "2026-10-18T09:58:03.022011+00:00",
+    "wall_seconds": 600.147159,
+    "adapter_seconds": 600.019,
+    "trace_offset_seconds": 0.128159,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc__input-dem/cornucopia_576__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc__input-dem/cornucopia_576__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 55.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

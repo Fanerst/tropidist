@@ -2,7 +2,8 @@
 
 config: mode=incremental (default) or maxsat; solver=cadical153 for incremental,
 solver=rc2 for MaxSAT; xor_chunk=6; encoding=matrix (default) or stim (MaxSAT,
-full circuit variant only); binary=/path/to/maxsat; binary_args='...'; dump=dir.
+full circuit variant only); binary=/path/to/maxsat; binary_args='...'; dump=dir;
+lbasis=std reads the sparse logical basis full.L.std.mtx of a code instance.
 RC2 options: adapt=0, exhaust=1, minz=0, trim=0 (configurable).
 An external binary receives binary_args followed by the WCNF path. Arguments can
 contain {threads} and {time_limit}; generic external binaries have no standard
@@ -557,10 +558,12 @@ def main():
     tr = common.Trace()
     started = time.monotonic()
     a = common.adapter_args(__doc__)
-    prob = common.load(a.instance, a.variant)
+    prob = common.load(a.instance, a.variant, lbasis=a.cfg.get("lbasis"))
     mode = a.cfg.get("mode", "incremental")
     method = "sat_" + mode
     status, witness, version, notes = "timeout", None, None, []
+    if a.cfg.get("lbasis"):
+        notes.append("logical matrix %s (lbasis=%s)" % (prob.lfile, a.cfg["lbasis"]))
     # Zero errors cannot flip a logical observable. This trivial certificate is
     # independent of package availability and of the instance's ground truth.
     needs_pysat = "dump" not in a.cfg and not (mode == "maxsat" and a.cfg.get("binary"))

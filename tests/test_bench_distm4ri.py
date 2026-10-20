@@ -389,7 +389,7 @@ def test_validation():
         assert record["status"] == "bounds" and record["lower_bound"] is None, record
         assert all("lb" not in e for e in record["trace"]), record
         assert record["upper_bound"] == record["truth"] and record["witness_ok"] is True, record
-    binary, _, _, options = distm4ri.settings({"mode": "cc", "finC": str(OUT / "upstream_codewords.nz")}, 2)
+    binary, _, _, options, _ = distm4ri.settings({"mode": "cc", "finC": str(OUT / "upstream_codewords.nz")}, 2)
     assert Path(binary).is_absolute(), binary
     assert "maxC" not in options, options
     assert distm4ri.settings({"binary": "results/bench_dev/distm4ri/fake_dist_m4ri"}, 2)[0] == str(FAKE)

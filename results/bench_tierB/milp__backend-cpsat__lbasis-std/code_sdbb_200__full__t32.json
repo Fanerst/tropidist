@@ -1,0 +1,125 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_sdbb_200",
+  "variant": "full",
+  "rows": 100,
+  "cols": 200,
+  "obs": 12,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    5,
+    31,
+    45,
+    54,
+    68,
+    93,
+    104,
+    130,
+    140,
+    153,
+    167,
+    178
+  ],
+  "witness_ok": true,
+  "seconds": 1238.145,
+  "trace": [
+    {
+      "t": 0.367,
+      "ub": 18
+    },
+    {
+      "t": 0.367,
+      "lb": 1
+    },
+    {
+      "t": 0.409,
+      "ub": 16
+    },
+    {
+      "t": 0.409,
+      "lb": 2
+    },
+    {
+      "t": 0.413,
+      "ub": 12
+    },
+    {
+      "t": 1238.119,
+      "lb": 12
+    }
+  ],
+  "peak_rss_mb": 688.0,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_sdbb_200",
+    "family": "selfdual_bb",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "started_at": "2026-10-19T00:36:14.473413+00:00",
+    "ended_at": "2026-10-19T00:56:52.917790+00:00",
+    "wall_seconds": 1238.442568,
+    "adapter_seconds": 1238.145,
+    "trace_offset_seconds": 0.297568,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_sdbb_200__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_sdbb_200__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 701.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

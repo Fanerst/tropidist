@@ -1,0 +1,190 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-klouuxhg/codewords.nz",
+    "timeout": "3599.841497628"
+  },
+  "instance": "wjh_lp_pk31",
+  "variant": "full",
+  "rows": 465,
+  "cols": 1054,
+  "obs": 140,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 18,
+  "upper_bound": 20,
+  "witness": [
+    93,
+    96,
+    111,
+    122,
+    252,
+    255,
+    265,
+    272,
+    408,
+    421,
+    422,
+    428,
+    431,
+    572,
+    576,
+    580,
+    585,
+    587,
+    720,
+    726
+  ],
+  "witness_ok": true,
+  "seconds": 1515.413,
+  "trace": [
+    {
+      "t": 0.076,
+      "lb": 2
+    },
+    {
+      "t": 0.076,
+      "lb": 3
+    },
+    {
+      "t": 0.076,
+      "lb": 4
+    },
+    {
+      "t": 0.077,
+      "lb": 5
+    },
+    {
+      "t": 0.079,
+      "lb": 6
+    },
+    {
+      "t": 0.102,
+      "lb": 7
+    },
+    {
+      "t": 0.172,
+      "lb": 8
+    },
+    {
+      "t": 0.195,
+      "lb": 9
+    },
+    {
+      "t": 0.228,
+      "lb": 10
+    },
+    {
+      "t": 0.328,
+      "lb": 11
+    },
+    {
+      "t": 0.596,
+      "lb": 12
+    },
+    {
+      "t": 1.951,
+      "lb": 13
+    },
+    {
+      "t": 5.421,
+      "lb": 14
+    },
+    {
+      "t": 24.068,
+      "lb": 15
+    },
+    {
+      "t": 86.978,
+      "lb": 16
+    },
+    {
+      "t": 428.785,
+      "lb": 17
+    },
+    {
+      "t": 1515.362,
+      "lb": 18
+    },
+    {
+      "t": 1515.372,
+      "ub": 20
+    }
+  ],
+  "peak_rss_mb": 38.0,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 18 20 100000 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31",
+    "family": "wjh_lp",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "started_at": "2026-10-18T13:44:24.187130+00:00",
+    "ended_at": "2026-10-18T14:09:39.757785+00:00",
+    "wall_seconds": 1515.561947,
+    "adapter_seconds": 1515.413,
+    "trace_offset_seconds": 0.148947,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-bracket/wjh_lp_pk31__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-bracket/wjh_lp_pk31__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

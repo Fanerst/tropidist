@@ -1,0 +1,107 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "cutoff": "0",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_xu16/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_xu16/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-e0w07ccq/codewords.nz",
+    "timeout": "1000000000"
+  },
+  "instance": "wjh_lp_xu16",
+  "variant": "full",
+  "rows": 240,
+  "cols": 544,
+  "obs": 80,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 11,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.006,
+  "trace": [
+    {
+      "t": 0.016,
+      "lb": 2
+    },
+    {
+      "t": 0.017,
+      "lb": 3
+    },
+    {
+      "t": 0.017,
+      "lb": 4
+    },
+    {
+      "t": 0.019,
+      "lb": 5
+    },
+    {
+      "t": 0.031,
+      "lb": 6
+    },
+    {
+      "t": 0.105,
+      "lb": 7
+    },
+    {
+      "t": 0.61,
+      "lb": 8
+    },
+    {
+      "t": 4.109,
+      "lb": 9
+    },
+    {
+      "t": 22.942,
+      "lb": 10
+    },
+    {
+      "t": 153.763,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 34.4,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. cutoff=0: native timeout 1e9 s, far beyond the budget, so the program runs until the wall deadline kills it (completed rounds give the lower bound; a codeword found by CC is exported by the program before it exits). Wall deadline reached; process group killed. Only completed proofs and available checked witnesses retained.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc,cutoff=0",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc,cutoff=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_xu16",
+    "family": "wjh_lp",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      23
+    ],
+    "started_at": "2026-10-18T08:51:36.158989+00:00",
+    "ended_at": "2026-10-18T09:01:36.364649+00:00",
+    "wall_seconds": 600.205396,
+    "adapter_seconds": 600.006,
+    "trace_offset_seconds": 0.199396,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__mode-cc__cutoff-0/wjh_lp_xu16__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__mode-cc__cutoff-0/wjh_lp_xu16__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

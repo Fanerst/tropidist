@@ -1,0 +1,108 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-2i56taox/codewords.nz",
+    "timeout": "599.884921268"
+  },
+  "instance": "sdbb_64",
+  "variant": "sector",
+  "rows": 224,
+  "cols": 2752,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    0,
+    1,
+    6,
+    10,
+    80,
+    82,
+    201,
+    346
+  ],
+  "witness_ok": true,
+  "seconds": 121.451,
+  "trace": [
+    {
+      "t": 0.024,
+      "lb": 2
+    },
+    {
+      "t": 0.025,
+      "lb": 3
+    },
+    {
+      "t": 0.026,
+      "lb": 4
+    },
+    {
+      "t": 0.033,
+      "lb": 5
+    },
+    {
+      "t": 0.187,
+      "lb": 6
+    },
+    {
+      "t": 4.194,
+      "lb": 7
+    },
+    {
+      "t": 121.448,
+      "lb": 8
+    },
+    {
+      "t": 121.451,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 36.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 8 8 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-18T10:22:26.975370+00:00",
+    "ended_at": "2026-10-18T10:24:28.555106+00:00",
+    "wall_seconds": 121.571261,
+    "adapter_seconds": 121.451,
+    "trace_offset_seconds": 0.120261,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/sdbb_64__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/sdbb_64__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

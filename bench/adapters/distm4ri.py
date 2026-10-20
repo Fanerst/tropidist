@@ -1,7 +1,10 @@
-"""dist-m4ri 0.9 CLI adapter: connected clusters, random windows, or bracketing.
+"""dist-m4ri CLI adapter (0.9.0 and 0.14.x): connected clusters, random windows, or bracketing.
 
-Config: binary=<path>, mode=cc|rw|bracket, input=mtx|dem, followed by documented
-dist-m4ri key=value options. DEM is restricted to circuit/full and pmin=0.
+Config: binary=<path> or build=<version> (bench/external/dist-m4ri-<version>/src/dist_m4ri;
+default: the 0.9.0 build in bench/external/dist-m4ri), mode=cc|rw|bracket, input=mtx|dem,
+cutoff=1|0 (0: a native timeout far beyond the budget, so the program runs until the wall
+deadline kills it, which avoids 0.9.0's predictive skipping of a CC round), followed by documented dist-m4ri
+key=value options. DEM is restricted to circuit/full and pmin=0.
 Input paths/method are owned by the adapter; classical=1 changes the problem and
 is rejected. Assumed dmin/dmax, noscan, and restricted columns disable all lower
 bound claims. --threads is authoritative and nothrottle=1 is mandatory.
@@ -119,7 +122,18 @@ def read_codewords(path, ncols):
 
 def settings(cfg, threads):
     cfg = dict(cfg)
-    binary = str(Path(cfg.pop("binary", str(DEFAULT_BINARY))).expanduser().absolute())
+    default = DEFAULT_BINARY
+    build = cfg.pop("build", None)
+    if build is not None:
+        if "binary" in cfg:
+            raise ValueError("specify binary or build, not both")
+        if not re.fullmatch(r"\d+(\.\d+)*", build):
+            raise ValueError("build must be a version such as 0.14.7")
+        default = Path(common.ROOT) / ("bench/external/dist-m4ri-%s/src/dist_m4ri" % build)
+    binary = str(Path(cfg.pop("binary", str(default))).expanduser().absolute())
+    cutoff = cfg.pop("cutoff", "1")
+    if cutoff not in ("0", "1"):
+        raise ValueError("cutoff must be 0 or 1")
     mode = cfg.pop("mode", "cc")
     input_kind = cfg.pop("input", "mtx")
     if mode not in METHODS or input_kind not in ("mtx", "dem"):
@@ -182,7 +196,9 @@ def settings(cfg, threads):
     if (mode == "cc" and "maxC" not in options and "finC" not in options and
             int(options.get("dW", 0)) == 0):
         options["maxC"] = "1"
-    return binary, mode, input_kind, options
+    if cutoff == "0" and "timeout" in options:
+        raise ValueError("cutoff=0 and an explicit timeout contradict each other")
+    return binary, mode, input_kind, options, cutoff == "1"
 
 
 def proof_eligible(options, ncols):
@@ -373,7 +389,7 @@ def main():
     try:
         if not 1 <= a.threads <= 2147483647 or not math.isfinite(a.time_limit) or a.time_limit < 0:
             raise ValueError("threads must be positive and time-limit finite/nonnegative")
-        binary, mode, input_kind, options = settings(a.cfg, a.threads)
+        binary, mode, input_kind, options, native_limit = settings(a.cfg, a.threads)
         effective.update(binary=binary, mode=mode, input=input_kind)
         if not Path(binary).is_file() or not os.access(binary, os.X_OK):
             status = "unavailable"
@@ -397,6 +413,10 @@ def main():
                             version = match.group(1)
                 if version is None:
                     notes.append("Executable version could not be read; parser targets bundled 0.9.0.")
+                elif tuple(int(x) for x in re.findall(r"\d+", version)[:2]) >= (0, 10):
+                    # from 0.10 the finished CC rounds are printed under debug bit 2, not 1
+                    options["debug"] = str(int(options["debug"]) | 2)
+                    notes.append("dist-m4ri %s: completed-weight trace via debug bits 1|2." % version)
                 if version_killed and time.monotonic() >= deadline:
                     status = "timeout"
                 mapping = None
@@ -452,7 +472,15 @@ def main():
                         configured = float(options.get("timeout", 0))
                         if configured > 0:
                             native_timeout = min(native_timeout, configured)
-                        options.update(inputs, outC=codeword_path, timeout="%.9f" % native_timeout)
+                        if native_limit:
+                            options.update(inputs, outC=codeword_path, timeout="%.9f" % native_timeout)
+                        else:
+                            # 0.9.0 rejects timeout=0 for CC; a timeout far beyond the budget keeps its
+                            # predictive round skipping from ever triggering
+                            options.update(inputs, outC=codeword_path, timeout="1000000000")
+                            notes.append("cutoff=0: native timeout 1e9 s, far beyond the budget, so the program runs "
+                                         "until the wall deadline kills it (completed rounds give the lower bound; a "
+                                         "codeword found by CC is exported by the program before it exits).")
                         effective.update(options)
                         command = [binary, "method=%d" % METHODS[mode]] + [
                             "%s=%s" % (key, value) for key, value in options.items()]

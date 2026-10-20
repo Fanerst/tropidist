@@ -1,0 +1,87 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "lbasis": "std"
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 8,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.028,
+  "trace": [
+    {
+      "t": 0.004,
+      "lb": 1
+    },
+    {
+      "t": 0.187,
+      "lb": 2
+    },
+    {
+      "t": 0.223,
+      "lb": 3
+    },
+    {
+      "t": 0.522,
+      "lb": 4
+    },
+    {
+      "t": 1.01,
+      "lb": 5
+    },
+    {
+      "t": 4.507,
+      "lb": 6
+    },
+    {
+      "t": 35.621,
+      "lb": 7
+    },
+    {
+      "t": 397.385,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 222.6,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      175
+    ],
+    "started_at": "2026-10-18T22:35:05.229122+00:00",
+    "ended_at": "2026-10-18T23:35:06.538356+00:00",
+    "wall_seconds": 3601.309126,
+    "adapter_seconds": 3601.028,
+    "trace_offset_seconds": 0.281126,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__lbasis-std/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__lbasis-std/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

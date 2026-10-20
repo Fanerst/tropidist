@@ -1,0 +1,152 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_kasai_372",
+  "variant": "full",
+  "rows": 124,
+  "cols": 372,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": 62,
+  "witness": [
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    332,
+    333,
+    334,
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371
+  ],
+  "witness_ok": true,
+  "seconds": 598.379,
+  "trace": [
+    {
+      "t": 0.34,
+      "ub": 62
+    },
+    {
+      "t": 0.34,
+      "lb": 1
+    },
+    {
+      "t": 10.355,
+      "lb": 2
+    },
+    {
+      "t": 45.208,
+      "lb": 3
+    },
+    {
+      "t": 100.297,
+      "lb": 4
+    },
+    {
+      "t": 215.285,
+      "lb": 5
+    },
+    {
+      "t": 340.339,
+      "lb": 6
+    },
+    {
+      "t": 520.25,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 279.0,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-18T17:55:55.206990+00:00",
+    "ended_at": "2026-10-18T18:05:53.698011+00:00",
+    "wall_seconds": 598.480218,
+    "adapter_seconds": 598.379,
+    "trace_offset_seconds": 0.101218,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_kasai_372__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_kasai_372__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 309.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-sjs_rpge/codewords.nz",
+    "timeout": "599.812520911"
+  },
+  "instance": "routing_90",
+  "variant": "full",
+  "rows": 540,
+  "cols": 25020,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 9,
+  "witness": [
+    24962,
+    24963,
+    24998,
+    24999,
+    25002,
+    25004,
+    25007,
+    25013,
+    25014
+  ],
+  "witness_ok": true,
+  "seconds": 599.981,
+  "trace": [
+    {
+      "t": 0.189,
+      "lb": 2
+    },
+    {
+      "t": 1.113,
+      "lb": 3
+    },
+    {
+      "t": 1.677,
+      "lb": 4
+    },
+    {
+      "t": 4.257,
+      "lb": 5
+    },
+    {
+      "t": 283.895,
+      "lb": 6
+    },
+    {
+      "t": 599.98,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 39.4,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 6 9 42876 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/routing_90",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-18T10:22:05.233847+00:00",
+    "ended_at": "2026-10-18T10:32:05.549042+00:00",
+    "wall_seconds": 600.23084,
+    "adapter_seconds": 599.981,
+    "trace_offset_seconds": 0.24984,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/routing_90__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/routing_90__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 18.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -18,16 +18,26 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
-SHORT = [("ours_pipeline", "ours"), ("ours", "ours, plain"), ("distm4ri__mode-cc", "dist-m4ri CC"),
-         ("distm4ri__mode-bracket", "dist-m4ri CC+RW"), ("milp__backend-scipy", "HiGHS"), ("milp__backend-cpsat", "CP-SAT"), ("milp__backend-gurobi", "Gurobi"),
+# dist-m4ri: the unqualified names are the current version (0.14.7, commit bed621e); the records of the
+# 0.9.0 build (commit 1f46277) that the benchmark first ran are kept under their own names
+SHORT = [("ours_pipeline", "ours"), ("ours", "ours, plain"),
+         ("distm4ri__build-0.14.7__mode-cc", "dist-m4ri CC"), ("distm4ri__build-0.14.7__mode-bracket", "dist-m4ri CC+RW"),
+         ("distm4ri__build-0.14.7__mode-cc__input-dem", "dist-m4ri CC, DEM input"),
+         ("distm4ri__build-0.14.7__mode-bracket__input-dem", "dist-m4ri CC+RW, DEM input"),
+         ("distm4ri__mode-cc", "dist-m4ri 0.9.0 CC"), ("distm4ri__mode-cc__cutoff-0", "dist-m4ri 0.9.0 CC, no cutoff"),
+         ("distm4ri__mode-bracket", "dist-m4ri 0.9.0 CC+RW"),
+         ("milp__backend-scipy", "HiGHS"), ("milp__backend-cpsat", "CP-SAT"), ("milp__backend-gurobi", "Gurobi"),
          ("sat__mode-incremental", "SAT"), ("sat__mode-maxsat", "RC2"), ("CASHW", "CASHWMaxSAT"), ("enMaxCDCL", "enMaxCDCL"),
          ("-", "RC2 (Stim WCNF)"), ("-", "CASHWMaxSAT (Stim WCNF)"), ("-", "enMaxCDCL (Stim WCNF)"),
          ("qserf__method-cc", "Qubitserf CC"), ("qserf__method-bz", "Qubitserf BZ"), ("qserf__method-mitm", "Qubitserf MITM"),
-         ("bposd", "BP+OSD"), ("isd", "ISD"), ("stim_search", "Stim search"), ("distm4ri__mode-rw", "dist-m4ri RW")]
-HEURISTIC = ("BP+OSD", "ISD", "Stim search", "dist-m4ri RW")
+         ("bposd", "BP+OSD"), ("isd", "ISD"), ("stim_search", "Stim search"), ("distm4ri__build-0.14.7__mode-rw", "dist-m4ri RW"),
+         ("distm4ri__mode-rw", "dist-m4ri 0.9.0 RW")]
+HEURISTIC = ("BP+OSD", "ISD", "Stim search", "dist-m4ri RW", "dist-m4ri 0.9.0 RW")
 
 
 def short(folder):
+    if "__lbasis-std" in folder:        # the same tool on the sparse logical basis of a code instance
+        return short(folder.replace("__lbasis-std", "")) + ", sparse L"
     if folder.startswith("ours_pipeline__"):
         return "ours, " + folder[len("ours_pipeline__"):].replace("__", " ").replace("-0", " off")
     stim = " (Stim WCNF)" if "encoding-stim" in folder else ""
@@ -88,12 +98,15 @@ def load(results, threads):
     return recs
 
 
-def table(results, variant, track, threads, methods=None, instance_dir=HERE / "instances", select=None):
+def table(results, variant, track, threads, methods=None, instance_dir=HERE / "instances", select=None, exclude=None):
+    """exclude: a predicate on method names to leave out (e.g. superseded versions of a tool)."""
     recs = load(results, threads)
     names = [name for _, name in SHORT] + sorted({m for m, _, _ in recs} - {name for _, name in SHORT})
     cols = [m for m in names if any(k[0] == m and k[2] == variant for k in recs)]
-    if methods:
-        cols = [m for m in cols if m in methods]
+    if methods:                    # in the order given
+        cols = [m for m in methods if m in cols]
+    if exclude:
+        cols = [m for m in cols if not exclude(m)]
     metas = []
     for p in sorted(Path(instance_dir).glob("*/meta.json")):
         m = json.loads(p.read_text())

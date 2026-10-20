@@ -1,0 +1,128 @@
+{
+  "method": "distm4ri",
+  "version": "0.9.0",
+  "config": {
+    "mode": "cc",
+    "cutoff": "0",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "1",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_sdbb_200/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_sdbb_200/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-yw7y9fby/codewords.nz",
+    "timeout": "1000000000"
+  },
+  "instance": "code_sdbb_200",
+  "variant": "full",
+  "rows": 100,
+  "cols": 200,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    0,
+    1,
+    16,
+    31,
+    46,
+    98,
+    135,
+    152,
+    167,
+    182,
+    183,
+    187
+  ],
+  "witness_ok": true,
+  "seconds": 213.244,
+  "trace": [
+    {
+      "t": 0.097,
+      "lb": 2
+    },
+    {
+      "t": 0.097,
+      "lb": 3
+    },
+    {
+      "t": 0.097,
+      "lb": 4
+    },
+    {
+      "t": 0.098,
+      "lb": 5
+    },
+    {
+      "t": 0.103,
+      "lb": 6
+    },
+    {
+      "t": 0.135,
+      "lb": 7
+    },
+    {
+      "t": 0.335,
+      "lb": 8
+    },
+    {
+      "t": 1.485,
+      "lb": 9
+    },
+    {
+      "t": 6.867,
+      "lb": 10
+    },
+    {
+      "t": 35.288,
+      "lb": 11
+    },
+    {
+      "t": 209.357,
+      "lb": 12
+    },
+    {
+      "t": 213.243,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 35.0,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. maxC=1 stops at the first CC witness after exhausting lighter weights. cutoff=0: native timeout 1e9 s, far beyond the budget, so the program runs until the wall deadline kills it (completed rounds give the lower bound; a codeword found by CC is exported by the program before it exits). Native triple: 12 12 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:mode=cc,cutoff=0",
+    "adapter": "distm4ri",
+    "config_string": "mode=cc,cutoff=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_sdbb_200",
+    "family": "selfdual_bb",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-18T10:02:34.011838+00:00",
+    "ended_at": "2026-10-18T10:06:07.515390+00:00",
+    "wall_seconds": 213.502366,
+    "adapter_seconds": 213.244,
+    "trace_offset_seconds": 0.258366,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc__cutoff-0/code_sdbb_200__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__mode-cc__cutoff-0/code_sdbb_200__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

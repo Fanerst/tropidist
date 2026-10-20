@@ -138,9 +138,13 @@ def fig_method():
 def fig_benchmark():
     a, b32, b1, metas = bench()
     main = {m["name"]: ("full" if (m["track"] == "code" or "sector" not in m["variants"]) else "sector") for m in metas}
-    groups = [("this method", ["ours"]), ("dist-m4ri", ["dist-m4ri CC", "dist-m4ri CC+RW"]),
-              ("CP-SAT", ["CP-SAT"]), ("HiGHS", ["HiGHS"]), ("Gurobi", ["Gurobi"]), ("SAT (CaDiCaL)", ["SAT"]),
-              ("RC2", ["RC2"]), ("enMaxCDCL", ["enMaxCDCL"]), ("CASHWMaxSAT", ["CASHWMaxSAT"]),
+    # a tool counts an instance as solved with any of its configurations: dist-m4ri 0.14.7 in CC or CC+RW mode
+    # (from our matrices or Stim's DEM), the integer-programming and SAT tools with either logical basis of a code
+    both = lambda name: [name, name + ", sparse L"]
+    groups = [("this method", ["ours"]),
+              ("dist-m4ri", ["dist-m4ri CC", "dist-m4ri CC+RW", "dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]),
+              ("CP-SAT", both("CP-SAT")), ("HiGHS", both("HiGHS")), ("Gurobi", both("Gurobi")), ("SAT (CaDiCaL)", both("SAT")),
+              ("RC2", both("RC2")), ("enMaxCDCL", both("enMaxCDCL")), ("CASHWMaxSAT", both("CASHWMaxSAT")),
               ("Qubitserf (codes only)", ["Qubitserf CC", "Qubitserf BZ", "Qubitserf MITM"])]
     rows = []
     for label, ms in groups:
@@ -320,47 +324,49 @@ def fig_growth():
 
 # ------------------------------------------- figure 3: the instances of arXiv:2603.22532
 def fig_wjh():
-    """Our first-tier time (1 thread, 600 s) against the fastest exact method of the paper (1 thread, 8 h on
-    their cluster), one point per instance; instances only one side solved sit in the margins."""
+    """Both sides under the paper's limits: our single-thread time (600 s tier, else the 8-hour run; 8 GB)
+    against the fastest exact method of the paper (1 core, 8 h, 8 GB on their cluster), one point per
+    instance; instances only one side solved within 8 h sit in the margins."""
     import wjh_compare as W
     rows = W.per_instance()
-    NONE_X, NONE_Y, FLOOR = 2.5e5, 3000, 0.01
-    fig, ax = plt.subplots(figsize=(7.2, 4.0))
-    fig.subplots_adjust(left=0.11, right=0.97, top=0.87, bottom=0.14)
+    NONE, FLOOR = 2.5e5, 0.01
+    fig, ax = plt.subplots(figsize=(7.2, 4.6))
+    fig.subplots_adjust(left=0.13, right=0.97, top=0.89, bottom=0.13)
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.set_xlim(0.006, 6e5)
-    ax.set_ylim(0.006, 8000)
+    ax.set_ylim(0.006, 6e5)
     style_axes(ax, "both")
     ax.plot([0.006, 28800], [0.006, 28800], color=AXIS, linewidth=0.9, zorder=1)
-    ax.text(900, 2600, "equal time", fontsize=7.8, color=MUTED, rotation=30, ha="center", va="center")
+    ax.text(900, 2600, "equal time", fontsize=7.8, color=MUTED, rotation=33, ha="center", va="center")
     ax.axvline(28800 * 1.9, color=AXIS, linewidth=0.72, zorder=1)
-    ax.axhline(600 * 1.9, color=AXIS, linewidth=0.72, zorder=1)
+    ax.axhline(28800 * 1.9, color=AXIS, linewidth=0.72, zorder=1)
     counts = {}
     for track, color, label in (("circuit", BLUE, "circuits"), ("code", ORANGE, "codes")):
         xs, ys = [], []
         for r in rows:
             if r["track"] != track:
                 continue
-            o, t = r["ours_t1"], r["theirs"]
+            o, t = r["ours_8h"], r["theirs"]
             key = (o is not None, t is not None)
             counts[key] = counts.get(key, 0) + 1
             if o is None and t is None:
                 continue
-            xs.append(max(t[0], FLOOR) if t else NONE_X)
-            ys.append(max(o, FLOOR) if o is not None else NONE_Y)
+            xs.append(max(t[0], FLOOR) if t else NONE)
+            ys.append(max(o, FLOOR) if o is not None else NONE)
         ax.plot(xs, ys, linewidth=0, marker="o", markersize=6.2, color=color, markeredgecolor=SURFACE,
                 markeredgewidth=1.5, label=label, zorder=3, alpha=0.95)
     only = sum(v for (o, t), v in counts.items() if o and not t)
-    ax.text(NONE_X, 0.035, "%d solved by\nthis method only" % only, fontsize=7.8, color=INK2, ha="center", va="center",
+    ax.text(NONE, 0.03, "%d solved by\nthis method only" % only, fontsize=7.8, color=INK2, ha="center", va="center",
             linespacing=1.3)
-    ax.set_xticks([0.01, 1, 100, 10000, NONE_X])
+    ticks = [0.01, 1, 100, 10000, NONE]
+    ax.set_xticks(ticks)
     ax.set_xticklabels(["≤ 0.01", "1", "100", "10000", "not solved\nin 8 h"])
-    ax.set_yticks([0.01, 0.1, 1, 10, 100, NONE_Y])
-    ax.set_yticklabels(["≤ 0.01", "0.1", "1", "10", "100", "not solved\nin 600 s"])
+    ax.set_yticks(ticks)
+    ax.set_yticklabels(["≤ 0.01", "1", "100", "10000", "not solved\nin 8 h"])
     ax.minorticks_off()
-    ax.set_xlabel("fastest exact method of arXiv:2603.22532 (seconds, 1 thread, 8 h limit, their cluster)", fontsize=8.5)
-    ax.set_ylabel("this method (seconds, 1 thread)", fontsize=8.5)
+    ax.set_xlabel("fastest exact method of arXiv:2603.22532 (seconds; 1 core, 8 h, 8 GB, their cluster)", fontsize=8.5)
+    ax.set_ylabel("this method (seconds; 1 thread, 8 h, 8 GB)", fontsize=8.5)
     ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2, fontsize=8.2, handlelength=1.2, borderaxespad=0.3)
     save(fig, "fig3_prior.png")
     return counts

@@ -1,0 +1,120 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat",
+    "lbasis": "std"
+  },
+  "instance": "code_bb144",
+  "variant": "full",
+  "rows": 72,
+  "cols": 144,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    10,
+    41,
+    44,
+    67,
+    77,
+    93,
+    109,
+    120,
+    124,
+    125,
+    126,
+    142
+  ],
+  "witness_ok": true,
+  "seconds": 196.308,
+  "trace": [
+    {
+      "t": 0.006,
+      "lb": 1
+    },
+    {
+      "t": 0.236,
+      "lb": 2
+    },
+    {
+      "t": 0.236,
+      "lb": 3
+    },
+    {
+      "t": 0.314,
+      "lb": 4
+    },
+    {
+      "t": 0.548,
+      "lb": 5
+    },
+    {
+      "t": 0.571,
+      "lb": 6
+    },
+    {
+      "t": 1.177,
+      "lb": 7
+    },
+    {
+      "t": 2.867,
+      "lb": 8
+    },
+    {
+      "t": 7.54,
+      "lb": 9
+    },
+    {
+      "t": 23.098,
+      "lb": 10
+    },
+    {
+      "t": 72.788,
+      "lb": 11
+    },
+    {
+      "t": 196.203,
+      "lb": 12
+    },
+    {
+      "t": 196.305,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 81.4,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb144",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-18T17:34:51.527139+00:00",
+    "ended_at": "2026-10-18T17:38:08.079675+00:00",
+    "wall_seconds": 196.551746,
+    "adapter_seconds": 196.308,
+    "trace_offset_seconds": 0.243746,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__lbasis-std/code_bb144__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat__lbasis-std/code_bb144__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

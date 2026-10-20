@@ -1,0 +1,99 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-lohbv94w/codewords.nz",
+    "timeout": "599.843765328"
+  },
+  "instance": "walkingcat_54",
+  "variant": "full",
+  "rows": 324,
+  "cols": 17820,
+  "obs": 2,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 8,
+  "witness": [
+    243,
+    299,
+    383,
+    436,
+    499,
+    566,
+    682,
+    759
+  ],
+  "witness_ok": true,
+  "seconds": 599.933,
+  "trace": [
+    {
+      "t": 0.098,
+      "lb": 2
+    },
+    {
+      "t": 0.477,
+      "lb": 3
+    },
+    {
+      "t": 0.737,
+      "lb": 4
+    },
+    {
+      "t": 2.708,
+      "lb": 5
+    },
+    {
+      "t": 339.324,
+      "lb": 6
+    },
+    {
+      "t": 599.932,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 37.9,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 6 8 62881 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/walkingcat_54",
+    "family": "walkingcat",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-18T10:52:55.011287+00:00",
+    "ended_at": "2026-10-18T11:02:55.233886+00:00",
+    "wall_seconds": 600.153518,
+    "adapter_seconds": 599.933,
+    "trace_offset_seconds": 0.220518,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/walkingcat_54__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/walkingcat_54__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

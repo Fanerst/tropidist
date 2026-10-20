@@ -1,0 +1,197 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_w8bb_144_6",
+  "variant": "full",
+  "rows": 72,
+  "cols": 144,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": 15,
+  "witness": [
+    0,
+    22,
+    50,
+    57,
+    66,
+    69,
+    90,
+    94,
+    97,
+    98,
+    124,
+    128,
+    129,
+    133,
+    143
+  ],
+  "witness_ok": true,
+  "seconds": 600.013,
+  "trace": [
+    {
+      "t": 0.374,
+      "ub": 144
+    },
+    {
+      "t": 0.374,
+      "ub": 136
+    },
+    {
+      "t": 0.374,
+      "ub": 130
+    },
+    {
+      "t": 0.374,
+      "ub": 124
+    },
+    {
+      "t": 0.374,
+      "lb": 1
+    },
+    {
+      "t": 0.374,
+      "lb": 2
+    },
+    {
+      "t": 0.575,
+      "ub": 104
+    },
+    {
+      "t": 0.575,
+      "ub": 100
+    },
+    {
+      "t": 0.575,
+      "ub": 94
+    },
+    {
+      "t": 0.776,
+      "ub": 92
+    },
+    {
+      "t": 0.776,
+      "ub": 68
+    },
+    {
+      "t": 0.776,
+      "ub": 54
+    },
+    {
+      "t": 0.776,
+      "ub": 53
+    },
+    {
+      "t": 0.776,
+      "ub": 52
+    },
+    {
+      "t": 0.776,
+      "ub": 51
+    },
+    {
+      "t": 2.38,
+      "ub": 47
+    },
+    {
+      "t": 2.38,
+      "ub": 45
+    },
+    {
+      "t": 2.581,
+      "ub": 43
+    },
+    {
+      "t": 2.581,
+      "ub": 42
+    },
+    {
+      "t": 5.387,
+      "lb": 4
+    },
+    {
+      "t": 5.988,
+      "ub": 40
+    },
+    {
+      "t": 6.991,
+      "ub": 28
+    },
+    {
+      "t": 6.991,
+      "ub": 24
+    },
+    {
+      "t": 6.991,
+      "ub": 20
+    },
+    {
+      "t": 7.191,
+      "ub": 15
+    },
+    {
+      "t": 10.398,
+      "lb": 5
+    },
+    {
+      "t": 20.42,
+      "lb": 6
+    },
+    {
+      "t": 30.438,
+      "lb": 7
+    },
+    {
+      "t": 75.324,
+      "lb": 8
+    },
+    {
+      "t": 185.356,
+      "lb": 9
+    },
+    {
+      "t": 445.268,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 734.3,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_w8bb_144_6",
+    "family": "estimated_codes",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-18T17:44:07.596485+00:00",
+    "ended_at": "2026-10-18T17:54:07.778926+00:00",
+    "wall_seconds": 600.18006,
+    "adapter_seconds": 600.013,
+    "trace_offset_seconds": 0.16706,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_w8bb_144_6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_w8bb_144_6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 764.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

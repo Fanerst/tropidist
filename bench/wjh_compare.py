@@ -1,7 +1,9 @@
 """Tables for the instances of arXiv:2603.22532 (Webster, Jacob, Higgott): our runs next to their published ones.
 
-Ours: results/bench_wjh (first tier: 1 thread, 600 s, 16 GB: our pipeline, Gurobi, dist-m4ri CC) and
-results/bench_wjh_tierB (32 threads, 1 h, 90 GB: our pipeline), on the instances of bench/instances_wjh.
+Ours: results/bench_wjh (first tier: 1 thread, 600 s, 16 GB: our pipeline, Gurobi, dist-m4ri CC),
+results/bench_wjh_8h (their own limits, 1 thread, 8 h, 8 GB: our pipeline on what the first tier left) and
+results/bench_wjh_tierB (32 threads, 1 h, 90 GB: our pipeline and dist-m4ri 0.14.7, the latter in pure cluster
+mode where its bracketing mode stopped early), on the instances of bench/instances_wjh.
 Theirs: the spreadsheets of their codeDistance package (papers/downloads/codedistance/paper results), one per
 family, one sheet per method.  Their exact methods are Gurobi, MIP-SCIP, CLISAT (MaxSAT), m4riCC (dist-m4ri
 connected clusters) and Magma (Brouwer-Zimmermann), each run with one thread and an 8-hour limit on their
@@ -24,6 +26,7 @@ import xlsx_lite
 SHEETS = ROOT / "papers" / "downloads" / "codedistance" / "paper results"
 INSTANCES = HERE / "instances_wjh"
 A, B = ROOT / "results" / "bench_wjh", ROOT / "results" / "bench_wjh_tierB"
+H8 = ROOT / "results" / "bench_wjh_8h"      # their protocol: 1 thread, 8 h, 8 GB (instances not solved in A)
 MAX_TIME = 28800
 # our family tag, their spreadsheet, a title
 FAMILIES = [("surface_circuit", "08 qc_SC.xlsx", "surface-code circuits"),
@@ -116,6 +119,7 @@ def per_instance():
     ms = metas()
     a1 = T.load(A, 1) if A.is_dir() else {}
     b32 = T.load(B, 32) if B.is_dir() else {}
+    h8 = T.load(H8, 1) if H8.is_dir() else {}
     out = []
     for family, sheet, title in FAMILIES:
         book = xlsx_lite.read(str(SHEETS / sheet))
@@ -133,6 +137,7 @@ def per_instance():
             t = lambda recs: (recs[("ours", m["name"], variant)]["seconds"] if ("ours", m["name"], variant) in recs
                               and recs[("ours", m["name"], variant)].get("status") == "exact" else None)
             out.append(dict(name=m["name"], family=family, title=title, track=m["track"], ours_t1=t(a1), ours_t2=t(b32),
+                            ours_8h=t(a1) if t(a1) is not None else t(h8),
                             theirs=fastest.get(m["name"])))
     return out
 
@@ -146,9 +151,13 @@ def report():
     ms = metas()
     a1 = T.load(A, 1) if A.is_dir() else {}
     b32 = T.load(B, 32) if B.is_dir() else {}
-    summary = ["| family | instances | ours, tier 1 | ours, both tiers | Gurobi, tier 1 | dist-m4ri CC, tier 1 "
-               "| theirs, 8 h: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |",
-               "|---|---:|---:|---:|---:|---:|---|---:|"]
+    h8 = T.load(H8, 1) if H8.is_dir() else {}
+    summary = ["| family | instances | ours, 1 thread, 600 s | ours, 1 thread, 8 h, 8 GB | ours, 600 s + 32 threads, 1 h "
+               "| Gurobi, 1 thread, 600 s | Gurobi, sparse L, 1 thread, 600 s "
+               "| dist-m4ri 0.9.0 CC, 1 thread, 600 s | dist-m4ri 0.14.7 CC, 1 thread, 600 s "
+               "| dist-m4ri 0.14.7, 600 s + 32 threads, 1 h "
+               "| theirs, 1 core, 8 h, 8 GB: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |",
+               "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|"]
     detail, notes, total = [], [], {}
     for family, sheet, title in FAMILIES:
         path = SHEETS / sheet
@@ -180,9 +189,14 @@ def report():
         variant = "sector" if family.endswith("_circuit") else "full"
         c = {}
         for key, method in (("o", "ours"), ("g", "Gurobi"), ("m", "dist-m4ri CC")):
-            m2 = "dist-m4ri CC+RW" if method == "dist-m4ri CC" else method
+            # dist-m4ri's second tier: the bracketing mode, and pure cluster mode where that stopped early
+            tier2 = ("dist-m4ri CC+RW", "dist-m4ri CC") if method == "dist-m4ri CC" else (method,)
             c[key + "1"] = sum(solved(a1, method, n, variant) for n in names)
-            c[key] = sum(solved(a1, method, n, variant) or solved(b32, m2, n, variant) for n in names)
+            c[key] = sum(solved(a1, method, n, variant) or any(solved(b32, m2, n, variant) for m2 in tier2)
+                         for n in names)
+        c["o8"] = sum(solved(a1, "ours", n, variant) or solved(h8, "ours", n, variant) for n in names)
+        c["m0"] = sum(solved(a1, "dist-m4ri 0.9.0 CC, no cutoff", n, variant) for n in names)
+        c["gs"] = sum(solved(a1, "Gurobi, sparse L", n, variant) for n in names)
         anyt = sum(1 for n in names if exact_theirs[n])
         for k, v in c.items():
             total[k] = total.get(k, 0) + v
@@ -190,39 +204,48 @@ def report():
         total["any"] = total.get("any", 0) + anyt
         for k, v in counts.items():
             total["t_" + k] = total.get("t_" + k, 0) + v
-        summary.append("| %s | %d | %d | %d | %d | %d | %s | %d |" % (
-            title, len(names), c["o1"], c["o"], c["g1"], c["m1"],
+        summary.append("| %s | %d | %d | %d | %d | %d | %s | %d | %d | %d | %s | %d |" % (
+            title, len(names), c["o1"], c["o8"], c["o"], c["g1"], "–" if family.endswith("_circuit") else c["gs"],
+            c["m0"], c["m1"], c["m"],
             " / ".join(str(counts[k]) for k, _ in THEIR_EXACT), anyt))
         lines = ["", "<details><summary>%s (%d instances)</summary>" % (title[0].upper() + title[1:], len(names)), "",
-                 "| instance | n | k | columns | distance | their best | ours t1 | ours t2 | Gurobi t1 "
-                 "| dist-m4ri CC t1 | their fastest exact (8 h) |",
-                 "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
+                 "| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 "
+                 "| Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 "
+                 "| their fastest exact (8 h) |",
+                 "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
         for n in names:
             m = ms[n]
             v = m["variants"][variant]
-            recs = [r for r in (a1.get((x, n, variant)) for x in ("ours", "Gurobi", "dist-m4ri CC"))
-                    if r is not None] + [r for r in (b32.get((x, n, variant)) for x in ("ours", "Gurobi", "dist-m4ri CC+RW"))
-                                         if r is not None]
+            recs = [r for r in (a1.get((x, n, variant)) for x in ("ours", "Gurobi", "dist-m4ri CC", "dist-m4ri 0.9.0 CC",
+                                                                 "dist-m4ri 0.9.0 CC, no cutoff"))
+                    if r is not None] + [r for r in (b32.get((x, n, variant)) for x in ("ours", "Gurobi", "dist-m4ri CC+RW",
+                                                                                        "dist-m4ri CC"))
+                                         if r is not None] + [r for r in [h8.get(("ours", n, variant))] if r is not None]
             lbs = [r["lower_bound"] for r in recs if r.get("lower_bound") is not None and r.get("status") in ("exact", "bounds", "timeout")]
             ubs = [r["upper_bound"] for r in recs if r.get("upper_bound") is not None and r.get("witness_ok")]
             d = (str(min(ubs)) if lbs and ubs and max(lbs) == min(ubs) else
                  ("%d..%d" % (max(lbs), min(ubs)) if lbs and ubs else (">=%d" % max(lbs) if lbs else "?")))
             fast = min(exact_theirs[n]) if exact_theirs[n] else None
             bk = best_map.get(n)
-            lines.append("| %s | %s | %s | %d | %s | %s | %s | %s | %s | %s | %s |" % (
+            lines.append("| %s | %s | %s | %d | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
                 n, m.get("n", ""), m.get("k", ""), v["cols"], d, bk[3] if bk else "",
-                ours_cell(a1.get(("ours", n, variant))), ours_cell(b32.get(("ours", n, variant))),
-                ours_cell(a1.get(("Gurobi", n, variant))), ours_cell(a1.get(("dist-m4ri CC", n, variant))),
+                ours_cell(a1.get(("ours", n, variant))), ours_cell(h8.get(("ours", n, variant))),
+                ours_cell(b32.get(("ours", n, variant))),
+                ours_cell(a1.get(("Gurobi", n, variant))), ours_cell(a1.get(("Gurobi, sparse L", n, variant))),
+                ours_cell(a1.get(("dist-m4ri 0.9.0 CC, no cutoff", n, variant))),
+                ours_cell(a1.get(("dist-m4ri CC", n, variant))),
+                ours_cell(next((r for r in [b32.get(("dist-m4ri CC", n, variant))] if r and r.get("status") == "exact"),
+                               b32.get(("dist-m4ri CC+RW", n, variant)))),
                 ("%s, %s" % (fast[1], T.seconds(fast[0]))) if fast else "none"))
         detail += lines + ["", "</details>"]
-    summary.append("| **all** | %d | **%d** | **%d** | %d | %d | %s | %d |" % (
-        total["n"], total["o1"], total["o"], total["g1"], total["m1"],
+    summary.append("| **all** | %d | **%d** | **%d** | **%d** | %d | %d (codes) | %d | %d | %d | %s | %d |" % (
+        total["n"], total["o1"], total["o8"], total["o"], total["g1"], total["gs"], total["m0"], total["m1"], total["m"],
         " / ".join(str(total["t_" + k]) for k, _ in THEIR_EXACT), total["any"]))
-    notes += agreement(ms, a1, b32)
+    notes += agreement(ms, a1, b32, h8)
     return "\n".join(summary + ([""] + ["- " + x for x in notes] if notes else []) + detail)
 
 
-def agreement(ms, a1, b32):
+def agreement(ms, a1, b32, h8=None):
     """Our exact values against theirs: equal to every value an exact method of theirs certified, and never
     above their best known value (an upper bound found by any of their methods)."""
     same = differ = below = 0
@@ -239,7 +262,8 @@ def agreement(ms, a1, b32):
         rows = [r for r in book.get("best", [])[1:] if len(r) > 3 and r[1].strip().isdigit()]
         best = match(family, ms, [(r[0], int(r[1]), int(r[2]), int(float(r[3] or 0)), 0.0) for r in rows])
         for name in (n for n, m in ms.items() if m["family"] == "wjh_" + family):
-            recs = [r for r in (a1.get(("ours", name, variant)), b32.get(("ours", name, variant)))
+            recs = [r for r in (a1.get(("ours", name, variant)), b32.get(("ours", name, variant)),
+                                (h8 or {}).get(("ours", name, variant)))
                     if r is not None and r.get("status") == "exact"]
             if not recs:
                 continue

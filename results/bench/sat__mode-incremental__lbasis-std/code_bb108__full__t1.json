@@ -1,0 +1,110 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "code_bb108",
+  "variant": "full",
+  "rows": 54,
+  "cols": 108,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 10,
+  "upper_bound": 10,
+  "witness": [
+    0,
+    29,
+    38,
+    45,
+    64,
+    71,
+    79,
+    80,
+    101,
+    103
+  ],
+  "witness_ok": true,
+  "seconds": 15.217,
+  "trace": [
+    {
+      "t": 0.004,
+      "lb": 1
+    },
+    {
+      "t": 0.206,
+      "lb": 2
+    },
+    {
+      "t": 0.206,
+      "lb": 3
+    },
+    {
+      "t": 0.206,
+      "lb": 4
+    },
+    {
+      "t": 0.353,
+      "lb": 5
+    },
+    {
+      "t": 0.625,
+      "lb": 6
+    },
+    {
+      "t": 1.527,
+      "lb": 7
+    },
+    {
+      "t": 4.308,
+      "lb": 8
+    },
+    {
+      "t": 14.887,
+      "lb": 9
+    },
+    {
+      "t": 15.211,
+      "lb": 10
+    },
+    {
+      "t": 15.214,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 52.9,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb108",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-18T17:34:28.565877+00:00",
+    "ended_at": "2026-10-18T17:34:43.936957+00:00",
+    "wall_seconds": 15.37046,
+    "adapter_seconds": 15.217,
+    "trace_offset_seconds": 0.15346,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/code_bb108__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/code_bb108__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

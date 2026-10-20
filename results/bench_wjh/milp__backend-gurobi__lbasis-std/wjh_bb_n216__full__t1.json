@@ -1,0 +1,96 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "wjh_bb_n216",
+  "variant": "full",
+  "rows": 108,
+  "cols": 216,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 10,
+  "upper_bound": 10,
+  "witness": [
+    39,
+    45,
+    95,
+    97,
+    105,
+    109,
+    145,
+    159,
+    181,
+    197
+  ],
+  "witness_ok": true,
+  "seconds": 6.6,
+  "trace": [
+    {
+      "t": 0.383,
+      "ub": 24
+    },
+    {
+      "t": 0.383,
+      "ub": 12
+    },
+    {
+      "t": 0.383,
+      "ub": 10
+    },
+    {
+      "t": 0.384,
+      "lb": 1
+    },
+    {
+      "t": 0.384,
+      "lb": 2
+    },
+    {
+      "t": 5.394,
+      "lb": 7
+    },
+    {
+      "t": 6.597,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 41.3,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_bb_n216",
+    "family": "wjh_bb",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-18T17:35:36.919115+00:00",
+    "ended_at": "2026-10-18T17:35:43.765430+00:00",
+    "wall_seconds": 6.845699,
+    "adapter_seconds": 6.6,
+    "trace_offset_seconds": 0.245699,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi__lbasis-std/wjh_bb_n216__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/milp__backend-gurobi__lbasis-std/wjh_bb_n216__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 71.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

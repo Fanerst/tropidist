@@ -1,0 +1,133 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 11,
+  "upper_bound": 12,
+  "witness": [
+    2,
+    17,
+    27,
+    43,
+    51,
+    60,
+    81,
+    87,
+    92,
+    96,
+    125,
+    130
+  ],
+  "witness_ok": true,
+  "seconds": 3600.782,
+  "trace": [
+    {
+      "t": 0.377,
+      "ub": 110
+    },
+    {
+      "t": 0.377,
+      "lb": 1
+    },
+    {
+      "t": 0.377,
+      "ub": 22
+    },
+    {
+      "t": 0.384,
+      "ub": 18
+    },
+    {
+      "t": 0.787,
+      "ub": 14
+    },
+    {
+      "t": 0.787,
+      "lb": 2
+    },
+    {
+      "t": 1.136,
+      "ub": 12
+    },
+    {
+      "t": 3600.73,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 856.3,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "started_at": "2026-10-18T23:36:13.329228+00:00",
+    "ended_at": "2026-10-19T00:36:14.371806+00:00",
+    "wall_seconds": 3601.041323,
+    "adapter_seconds": 3600.782,
+    "trace_offset_seconds": 0.259323,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_gala_132__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_gala_132__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 869.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

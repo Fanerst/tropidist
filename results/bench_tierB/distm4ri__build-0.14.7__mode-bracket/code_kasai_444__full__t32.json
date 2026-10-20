@@ -1,0 +1,180 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_444/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_444/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-4ccwealb/codewords.nz",
+    "timeout": "3599.884697947"
+  },
+  "instance": "code_kasai_444",
+  "variant": "full",
+  "rows": 148,
+  "cols": 444,
+  "obs": 154,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 16,
+  "upper_bound": 18,
+  "witness": [
+    8,
+    25,
+    84,
+    116,
+    117,
+    128,
+    145,
+    161,
+    193,
+    238,
+    246,
+    286,
+    301,
+    305,
+    346,
+    383,
+    407,
+    411
+  ],
+  "witness_ok": true,
+  "seconds": 1435.117,
+  "trace": [
+    {
+      "t": 0.03,
+      "lb": 2
+    },
+    {
+      "t": 0.03,
+      "lb": 3
+    },
+    {
+      "t": 0.03,
+      "lb": 4
+    },
+    {
+      "t": 0.119,
+      "lb": 5
+    },
+    {
+      "t": 0.12,
+      "lb": 6
+    },
+    {
+      "t": 0.125,
+      "lb": 7
+    },
+    {
+      "t": 0.136,
+      "lb": 8
+    },
+    {
+      "t": 0.186,
+      "lb": 9
+    },
+    {
+      "t": 0.298,
+      "lb": 10
+    },
+    {
+      "t": 0.53,
+      "lb": 11
+    },
+    {
+      "t": 1.622,
+      "lb": 12
+    },
+    {
+      "t": 7.399,
+      "lb": 13
+    },
+    {
+      "t": 39.291,
+      "lb": 14
+    },
+    {
+      "t": 233.391,
+      "lb": 15
+    },
+    {
+      "t": 1435.098,
+      "lb": 16
+    },
+    {
+      "t": 1435.1,
+      "ub": 18
+    }
+  ],
+  "peak_rss_mb": 33.7,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 16 18 100000 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_444",
+    "family": "kasai",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-18T17:00:37.929806+00:00",
+    "ended_at": "2026-10-18T17:24:33.240152+00:00",
+    "wall_seconds": 1435.304736,
+    "adapter_seconds": 1435.117,
+    "trace_offset_seconds": 0.187736,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket/code_kasai_444__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket/code_kasai_444__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

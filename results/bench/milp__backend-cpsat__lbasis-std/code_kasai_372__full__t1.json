@@ -1,0 +1,96 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_kasai_372",
+  "variant": "full",
+  "rows": 124,
+  "cols": 372,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 26,
+  "witness": [
+    13,
+    35,
+    47,
+    50,
+    60,
+    92,
+    94,
+    106,
+    148,
+    153,
+    162,
+    165,
+    196,
+    209,
+    233,
+    246,
+    250,
+    251,
+    260,
+    273,
+    309,
+    313,
+    318,
+    341,
+    361,
+    363
+  ],
+  "witness_ok": true,
+  "seconds": 600.022,
+  "trace": [
+    {
+      "t": 16.598,
+      "ub": 38
+    },
+    {
+      "t": 16.598,
+      "lb": 0
+    },
+    {
+      "t": 41.857,
+      "ub": 26
+    }
+  ],
+  "peak_rss_mb": 133.7,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-18T17:55:54.250158+00:00",
+    "ended_at": "2026-10-18T18:05:54.565158+00:00",
+    "wall_seconds": 600.304486,
+    "adapter_seconds": 600.022,
+    "trace_offset_seconds": 0.282486,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_kasai_372__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_kasai_372__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 145.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

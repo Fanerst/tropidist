@@ -1,0 +1,102 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 8,
+  "upper_bound": 12,
+  "witness": [
+    0,
+    3,
+    16,
+    21,
+    52,
+    62,
+    91,
+    99,
+    116,
+    122,
+    123,
+    126
+  ],
+  "witness_ok": true,
+  "seconds": 598.714,
+  "trace": [
+    {
+      "t": 0.327,
+      "ub": 22
+    },
+    {
+      "t": 0.331,
+      "lb": 1
+    },
+    {
+      "t": 1.729,
+      "ub": 12
+    },
+    {
+      "t": 1.73,
+      "lb": 3
+    },
+    {
+      "t": 5.335,
+      "lb": 5
+    },
+    {
+      "t": 25.166,
+      "lb": 6
+    },
+    {
+      "t": 70.236,
+      "lb": 7
+    },
+    {
+      "t": 225.311,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 400.9,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-18T17:45:45.067307+00:00",
+    "ended_at": "2026-10-18T17:55:43.957114+00:00",
+    "wall_seconds": 598.887917,
+    "adapter_seconds": 598.714,
+    "trace_offset_seconds": 0.173917,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 430.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

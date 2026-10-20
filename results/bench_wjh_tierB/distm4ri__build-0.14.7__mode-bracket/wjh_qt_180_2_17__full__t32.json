@@ -1,0 +1,183 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_qt_180_2_17/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_qt_180_2_17/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-l2q3_qpc/codewords.nz",
+    "timeout": "3599.890443090"
+  },
+  "instance": "wjh_qt_180_2_17",
+  "variant": "full",
+  "rows": 90,
+  "cols": 180,
+  "obs": 2,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 17,
+  "upper_bound": 17,
+  "witness": [
+    12,
+    24,
+    29,
+    32,
+    43,
+    72,
+    73,
+    94,
+    99,
+    103,
+    107,
+    117,
+    124,
+    129,
+    133,
+    152,
+    162
+  ],
+  "witness_ok": true,
+  "seconds": 1787.986,
+  "trace": [
+    {
+      "t": 0.019,
+      "lb": 2
+    },
+    {
+      "t": 0.049,
+      "lb": 3
+    },
+    {
+      "t": 0.052,
+      "lb": 4
+    },
+    {
+      "t": 0.058,
+      "lb": 5
+    },
+    {
+      "t": 0.06,
+      "lb": 6
+    },
+    {
+      "t": 0.061,
+      "lb": 7
+    },
+    {
+      "t": 0.067,
+      "lb": 8
+    },
+    {
+      "t": 0.09,
+      "lb": 9
+    },
+    {
+      "t": 0.127,
+      "lb": 10
+    },
+    {
+      "t": 0.241,
+      "lb": 11
+    },
+    {
+      "t": 0.723,
+      "lb": 12
+    },
+    {
+      "t": 3.172,
+      "lb": 13
+    },
+    {
+      "t": 13.412,
+      "lb": 14
+    },
+    {
+      "t": 66.705,
+      "lb": 15
+    },
+    {
+      "t": 344.596,
+      "lb": 16
+    },
+    {
+      "t": 1787.983,
+      "lb": 17
+    },
+    {
+      "t": 1787.985,
+      "ub": 17
+    }
+  ],
+  "peak_rss_mb": 32.9,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 17 17 38138 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_qt_180_2_17",
+    "family": "wjh_qt",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "started_at": "2026-10-18T14:09:39.778961+00:00",
+    "ended_at": "2026-10-18T14:39:27.912255+00:00",
+    "wall_seconds": 1788.132693,
+    "adapter_seconds": 1787.986,
+    "trace_offset_seconds": 0.146693,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-bracket/wjh_qt_180_2_17__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-bracket/wjh_qt_180_2_17__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -105,16 +105,26 @@ class Prob:
         return len(self.h)
 
 
-def load(instance_dir, variant="full"):
+def load(instance_dir, variant="full", lbasis=None):
+    """lbasis: read the logical matrix from <variant>.L.<lbasis>.mtx instead of <variant>.L.mtx when that
+    file exists (bench/standard_logicals.py writes L.std, a sparse basis of the same logical space; circuits
+    have none, their L is fixed by the observables).  prob.lfile names the file read."""
     instance_dir = instance_dir.rstrip("/")
     meta = json.load(open(os.path.join(instance_dir, "meta.json")))
     base = os.path.join(instance_dir, variant)
     nrows, ncols, h = read_mtx(base + ".H.mtx")
-    nobs, ncols2, l = read_mtx(base + ".L.mtx")
+    lfile = base + ".L.mtx"
+    if lbasis and os.path.exists(base + ".L.%s.mtx" % lbasis):
+        lfile = base + ".L.%s.mtx" % lbasis
+    elif lbasis and meta.get("track") == "code":
+        raise FileNotFoundError("no %s.L.%s.mtx for code instance %s" % (variant, lbasis, meta.get("name")))
+    nobs, ncols2, l = read_mtx(lfile)
     assert ncols == ncols2
     rowmeta = json.load(open(base + ".rowmeta.json")) if os.path.exists(base + ".rowmeta.json") else None
     perms = json.load(open(base + ".perms.json")) if os.path.exists(base + ".perms.json") else None
-    return Prob(meta["name"], variant, nrows, nobs, h, l, meta, rowmeta, perms)
+    prob = Prob(meta["name"], variant, nrows, nobs, h, l, meta, rowmeta, perms)
+    prob.lfile = os.path.basename(lfile)
+    return prob
 
 
 def to_cdist(prob):
@@ -332,7 +342,10 @@ def save_result(out, prob, method, trace, status, threads, time_limit, witness=N
       witness_ok     checked here against H and L
       seconds        wall time of the whole run
       trace          [{"t": seconds, "lb": K} | {"t": seconds, "ub": w}, ...] in time order
-      peak_rss_mb, truth (the variant's ground truth if known), agrees_with_truth
+      peak_rss_mb    the adapter's own process and its reaped children only; the harness adds
+                     harness.peak_group_rss_mb, the peak of the whole process group (workers and
+                     external solvers included), which is the figure to use
+      truth (the variant's ground truth if known), agrees_with_truth
       value_only     true for tools whose interface returns the distance as a number and no fault set:
                      upper_bound then has no witness, and the value is checked against the ground
                      truth only (the report labels such results)

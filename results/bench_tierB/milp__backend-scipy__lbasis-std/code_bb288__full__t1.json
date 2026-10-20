@@ -1,0 +1,84 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_bb288",
+  "variant": "full",
+  "rows": 144,
+  "cols": 288,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": 18,
+  "witness": [
+    0,
+    12,
+    21,
+    30,
+    39,
+    42,
+    45,
+    48,
+    54,
+    60,
+    66,
+    69,
+    78,
+    90,
+    93,
+    102,
+    114,
+    135
+  ],
+  "witness_ok": true,
+  "seconds": 3600.159,
+  "trace": [
+    {
+      "t": 3600.104,
+      "ub": 18
+    },
+    {
+      "t": 3600.104,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 1117.5,
+  "truth": 18,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); logical matrix full.L.std.mtx (lbasis=std); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=scipy,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb288",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      160
+    ],
+    "started_at": "2026-10-18T22:35:05.386023+00:00",
+    "ended_at": "2026-10-18T23:35:05.835225+00:00",
+    "wall_seconds": 3600.448224,
+    "adapter_seconds": 3600.159,
+    "trace_offset_seconds": 0.289224,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-scipy__lbasis-std/code_bb288__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-scipy__lbasis-std/code_bb288__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1131.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "code_kasai_372",
+  "variant": "full",
+  "rows": 124,
+  "cols": 372,
+  "obs": 130,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.02,
+  "trace": [
+    {
+      "t": 0.01,
+      "lb": 1
+    },
+    {
+      "t": 0.551,
+      "lb": 2
+    },
+    {
+      "t": 1.292,
+      "lb": 3
+    },
+    {
+      "t": 5.814,
+      "lb": 4
+    },
+    {
+      "t": 29.682,
+      "lb": 5
+    },
+    {
+      "t": 395.2,
+      "lb": 6
+    },
+    {
+      "t": 3429.342,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 216.8,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      170
+    ],
+    "started_at": "2026-10-18T22:38:46.257025+00:00",
+    "ended_at": "2026-10-18T23:38:47.470350+00:00",
+    "wall_seconds": 3601.213219,
+    "adapter_seconds": 3601.02,
+    "trace_offset_seconds": 0.193219,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/code_kasai_372__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/code_kasai_372__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

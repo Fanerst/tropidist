@@ -1,7 +1,8 @@
 # Certified circuit distances by collapse, lift and weight-bounded search
 
-Notes on the method and its numerical results, 7 October 2026, updated 15 October 2026 (Gurobi in
-the benchmark; the instances of the prior benchmark, section 4.2). Working name of the method:
+Notes on the method and its numerical results, 7 October 2026, updated 19 October 2026 (Gurobi in
+the benchmark; the instances of the prior benchmark, section 4.2; the October version of dist-m4ri; a
+sparse logical basis for the code instances). Working name of the method:
 **CLIMB** (collapse, lift, meet in the middle, bound). Full tables are in
 [BENCHMARK.md](BENCHMARK.md) and [PAPERS.md](PAPERS.md); the figures here are drawn from the result
 records by `docs/make_figures.py`.
@@ -17,12 +18,13 @@ lighter fault set, and an upper bound given by an explicit fault set replayed in
 cost is governed by the distance and by a small relaxed problem, not by the size of the circuit.
 
 - On a benchmark of 60 instances it solves 46 with one thread in 600 s and 59 with 32 threads in an
-  hour. All other exact methods together, Gurobi included, solve 17 and 28, and none solves an
-  instance it does not.
+  hour. All other exact methods together, among them Gurobi and the October version of dist-m4ri,
+  solve 30 and 38, and none solves an instance it does not.
 - On the 126 CSS instances of the most recent benchmark of distance methods (arXiv:2603.22532), run
-  from that study's own files, it solves 86 with one thread in 600 s and 96 with 32 threads in an
-  hour. That study's five exact methods together solved 73, with eight hours each, all of them among
-  these.
+  from that study's own files and under its own limits (one core, 8 GB and eight hours per run), it
+  solves 95; that study's five exact methods together solved 73, all of them among these. With one
+  thread and 600 s it already solves 86 (the current dist-m4ri, run here: 76); with 32 threads and an
+  hour, 96 (dist-m4ri: 80).
 - Largest circuits closed: the [[288,12,18]] bivariate bicycle circuit (distance 16, 206,352 fault
   mechanisms) and a [[1044,526,12]] circuit (distance 10, 271,440 mechanisms).
 - For a paper posted on 2 October 2026 it closed 15 code distances that the authors could only
@@ -130,24 +132,41 @@ sector problem, their best case. A harness checks every witness; no two records 
 
 ![Benchmark](figs/fig2_benchmark.png)
 
-*Figure 2. Instances solved exactly. Compared: connected-cluster enumeration (dist-m4ri, Qubitserf),
-integer programming (HiGHS, CP-SAT, Gurobi), SAT and three MaxSAT solvers.*
+*Figure 2. Instances solved exactly. Compared: connected-cluster enumeration (dist-m4ri in its version
+of 15 October, Qubitserf), integer programming (HiGHS, CP-SAT, Gurobi), SAT and three MaxSAT solvers. A
+tool counts an instance if any of its configurations solves it.*
 
 | instance | columns | d | this method | best other exact method |
 |---|---:|---:|---|---|
-| [[72,12,6]] circuit | 2232 | 6 | 0.4 s | dist-m4ri, 5.0 s |
-| [[90,8,10]] circuit | 4590 | 8 | 0.4 s | dist-m4ri, 2203 s on 32 threads |
-| [[144,12,12]] circuit | 8784 | 10 | 1.4 s | none (dist-m4ri: 8 to 13 after an hour) |
+| [[72,12,6]] circuit | 2232 | 6 | 0.4 s | dist-m4ri, 0.1 s |
+| [[90,8,10]] circuit | 4590 | 8 | 0.4 s | dist-m4ri, 60 s |
+| [[144,12,12]] circuit | 8784 | 10 | 1.4 s | dist-m4ri, 532 s on 32 threads |
 | [[288,12,18]] circuit | 26,208 | 16 | 209 s on 32 threads | none |
 | [[1044,526,12]] circuit | 35,496 | 10 | 881 s on 32 threads | none |
-| [[288,12,18]] code | 288 | 18 | 3.1 s | Gurobi, 2006 s on 32 threads |
+| [[288,12,18]] code | 288 | 18 | 3.1 s | dist-m4ri, 115 s |
 | [[625,125,20]] code | 625 | 20 | 47 s on 32 threads | none |
 
 Times without a thread count are single-thread. MaxSAT on Stim's own export of the whole circuit,
 the recipe behind the exact values published so far, proves no qLDPC circuit distance within an
 hour; its best lower bound is 3. Gurobi, run when a licence became available, solves 11 instances in
-the first tier and 17 over both, each of them also solved by another method; the [[72,12,6]]
+the first tier and 19 over both, each of them also solved by another method; the [[72,12,6]]
 circuit takes it 534 s on 32 threads.
+
+The strongest competitor, dist-m4ri, improved a lot during this work: its version of 15 October (0.14.7)
+solves 30 and 38 of the instances, where the September version solved 17 and 26 (BENCHMARK.md compares
+the two). It is now faster than this method on 17 instances: on 14 of them both need less than two
+seconds; the others are Stim's color-code circuits of d = 9 and 11, to which none of the reductions
+applies, and a circuit of the shift family, whose relaxation is loose (2 against 8; the search without it
+takes 1.4 s, dist-m4ri 24 s). It solves no instance that this method does not, and on the eight other
+instances where both need more than a second it is 19 to 88 times slower.
+
+The logical operators of the code instances were first computed by a generic construction whose rows are,
+on codes with many logical qubits, up to 5 times denser than the standard form that the prior benchmark
+uses. Integer programs and SAT encodings turn every logical row into a parity constraint, so these tools
+were run again on a sparse basis of the same logical space. On the 16 codes here this gains them
+nothing, and Gurobi loses two of them ([[288,12,18]] and [[324,12,18]]); on the hyperbolic codes of
+section 4.2, which have many logical qubits, it lets Gurobi solve 33 of 42 within 600 s instead of 30.
+A tool is credited with an instance it solves on either basis.
 
 ### 4.2 The instances of the prior benchmark
 
@@ -158,25 +177,24 @@ with their results. All of their CSS instances were run here from their files: 1
 bicycle codes). Their circuit problem, the error model filtered to the detectors of one basis, is
 exactly the sector problem of section 3.1, column for column. For a code they compute the Z
 distance, and so does this comparison. Their exact methods (Gurobi, SCIP, the MaxSAT solver CLISAT,
-dist-m4ri's connected clusters, Magma's Brouwer-Zimmermann) had one thread and eight hours each on
-their cluster; their own result sheets are used.
+dist-m4ri's connected clusters, Magma's Brouwer-Zimmermann) ran once per instance with one CPU
+core, 8 GB and eight hours each on their cluster; their own result sheets are used.
 
-| family | instances | this method, 1 thread, 600 s | also 32 threads, 1 h | any of their five, 8 h each |
-|---|---:|---:|---:|---:|
-| circuits (four families) | 23 | 19 | 20 | 15 |
-| hyperbolic surface and colour codes | 42 | 42 | 42 | 42 |
-| lifted-product codes | 19 | 14 | 19 | 6 |
-| bivariate bicycle codes | 20 | 6 | 8 | 5 |
-| quantum Tanner codes | 22 | 5 | 7 | 5 |
-| **all** | 126 | **86** | **96** | **73** |
+| family | instances | this method, 1 thread, 600 s | 1 thread, 8 h, 8 GB | 600 s + 32 threads, 1 h | any of their five (1 core, 8 h, 8 GB each) |
+|---|---:|---:|---:|---:|---:|
+| circuits (four families) | 23 | 19 | 20 | 20 | 15 |
+| hyperbolic surface and colour codes | 42 | 42 | 42 | 42 | 42 |
+| lifted-product codes | 19 | 14 | 19 | 19 | 6 |
+| bivariate bicycle codes | 20 | 6 | 8 | 8 | 5 |
+| quantum Tanner codes | 22 | 5 | 6 | 7 | 5 |
+| **all** | 126 | **86** | **95** | **96** | **73** |
 
 ![Prior benchmark](figs/fig3_prior.png)
 
-*Figure 3. One point per instance: time of this method in the first tier (one thread, 600 s)
-against the fastest exact method of the prior benchmark (one thread, eight-hour limit, their
-machine). Points on the right are instances only this method solves; the 10 it solves only in its
-second tier are not shown. No instance that they solve is missing. Times near 0.1 s are mostly the
-start of the Python process.*
+*Figure 3. One point per instance, both sides under the limits of the prior benchmark (one core,
+8 GB, eight hours): time of this method with one thread against the fastest of its five exact
+methods on their machine. Points on the right are instances only this method solves; no instance
+that they solve is missing. Times near 0.1 s are mostly the start of the Python process.*
 
 Where their exact methods certified a distance (73 instances), the values agree. Of the 23 values
 certified only here, all but one confirm the best value their heuristics had found; the exception
@@ -185,10 +203,15 @@ is 24. The new values include the remaining bivariate bicycle circuits up to [[2
 surface-code circuit of d = 11, every lifted-product code from n = 714 to 3230 (distances 16 to 24),
 the bivariate bicycle codes [[288,12,18]], [[360,12,24]] and [[576,8,24]], and the quantum Tanner
 codes of n = 216 and 252 (distances 18 and 22). Its [[360,12,24]] circuit, with best value 88 there,
-has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). Its seven bivariate bicycle
+has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). All but one of the new values
+(the Tanner code of n = 252, 40 minutes on 32 threads) were obtained within the paper's own limits;
+the [[288,12,18]] circuit took 2.3 hours on one thread. For the 31 instances still open, the
+eight-hour runs certify lower bounds: 21 to 28 for the codes, 10 to 17 for the circuits (10 for the
+superdense colour-code circuit of d = 11, whose best value is 11). Its seven bivariate bicycle
 circuits turn out to be the files of this project's first study, five of which are in the benchmark
-of section 4.1. Run here with first-tier limits, Gurobi and dist-m4ri solve 55 and 67 of the 126
-instances, against 70 and 71 in the paper's eight-hour runs.
+of section 4.1. Run here with first-tier limits, Gurobi solves 55 of the 126 instances (58 on the
+sparse basis of the codes) and the current dist-m4ri 76 (its September version 68), against 70 and 71 in
+the paper's eight-hour runs of the two tools.
 
 ### 4.3 Scaling on surface-code circuits
 
@@ -218,8 +241,8 @@ place of 29, and the plain search without symmetry and covering bound solves 17.
 Lifting and the covering bound (a bound on the faults still needed for the fired detectors) do not
 pay at this scale; several instances run faster without them.
 
-The relaxation is a contribution on its own. Given the collapsed problems, dist-m4ri solves 20 of 39
-where it solves 8 of the sector problems, and the search of section 3.3 solves 33 of them.
+The relaxation is a contribution on its own. Given the collapsed problems, the current dist-m4ri solves
+26 of 39 where it solves 16 of the sector problems, and the search of section 3.3 solves 33 of them.
 
 ### 4.5 Published circuits
 
@@ -272,7 +295,9 @@ it reports 8.
   and the mitten circuits of 500 qubits or more remain open.
 - The reductions need structure: a CSS memory experiment, detectors that can be assigned to a check
   and a round, and symmetries supplied by the user. Without them the method is a plain search; on
-  Stim's color-code circuits it is then comparable to dist-m4ri, which is faster up to d = 7.
+  Stim's color-code circuits the current dist-m4ri is faster at every distance tested (d = 11: 28 s
+  against 240 s). On instances that take either tool a second or two, dist-m4ri is also faster; most of
+  this method's time there is the start of Python.
 - Of the prior benchmark's exact methods, SCIP, CLISAT and Magma were not run here; their published
   eight-hour runs are compared instead (section 4.2). Every tool ran with default settings, the
   method included.

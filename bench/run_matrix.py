@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import ast
 import ctypes
+import fcntl
 from collections import deque
 from datetime import datetime, timezone
 import importlib.metadata
@@ -52,14 +53,37 @@ def utc_now():
 def write_json(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + ".tmp")
+    tmp = path.with_name("%s.%d.tmp" % (path.name, os.getpid()))
     with tmp.open("w") as f:
         json.dump(value, f, indent=2, allow_nan=False)
         f.write("\n")
     os.replace(str(tmp), str(path))
 
 
-def parse_methods(value, adapter_dir, heuristic_names):
+def record_invocation(manifest_path, invocation):
+    """Add this invocation to the manifest, or refresh its entry.  Harnesses that share an output directory may run
+    at the same time, so the file is re-read under a lock and only this invocation's entry is written."""
+    with open(str(manifest_path) + ".lock", "a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        previous = None
+        if manifest_path.exists():
+            try:
+                previous = json.loads(manifest_path.read_text())
+            except (OSError, ValueError):
+                pass
+        history = list(previous.get("invocations", [])) if isinstance(previous, dict) else []
+        key = (invocation["host"], invocation["pid"], invocation["started_at"])
+        for i, entry in enumerate(history):
+            if (entry.get("host"), entry.get("pid"), entry.get("started_at")) == key:
+                history[i] = dict(invocation)
+                break
+        else:
+            history.append(dict(invocation))
+        write_json(manifest_path, dict(invocation, invocations=history))
+
+
+def group_specs(value):
+    """Split a comma-separated list of methods; key=value tokens belong to the preceding method."""
     specs = []
     for token in value.split(","):
         token = token.strip()
@@ -71,6 +95,11 @@ def parse_methods(value, adapter_dir, heuristic_names):
             specs[-1] += "," + token
         else:
             specs.append(token)
+    return specs
+
+
+def parse_methods(value, adapter_dir, heuristic_names):
+    specs = group_specs(value)
     methods, folders = [], set()
     for spec in specs:
         adapter, sep, cfg = spec.partition(":")
@@ -399,7 +428,11 @@ def finalize(run, a):
                  "trace_offset_seconds": round(max(0.0, elapsed - adapter_seconds), 6),
                  "exit_code": process.returncode, "error_reason": reason, "stderr_tail": tail,
                  "stdout_file": str(run["stdout_path"]), "stderr_file": str(run["stderr_path"]),
-                 "memory_enforcement": a.memory_enforcement})
+                 "memory_enforcement": a.memory_enforcement,
+                 # the authoritative memory figure: the record's own peak_rss_mb is the adapter's view
+                 # (its process and reaped children) and misses workers and external solvers
+                 "peak_group_rss_mb": round(run.get("peak_rss_mb", 0.0), 1),
+                 "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"})
     rec["harness"] = info
     write_json(task["out"], rec)
     return rec
@@ -458,7 +491,8 @@ def main(argv=None):
         variants = a.variants.split(",")
         if len(set(variants)) != len(variants) or any(not VALID_NAME.fullmatch(v) for v in variants):
             raise ValueError("invalid or duplicate variants")
-        methods = parse_methods(a.methods, Path(a.adapter_dir).resolve(), set(a.heuristic_methods.split(",")))
+        heuristic_names = set(group_specs(a.heuristic_methods)) if a.heuristic_methods.strip() else set()
+        methods = parse_methods(a.methods, Path(a.adapter_dir).resolve(), heuristic_names)
         instances = select_instances(a.instances, Path(a.instance_dir).resolve())
         filters = []
         for clause in a.redo:
@@ -531,14 +565,8 @@ def main(argv=None):
         print("warning: " + warning, file=sys.stderr)
     out.mkdir(parents=True, exist_ok=True)
     manifest_path = out / "manifest.json"
-    previous = None
-    if manifest_path.exists():
-        try:
-            previous = json.loads(manifest_path.read_text())
-        except (OSError, ValueError):
-            pass
     invocation = {"command_line": [sys.executable, str(Path(__file__).resolve())] + (list(argv) if argv is not None else sys.argv[1:]),
-                  "host": platform.node(), "cpu_model": cpu_model(), "platform": platform.platform(),
+                  "host": platform.node(), "pid": os.getpid(), "cpu_model": cpu_model(), "platform": platform.platform(),
                   "python": sys.version, "started_at": utc_now(), "ended_at": None,
                   "versions": package_versions(), "cpus": cpus, "jobs": a.jobs,
                   "threads": threads, "mem_gb": a.mem_gb, "total_mem_gb": a.total_mem_gb,
@@ -547,9 +575,7 @@ def main(argv=None):
                   "memory_enforcement": a.memory_enforcement, "warnings": warnings,
                   "trace_timing": "adapter trace plus conservative wall_seconds - adapter_seconds offset",
                   "planned": len(tasks), "ran": 0, "resumed": 0, "skipped": 0}
-    history = previous.get("invocations", []) if isinstance(previous, dict) else []
-    manifest = dict(invocation, invocations=history + [invocation])
-    write_json(manifest_path, manifest)
+    record_invocation(manifest_path, invocation)
     pending, running, active_chains = deque(tasks), [], set()
     state = {}
     free_cpus = list(cpus)
@@ -646,6 +672,8 @@ def main(argv=None):
             rss = group_memory_mb({run["process"].pid for run in running}) if running else {}
             for run in list(running):
                 process = run["process"]
+                # peak resident memory of the whole process group (adapter, workers, external solvers)
+                run["peak_rss_mb"] = max(run.get("peak_rss_mb", 0.0), rss.get(process.pid, 0.0))
                 if process.poll() is None:
                     if time.monotonic() - run["started_monotonic"] >= a.time_limit + 30:
                         run["kill_reason"] = "killed by harness wall-time deadline (time-limit + 30 s)"
@@ -676,8 +704,7 @@ def main(argv=None):
             finalize(run, a)
         invocation["ended_at"] = utc_now()
         invocation["interrupted"] = interrupted
-        manifest.update(invocation)
-        write_json(manifest_path, manifest)
+        record_invocation(manifest_path, invocation)
     return 130 if interrupted else 0
 
 

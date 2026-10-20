@@ -1,0 +1,84 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_bb72",
+  "variant": "full",
+  "rows": 36,
+  "cols": 72,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    3,
+    6,
+    12,
+    15,
+    18,
+    24
+  ],
+  "witness_ok": true,
+  "seconds": 3.752,
+  "trace": [
+    {
+      "t": 3.666,
+      "ub": 12
+    },
+    {
+      "t": 3.666,
+      "lb": 0
+    },
+    {
+      "t": 3.666,
+      "ub": 10
+    },
+    {
+      "t": 3.666,
+      "ub": 6
+    },
+    {
+      "t": 3.741,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 113.3,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_bb72",
+    "family": "bb6",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-18T17:34:06.961816+00:00",
+    "ended_at": "2026-10-18T17:34:10.995240+00:00",
+    "wall_seconds": 4.03268,
+    "adapter_seconds": 3.752,
+    "trace_offset_seconds": 0.28068,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_bb72__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_bb72__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 117.9,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

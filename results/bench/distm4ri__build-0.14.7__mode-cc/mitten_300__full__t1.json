@@ -1,0 +1,83 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-z5r7myyr/codewords.nz",
+    "timeout": "599.056072427"
+  },
+  "instance": "mitten_300",
+  "variant": "full",
+  "rows": 1440,
+  "cols": 87780,
+  "obs": 60,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 5,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.01,
+  "trace": [
+    {
+      "t": 1.414,
+      "lb": 2
+    },
+    {
+      "t": 1.536,
+      "lb": 3
+    },
+    {
+      "t": 1.891,
+      "lb": 4
+    },
+    {
+      "t": 57.045,
+      "lb": 5
+    }
+  ],
+  "peak_rss_mb": 58.8,
+  "truth": 12,
+  "truth_kind": "lower_bound",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. maxC=1 stops at the first CC witness after exhausting lighter weights. Wall deadline reached; process group killed. Only completed proofs and available checked witnesses retained.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_300",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-18T10:12:26.753405+00:00",
+    "ended_at": "2026-10-18T10:22:26.873891+00:00",
+    "wall_seconds": 600.120179,
+    "adapter_seconds": 600.01,
+    "trace_offset_seconds": 0.110179,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/mitten_300__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/mitten_300__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 29.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

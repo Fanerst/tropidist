@@ -17,6 +17,15 @@ import summary_table as T
 
 A, B, ABL = ROOT / "results" / "bench", ROOT / "results" / "bench_tierB", ROOT / "results" / "bench_ablation"
 EXACT = [name for _, name in T.SHORT if name not in T.HEURISTIC]
+OLD_DM4RI = lambda name: name.startswith("dist-m4ri 0.9.0")      # superseded build: own section only
+DM4RI_VERSIONS = ["dist-m4ri 0.9.0 CC", "dist-m4ri 0.9.0 CC, no cutoff", "dist-m4ri CC", "dist-m4ri CC+RW"]
+DM4RI_VERSIONS_RAW = DM4RI_VERSIONS + ["dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
+# tools whose code results depend on the logical basis: the main tables keep their runs on the instances' first
+# basis; their runs on the sparse basis (full.L.std.mtx) are side by side in a section of their own, and the
+# coverage counts credit a tool with either basis
+BASIS_TOOLS = ["HiGHS", "CP-SAT", "Gurobi", "SAT", "RC2", "CASHWMaxSAT", "enMaxCDCL"]
+SPARSE_L = lambda name: name.endswith(", sparse L")
+BASIS_COLUMNS = [x for t in BASIS_TOOLS for x in (t, t + ", sparse L")]
 
 
 STIM = ("surface", "stim_color")
@@ -32,7 +41,8 @@ def stim_set(m):
 
 def overall():
     """One row per instance on its main problem (sector for CSS circuits, the code itself, the raw
-    model for circuits without sectors): our best time and the best other exact method, per tier."""
+    model for circuits without sectors): our best time and the best other exact method, per tier.  The superseded
+    dist-m4ri 0.9.0 is left out (it solves no instance that 0.14.7 does not)."""
     import json
     a, b32, b1 = T.load(A, 1), T.load(B, 32), T.load(B, 1)
     ours = ("ours",)                       # one configuration: the pipeline, not the better of two
@@ -49,8 +59,8 @@ def overall():
             continue
         variant = "full" if (m["track"] == "code" or "sector" not in m["variants"]) else "sector"
         name = m["name"]
-        comp = sorted({k[0] for recs in (a, b32, b1) for k in recs if k[1] == name and k[2] == variant}
-                      - set(mine) - set(T.HEURISTIC))
+        comp = sorted(c for c in {k[0] for recs in (a, b32, b1) for k in recs if k[1] == name and k[2] == variant}
+                      - set(mine) - set(T.HEURISTIC) if not OLD_DM4RI(c))
         oa = min((t for t in (ex(a, o, name, variant) for o in ours) if t is not None), default=None)
         ob = ex(b32, "ours", name, variant)
         ca = min(((t, c) for c in comp for t in [ex(a, c, name, variant)] if t is not None), default=None)
@@ -86,21 +96,34 @@ def tables():
     if A.is_dir() and B.is_dir():
         t["overall"] = overall()
     if A.is_dir():
-        t["A-circuit-sector"] = T.table(A, "sector", "circuit", 1, select=main_set)
-        t["A-circuit-full"] = T.table(A, "full", "circuit", 1, select=main_set)
-        t["A-code"] = T.table(A, "full", "code", 1)
-        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"])
-        t["A-stim-sector"] = T.table(A, "sector", "circuit", 1, select=stim_set)
-        t["A-stim-full"] = T.table(A, "full", "circuit", 1, select=stim_set)
+        t["A-circuit-sector"] = T.table(A, "sector", "circuit", 1, select=main_set, exclude=OLD_DM4RI)
+        t["A-circuit-full"] = T.table(A, "full", "circuit", 1, select=main_set, exclude=OLD_DM4RI)
+        t["A-code"] = T.table(A, "full", "code", 1, exclude=lambda n: OLD_DM4RI(n) or SPARSE_L(n))
+        t["L-code"] = T.table(A, "full", "code", 1, methods=BASIS_COLUMNS)
+        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"], exclude=OLD_DM4RI)
+        t["A-stim-sector"] = T.table(A, "sector", "circuit", 1, select=stim_set, exclude=OLD_DM4RI)
+        t["A-stim-full"] = T.table(A, "full", "circuit", 1, select=stim_set, exclude=OLD_DM4RI)
+        # the two dist-m4ri builds side by side (first tier)
+        t["DM-sector"] = T.table(A, "sector", "circuit", 1, methods=DM4RI_VERSIONS)
+        t["DM-code"] = T.table(A, "full", "code", 1, methods=DM4RI_VERSIONS)
+        t["DM-full"] = T.table(A, "full", "circuit", 1, methods=DM4RI_VERSIONS_RAW)
+        t["DM-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=DM4RI_VERSIONS)
         bad = T.consistency(A, 1)
         t["A-check"] = "\n".join("- " + b for b in bad) if bad else "All first-tier records are mutually consistent and consistent with the ground truth."
     if B.is_dir():
         for threads, key in ((32, "B32"), (1, "B1")):
             for variant, track in (("sector", "circuit"), ("full", "circuit"), ("full", "code")):
                 try:
-                    t["%s-%s-%s" % (key, track, variant)] = T.table(B, variant, track, threads)
+                    excl = (lambda n: OLD_DM4RI(n) or SPARSE_L(n)) if track == "code" else OLD_DM4RI
+                    t["%s-%s-%s" % (key, track, variant)] = T.table(B, variant, track, threads, exclude=excl)
                 except (OSError, ValueError):
                     pass
+            try:
+                t["L-%s-code" % key] = T.table(B, "full", "code", threads, methods=BASIS_COLUMNS)
+            except (OSError, ValueError):
+                pass
+        for variant, track in (("sector", "circuit"), ("full", "code")):
+            t["DM-B32-%s" % track] = T.table(B, variant, track, 32, methods=["dist-m4ri 0.9.0 CC+RW", "dist-m4ri CC+RW", "dist-m4ri CC"])
         bad = T.consistency(B, 32) + T.consistency(B, 1)
         t["B-check"] = "\n".join("- " + b for b in bad) if bad else "All second-tier records are mutually consistent and consistent with the ground truth."
     if ABL.is_dir():

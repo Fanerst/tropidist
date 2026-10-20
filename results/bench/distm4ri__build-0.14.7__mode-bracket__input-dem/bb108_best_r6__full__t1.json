@@ -1,0 +1,113 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "input": "dem",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "fdem": "/tmp/bench-distm4ri-njwr97je/input.dem",
+    "pmin": "0",
+    "outC": "/tmp/bench-distm4ri-njwr97je/codewords.nz",
+    "timeout": "599.043367445"
+  },
+  "instance": "bb108_best_r6",
+  "variant": "full",
+  "rows": 648,
+  "cols": 24246,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": 10,
+  "witness": [
+    22146,
+    22162,
+    22197,
+    22252,
+    22303,
+    22357,
+    22575,
+    22663,
+    22711,
+    22855
+  ],
+  "witness_ok": true,
+  "seconds": 391.572,
+  "trace": [
+    {
+      "t": 0.971,
+      "lb": 2
+    },
+    {
+      "t": 1.106,
+      "lb": 3
+    },
+    {
+      "t": 1.23,
+      "lb": 4
+    },
+    {
+      "t": 1.349,
+      "lb": 5
+    },
+    {
+      "t": 1.508,
+      "lb": 6
+    },
+    {
+      "t": 2.404,
+      "lb": 7
+    },
+    {
+      "t": 15.446,
+      "lb": 8
+    },
+    {
+      "t": 253.31,
+      "lb": 9
+    },
+    {
+      "t": 391.541,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 56.2,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Undecomposed loop-flattened DEM; pmin=0 retains every mechanism. dist-m4ri ignores probabilities after filtering, using unit weights. Raw supports map to full columns with GF(2) cancellation. Native triple: 9 10 100000 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,input=dem",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,input=dem",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      10
+    ],
+    "started_at": "2026-10-18T08:50:29.186502+00:00",
+    "ended_at": "2026-10-18T08:57:01.092839+00:00",
+    "wall_seconds": 391.857379,
+    "adapter_seconds": 391.572,
+    "trace_offset_seconds": 0.285379,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem/bb108_best_r6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem/bb108_best_r6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 19.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

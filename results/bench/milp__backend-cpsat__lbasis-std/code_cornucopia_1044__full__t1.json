@@ -1,0 +1,102 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_cornucopia_1044",
+  "variant": "full",
+  "rows": 261,
+  "cols": 1044,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 16,
+  "witness": [
+    48,
+    124,
+    125,
+    126,
+    137,
+    223,
+    465,
+    649,
+    725,
+    824,
+    826,
+    840,
+    913,
+    914,
+    998,
+    1014
+  ],
+  "witness_ok": true,
+  "seconds": 600.026,
+  "trace": [
+    {
+      "t": 8.592,
+      "ub": 56
+    },
+    {
+      "t": 8.592,
+      "lb": 0
+    },
+    {
+      "t": 10.864,
+      "ub": 34
+    },
+    {
+      "t": 263.591,
+      "ub": 26
+    },
+    {
+      "t": 286.494,
+      "ub": 24
+    },
+    {
+      "t": 290.707,
+      "ub": 18
+    },
+    {
+      "t": 340.641,
+      "ub": 16
+    }
+  ],
+  "peak_rss_mb": 169.6,
+  "truth": 12,
+  "truth_kind": "unknown",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-18T17:34:06.981590+00:00",
+    "ended_at": "2026-10-18T17:44:07.382631+00:00",
+    "wall_seconds": 600.294922,
+    "adapter_seconds": 600.026,
+    "trace_offset_seconds": 0.268922,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_cornucopia_1044__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/code_cornucopia_1044__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 183.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

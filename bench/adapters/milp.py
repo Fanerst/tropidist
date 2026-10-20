@@ -1,7 +1,9 @@
 """Exact integer-programming adapters for binary parity distance.
 
 config: backend=scipy (default), highspy, gurobi, or cpsat; mode=optimize
-(default) or decision; dump=<directory> writes an LP and does not solve.
+(default) or decision; dump=<directory> writes an LP and does not solve;
+lbasis=std reads the sparse logical basis full.L.std.mtx of a code instance
+(bench/standard_logicals.py).
 All models use bounded integer parity slacks, binary fault and logical bits,
 and the solver's native thread setting. Optional packages are never required
 by the default SciPy/HiGHS adapter.
@@ -391,7 +393,7 @@ def main():
     deadline = tr.t0 + max(0.0, a.time_limit)
     os.environ["OMP_NUM_THREADS"] = str(a.threads)
     os.environ["OPENBLAS_NUM_THREADS"] = str(a.threads)
-    prob = common.load(a.instance, a.variant)
+    prob = common.load(a.instance, a.variant, lbasis=a.cfg.get("lbasis"))
     cfg = dict(a.cfg)
     backend, mode = cfg.setdefault("backend", "scipy"), cfg.setdefault("mode", "optimize")
     cfg["threads_honoured"] = backend in ("scipy", "highspy", "gurobi", "cpsat")
@@ -399,6 +401,8 @@ def main():
               "highspy": "HiGHS threads", "gurobi": "Gurobi Threads" + (
               "" if importlib.util.find_spec("gurobipy") else " (gurobi_cl on an LP file)"), "cpsat": "CP-SAT num_search_workers"}.get(backend, "unknown backend"))
     witness, status, version = None, "error", None
+    if cfg.get("lbasis"):
+        notes += "; logical matrix %s (lbasis=%s)" % (prob.lfile, cfg["lbasis"])
     if a.threads < 1 or backend not in ("scipy", "highspy", "gurobi", "cpsat") or mode not in ("optimize", "decision"):
         cfg["threads_honoured"] = None
         notes += "; invalid threads, backend or mode"

@@ -1,0 +1,166 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-_kdycpnc/codewords.nz",
+    "timeout": "3599.883437342"
+  },
+  "instance": "wjh_lp_pk31",
+  "variant": "full",
+  "rows": 465,
+  "cols": 1054,
+  "obs": 140,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 18,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3599.916,
+  "trace": [
+    {
+      "t": 0.034,
+      "lb": 2
+    },
+    {
+      "t": 0.034,
+      "lb": 3
+    },
+    {
+      "t": 0.034,
+      "lb": 4
+    },
+    {
+      "t": 0.034,
+      "lb": 5
+    },
+    {
+      "t": 0.035,
+      "lb": 6
+    },
+    {
+      "t": 0.036,
+      "lb": 7
+    },
+    {
+      "t": 0.037,
+      "lb": 8
+    },
+    {
+      "t": 0.043,
+      "lb": 9
+    },
+    {
+      "t": 0.056,
+      "lb": 10
+    },
+    {
+      "t": 0.111,
+      "lb": 11
+    },
+    {
+      "t": 0.296,
+      "lb": 12
+    },
+    {
+      "t": 1.226,
+      "lb": 13
+    },
+    {
+      "t": 3.775,
+      "lb": 14
+    },
+    {
+      "t": 17.991,
+      "lb": 15
+    },
+    {
+      "t": 65.229,
+      "lb": 16
+    },
+    {
+      "t": 342.26,
+      "lb": 17
+    },
+    {
+      "t": 1226.383,
+      "lb": 18
+    }
+  ],
+  "peak_rss_mb": 31.4,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 18 0 0 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_lp_pk31",
+    "family": "wjh_lp",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-18T22:34:09.436521+00:00",
+    "ended_at": "2026-10-18T23:34:09.437786+00:00",
+    "wall_seconds": 3600.000875,
+    "adapter_seconds": 3599.916,
+    "trace_offset_seconds": 0.084875,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-cc/wjh_lp_pk31__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_tierB/distm4ri__build-0.14.7__mode-cc/wjh_lp_pk31__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

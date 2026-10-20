@@ -1,0 +1,132 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/collapsed.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/collapsed.L.mtx",
+    "outC": "/tmp/bench-distm4ri-pfgjb1l2/codewords.nz",
+    "timeout": "599.892958760"
+  },
+  "instance": "surface_d13",
+  "variant": "collapsed",
+  "rows": 84,
+  "cols": 229,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 13,
+  "upper_bound": 13,
+  "witness": [
+    18,
+    19,
+    20,
+    21,
+    30,
+    37,
+    39,
+    40,
+    42,
+    44,
+    48,
+    61,
+    63
+  ],
+  "witness_ok": true,
+  "seconds": 2.728,
+  "trace": [
+    {
+      "t": 0.011,
+      "lb": 2
+    },
+    {
+      "t": 0.026,
+      "lb": 3
+    },
+    {
+      "t": 0.04,
+      "lb": 4
+    },
+    {
+      "t": 0.055,
+      "lb": 5
+    },
+    {
+      "t": 0.07,
+      "lb": 6
+    },
+    {
+      "t": 0.085,
+      "lb": 7
+    },
+    {
+      "t": 0.104,
+      "lb": 8
+    },
+    {
+      "t": 0.123,
+      "lb": 9
+    },
+    {
+      "t": 0.147,
+      "lb": 10
+    },
+    {
+      "t": 0.198,
+      "lb": 11
+    },
+    {
+      "t": 0.344,
+      "lb": 12
+    },
+    {
+      "t": 0.846,
+      "lb": 13
+    },
+    {
+      "t": 2.673,
+      "ub": 13
+    }
+  ],
+  "peak_rss_mb": 33.8,
+  "truth": 13,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 13 13 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      8
+    ],
+    "started_at": "2026-10-18T10:02:16.800326+00:00",
+    "ended_at": "2026-10-18T10:02:19.633287+00:00",
+    "wall_seconds": 2.832287,
+    "adapter_seconds": 2.728,
+    "trace_offset_seconds": 0.104287,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/surface_d13__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/surface_d13__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

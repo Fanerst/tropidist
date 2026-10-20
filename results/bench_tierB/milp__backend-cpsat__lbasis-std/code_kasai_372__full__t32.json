@@ -1,0 +1,153 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "code_kasai_372",
+  "variant": "full",
+  "rows": 124,
+  "cols": 372,
+  "obs": 130,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": 16,
+  "witness": [
+    31,
+    68,
+    98,
+    134,
+    195,
+    229,
+    236,
+    254,
+    257,
+    275,
+    281,
+    299,
+    302,
+    320,
+    327,
+    360
+  ],
+  "witness_ok": true,
+  "seconds": 3600.606,
+  "trace": [
+    {
+      "t": 0.389,
+      "ub": 62
+    },
+    {
+      "t": 0.389,
+      "lb": 1
+    },
+    {
+      "t": 3.985,
+      "ub": 38
+    },
+    {
+      "t": 3.985,
+      "lb": 5
+    },
+    {
+      "t": 8.964,
+      "ub": 36
+    },
+    {
+      "t": 8.964,
+      "lb": 6
+    },
+    {
+      "t": 9.726,
+      "ub": 32
+    },
+    {
+      "t": 22.785,
+      "ub": 20
+    },
+    {
+      "t": 147.498,
+      "ub": 18
+    },
+    {
+      "t": 147.498,
+      "lb": 7
+    },
+    {
+      "t": 239.105,
+      "ub": 16
+    },
+    {
+      "t": 3600.573,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 972.5,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_372",
+    "family": "kasai",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ],
+    "started_at": "2026-10-19T00:35:06.757174+00:00",
+    "ended_at": "2026-10-19T01:35:07.541116+00:00",
+    "wall_seconds": 3600.774668,
+    "adapter_seconds": 3600.606,
+    "trace_offset_seconds": 0.168668,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_kasai_372__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-cpsat__lbasis-std/code_kasai_372__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 985.6,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}
