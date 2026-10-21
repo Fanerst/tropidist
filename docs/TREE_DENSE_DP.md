@@ -2,6 +2,19 @@
 
 The distance library now supports general binary-tree realizations through `cdist.tree_dp`. The existing trellis engine is retained. The new engine solves the same exact unit-cost problem, including arbitrary affine targets; it is not a width-truncated relaxation.
 
+## Changes from the trellis
+
+The previous solver adds one column at a time in a fixed order. The new solver combines two subproblems at each node of a binary tree. Both solve the same H/L distance problem. The previous trellis solver remains available.
+
+| Aspect | Previous trellis | New tree solver |
+|---|---|---|
+| Decomposition | Fixed column order | General binary tree |
+| Boundary states | H parities plus a logical target row | Minimal boundary space of the augmented matrix |
+| Resource estimate | Largest trellis buffer | All live tables, scratch memory, and join work |
+| Integer costs | uint8, with 255 as infinity | Smallest safe unsigned type for N+1 |
+
+The measured benefit is lower memory use on suitable trees. For BB72, the largest table decreases from 256 KiB to 4 KiB, and the complete numeric workspace decreases from 262,144 bytes to 12,560 bytes. Both solvers return distance 6 after all 12 observable queries. The recorded times are 0.026 s for tree DP and 0.014 s for trellis DP, excluding decomposition search. Thus, this example demonstrates a memory improvement, but no speed improvement. Other trees can require much more join work even when their tables are smaller.
+
 ## Interface and correctness
 
 A tree is an original column index at a leaf and a pair of child trees at a join. `CompiledTreeDP(M, tree).run(t)` minimizes Hamming weight subject to `M e = t`. `tree_min_distance_for_mask(H, L, mask, tree)` evaluates one logical parity query. `scripts/experiments_tree_dense.py` profiles or executes all observable rows and takes their minimum; an explicitly selected observable is labelled separately.
