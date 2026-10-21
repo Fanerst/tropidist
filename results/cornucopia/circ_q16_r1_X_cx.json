@@ -1,0 +1,579 @@
+{
+ "paper": "cornucopia",
+ "code": [
+  576,
+  292,
+  8
+ ],
+ "paper_circuit_distance_upper_bound": 8,
+ "basis": "X",
+ "rounds": 1,
+ "noise": "cx",
+ "circuit": "circuits/papers/cornucopia576_r1_X_cx.stim",
+ "threads": 64,
+ "model": {
+  "qubits": 864,
+  "detectors": 288,
+  "observables": 292,
+  "dem_mechanisms": 3744,
+  "sector_rows": 288,
+  "sector_columns": 3744,
+  "sector_reduction_exact": true,
+  "collapsed_rows": 144,
+  "collapsed_columns": 1872
+ },
+ "sector_symmetries_kept": 15,
+ "symmetries_expected": 15,
+ "collapsed": {
+  "rows": 144,
+  "columns": 1872,
+  "k_table": 2,
+  "orbits": 117,
+  "runs": [
+   {
+    "K": 1,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 117,
+    "false_hits": 0,
+    "seconds": 0.01
+   },
+   {
+    "K": 2,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 117,
+    "false_hits": 117,
+    "seconds": 0.0
+   },
+   {
+    "K": 3,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 117,
+    "false_hits": 117,
+    "seconds": 0.03
+   },
+   {
+    "K": 4,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 5051,
+    "false_hits": 4934,
+    "seconds": 0.03
+   },
+   {
+    "K": 5,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 270591,
+    "false_hits": 175,
+    "seconds": 0.01
+   },
+   {
+    "K": 6,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 15861784,
+    "false_hits": 310,
+    "seconds": 0.12
+   },
+   {
+    "K": 7,
+    "status": "exhausted",
+    "best": null,
+    "nodes": 953080851,
+    "false_hits": 589,
+    "seconds": 0.96
+   },
+   {
+    "K": 8,
+    "status": "found",
+    "best": 8,
+    "nodes": 17900800411,
+    "false_hits": 345,
+    "seconds": 12.29
+   }
+  ],
+  "distance": 8
+ },
+ "certified_lower_bound": 8,
+ "witness": {
+  "weight": 8,
+  "dem_error_indices": [
+   5,
+   27,
+   388,
+   417,
+   1107,
+   1126,
+   1891,
+   1916
+  ],
+  "dem_errors": [
+   "error(0.000533333) D0 D17 D50 D65 D115 D135 L5 L8 L9 L11 L15 L17 L23 L25 L27 L30 L31 L32 L34 L35 L36 L39 L40 L42 L43 L44 L47 L48 L50 L51 L53 L54 L59 L60 L62 L64 L69 L72 L73 L75 L78 L79 L81 L82 L86 L87 L92 L94 L95 L99 L101 L102 L104 L105 L106 L107 L109 L110 L114 L115 L118 L119 L120 L121 L124 L125 L133 L137 L138 L139 L140 L141 L143 L147 L150 L153 L157 L158 L159 L165 L167 L168 L169 L170 L176 L177 L179 L180 L181 L182 L184 L186 L187 L189 L190 L192 L195 L197 L204 L209 L211 L213 L215 L216 L218 L219",
+   "error(0.00133227) D0 D48 D98 L4 L5 L8 L9 L10 L11 L13 L14 L15 L16 L18 L20 L21 L24 L26 L27 L30 L32 L33 L35 L36 L37 L40 L41 L45 L47 L51 L52 L54 L58 L61 L62 L65 L67 L70 L72 L74 L75 L79 L80 L81 L82 L85 L88 L92 L93 L94 L95 L96 L98 L99 L101 L103 L106 L107 L108 L109 L110 L112 L113 L114 L115 L118 L119 L121 L124 L125 L127 L128 L130 L131 L132 L133 L135 L136 L138 L139 L141 L144 L147 L149 L151 L153 L155 L159 L160 L161 L162 L163 L164 L166 L167 L170 L171 L178 L181 L183 L185 L186 L188 L191 L193 L194 L197 L200 L202 L203",
+   "error(0.000533333) D6 D17 D50 D65 D98 D115 L0 L6 L7 L9 L10 L11 L14 L15 L16 L21 L22 L23 L29 L32 L33 L34 L35 L38 L40 L41 L42 L43 L50 L51 L53 L56 L57 L58 L59 L64 L65 L67 L69 L70 L71 L72 L76 L77 L80 L82 L88 L89 L94 L98 L101 L102 L105 L106 L107 L108 L110 L112 L113 L114 L117 L118 L119 L120 L122 L123 L125 L126 L127 L130 L132 L133 L135 L137 L139 L140 L142 L147 L148 L151 L154 L157 L159 L163 L165 L169 L171 L173 L178 L179 L181 L182 L184 L185 L186 L188 L189 L190 L191 L192 L193 L194 L195 L199 L200 L202 L207 L209 L210 L211 L212 L216 L219 L220 L223 L226 L227 L229 L232 L234 L235 L237 L240 L246 L250 L252 L254",
+   "error(0.000266738) D6 D51 D142",
+   "error(0.0010661) D18 D51 D113",
+   "error(0.000266738) D18 D91 D135 L0 L1 L3 L6 L7 L10 L11 L12 L13 L16 L19 L20 L21 L25 L35",
+   "error(0.000266738) D37 D48 D113",
+   "error(0.000533333) D37 D91 D142 L1 L5 L6 L7 L10 L11 L17 L19 L20 L21 L23 L24 L26 L27 L28 L30 L31 L34 L36 L37 L38 L39 L40 L41 L42 L44 L46 L49 L50 L53 L56 L57 L58 L60 L61 L65 L67 L68 L70 L71 L72 L74 L76 L78 L80 L85 L86 L87 L89 L90 L91 L92 L93 L96 L101 L104 L106 L107 L109 L111 L112 L114 L116 L117 L118 L119 L120 L121 L122 L125 L128 L130 L132 L133 L136 L137 L141 L142 L143 L150 L152 L156 L158 L159 L162 L166 L167 L168 L169 L170 L171 L175 L177 L178 L179 L180 L181 L182 L183 L185 L186 L189 L190 L192 L193 L198 L200 L203 L204 L205 L206 L208 L210 L211 L212 L213 L214 L218 L219 L222 L223 L224 L226 L227 L231 L232 L237 L238 L239 L241 L242 L243 L244 L245 L247 L248 L249 L250 L251 L252 L253 L254 L255 L258 L259 L260 L261 L263 L264 L265 L267 L268 L271 L272 L273 L274 L275 L277 L278 L281 L282 L283 L285 L286 L288"
+  ],
+  "dem_check": {
+   "detectors": [],
+   "observables": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    11,
+    12,
+    15,
+    16,
+    18,
+    20,
+    22,
+    23,
+    27,
+    28,
+    29,
+    30,
+    32,
+    34,
+    36,
+    41,
+    42,
+    45,
+    46,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    58,
+    65,
+    67,
+    68,
+    70,
+    73,
+    77,
+    80,
+    82,
+    90,
+    91,
+    92,
+    94,
+    103,
+    109,
+    110,
+    111,
+    112,
+    116,
+    120,
+    121,
+    123,
+    126,
+    130,
+    131,
+    132,
+    137,
+    139,
+    141,
+    144,
+    147,
+    148,
+    149,
+    152,
+    154,
+    155,
+    156,
+    160,
+    161,
+    164,
+    167,
+    169,
+    170,
+    171,
+    173,
+    175,
+    176,
+    178,
+    179,
+    182,
+    185,
+    187,
+    189,
+    190,
+    192,
+    193,
+    198,
+    199,
+    200,
+    205,
+    206,
+    207,
+    208,
+    211,
+    214,
+    215,
+    219,
+    220,
+    222,
+    224,
+    229,
+    231,
+    234,
+    235,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    251,
+    253,
+    255,
+    258,
+    259,
+    260,
+    261,
+    263,
+    264,
+    265,
+    267,
+    268,
+    271,
+    272,
+    273,
+    274,
+    275,
+    277,
+    278,
+    281,
+    282,
+    283,
+    285,
+    286,
+    288
+   ]
+  },
+  "physical_faults": [
+   {
+    "tick": 3,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      615
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      9,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 2,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      204
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      6,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 3,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      648
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      9,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 8,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      771
+     ],
+     [
+      "Z",
+      537
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 8,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      461
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 2,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      738
+     ],
+     [
+      "Z",
+      35
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      6,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 8,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      757
+     ],
+     [
+      "Z",
+      523
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   },
+   {
+    "tick": 8,
+    "instruction": "DEPOLARIZE2",
+    "paulis": [
+     [
+      "Z",
+      369
+     ]
+    ],
+    "flipped_measurement": null,
+    "stack": [
+     [
+      24,
+      0,
+      0
+     ]
+    ]
+   }
+  ],
+  "replay": {
+   "fired_detectors": [],
+   "flipped_observables": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    11,
+    12,
+    15,
+    16,
+    18,
+    20,
+    22,
+    23,
+    27,
+    28,
+    29,
+    30,
+    32,
+    34,
+    36,
+    41,
+    42,
+    45,
+    46,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    58,
+    65,
+    67,
+    68,
+    70,
+    73,
+    77,
+    80,
+    82,
+    90,
+    91,
+    92,
+    94,
+    103,
+    109,
+    110,
+    111,
+    112,
+    116,
+    120,
+    121,
+    123,
+    126,
+    130,
+    131,
+    132,
+    137,
+    139,
+    141,
+    144,
+    147,
+    148,
+    149,
+    152,
+    154,
+    155,
+    156,
+    160,
+    161,
+    164,
+    167,
+    169,
+    170,
+    171,
+    173,
+    175,
+    176,
+    178,
+    179,
+    182,
+    185,
+    187,
+    189,
+    190,
+    192,
+    193,
+    198,
+    199,
+    200,
+    205,
+    206,
+    207,
+    208,
+    211,
+    214,
+    215,
+    219,
+    220,
+    222,
+    224,
+    229,
+    231,
+    234,
+    235,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    251,
+    253,
+    255,
+    258,
+    259,
+    260,
+    261,
+    263,
+    264,
+    265,
+    267,
+    268,
+    271,
+    272,
+    273,
+    274,
+    275,
+    277,
+    278,
+    281,
+    282,
+    283,
+    285,
+    286,
+    288
+   ]
+  },
+  "verified": true
+ },
+ "certified_upper_bound": 8,
+ "seconds": 20.0
+}

@@ -15,7 +15,10 @@ A paper module provides CODES[size] = (..., ..., (n, k, d), claimed circuit dist
 build(size, basis, rounds), and optionally translations(size) (check permutations that are
 symmetries of the circuit) and tag(size) (name used in file names).
 
-Usage: python papers/run_parallel.py cornucopia 7 Z out.json [rounds] [k_coll] [kmax] [seconds_per_threshold] [full: 0|1] [noise: full|cx]
+Usage: python papers/run_parallel.py cornucopia 7 Z out.json [rounds] [k_coll] [kmax] [seconds_per_threshold] [full: 0|1] [noise: full|cx] [cover: 0|1]
+
+cover = 1 adds the covering bound to every search (fewer nodes, more work per node; it pays off from a
+threshold of about 8 on these circuits).  The default 0 is the setting of the October 2026 records.
 """
 import json
 import os
@@ -62,9 +65,12 @@ def sym_of(p, check_perms):
     return sym, kw
 
 
+COVER = False
+
+
 def dist(p, **kw):
     """One pass over the search tree for any number of observables (label-free mode)."""
-    r = search.distance(p, labelfree=True, **kw)
+    r = search.distance(p, labelfree=True, cover=COVER, **kw)
     for x in r["runs"]:
         x["nodes"] = sum(x["nodes"])
     return r
@@ -88,8 +94,10 @@ def lift_multi(sector, relaxed, classes, slack, time_limit):
     return r["distance"], tuple(cols[i] for i in r["solutions"][0])
 
 
-def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_full=1, noise="full"):
+def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_full=1, noise="full", cover=0):
+    global COVER
     rounds, k_coll, kmax, time_limit, do_full = int(rounds), int(k_coll), int(kmax), float(time_limit), int(do_full)
+    COVER = bool(int(cover))
     mod = __import__(paper)
     size = int(size) if str(size).lstrip("-").isdigit() else size       # keys of mod.CODES are ints or strings
     t0 = time.time()
@@ -107,7 +115,7 @@ def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_
     exact = problem.sector_is_exact(full, sector)
     coll = problem.collapse_time(sector)
     res = {"paper": paper, "code": list(mod.CODES[size][2]), "paper_circuit_distance_upper_bound": mod.CODES[size][3],
-           "basis": basis, "rounds": rounds, "noise": noise, "circuit": os.path.relpath(path, ROOT),
+           "basis": basis, "rounds": rounds, "noise": noise, "cover": COVER, "circuit": os.path.relpath(path, ROOT),
            "threads": search.lib().gm_num_threads(),
            "model": {"qubits": circ.num_qubits, "detectors": circ.num_detectors, "observables": circ.num_observables,
                      "dem_mechanisms": full.notes["raw_mechanisms"], "sector_rows": sector.nrows,

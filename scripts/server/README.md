@@ -16,4 +16,5 @@ file before using them elsewhere. All of them are meant to be run from the repos
 | `chain_after_dm4ri.sh`, `sparseL2_split.sh` | after the dist-m4ri 0.14.7 pass: its early-stopped second-tier runs again in pure cluster mode, and the integer-programming and SAT tools on the sparse logical basis (docs/BENCHMARK.md) |
 | `redo_gurobi_d11.sh`, `redo_gurobi_w8bb.sh`, `redo_gurobi_mm324.sh`, `redo_dm4ri_rw.sh` | single runs repeated after a failure or a harness fix, as listed in docs/BENCHMARK.md |
 | `rebuild_manifest.py`, `rebuild_manifest_dm4ri.py` | put back the manifest entries that harnesses running at the same time had overwritten (marked `reconstructed`) |
+| `server_cornucopia_check.sh`, `server_cornucopia_isd.sh` | the check of the Cornucopia distances: one-cycle circuits in the authors' setting, the large memory circuits with the covering bound, and the randomized witness search (docs/PAPERS.md, results/cornucopia/) |
 | `mem_guard.sh` | stops this project's jobs if their total memory passes a limit |
