@@ -1,41 +1,19 @@
 --- a/RankWidthApproximate.csproj
 +++ b/RankWidthApproximate.csproj
-@@ -2,18 +2,18 @@
- 
-   <PropertyGroup>
-     <OutputType>Exe</OutputType>
+@@ -1 +1 @@
+-﻿<Project Sdk="Microsoft.NET.Sdk">
++<Project Sdk="Microsoft.NET.Sdk">
+@@ -5 +5 @@
 -    <TargetFramework>net5.0</TargetFramework>
 +    <TargetFramework>net8.0</TargetFramework>
-     <LangVersion>9.0</LangVersion>
-   </PropertyGroup>
- 
-   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+@@ -10 +10 @@
 -    <PlatformTarget>x64</PlatformTarget>
 +    <PlatformTarget>AnyCPU</PlatformTarget>
-     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-     <DefineConstants>TRACE;LOG_PROGRESS</DefineConstants>
-   </PropertyGroup>
- 
-   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+@@ -16 +16 @@
 -    <PlatformTarget>x64</PlatformTarget>
 +    <PlatformTarget>AnyCPU</PlatformTarget>
-     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-     <DefineConstants>TRACE;LOG_PROGRESS</DefineConstants>
-   </PropertyGroup>
 --- a/LocalSearch/SearchContext.cs
 +++ b/LocalSearch/SearchContext.cs
-@@ -1,4 +1,4 @@
--using System;
-+﻿using System;
- using System.Collections.Generic;
- using System.Threading.Tasks;
- using RankWidthApproximate.Data;
-@@ -192,7 +192,7 @@
-                 }, computationThreshold);
- 
-                 object lockObj = new();
+@@ -195 +195 @@
 -                Parallel.ForEach(partitions,
 +                Parallel.ForEach(partitions, new ParallelOptions { MaxDegreeOfParallelism = 1 },
-                     () => (score: (long)0, width: width, worst: (BitArrayEx)null),
-                     (input, loopState, idk, local) =>
-                     {

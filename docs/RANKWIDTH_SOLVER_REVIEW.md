@@ -50,6 +50,8 @@ The retrieved repository has no LICENSE file, so its code was not copied into th
 Gericom was built with a portable .NET 8 SDK under the project's `temp/` directory.
 The recorded portability patch changes the target to `net8.0`, uses `AnyCPU`, and limits `Parallel.ForEach` to one worker.
 The rank and annealing algorithms were unchanged.
+Apply the saved zero-context portability patch from the upstream project directory with `git apply --unidiff-zero`.
+Its replay was checked byte-for-byte against the sources used to build the executable; see `portability_patch_validation.json`.
 The wrapper preserves isolated vertices through diagonal DIMACS records, which never cross a cut.
 It rejects malformed trees and checks each DOT edge's rank against the original loop-free graph.
 The interchange follows the audited approach already used by `DecisionDiagramDecoder-github`.
