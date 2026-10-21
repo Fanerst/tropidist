@@ -1,0 +1,63 @@
+{
+ "date": "2026-10-21",
+ "timezone": "Asia/Singapore",
+ "repository_commit": "b4cfc4493acbd9d279357104ccb23a85fb92b452",
+ "cpu": "Apple M5 Pro",
+ "physical_cores": 15,
+ "performance_cores": 5,
+ "efficiency_cores": 10,
+ "ram_bytes": 25769803776,
+ "kernel_threads": 1,
+ "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+ "platform": "macOS-26.5.2-arm64-arm-64bit",
+ "packages": {
+  "numpy": "2.5.4",
+  "stim": "1.16.0",
+  "scipy": "1.18.1",
+  "numba": "0.68.0"
+ },
+ "source_archives": {
+  "yarn.tar.gz": "1012630c0de666776d120de2340881de789d01316e86215f0d72c2298269ad50",
+  "amplified.tar.gz": "d86f073ab46929ad9a3c73784e1292888be057821182a1dc16205c44b04bb3d6",
+  "codedistance.tar.gz": "ec1692f60ff7b61042eeca3e6bb5812535cf9cda0b215d0a34a70c51fab4841f"
+ },
+ "greedy_seeds": 24,
+ "greedy_wall_budget_per_problem": 12,
+ "improve_iterations": 3000,
+ "improve_wall_budget_per_problem": 6,
+ "width_workers": 4,
+ "run_workers": 1,
+ "initial_run_max_bits": 30,
+ "initial_run_seconds": 300,
+ "excluded_registry_entry": {
+  "name": "amplified_90",
+  "status": "needs_lead",
+  "reason": "Not exported by the repository: ambiguous default memory-sector selector for flag detectors at round zero."
+ },
+ "scope": "All 186 exported benchmark instances and two fixtures; use exact sector reduction when exported; additionally evaluate all 63 collapsed relaxations. No tree-shaped DP or new ordering algorithm.",
+ "max_concurrent_table_bytes": 8589934592,
+ "per_run_max_table_bytes": 4294967296,
+ "large_run_seconds": 1200,
+ "large_instances": [
+  "code_bb144",
+  "wjh_bb_n144",
+  "wjh_hcc_09_n168",
+  "wjh_hsc_09_n252",
+  "wjh_midout_d11"
+ ],
+ "geometric_refinement_instances": [
+  "code_bb144",
+  "wjh_bb_n144",
+  "code_bb288"
+ ],
+ "boundary_refinement_seconds": 30,
+ "implementation_sha256": {
+  "cdist/ordering.py": "5eefbf000ac36f2a3b15e2f6f182371516d818ec760eea33beff330618f74e2e",
+  "cdist/trellis.py": "81586c5ed878e9b1bf896634f65e1178012fa8508e466e7796485eb84e3aa056",
+  "cdist/kernel.py": "2a085d7bb4af44feafba3dcacf88ab7f4d6835894555d9a1bd55f0ca92dce591",
+  "cdist/viterbi.c": "b00e65a1bcc2a6f94cbe15806ef8c415f86b6726acd87fd446f64df74f577f1e"
+ },
+ "status": "stopped_by_user",
+ "stopped_at": "2026-10-21T14:17:50.564117+08:00",
+ "running_processes": 0
+}
