@@ -1,0 +1,57 @@
+{
+ "completed_at": "2026-10-21T15:48:15.561732+08:00",
+ "base_commit": "75ab494",
+ "branch": "codex/dense-dp-audit-20261021",
+ "user_resource_constraint": "At most half of local machine performance",
+ "machine": {
+  "cpu": "Apple M5 Pro",
+  "physical_cores": 15,
+  "ram_bytes": 25769803776
+ },
+ "team_budget": {
+  "cpu_execution_threads": 6,
+  "experiment_ram_bytes": 10737418240,
+  "subagent_budgets": [
+   {
+    "threads": 2,
+    "ram_bytes": 4294967296
+   },
+   {
+    "threads": 2,
+    "ram_bytes": 4294967296
+   }
+  ],
+  "parent_budget": {
+   "threads": 2,
+   "ram_bytes": 2147483648
+  }
+ },
+ "dense_execution_policy": {
+  "parent_run_memory_bytes": 134217728,
+  "parent_case_seconds": 45,
+  "parent_parallel_runs_at_most": 1,
+  "all_logical_rows_required_for_exact_distance": true
+ },
+ "profile_records": 72,
+ "unique_instance_tree_pairs": 60,
+ "large_representative_inputs": 10,
+ "exact_small_matrices": 22,
+ "formal_scope": "Small exact certificates and bounded tree-witness comparisons; no optimal-rw claim for large instances and no all186-instance rerun.",
+ "tests": {
+  "tree_unittests": 9,
+  "rankwidth_unittests": 8,
+  "exhaustive_affine_queries": 2728,
+  "random_logical_queries": 160,
+  "python39_ast_parse": "passed"
+ },
+ "final_validated_source_sha256": {
+  "cdist/tree_dp.py": "50e975a92facb2950f037249cfc94f7a7ade57c26956f642c2a25f90da528c40",
+  "cdist/tree_dp.c": "09bc6ab562f5d0211bc8fe3bae45c390641f27cf31b8a763c915f0b73a2cb1a2",
+  "cdist/rankwidth.py": "d7db04bcb515b123d02cd049d4f8dc13b6e3ce0cf5d84c095131da40bcabfb04",
+  "scripts/experiments_tree_dense.py": "c96d2b73385da25a7fd18d428dd30fe34273bc86c13fca3e59babfafede1b0aa",
+  "scripts/summarize_tree_dense.py": "5d23a993fde04a1a1e9becd883b54374c1b8e2905932f3a0ec9162d64e71a92d",
+  "tests/test_tree_dp.py": "b7e0867b410c13330bfdacc92aeea16ef421b045468e32e14ea3dfa025d5ad5c",
+  "tests/test_rankwidth.py": "83b64af8f70b9e43eebb8a576fb7f4fbd1248d4d7497a4fa6cf4e9d90ecd51a3"
+ },
+ "all_experiments_stopped": true
+}

@@ -1,0 +1,1064 @@
+{
+  "input": {
+    "path": "results/dense_audit_20261021/inputs/surface_d3/sector.json.gz",
+    "compressed_sha256": "6a03298e0ef186e5c3d6eb5dd6550d2ad4cdd644c3748d797e4199f5c9aed21d",
+    "input_sha256": {
+      "H": "825a55915856d6ce67258a4f11254ff37a0296b34610e2c616eb9783d6607bdc",
+      "L": "970b6a10f73d7efd92f75e607dd4621700d9214d82272087d548f70172907628"
+    },
+    "name": "surface_d3",
+    "variant": "sector"
+  },
+  "shape": "balanced",
+  "order": [
+    45,
+    54,
+    41,
+    53,
+    44,
+    51,
+    50,
+    39,
+    35,
+    52,
+    40,
+    42,
+    43,
+    28,
+    27,
+    23,
+    22,
+    36,
+    37,
+    26,
+    49,
+    47,
+    38,
+    48,
+    46,
+    32,
+    33,
+    34,
+    31,
+    25,
+    21,
+    24,
+    13,
+    14,
+    15,
+    19,
+    20,
+    12,
+    8,
+    18,
+    11,
+    16,
+    9,
+    7,
+    30,
+    29,
+    10,
+    17,
+    4,
+    3,
+    5,
+    6,
+    1,
+    2,
+    0
+  ],
+  "ncols": 55,
+  "nobs": 1,
+  "limits": {
+    "input": "results/dense_audit_20261021/inputs/surface_d3/sector.json.gz",
+    "order": "results/dense_audit_20261021/widths/surface_d3__sector.json.gz",
+    "shape": "balanced",
+    "output": "results/rw_tree_audit_20261021/tree/surface_d3_balanced.json",
+    "max_memory_bytes": 268435456,
+    "max_join_work": 100000000,
+    "max_seconds": 60.0
+  },
+  "sources_sha256": {
+    "tree_dp.py": "8251a44663d26c7e1ab957bafdcda1cf849c869d69cb779485e7f896b21eda48",
+    "tree_dp.c": "09bc6ab562f5d0211bc8fe3bae45c390641f27cf31b8a763c915f0b73a2cb1a2",
+    "trellis.py": "81586c5ed878e9b1bf896634f65e1178012fa8508e466e7796485eb84e3aa056",
+    "kernel.py": "2a085d7bb4af44feafba3dcacf88ab7f4d6835894555d9a1bd55f0ca92dce591"
+  },
+  "queries": [
+    {
+      "observable": 0,
+      "distance": 3,
+      "tree": {
+        "allowed": true,
+        "rejection_reasons": [],
+        "ncols": 55,
+        "matrix_rank": 17,
+        "dtype": "uint8",
+        "dtype_bytes": 1,
+        "infinity": 56,
+        "edge_state_dimensions": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          2,
+          3,
+          3,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          4,
+          5,
+          4,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          4,
+          5,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          4,
+          7,
+          5,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          6,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          6,
+          7,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          4,
+          5,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          4,
+          4,
+          5,
+          0
+        ],
+        "max_interface_rank": 7,
+        "max_join_dimension": 10,
+        "join_work": 3836,
+        "join_profiles": [
+          {
+            "node": 3,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 4,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 2,
+            "kernel_rank": 1,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 10
+          },
+          {
+            "node": 8,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 9,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 10,
+            "left_rank": 2,
+            "right_rank": 3,
+            "parent_rank": 3,
+            "kernel_rank": 1,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 20
+          },
+          {
+            "node": 14,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 15,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 18,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 21,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 22,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 4,
+            "kernel_rank": 0,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 24
+          },
+          {
+            "node": 23,
+            "left_rank": 3,
+            "right_rank": 4,
+            "parent_rank": 5,
+            "kernel_rank": 2,
+            "join_dimension": 7,
+            "work": 128,
+            "child_parent_table_bytes": 56
+          },
+          {
+            "node": 24,
+            "left_rank": 3,
+            "right_rank": 5,
+            "parent_rank": 4,
+            "kernel_rank": 3,
+            "join_dimension": 7,
+            "work": 128,
+            "child_parent_table_bytes": 56
+          },
+          {
+            "node": 28,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 29,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 32,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 35,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 36,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 4,
+            "kernel_rank": 0,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 24
+          },
+          {
+            "node": 37,
+            "left_rank": 3,
+            "right_rank": 4,
+            "parent_rank": 5,
+            "kernel_rank": 2,
+            "join_dimension": 7,
+            "work": 128,
+            "child_parent_table_bytes": 56
+          },
+          {
+            "node": 41,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 42,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 45,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 48,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 49,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 1,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 16
+          },
+          {
+            "node": 50,
+            "left_rank": 3,
+            "right_rank": 3,
+            "parent_rank": 4,
+            "kernel_rank": 1,
+            "join_dimension": 5,
+            "work": 32,
+            "child_parent_table_bytes": 32
+          },
+          {
+            "node": 51,
+            "left_rank": 5,
+            "right_rank": 4,
+            "parent_rank": 7,
+            "kernel_rank": 2,
+            "join_dimension": 9,
+            "work": 512,
+            "child_parent_table_bytes": 176
+          },
+          {
+            "node": 52,
+            "left_rank": 4,
+            "right_rank": 7,
+            "parent_rank": 5,
+            "kernel_rank": 4,
+            "join_dimension": 9,
+            "work": 512,
+            "child_parent_table_bytes": 176
+          },
+          {
+            "node": 56,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 57,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 60,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 63,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 64,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 1,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 16
+          },
+          {
+            "node": 65,
+            "left_rank": 3,
+            "right_rank": 3,
+            "parent_rank": 6,
+            "kernel_rank": 0,
+            "join_dimension": 6,
+            "work": 64,
+            "child_parent_table_bytes": 80
+          },
+          {
+            "node": 69,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 70,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 73,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 76,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 77,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 1,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 16
+          },
+          {
+            "node": 78,
+            "left_rank": 3,
+            "right_rank": 3,
+            "parent_rank": 6,
+            "kernel_rank": 0,
+            "join_dimension": 6,
+            "work": 64,
+            "child_parent_table_bytes": 80
+          },
+          {
+            "node": 79,
+            "left_rank": 6,
+            "right_rank": 6,
+            "parent_rank": 7,
+            "kernel_rank": 3,
+            "join_dimension": 10,
+            "work": 1024,
+            "child_parent_table_bytes": 256
+          },
+          {
+            "node": 83,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 84,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 87,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 90,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 91,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 4,
+            "kernel_rank": 0,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 24
+          },
+          {
+            "node": 92,
+            "left_rank": 3,
+            "right_rank": 4,
+            "parent_rank": 5,
+            "kernel_rank": 2,
+            "join_dimension": 7,
+            "work": 128,
+            "child_parent_table_bytes": 56
+          },
+          {
+            "node": 96,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 97,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 100,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 103,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 104,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 16
+          },
+          {
+            "node": 105,
+            "left_rank": 3,
+            "right_rank": 3,
+            "parent_rank": 4,
+            "kernel_rank": 1,
+            "join_dimension": 5,
+            "work": 32,
+            "child_parent_table_bytes": 32
+          },
+          {
+            "node": 106,
+            "left_rank": 5,
+            "right_rank": 4,
+            "parent_rank": 4,
+            "kernel_rank": 4,
+            "join_dimension": 8,
+            "work": 256,
+            "child_parent_table_bytes": 64
+          },
+          {
+            "node": 107,
+            "left_rank": 7,
+            "right_rank": 4,
+            "parent_rank": 5,
+            "kernel_rank": 4,
+            "join_dimension": 9,
+            "work": 512,
+            "child_parent_table_bytes": 176
+          },
+          {
+            "node": 108,
+            "left_rank": 5,
+            "right_rank": 5,
+            "parent_rank": 0,
+            "kernel_rank": 5,
+            "join_dimension": 5,
+            "work": 32,
+            "child_parent_table_bytes": 65
+          }
+        ],
+        "largest_table_bytes": 128,
+        "peak_live_table_bytes": 256,
+        "arena_bytes": 256,
+        "scratch_bytes": 160,
+        "peak_dense_bytes": 416,
+        "compiled_metadata_bytes": 58531,
+        "compile_storage_bound_bytes": 301068,
+        "compilation_seconds": 0.0006091659888625145,
+        "memory_scope": "arena and map arrays; Python plan reported separately; process RSS excluded",
+        "threads": 1,
+        "feasible": true,
+        "seconds": 0.00019449996761977673,
+        "join_work_done": 3836,
+        "allocated_dense_bytes": 416,
+        "observed_peak_live_table_bytes": 256,
+        "backend": "c"
+      },
+      "trellis": {
+        "seconds": 2.288818359375e-05,
+        "peak_bits": 6,
+        "threads": 1,
+        "distance": 3,
+        "peak_table_bytes": 64,
+        "plan_work": 1420,
+        "crosscheck": "equal"
+      }
+    }
+  ],
+  "status": "exact",
+  "distance": 3,
+  "threads": 1,
+  "rss_scope": "whole fresh process, including Python, NumPy and retained query reports",
+  "tree_nodes": [
+    45,
+    54,
+    41,
+    [
+      1,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    53,
+    44,
+    51,
+    [
+      6,
+      7
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      4,
+      9
+    ],
+    50,
+    39,
+    35,
+    [
+      12,
+      13
+    ],
+    [
+      11,
+      14
+    ],
+    52,
+    40,
+    [
+      16,
+      17
+    ],
+    42,
+    43,
+    [
+      19,
+      20
+    ],
+    [
+      18,
+      21
+    ],
+    [
+      15,
+      22
+    ],
+    [
+      10,
+      23
+    ],
+    28,
+    27,
+    23,
+    [
+      26,
+      27
+    ],
+    [
+      25,
+      28
+    ],
+    22,
+    36,
+    [
+      30,
+      31
+    ],
+    37,
+    26,
+    [
+      33,
+      34
+    ],
+    [
+      32,
+      35
+    ],
+    [
+      29,
+      36
+    ],
+    49,
+    47,
+    38,
+    [
+      39,
+      40
+    ],
+    [
+      38,
+      41
+    ],
+    48,
+    46,
+    [
+      43,
+      44
+    ],
+    32,
+    33,
+    [
+      46,
+      47
+    ],
+    [
+      45,
+      48
+    ],
+    [
+      42,
+      49
+    ],
+    [
+      37,
+      50
+    ],
+    [
+      24,
+      51
+    ],
+    34,
+    31,
+    25,
+    [
+      54,
+      55
+    ],
+    [
+      53,
+      56
+    ],
+    21,
+    24,
+    [
+      58,
+      59
+    ],
+    13,
+    14,
+    [
+      61,
+      62
+    ],
+    [
+      60,
+      63
+    ],
+    [
+      57,
+      64
+    ],
+    15,
+    19,
+    20,
+    [
+      67,
+      68
+    ],
+    [
+      66,
+      69
+    ],
+    12,
+    8,
+    [
+      71,
+      72
+    ],
+    18,
+    11,
+    [
+      74,
+      75
+    ],
+    [
+      73,
+      76
+    ],
+    [
+      70,
+      77
+    ],
+    [
+      65,
+      78
+    ],
+    16,
+    9,
+    7,
+    [
+      81,
+      82
+    ],
+    [
+      80,
+      83
+    ],
+    30,
+    29,
+    [
+      85,
+      86
+    ],
+    10,
+    17,
+    [
+      88,
+      89
+    ],
+    [
+      87,
+      90
+    ],
+    [
+      84,
+      91
+    ],
+    4,
+    3,
+    5,
+    [
+      94,
+      95
+    ],
+    [
+      93,
+      96
+    ],
+    6,
+    1,
+    [
+      98,
+      99
+    ],
+    2,
+    0,
+    [
+      101,
+      102
+    ],
+    [
+      100,
+      103
+    ],
+    [
+      97,
+      104
+    ],
+    [
+      92,
+      105
+    ],
+    [
+      79,
+      106
+    ],
+    [
+      52,
+      107
+    ]
+  ],
+  "internal_internal_joins": 22,
+  "seconds": 0.0020502079278230667,
+  "join_work_done": 3836,
+  "peak_rss_bytes": 34619392
+}

@@ -1,0 +1,231 @@
+{
+  "input": {
+    "name": "synthetic_branching_demo",
+    "h": [
+      1,
+      2,
+      4,
+      7,
+      3,
+      5,
+      6,
+      1
+    ],
+    "l": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "shape": "balanced",
+  "order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "ncols": 8,
+  "nobs": 1,
+  "limits": {
+    "input": null,
+    "order": null,
+    "shape": "balanced",
+    "output": "results/rw_tree_audit_20261021/tree/synthetic_branching_demo.json",
+    "max_memory_bytes": 268435456,
+    "max_join_work": 100000000,
+    "max_seconds": 60.0
+  },
+  "sources_sha256": {
+    "tree_dp.py": "8251a44663d26c7e1ab957bafdcda1cf849c869d69cb779485e7f896b21eda48",
+    "tree_dp.c": "09bc6ab562f5d0211bc8fe3bae45c390641f27cf31b8a763c915f0b73a2cb1a2",
+    "trellis.py": "81586c5ed878e9b1bf896634f65e1178012fa8508e466e7796485eb84e3aa056",
+    "kernel.py": "2a085d7bb4af44feafba3dcacf88ab7f4d6835894555d9a1bd55f0ca92dce591"
+  },
+  "queries": [
+    {
+      "observable": 0,
+      "distance": 2,
+      "tree": {
+        "allowed": true,
+        "rejection_reasons": [],
+        "ncols": 8,
+        "matrix_rank": 4,
+        "dtype": "uint8",
+        "dtype_bytes": 1,
+        "infinity": 9,
+        "edge_state_dimensions": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          3,
+          0
+        ],
+        "max_interface_rank": 3,
+        "max_join_dimension": 4,
+        "join_work": 46,
+        "join_profiles": [
+          {
+            "node": 2,
+            "left_rank": 0,
+            "right_rank": 1,
+            "parent_rank": 1,
+            "kernel_rank": 0,
+            "join_dimension": 1,
+            "work": 2,
+            "child_parent_table_bytes": 5
+          },
+          {
+            "node": 5,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 6,
+            "left_rank": 1,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 0,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 14
+          },
+          {
+            "node": 9,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 12,
+            "left_rank": 1,
+            "right_rank": 1,
+            "parent_rank": 2,
+            "kernel_rank": 0,
+            "join_dimension": 2,
+            "work": 4,
+            "child_parent_table_bytes": 8
+          },
+          {
+            "node": 13,
+            "left_rank": 2,
+            "right_rank": 2,
+            "parent_rank": 3,
+            "kernel_rank": 1,
+            "join_dimension": 4,
+            "work": 16,
+            "child_parent_table_bytes": 16
+          },
+          {
+            "node": 14,
+            "left_rank": 3,
+            "right_rank": 3,
+            "parent_rank": 0,
+            "kernel_rank": 3,
+            "join_dimension": 3,
+            "work": 8,
+            "child_parent_table_bytes": 17
+          }
+        ],
+        "largest_table_bytes": 8,
+        "peak_live_table_bytes": 22,
+        "arena_bytes": 22,
+        "scratch_bytes": 64,
+        "peak_dense_bytes": 86,
+        "compiled_metadata_bytes": 9563,
+        "compile_storage_bound_bytes": 38024,
+        "compilation_seconds": 7.53339845687151e-05,
+        "memory_scope": "arena and map arrays; Python plan reported separately; process RSS excluded",
+        "threads": 1,
+        "feasible": true,
+        "seconds": 0.00036720791831612587,
+        "join_work_done": 46,
+        "allocated_dense_bytes": 86,
+        "observed_peak_live_table_bytes": 22,
+        "backend": "c"
+      },
+      "trellis": {
+        "seconds": 8.344650268554688e-06,
+        "peak_bits": 4,
+        "threads": 1,
+        "distance": 2,
+        "peak_table_bytes": 16,
+        "plan_work": 74,
+        "crosscheck": "equal"
+      }
+    }
+  ],
+  "status": "exact",
+  "distance": 2,
+  "threads": 1,
+  "rss_scope": "whole fresh process, including Python, NumPy and retained query reports",
+  "tree_nodes": [
+    0,
+    1,
+    [
+      0,
+      1
+    ],
+    2,
+    3,
+    [
+      3,
+      4
+    ],
+    [
+      2,
+      5
+    ],
+    4,
+    5,
+    [
+      7,
+      8
+    ],
+    6,
+    7,
+    [
+      10,
+      11
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      6,
+      13
+    ]
+  ],
+  "internal_internal_joins": 3,
+  "seconds": 0.0018407921306788921,
+  "join_work_done": 46,
+  "peak_rss_bytes": 34111488
+}

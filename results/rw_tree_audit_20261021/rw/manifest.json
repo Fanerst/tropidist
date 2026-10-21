@@ -1,0 +1,112 @@
+{
+ "date": "2026-10-21",
+ "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+ "numerical_threads": 1,
+ "concurrent_worker_cap": 2,
+ "process_ram_budget_bytes": 4294967296,
+ "dotnet_managed_heap_limit_bytes": 1610612736,
+ "upstreams": [
+  {
+   "name": "rw",
+   "version": "0.10",
+   "url": "https://sourceforge.net/projects/rankwidth/files/rw-0.10.tar.gz/download",
+   "license": "GPL-2.0-or-later",
+   "applied": true
+  },
+  {
+   "name": "Gericom/RankWidthApproximate",
+   "commit": "9a4743a1e0f55302ce1438a22f630eb35f0f96ab",
+   "url": "https://github.com/Gericom/RankWidthApproximate",
+   "license": "MIT",
+   "applied": true
+  },
+  {
+   "name": "hmyuuu/RankWidthSolver.jl",
+   "commit": "a3b9641359a9dbed5a2ffb6989a15ac0ffa59c85",
+   "url": "https://github.com/hmyuuu/RankWidthSolver.jl",
+   "license": "No LICENSE in retrieved repository",
+   "applied": false,
+   "inspection": "Source read; Julia runtime not installed"
+  },
+  {
+   "name": "Friedmansky2012",
+   "url": "https://is.muni.cz/th/tgow6/",
+   "applied": false,
+   "inspection": "Primary catalog lists rwd.cpp; source retrieval returned JavaScript proof-of-work page"
+  },
+  {
+   "name": "sangiloum/rwd2",
+   "url": "https://github.com/sangiloum/rwd2",
+   "applied": false,
+   "inspection": "Primary repository README; threshold-two oracle, not a general width solver"
+  },
+  {
+   "name": "twalgor/bw",
+   "url": "https://github.com/twalgor/bw",
+   "applied": false,
+   "inspection": "Primary repository README; ordinary graph branchwidth, edge-labelled decomposition leaves"
+  }
+ ],
+ "sibling_nni": {
+  "repository": "../DecisionDiagramDecoder-github",
+  "commit": "20daa832220c81953799f422c0911e4db91d1ac2",
+  "source": "src/rank_width_qec/decomposition.py",
+  "max_moves": 200000,
+  "cache_limit": 10000,
+  "seed": 17,
+  "default_target": "initial width minus one",
+  "refinement_target": 0,
+  "python_requirement": ">=3.11,<3.13"
+ },
+ "source_sha256": {
+  "rw-0.10.tar.gz": "89a8ed364893ac1b70ab70a152e3e7db3cf348bb69098aa6dbb969639df927db",
+  "gericom.tar.gz": "2be726f7825682b05d8621c4de07e64c9204b2d9e06947673dcf94664bde60fa",
+  "julia_solver.tar.gz": "5a0c5a19e58a2959b2229638b0df8b4161bdcb7c48934ac19df962484ba16538",
+  "dotnet-sdk-8.0.426-osx-arm64.tar.gz": "c4e88383ff1ffcf9e80d91367a83690f77dff32a68c742fab6fa5644173875aa"
+ },
+ "dotnet_sdk_version": "8.0.426",
+ "dotnet_sdk_sha512": "17cd408c92eb6ceedc06d41fa726c783b9be020c6ae5f3624ad3a0b2c26a78aa7d09f38338003163a72bb14d437731debf533c0451a5c6a05de3b1e37a3aa50a",
+ "build_changes": "Gericom target net8.0, AnyCPU, Parallel.ForEach MaxDegreeOfParallelism=1; see gericom-portability.patch. No change to rank or search logic.",
+ "temporary_source_directory": "temp/rw_tree_audit_20261021/rw",
+ "cc_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+ "exact_binary_sha256": "d83005c286e241d8a60ea7d2f89042370855becad84216f79478c3402a37b067",
+ "gericom_binary_sha256": "542ea6b9ba64379dae5e6004fcec3e02f6d9b0616565c5898511becfdb5f1f9b",
+ "source_files_sha256": {
+  "cdist/rankwidth.py": "d7db04bcb515b123d02cd049d4f8dc13b6e3ce0cf5d84c095131da40bcabfb04",
+  "scripts/rankwidth_audit.py": "940ccb1d982905fe6a437c24b1ab012f716e9c79473a93c13cc37605f99dd7eb",
+  "scripts/rankwidth_exact_audit.py": "71f5f959e930527024fddca23a6956e8134ca6e1af8be24b6f4cb8e103794279",
+  "scripts/rw_exact_driver.c": "884ee3b673137b6bd39c88f29ed64a81f16cb5409a7487c257fc5b167cb41df0",
+  "tests/test_rankwidth.py": "83b64af8f70b9e43eebb8a576fb7f4fbd1248d4d7497a4fa6cf4e9d90ecd51a3"
+ },
+ "commands": [
+  [
+   "cc",
+   "-O3",
+   "-std=c99",
+   "-I",
+   "../temp/rw_tree_audit_20261021/rw/sources/rw-0.10",
+   "../temp/rw_tree_audit_20261021/rw/sources/rw-0.10/rw.c",
+   "scripts/rw_exact_driver.c",
+   "-o",
+   "../temp/rw_tree_audit_20261021/rw/rw-exact-driver"
+  ],
+  [
+   "../temp/dense_audit_20261021/venv/bin/python",
+   "scripts/rankwidth_exact_audit.py",
+   "--rw-driver",
+   "../temp/rw_tree_audit_20261021/rw/rw-exact-driver"
+  ]
+ ],
+ "limitations": [
+  "No general exact run beyond16 vertices; synthetic320-vertex exact certificate uses disconnected components of size2.",
+  "Search budgets are upper limits, not guaranteed elapsed times; NNI may stop at its target or200000-move cap.",
+  "Width witnesses are upper bounds; failed heuristic search is not a lower-bound certificate.",
+  "H-only cut and join profiles are not actual augmented logical DP memory estimates.",
+  "Wall-clock search stopping is hardware-sensitive; saved flat trees and exact cut replay are the reproducible witnesses."
+ ],
+ "paper_source_check": {
+  "arxiv_search": "Exact title query did not identify an arXiv version",
+  "fallback": "author-hosted PDF read natively with pdf skill",
+  "url": "https://mathsci.kaist.ac.kr/~sangil/pdf/2008exp.pdf"
+ }
+}
