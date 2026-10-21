@@ -1,0 +1,19 @@
+--- a/RankWidthApproximate.csproj
++++ b/RankWidthApproximate.csproj
+@@ -1 +1 @@
+-﻿<Project Sdk="Microsoft.NET.Sdk">
++<Project Sdk="Microsoft.NET.Sdk">
+@@ -5 +5 @@
+-    <TargetFramework>net5.0</TargetFramework>
++    <TargetFramework>net8.0</TargetFramework>
+@@ -10 +10 @@
+-    <PlatformTarget>x64</PlatformTarget>
++    <PlatformTarget>AnyCPU</PlatformTarget>
+@@ -16 +16 @@
+-    <PlatformTarget>x64</PlatformTarget>
++    <PlatformTarget>AnyCPU</PlatformTarget>
+--- a/LocalSearch/SearchContext.cs
++++ b/LocalSearch/SearchContext.cs
+@@ -195 +195 @@
+-                Parallel.ForEach(partitions,
++                Parallel.ForEach(partitions, new ParallelOptions { MaxDegreeOfParallelism = 1 },
