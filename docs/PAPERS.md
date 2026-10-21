@@ -803,6 +803,96 @@ could change individual values. Rectangle modules are not rebuilt. The color-cod
 which the paper states no circuit distance at all, are not rebuilt either: the placement of measure
 qubits on skewed module boundaries is given only in figures.
 
+## Check of the Cornucopia distances (20 October 2026)
+
+Feng asked whether the distances of arXiv:2608.02773 (Cornucopia codes) and arXiv:2610.19073 (a modular
+architecture built on the [[2844,1426,18]] Cornucopia code) are valid. Notes on the second paper are in
+`papers/new/2610.19073.md`.
+
+**Code distances: all seven are correct.** Both CSS distances were computed exactly
+(`scripts/cornucopia_code_distance.py`). The search is label-free, with the covering bound and the q column
+translations of each code, verified as symmetries. Each witness is checked to commute with the opposite checks and
+to lie outside the stabilizer row space. Every row of H_X and H_Z has weight 12 and every column weight 3, so
+the all-ones vector is a stabilizer of both types and every logical operator has even weight. The runs skip odd
+thresholds for that reason. For [[2844,1426]] the run was repeated without this shortcut and gave the same values.
+
+| code | paper | d_X | d_Z | search time |
+|---|---:|---:|---:|---|
+| [[252,130,6]] | 6 | **6** | **6** | < 0.1 s, 1 thread |
+| [[576,292,8]] | 8 | **8** | **8** | < 0.1 s, 1 thread |
+| [[900,454,10]] | 10 | **10** | **10** | 0.1 s, 1 thread |
+| [[1044,526,12]] | 12 | **12** | **12** | 0.3 s, 1 thread |
+| [[1764,886,14]] | 14 | **14** | **14** | 0.2 s, 64 threads |
+| [[2304,1156,16]] | 16 | **16** | **16** | 0.8 s, 64 threads |
+| [[2844,1426,18]] | 18 | **18** | **18** | 12–15 s, 64 threads (46 s without the parity shortcut) |
+
+Building the matrices and the symmetry check take longer than the search: about one minute for the largest code.
+
+**Circuit distances.** The paper's column d_circ holds upper bounds from a randomized BP-OSD search. The
+authors' repository (commit fc12c97, `circuit_distance/estimate_distance.py`) runs that search on a memory circuit
+with one syndrome cycle (`--rounds` defaults to 1 and the notebook that configures the long searches does not set
+it) and with CNOT faults only. We rebuilt exactly that setting (`papers/cornucopia.py`, noise `cx`, one cycle) and
+the memory experiment the paper simulates (N_c cycles, the paper's full fault model). The two fault models have the
+same fault mechanisms: every preparation, reset and measurement flip is a component of the depolarizing fault of
+an adjacent CNOT. Bold = exact; otherwise certified lower bound – verified upper bound. Every upper bound is a fault
+set checked in the detector error model and replayed in Stim (no detector fires, logical observables flip). Table
+from `scripts/summarize_cornucopia_check.py`:
+
+| code | paper: d | d_X, d_Z | paper: d_circ | one cycle, CNOT faults | N_c cycles, paper's faults |
+|---|---:|---|---:|---|---|
+| [[252,130,6]] | 6 | 6, 6 | ≤ 5 | **5**; **5** (Z; X) | 6 cycles: **5** (Z); **5** (X) |
+| [[576,292,8]] | 8 | 8, 8 | ≤ 8 | **8**; **8** (Z; X) | 6 cycles: **8** (Z); **8** (X) |
+| [[900,454,10]] | 10 | 10, 10 | ≤ 10 | **9**; **9** (Z; X) | 6 cycles: **9** (Z); **9** (X) |
+| [[1044,526,12]] | 12 | 12, 12 | ≤ 11 | **10**; **10** (Z; X) | 6 cycles: **10** (Z); **10** (X) |
+| [[1764,886,14]] | 14 | 14, 14 | ≤ 14 | 11–14 (Z) | 7 cycles: 12–14 (Z) |
+| [[2304,1156,16]] | 16 | 16, 16 | ≤ 16 | 12–14 (Z) | 8 cycles: 12–14 (Z) |
+| [[2844,1426,18]] | 18 | 18, 18 | ≤ 18 | 12–17 (Z) | 8 cycles: 12–16 (Z) |
+
+For [[900]] and [[1044]] the published bound is one too high even in the authors' own setting: BP-OSD missed fault
+sets of weight 9 and 10. One cycle and six cycles give the same value for all four codes, so the number of cycles is
+not the cause.
+
+For the three largest codes the published bounds equal the code distances. Two of them are too high:
+
+- [[2304,1156,16]] has an undetected logical fault set of weight 14 (598 observables flip). It lies in the first
+  cycle of the 8-cycle circuit and replays unchanged in the one-cycle circuit (`scripts/cornucopia_transfer_check.py`),
+  so the authors' own setting also has a weight-14 fault set.
+- [[2844,1426,18]] has one of weight 16 in the 8-cycle circuit, and one of weight 17 in the one-cycle circuit.
+- For [[1764,886,14]] the best fault set found has weight 14, the published bound.
+
+How the large intervals were obtained (`papers/run_parallel.py` with the covering bound, and
+`scripts/window_search.py`):
+
+- Lower bounds: the time-collapsed problem. [[1764]] has collapsed distance 11, with a single symmetry orbit of
+  minimum solutions that does not lift to the circuit, so its lower bound is 12. For [[2304]] and [[2844]], weight 11 is
+  excluded, about 3 h each on 64 threads.
+- The collapsed columns of one cycle are a subset of those of N_c cycles, so the collapsed bounds also hold for one
+  cycle. The lifting step for [[1764]] was done on 7 cycles only.
+- Upper bounds: exact searches of a one-cycle window, the faults whose detection events lie in one round. In the
+  N_c-cycle circuits the window minima are 14, 14 and 16. In the one-cycle circuits, the faults seen only by the final
+  readout have minima 14 ([[1764]]) and 17 ([[2844]]).
+- Exact values at 12 to 16 are out of reach on the full problems. The exact search of all of [[1764]]'s 7-cycle
+  problem ran 3 h at weight 12 without finishing.
+
+Consequence for the paper's error rates: it fits the logical error rate as p^(d/2) exp(c0 + c1 p + c2 p^2) with the
+code distance d. With circuit distances below d the leading order is lower: p^5 instead of p^6 for [[1044]], at most
+p^7 instead of p^8 for [[2304]], at most p^8 instead of p^9 for [[2844]]. The extrapolated values at p = 1e-3 and
+1e-4 in Tab. 1 are therefore optimistic, and so is the 2.6e-16 per logical qubit and cycle that arXiv:2610.19073
+quotes for [[2844,1426,18]].
+
+The randomized witness search of `scripts/run_isd.py` finds the optimum for [[900]] (one cycle: 9, in 4 min) and
+[[1044]] (a two-cycle window of the 6-cycle circuit: 10, in 3 min). It finds nothing on the large circuits: it
+inspects only one free column plus pivot columns, and with about 900 rows against 11,000 to 20,000 columns a
+minimum-weight solution almost never has that form.
+
+**arXiv:2610.19073.** Its only computed distance is d = 18 of [[2844,1426]], cited from the first paper and confirmed
+above. The distances of its merged codes (surgery gadgets, extractor, bridges) follow from its Theorem 2 (expansion
+h2 ≥ 1 with a complete cycle basis) and Proposition 1 (bridges of b ≥ d edges); the expansion is certified through
+λ2 > 2 with exact integer arithmetic. "Verified exactly" in its Extended Data Tabs. 3 and 4 refers to rank,
+commutation, weights and these certificates; no merged-code distance is computed. The gadget graphs are not public,
+so these distances cannot be checked here without the authors' data. The paper makes no circuit-level distance
+claim.
+
 ## Reproduce
 
     .venv/bin/python papers/run_mitten.py "[[150,30,10]]" Z results/papers/mitten150_Z.json 10 2 600
@@ -840,6 +930,10 @@ qubits on skewed module boundaries is given only in figures.
     .venv/bin/python papers/run_parallel.py hypsurf q6_L5_NZ_fb Z out.json 5 3 12       # {4,6} surface-code circuit: 8
     .venv/bin/python papers/run_parallel.py hypsurf_pick q8_L5_NZ_fb@228 Z out.json 5 3 12   # a better assignment: 9
     .venv/bin/python scripts/summarize_hypsurf.py                                               # circuit table of the fourth batch
+    .venv/bin/python scripts/cornucopia_code_distance.py out.json 7,16,25,29,49,64,79 XZ    # Cornucopia code distances
+    .venv/bin/python papers/run_parallel.py cornucopia 29 Z out.json 1 3 20 3600 1 cx     # one cycle, CNOT faults: 10
+    .venv/bin/python papers/run_parallel.py cornucopia 49 Z out.json 7 2 18 10800 1 full 1   # 7 cycles, covering bound
+    .venv/bin/python scripts/summarize_cornucopia_check.py                                      # table of the Cornucopia check
 
 The exhaustive runs for [[300,60,14]] at weight 11 took 2.7 hours (X) and 4.0 hours (Z) on 64
 threads each;
