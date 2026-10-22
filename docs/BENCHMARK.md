@@ -20,7 +20,7 @@ On these 60 instances, yes, with the qualifications given below. A tool is credi
 any of its configurations solves it: dist-m4ri 0.14.7 in either mode and from either input, the
 integer-programming and SAT tools with either logical basis of a code.
 
-- **Coverage.** Ours solves 46 instances exactly with one thread in 600 s and 59 with 32 threads in
+- **Coverage.** Ours solves 47 instances exactly with one thread in 600 s and 59 with 32 threads in
   an hour. The other exact methods together solve 30 and 38, and dist-m4ri 0.14.7 alone
   accounts for all of them. No instance is solved by another method and not by ours; 21 are solved by
   ours only. The one instance ours leaves open, the mitten [[300,60,14]] circuit, is open for every method
@@ -184,7 +184,7 @@ with 32 threads and 90 GB for tools that use threads.
 | bb90_r10 | 90 | 4590 | 8 | 0.4 s |  | 59.8 s (dist-m4ri CC) |  |
 | bb108_r10 | 108 | 5508 | 8 | 0.5 s |  | 57.4 s (dist-m4ri CC) |  |
 | bb144_r12 | 144 | 8784 | 10 | 1.4 s |  |  | 532 s (dist-m4ri CC+RW, 32 threads) |
-| bb288_r18 | 288 | 26208 | 16 |  | 209 s |  |  |
+| bb288_r18 | 288 | 26208 | 16 |  | 242 s |  |  |
 | w8bb_72 | 72 | 3096 | 8 | 4.4 s |  | 205 s (dist-m4ri CC) |  |
 | w8bb_144_16 | 144 | 6192 | 10 | 163 s |  |  |  |
 | cornucopia_252 | 252 | 8568 | 5 | 1.6 s |  | 0.4 s (dist-m4ri CC) |  |
@@ -198,7 +198,7 @@ with 32 threads and 90 GB for tools that use threads.
 | routing_54 | 54 | 1998 | 6 | 0.9 s |  | 0.1 s (dist-m4ri CC) | 206 s (Gurobi, 32 threads) |
 | routing_90 | 90 | 3330 | 9 | 5.4 s |  | 477 s (dist-m4ri CC) |  |
 | routing_110 | 110 | 4070 | 10 | 35.3 s |  |  | 408 s (dist-m4ri CC+RW, 32 threads) |
-| routing_140_13 | 140 | 5180 | 12 |  | 86.2 s |  |  |
+| routing_140_13 | 140 | 5180 | 12 |  | 103 s |  |  |
 | routing_200_24 | 200 | 11700 | 10 |  | 477 s |  |  |
 | sdbb_64 | 64 | 2752 | 8 | 3.7 s |  | 121 s (dist-m4ri CC) |  |
 | sdbb_120 | 120 | 5160 | 12 |  | 1117 s |  |  |
@@ -216,11 +216,11 @@ with 32 threads and 90 GB for tools that use threads.
 | surface_d11 | 121 | 3631 | 11 | 0.2 s |  | 244 s (dist-m4ri CC) |  |
 | surface_d13 | 169 | 6085 | 13 | 0.3 s |  |  | 1287 s (dist-m4ri CC+RW, 32 threads) |
 | surface_d15 | 225 | 9451 | 15 | 0.7 s |  |  |  |
-| surface_d17 | 289 | 13873 | 17 | 3.7 s |  |  |  |
-| surface_d19 | 361 | 19495 | 19 | 26.5 s |  |  |  |
-| surface_d21 | 441 | 26461 | 21 | 181 s |  |  |  |
-| surface_d23 | 529 | 34915 | 23 |  | 69.3 s |  |  |
-| surface_d25 | 625 | 45001 | 25 |  | 564 s |  |  |
+| surface_d17 | 289 | 13873 | 17 | 2.0 s |  |  |  |
+| surface_d19 | 361 | 19495 | 19 | 12.3 s |  |  |  |
+| surface_d21 | 441 | 26461 | 21 | 65.2 s |  |  |  |
+| surface_d23 | 529 | 34915 | 23 | 552 s | 23.7 s |  |  |
+| surface_d25 | 625 | 45001 | 25 |  | 196 s |  |  |
 | walkingcat_54 | 54 | 2322 | 8 | 6.7 s |  | 129 s (dist-m4ri CC) |  |
 | code_bb72 | 72 | 72 | 6 | 0.2 s |  | 0.0 s (dist-m4ri CC) |  |
 | code_bb90 | 90 | 90 | 10 | 0.2 s |  | 0.0 s (dist-m4ri CC) |  |
@@ -239,7 +239,7 @@ with 32 threads and 90 GB for tools that use threads.
 | code_kasai_492 | 492 | 492 | 20 |  | 776 s |  |  |
 | code_sdbb_200 | 200 | 200 | 12 | 0.2 s |  | 1.2 s (dist-m4ri CC) | 1204 s (CP-SAT, 32 threads) |
 
-Of 60 instances: ours solves 46 in the first tier and 59 over both tiers; some other exact method solves 30 in the first tier and 38 over both. 21 are solved by ours only; 0 are solved by another method and not by ours.
+Of 60 instances: ours solves 47 in the first tier and 59 over both tiers; some other exact method solves 30 in the first tier and 38 over both. 21 are solved by ours only; 0 are solved by another method and not by ours.
 <!-- TABLE:overall:END -->
 
 ## Results, first tier (1 thread, 600 s, 16 GB)
@@ -251,140 +251,140 @@ All first-tier records are mutually consistent and consistent with the ground tr
 ### Circuits, sector problem
 
 <!-- TABLE:A-circuit-sector:BEGIN -->
-| instance | n | columns | distance | ours | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 | 16.7 s | 12.2 s | >=9 | 9..10 | 1..12 | <=11 | 3..12 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
-| gross_best_r6 | 144 | 4464 | 11 | 114 s | 99.4 s | >=9 | 9..11 | 1..31 | t/o | 3..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
-| bb72_r6 | 72 | 2232 | 6 | 0.4 s | 0.3 s | 0.1 s | 1.5 s | 1..6 | <=6 ok | 3..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| bb90_r10 | 90 | 4590 | 8 | 0.4 s | 1.3 s | 59.8 s | 473 s | 1..27 | <=13 | 3..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| bb108_r10 | 108 | 5508 | 8 | 0.5 s | 1.6 s | 57.4 s | 567 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=8 ok | <=8 ok | mem | <=8 ok |
-| bb144_r12 | 144 | 8784 | 10 | 1.4 s | 46.0 s | >=8 | 8..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=11 | mem | <=10 ok |
-| bb288_r18 | 288 | 26208 | 16 | >=14 | >=11 | >=8 | 8..18 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=26 | <=35 | mem | <=18 |
-| w8bb_72 | 72 | 3096 | 8 | 4.4 s | 5.6 s | 205 s | 296 s | 1..8 | <=8 ok | 3..8 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | <=8 ok | <=8 ok |
-| w8bb_144_16 | 144 | 6192 | 10 | 163 s | 178 s | >=8 | 8..10 | t/o | t/o | 2..10 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
-| cornucopia_252 | 252 | 8568 | 5 | 1.6 s | 7.7 s | 0.4 s | 12.5 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | mem | <=5 ok |
-| cornucopia_576 | 576 | 19584 | 8 | 376 s | >=7 | >=7 | >=7 | t/o | t/o | 1..33 | >=2 | >=1 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | t/o |
-| cornucopia_900 | 900 | 30600 | 9 | >=9 | >=7 | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | t/o | mem | t/o |
-| cornucopia_1044 | 1044 | 35496 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | t/o | t/o | mem | t/o |
-| lrgross | 144 | 4464 | 11 | 19.8 s | >=10 | >=8 | 8..11 | t/o | t/o | 3..11 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
-| mitten_150 | 150 | 9750 | 8 | 130 s | t/o | >=7 | 7..8 | 1..10 | t/o | 2..10 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=9 | <=8 ok | mem | <=8 ok |
-| mitten_300 | 300 | 11820 | >=12 | >=9 | >=7 | >=6 | 6..14 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
-| mitten_200 | 200 | 15560 | 9 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=16 | mem | <=9 ok |
-| routing_54 | 54 | 1998 | 6 | 0.9 s | 0.4 s | 0.1 s | 1.9 s | 2..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| routing_90 | 90 | 3330 | 9 | 5.4 s | 5.8 s | 477 s | 507 s | 2..26 | t/o | 4..9 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
-| routing_110 | 110 | 4070 | 10 | 35.3 s | 33.3 s | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=10 ok | <=10 ok | mem | <=10 ok |
-| routing_140_13 | 140 | 5180 | 12 | 11..13 | >=11 | >=9 | 9..12 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | <=12 ok | mem | <=12 ok |
-| routing_200_24 | 200 | 11700 | 10 | 9..10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | <=11 | t/o | <=10 ok |
-| sdbb_64 | 64 | 2752 | 8 | 3.7 s | 4.0 s | 121 s | 202 s | 1..8 | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| sdbb_120 | 120 | 5160 | 12 | 11..12 | >=10 | >=8 | 8..12 | t/o | t/o | 2..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=13 | <=13 | mem | <=12 ok |
-| shift_120d | 120 | 3720 | 8 | 37.1 s | 1.4 s | 24.2 s | 423 s | t/o | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| star_42 | 42 | 1806 | 6 | 0.8 s | 0.5 s | 0.2 s | 4.8 s | 3..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| walkingcat_54 | 54 | 2322 | 8 | 6.7 s | 6.2 s | 129 s | 188 s | 2..11 | <=9 | 4..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| **solved exactly** (of 27) | | | | **19** | **16** | **11** | **11** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 3348 | 10 | 16.7 s | 12.9 s | 12.2 s | >=9 | 9..10 | 1..12 | <=11 | 3..12 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
+| gross_best_r6 | 144 | 4464 | 11 | 114 s | 74.2 s | 99.4 s | >=9 | 9..11 | 1..31 | t/o | 3..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
+| bb72_r6 | 72 | 2232 | 6 | 0.4 s | 0.2 s | 0.3 s | 0.1 s | 1.5 s | 1..6 | <=6 ok | 3..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| bb90_r10 | 90 | 4590 | 8 | 0.4 s | 0.4 s | 1.3 s | 59.8 s | 473 s | 1..27 | <=13 | 3..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| bb108_r10 | 108 | 5508 | 8 | 0.5 s | 0.6 s | 1.6 s | 57.4 s | 567 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=8 ok | <=8 ok | mem | <=8 ok |
+| bb144_r12 | 144 | 8784 | 10 | 1.4 s | 1.4 s | 46.0 s | >=8 | 8..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=11 | mem | <=10 ok |
+| bb288_r18 | 288 | 26208 | 16 | >=14 | >=14 | >=11 | >=8 | 8..18 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=26 | <=35 | mem | <=18 |
+| w8bb_72 | 72 | 3096 | 8 | 4.4 s | 4.5 s | 5.6 s | 205 s | 296 s | 1..8 | <=8 ok | 3..8 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | <=8 ok | <=8 ok |
+| w8bb_144_16 | 144 | 6192 | 10 | 163 s | 163 s | 178 s | >=8 | 8..10 | t/o | t/o | 2..10 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
+| cornucopia_252 | 252 | 8568 | 5 | 1.6 s | 2.2 s | 7.7 s | 0.4 s | 12.5 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | mem | <=5 ok |
+| cornucopia_576 | 576 | 19584 | 8 | 376 s | 389 s | >=7 | >=7 | >=7 | t/o | t/o | 1..33 | >=2 | >=1 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | t/o |
+| cornucopia_900 | 900 | 30600 | 9 | >=9 | >=9 | >=7 | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | t/o | mem | t/o |
+| cornucopia_1044 | 1044 | 35496 | 10 | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | t/o | t/o | mem | t/o |
+| lrgross | 144 | 4464 | 11 | 19.8 s | 20.7 s | >=10 | >=8 | 8..11 | t/o | t/o | 3..11 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
+| mitten_150 | 150 | 9750 | 8 | 130 s | 135 s | t/o | >=7 | 7..8 | 1..10 | t/o | 2..10 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=9 | <=8 ok | mem | <=8 ok |
+| mitten_300 | 300 | 11820 | >=12 | >=9 | >=9 | >=7 | >=6 | 6..14 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
+| mitten_200 | 200 | 15560 | 9 | >=8 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=16 | mem | <=9 ok |
+| routing_54 | 54 | 1998 | 6 | 0.9 s | 0.9 s | 0.4 s | 0.1 s | 1.9 s | 2..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| routing_90 | 90 | 3330 | 9 | 5.4 s | 5.4 s | 5.8 s | 477 s | 507 s | 2..26 | t/o | 4..9 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
+| routing_110 | 110 | 4070 | 10 | 35.3 s | 36.8 s | 33.3 s | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=10 ok | <=10 ok | mem | <=10 ok |
+| routing_140_13 | 140 | 5180 | 12 | 11..13 | 11..13 | >=11 | >=9 | 9..12 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | <=12 ok | mem | <=12 ok |
+| routing_200_24 | 200 | 11700 | 10 | 9..10 | 9..10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | <=11 | t/o | <=10 ok |
+| sdbb_64 | 64 | 2752 | 8 | 3.7 s | 3.9 s | 4.0 s | 121 s | 202 s | 1..8 | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| sdbb_120 | 120 | 5160 | 12 | 11..12 | 11..12 | >=10 | >=8 | 8..12 | t/o | t/o | 2..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=13 | <=13 | mem | <=12 ok |
+| shift_120d | 120 | 3720 | 8 | 37.1 s | 11.5 s | 1.4 s | 24.2 s | 423 s | t/o | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| star_42 | 42 | 1806 | 6 | 0.8 s | 0.7 s | 0.5 s | 0.2 s | 4.8 s | 3..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| walkingcat_54 | 54 | 2322 | 8 | 6.7 s | 6.8 s | 6.2 s | 129 s | 188 s | 2..11 | <=9 | 4..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| **solved exactly** (of 27) | | | | **19** | **19** | **16** | **11** | **11** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-circuit-sector:END -->
 
 ### Circuits, raw detector error model
 
 <!-- TABLE:A-circuit-full:BEGIN -->
-| instance | n | columns | distance | ours | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 24246 | 10 | 12.7 s | >=7 | >=6 | 6..10 | >=9 | 9..10 | t/o | t/o | 2..10 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=12 | <=16 | mem | <=10 ok |
-| gross_best_r6 | 144 | 32328 | 11 | 120 s | >=7 | >=6 | 6..11 | >=9 | 9..11 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=111 | mem | <=11 ok |
-| bb72_r6 | 72 | 16164 | 6 | 0.3 s | 29.8 s | 94.3 s | 162 s | 0.8 s | 1.7 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| bb90_r10 | 90 | 34965 | 8 | 0.6 s | mem | >=6 | 6..8 | 42.4 s | 353 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=11 | mem | <=8 ok |
-| bb108_r10 | 108 | 41958 | 8 | 0.7 s | mem | >=6 | 6..8 | 50.7 s | 419 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=53 | mem | <=8 ok |
-| bb144_r12 | 144 | 67752 | 10 | 1.9 s | skip | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 | <=31 | mem | <=10 ok |
-| bb288_r18 | 288 | 206352 | 16 | >=14 | skip | skip | skip | >=8 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| w8bb_72 | 72 | 23904 | 8 | 4.5 s | >=6 | >=5 | 5..8 | 140 s | 218 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=10 | <=10 | <=8 ok | <=8 ok |
-| w8bb_144_16 | 144 | 47808 | 10 | 165 s | mem | >=5 | >=5 | >=8 | 8..10 | t/o | t/o | 1..13 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=14 | t/o | mem | t/o |
-| cornucopia_252 | 252 | 65450 | 5 | 2.4 s | mem | 64.0 s | >=5 | 6.5 s | 9.5 s | t/o | t/o | 1..8 | >=1 | mem | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=6 | <=7 | mem | t/o |
-| cornucopia_576 | 576 | 149760 | 8 | 382 s | mem | >=5 | >=5 | >=7 | >=7 | skip | skip | skip | skip | skip | skip | skip | mem | >=1 | >=1 | skip | skip | skip | mem | t/o | mem | t/o |
-| cornucopia_900 | 900 | 234000 | 9 | >=9 | skip | >=5 | skip | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| cornucopia_1044 | 1044 | 271440 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| lrgross | 144 | 31488 | 11 | 19.8 s | >=7 | >=6 | 6..11 | >=8 | >=8 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 ok | <=12 | mem | <=11 ok |
-| mitten_150 | 150 | 76395 | 8 | 135 s | mem | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 2..10 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=10 | <=67 | mem | t/o |
-| mitten_300 | 300 | 87780 | >=12 | >=9 | mem | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
-| mitten_200 | 200 | 123792 | 9 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| routing_54 | 54 | 14958 | 6 | 0.9 s | 83.7 s | 189 s | 343 s | 0.5 s | 2.0 s | t/o | t/o | 3..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| routing_90 | 90 | 25020 | 9 | 5.5 s | >=7 | >=6 | 6..9 | 398 s | 479 s | t/o | t/o | 2..9 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=9 ok | <=38 | mem | <=9 ok |
-| routing_110 | 110 | 30580 | 10 | 35.5 s | >=7 | >=6 | 6..10 | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=92 | mem | <=10 ok |
-| routing_140_13 | 140 | 38920 | 12 | 11..13 | skip | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | t/o | mem | <=13 |
-| routing_200_24 | 200 | 95200 | 10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | t/o | t/o |
-| sdbb_64 | 64 | 21248 | 8 | 3.9 s | t/o | >=6 | 6..8 | 68.6 s | 131 s | t/o | t/o | 2..8 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| sdbb_120 | 120 | 39840 | 12 | 11..12 | mem | >=5 | 5..15 | >=8 | 8..12 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=19 | <=116 | mem | <=12 ok |
-| shift_120d | 120 | 27000 | 8 | 46.7 s | >=7 | >=6 | 6..9 | 15.3 s | 244 s | t/o | t/o | 2..14 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=18 | mem | <=8 ok |
-| star_42 | 42 | 13902 | 6 | 0.9 s | 289 s | 383 s | 600 s | 0.5 s | 3.4 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| walkingcat_54 | 54 | 17820 | 8 | 6.8 s | >=6 | >=6 | 6..8 | 67.9 s | 117 s | t/o | <=68 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=14 | mem | <=8 ok |
-| **solved exactly** (of 27) | | | | **19** | **3** | **4** | **3** | **11** | **11** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 24246 | 10 | 12.7 s | 12.6 s | >=7 | >=6 | 6..10 | >=9 | 9..10 | t/o | t/o | 2..10 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=12 | <=16 | mem | <=10 ok |
+| gross_best_r6 | 144 | 32328 | 11 | 120 s | 74.2 s | >=7 | >=6 | 6..11 | >=9 | 9..11 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=111 | mem | <=11 ok |
+| bb72_r6 | 72 | 16164 | 6 | 0.3 s | 0.3 s | 29.8 s | 94.3 s | 162 s | 0.8 s | 1.7 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| bb90_r10 | 90 | 34965 | 8 | 0.6 s | 0.6 s | mem | >=6 | 6..8 | 42.4 s | 353 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=11 | mem | <=8 ok |
+| bb108_r10 | 108 | 41958 | 8 | 0.7 s | 0.8 s | mem | >=6 | 6..8 | 50.7 s | 419 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=53 | mem | <=8 ok |
+| bb144_r12 | 144 | 67752 | 10 | 1.9 s | 1.8 s | skip | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 | <=31 | mem | <=10 ok |
+| bb288_r18 | 288 | 206352 | 16 | >=14 | >=14 | skip | skip | skip | >=8 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| w8bb_72 | 72 | 23904 | 8 | 4.5 s | 4.6 s | >=6 | >=5 | 5..8 | 140 s | 218 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=10 | <=10 | <=8 ok | <=8 ok |
+| w8bb_144_16 | 144 | 47808 | 10 | 165 s | 164 s | mem | >=5 | >=5 | >=8 | 8..10 | t/o | t/o | 1..13 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=14 | t/o | mem | t/o |
+| cornucopia_252 | 252 | 65450 | 5 | 2.4 s | 3.1 s | mem | 64.0 s | >=5 | 6.5 s | 9.5 s | t/o | t/o | 1..8 | >=1 | mem | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=6 | <=7 | mem | t/o |
+| cornucopia_576 | 576 | 149760 | 8 | 382 s | 393 s | mem | >=5 | >=5 | >=7 | >=7 | skip | skip | skip | skip | skip | skip | skip | mem | >=1 | >=1 | skip | skip | skip | mem | t/o | mem | t/o |
+| cornucopia_900 | 900 | 234000 | 9 | >=9 | >=9 | skip | >=5 | skip | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| cornucopia_1044 | 1044 | 271440 | 10 | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| lrgross | 144 | 31488 | 11 | 19.8 s | 20.6 s | >=7 | >=6 | 6..11 | >=8 | >=8 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 ok | <=12 | mem | <=11 ok |
+| mitten_150 | 150 | 76395 | 8 | 135 s | 135 s | mem | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 2..10 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=10 | <=67 | mem | t/o |
+| mitten_300 | 300 | 87780 | >=12 | >=9 | >=9 | mem | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
+| mitten_200 | 200 | 123792 | 9 | >=8 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| routing_54 | 54 | 14958 | 6 | 0.9 s | 0.9 s | 83.7 s | 189 s | 343 s | 0.5 s | 2.0 s | t/o | t/o | 3..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| routing_90 | 90 | 25020 | 9 | 5.5 s | 5.6 s | >=7 | >=6 | 6..9 | 398 s | 479 s | t/o | t/o | 2..9 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=9 ok | <=38 | mem | <=9 ok |
+| routing_110 | 110 | 30580 | 10 | 35.5 s | 36.5 s | >=7 | >=6 | 6..10 | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=92 | mem | <=10 ok |
+| routing_140_13 | 140 | 38920 | 12 | 11..13 | 11..13 | skip | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | t/o | mem | <=13 |
+| routing_200_24 | 200 | 95200 | 10 | 9..10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | t/o | t/o |
+| sdbb_64 | 64 | 21248 | 8 | 3.9 s | 4.0 s | t/o | >=6 | 6..8 | 68.6 s | 131 s | t/o | t/o | 2..8 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| sdbb_120 | 120 | 39840 | 12 | 11..12 | 11..12 | mem | >=5 | 5..15 | >=8 | 8..12 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=19 | <=116 | mem | <=12 ok |
+| shift_120d | 120 | 27000 | 8 | 46.7 s | 11.8 s | >=7 | >=6 | 6..9 | 15.3 s | 244 s | t/o | t/o | 2..14 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=18 | mem | <=8 ok |
+| star_42 | 42 | 13902 | 6 | 0.9 s | 0.8 s | 289 s | 383 s | 600 s | 0.5 s | 3.4 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| walkingcat_54 | 54 | 17820 | 8 | 6.8 s | 6.9 s | >=6 | >=6 | 6..8 | 67.9 s | 117 s | t/o | <=68 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=14 | mem | <=8 ok |
+| **solved exactly** (of 27) | | | | **19** | **19** | **3** | **4** | **3** | **11** | **11** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-circuit-full:END -->
 
 ### Codes
 
 <!-- TABLE:A-code:BEGIN -->
-| instance | n | columns | distance | ours | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| code_bb72 | 72 | 72 | 6 | 0.2 s | 0.0 s | 0.0 s | 0.0 s | 0.7 s | 0.3 s | 0.7 s | 0.2 s | 0.2 s | 0.3 s | 0.1 s | 0.1 s* | 0.1 s* | 0.6 s* | <=6 ok | <=6 ok | <=6 ok |
-| code_bb90 | 90 | 90 | 10 | 0.2 s | 0.0 s | 0.0 s | 0.1 s | 16.5 s | 49.0 s | 2.5 s | 17.6 s | 16.5 s | 27.4 s | 0.7 s | 0.1 s* | 3.9 s* | mem | <=10 ok | <=10 ok | <=10 ok |
-| code_bb108 | 108 | 108 | 10 | 0.3 s | 0.0 s | 0.0 s | 0.1 s | 24.5 s | 36.6 s | 3.7 s | 21.1 s | 17.0 s | 37.0 s | 2.0 s | 0.1 s* | 16.8 s* | mem | <=10 ok | <=10 ok | <=10 ok |
-| code_bb144 | 144 | 144 | 12 | 0.2 s | 0.1 s | 0.1 s | 0.3 s | 183 s | <=12 ok | 43.8 s | 168 s | 196 s | 462 s | 28.7 s | 0.9 s* | t/o | skip | <=12 ok | <=12 ok | <=12 ok |
-| code_bb288 | 288 | 288 | 18 | 3.1 s | 2.5 s | 115 s | 501 s | 5..20 | <=18 ok | 10..18 | >=10 | >=11 | >=1 | >=1 | t/o | t/o | skip | <=18 ok | <=18 ok | <=18 ok |
-| code_cornucopia_1044 | 1044 | 1044 | 12† | 1.7 s | 1.1 s | 133 s | 600 s | t/o | <=20 | 2..16 | >=5 | >=5 | >=1 | >=1 | t/o | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
-| code_w8bb_144_6 | 144 | 144 | 15 | 1.2 s | 1.1 s | 86.5 s | 409 s | 9..15 | <=15 ok | 11..15 | >=10 | >=10 | >=1 | >=1 | t/o | t/o | mem | <=15 ok | <=15 ok | <=15 ok |
-| code_mm_324 | 324 | 324 | 18 | 2.6 s | 2.4 s | >=17 | 17..18 | 7..23 | <=20 | 9..24 | >=10 | >=10 | >=1 | >=1 | t/o | t/o | mem | <=20 | <=18 ok | <=18 ok |
-| code_llmbb_360 | 360 | 360 | 24 | >=23 | >=23 | >=18 | 18..24 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=24 ok | <=24 ok | <=24 ok |
-| code_balanced_390 | 390 | 390 | 16 | 39.0 s | 38.8 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 ok | <=16 ok | <=16 ok |
-| code_balanced_625 | 625 | 625 | 20 | >=19 | >=19 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=20 ok | <=20 ok | <=20 ok |
-| code_gala_132 | 132 | 132 | 12 | 1.2 s | 1.1 s | 30.5 s | 341 s | 7..12 | <=12 ok | 8..12 | >=7 | >=8 | >=1 | >=1 | t/o | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
-| code_kasai_372 | 372 | 372 | 16 | 104 s | 103 s | >=13 | 13..16 | 3..62 | <=30 | 8..62 | >=6 | >=7 | >=1 | >=1 | t/o | t/o | mem | <=16 ok | <=16 ok | <=16 ok |
-| code_kasai_444 | 444 | 444 | 18 | >=17 | >=17 | >=13 | 13..18 | 2..74 | <=52 | 7..64 | >=6 | >=1 | >=1 | >=1 | t/o | t/o | mem | <=20 | <=18 ok | <=18 ok |
-| code_kasai_492 | 492 | 492 | 20 | >=17 | >=17 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=22 | <=20 ok | <=20 ok |
-| code_sdbb_200 | 200 | 200 | 12 | 0.2 s | 0.1 s | 1.2 s | 5.1 s | 307 s | <=12 ok | 163 s | >=9 | >=10 | >=1 | 248 s | 30.2 s* | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
-| **solved exactly** (of 16) | | | | **12** | **12** | **9** | **9** | **5** | **3** | **5** | **4** | **4** | **4** | **5** | **5** | **3** | **1** |  |  |  |
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| code_bb72 | 72 | 72 | 6 | 0.2 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.7 s | 0.3 s | 0.7 s | 0.2 s | 0.2 s | 0.3 s | 0.1 s | 0.1 s* | 0.1 s* | 0.6 s* | <=6 ok | <=6 ok | <=6 ok |
+| code_bb90 | 90 | 90 | 10 | 0.2 s | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 16.5 s | 49.0 s | 2.5 s | 17.6 s | 16.5 s | 27.4 s | 0.7 s | 0.1 s* | 3.9 s* | mem | <=10 ok | <=10 ok | <=10 ok |
+| code_bb108 | 108 | 108 | 10 | 0.3 s | 0.2 s | 0.0 s | 0.0 s | 0.1 s | 24.5 s | 36.6 s | 3.7 s | 21.1 s | 17.0 s | 37.0 s | 2.0 s | 0.1 s* | 16.8 s* | mem | <=10 ok | <=10 ok | <=10 ok |
+| code_bb144 | 144 | 144 | 12 | 0.2 s | 0.2 s | 0.1 s | 0.1 s | 0.3 s | 183 s | <=12 ok | 43.8 s | 168 s | 196 s | 462 s | 28.7 s | 0.9 s* | t/o | skip | <=12 ok | <=12 ok | <=12 ok |
+| code_bb288 | 288 | 288 | 18 | 3.1 s | 1.7 s | 2.5 s | 115 s | 501 s | 5..20 | <=18 ok | 10..18 | >=10 | >=11 | >=1 | >=1 | t/o | t/o | skip | <=18 ok | <=18 ok | <=18 ok |
+| code_cornucopia_1044 | 1044 | 1044 | 12† | 1.7 s | 2.7 s | 1.1 s | 133 s | 600 s | t/o | <=20 | 2..16 | >=5 | >=5 | >=1 | >=1 | t/o | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
+| code_w8bb_144_6 | 144 | 144 | 15 | 1.2 s | 1.2 s | 1.1 s | 86.5 s | 409 s | 9..15 | <=15 ok | 11..15 | >=10 | >=10 | >=1 | >=1 | t/o | t/o | mem | <=15 ok | <=15 ok | <=15 ok |
+| code_mm_324 | 324 | 324 | 18 | 2.6 s | 2.7 s | 2.4 s | >=17 | 17..18 | 7..23 | <=20 | 9..24 | >=10 | >=10 | >=1 | >=1 | t/o | t/o | mem | <=20 | <=18 ok | <=18 ok |
+| code_llmbb_360 | 360 | 360 | 24 | >=23 | >=23 | >=23 | >=18 | 18..24 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=24 ok | <=24 ok | <=24 ok |
+| code_balanced_390 | 390 | 390 | 16 | 39.0 s | 39.1 s | 38.8 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 ok | <=16 ok | <=16 ok |
+| code_balanced_625 | 625 | 625 | 20 | >=19 | >=19 | >=19 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=20 ok | <=20 ok | <=20 ok |
+| code_gala_132 | 132 | 132 | 12 | 1.2 s | 1.2 s | 1.1 s | 30.5 s | 341 s | 7..12 | <=12 ok | 8..12 | >=7 | >=8 | >=1 | >=1 | t/o | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
+| code_kasai_372 | 372 | 372 | 16 | 104 s | 107 s | 103 s | >=13 | 13..16 | 3..62 | <=30 | 8..62 | >=6 | >=7 | >=1 | >=1 | t/o | t/o | mem | <=16 ok | <=16 ok | <=16 ok |
+| code_kasai_444 | 444 | 444 | 18 | >=17 | >=17 | >=17 | >=13 | 13..18 | 2..74 | <=52 | 7..64 | >=6 | >=1 | >=1 | >=1 | t/o | t/o | mem | <=20 | <=18 ok | <=18 ok |
+| code_kasai_492 | 492 | 492 | 20 | >=17 | >=17 | >=17 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=22 | <=20 ok | <=20 ok |
+| code_sdbb_200 | 200 | 200 | 12 | 0.2 s | 0.3 s | 0.1 s | 1.2 s | 5.1 s | 307 s | <=12 ok | 163 s | >=9 | >=10 | >=1 | 248 s | 30.2 s* | t/o | mem | <=12 ok | <=12 ok | <=12 ok |
+| **solved exactly** (of 16) | | | | **12** | **12** | **12** | **9** | **9** | **5** | **3** | **5** | **4** | **4** | **4** | **5** | **5** | **3** | **1** |  |  |  |
 <!-- TABLE:A-code:END -->
 
 ### Stim surface-code circuits, sector problem
 
 <!-- TABLE:A-stim-sector:BEGIN -->
-| instance | n | columns | distance | ours | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| surface_d3 | 9 | 55 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.2 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| surface_d5 | 25 | 301 | 5 | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.7 s | 21.5 s | 0.5 s | 0.3 s | 0.4 s | 1.4 s | 0.2 s | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| surface_d7 | 49 | 883 | 7 | 0.1 s | 0.1 s | 0.0 s | 0.3 s | 168 s | 4..7 | 29.0 s | 31.1 s | 62.4 s | >=1 | 131 s | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
-| surface_d9 | 81 | 1945 | 9 | 0.1 s | 0.9 s | 1.8 s | 17.2 s | 5..9 | 3..9 | 6..9 | >=6 | >=7 | >=1 | >=1 | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
-| surface_d11 | 121 | 3631 | 11 | 0.2 s | 36.3 s | 244 s | 509 s | 3..11 | skip | 5..11 | >=6 | >=7 | skip | >=1 | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
-| surface_d13 | 169 | 6085 | 13 | 0.3 s | >=12 | >=11 | 11..13 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
-| surface_d15 | 225 | 9451 | 15 | 0.7 s | >=11 | >=10 | 10..15 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=15 ok | mem | <=15 ok |
-| surface_d17 | 289 | 13873 | 17 | 3.7 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=17 ok | <=17 ok | mem | <=17 ok |
-| surface_d19 | 361 | 19495 | 19 | 26.5 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=19 ok | <=19 ok | err | <=19 ok |
-| surface_d21 | 441 | 26461 | 21 | 181 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=21 ok | <=23 | mem | <=21 ok |
-| surface_d23 | 529 | 34915 | 23 | >=23 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=23 ok | <=27 | mem | <=23 ok |
-| surface_d25 | 625 | 45001 | 25 | >=22 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=25 ok | t/o | err | <=25 ok |
-| **solved exactly** (of 12) | | | | **10** | **5** | **5** | **5** | **3** | **2** | **3** | **3** | **3** | **2** | **3** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| surface_d3 | 9 | 55 | 3 | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.2 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| surface_d5 | 25 | 301 | 5 | 0.1 s | 0.2 s | 0.0 s | 0.0 s | 0.0 s | 0.7 s | 21.5 s | 0.5 s | 0.3 s | 0.4 s | 1.4 s | 0.2 s | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| surface_d7 | 49 | 883 | 7 | 0.1 s | 0.2 s | 0.1 s | 0.0 s | 0.3 s | 168 s | 4..7 | 29.0 s | 31.1 s | 62.4 s | >=1 | 131 s | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
+| surface_d9 | 81 | 1945 | 9 | 0.1 s | 0.2 s | 0.9 s | 1.8 s | 17.2 s | 5..9 | 3..9 | 6..9 | >=6 | >=7 | >=1 | >=1 | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
+| surface_d11 | 121 | 3631 | 11 | 0.2 s | 0.2 s | 36.3 s | 244 s | 509 s | 3..11 | skip | 5..11 | >=6 | >=7 | skip | >=1 | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
+| surface_d13 | 169 | 6085 | 13 | 0.3 s | 0.3 s | >=12 | >=11 | 11..13 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
+| surface_d15 | 225 | 9451 | 15 | 0.7 s | 0.6 s | >=11 | >=10 | 10..15 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=15 ok | mem | <=15 ok |
+| surface_d17 | 289 | 13873 | 17 | 2.0 s | 1.7 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=17 ok | <=17 ok | mem | <=17 ok |
+| surface_d19 | 361 | 19495 | 19 | 12.3 s | 2.4 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=19 ok | <=19 ok | err | <=19 ok |
+| surface_d21 | 441 | 26461 | 21 | 65.2 s | 1.8 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=21 ok | <=23 | mem | <=21 ok |
+| surface_d23 | 529 | 34915 | 23 | 552 s | 2.6 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=23 ok | <=27 | mem | <=23 ok |
+| surface_d25 | 625 | 45001 | 25 | >=22 | 7.2 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=25 ok | t/o | err | <=25 ok |
+| **solved exactly** (of 12) | | | | **11** | **12** | **5** | **5** | **5** | **3** | **2** | **3** | **3** | **3** | **2** | **3** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-stim-sector:END -->
 
 ### Stim surface- and color-code circuits, raw detector error model
 
 <!-- TABLE:A-stim-full:BEGIN -->
-| instance | n | columns | distance | ours | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| color_d3 | 7 | 72 | 2† | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | - | - | - | <=2 ok | <=2 ok | <=2 ok | <=2 ok |
-| color_d5 | 19 | 1104 | 3† | 0.2 s | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 1.9 s | 35.1 s | 0.3 s | 1.0 s | 1.0 s | 5.8 s | 2.3 s | 0.9 s | 5.0 s | 2.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| color_d7 | 37 | 3651 | 4† | 1.6 s | 1.5 s | 0.0 s | 0.2 s | 0.1 s | 0.3 s | 47.8 s | 2..4 | 6.9 s | 37.4 s | 45.0 s | 63.6 s | >=1 | 49.5 s | 198 s | >=1 | skip | skip | skip | <=4 ok | <=4 ok | <=4 ok | <=4 ok |
-| color_d9 | 61 | 7683 | 5† | 33.3 s | 33.4 s | 0.4 s | 11.2 s | 0.5 s | 4.6 s | 2..5 | 2..5 | 4..5 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | skip | skip | skip | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| color_d11 | 91 | 16422 | 6† | 240 s | t/o | 38.3 s | 600 s | 27.9 s | 522 s | 1..6 | skip | 3..6 | >=4 | >=3 | >=1 | skip | >=3 | >=1 | skip | skip | skip | skip | <=6 ok | <=6 ok | err | <=6 ok |
-| surface_d3 | 9 | 219 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.4 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| surface_d5 | 25 | 1677 | 5 | 0.1 s | 0.4 s | 0.0 s | 0.4 s | 0.1 s | 0.1 s | 16.9 s | 3..5 | 7.5 s | 30.8 s | 75.0 s | >=1 | >=1 | 48.0 s | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| surface_d7 | 49 | 5471 | 7 | 0.2 s | 122 s | 28.2 s | 7..7 | 0.2 s | 0.5 s | 3..7 | 2..7 | 4..7 | >=5 | >=5 | >=1 | >=1 | >=5 | >=1 | >=1 | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
-| surface_d9 | 81 | 12705 | 9 | 0.2 s | t/o | >=7 | 7..9 | 1.8 s | 16.3 s | 3..9 | skip | 4..9 | >=4 | >=4 | skip | skip | >=4 | skip | skip | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
-| surface_d11 | 121 | 24483 | 11 | 0.3 s | >=6 | >=7 | skip | 221 s | 480 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
-| surface_d13 | 169 | 41909 | 13 | 0.4 s | skip | skip | skip | >=11 | >=11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
-| surface_d15 | 225 | 66087 | 15 | 1.1 s | skip | skip | skip | >=10 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=20 | mem | <=15 ok |
-| surface_d17 | 289 | 98121 | 17 | 4.8 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | <=17 ok |
-| surface_d19 | 361 | 139115 | 19 | 29.0 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | <=24 |
-| surface_d21 | 441 | 190173 | 21 | 191 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| surface_d23 | 529 | 252399 | 23 | >=22 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| surface_d25 | 625 | 326897 | 25 | >=22 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | t/o |
-| **solved exactly** (of 17) | | | | **15** | **7** | **8** | **7** | **10** | **10** | **5** | **3** | **5** | **5** | **5** | **4** | **3** | **5** | **4** | **3** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| color_d3 | 7 | 72 | 2† | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | - | - | - | <=2 ok | <=2 ok | <=2 ok | <=2 ok |
+| color_d5 | 19 | 1104 | 3† | 0.2 s | 0.9 s | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 1.9 s | 35.1 s | 0.3 s | 1.0 s | 1.0 s | 5.8 s | 2.3 s | 0.9 s | 5.0 s | 2.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| color_d7 | 37 | 3651 | 4† | 1.6 s | 1.7 s | 1.5 s | 0.0 s | 0.2 s | 0.1 s | 0.3 s | 47.8 s | 2..4 | 6.9 s | 37.4 s | 45.0 s | 63.6 s | >=1 | 49.5 s | 198 s | >=1 | skip | skip | skip | <=4 ok | <=4 ok | <=4 ok | <=4 ok |
+| color_d9 | 61 | 7683 | 5† | 33.3 s | 33.8 s | 33.4 s | 0.4 s | 11.2 s | 0.5 s | 4.6 s | 2..5 | 2..5 | 4..5 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | skip | skip | skip | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| color_d11 | 91 | 16422 | 6† | 240 s | 236 s | t/o | 38.3 s | 600 s | 27.9 s | 522 s | 1..6 | skip | 3..6 | >=4 | >=3 | >=1 | skip | >=3 | >=1 | skip | skip | skip | skip | <=6 ok | <=6 ok | err | <=6 ok |
+| surface_d3 | 9 | 219 | 3 | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.4 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| surface_d5 | 25 | 1677 | 5 | 0.1 s | 0.1 s | 0.4 s | 0.0 s | 0.4 s | 0.1 s | 0.1 s | 16.9 s | 3..5 | 7.5 s | 30.8 s | 75.0 s | >=1 | >=1 | 48.0 s | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| surface_d7 | 49 | 5471 | 7 | 0.2 s | 0.2 s | 122 s | 28.2 s | 7..7 | 0.2 s | 0.5 s | 3..7 | 2..7 | 4..7 | >=5 | >=5 | >=1 | >=1 | >=5 | >=1 | >=1 | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
+| surface_d9 | 81 | 12705 | 9 | 0.2 s | 0.2 s | t/o | >=7 | 7..9 | 1.8 s | 16.3 s | 3..9 | skip | 4..9 | >=4 | >=4 | skip | skip | >=4 | skip | skip | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
+| surface_d11 | 121 | 24483 | 11 | 0.3 s | 0.3 s | >=6 | >=7 | skip | 221 s | 480 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
+| surface_d13 | 169 | 41909 | 13 | 0.4 s | 0.5 s | skip | skip | skip | >=11 | >=11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
+| surface_d15 | 225 | 66087 | 15 | 1.1 s | 1.0 s | skip | skip | skip | >=10 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=20 | mem | <=15 ok |
+| surface_d17 | 289 | 98121 | 17 | 3.0 s | 2.7 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | <=17 ok |
+| surface_d19 | 361 | 139115 | 19 | 13.9 s | 3.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | <=24 |
+| surface_d21 | 441 | 190173 | 21 | 67.5 s | 5.2 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| surface_d23 | 529 | 252399 | 23 | 573 s | 8.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| surface_d25 | 625 | 326897 | 25 | >=22 | 18.1 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | t/o |
+| **solved exactly** (of 17) | | | | **16** | **17** | **7** | **8** | **7** | **10** | **10** | **5** | **3** | **5** | **5** | **5** | **4** | **3** | **5** | **4** | **3** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-stim-full:END -->
 
 ### Time-collapsed relaxation
@@ -454,7 +454,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | bb90_r10 | 90 | 4590 | 8 |  |  |  | 4..8 | 4..8 |  |  |  |
 | bb108_r10 | 108 | 5508 | 8 |  |  |  | skip | skip | - | - | - |
 | bb144_r12 | 144 | 8784 | 10 |  |  | 532 s | skip | skip | skip | skip | skip |
-| bb288_r18 | 288 | 26208 | 16 | 209 s | >=10 | 10..18 | skip | skip | skip | skip | skip |
+| bb288_r18 | 288 | 26208 | 16 | 242 s | >=10 | 10..18 | skip | skip | skip | skip | skip |
 | w8bb_72 | 72 | 3096 | 8 |  |  |  | 5..8 | 4..8 |  |  |  |
 | w8bb_144_16 | 144 | 6192 | 10 |  |  | 9..10 | skip | skip |  |  |  |
 | cornucopia_252 | 252 | 8568 | 5 |  |  |  | 3..5 | 2..5 |  |  |  |
@@ -468,7 +468,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | routing_54 | 54 | 1998 | 6 |  |  |  | 2457 s | 206 s |  |  |  |
 | routing_90 | 90 | 3330 | 9 |  |  |  | 1..9 | 5..9 |  |  |  |
 | routing_110 | 110 | 4070 | 10 |  |  | 408 s | skip | skip | - | - | - |
-| routing_140_13 | 140 | 5180 | 12 | 86.2 s | >=10 | 10..12 | skip | skip | skip | skip | skip |
+| routing_140_13 | 140 | 5180 | 12 | 103 s | >=10 | 10..12 | skip | skip | skip | skip | skip |
 | routing_200_24 | 200 | 11700 | 10 | 477 s |  | skip | skip | skip | skip | skip | skip |
 | sdbb_64 | 64 | 2752 | 8 |  |  |  | 5..8 | 5..8 |  |  |  |
 | sdbb_120 | 120 | 5160 | 12 | 1117 s |  | 9..12 | skip | skip |  |  |  |
@@ -482,8 +482,8 @@ All second-tier records are mutually consistent and consistent with the ground t
 | surface_d17 | 289 | 13873 | 17 |  |  | skip | skip | skip | skip | skip | skip |
 | surface_d19 | 361 | 19495 | 19 |  |  | skip | skip | skip | skip | skip | skip |
 | surface_d21 | 441 | 26461 | 21 |  |  | skip | skip | skip | skip | skip | skip |
-| surface_d23 | 529 | 34915 | 23 | 69.3 s |  | skip | skip | skip | skip | skip | skip |
-| surface_d25 | 625 | 45001 | 25 | 564 s |  | skip | skip | skip | skip | skip | skip |
+| surface_d23 | 529 | 34915 | 23 | 23.7 s |  | skip | skip | skip | skip | skip | skip |
+| surface_d25 | 625 | 45001 | 25 | 196 s |  | skip | skip | skip | skip | skip | skip |
 | walkingcat_54 | 54 | 2322 | 8 |  |  |  | 5..8 | 5..8 |  |  |  |
 | **solved exactly** (of 37) | | | | **9** | **0** | **6** | **3** | **4** | **0** | **0** | **0** |
 <!-- TABLE:B32-circuit-sector:END -->
@@ -1010,12 +1010,12 @@ One component switched off per column; the full pipeline is the column "ours" of
 <!-- TABLE:ablation:BEGIN -->
 | instance | n | columns | distance | ours, collapse off | ours, collapse off lift off window off | ours, cover off | ours, lift off | ours, symmetry off | ours, symmetry off cover off collapse off lift off window off | ours, window off |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 | 12.3 s | 12.9 s | 7.5 s | 12.9 s | 9..10 | 440 s | 12.5 s |
+| bb108_best_r6 | 108 | 3348 | 10 | 12.3 s | 12.9 s | 7.5 s | 12.9 s | 424 s | 440 s | 12.5 s |
 | gross_best_r6 | 144 | 4464 | 11 | 72.0 s | 81.5 s | 55.6 s | 80.3 s | 10..11 | >=10 | 74.1 s |
 | bb72_r6 | 72 | 2232 | 6 | 0.2 s | 0.3 s | 0.2 s | 0.4 s | 0.5 s | 0.6 s | 0.4 s |
-| bb90_r10 | 90 | 4590 | 8 | 0.4 s | 1.5 s | 0.4 s | 1.2 s | 4.1 s | 13.0 s | 1.4 s |
-| bb108_r10 | 108 | 5508 | 8 | 0.5 s | 1.8 s | 0.5 s | 1.6 s | 3.4 s | 16.7 s | 1.8 s |
-| bb144_r12 | 144 | 8784 | 10 | 1.4 s | 56.7 s | 1.3 s | 28.0 s | 39.1 s | >=9 | 17.6 s |
+| bb90_r10 | 90 | 4590 | 8 | 0.4 s | 1.5 s | 0.4 s | 1.2 s | 1.5 s | 13.0 s | 1.4 s |
+| bb108_r10 | 108 | 5508 | 8 | 0.5 s | 1.8 s | 0.5 s | 1.6 s | 1.4 s | 16.7 s | 1.8 s |
+| bb144_r12 | 144 | 8784 | 10 | 1.4 s | 56.7 s | 1.3 s | 28.0 s | 11.9 s | >=9 | 17.6 s |
 | bb288_r18 | 288 | 26208 | 16 | >=1 | >=11 | >=13 | >=14 | >=12 | >=8 | >=14 |
 | w8bb_72 | 72 | 3096 | 8 | 4.3 s | 6.4 s | 3.1 s | 4.1 s | 48.0 s | 24.5 s | 6.7 s |
 | w8bb_144_16 | 144 | 6192 | 10 | 154 s | 182 s | 124 s | 161 s | 8..10 | >=8 | 192 s |
@@ -1028,7 +1028,7 @@ One component switched off per column; the full pipeline is the column "ours" of
 | mitten_300 | 300 | 11820 | >=12 | >=1 | >=7 | >=9 | >=9 | >=8 | >=7 | >=9 |
 | mitten_200 | 200 | 15560 | 9 | skip | skip | >=9 | >=8 | >=8 | skip | >=8 |
 | routing_54 | 54 | 1998 | 6 | 0.8 s | 0.8 s | 0.8 s | 0.8 s | 0.7 s | 0.6 s | 0.8 s |
-| routing_90 | 90 | 3330 | 9 | 5.2 s | 6.5 s | 3.6 s | 5.4 s | 139 s | 94.6 s | 6.7 s |
+| routing_90 | 90 | 3330 | 9 | 5.2 s | 6.5 s | 3.6 s | 5.4 s | 117 s | 94.6 s | 6.7 s |
 | routing_110 | 110 | 4070 | 10 | 35.1 s | 34.8 s | 20.7 s | 35.1 s | 9..11 | >=9 | 35.0 s |
 | routing_140_13 | 140 | 5180 | 12 | 11..13 | >=11 | 11..13 | 11..13 | >=10 | >=9 | >=11 |
 | routing_200_24 | 200 | 11700 | 10 | 9..10 | >=8 | 9..10 | 8..10 | skip | skip | >=9 |
@@ -1043,13 +1043,13 @@ One component switched off per column; the full pipeline is the column "ours" of
 | surface_d11 | 121 | 3631 | 11 | 35.8 s | 35.6 s | 0.2 s | 0.1 s | 0.2 s | 35.5 s | 0.2 s |
 | surface_d13 | 169 | 6085 | 13 | 12..13 | >=12 | 0.3 s | 0.2 s | 0.3 s | >=12 | 0.2 s |
 | surface_d15 | 225 | 9451 | 15 | 12..15 | >=12 | 0.7 s | 0.5 s | 0.7 s | >=12 | 0.7 s |
-| surface_d17 | 289 | 13873 | 17 | skip | skip | 3.4 s | 1.9 s | 3.4 s | skip | 3.4 s |
-| surface_d19 | 361 | 19495 | 19 | skip | skip | 26.0 s | 12.2 s | 25.8 s | skip | 26.0 s |
-| surface_d21 | 441 | 26461 | 21 | skip | skip | 184 s | 62.4 s | 184 s | skip | 182 s |
-| surface_d23 | 529 | 34915 | 23 | skip | skip | >=23 | 549 s | >=23 | skip | >=23 |
+| surface_d17 | 289 | 13873 | 17 | skip | skip | 2.0 s | 1.9 s | 2.0 s | skip | 2.0 s |
+| surface_d19 | 361 | 19495 | 19 | skip | skip | 12.6 s | 12.2 s | 12.1 s | skip | 12.2 s |
+| surface_d21 | 441 | 26461 | 21 | skip | skip | 64.1 s | 62.4 s | 63.1 s | skip | 62.9 s |
+| surface_d23 | 529 | 34915 | 23 | skip | skip | 556 s | 549 s | 551 s | skip | 552 s |
 | surface_d25 | 625 | 45001 | 25 | skip | skip | >=22 | >=22 | >=22 | skip | >=22 |
 | walkingcat_54 | 54 | 2322 | 8 | 7.0 s | 6.5 s | 2.4 s | 6.3 s | 107 s | 23.7 s | 6.6 s |
-| **solved exactly** (of 39) | | | | **21** | **21** | **29** | **30** | **24** | **17** | **28** |
+| **solved exactly** (of 39) | | | | **21** | **21** | **30** | **30** | **26** | **17** | **29** |
 <!-- TABLE:ablation:END -->
 
 ## The instances of the prior benchmark (arXiv:2603.22532)
@@ -1148,7 +1148,7 @@ the same mechanisms as the plain circuits, only other probabilities.
 | wjh_bb90_circuit | 90 | 8 | 4590 | 8 | 8 | 0.4 s |  |  | 3..9 |  | >=7 | 46.8 s |  | none |
 | wjh_bb108_circuit | 108 | 8 | 5508 | 8 | 8 | 0.5 s |  |  | skip |  | >=7 | 64.3 s |  | none |
 | wjh_bb144_circuit | 144 | 12 | 8784 | 10 | 10 | 1.4 s |  |  | skip |  | skip | >=8 | 538 s | none |
-| wjh_bb288_circuit | 288 | 12 | 26208 | 16 | 24 | >=14 | 8306 s | 299 s | skip |  | skip | >=8 | 10..18 | none |
+| wjh_bb288_circuit | 288 | 12 | 26208 | 16 | 24 | >=14 | 8306 s | 196 s | skip |  | skip | >=8 | 10..18 | none |
 | wjh_bb360_circuit | 360 | 12 | 43560 | >=17 | 88 | >=14 | >=16 | >=17 | skip |  | skip | skip | skip | none |
 | wjh_bb756_circuit | 756 | 16 | 129276 | >=17 | 56 | skip | >=17 | skip | skip |  | skip | skip | skip | none |
 
@@ -1336,6 +1336,71 @@ the same mechanisms as the plain circuits, only other probabilities.
 - Times are single runs, wall clock, with other benchmark jobs on other cores of the same socket. The
   second tier of the sparse-basis pass (19 October) ran on the machine's other socket, of the same
   model, so as to run alongside the last dist-m4ri runs.
+
+## Changes of 22 October 2026
+
+### Lift steps start at the certified lower bound
+
+Bin Cheng noticed that the restricted searches of the lifting step (quick lifts and orbit lifts) were not given
+the certified lower bound and started at weight 1. That is valid, since a search from 1 is complete, but slow.
+Every solution of such a restriction is a solution of the sector problem, so weights below the certified lower
+bound need no search; since commit 6dac207 the lift steps start there. No value changes.
+
+In the records of the main passes the lift stages had spent 291 of their 314 s below their last threshold, almost
+all of it on the surface-code circuits. Rerun with the original limits (`scripts/server/rerun_lift_fix.sh`):
+the 30 records where that time was at least 1 s and 1 % of the run (or 1 % of the limit for unfinished runs), and
+the whole surface series d = 17 to 25 wherever a member was affected. Main configuration, first tier:
+
+| instance | sector, before | sector, after | full, before | full, after |
+|---|---:|---:|---:|---:|
+| surface d = 17 | 3.7 s | 2.0 s | 4.8 s | 3.0 s |
+| surface d = 19 | 26.5 s | 12.3 s | 29.0 s | 13.9 s |
+| surface d = 21 | 181 s | 65.2 s | 191 s | 67.5 s |
+| surface d = 23 | timeout | 552 s | timeout | 573 s |
+| surface d = 25 | timeout | timeout | timeout | timeout |
+
+So surface d = 23 is now solved in the first tier. Second tier (32 threads): surface d = 23 69 s → 23.7 s,
+d = 25 564 s → 196 s, the [[288,12,18]] circuit of the prior benchmark 299 s → 196 s. The ablations with
+cover, window or symmetry off were rerun on the same instances. Surface d = 23 is now solved by all three (551 to
+556 s), and with symmetry off also bb108_best_r6 (424 s; before, a timeout): without symmetry it has many orbits
+to lift, and each lift had repeated the low thresholds.
+
+Two second-tier reruns took longer than in October, in stages the fix does not touch: bb288_r18 242 s (209 s
+before) and routing_140_13 103 s (86 s). Repeated on the other socket they gave the same times within 3 %. The
+reruns use the search kernel of commit b4cfc44 (reconstruction always within the full remaining budget), the
+other records the kernel of early October. Single-run times on this shared machine also differ by up to a factor
+two between days, in both directions, for runs the change does not affect.
+
+### A front end with the dense Rank DP ("ours + DP")
+
+The weight-bounded search and the dense Rank DP evaluate the same quantity, and their costs depend on different
+things: the search on the distance and on how well its bounds prune, the DP on the cut rank of a column order.
+`cdist/auto.py` computes the DP's cost from its plan before running it: the largest table and the work of all
+logical queries. A rate measured on this machine (`scripts/calibrate_dp.py`) turns that into a predicted time.
+The pipeline's option `dp=1` uses it at two places:
+
+- the main problem (a code, or the sector problem of a circuit): if the DP is predicted to take at most
+  `dp_fast` = 10 s and fits in memory, the search gets a 1 s head start and the DP runs if it has not
+  finished, followed by a search at the DP's value for a witness. If the DP fits but is slower, the search runs
+  first for the DP's predicted time;
+- the time-collapsed problem of a circuit: under the same condition the DP certifies the collapsed distance,
+  and the collapsed search starts at that threshold, so it only supplies the minimum solutions for lifting.
+
+On the Stim surface-code circuits the collapsed problem has DP width 13 to 16, so the step that dominated
+their search time takes milliseconds. First tier, the 102 instance variants of the main suite (`bench/compare_dp.py`):
+
+| instance | default | + DP | DP used on |
+|---|---:|---:|---|
+| surface d = 19, sector / full | 12.3 s / 13.9 s | 2.4 s / 3.9 s | collapsed problem (width 14) |
+| surface d = 21, sector / full | 65.2 s / 67.5 s | 1.8 s / 5.2 s | collapsed problem (width 16) |
+| surface d = 23, sector / full | 552 s / 573 s | 2.6 s / 8.9 s | collapsed problem (width 15) |
+| surface d = 25, sector / full | timeout / timeout | 7.2 s / 18.1 s | collapsed problem (width 16) |
+
+Nothing is solved without the front end that is not solved with it, and no run is slower by more than 1 s and
+a factor 1.5. Three other runs were faster with `dp=1` although the front end chose the search
+(shift_120d, gross_best_r6, the [[288,12,18]] code). The default records for these are from the October
+pass, so that difference is the day-to-day variation described above, not the DP. The main tables keep "ours"
+for the default configuration; "ours + DP" has first-tier records only.
 
 ## Reproduce
 

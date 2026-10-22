@@ -1,0 +1,120 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10
+  },
+  "instance": "bb288_r18",
+  "variant": "sector",
+  "rows": 2736,
+  "cols": 26208,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 14,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.04,
+  "trace": [
+    {
+      "t": 0.128,
+      "lb": 1
+    },
+    {
+      "t": 2.783,
+      "lb": 2
+    },
+    {
+      "t": 2.784,
+      "lb": 3
+    },
+    {
+      "t": 2.784,
+      "lb": 4
+    },
+    {
+      "t": 2.784,
+      "lb": 5
+    },
+    {
+      "t": 2.785,
+      "lb": 6
+    },
+    {
+      "t": 2.786,
+      "lb": 7
+    },
+    {
+      "t": 2.79,
+      "lb": 8
+    },
+    {
+      "t": 2.814,
+      "lb": 9
+    },
+    {
+      "t": 2.929,
+      "lb": 10
+    },
+    {
+      "t": 3.534,
+      "lb": 11
+    },
+    {
+      "t": 7.012,
+      "lb": 12
+    },
+    {
+      "t": 27.758,
+      "lb": 13
+    },
+    {
+      "t": 155.45,
+      "lb": 14
+    }
+  ],
+  "peak_rss_mb": 94.3,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 720, \"cut_rank\": 106, \"decision\": \"search\", \"estimate_seconds\": 0.414, \"fits\": false, \"peak_bits\": 106, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 26208, \"cut_rank\": 211, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 1.036, \"fits\": false, \"peak_bits\": 211, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 2, \"stages\": {\"collapsed\": {\"cols\": 720, \"rows\": 144, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015592575073242188, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.153915405273438e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.797645568847656e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001900196075439453, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001952648162841797, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006585121154785156, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004185914993286133, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.023095130920410156, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.11447882652282715, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.6051042079925537, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.47721529006958, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 20.745150089263916, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 127.69175958633423, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_k_reduced\": [[720, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb288_r18",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      96
+    ],
+    "started_at": "2026-10-22T05:33:26.801928+00:00",
+    "ended_at": "2026-10-22T05:43:26.991199+00:00",
+    "wall_seconds": 600.189059,
+    "adapter_seconds": 600.04,
+    "trace_offset_seconds": 0.149059,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-1/bb288_r18__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-1/bb288_r18__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 103.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

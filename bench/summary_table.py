@@ -38,6 +38,9 @@ HEURISTIC = ("BP+OSD", "ISD", "Stim search", "dist-m4ri RW", "dist-m4ri 0.9.0 RW
 def short(folder):
     if "__lbasis-std" in folder:        # the same tool on the sparse logical basis of a code instance
         return short(folder.replace("__lbasis-std", "")) + ", sparse L"
+    for key, name in SHORT:          # exact names first (the dp configuration is not an ablation)
+        if folder == key:
+            return name
     if folder.startswith("ours_pipeline__"):
         return "ours, " + folder[len("ours_pipeline__"):].replace("__", " ").replace("-0", " off")
     stim = " (Stim WCNF)" if "encoding-stim" in folder else ""

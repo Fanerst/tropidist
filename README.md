@@ -16,7 +16,7 @@ fault set replayed in Stim. The same engine computes code distances.
   rounds), search by weight with a meet-in-the-middle table and the code's symmetry, and lift the
   relaxed solutions back to real fault sets.
 - **A benchmark** against other exact solvers (connected-cluster enumeration, integer programming
-  including Gurobi, SAT, MaxSAT) on 60 instances. It solves 46 with one thread in 600 s and 59 with
+  including Gurobi, SAT, MaxSAT) on 60 instances. It solves 47 with one thread in 600 s and 59 with
   32 threads in an hour; all other methods together, among them the October version of dist-m4ri,
   solve 30 and 38, and none solves an instance it does not.
 - **The instances of the prior benchmark** (Webster, Jacob, Higgott, arXiv:2603.22532), from its own

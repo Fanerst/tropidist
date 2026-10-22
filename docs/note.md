@@ -18,7 +18,7 @@ The method computes it exactly, as an interval that closes: a lower bound proved
 lighter fault set, and an upper bound given by an explicit fault set replayed in the simulator. Its
 cost is governed by the distance and by a small relaxed problem, not by the size of the circuit.
 
-- On a benchmark of 60 instances it solves 46 with one thread in 600 s and 59 with 32 threads in an
+- On a benchmark of 60 instances it solves 47 with one thread in 600 s and 59 with 32 threads in an
   hour. All other exact methods together, among them Gurobi and the October version of dist-m4ri,
   solve 30 and 38, and none solves an instance it does not.
 - On the 126 CSS instances of the most recent benchmark of distance methods (arXiv:2603.22532), run
@@ -224,10 +224,13 @@ at the time limit with the right value but without a proof. This method takes 0.
 
 *Figure 4. Time to the certified distance of Stim's own surface-code memory circuit, generated here
 up to d = 25 (sector problem, one thread, 600 s limit). Each line ends at the last distance the
-method solved.*
+method solved. Dashed: the same method with the dense Rank DP front end (benchmark configuration
+"ours + DP"). Hollow: this method with 32 threads and one hour.*
 
-The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight, and
-reaches d = 25 in 564 s on 32 threads. One caveat: surface codes are graph-like, so a shortest-path
+The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight. It
+reaches d = 23 in 552 s with one thread and d = 25 in 196 s on 32 threads. The cost is the
+exhaustive search of the collapsed problem, whose Rank DP width is only 13 to 16, so the DP front end
+settles it in milliseconds, and d = 25 then takes 7 s with one thread. One caveat: surface codes are graph-like, so a shortest-path
 computation solves them at any size. The family is shown because others report on it.
 
 ### 4.4 Which ingredient matters

@@ -1,0 +1,132 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10
+  },
+  "instance": "code_kasai_492",
+  "variant": "full",
+  "rows": 164,
+  "cols": 492,
+  "obs": 170,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 17,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 0.068,
+      "lb": 1
+    },
+    {
+      "t": 0.688,
+      "lb": 2
+    },
+    {
+      "t": 0.688,
+      "lb": 3
+    },
+    {
+      "t": 0.689,
+      "lb": 4
+    },
+    {
+      "t": 0.689,
+      "lb": 5
+    },
+    {
+      "t": 0.69,
+      "lb": 6
+    },
+    {
+      "t": 0.69,
+      "lb": 7
+    },
+    {
+      "t": 0.691,
+      "lb": 8
+    },
+    {
+      "t": 0.692,
+      "lb": 9
+    },
+    {
+      "t": 0.696,
+      "lb": 10
+    },
+    {
+      "t": 0.71,
+      "lb": 11
+    },
+    {
+      "t": 0.765,
+      "lb": 12
+    },
+    {
+      "t": 0.992,
+      "lb": 13
+    },
+    {
+      "t": 2.034,
+      "lb": 14
+    },
+    {
+      "t": 6.817,
+      "lb": 15
+    },
+    {
+      "t": 29.703,
+      "lb": 16
+    },
+    {
+      "t": 140.343,
+      "lb": 17
+    }
+  ],
+  "peak_rss_mb": 407.8,
+  "truth": 20,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 492, \"cut_rank\": 131, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.194, \"fits\": false, \"peak_bits\": 131, \"predicted_seconds\": null, \"queries\": 170, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 492, \"rows\": 164, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013566017150878906, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.489059448242188e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010585784912109375, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.226799011230469e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012731552124023438, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00014352798461914062, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002765655517578125, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0009157657623291016, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003665447235107422, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.014244794845581055, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.054669857025146484, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.22615671157836914, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.0417742729187012, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.782965421676636, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 22.885293006896973, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 110.63972401618958, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 459.6602132320404, \"status\": \"timeout\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\"}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/code_kasai_492",
+    "family": "kasai",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      97
+    ],
+    "started_at": "2026-10-22T05:45:10.457649+00:00",
+    "ended_at": "2026-10-22T05:55:10.664747+00:00",
+    "wall_seconds": 600.206894,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.189894,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-1/code_kasai_492__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-1/code_kasai_492__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 77.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -207,11 +207,19 @@ def fig_surface():
                 marker="o", markersize=6.2, markeredgecolor=SURFACE, markeredgewidth=1.5, zorder=4 if color == BLUE else 3)
         if xs:
             ends[label] = (xs[-1], ys[-1])
+    # the same with the dense Rank DP front end (ours + DP, first tier): the DP settles the collapsed problem
+    dp = [(d, exact(a, "ours + DP", "surface_d%d" % d, "sector")) for d in range(3, 27, 2)]
+    dp = [(d, max(t, 0.01)) for d, t in dp if t is not None]
+    if dp:
+        ax.plot([d for d, _ in dp], [t for _, t in dp], color=AQUA, linewidth=1.8, linestyle=(0, (4, 2)),
+                marker="s", markersize=5.6, markeredgecolor=SURFACE, markeredgewidth=1.3, zorder=5)
+        ax.text(21.6, 0.75, "this method with the\nRank DP front end", fontsize=7.8, color=INK2,
+                ha="center", va="top", linespacing=1.3)
     # second tier of this method: 32 threads, one hour
     t2 = [(d, exact(b32, "ours", "surface_d%d" % d, "sector")) for d in (23, 25)]
     ax.plot([d for d, _ in t2], [t for _, t in t2], color=BLUE, linewidth=0, marker="o", markersize=6.2,
             markerfacecolor=SURFACE, markeredgecolor=BLUE, markeredgewidth=1.5, zorder=4)
-    ax.text(24.0, 16, "32 threads,\none hour", fontsize=7.8, color=INK2, ha="center", va="center", linespacing=1.3)
+    ax.text(24.1, 62, "32 threads,\none hour", fontsize=7.8, color=INK2, ha="center", va="center", linespacing=1.3)
     ax.text(18.7, 62, "this method", fontsize=8.5, color=INK, fontweight="bold", ha="right", va="center")
     # labels at the end of each line; SAT and Gurobi end at the same point, so they share a label
     shared = "SAT" in ends and "Gurobi" in ends and ends["SAT"][0] == ends["Gurobi"][0] and \

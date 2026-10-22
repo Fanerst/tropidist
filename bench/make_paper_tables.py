@@ -168,6 +168,15 @@ def numbers(R):
     surf = sorted((R.m[n]["rounds"], n) for n in circ if R.m[n].get("family") == "surface")
     N["SurfMaxFirst"] = max(d for d, n in surf if R.ex(R.a, "ours", n, "sector"))
     N["SurfMaxBoth"] = max(d for d, n in surf if R.ours(n, "sector", 2))
+    top = [n for d, n in surf if d == N["SurfMaxBoth"]][0]
+    if not R.ex(R.a, "ours", top, "sector"):                           # seconds of the largest, in the second tier
+        N["SurfMaxBothSeconds"] = "%.0f" % R.b32[("ours", top, "sector")]["seconds"]
+    # the dense Rank DP front end (configuration ours + DP, first tier)
+    dp_surf = [(d, n) for d, n in surf if R.ex(R.a, "ours + DP", n, "sector")]
+    if dp_surf:
+        d_dp, n_dp = max(dp_surf)
+        N["SurfDpMax"] = d_dp
+        N["SurfDpMaxSeconds"] = "%.0f" % R.a[("ours + DP", n_dp, "sector")]["seconds"]
     # the prior benchmark
     rep = W.report()
     c = wjh_summary_rows()[-1]
