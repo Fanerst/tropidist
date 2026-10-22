@@ -303,8 +303,10 @@ class Pipeline:
         sub = self.problem.Problem("lift", self.sector.nrows, self.sector.nobs,
                                    [self.sector.h[i] for i in cols], [self.sector.l[i] for i in cols],
                                    self.sector.row_meta)
+        # every solution of the restriction is a sector solution, so its weight is at least the certified lower
+        # bound: thresholds below it need no search (before 2026-10-21 this started at 1, which is valid but slow)
         return self.distance(sub, stage, self.cfg["k_table"] if not slack else 1,
-                             kmax=len(classes) + slack,
+                             start=self.tr.lower, kmax=len(classes) + slack,
                              witness_map=lambda sol: [cols[j] for j in sol])
 
     def window(self, round_, start, kmax, stage):

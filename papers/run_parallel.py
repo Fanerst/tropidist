@@ -76,8 +76,9 @@ def dist(p, **kw):
     return r
 
 
-def lift_multi(sector, relaxed, classes, slack, time_limit):
-    """As cdist.lift.lift, for any number of observables."""
+def lift_multi(sector, relaxed, classes, slack, time_limit, start=1):
+    """As cdist.lift.lift, for any number of observables.  start: a certified lower bound on the circuit distance;
+    every solution of the restriction is a sector solution, so lighter thresholds need no search."""
     cols = []
     for j in classes:
         cols.extend(relaxed.col_meta[j])
@@ -86,7 +87,8 @@ def lift_multi(sector, relaxed, classes, slack, time_limit):
     cols = sorted(set(cols))
     sub = Problem("lift", sector.nrows, sector.nobs, [sector.h[i] for i in cols], [sector.l[i] for i in cols],
                   sector.row_meta)
-    r = dist(sub, k_table=2 if slack == 0 else 1, kmax=len(classes) + slack, time_limit=time_limit)
+    kmax = len(classes) + slack
+    r = dist(sub, k_table=2 if slack == 0 else 1, kmax=kmax, time_limit=time_limit, start=min(start, kmax))
     if r["runs"] and r["runs"][-1]["status"] == "timeout":
         return "timeout", None
     if r["distance"] is None:
@@ -176,7 +178,7 @@ def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_
     best = None
     # ---------------- quick upper bounds at weight d_coll: the solutions just found, then one-layer windows
     for sol in r["solutions"][:20]:
-        w, cols = lift_multi(sector, coll, sol, 0, 600)
+        w, cols = lift_multi(sector, coll, sol, 0, 600, start=res["certified_lower_bound"])
         if w not in (None, "timeout"):
             best = (w, cols)
             break
@@ -209,7 +211,7 @@ def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_
     lifts = {0: 0, 1: 0}
     for slack in ((0, 1) if best is None else ()):
         for rep, size_ in reps:
-            w, cols = lift_multi(sector, coll, rep, slack, 600)
+            w, cols = lift_multi(sector, coll, rep, slack, 600, start=res["certified_lower_bound"])
             if w == "timeout":
                 lifts[slack] = None
                 break
