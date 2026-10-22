@@ -47,7 +47,7 @@ def overall_rows():
     import json
     a, b32, b1 = T.load(A, 1), T.load(B, 32), T.load(B, 1)
     ours = ("ours",)                       # one configuration: the pipeline, not the better of two
-    mine = ("ours", "ours, plain")
+    mine = ("ours", "ours, plain", "ours + DP")
 
     def ex(recs, method, inst, variant):
         r = recs.get((method, inst, variant))

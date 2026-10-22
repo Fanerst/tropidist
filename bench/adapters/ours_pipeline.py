@@ -1,12 +1,20 @@
 """Exported-instance adapter for the collapsed/lift/window/sector pipeline.
 
 config: symmetry=1, cover=1, collapse=1, lift=1, window=1,
-        k_coll=3, k_table=2, kmax=40.
+        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10.
 
 collapse controls the standalone collapsed lower bound and the pruning table.
 With collapse=0 and lift=1, collapsed solutions are still generated for lifting
 and the exhaustive orbit argument.  With collapse=lift=window=0 this is the
 plain weight-bounded search on the sector.  Code instances use plain search.
+
+dp=1 adds the dense Rank DP (cdist.auto) where its exactly computed cost is small:
+  - the main problem (code, or sector of a circuit): if the DP's predicted time is at most
+    dp_fast seconds it gives the distance, and a search at that single threshold looks for a
+    witness; if it fits in memory but is slower, the search runs first for the DP's predicted
+    time and the DP runs if the search has not finished;
+  - the time-collapsed problem of a circuit: if its DP is predicted within dp_fast seconds, it
+    certifies the collapsed distance and the collapsed search starts at that threshold.
 """
 import json
 import math
@@ -22,8 +30,10 @@ import common
 
 
 DEFAULTS = dict(symmetry=1, cover=1, collapse=1, lift=1, window=1,
-                k_coll=3, k_table=2, kmax=40, table_gb=0)
-SWITCHES = ("symmetry", "cover", "collapse", "lift", "window")
+                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10)
+SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp")
+DP_MAX_COLUMNS = 30000          # beyond this the order search alone is slow, and no such DP would fit
+DP_HEAD_START = 1.0             # seconds the search runs before a DP predicted to be cheap
 TABLE_BUDGET = 1 << 30          # leave space below 2 GiB for search/Python arrays
 SOL_CAP = 100000
 
@@ -48,6 +58,8 @@ def configuration(values):
     for k in ("k_coll", "k_table", "kmax"):
         if not 1 <= cfg[k] <= 40:
             raise ValueError(k + " must be between 1 and 40")
+    if cfg["dp_fast"] < 0:
+        raise ValueError("dp_fast must be nonnegative")
     global TABLE_BUDGET
     TABLE_BUDGET = table_budget(cfg["table_gb"])
     return cfg
@@ -101,8 +113,8 @@ def induced_perms(source, target, perms, collapsed=False):
 
 class Pipeline:
     def __init__(self, prob, cfg, trace, deadline, progress):
-        from cdist import lift, problem, search, symmetry
-        self.lift, self.problem, self.search, self.symmetry = lift, problem, search, symmetry
+        from cdist import auto, lift, problem, search, symmetry
+        self.auto, self.lift, self.problem, self.search, self.symmetry = auto, lift, problem, search, symmetry
         self.prob, self.cfg, self.tr = prob, cfg, trace
         self.deadline, self.progress = deadline, progress
         self.tables = []
@@ -295,6 +307,70 @@ class Pipeline:
                 "the exhaustive no-lift orbit proof remains enabled")
         self.checkpoint()
 
+    # ---------------- dense Rank DP (config dp=1)
+    def dp_estimate(self, p, stage):
+        """DP cost on p for the best of a few column orders; nothing is allocated (cdist.auto.estimate)."""
+        info = self.notes.setdefault("dp", {}).setdefault(stage, {"columns": p.ncols})
+        if p.ncols > DP_MAX_COLUMNS:
+            info.update(fits=False, decision="search (too many columns for the DP)")
+            return None, info
+        budget = max(1.0, min(30.0, 0.05 * self.remaining()))
+        # greedy orders cost about n^2 (13 s at 4,590 columns); they help on code-sized problems, not on the
+        # detector error model of a circuit, whose width is far beyond any table
+        greedy = p.ncols <= 2000 and (self.plain or stage != "main")
+        est = self.auto.estimate(p, threads=self.notes["kernel_threads"], seeds=2 if greedy else 0,
+                                 time_limit=budget, max_table_bytes=max(0, TABLE_BUDGET - self.table_bytes))
+        info.update(cut_rank=est["cut_rank"], peak_bits=est["peak_bits"], work=est["work"], queries=est["queries"],
+                    estimate_seconds=round(est["estimate_seconds"], 3), fits=est["fits"],
+                    predicted_seconds=None if est["work"] is None else round(est["predicted_seconds"], 3))
+        self.remaining()
+        return est, info
+
+    def soft(self, fn, seconds):
+        """fn() under a deadline at most `seconds` away: (True, result) if it finished, (False, None) if only that
+        soft deadline stopped it.  The run's own deadline still raises."""
+        hard = self.deadline
+        soft = time.monotonic() + seconds
+        self.deadline = soft if hard is None else min(hard, soft)
+        try:
+            return True, fn()
+        except Deadline:
+            if hard is not None and time.monotonic() >= hard:
+                raise
+            return False, None
+        finally:
+            self.deadline = hard
+
+    def dp_cheap(self, info):
+        return info.get("fits") and info.get("predicted_seconds") is not None \
+            and info["predicted_seconds"] <= self.cfg["dp_fast"]
+
+    def dp_run(self, p, est, stage):
+        t = time.monotonic()
+        value, _ = self.auto.dp_distance(p, est["order"], max_table_bytes=TABLE_BUDGET, deadline=self.deadline)
+        self.notes["dp"][stage].update(value=value, seconds=round(time.monotonic() - t, 3))
+        self.checkpoint()
+        return value
+
+    def dp_settle(self, est, stage):
+        """The DP's value is the distance of the main problem; then a search at that one threshold for a witness."""
+        value = self.dp_run(self.sector, est, stage)
+        info = self.notes["dp"][stage]
+        if value is None:
+            info["no_logical"] = True           # no fault set flips a logical observable
+            return
+        self.tr.lb(value)
+        if self.tr.upper is not None and self.tr.upper <= value:
+            return
+        self.soft(lambda: self.distance(self.sector, stage + "_witness", self.cfg["k_table"], start=value,
+                                        kmax=value, perms=self.perms, witness_map=list),
+                  max(10.0, 2.0 * info["seconds"]))
+        if self.tr.upper is None or self.tr.upper > value:
+            # The DP minimises over actual fault sets, so the value is attained; only no witness was found.
+            self.tr.ub(value)
+            info["value_only"] = True
+            self.checkpoint()
+
     def lift_classes(self, coll, classes, slack, stage):
         cols = [i for j in classes for i in coll.col_meta[j]]
         if slack:
@@ -318,6 +394,33 @@ class Pipeline:
 
     def run(self):
         self.prepare()
+        if not self.cfg["dp"]:
+            self.run_search()
+            return
+        est, info = self.dp_estimate(self.sector, "main")
+        if est is not None and self.dp_cheap(info):
+            # a short head start lets the search settle the small instances, where it is faster than any DP
+            done, _ = self.soft(self.run_search, DP_HEAD_START)
+            if done:
+                info["decision"] = "search (finished within the head start)"
+                return
+            self.close()
+            info["decision"] = "dp (after a %.0f s head start of the search)" % DP_HEAD_START
+            self.dp_settle(est, "main")
+            return
+        if est is not None and info.get("fits") and info["predicted_seconds"] < self.remaining():
+            done, _ = self.soft(self.run_search, max(DP_HEAD_START, info["predicted_seconds"]))
+            if done:
+                info["decision"] = "search (finished within the DP's predicted time)"
+                return
+            self.close()
+            info["decision"] = "dp (the search did not finish within the DP's predicted time)"
+            self.dp_settle(est, "main")
+            return
+        info.setdefault("decision", "search (the DP does not fit or is too slow)")
+        self.run_search()
+
+    def run_search(self):
         if self.plain:
             self.distance(self.sector, "plain", self.cfg["k_table"], perms=self.perms,
                           certify=True, witness_map=list)
@@ -330,8 +433,26 @@ class Pipeline:
             coll = self.problem.collapse_time(self.sector)
             cperms = self.valid_perms(coll, induced_perms(self.sector, coll, self.perms, collapsed=True))
             csym, _ = self.sym(coll, cperms)
-            rc = self.distance(coll, "collapsed", self.cfg["k_coll"], perms=cperms,
-                               certify=bool(self.cfg["collapse"]))
+            start, rc = 1, None
+            collapsed = lambda st: self.distance(coll, "collapsed", self.cfg["k_coll"], start=st, perms=cperms,
+                                                 certify=bool(self.cfg["collapse"]))
+            if self.cfg["dp"]:
+                est_c, info_c = self.dp_estimate(coll, "collapsed")
+                if est_c is not None and self.dp_cheap(info_c):
+                    done, rc = self.soft(lambda: collapsed(1), DP_HEAD_START)
+                    if done:
+                        info_c["decision"] = "search (finished within the head start)"
+                    else:
+                        info_c["decision"] = "dp after a head start of the search; the search then starts at its value"
+                        value = self.dp_run(coll, est_c, "collapsed")
+                        if value is not None:
+                            start = value       # the collapsed distance: no lighter collapsed solution exists
+                            if self.cfg["collapse"]:
+                                self.tr.lb(value)
+                else:
+                    info_c.setdefault("decision", "search")
+            if rc is None:
+                rc = collapsed(start)
         d_coll = rc["distance"] if rc else None
         if d_coll is not None:
             if self.cfg["lift"]:
@@ -545,8 +666,10 @@ def main():
     actual = detail.get("kernel_threads")
     if actual is not None and actual != a.threads:
         detail["threads_note"] = "kernel uses %d threads; requested %d (build ignores the request)" % (actual, a.threads)
+    # an upper bound from the DP's value without a fault set (no witness found within its cap) is labelled
+    value_only = any(isinstance(v, dict) and v.get("value_only") for v in detail.get("dp", {}).values())
     common.save_result(a.out, prob, "ours_pipeline", tr, status, a.threads, a.time_limit,
-                       witness=witness, config=cfg, notes=json.dumps(detail, sort_keys=True))
+                       witness=witness, config=cfg, notes=json.dumps(detail, sort_keys=True), value_only=value_only)
     print(status, tr.lower, tr.upper, tr.seconds())
 
 

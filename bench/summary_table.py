@@ -20,7 +20,7 @@ HERE = Path(__file__).resolve().parent
 
 # dist-m4ri: the unqualified names are the current version (0.14.7, commit bed621e); the records of the
 # 0.9.0 build (commit 1f46277) that the benchmark first ran are kept under their own names
-SHORT = [("ours_pipeline", "ours"), ("ours", "ours, plain"),
+SHORT = [("ours_pipeline", "ours"), ("ours_pipeline__dp-1", "ours + DP"), ("ours", "ours, plain"),
          ("distm4ri__build-0.14.7__mode-cc", "dist-m4ri CC"), ("distm4ri__build-0.14.7__mode-bracket", "dist-m4ri CC+RW"),
          ("distm4ri__build-0.14.7__mode-cc__input-dem", "dist-m4ri CC, DEM input"),
          ("distm4ri__build-0.14.7__mode-bracket__input-dem", "dist-m4ri CC+RW, DEM input"),
