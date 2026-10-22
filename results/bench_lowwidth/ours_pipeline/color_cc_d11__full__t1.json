@@ -1,0 +1,124 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 0,
+    "dp_fast": 10
+  },
+  "instance": "color_cc_d11",
+  "variant": "full",
+  "rows": 45,
+  "cols": 91,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "witness_ok": true,
+  "seconds": 0.135,
+  "trace": [
+    {
+      "t": 0.065,
+      "lb": 1
+    },
+    {
+      "t": 0.111,
+      "lb": 2
+    },
+    {
+      "t": 0.111,
+      "lb": 3
+    },
+    {
+      "t": 0.112,
+      "lb": 4
+    },
+    {
+      "t": 0.112,
+      "lb": 5
+    },
+    {
+      "t": 0.112,
+      "lb": 6
+    },
+    {
+      "t": 0.113,
+      "lb": 7
+    },
+    {
+      "t": 0.113,
+      "lb": 8
+    },
+    {
+      "t": 0.114,
+      "lb": 9
+    },
+    {
+      "t": 0.115,
+      "lb": 10
+    },
+    {
+      "t": 0.117,
+      "lb": 11
+    },
+    {
+      "t": 0.117,
+      "ub": 11
+    }
+  ],
+  "peak_rss_mb": 58.3,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 91, \"rows\": 45, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011944770812988281, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.153915405273438e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.322166442871094e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00014781951904296875, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000102996826171875, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016880035400390625, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00024509429931640625, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00044035911560058594, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006213188171386719, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0016870498657226562, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": 11, \"nsol_recorded\": 1, \"seconds\": 0.00011372566223144531, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d11",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      0
+    ],
+    "started_at": "2026-10-22T11:08:32.397985+00:00",
+    "ended_at": "2026-10-22T11:08:32.679756+00:00",
+    "wall_seconds": 0.281286,
+    "adapter_seconds": 0.135,
+    "trace_offset_seconds": 0.146286,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/ours_pipeline/color_cc_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/ours_pipeline/color_cc_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

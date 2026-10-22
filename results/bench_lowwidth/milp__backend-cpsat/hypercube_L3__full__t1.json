@@ -1,0 +1,77 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "hypercube_L3",
+  "variant": "full",
+  "rows": 76,
+  "cols": 216,
+  "obs": 64,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    108,
+    111,
+    120,
+    123,
+    144,
+    147,
+    156,
+    159
+  ],
+  "witness_ok": true,
+  "seconds": 28.847,
+  "trace": [
+    {
+      "t": 0.308,
+      "ub": 8
+    },
+    {
+      "t": 0.308,
+      "lb": 0
+    },
+    {
+      "t": 28.842,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 122.2,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L3",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      1
+    ],
+    "started_at": "2026-10-22T10:46:34.765583+00:00",
+    "ended_at": "2026-10-22T10:47:03.692062+00:00",
+    "wall_seconds": 28.925691,
+    "adapter_seconds": 28.847,
+    "trace_offset_seconds": 0.078691,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/hypercube_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/hypercube_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 133.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

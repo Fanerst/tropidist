@@ -1,0 +1,88 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_cc_d11",
+  "variant": "full",
+  "rows": 45,
+  "cols": 91,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    9,
+    19,
+    38,
+    46,
+    60,
+    66,
+    76,
+    80,
+    86,
+    87,
+    89
+  ],
+  "witness_ok": true,
+  "seconds": 14.043,
+  "trace": [
+    {
+      "t": 3.207,
+      "ub": 21
+    },
+    {
+      "t": 3.207,
+      "lb": 1
+    },
+    {
+      "t": 3.207,
+      "ub": 11
+    },
+    {
+      "t": 3.207,
+      "lb": 2
+    },
+    {
+      "t": 14.036,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 117.3,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d11",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      5
+    ],
+    "started_at": "2026-10-22T10:06:33.146893+00:00",
+    "ended_at": "2026-10-22T10:06:47.315942+00:00",
+    "wall_seconds": 14.168651,
+    "adapter_seconds": 14.043,
+    "trace_offset_seconds": 0.125651,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/color_cc_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/color_cc_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 129.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

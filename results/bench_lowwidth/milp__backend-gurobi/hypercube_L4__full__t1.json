@@ -1,0 +1,97 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 4,
+  "upper_bound": 16,
+  "witness": [
+    777,
+    778,
+    783,
+    784,
+    813,
+    814,
+    819,
+    820,
+    993,
+    994,
+    999,
+    1000,
+    1029,
+    1030,
+    1035,
+    1036
+  ],
+  "witness_ok": true,
+  "seconds": 598.084,
+  "trace": [
+    {
+      "t": 0.292,
+      "ub": 24
+    },
+    {
+      "t": 0.292,
+      "ub": 16
+    },
+    {
+      "t": 0.292,
+      "lb": 1
+    },
+    {
+      "t": 0.492,
+      "lb": 2
+    },
+    {
+      "t": 55.166,
+      "lb": 3
+    },
+    {
+      "t": 345.148,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 256.7,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      16
+    ],
+    "started_at": "2026-10-22T10:48:22.651207+00:00",
+    "ended_at": "2026-10-22T10:58:20.950243+00:00",
+    "wall_seconds": 598.293734,
+    "adapter_seconds": 598.084,
+    "trace_offset_seconds": 0.209734,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/hypercube_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/hypercube_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 286.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

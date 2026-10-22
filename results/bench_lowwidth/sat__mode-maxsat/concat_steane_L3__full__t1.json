@@ -1,0 +1,146 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 23,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.022,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.107,
+      "lb": 2
+    },
+    {
+      "t": 0.108,
+      "lb": 3
+    },
+    {
+      "t": 0.108,
+      "lb": 4
+    },
+    {
+      "t": 0.108,
+      "lb": 5
+    },
+    {
+      "t": 0.194,
+      "lb": 6
+    },
+    {
+      "t": 0.202,
+      "lb": 7
+    },
+    {
+      "t": 0.419,
+      "lb": 8
+    },
+    {
+      "t": 0.433,
+      "lb": 9
+    },
+    {
+      "t": 0.695,
+      "lb": 10
+    },
+    {
+      "t": 1.257,
+      "lb": 11
+    },
+    {
+      "t": 1.783,
+      "lb": 12
+    },
+    {
+      "t": 3.598,
+      "lb": 13
+    },
+    {
+      "t": 3.854,
+      "lb": 14
+    },
+    {
+      "t": 6.526,
+      "lb": 15
+    },
+    {
+      "t": 8.292,
+      "lb": 16
+    },
+    {
+      "t": 11.624,
+      "lb": 17
+    },
+    {
+      "t": 19.611,
+      "lb": 18
+    },
+    {
+      "t": 28.173,
+      "lb": 19
+    },
+    {
+      "t": 42.079,
+      "lb": 20
+    },
+    {
+      "t": 74.504,
+      "lb": 21
+    },
+    {
+      "t": 120.737,
+      "lb": 22
+    },
+    {
+      "t": 270.769,
+      "lb": 23
+    }
+  ],
+  "peak_rss_mb": 147.8,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      2
+    ],
+    "started_at": "2026-10-22T10:36:00.004735+00:00",
+    "ended_at": "2026-10-22T10:46:01.088634+00:00",
+    "wall_seconds": 601.083688,
+    "adapter_seconds": 601.022,
+    "trace_offset_seconds": 0.061688,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-maxsat/concat_steane_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-maxsat/concat_steane_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

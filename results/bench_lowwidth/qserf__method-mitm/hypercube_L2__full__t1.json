@@ -1,0 +1,62 @@
+{
+  "method": "qubitserf_mitm",
+  "version": "0.1.0",
+  "config": {
+    "method": "mitm"
+  },
+  "instance": "hypercube_L2",
+  "variant": "full",
+  "rows": 10,
+  "cols": 36,
+  "obs": 16,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 0.066,
+  "trace": [
+    {
+      "t": 0.066,
+      "lb": 4
+    },
+    {
+      "t": 0.066,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 51.9,
+  "truth": 4,
+  "truth_kind": "exact",
+  "notes": "value returned by the tool, no codeword available (which=x)",
+  "value_only": true,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "qserf:method=mitm",
+    "adapter": "qserf",
+    "config_string": "method=mitm",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L2",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      10
+    ],
+    "started_at": "2026-10-22T10:42:54.996753+00:00",
+    "ended_at": "2026-10-22T10:42:55.270626+00:00",
+    "wall_seconds": 0.273695,
+    "adapter_seconds": 0.066,
+    "trace_offset_seconds": 0.207695,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/qserf__method-mitm/hypercube_L2__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/qserf__method-mitm/hypercube_L2__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

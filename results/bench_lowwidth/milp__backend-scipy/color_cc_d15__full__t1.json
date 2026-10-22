@@ -1,0 +1,80 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_cc_d15",
+  "variant": "full",
+  "rows": 84,
+  "cols": 169,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 15,
+  "upper_bound": 15,
+  "witness": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    13,
+    14,
+    25,
+    26
+  ],
+  "witness_ok": true,
+  "seconds": 267.083,
+  "trace": [
+    {
+      "t": 267.069,
+      "ub": 15
+    },
+    {
+      "t": 267.069,
+      "lb": 15
+    }
+  ],
+  "peak_rss_mb": 337.4,
+  "truth": 15,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d15",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-22T10:06:38.179793+00:00",
+    "ended_at": "2026-10-22T10:11:05.424867+00:00",
+    "wall_seconds": 267.24464,
+    "adapter_seconds": 267.083,
+    "trace_offset_seconds": 0.16164,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/color_cc_d15__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/color_cc_d15__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 348.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental"
+  },
+  "instance": "color_cc_d19",
+  "variant": "full",
+  "rows": 135,
+  "cols": 271,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 17,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.023,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.116,
+      "lb": 2
+    },
+    {
+      "t": 0.116,
+      "lb": 3
+    },
+    {
+      "t": 0.116,
+      "lb": 4
+    },
+    {
+      "t": 0.116,
+      "lb": 5
+    },
+    {
+      "t": 0.148,
+      "lb": 6
+    },
+    {
+      "t": 0.232,
+      "lb": 7
+    },
+    {
+      "t": 0.456,
+      "lb": 8
+    },
+    {
+      "t": 0.879,
+      "lb": 9
+    },
+    {
+      "t": 1.779,
+      "lb": 10
+    },
+    {
+      "t": 3.81,
+      "lb": 11
+    },
+    {
+      "t": 8.499,
+      "lb": 12
+    },
+    {
+      "t": 17.943,
+      "lb": 13
+    },
+    {
+      "t": 37.965,
+      "lb": 14
+    },
+    {
+      "t": 86.897,
+      "lb": 15
+    },
+    {
+      "t": 202.636,
+      "lb": 16
+    },
+    {
+      "t": 511.299,
+      "lb": 17
+    }
+  ],
+  "peak_rss_mb": 138.1,
+  "truth": 19,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental",
+    "adapter": "sat",
+    "config_string": "mode=incremental",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d19",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-22T10:07:09.921644+00:00",
+    "ended_at": "2026-10-22T10:17:11.133300+00:00",
+    "wall_seconds": 601.211476,
+    "adapter_seconds": 601.023,
+    "trace_offset_seconds": 0.188476,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-incremental/color_cc_d19__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-incremental/color_cc_d19__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

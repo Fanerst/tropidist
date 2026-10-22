@@ -1,0 +1,74 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L2",
+  "variant": "full",
+  "rows": 24,
+  "cols": 49,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 9,
+  "upper_bound": 9,
+  "witness": [
+    0,
+    1,
+    2,
+    37,
+    38,
+    41,
+    42,
+    43,
+    44
+  ],
+  "witness_ok": true,
+  "seconds": 0.669,
+  "trace": [
+    {
+      "t": 0.664,
+      "ub": 9
+    },
+    {
+      "t": 0.664,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 110.4,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/concat_steane_L2",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-22T10:27:14.087619+00:00",
+    "ended_at": "2026-10-22T10:27:14.956589+00:00",
+    "wall_seconds": 0.868632,
+    "adapter_seconds": 0.669,
+    "trace_offset_seconds": 0.199632,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/concat_steane_L2__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/concat_steane_L2__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 121.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

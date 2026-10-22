@@ -1,0 +1,88 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_cc_d11",
+  "variant": "full",
+  "rows": 45,
+  "cols": 91,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    10,
+    20,
+    38,
+    46,
+    60,
+    66,
+    72,
+    73,
+    74,
+    75,
+    76
+  ],
+  "witness_ok": true,
+  "seconds": 8.526,
+  "trace": [
+    {
+      "t": 7.924,
+      "ub": 91
+    },
+    {
+      "t": 8.124,
+      "ub": 15
+    },
+    {
+      "t": 8.124,
+      "ub": 11
+    },
+    {
+      "t": 8.124,
+      "lb": 1
+    },
+    {
+      "t": 8.525,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 40.6,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 2 (optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d11",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-22T10:06:33.152434+00:00",
+    "ended_at": "2026-10-22T10:06:41.859931+00:00",
+    "wall_seconds": 8.707078,
+    "adapter_seconds": 8.526,
+    "trace_offset_seconds": 0.181078,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/color_cc_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/color_cc_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 70.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

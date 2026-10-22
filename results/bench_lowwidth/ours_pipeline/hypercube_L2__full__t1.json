@@ -1,0 +1,89 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 0,
+    "dp_fast": 10
+  },
+  "instance": "hypercube_L2",
+  "variant": "full",
+  "rows": 10,
+  "cols": 36,
+  "obs": 16,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    0,
+    1,
+    6,
+    7
+  ],
+  "witness_ok": true,
+  "seconds": 0.126,
+  "trace": [
+    {
+      "t": 0.064,
+      "lb": 1
+    },
+    {
+      "t": 0.108,
+      "lb": 2
+    },
+    {
+      "t": 0.108,
+      "lb": 3
+    },
+    {
+      "t": 0.109,
+      "lb": 4
+    },
+    {
+      "t": 0.109,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 55.5,
+  "truth": 4,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 36, \"rows\": 10, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.822845458984375e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.340576171875e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.677078247070312e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 8.273124694824219e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L2",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-22T11:08:32.408506+00:00",
+    "ended_at": "2026-10-22T11:08:32.681787+00:00",
+    "wall_seconds": 0.273073,
+    "adapter_seconds": 0.126,
+    "trace_offset_seconds": 0.147073,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/ours_pipeline/hypercube_L2__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/ours_pipeline/hypercube_L2__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

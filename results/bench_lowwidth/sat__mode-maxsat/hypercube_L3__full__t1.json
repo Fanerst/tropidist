@@ -1,0 +1,99 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "hypercube_L3",
+  "variant": "full",
+  "rows": 76,
+  "cols": 216,
+  "obs": 64,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    37,
+    38,
+    43,
+    44,
+    73,
+    74,
+    79,
+    80
+  ],
+  "witness_ok": true,
+  "seconds": 2.452,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.131,
+      "lb": 2
+    },
+    {
+      "t": 0.17,
+      "lb": 3
+    },
+    {
+      "t": 0.259,
+      "lb": 4
+    },
+    {
+      "t": 0.277,
+      "lb": 5
+    },
+    {
+      "t": 0.437,
+      "lb": 6
+    },
+    {
+      "t": 0.979,
+      "lb": 7
+    },
+    {
+      "t": 2.361,
+      "lb": 8
+    },
+    {
+      "t": 2.451,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 61.5,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L3",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-22T10:47:24.129025+00:00",
+    "ended_at": "2026-10-22T10:47:26.662704+00:00",
+    "wall_seconds": 2.532774,
+    "adapter_seconds": 2.452,
+    "trace_offset_seconds": 0.080774,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-maxsat/hypercube_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/sat__mode-maxsat/hypercube_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

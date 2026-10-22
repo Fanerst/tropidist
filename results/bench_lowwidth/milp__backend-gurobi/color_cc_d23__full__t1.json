@@ -1,0 +1,136 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_cc_d23",
+  "variant": "full",
+  "rows": 198,
+  "cols": 397,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 13,
+  "upper_bound": 23,
+  "witness": [
+    22,
+    44,
+    86,
+    106,
+    144,
+    162,
+    196,
+    212,
+    242,
+    256,
+    282,
+    294,
+    316,
+    326,
+    344,
+    352,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366
+  ],
+  "witness_ok": true,
+  "seconds": 600.435,
+  "trace": [
+    {
+      "t": 0.287,
+      "ub": 397
+    },
+    {
+      "t": 0.287,
+      "ub": 43
+    },
+    {
+      "t": 0.288,
+      "ub": 41
+    },
+    {
+      "t": 0.288,
+      "ub": 27
+    },
+    {
+      "t": 0.288,
+      "ub": 23
+    },
+    {
+      "t": 0.288,
+      "lb": 1
+    },
+    {
+      "t": 0.288,
+      "lb": 3
+    },
+    {
+      "t": 5.093,
+      "lb": 7
+    },
+    {
+      "t": 10.099,
+      "lb": 8
+    },
+    {
+      "t": 20.112,
+      "lb": 9
+    },
+    {
+      "t": 40.137,
+      "lb": 10
+    },
+    {
+      "t": 80.187,
+      "lb": 11
+    },
+    {
+      "t": 200.135,
+      "lb": 12
+    },
+    {
+      "t": 405.192,
+      "lb": 13
+    }
+  ],
+  "peak_rss_mb": 2177.2,
+  "truth": 23,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d23",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-22T10:17:26.923850+00:00",
+    "ended_at": "2026-10-22T10:27:27.416117+00:00",
+    "wall_seconds": 600.491622,
+    "adapter_seconds": 600.435,
+    "trace_offset_seconds": 0.056622,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/color_cc_d23__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-gurobi/color_cc_d23__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 2205.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "color_cc_d35",
+  "variant": "full",
+  "rows": 459,
+  "cols": 919,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 35,
+  "witness": [
+    0,
+    3,
+    4,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    39,
+    40,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62
+  ],
+  "witness_ok": true,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 0.109,
+      "ub": 53
+    },
+    {
+      "t": 0.112,
+      "ub": 49
+    },
+    {
+      "t": 0.115,
+      "ub": 43
+    },
+    {
+      "t": 0.122,
+      "ub": 41
+    },
+    {
+      "t": 0.134,
+      "ub": 37
+    },
+    {
+      "t": 0.225,
+      "ub": 35
+    }
+  ],
+  "peak_rss_mb": 56.5,
+  "truth": 35,
+  "truth_kind": "exact",
+  "notes": "search calls: 2355; valid outputs: 6; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d35",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      3
+    ],
+    "started_at": "2026-10-22T10:26:37.156895+00:00",
+    "ended_at": "2026-10-22T10:36:37.367057+00:00",
+    "wall_seconds": 600.209047,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.192047,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/isd/color_cc_d35__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/isd/color_cc_d35__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

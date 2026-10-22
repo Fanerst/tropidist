@@ -1,0 +1,78 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L2",
+  "variant": "full",
+  "rows": 24,
+  "cols": 49,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 9,
+  "upper_bound": 9,
+  "witness": [
+    1,
+    3,
+    5,
+    7,
+    10,
+    11,
+    14,
+    15,
+    16
+  ],
+  "witness_ok": true,
+  "seconds": 0.627,
+  "trace": [
+    {
+      "t": 0.283,
+      "ub": 9
+    },
+    {
+      "t": 0.283,
+      "lb": 1
+    },
+    {
+      "t": 0.622,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 116.2,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; OPTIMAL",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat",
+    "adapter": "milp",
+    "config_string": "backend=cpsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/concat_steane_L2",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-22T10:27:12.549414+00:00",
+    "ended_at": "2026-10-22T10:27:13.407584+00:00",
+    "wall_seconds": 0.857855,
+    "adapter_seconds": 0.627,
+    "trace_offset_seconds": 0.230855,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/concat_steane_L2__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-cpsat/concat_steane_L2__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 126.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

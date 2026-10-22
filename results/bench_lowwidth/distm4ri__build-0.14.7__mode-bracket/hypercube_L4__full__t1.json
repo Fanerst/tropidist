@@ -1,0 +1,131 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L4/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L4/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-raes5hiw/codewords.nz",
+    "timeout": "599.888989612"
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 12,
+  "upper_bound": 16,
+  "witness": [
+    146,
+    149,
+    152,
+    155,
+    182,
+    185,
+    188,
+    191,
+    1010,
+    1013,
+    1016,
+    1019,
+    1046,
+    1049,
+    1052,
+    1055
+  ],
+  "witness_ok": true,
+  "seconds": 130.76,
+  "trace": [
+    {
+      "t": 0.018,
+      "lb": 2
+    },
+    {
+      "t": 0.093,
+      "lb": 3
+    },
+    {
+      "t": 0.167,
+      "lb": 4
+    },
+    {
+      "t": 0.24,
+      "lb": 5
+    },
+    {
+      "t": 0.317,
+      "lb": 6
+    },
+    {
+      "t": 0.399,
+      "lb": 7
+    },
+    {
+      "t": 0.537,
+      "lb": 8
+    },
+    {
+      "t": 0.877,
+      "lb": 9
+    },
+    {
+      "t": 3.186,
+      "lb": 10
+    },
+    {
+      "t": 12.865,
+      "lb": 11
+    },
+    {
+      "t": 96.653,
+      "lb": 12
+    },
+    {
+      "t": 130.448,
+      "ub": 16
+    }
+  ],
+  "peak_rss_mb": 35.8,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native triple: 12 16 47217 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      14
+    ],
+    "started_at": "2026-10-22T10:47:34.113010+00:00",
+    "ended_at": "2026-10-22T10:49:44.961543+00:00",
+    "wall_seconds": 130.843192,
+    "adapter_seconds": 130.76,
+    "trace_offset_seconds": 0.083192,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/distm4ri__build-0.14.7__mode-bracket/hypercube_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/distm4ri__build-0.14.7__mode-bracket/hypercube_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

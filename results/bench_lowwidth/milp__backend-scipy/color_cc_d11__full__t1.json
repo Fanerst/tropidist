@@ -1,0 +1,76 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "color_cc_d11",
+  "variant": "full",
+  "rows": 45,
+  "cols": 91,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 11,
+  "upper_bound": 11,
+  "witness": [
+    6,
+    16,
+    34,
+    41,
+    49,
+    51,
+    54,
+    55,
+    58,
+    65,
+    66
+  ],
+  "witness_ok": true,
+  "seconds": 4.77,
+  "trace": [
+    {
+      "t": 4.764,
+      "ub": 11
+    },
+    {
+      "t": 4.764,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 120.9,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/color_cc_d11",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-22T10:06:33.154565+00:00",
+    "ended_at": "2026-10-22T10:06:38.078929+00:00",
+    "wall_seconds": 4.923823,
+    "adapter_seconds": 4.77,
+    "trace_offset_seconds": 0.153823,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/color_cc_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth/milp__backend-scipy/color_cc_d11__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 130.9,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

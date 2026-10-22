@@ -34,6 +34,7 @@ DEFAULTS = dict(symmetry=1, cover=1, collapse=1, lift=1, window=1,
 SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp")
 DP_MAX_COLUMNS = 30000          # beyond this the order search alone is slow, and no such DP would fit
 DP_HEAD_START = 1.0             # seconds the search runs before a DP predicted to be cheap
+DP_FAST_TRACEBACK = 1 << 28     # DP work (table entries) up to which the traceback runs before the witness search
 TABLE_BUDGET = 1 << 30          # leave space below 2 GiB for search/Python arrays
 SOL_CAP = 100000
 
@@ -363,18 +364,28 @@ class Pipeline:
         self.tr.lb(value)
         if self.tr.upper is not None and self.tr.upper <= value:
             return
-        # a fault set by tracing the DP back, when the tables of all its column steps fit in the budget
-        t = time.monotonic()
         obs = min(i for i, v in enumerate(self.dp_per) if v == value)
-        cols = self.auto.dp_witness(self.sector, est["order"], obs, max_bytes=max(0, TABLE_BUDGET - self.table_bytes))
-        info["traceback_seconds"] = round(time.monotonic() - t, 3)
-        if cols is not None:
-            info["witness"] = "traceback"
-            self.found(cols)
-            return
-        self.soft(lambda: self.distance(self.sector, stage + "_witness", self.cfg["k_table"], start=value,
-                                        kmax=value, perms=self.perms, witness_map=list),
-                  max(10.0, 2.0 * info["seconds"]))
+
+        def traceback():
+            # a fault set by tracing the DP back; it keeps the table of every column step (the plan's work, one
+            # byte each) and runs in numpy, several times slower than the DP itself
+            t = time.monotonic()
+            cols = self.auto.dp_witness(self.sector, est["order"], obs,
+                                        max_bytes=max(0, TABLE_BUDGET - self.table_bytes))
+            info["traceback_seconds"] = round(time.monotonic() - t, 3)
+            if cols is not None:
+                info["witness"] = "traceback"
+                self.found(cols)
+
+        if est["work"] is not None and est["work"] <= DP_FAST_TRACEBACK:
+            traceback()
+        if self.tr.upper is None or self.tr.upper > value:
+            # a search at the single threshold of the DP's value usually finds one at once (color codes)
+            self.soft(lambda: self.distance(self.sector, stage + "_witness", self.cfg["k_table"], start=value,
+                                            kmax=value, perms=self.perms, witness_map=list),
+                      max(10.0, 2.0 * info["seconds"]))
+        if (self.tr.upper is None or self.tr.upper > value) and "traceback_seconds" not in info:
+            traceback()
         if self.tr.upper is None or self.tr.upper > value:
             # The DP minimises over actual fault sets, so the value is attained; only no witness was found.
             self.tr.ub(value)
