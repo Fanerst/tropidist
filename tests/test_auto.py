@@ -56,3 +56,14 @@ def test_estimate_stops_when_no_table_fits():
     p = stabcode.css_distance_problem(hx, hz, n, "X")
     est = auto.estimate(p, max_table_bytes=1 << 4)
     assert est["fits"] is False and est["work"] is None and est["predicted_seconds"] == float("inf")
+
+
+def test_witness_by_traceback():
+    for build, d in ((dvs.rotated_surface, 11), (dvs.color_code, 13)):
+        hx, hz, n = build(d)
+        p = stabcode.css_distance_problem(hx, hz, n, "X")
+        est = auto.estimate(p)
+        value, per = auto.dp_distance(p, est["order"])
+        cols = auto.dp_witness(p, est["order"], per.index(value))
+        assert value == d and len(cols) == d and search.verify(p, tuple(cols))
+    assert auto.dp_witness(p, est["order"], 0, max_bytes=1) is None       # tables over the cap: no traceback

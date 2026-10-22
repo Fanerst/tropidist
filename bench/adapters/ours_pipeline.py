@@ -347,8 +347,9 @@ class Pipeline:
 
     def dp_run(self, p, est, stage):
         t = time.monotonic()
-        value, _ = self.auto.dp_distance(p, est["order"], max_table_bytes=TABLE_BUDGET, deadline=self.deadline)
+        value, per = self.auto.dp_distance(p, est["order"], max_table_bytes=TABLE_BUDGET, deadline=self.deadline)
         self.notes["dp"][stage].update(value=value, seconds=round(time.monotonic() - t, 3))
+        self.dp_per = per
         self.checkpoint()
         return value
 
@@ -361,6 +362,15 @@ class Pipeline:
             return
         self.tr.lb(value)
         if self.tr.upper is not None and self.tr.upper <= value:
+            return
+        # a fault set by tracing the DP back, when the tables of all its column steps fit in the budget
+        t = time.monotonic()
+        obs = min(i for i, v in enumerate(self.dp_per) if v == value)
+        cols = self.auto.dp_witness(self.sector, est["order"], obs, max_bytes=max(0, TABLE_BUDGET - self.table_bytes))
+        info["traceback_seconds"] = round(time.monotonic() - t, 3)
+        if cols is not None:
+            info["witness"] = "traceback"
+            self.found(cols)
             return
         self.soft(lambda: self.distance(self.sector, stage + "_witness", self.cfg["k_table"], start=value,
                                         kmax=value, perms=self.perms, witness_map=list),
@@ -509,6 +519,11 @@ class Pipeline:
 
 def worker(prob, cfg, t0, deadline, conn):
     """The parent can stop untimed native table construction at the wall limit."""
+    # The worker is a spawned process: module globals start from their defaults, so the table budget that
+    # configuration() set in the parent must be set again here (until 2026-10-22 it stayed at the 1 GiB default,
+    # which reduced the depth of larger tables).  The address-space limit is inherited from the parent.
+    global TABLE_BUDGET
+    TABLE_BUDGET = table_budget(cfg["table_gb"])
     tr = common.Trace()
     tr.t0 = t0
     pipeline = None
@@ -524,6 +539,7 @@ def worker(prob, cfg, t0, deadline, conn):
 
     signal.signal(signal.SIGTERM, stop)
     tr.lb(1)
+    notes["table_budget_gib"] = round(TABLE_BUDGET / 2 ** 30, 2)
     progress(tr, witness, notes)
     status = "bounds"
     try:

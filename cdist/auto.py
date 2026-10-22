@@ -111,3 +111,63 @@ def dp_distance(p, order, max_table_bytes=None, deadline=None):
         if v is not None and (best is None or v < best):
             best = v
     return best, per
+
+
+def dp_witness(p, order, obs, max_bytes=1 << 30):
+    """Columns of a minimum-weight solution of min{|e| : H e = 0, (L e)_obs = 1}, by a traceback of the DP on the
+    given order; None if no logical exists or the tables of all column steps (the plan's work, one byte each)
+    exceed max_bytes.  The trellis plan is replayed with numpy, keeping the table before every column step."""
+    import numpy as np
+    INF = kernel.INF
+    hrows = trellis.minimal_span_form(trellis.rows_from_columns(p.h, order, p.nrows))
+    lrow = 0
+    for pos, j in enumerate(order):
+        if (p.l[j] >> obs) & 1:
+            lrow |= 1 << pos
+    lrow = trellis.reduce_target_row(lrow, hrows)
+    if lrow == 0:
+        return None
+    if trellis.make_plan(hrows, lrow, len(order)).work() > max_bytes:
+        return None
+    rows = [(r, 0) for r in hrows] + [(lrow, 1)]
+    start_at, end_at = {}, {}
+    for idx, (r, _) in enumerate(rows):
+        start_at.setdefault(trellis.lowbit(r), []).append(idx)
+        end_at.setdefault(r.bit_length() - 1, []).append(idx)
+    active, hist = [], []
+    T = np.zeros(1, dtype=np.uint8)
+    for j in range(len(order)):                  # the steps of trellis.make_plan, executed and recorded
+        for idx in start_at.get(j, ()):
+            active.append(idx)
+            T = np.concatenate([T, np.full(T.size, INF, dtype=np.uint8)])
+            hist.append(("expand", len(active) - 1))      # the new row is the highest bit of the state
+        mask = sum(1 << pos for pos, idx in enumerate(active) if (rows[idx][0] >> j) & 1)
+        if mask:
+            other = T[np.arange(T.size, dtype=np.int64) ^ mask]
+            other = np.where(other == INF, INF, other + 1).astype(np.uint8)
+            hist.append(("update", mask, j, T))
+            T = np.minimum(T, other)
+        for pos in sorted((active.index(idx) for idx in end_at.get(j, ())), reverse=True):
+            target = rows[active[pos]][1]
+            T = T[((np.arange(T.size, dtype=np.int64) >> pos) & 1) == target]
+            hist.append(("select", pos, target))
+            active.pop(pos)
+    if int(T[0]) == INF:
+        return None
+    state, value, used = 0, int(T[0]), []
+    for step in reversed(hist):
+        if step[0] == "select":
+            _, pos, target = step
+            state = ((state >> pos) << (pos + 1)) | (target << pos) | (state & ((1 << pos) - 1))
+        elif step[0] == "expand":
+            # entries with the new row's bit set start at infinity, so on the minimum path that bit is 0 here
+            assert not (state >> step[1]) & 1
+        else:
+            _, mask, j, before = step
+            if int(before[state]) != value:          # the minimum at this step uses column j
+                used.append(order[j])
+                state ^= mask
+                value -= 1
+                assert int(before[state]) == value
+    assert value == 0
+    return sorted(used)
