@@ -1,0 +1,79 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10
+  },
+  "instance": "wjh_hcc_01_n16",
+  "variant": "full",
+  "rows": 6,
+  "cols": 16,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 2,
+  "upper_bound": 2,
+  "witness": [
+    0,
+    1
+  ],
+  "witness_ok": true,
+  "seconds": 0.139,
+  "trace": [
+    {
+      "t": 0.082,
+      "lb": 1
+    },
+    {
+      "t": 0.126,
+      "lb": 2
+    },
+    {
+      "t": 0.127,
+      "ub": 2
+    }
+  ],
+  "peak_rss_mb": 52.4,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 16, \"cut_rank\": 3, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.0, \"fits\": true, \"peak_bits\": 5, \"predicted_seconds\": 0.0, \"queries\": 8, \"work\": 1328}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 16, \"rows\": 6, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.606910705566406e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": 2, \"nsol_recorded\": 1, \"seconds\": 4.4345855712890625e-05, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hcc_01_n16",
+    "family": "wjh_hcc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      97
+    ],
+    "started_at": "2026-10-22T06:20:55.763903+00:00",
+    "ended_at": "2026-10-22T06:20:56.035899+00:00",
+    "wall_seconds": 0.271806,
+    "adapter_seconds": 0.139,
+    "trace_offset_seconds": 0.132806,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-1/wjh_hcc_01_n16__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-1/wjh_hcc_01_n16__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

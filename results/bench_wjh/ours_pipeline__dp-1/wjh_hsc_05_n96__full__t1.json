@@ -1,0 +1,89 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10
+  },
+  "instance": "wjh_hsc_05_n96",
+  "variant": "full",
+  "rows": 24,
+  "cols": 96,
+  "obs": 10,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    0,
+    3,
+    22,
+    25
+  ],
+  "witness_ok": true,
+  "seconds": 0.123,
+  "trace": [
+    {
+      "t": 0.06,
+      "lb": 1
+    },
+    {
+      "t": 0.109,
+      "lb": 2
+    },
+    {
+      "t": 0.11,
+      "lb": 3
+    },
+    {
+      "t": 0.11,
+      "lb": 4
+    },
+    {
+      "t": 0.111,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 55.2,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 96, \"cut_rank\": 15, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.005, \"fits\": true, \"peak_bits\": 18, \"predicted_seconds\": 0.015, \"queries\": 10, \"work\": 19107040}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 96, \"rows\": 24, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012421607971191406, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.58306884765625e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015044212341308594, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.00010848045349121094, \"status\": \"found\"}]}}}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hsc_05_n96",
+    "family": "wjh_hsc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      98
+    ],
+    "started_at": "2026-10-22T06:20:57.097655+00:00",
+    "ended_at": "2026-10-22T06:20:57.380417+00:00",
+    "wall_seconds": 0.282484,
+    "adapter_seconds": 0.123,
+    "trace_offset_seconds": 0.159484,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-1/wjh_hsc_05_n96__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-1/wjh_hsc_05_n96__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

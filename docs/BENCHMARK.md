@@ -1402,6 +1402,12 @@ a factor 1.5. Three other runs were faster with `dp=1` although the front end ch
 pass, so that difference is the day-to-day variation described above, not the DP. The main tables keep "ours"
 for the default configuration; "ours + DP" has first-tier records only.
 
+On the 126 instances of the prior benchmark (first tier, results/bench_wjh/ours_pipeline__dp-1) the front end
+changes no outcome. Their codes and circuits have no problem cheap for the DP except a few small ones, which the
+search settles within its head start. One quantum Tanner code (qt_216_4_18) finished in 588 s against a timeout
+of the default, with the search chosen, which is variation at the limit. Four runs were about 1 s slower, the
+cost of estimating the DP for codes of about 1,000 columns.
+
 ## Reproduce
 
 ```sh
