@@ -16,15 +16,15 @@ problems have widths 5, 10, 18 and 39:
 |---|---|---|---|---|---|
 | [[259,2,d_X,4]], NESEN | 22 x 3 | <= 37 | 5 | **36** in 1.2 s (DP 0.002 s) | 360 s |
 | [[269,4,d_X,5]], N²ESEN² | 22 x 3 | <= 28 | 10 | **28** in 1.3 s (DP 0.015 s) | 69 s |
-| [[365,10,d_X,4]], N²E²SE²N² | 19 x 4 | <= 31 | 18 | **31** in 13 s (DP 1.2 s) | running (with 2 threads: lower bound 26 after 1800 s) |
+| [[365,10,d_X,4]], N²E²SE²N² | 19 x 4 | <= 31 | 18 | **31** in 13 s (DP 1.2 s) | 3612 s |
 | [[537,14,d_X,12]], N²E²SESE²N² | 12 x 13 | <= 35 | 39 | does not fit | [19, 30]: search lower bound in 1800 s, our ISD upper bound |
 
 So the paper's bound for [[259,2,·,4]] was one too high (a weight-36 X logical exists and is the lightest), the
 other two are tight, and the paper's ranking value k d_X d_Z / n of the first code drops from 1.14 to 1.11.  These
 are the only problems of this study where the DP is needed in practice.  The DP itself takes 2 ms, 15 ms and 1.2 s
-on 2 threads; the search alone reaches the same values on 32 threads, but in minutes to hours, and its time
-roughly doubles with every unit of distance (each threshold costs twice the one before), while the DP's cost does
-not depend on the distance at all.
+on 2 threads; the search alone reaches the same values on 32 threads in 6 min, 1 min and 1 h, and its time
+roughly doubles with every unit of distance (each threshold costs 1.8 to 2 times the one before), while the DP's
+cost does not depend on the distance at all.
 
 **Every other open question here is settled by the weight-bounded search; one published value is wrong:**
 
@@ -212,13 +212,13 @@ sizes (see Caveats), so they are not counted as checks of the paper.
 | dtc_w7_112_4_7 | 112 | 4 | 7 (unknown) | 12 / 9 | yes | 7 | 7 | 0.2 / 0.2 | 0.2 / 0.2 |
 | dtc_w7_144_4_8 | 144 | 4 | 8 (unknown) | 14 / 10 | yes | 8 | 8 | 0.2 / 0.2 | 0.2 / 0.1 |
 | dtc_w7_180_4_9 | 180 | 4 | 9 (unknown) | 15 / 11 | yes | 9 | 9 | 0.2 / 0.2 | 0.2 / 0.2 |
-| dtc_w7_269_4_5 | 269 | 4 | dx <= 28 (upper, QDistRnd), dz 5 (exact, IP) | 10 / 6 | yes | 28 | 5 | 1.3 DP / 0.2 | 69.1 / 0.2 |
+| dtc_w7_269_4_5 | 269 | 4 | dx <= 28 (upper, QDistRnd), dz 5 (exact, IP) | 10 / 6 | yes | 28 | 5 | 1.2 DP / 0.2 | 69.1 / 0.2 |
 | dtc_w9_52_10_3 | 52 | 10 | 3 (unknown) | 8 / 6 | yes | 3 | 3 | 0.2 / 0.2 | 0.2 / 0.1 |
 | dtc_w9_76_10_4 | 76 | 10 | 4 (unknown) | 12 / 8 | yes | 4 | 4 | 0.2 / 0.2 | 0.2 / 0.2 |
 | dtc_w9_115_10_5 | 115 | 10 | 5 (unknown) | 16 / 11 | yes | 5 | 5 | 0.2 / 0.2 | 0.2 / 0.2 |
 | dtc_w9_162_10_6 | 162 | 10 | 6 (unknown) | 20 / 15 | yes | 6 | 6 | 0.1 / 0.2 | 0.1 / 0.2 |
 | dtc_w9_351_10_9 | 351 | 10 | 9 (unknown) | 32 / 24 | 64 GiB | 9 | 9 | 0.3 / 0.4 | 0.2 / 0.2 |
-| dtc_w9_365_10_4 | 365 | 10 | dx <= 31 (upper, QDistRnd), dz 4 (exact, IP) | 18 / 8 | yes | 31 | 4 | 13.0 DP / 0.3 | >1800 ([26, ?]) / 0.2 |
+| dtc_w9_365_10_4 | 365 | 10 | dx <= 31 (upper, QDistRnd), dz 4 (exact, IP) | 18 / 8 | yes | 31 | 4 | 12.2 DP / 0.3 | 3612.4 / 0.2 |
 | dtc_w11_74_14_5 | 74 | 14 | 5 (unknown) | 11 / 10 | yes | 5 | 5 | 0.1 / 0.1 | 0.1 / 0.1 |
 | dtc_w11_104_14_6 | 104 | 14 | 6 (unknown) | 16 / 12 | yes | 6 | 6 | 0.2 / 0.2 | 0.1 / 0.1 |
 | dtc_w11_182_14_10 | 182 | 14 | 10 (unknown) | 21 / 22 | yes | 10 | 10 | 0.3 / 0.2 | 0.2 / 0.2 |
