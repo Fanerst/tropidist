@@ -19,8 +19,9 @@ Instance tokens:
 All code-capacity problems are the Z-basis ones (X errors, Z checks), as in the benchmark.
 
 Configurations (comma separated): sparse:MODE:BACKEND:H[:SPLIT] with MODE forward|mitm, BACKEND c|numpy, H 0|1
-(the lookahead bound), SPLIT the forward weight a of mitm (default K // 2 + 1, "auto": sparse_dp.choose_split);
-dense; search.
+(the lookahead bound), SPLIT the forward weight a of mitm (default K // 2 + 1, "auto": sparse_dp.choose_split,
+"schedule": a split per cut, sparse_dp.choose_schedule; the run at K = d then uses the split of the run at
+K = d - 1 plus one, which keeps its backward sweep); dense; search.
 
 usage: python scripts/sparse_dp_eval.py OUT.json TOKEN[,TOKEN...] [--configs C,C] [--search-seconds S]
            [--dense-bits B] [--max-states N] [--max-seconds S] [--upper TOKEN=U,...]
@@ -36,7 +37,8 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path[:0] = [ROOT, os.path.join(ROOT, "papers"), os.path.join(ROOT, "scripts"), os.path.join(ROOT, "bench")]
 
-DEFAULT_CONFIGS = "sparse:mitm:c:0:auto,sparse:mitm:c:1:auto,sparse:forward:c:1,sparse:forward:c:0,dense,search"
+DEFAULT_CONFIGS = ("sparse:mitm:c:0:schedule,sparse:mitm:c:0:auto,sparse:mitm:c:1:auto,sparse:forward:c:1,"
+                   "sparse:forward:c:0,dense,search")
 WJH_FOLDERS = {"surface": "01_surfacecodes", "midout": "03_colorcodes_midout", "superdense": "04_colorcodes_superdense"}
 # distances established by the benchmark (results/bench_wjh): surface and superdense d (superdense d11 open:
 # 8..11), midout (d + 1) / 2
@@ -135,7 +137,7 @@ def job_sparse(token, cfg, args):
     from cdist import sparse_dp
     parts = cfg.split(":")
     mode, backend, use_h = parts[1], parts[2], parts[3] == "1"
-    split = (parts[4] if parts[4] == "auto" else int(parts[4])) if len(parts) > 4 else None
+    split = (parts[4] if parts[4] in ("auto", "schedule") else int(parts[4])) if len(parts) > 4 else None
     t0 = time.time()
     p, d, ub, kind = build(token)
     order = column_order(p, kind)
@@ -147,6 +149,7 @@ def job_sparse(token, cfg, args):
               dense=args.dense_fraction if mode == "forward" else None, dense_max=1 << args.dense_bits,
               log=lambda msg: print(time.strftime("%H:%M:%S"), token, cfg, msg, file=sys.stderr, flush=True))
     t1 = time.time()
+    used = {}                                                     # split of the K = target - 1 run, per observable
     try:
         lower = []                                                # K = target - 1, every observable
         big = None
@@ -154,6 +157,7 @@ def job_sparse(token, cfg, args):
             if not tr.feasible:
                 continue
             r = sparse_dp.query(tr, target - 1, witness=True, lower=target - 1, **kw)
+            used[i] = r.get("split_values")
             s = sparse_dp.summary(r)
             s["obs"] = i
             lower.append(s)
@@ -175,7 +179,13 @@ def job_sparse(token, cfg, args):
             for i, tr in enumerate(trs):
                 if not tr.feasible:
                     continue
-                r = sparse_dp.query(tr, target, witness=True, lower=target, **kw)
+                # the run at K = target stops at its first solution, so its cost is mostly the backward sweep:
+                # with a chosen split, raise the split of the K = target - 1 run by one at every cut, which keeps
+                # that run's backward caps (and cost)
+                kw_up = dict(kw)
+                if mode == "mitm" and split in ("auto", "schedule") and used.get(i) is not None:
+                    kw_up["split"] = [x + 1 for x in used[i]]
+                r = sparse_dp.query(tr, target, witness=True, lower=target, **kw_up)
                 s = sparse_dp.summary(r)
                 s["obs"] = i
                 upper.append(s)
@@ -189,6 +199,9 @@ def job_sparse(token, cfg, args):
                              else {"lower_bound": target + 1, "status": "no solution <= %d" % target})
     except sparse_dp.BudgetExceeded as e:
         rec["result"] = {"status": "budget", "detail": str(e)}
+        low = rec.get("lower_run")
+        if low and low["queries"] and all(q["value"] is None for q in low["queries"]):
+            rec["result"]["lower_bound"] = target                # the run at K = target - 1 was complete
     rec["seconds"] = round(time.time() - t1, 3)
     return rec
 

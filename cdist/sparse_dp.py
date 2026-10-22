@@ -1037,7 +1037,7 @@ def query(tr, K, mode="mitm", split=None, use_h=True, witness=True, lower=0, eve
     rec.update(forward_counts=fw.counts, backward_counts=bw.counts, changed_counts=fw.changed_counts,
                peak_states=max(fw.peak, bw.peak), peak_table_bytes=fw.peak_bytes + bw.peak_bytes,
                backward_seconds=t1 - t0, forward_seconds=time.time() - t1,
-               split=sched[0] if len(set(sched)) == 1 else _runs(sched), joined=joins[0],
+               split=sched[0] if len(set(sched)) == 1 else _runs(sched), split_values=sched, joined=joins[0],
                steps=fw.steps_done + bw.steps_done, dense_cuts=bw.dense_cuts)
     if best[0] is not None and best[0][0] <= K:
         value, c, sl, fl, sr = best[0]
@@ -1108,7 +1108,7 @@ def distance(p, order=None, start=1, kmax=64, mode="mitm", use_h=True, witness=T
 
 def summary(r):
     """A query record without the per-cut arrays (their totals instead)."""
-    out = {k: v for k, v in r.items() if not k.endswith("_counts") and k != "witness"}
+    out = {k: v for k, v in r.items() if not k.endswith("_counts") and k not in ("witness", "split_values")}
     for k in ("forward_counts", "backward_counts", "changed_counts"):
         if k in r:
             out[k.replace("_counts", "_states_total")] = int(sum(r[k]))

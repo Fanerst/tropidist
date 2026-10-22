@@ -1,28 +1,75 @@
-"""Tables and the figure of results/sparse_dp/README.md from the records of scripts/sparse_dp_eval.py.
+"""Tables and the figure of results/sparse_dp/README.md from the records of scripts/sparse_dp_eval.py and
+scripts/sparse_dp_query.py.
 
 usage: python scripts/summarize_sparse_dp.py [results/sparse_dp]
-Writes results/sparse_dp/tables.md (included in the README by hand) and results/sparse_dp/states_per_cut.png.
+Writes results/sparse_dp/tables.md (pasted into the README) and results/sparse_dp/states_per_cut.png.
 """
-import glob
 import json
 import math
 import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STREAMS = ("narrow", "lowwidth", "bb", "circuits", "d11")
+# records of scripts/sparse_dp_eval.py; for a configuration recorded twice the later file wins
+STREAMS = ("narrow", "lowwidth", "bb", "circuits", "d11", "schedule", "surface11", "mitm")
+# records of scripts/sparse_dp_query.py for the superdense d11 circuit
+D11 = (("d11_K10_a5", "K = 10, a = 5"), ("d11_K10_schedule", "K = 10, schedule"), ("d11_K11_a6", "K = 11, a = 6"),
+       ("d11_K11_schedule", "K = 11, schedule + 1"))
 REGIME = {"color": "narrow", "lowwidth": "narrow", "bb": "expanding", "wjh": "local circuit"}
-SPARSE = ("sparse:mitm:c:0:auto", "sparse:mitm:c:1:auto", "sparse:forward:c:1", "sparse:forward:c:0")
-SHORT = {"sparse:mitm:c:0:auto": "MITM", "sparse:mitm:c:1:auto": "MITM+h", "sparse:forward:c:1": "fwd+h",
-         "sparse:forward:c:0": "fwd"}
+SPARSE = ("sparse:mitm:c:0:schedule", "sparse:mitm:c:0:auto", "sparse:mitm:c:1:auto", "sparse:forward:c:1",
+          "sparse:forward:c:0")
+SHORT = {"sparse:mitm:c:0:schedule": "MITM sched", "sparse:mitm:c:0:auto": "MITM", "sparse:mitm:c:1:auto": "MITM+h",
+         "sparse:forward:c:1": "fwd+h", "sparse:forward:c:0": "fwd"}
+NUMPY = {"sparse:mitm:c:0:schedule": "sparse:mitm:numpy:0:schedule", "sparse:mitm:c:0:auto": "sparse:mitm:numpy:0:auto"}
 
 
 def load(d):
+    """All records, merged per instance.  A completed run is not replaced by one that stopped at a budget."""
     out = {}
     for s in STREAMS:
         f = os.path.join(d, s + ".json")
-        if os.path.exists(f):
-            out.update(json.load(open(f))["instances"])
+        if not os.path.exists(f):
+            continue
+        for tok, inst in json.load(open(f))["instances"].items():
+            cur = out.setdefault(tok, {"runs": {}})
+            if "info" in inst:
+                cur["info"] = inst["info"]
+            for cfg, run in inst["runs"].items():
+                old = cur["runs"].get(cfg)
+                if old is not None and old.get("result", {}).get("status") != "budget" and \
+                        run.get("result", {}).get("status") in ("budget", "error"):
+                    continue
+                cur["runs"][cfg] = run
+    # the C tables hold 56 row slots: wider trellises ran with the numpy tables
+    for tok, inst in out.items():
+        for c, n in NUMPY.items():
+            if n in inst["runs"] and inst["runs"].get(c, {}).get("result", {}).get("status") in (None, "error"):
+                inst["runs"][c] = dict(inst["runs"][n], numpy=True)
+    d11 = {key: json.load(open(os.path.join(d, key + ".json"))) for key, _ in D11
+           if os.path.exists(os.path.join(d, key + ".json"))}
+    inst = out.get("wjh:superdense:11")
+    if inst is not None:
+        for cfg, key, ukey in (("sparse:mitm:c:0:auto", "d11_K10_a5", "d11_K11_a6"),
+                               ("sparse:mitm:c:0:schedule", "d11_K10_schedule", "d11_K11_schedule")):
+            if key not in d11 or ukey not in d11:
+                continue
+            low, up = d11[key], d11[ukey]
+            assert low["value"] is None and up["value"] == 11 and up["witness_ok"]
+            inst["runs"][cfg] = {
+                "config": cfg, "d11": True, "seconds": low["seconds"] + up["seconds"],
+                "maxrss_gb": max(low["maxrss_gb"], up["maxrss_gb"]),
+                "result": {"distance": 11, "witness_ok": True, "status": "exact"},
+                "lower_run": {"K": 10, "queries": [_summary(low)], "seconds": low["seconds"],
+                              "per_cut": {k: low[k] for k in ("forward_counts", "backward_counts", "changed_counts")}},
+                "upper_run": {"K": 11, "queries": [_summary(up)], "seconds": up["seconds"]}}
+    return out, d11
+
+
+def _summary(r):
+    out = {k: v for k, v in r.items() if not k.endswith("_counts") and k not in ("witness", "split_values", "width")}
+    for k in ("forward_counts", "backward_counts", "changed_counts"):
+        if k in r:
+            out[k.replace("_counts", "_states_total")] = int(sum(r[k]))
     return out
 
 
@@ -36,7 +83,10 @@ def order_key(token):
 
 
 def name(token):
-    return token.replace("lowwidth:", "").replace("wjh:", "").replace("bb:", "").replace("color:", "color d")
+    if token.startswith("wjh:"):
+        fam, d = token.split(":")[1:]
+        return "%s d%s" % (fam, d)
+    return token.replace("lowwidth:", "").replace("bb:", "").replace("color:", "color d")
 
 
 def fmt_t(x):
@@ -75,25 +125,23 @@ def value(run):
         return "–"
     r = run.get("result", {})
     st = r.get("status")
+    mark = "†" if run.get("numpy") else ("‡" if run.get("d11") else "")
     if st == "exact" and r.get("distance") is not None:
-        return str(r["distance"]) + ("" if r.get("witness_ok", True) else " (bad witness)")
+        return str(r["distance"]) + mark + ("" if r.get("witness_ok", True) else " (bad witness)")
     if st == "timeout":
         return "≥ %s (timeout)" % r.get("lower_bound", "?")
     if st and st.startswith("no solution"):
-        return "≥ %d" % r["lower_bound"]
+        return "≥ %d" % r["lower_bound"] + mark
     if st == "budget":
-        return "budget"
-    if st == "too wide":
-        return "too wide"
-    if st == "error":
-        return "error"
-    return str(st)
+        low = run.get("lower_run")
+        if low and low.get("queries") and all(q["value"] is None for q in low["queries"]):
+            return "≥ %d (budget at K = %d)%s" % (low["K"] + 1, low["K"] + 1, mark)
+        return "budget" + mark
+    return str(st) + mark
 
 
-def seconds(run):
-    if run is None or run.get("result", {}).get("status") in ("too wide", "error", "budget"):
-        return None
-    return run.get("seconds")
+def exact(run):
+    return run is not None and run.get("result", {}).get("status") == "exact"
 
 
 def search_last(run):
@@ -104,18 +152,29 @@ def search_last(run):
 
 
 def sparse_stats(run):
-    """(split, peak states, peak table bytes, states of the K = d - 1 run summed over cuts and observables)."""
+    """(splits, peak states, peak table bytes, states of the K = d - 1 run summed over cuts and observables)."""
     if not run or "lower_run" not in run:
         return None
     qs = run["lower_run"]["queries"]
     peak = max(q["peak_states"] for q in qs)
     tb = max(q.get("peak_table_bytes", 0) for q in qs)
     tot = sum(q.get("forward_states_total", 0) + q.get("backward_states_total", 0) for q in qs)
-    split = sorted({q.get("split") for q in qs if q.get("split")})
-    return split, peak, tb, tot
+    splits = sorted({str(q.get("split")) for q in qs if q.get("split")})
+    return splits, peak, tb, tot
 
 
-def tables(res):
+def short_split(s):
+    """A schedule 'a@cut,a@cut,...' as its values along the sweep, without the forced ends (all weight in one
+    direction at the first and the last cuts)."""
+    if "@" not in s:
+        return s
+    vals = [int(x.split("@")[0]) for x in s.split(",")]
+    if len(vals) > 2:
+        vals = vals[1:-1]
+    return "→".join(str(v) for v in vals)
+
+
+def tables(res, d11):
     toks = sorted(res, key=order_key)
     out = []
     out.append("### Validation: distance found by each method\n")
@@ -125,14 +184,17 @@ def tables(res):
         inst = res[t]
         info = inst.get("info", {})
         known = info.get("distance_known")
-        known = str(known) if known is not None else "≤ %s" % info.get("upper_known")
+        known = str(known) if known is not None else "10..11 (open)"
         cells = [value(inst["runs"].get(c)) for c in SPARSE + ("dense", "search")]
         out.append("| %s | %s | %s |" % (name(t), known, " | ".join(cells)))
     out.append("")
+    out.append("† numpy tables (the trellis needs 62 row slots, the C tables hold 56). ‡ dedicated runs, see "
+               "*Superdense d11*.\n")
     out.append("### Time (seconds, one thread)\n")
-    out.append("Sparse: the sweep at K = d - 1 for every observable plus the one at K = d that returns the witness "
-               "(the split probe included). Search: all thresholds from K = 1, and in brackets its last two (d - 1 "
-               "and d). Dense DP: one untruncated sweep per observable.\n")
+    out.append("Sparse: the sweep at K = d − 1 for every observable, plus the one at K = d that stops at its first "
+               "solution and returns the witness; the split probes are included. Search: every threshold from "
+               "K = 1, and in brackets its last two (d − 1 and d). Dense DP: one untruncated sweep per observable. "
+               "Bold: the fastest method.\n")
     out.append("| instance | regime | columns | cut rank | d | dense DP | search | " +
                " | ".join(SHORT[c] for c in SPARSE) + " |")
     out.append("|---|---|---|---|---|---|---|" + "---|" * len(SPARSE))
@@ -141,41 +203,62 @@ def tables(res):
         info = inst.get("info", {})
         runs = inst["runs"]
         d = info.get("distance_known") or info.get("upper_known")
-        s = runs.get("search")
-        st = fmt_t(seconds(s)) if s and s.get("result", {}).get("status") == "exact" else value(s)
-        if s and s.get("result", {}).get("status") == "exact":
-            st += " (%s)" % fmt_t(search_last(s))
-        dn = runs.get("dense")
-        dt = fmt_t(seconds(dn)) if dn and dn.get("result", {}).get("status") == "exact" else value(dn)
-        cells = []
-        for c in SPARSE:
+        times = {c: runs[c]["seconds"] for c in ("dense", "search") + SPARSE if exact(runs.get(c))}
+        best = min(times, key=times.get) if times else None
+
+        def cell(c):
             r = runs.get(c)
-            cells.append(fmt_t(seconds(r)) if r and r.get("result", {}).get("status") == "exact" else value(r))
+            if not exact(r):
+                return value(r)
+            txt = fmt_t(r["seconds"]) + ("†" if r.get("numpy") else "") + ("‡" if r.get("d11") else "")
+            if c == "search":
+                txt += " (%s)" % fmt_t(search_last(r))
+            return "**%s**" % txt if c == best else txt
         out.append("| %s | %s | %d | %d | %s | %s | %s | %s |" % (
-            name(t), REGIME[t.split(":")[0]], info.get("columns", 0), info.get("cut_rank", 0), d, dt, st,
-            " | ".join(cells)))
+            name(t), REGIME[t.split(":")[0]], info.get("columns", 0), info.get("cut_rank", 0), d, cell("dense"),
+            cell("search"), " | ".join(cell(c) for c in SPARSE)))
     out.append("")
     out.append("### States kept, against the dense table\n")
     out.append("2^w: entries of the dense table at the widest cut; dense work: entries the dense DP updates per "
-               "observable. For the sparse sweeps (K = d - 1 run): the split a of MITM, the largest table (states), "
-               "the states summed over all cuts, both directions and all observables, and the tables held at the "
-               "peak (checkpoints included).\n")
-    out.append("| instance | 2^w | dense work | MITM a | MITM peak | MITM total | MITM tables | fwd+h peak | "
-               "fwd+h total | peak memory (MITM) |")
-    out.append("|---|---|---|---|---|---|---|---|---|---|")
+               "observable. For the sparse sweeps at K = d − 1: the split a (for a schedule, its values along the "
+               "sweep), the largest table, the states summed over all cuts, both directions and all observables, "
+               "and the bytes of the tables held at the peak (checkpoints included); then the process's peak "
+               "memory.\n")
+    out.append("| instance | 2^w | dense work | MITM sched a | peak | total | tables | MITM a | peak | total | "
+               "fwd+h peak | fwd+h total | peak memory (MITM sched) |")
+    out.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for t in toks:
         inst = res[t]
         info = inst.get("info", {})
+        s = sparse_stats(inst["runs"].get("sparse:mitm:c:0:schedule"))
         m = sparse_stats(inst["runs"].get("sparse:mitm:c:0:auto"))
         f = sparse_stats(inst["runs"].get("sparse:forward:c:1"))
-        mr = inst["runs"].get("sparse:mitm:c:0:auto", {})
-        out.append("| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
-            name(t), fmt_n(2.0 ** info.get("cut_rank", 0)),
-            fmt_n(info.get("dense_work_per_query")),
-            ",".join(str(x) for x in m[0]) if m else "–", fmt_n(m[1]) if m else "–", fmt_n(m[2 + 1]) if m else "–",
-            fmt_bytes(m[2]) if m else "–", fmt_n(f[1]) if f else "–", fmt_n(f[3]) if f else "–",
-            ("%.2f GB" % mr["maxrss_gb"]) if mr.get("maxrss_gb") is not None else "–"))
+        sr = inst["runs"].get("sparse:mitm:c:0:schedule", {})
+        out.append("| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
+            name(t), fmt_n(2.0 ** info.get("cut_rank", 0)), fmt_n(info.get("dense_work_per_query")),
+            "; ".join(short_split(x) for x in s[0]) if s else "–", fmt_n(s[1]) if s else "–",
+            fmt_n(s[3]) if s else "–", fmt_bytes(s[2]) if s else "–",
+            ",".join(m[0]) if m else "–", fmt_n(m[1]) if m else "–", fmt_n(m[3]) if m else "–",
+            fmt_n(f[1]) if f else "–", fmt_n(f[3]) if f else "–",
+            ("%.2f GB" % sr["maxrss_gb"]) if sr.get("maxrss_gb") is not None else "–"))
     out.append("")
+    if d11:
+        out.append("### Superdense d11: the four runs\n")
+        out.append("| run | split a | result | backward sweep | forward sweep | traceback | total | largest table | "
+                   "states (all cuts) | peak memory |")
+        out.append("|---|---|---|---|---|---|---|---|---|---|")
+        for key, label in D11:
+            r = d11.get(key)
+            if r is None:
+                continue
+            res_txt = "none of weight ≤ %d" % r["K"] if r["value"] is None else \
+                "weight %d, witness %s" % (r["value"], "checked" if r["witness_ok"] else "FAILED")
+            tot = sum(r["forward_counts"]) + sum(r["backward_counts"])
+            out.append("| %s | %s | %s | %s s | %s s | %s | %s s | %s | %s | %.1f GB |" % (
+                label, short_split(str(r["split"])), res_txt, fmt_t(r["backward_seconds"]),
+                fmt_t(r["forward_seconds"]), (fmt_t(r["traceback_seconds"]) + " s") if r.get("traceback_seconds")
+                else "–", fmt_t(r["seconds"]), fmt_n(r["peak_states"]), fmt_n(tot), r["maxrss_gb"]))
+        out.append("")
     return "\n".join(out)
 
 
@@ -188,49 +271,47 @@ def figure(res, path, picks):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    picks = [t for t in picks if t in res and "sparse:mitm:c:0:auto" in res[t]["runs"]
-             and "lower_run" in res[t]["runs"]["sparse:mitm:c:0:auto"]]
+    cfg = "sparse:mitm:c:0:schedule"
+    picks = [t for t in picks if t in res and "lower_run" in res[t]["runs"].get(cfg, {})]
     if not picks:
         return
     plt.rcParams.update({"font.size": 9, "axes.edgecolor": INK2, "axes.labelcolor": INK, "xtick.color": INK2,
                          "ytick.color": INK2, "text.color": INK})
-    fig, axes = plt.subplots(1, len(picks), figsize=(3.6 * len(picks), 3.3), squeeze=False, facecolor=SURFACE)
-    lines = []
+    fig, axes = plt.subplots(1, len(picks), figsize=(3.6 * len(picks), 3.4), squeeze=False, facecolor=SURFACE)
+    handles = []
     for ax, t in zip(axes[0], picks):
         ax.set_facecolor(SURFACE)
         inst = res[t]
         width = inst["info"]["width"]
-        run = inst["runs"]["sparse:mitm:c:0:auto"]["lower_run"]
+        run = inst["runs"][cfg]["lower_run"]
         pc = run["per_cut"]
-        split = run["queries"][0].get("split")
         x = list(range(len(width)))
         lw = 1.1                                              # about 2 px at the saved resolution
-        l0, = ax.semilogy(x, [2.0 ** w for w in width], color=NEUTRAL, lw=lw, label="dense table, 2^w states")
-        l1, = ax.semilogy(x, [max(v, 0.8) for v in pc["backward_counts"]], color=SERIES[0], lw=lw,
-                          label="MITM backward table (weight <= K - a)")
-        l2, = ax.semilogy(x, [max(v, 0.8) for v in pc["forward_counts"]], color=SERIES[1], lw=lw,
-                          label="MITM forward table (weight <= a - 1)")
+        hs = [ax.semilogy(x, [2.0 ** w for w in width], color=NEUTRAL, lw=lw, label="dense table, 2^w states")[0],
+              ax.semilogy(x, [max(v, 0.8) for v in pc["backward_counts"]], color=SERIES[0], lw=lw,
+                          label="MITM backward table (weight ≤ K − a)")[0],
+              ax.semilogy(x, [max(v, 0.8) for v in pc["forward_counts"]], color=SERIES[1], lw=lw,
+                          label="MITM forward table (weight ≤ a − 1)")[0]]
         fw = inst["runs"].get("sparse:forward:c:1", {}).get("lower_run", {}).get("per_cut")
-        l3 = None
         if fw:
-            l3, = ax.semilogy(x, [max(v, 0.8) for v in fw["forward_counts"]], color=SERIES[2], lw=lw,
-                              label="forward only, with h (weight <= K)")
-        ax.set_title("%s, K = %d, a = %s" % (name(t), run["K"], split), fontsize=9.5, color=INK)
+            hs.append(ax.semilogy(x, [max(v, 0.8) for v in fw["forward_counts"]], color=SERIES[2], lw=lw,
+                                  label="forward only, with h (weight ≤ K)")[0])
+        if len(hs) > len(handles):
+            handles = hs
+        ax.set_title("%s, K = %d" % (name(t), run["K"]), fontsize=9.5, color=INK)
         ax.set_xlabel("cut (columns processed)")
         ax.grid(color="#e4e3df", lw=0.6, which="major")
         for side in ("top", "right"):
             ax.spines[side].set_visible(False)
-        if len(lines) < 4:
-            lines = [l0, l1, l2] + ([l3] if l3 is not None else [])
     axes[0][0].set_ylabel("states kept at the cut")
-    fig.legend(handles=lines, loc="lower center", ncol=len(lines), frameon=False, fontsize=8.5)
+    fig.legend(handles=handles, loc="lower center", ncol=len(handles), frameon=False, fontsize=8.5)
     fig.tight_layout(rect=(0, 0.08, 1, 1))
     fig.savefig(path, dpi=130, facecolor=SURFACE)
 
 
 def main(d=os.path.join(ROOT, "results", "sparse_dp")):
-    res = load(d)
-    md = tables(res)
+    res, d11 = load(d)
+    md = tables(res, d11)
     open(os.path.join(d, "tables.md"), "w").write(md + "\n")
     figure(res, os.path.join(d, "states_per_cut.png"),
            ["color:27", "bb:gross", "wjh:superdense:9", "wjh:superdense:11"])
