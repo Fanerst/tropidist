@@ -74,6 +74,39 @@ def test_random_queries_all_thresholds_and_splits():
     assert checked > 1000
 
 
+def test_split_schedules():
+    # a split that falls along the sweep, by drops of any size, and the chosen schedule
+    rng = random.Random(9)
+    checked = 0
+    for _ in range(50):
+        p = random_problem(rng)
+        order = list(range(p.ncols))
+        rng.shuffle(order)
+        for obs in range(p.nobs):
+            tr = sparse_dp.Trellis.for_query(p, obs, order)
+            if not tr.feasible:
+                continue
+            truth = brute(p, obs)
+            for K in range(1, p.ncols + 2):
+                want = truth if truth <= K else None
+                splits = [sorted((rng.randint(1, K) for _ in range(tr.N + 1)), reverse=True) for _ in range(3)]
+                for split in splits + ["schedule"]:
+                    for backend in BACKENDS:
+                        r = sparse_dp.query(tr, K, mode="mitm", split=split, backend=backend,
+                                            use_h=rng.random() < 0.5, every=rng.choice([1, 3]))
+                        assert r["value"] == want, (split, backend, K, r["value"], want)
+                        if want is not None:
+                            check_witness(p, r["witness"], want, obs)
+                        checked += 1
+    assert checked > 500
+    try:
+        sparse_dp.query(tr, 3, mode="mitm", split=list(range(1, tr.N + 2)))
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("a rising split must be refused")
+
+
 def test_distance_driver_matches_brute_force():
     rng = random.Random(5)
     for _ in range(80):

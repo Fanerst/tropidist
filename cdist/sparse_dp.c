@@ -83,14 +83,65 @@ static bound_t make_bound(int ncls, const uint64_t *mask, const int64_t *w, int6
     return b;
 }
 
-// Step 1+2: candidates of a[0..n) into cand (room for n), sorted.  Returns their number.
+// Reorder x[0..m), sorted by key k, into the order of k ^ upd.  For each set bit b of upd, from the highest: the
+// elements agreeing on the bits above b form runs (contiguous, and sorted by the lower bits); in each run the
+// part with bit b set moves in front of the part with bit b clear.  One pass per bit of upd; keys unchanged.
+static void xor_reorder(uint64_t *x, uint64_t *tmp, int64_t m, uint64_t upd) {
+    uint64_t *src = x, *dst = tmp;
+    for (int b = 63; b >= 0; b--) {
+        if (!((upd >> b) & 1)) continue;
+        uint64_t bit = 1ULL << b;
+        int64_t i = 0;
+        while (i < m) {
+            uint64_t hi = (src[i] & KEYMASK) >> b >> 1;
+            int64_t j = i, split = -1;
+            while (j < m && ((src[j] & KEYMASK) >> b >> 1) == hi) {
+                if (split < 0 && (src[j] & bit)) split = j;
+                j++;
+            }
+            if (split < 0 || split == i) {                     // one part only: unchanged
+                memcpy(dst + i, src + i, sizeof(uint64_t) * (size_t)(j - i));
+            } else {
+                int64_t n1 = j - split;
+                memcpy(dst + i, src + split, sizeof(uint64_t) * (size_t)n1);
+                memcpy(dst + i + n1, src + i, sizeof(uint64_t) * (size_t)(split - i));
+            }
+            i = j;
+        }
+        uint64_t *t = src; src = dst; dst = t;
+    }
+    if (src != x) memcpy(x, src, sizeof(uint64_t) * (size_t)m);
+}
+
+// Step 1+2: candidates of a[0..n) into cand (room for n), sorted.  Returns their number.  sort: 0 radix sort,
+// 1 xor_reorder (the candidates are the sorted sources XOR upd, then filtered: a subsequence of that order).
 int64_t sp_candidates(const uint64_t *a, int64_t n, uint64_t upd, uint64_t sel_mask, uint64_t sel_bits, int cap,
                       int ncls, const uint64_t *mask, const int64_t *w, int64_t extra, uint64_t tmask, int K,
-                      int use_h, int nbits, uint64_t *cand, uint64_t *tmp) {
+                      int use_h, int nbits, uint64_t *cand, uint64_t *tmp, int sort) {
     if (!upd) return 0;
     bound_t b = make_bound(ncls, mask, w, extra, tmask, K, use_h);
     uint64_t clr = ~sel_mask & KEYMASK;
     int64_t m = 0;
+    if (sort) {
+        // keep the source keys (sorted), reorder them by k ^ upd, then apply the XOR, filters and the bound
+        for (int64_t i = 0; i < n; i++) {
+            uint64_t x = a[i];
+            if (VAL(x) >= cap) continue;
+            uint64_t t = (x & KEYMASK) ^ upd;
+            if ((t & sel_mask) != sel_bits) continue;
+            cand[m++] = x;
+        }
+        xor_reorder(cand, tmp, m, upd);
+        int64_t k = 0;
+        for (int64_t i = 0; i < m; i++) {
+            uint64_t x = cand[i];
+            int v = VAL(x) + 1;
+            uint64_t t = ((x & KEYMASK) ^ upd) & clr;
+            if (!keep(&b, t, v)) continue;
+            cand[k++] = t | ((uint64_t)v << 56);
+        }
+        return k;
+    }
     for (int64_t i = 0; i < n; i++) {
         uint64_t x = a[i];
         int v = VAL(x);
@@ -105,16 +156,17 @@ int64_t sp_candidates(const uint64_t *a, int64_t n, uint64_t upd, uint64_t sel_m
     return m;
 }
 
-// Step 3: merge a[0..n) (filtered by the closing rows, cleared, re-bounded) with the sorted candidates.
-// out needs room for n + m, ch (may be NULL) for m.  States with value >= keep_below (if > 0) go to ch only.
-// Returns the size of out; *nch = number of changed states.
+// Step 3: merge a[0..n) (filtered by the closing rows, cleared, re-bounded, values > cap dropped) with the sorted
+// candidates.  out needs room for n + m, ch (may be NULL) for m.  States with value >= keep_below (if > 0) go to
+// ch only.  Returns the size of out; *nch = number of changed states.
 int64_t sp_merge(const uint64_t *a, int64_t n, const uint64_t *cand, int64_t m, uint64_t sel_mask,
-                 uint64_t sel_bits, int keep_below, int ncls, const uint64_t *mask, const int64_t *w, int64_t extra,
-                 uint64_t tmask, int K, int use_h, uint64_t *out, uint64_t *ch, int64_t *nch) {
+                 uint64_t sel_bits, int cap, int keep_below, int ncls, const uint64_t *mask, const int64_t *w,
+                 int64_t extra, uint64_t tmask, int K, int use_h, uint64_t *out, uint64_t *ch, int64_t *nch) {
     bound_t b = make_bound(ncls, mask, w, extra, tmask, K, use_h);
     uint64_t clr = ~sel_mask & KEYMASK;
     int64_t i = 0, j = 0, no = 0, nc = 0;
     int kb = keep_below > 0 ? keep_below : 1 << 30;
+    if (cap + 1 < kb) kb = cap + 1;                                    // old states above the cap leave too
     uint64_t ka = 0;
     int va = 0, have = 0;
     for (;;) {
