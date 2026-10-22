@@ -24,15 +24,16 @@ query() {         # record name, K, split, [--stop-at-K]
   taskset -c 0-95,192-287 "$PY" scripts/sparse_dp_query.py "$OUT/$1.json" wjh:superdense:11 "$2" "$3" $4 \
     > "logs/sparse_dp_$1.log" 2>&1
 }
-eval_stream d11 wjh:superdense:11 &
-eval_stream narrow color:7,color:9,color:11,color:13,color:15,color:17,color:19,color:21,color:23,color:25,color:27 &
-eval_stream lowwidth lowwidth:concat_steane_L2,lowwidth:concat_steane_L3,lowwidth:concat_steane_L4,lowwidth:hypercube_L2,lowwidth:hypercube_L3 &
-eval_stream bb bb:bb72,bb:bb90,bb:bb108,bb:gross &
-eval_stream circuits wjh:surface:3,wjh:superdense:3,wjh:surface:5,wjh:superdense:5,wjh:surface:7,wjh:superdense:7,wjh:surface:9,wjh:superdense:9,wjh:surface:11 &
-eval_stream surface11 wjh:surface:11 sparse:mitm:numpy:0:schedule,sparse:mitm:numpy:0:auto &
-query d11_K10_a5 10 5 &
-query d11_K10_schedule 10 schedule &
-query d11_K11_a6 11 6 --stop-at-K &
-query d11_K11_schedule 11 schedule+1 --stop-at-K &
-wait
+JOBS=""
+eval_stream d11 wjh:superdense:11 & JOBS="$JOBS $!"
+eval_stream narrow color:7,color:9,color:11,color:13,color:15,color:17,color:19,color:21,color:23,color:25,color:27 & JOBS="$JOBS $!"
+eval_stream lowwidth lowwidth:concat_steane_L2,lowwidth:concat_steane_L3,lowwidth:concat_steane_L4,lowwidth:hypercube_L2,lowwidth:hypercube_L3 & JOBS="$JOBS $!"
+eval_stream bb bb:bb72,bb:bb90,bb:bb108,bb:gross & JOBS="$JOBS $!"
+eval_stream circuits wjh:surface:3,wjh:superdense:3,wjh:surface:5,wjh:superdense:5,wjh:surface:7,wjh:superdense:7,wjh:surface:9,wjh:superdense:9,wjh:surface:11 & JOBS="$JOBS $!"
+eval_stream surface11 wjh:surface:11 sparse:mitm:numpy:0:schedule,sparse:mitm:numpy:0:auto & JOBS="$JOBS $!"
+query d11_K10_a5 10 5 & JOBS="$JOBS $!"
+query d11_K10_schedule 10 schedule & JOBS="$JOBS $!"
+query d11_K11_a6 11 6 --stop-at-K & JOBS="$JOBS $!"
+query d11_K11_schedule 11 schedule+1 --stop-at-K & JOBS="$JOBS $!"
+wait $JOBS                        # not a bare wait: that would also wait for the guard
 kill $GUARD
