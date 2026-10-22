@@ -1,0 +1,73 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bb_t2_108_12_6_X",
+ "variant": "full",
+ "rows": 54,
+ "cols": 108,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 6,
+ "upper_bound": 6,
+ "witness": [
+  0,
+  3,
+  11,
+  13,
+  25,
+  27
+ ],
+ "witness_ok": true,
+ "seconds": 0.156,
+ "trace": [
+  {
+   "t": 0.065,
+   "lb": 1
+  },
+  {
+   "t": 0.135,
+   "lb": 2
+  },
+  {
+   "t": 0.135,
+   "lb": 3
+  },
+  {
+   "t": 0.136,
+   "lb": 4
+  },
+  {
+   "t": 0.136,
+   "lb": 5
+  },
+  {
+   "t": 0.137,
+   "lb": 6
+  },
+  {
+   "t": 0.137,
+   "ub": 6
+  }
+ ],
+ "peak_rss_mb": 56.2,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 108, \"cut_rank\": 11, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.01, \"fits\": true, \"peak_bits\": 14, \"predicted_seconds\": 0.001, \"queries\": 12, \"work\": 1480560}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 108, \"rows\": 54, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00021600723266601562, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012683868408203125, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001201629638671875, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002009868621826172, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00022602081298828125, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.00028824806213378906, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

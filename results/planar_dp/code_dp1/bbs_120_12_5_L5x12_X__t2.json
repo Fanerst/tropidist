@@ -1,0 +1,73 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_120_12_5_L5x12_X",
+ "variant": "full",
+ "rows": 63,
+ "cols": 114,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 6,
+ "upper_bound": 6,
+ "witness": [
+  25,
+  64,
+  94,
+  101,
+  102,
+  106
+ ],
+ "witness_ok": true,
+ "seconds": 0.14,
+ "trace": [
+  {
+   "t": 0.051,
+   "lb": 1
+  },
+  {
+   "t": 0.117,
+   "lb": 2
+  },
+  {
+   "t": 0.117,
+   "lb": 3
+  },
+  {
+   "t": 0.118,
+   "lb": 4
+  },
+  {
+   "t": 0.119,
+   "lb": 5
+  },
+  {
+   "t": 0.119,
+   "lb": 6
+  },
+  {
+   "t": 0.12,
+   "ub": 6
+  }
+ ],
+ "peak_rss_mb": 55.9,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 114, \"cut_rank\": 21, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.012, \"fits\": true, \"peak_bits\": 24, \"predicted_seconds\": 0.68, \"queries\": 12, \"work\": 1237462416}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 114, \"rows\": 63, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002231597900390625, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001373291015625, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00014662742614746094, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00021505355834960938, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000179290771484375, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.00018787384033203125, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

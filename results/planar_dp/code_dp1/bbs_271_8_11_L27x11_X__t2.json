@@ -1,0 +1,63 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_271_8_11_L27x11_X",
+ "variant": "full",
+ "rows": 107,
+ "cols": 247,
+ "obs": 8,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 4,
+ "upper_bound": 4,
+ "witness": [
+  12,
+  42,
+  50,
+  67
+ ],
+ "witness_ok": true,
+ "seconds": 0.184,
+ "trace": [
+  {
+   "t": 0.06,
+   "lb": 1
+  },
+  {
+   "t": 0.168,
+   "lb": 2
+  },
+  {
+   "t": 0.168,
+   "lb": 3
+  },
+  {
+   "t": 0.169,
+   "lb": 4
+  },
+  {
+   "t": 0.17,
+   "ub": 4
+  }
+ ],
+ "peak_rss_mb": 55.9,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 247, \"cut_rank\": 12, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.044, \"fits\": true, \"peak_bits\": 14, \"predicted_seconds\": 0.006, \"queries\": 8, \"work\": 10243712}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 247, \"rows\": 107, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003800392150878906, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002713203430175781, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00031447410583496094, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.0002639293670654297, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

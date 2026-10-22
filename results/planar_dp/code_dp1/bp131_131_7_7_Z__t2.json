@@ -1,0 +1,78 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bp131_131_7_7_Z",
+ "variant": "full",
+ "rows": 64,
+ "cols": 126,
+ "obs": 7,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 7,
+ "upper_bound": 7,
+ "witness": [
+  0,
+  15,
+  24,
+  44,
+  80,
+  85,
+  95
+ ],
+ "witness_ok": true,
+ "seconds": 0.19,
+ "trace": [
+  {
+   "t": 0.068,
+   "lb": 1
+  },
+  {
+   "t": 0.166,
+   "lb": 2
+  },
+  {
+   "t": 0.167,
+   "lb": 3
+  },
+  {
+   "t": 0.169,
+   "lb": 4
+  },
+  {
+   "t": 0.17,
+   "lb": 5
+  },
+  {
+   "t": 0.17,
+   "lb": 6
+  },
+  {
+   "t": 0.171,
+   "lb": 7
+  },
+  {
+   "t": 0.172,
+   "ub": 7
+  }
+ ],
+ "peak_rss_mb": 56.2,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 126, \"cut_rank\": 18, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.022, \"fits\": true, \"peak_bits\": 21, \"predicted_seconds\": 0.075, \"queries\": 7, \"work\": 135853732}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 126, \"rows\": 64, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002942085266113281, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002181529998779297, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00024247169494628906, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003559589385986328, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002655982971191406, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003745555877685547, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 0.00042176246643066406, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

@@ -1,0 +1,53 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_72_6_5_L6x6_Z",
+ "variant": "full",
+ "rows": 21,
+ "cols": 62,
+ "obs": 6,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 2,
+ "upper_bound": 2,
+ "witness": [
+  0,
+  1
+ ],
+ "witness_ok": true,
+ "seconds": 0.124,
+ "trace": [
+  {
+   "t": 0.051,
+   "lb": 1
+  },
+  {
+   "t": 0.105,
+   "lb": 2
+  },
+  {
+   "t": 0.105,
+   "ub": 2
+  }
+ ],
+ "peak_rss_mb": 52.6,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 62, \"cut_rank\": 3, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.003, \"fits\": true, \"peak_bits\": 6, \"predicted_seconds\": 0.0, \"queries\": 6, \"work\": 6888}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 62, \"rows\": 21, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000209808349609375, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": 2, \"nsol_recorded\": 1, \"seconds\": 5.817413330078125e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

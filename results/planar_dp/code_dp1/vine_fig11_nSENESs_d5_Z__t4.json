@@ -1,0 +1,68 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 6,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "vine_fig11_nSENESs_d5_Z",
+ "variant": "full",
+ "rows": 37,
+ "cols": 83,
+ "obs": 4,
+ "threads": 4,
+ "time_limit": 600.0,
+ "status": "exact",
+ "lower_bound": 5,
+ "upper_bound": 5,
+ "witness": [
+  8,
+  12,
+  25,
+  40,
+  41
+ ],
+ "witness_ok": true,
+ "seconds": 0.164,
+ "trace": [
+  {
+   "t": 0.09,
+   "lb": 1
+  },
+  {
+   "t": 0.154,
+   "lb": 2
+  },
+  {
+   "t": 0.154,
+   "lb": 3
+  },
+  {
+   "t": 0.154,
+   "lb": 4
+  },
+  {
+   "t": 0.154,
+   "lb": 5
+  },
+  {
+   "t": 0.154,
+   "ub": 5
+  }
+ ],
+ "peak_rss_mb": 49.2,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 83, \"cut_rank\": 6, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.007, \"fits\": true, \"peak_bits\": 9, \"predicted_seconds\": 0.0, \"queries\": 4, \"work\": 33520}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 83, \"rows\": 37, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.413459777832031e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.081031799316406e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.416175842285156e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011277198791503906, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 7.915496826171875e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 6.0, \"threads_note\": \"kernel uses 1 threads; requested 4 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

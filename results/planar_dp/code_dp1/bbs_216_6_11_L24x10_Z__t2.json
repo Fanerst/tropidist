@@ -1,0 +1,144 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_216_6_11_L24x10_Z",
+ "variant": "full",
+ "rows": 132,
+ "cols": 213,
+ "obs": 6,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 25,
+ "upper_bound": 25,
+ "witness": [
+  16,
+  34,
+  36,
+  40,
+  42,
+  45,
+  46,
+  48,
+  55,
+  57,
+  82,
+  88,
+  104,
+  106,
+  110,
+  122,
+  145,
+  147,
+  154,
+  157,
+  158,
+  166,
+  168,
+  176,
+  181
+ ],
+ "witness_ok": true,
+ "seconds": 1.308,
+ "trace": [
+  {
+   "t": 0.057,
+   "lb": 1
+  },
+  {
+   "t": 0.166,
+   "lb": 2
+  },
+  {
+   "t": 0.166,
+   "lb": 3
+  },
+  {
+   "t": 0.167,
+   "lb": 4
+  },
+  {
+   "t": 0.168,
+   "lb": 5
+  },
+  {
+   "t": 0.169,
+   "lb": 6
+  },
+  {
+   "t": 0.17,
+   "lb": 7
+  },
+  {
+   "t": 0.171,
+   "lb": 8
+  },
+  {
+   "t": 0.172,
+   "lb": 9
+  },
+  {
+   "t": 0.173,
+   "lb": 10
+  },
+  {
+   "t": 0.176,
+   "lb": 11
+  },
+  {
+   "t": 0.18,
+   "lb": 12
+  },
+  {
+   "t": 0.19,
+   "lb": 13
+  },
+  {
+   "t": 0.21,
+   "lb": 14
+  },
+  {
+   "t": 0.256,
+   "lb": 15
+  },
+  {
+   "t": 0.344,
+   "lb": 16
+  },
+  {
+   "t": 0.527,
+   "lb": 17
+  },
+  {
+   "t": 0.874,
+   "lb": 18
+  },
+  {
+   "t": 1.211,
+   "lb": 25
+  },
+  {
+   "t": 1.288,
+   "ub": 25
+  }
+ ],
+ "peak_rss_mb": 67.8,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 213, \"cut_rank\": 17, \"decision\": \"dp (after a 1 s head start of the search)\", \"estimate_seconds\": 0.043, \"fits\": true, \"peak_bits\": 19, \"predicted_seconds\": 0.035, \"queries\": 6, \"seconds\": 0.044, \"traceback_seconds\": 0.077, \"value\": 25, \"witness\": \"traceback\", \"work\": 64309416}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 213, \"rows\": 132, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00037670135498046875, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00032401084899902344, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003414154052734375, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005118846893310547, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003597736358642578, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000514984130859375, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007534027099609375, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008957386016845703, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0012862682342529297, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0022194385528564453, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004391193389892578, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.009063005447387695, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02010822296142578, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.045177459716796875, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.08704566955566406, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.18251705169677734, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.3464024066925049, \"status\": \"exhausted\"}, {\"K\": 18, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.29227590560913086, \"status\": \"timeout\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

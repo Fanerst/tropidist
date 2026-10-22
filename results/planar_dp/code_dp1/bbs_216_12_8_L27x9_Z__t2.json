@@ -1,0 +1,143 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_216_12_8_L27x9_Z",
+ "variant": "full",
+ "rows": 144,
+ "cols": 210,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 20,
+ "upper_bound": 20,
+ "witness": [
+  36,
+  37,
+  38,
+  39,
+  41,
+  47,
+  51,
+  66,
+  82,
+  98,
+  104,
+  117,
+  118,
+  142,
+  147,
+  169,
+  183,
+  185,
+  187,
+  188
+ ],
+ "witness_ok": true,
+ "seconds": 1.963,
+ "trace": [
+  {
+   "t": 0.066,
+   "lb": 1
+  },
+  {
+   "t": 0.18,
+   "lb": 2
+  },
+  {
+   "t": 0.181,
+   "lb": 3
+  },
+  {
+   "t": 0.182,
+   "lb": 4
+  },
+  {
+   "t": 0.182,
+   "lb": 5
+  },
+  {
+   "t": 0.183,
+   "lb": 6
+  },
+  {
+   "t": 0.183,
+   "lb": 7
+  },
+  {
+   "t": 0.184,
+   "lb": 8
+  },
+  {
+   "t": 0.185,
+   "lb": 9
+  },
+  {
+   "t": 0.186,
+   "lb": 10
+  },
+  {
+   "t": 0.187,
+   "lb": 11
+  },
+  {
+   "t": 0.189,
+   "lb": 12
+  },
+  {
+   "t": 0.193,
+   "lb": 13
+  },
+  {
+   "t": 0.198,
+   "lb": 14
+  },
+  {
+   "t": 0.21,
+   "lb": 15
+  },
+  {
+   "t": 0.229,
+   "lb": 16
+  },
+  {
+   "t": 0.268,
+   "lb": 17
+  },
+  {
+   "t": 0.35,
+   "lb": 18
+  },
+  {
+   "t": 0.525,
+   "lb": 19
+  },
+  {
+   "t": 0.806,
+   "lb": 20
+  },
+  {
+   "t": 1.943,
+   "ub": 20
+  }
+ ],
+ "peak_rss_mb": 62.3,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 210, \"cut_rank\": 20, \"decision\": \"dp (after a 1 s head start of the search)\", \"estimate_seconds\": 0.045, \"fits\": true, \"peak_bits\": 22, \"predicted_seconds\": 0.216, \"queries\": 12, \"seconds\": 0.234, \"value\": 20, \"work\": 393642192}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"main_witness\": {\"cols\": 210, \"rows\": 144, \"runs\": [{\"K\": 20, \"best\": 20, \"nsol_recorded\": 1, \"seconds\": 0.5256223678588867, \"status\": \"found\"}]}, \"plain\": {\"cols\": 210, \"rows\": 144, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003497600555419922, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00028443336486816406, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00028705596923828125, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00043582916259765625, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002987384796142578, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00039005279541015625, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004680156707763672, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005497932434082031, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007674694061279297, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0010530948638916016, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0016570091247558594, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002970457077026367, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004777193069458008, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.011971712112426758, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.018998146057128906, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0377659797668457, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0814976692199707, \"status\": \"exhausted\"}, {\"K\": 18, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.1748502254486084, \"status\": \"exhausted\"}, {\"K\": 19, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.28015637397766113, \"status\": \"exhausted\"}, {\"K\": 20, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.3711278438568115, \"status\": \"timeout\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

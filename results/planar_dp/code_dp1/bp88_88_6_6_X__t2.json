@@ -1,0 +1,73 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bp88_88_6_6_X",
+ "variant": "full",
+ "rows": 40,
+ "cols": 82,
+ "obs": 6,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 6,
+ "upper_bound": 6,
+ "witness": [
+  0,
+  1,
+  3,
+  6,
+  7,
+  8
+ ],
+ "witness_ok": true,
+ "seconds": 0.14,
+ "trace": [
+  {
+   "t": 0.054,
+   "lb": 1
+  },
+  {
+   "t": 0.117,
+   "lb": 2
+  },
+  {
+   "t": 0.117,
+   "lb": 3
+  },
+  {
+   "t": 0.118,
+   "lb": 4
+  },
+  {
+   "t": 0.118,
+   "lb": 5
+  },
+  {
+   "t": 0.118,
+   "lb": 6
+  },
+  {
+   "t": 0.119,
+   "ub": 6
+  }
+ ],
+ "peak_rss_mb": 55.8,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 82, \"cut_rank\": 11, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.006, \"fits\": true, \"peak_bits\": 14, \"predicted_seconds\": 0.0, \"queries\": 6, \"work\": 503784}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 82, \"rows\": 40, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00020241737365722656, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010657310485839844, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011754035949707031, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017690658569335938, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001366138458251953, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.00013303756713867188, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

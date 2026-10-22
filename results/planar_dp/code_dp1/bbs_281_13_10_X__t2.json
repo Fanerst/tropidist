@@ -1,0 +1,93 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_281_13_10_X",
+ "variant": "full",
+ "rows": 131,
+ "cols": 254,
+ "obs": 13,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 10,
+ "upper_bound": 10,
+ "witness": [
+  0,
+  1,
+  7,
+  8,
+  16,
+  20,
+  65,
+  84,
+  107,
+  129
+ ],
+ "witness_ok": true,
+ "seconds": 0.184,
+ "trace": [
+  {
+   "t": 0.052,
+   "lb": 1
+  },
+  {
+   "t": 0.16,
+   "lb": 2
+  },
+  {
+   "t": 0.16,
+   "lb": 3
+  },
+  {
+   "t": 0.161,
+   "lb": 4
+  },
+  {
+   "t": 0.162,
+   "lb": 5
+  },
+  {
+   "t": 0.163,
+   "lb": 6
+  },
+  {
+   "t": 0.163,
+   "lb": 7
+  },
+  {
+   "t": 0.165,
+   "lb": 8
+  },
+  {
+   "t": 0.166,
+   "lb": 9
+  },
+  {
+   "t": 0.169,
+   "lb": 10
+  },
+  {
+   "t": 0.169,
+   "ub": 10
+  }
+ ],
+ "peak_rss_mb": 58.4,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 254, \"cut_rank\": 25, \"decision\": \"search (finished within the DP's predicted time)\", \"estimate_seconds\": 0.051, \"fits\": true, \"peak_bits\": 28, \"predicted_seconds\": 38.771, \"queries\": 13, \"work\": 70562414624}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 254, \"rows\": 131, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00041747093200683594, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003101825714111328, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003256797790527344, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004761219024658203, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003707408905029297, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005793571472167969, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008933544158935547, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0013167858123779297, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0021314620971679688, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 0.00043010711669921875, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

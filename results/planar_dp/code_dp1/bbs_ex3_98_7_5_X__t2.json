@@ -1,0 +1,68 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_ex3_98_7_5_X",
+ "variant": "full",
+ "rows": 46,
+ "cols": 93,
+ "obs": 7,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 5,
+ "upper_bound": 5,
+ "witness": [
+  10,
+  33,
+  44,
+  52,
+  76
+ ],
+ "witness_ok": true,
+ "seconds": 0.141,
+ "trace": [
+  {
+   "t": 0.047,
+   "lb": 1
+  },
+  {
+   "t": 0.118,
+   "lb": 2
+  },
+  {
+   "t": 0.119,
+   "lb": 3
+  },
+  {
+   "t": 0.12,
+   "lb": 4
+  },
+  {
+   "t": 0.121,
+   "lb": 5
+  },
+  {
+   "t": 0.121,
+   "ub": 5
+  }
+ ],
+ "peak_rss_mb": 55.8,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 93, \"cut_rank\": 12, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.01, \"fits\": true, \"peak_bits\": 14, \"predicted_seconds\": 0.001, \"queries\": 7, \"work\": 2351412}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 93, \"rows\": 46, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002601146697998047, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013899803161621094, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015425682067871094, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002608299255371094, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 0.00014162063598632812, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

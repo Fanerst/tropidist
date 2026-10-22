@@ -1,0 +1,68 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 6,
+  "dp": 0,
+  "dp_fast": 10
+ },
+ "instance": "vine_fig7_nSeWwSs_s7_memZ_r5",
+ "variant": "sector",
+ "rows": 717,
+ "cols": 3246,
+ "obs": 6,
+ "threads": 4,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 5,
+ "upper_bound": 5,
+ "witness": [
+  79,
+  88,
+  172,
+  270,
+  366
+ ],
+ "witness_ok": true,
+ "seconds": 0.433,
+ "trace": [
+  {
+   "t": 0.104,
+   "lb": 1
+  },
+  {
+   "t": 0.392,
+   "lb": 2
+  },
+  {
+   "t": 0.393,
+   "lb": 3
+  },
+  {
+   "t": 0.394,
+   "lb": 4
+  },
+  {
+   "t": 0.405,
+   "lb": 5
+  },
+  {
+   "t": 0.419,
+   "ub": 5
+  }
+ ],
+ "peak_rss_mb": 199.1,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 345, \"rows\": 132, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004961490631103516, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006000995635986328, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001374959945678711, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01058506965637207, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 0.012141227722167969, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 75, \"rows\": 717, \"runs\": [{\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 0.00012302398681640625, \"status\": \"found\"}]}}, \"table_budget_gib\": 6.0, \"threads_note\": \"kernel uses 1 threads; requested 4 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

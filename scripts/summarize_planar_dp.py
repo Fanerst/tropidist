@@ -5,6 +5,7 @@ Inputs (all under results/planar_dp/):
   code_dp1/, code_dp0/         pipeline records (bench/adapters/ours_pipeline.py) with and without the DP front end
   widths_circuits.json, fold/  vine-code memory circuits: collapsed and fold-2 widths, fold-2 lower bound + window
   circ_dp1/, circ_dp0/         pipeline records on the circuits (sector variant)
+  isd/                         upper bounds from bench/adapters/isd.py where no run is exact
 
 usage: python scripts/summarize_planar_dp.py
 """
@@ -30,7 +31,10 @@ def records(kind, name):
     out = []
     for path in glob.glob(os.path.join(OUT, kind, "%s__t*.json" % name)):
         r = json.load(open(path))
-        r["_notes"] = json.loads(r["notes"]) if r.get("notes") else {}
+        try:
+            r["_notes"] = json.loads(r["notes"]) if r.get("notes") else {}
+        except ValueError:          # adapters other than ours_pipeline write plain-text notes
+            r["_notes"] = {}
         out.append(r)
     return out
 
@@ -56,6 +60,12 @@ def basis_cell(name, basis):
     if not allr:
         return "-", "-", "-", False, False, None, None
     lo, hi = interval(allr)
+    if hi is None or hi > lo:
+        # upper bounds from our randomised information-set search (bench/adapters/isd.py), records in isd/
+        isd = [r for r in records("isd", key) if r.get("upper_bound") is not None and r.get("witness_ok")]
+        if isd:
+            u = min(r["upper_bound"] for r in isd)
+            hi = u if hi is None else min(hi, u)
     dp_solved = any(r["status"] == "exact" and str(r["_notes"].get("dp", {}).get("main", {}).get("decision", ""))
                     .startswith("dp") for r in r1)
     s_exact = [r for r in r0 if r["status"] == "exact"]
@@ -194,11 +204,12 @@ def circuit_table():
             return "%.0f" % rr["seconds"] if rr["status"] == "exact" else ">%d" % rr["time_limit"]
         paper = (r.get("paper") or {}).get("d_circuit")
         status = (r.get("paper") or {}).get("status")
-        lines.append("| %s | %s | %s (%s) | %s x %s, %s | %s x %s, %s | %s | %s | %s | %s | %.1f | %s / %s |" % (
+        lines.append("| %s | %s | %s (%s) | %s x %s, %s | %s x %s, %s | %s | %s | %s | %s | %s | %s / %s |" % (
             name, r.get("rounds"), paper, status, wc.get("rows", "-"), wc.get("cols", "-"), wc.get("width", "-"),
             r["fold"]["rows"], r["fold"]["cols"], wf.get("width", "-"), coll if coll is not None else "-",
             r["fold"]["lower_bound"], r["window"]["distance"],
-            r["lower"] if r["exact"] else "[%d, %s]" % (r["lower"], r["upper"]), r["seconds"], ptime(p1), ptime(p0)))
+            r["lower"] if r["exact"] else "[%d, %s]" % (r["lower"], r["upper"]),
+            "%.1f (%d thr)" % (r["seconds"], r.get("threads") or 1), ptime(p1), ptime(p0)))
     return "\n".join(lines) + "\n"
 
 

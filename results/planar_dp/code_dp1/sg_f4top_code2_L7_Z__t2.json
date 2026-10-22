@@ -1,0 +1,78 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "sg_f4top_code2_L7_Z",
+ "variant": "full",
+ "rows": 49,
+ "cols": 98,
+ "obs": 2,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 7,
+ "upper_bound": 7,
+ "witness": [
+  2,
+  3,
+  5,
+  8,
+  9,
+  10,
+  13
+ ],
+ "witness_ok": true,
+ "seconds": 0.156,
+ "trace": [
+  {
+   "t": 0.049,
+   "lb": 1
+  },
+  {
+   "t": 0.124,
+   "lb": 2
+  },
+  {
+   "t": 0.124,
+   "lb": 3
+  },
+  {
+   "t": 0.125,
+   "lb": 4
+  },
+  {
+   "t": 0.126,
+   "lb": 5
+  },
+  {
+   "t": 0.126,
+   "lb": 6
+  },
+  {
+   "t": 0.127,
+   "lb": 7
+  },
+  {
+   "t": 0.128,
+   "ub": 7
+  }
+ ],
+ "peak_rss_mb": 56.6,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 98, \"cut_rank\": 25, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.013, \"fits\": true, \"peak_bits\": 27, \"predicted_seconds\": 1.72, \"queries\": 2, \"work\": 3130794456}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 98, \"rows\": 49, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00022912025451660156, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015425682067871094, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00019884109497070312, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00024390220642089844, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002009868621826172, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003483295440673828, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 0.0005080699920654297, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

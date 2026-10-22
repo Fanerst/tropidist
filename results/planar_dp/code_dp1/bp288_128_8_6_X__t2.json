@@ -1,0 +1,73 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bp288_128_8_6_X",
+ "variant": "full",
+ "rows": 60,
+ "cols": 122,
+ "obs": 8,
+ "threads": 2,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 6,
+ "upper_bound": 6,
+ "witness": [
+  16,
+  21,
+  40,
+  52,
+  77,
+  84
+ ],
+ "witness_ok": true,
+ "seconds": 0.218,
+ "trace": [
+  {
+   "t": 0.074,
+   "lb": 1
+  },
+  {
+   "t": 0.181,
+   "lb": 2
+  },
+  {
+   "t": 0.182,
+   "lb": 3
+  },
+  {
+   "t": 0.183,
+   "lb": 4
+  },
+  {
+   "t": 0.184,
+   "lb": 5
+  },
+  {
+   "t": 0.185,
+   "lb": 6
+  },
+  {
+   "t": 0.185,
+   "ub": 6
+  }
+ ],
+ "peak_rss_mb": 56.5,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 122, \"cut_rank\": 15, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.027, \"fits\": true, \"peak_bits\": 18, \"predicted_seconds\": 0.008, \"queries\": 8, \"work\": 15224128}}, \"kernel_threads\": 2, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 122, \"rows\": 60, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003447532653808594, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00021219253540039062, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00023293495178222656, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003178119659423828, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000247955322265625, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.0002655982971191406, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

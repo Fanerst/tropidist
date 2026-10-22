@@ -1,0 +1,136 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "table_gb": 4,
+  "dp": 1,
+  "dp_fast": 10
+ },
+ "instance": "bbs_288_8_12_L18x8_Z",
+ "variant": "full",
+ "rows": 160,
+ "cols": 282,
+ "obs": 8,
+ "threads": 16,
+ "time_limit": 1800.0,
+ "status": "exact",
+ "lower_bound": 21,
+ "upper_bound": 21,
+ "witness": [
+  0,
+  8,
+  39,
+  85,
+  89,
+  102,
+  103,
+  112,
+  119,
+  126,
+  132,
+  137,
+  138,
+  149,
+  177,
+  188,
+  208,
+  233,
+  237,
+  258,
+  267
+ ],
+ "witness_ok": true,
+ "seconds": 4.696,
+ "trace": [
+  {
+   "t": 0.058,
+   "lb": 1
+  },
+  {
+   "t": 0.191,
+   "lb": 2
+  },
+  {
+   "t": 0.192,
+   "lb": 3
+  },
+  {
+   "t": 0.193,
+   "lb": 4
+  },
+  {
+   "t": 0.194,
+   "lb": 5
+  },
+  {
+   "t": 0.194,
+   "lb": 6
+  },
+  {
+   "t": 0.195,
+   "lb": 7
+  },
+  {
+   "t": 0.196,
+   "lb": 8
+  },
+  {
+   "t": 0.197,
+   "lb": 9
+  },
+  {
+   "t": 0.198,
+   "lb": 10
+  },
+  {
+   "t": 0.2,
+   "lb": 11
+  },
+  {
+   "t": 0.203,
+   "lb": 12
+  },
+  {
+   "t": 0.209,
+   "lb": 13
+  },
+  {
+   "t": 0.234,
+   "lb": 14
+  },
+  {
+   "t": 0.28,
+   "lb": 15
+  },
+  {
+   "t": 0.396,
+   "lb": 16
+  },
+  {
+   "t": 0.65,
+   "lb": 17
+  },
+  {
+   "t": 3.162,
+   "lb": 21
+  },
+  {
+   "t": 4.675,
+   "ub": 21
+  }
+ ],
+ "peak_rss_mb": 196.3,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 282, \"cut_rank\": 26, \"decision\": \"dp (after a 1 s head start of the search)\", \"estimate_seconds\": 0.073, \"fits\": true, \"peak_bits\": 28, \"predicted_seconds\": 2.018, \"queries\": 8, \"seconds\": 1.977, \"value\": 21, \"work\": 18363417216}}, \"kernel_threads\": 16, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"main_witness\": {\"cols\": 282, \"rows\": 160, \"runs\": [{\"K\": 21, \"best\": 21, \"nsol_recorded\": 1, \"seconds\": 1.503204107284546, \"status\": \"found\"}]}, \"plain\": {\"cols\": 282, \"rows\": 160, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0009427070617675781, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004220008850097656, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00041365623474121094, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004892349243164062, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003800392150878906, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005295276641845703, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007219314575195312, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007750988006591797, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0009140968322753906, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0013010501861572266, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0024580955505371094, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.006314277648925781, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.024028778076171875, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.04562854766845703, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.11565709114074707, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.25366878509521484, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.5333266258239746, \"status\": \"timeout\"}]}}, \"table_budget_gib\": 4.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}
