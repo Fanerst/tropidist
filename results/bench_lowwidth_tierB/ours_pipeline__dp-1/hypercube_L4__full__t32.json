@@ -1,0 +1,151 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 14,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3600.04,
+  "trace": [
+    {
+      "t": 0.045,
+      "lb": 1
+    },
+    {
+      "t": 2.038,
+      "lb": 2
+    },
+    {
+      "t": 2.046,
+      "lb": 3
+    },
+    {
+      "t": 2.054,
+      "lb": 4
+    },
+    {
+      "t": 2.082,
+      "lb": 5
+    },
+    {
+      "t": 2.135,
+      "lb": 6
+    },
+    {
+      "t": 2.583,
+      "lb": 7
+    },
+    {
+      "t": 4.288,
+      "lb": 8
+    },
+    {
+      "t": 6.348,
+      "lb": 9
+    },
+    {
+      "t": 9.745,
+      "lb": 10
+    },
+    {
+      "t": 23.784,
+      "lb": 11
+    },
+    {
+      "t": 75.541,
+      "lb": 12
+    },
+    {
+      "t": 421.821,
+      "lb": 13
+    },
+    {
+      "t": 1791.187,
+      "lb": 14
+    }
+  ],
+  "peak_rss_mb": 99.4,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 1296, \"cut_rank\": 85, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 1.827, \"fits\": false, \"peak_bits\": 85, \"predicted_seconds\": null, \"queries\": 256, \"work\": null}}, \"kernel_threads\": 32, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 1296, \"rows\": 520, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.009012937545776367, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.007357358932495117, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0077474117279052734, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02838277816772461, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.05251145362854004, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.4464449882507324, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.7047758102416992, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 2.0592880249023438, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.395549774169922, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 14.037530183792114, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 51.75534415245056, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 346.2778220176697, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1369.36492395401, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_budget_gib\": 45.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_lowwidth/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-22T12:12:45.933834+00:00",
+    "ended_at": "2026-10-22T13:12:46.123188+00:00",
+    "wall_seconds": 3600.189235,
+    "adapter_seconds": 3600.04,
+    "trace_offset_seconds": 0.149235,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth_tierB/ours_pipeline__dp-1/hypercube_L4__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_lowwidth_tierB/ours_pipeline__dp-1/hypercube_L4__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 112.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

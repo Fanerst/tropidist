@@ -138,6 +138,12 @@ def tables():
     if (ROOT / "results" / "bench_wjh").is_dir():
         import wjh_compare
         t["wjh"] = wjh_compare.report()
+    # trial on narrow problems of large distance (bench/export_lowwidth.py), not part of the standard benchmark
+    LW, LW2 = ROOT / "results" / "bench_lowwidth", ROOT / "results" / "bench_lowwidth_tierB"
+    if LW.is_dir():
+        t["lowwidth"] = T.table(LW, "full", "code", 1, instance_dir=HERE / "instances_lowwidth")
+    if LW2.is_dir():
+        t["lowwidth-B32"] = T.table(LW2, "full", "code", 32, instance_dir=HERE / "instances_lowwidth")
     return t
 
 

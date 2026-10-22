@@ -1408,6 +1408,92 @@ search settles within its head start. One quantum Tanner code (qt_216_4_18) fini
 of the default, with the search chosen, which is variation at the limit. Four runs were about 1 s slower, the
 cost of estimating the DP for codes of about 1,000 columns.
 
+### Trial: narrow problems of large distance (not part of the standard benchmark)
+
+The search slows down as the distance grows; the DP does not depend on the distance, only on the cut rank of
+a column order (here always that of the best order the front end finds). Neither suite above has a problem that
+is both narrow and of large distance:
+
+- **Narrow problems:** the small codes and the time-collapsed problems of the surface- and color-code circuits.
+  Their distances are small, and every method settles them within a second.
+- **Large distances:** these problems are wide. They are the expanding codes, and the circuits with d rounds,
+  whose space-time problem has cut rank 31 to 61 at d = 11 in the prior benchmark.
+
+This trial tests that regime. `bench/export_lowwidth.py` writes 13 code-capacity instances into
+`bench/instances_lowwidth/`:
+
+- **Color codes:** triangular 6.6.6 color codes with d = 11 to 35. Bulk qubits are in three checks, so the
+  problem is not graph-like.
+- **Concatenated Steane codes:** the Steane code concatenated L = 2 to 4 times, [[7^L, 1, 3^L]].
+- **Many-hypercube codes (contrast):** concatenated [[6,4,2]] codes, [[6^L, 4^L, 2^L]]. Their many logical
+  qubits make every cut wide (cut rank 85 at L = 4).
+
+Every method of the code track ran on them with the first-tier limits (`scripts/server/lowwidth_trial.sh`,
+records in `results/bench_lowwidth/`). Our two configurations then ran with the second-tier limits on what
+their first tier left (`scripts/server/lowwidth_tier2.sh`, records in `results/bench_lowwidth_tierB/`). First
+tier:
+
+<!-- TABLE:lowwidth:BEGIN -->
+| instance | n | columns | distance | ours | ours + DP | ours, plain | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| color_cc_d11 | 91 | 91 | 11 | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 4.8 s | 14.0 s | 8.5 s | 1.2 s | 1.5 s | 2.5 s | 1.5 s | 0.1 s* | 0.1 s* | mem | <=11 ok | <=11 ok | <=11 ok |
+| color_cc_d15 | 169 | 169 | 15 | 0.4 s | 0.4 s | 0.2 s | 0.5 s | 1.7 s | 267 s | 8..15 | 44.5 s | 18.8 s | 34.8 s | 109 s | 140 s | 2.3 s* | 53.4 s* | mem | <=15 ok | <=15 ok | <=15 ok |
+| color_cc_d19 | 271 | 271 | 19 | 18.2 s | 1.3 s | 18.4 s | 66.6 s | 208 s | 9..19 | 8..19 | 14..19 | >=17 | >=17 | >=1 | >=1 | 385 s* | t/o | skip | <=19 ok | <=19 ok | <=19 ok |
+| color_cc_d23 | 397 | 397 | 23 | >=22 | 2.1 s | >=22 | >=20 | 20..23 | 7..23 | skip | 13..23 | >=16 | >=16 | >=1 | >=1 | t/o | t/o | skip | <=23 ok | <=23 ok | <=23 ok |
+| color_cc_d27 | 547 | 547 | 27 | >=21 | 2.2 s | >=21 | >=20 | 20..27 | skip | skip | skip | skip | skip | skip | skip | t/o | skip | skip | <=27 ok | <=27 ok | <=27 ok |
+| color_cc_d31 | 721 | 721 | 31 | skip | 331 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=31 ok | <=31 ok | <=31 ok |
+| color_cc_d35 | 919 | 919 | 35 | skip | >=21 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=35 ok | <=35 ok | <=35 ok |
+| concat_steane_L2 | 49 | 49 | 9 | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.7 s | 0.6 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s* | 0.1 s* | 1.3 s* | <=9 ok | <=9 ok | <=9 ok |
+| concat_steane_L3 | 343 | 343 | 27 | >=22 | 1.2 s | >=22 | >=20 | mem | 12..27 | 10..27 | 17..27 | 3.4 s | >=23 | >=1 | >=1 | t/o | t/o | mem | <=27 ok | <=27 ok | mem |
+| concat_steane_L4 | 2401 | 2401 | 81 | >=18 | 1.2 s | >=18 | >=18 | mem | 16..81 | 4..85 | 16..81 | >=70 | >=17 | >=1 | >=1 | t/o | t/o | mem | <=81 ok | <=81 ok | mem |
+| hypercube_L2 | 36 | 36 | 4 | 0.1 s | 0.1 s | 0.0 s | 0.0 s | 0.0 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s* | 0.1 s* | 0.1 s* | <=4 ok | <=4 ok | <=4 ok |
+| hypercube_L3 | 216 | 216 | 8 | 0.2 s | 0.2 s | 0.0 s | 0.0 s | 0.1 s | 26.3 s | 28.8 s | 4.3 s | 0.8 s | 2.5 s | 4.4 s | 4.6 s | 0.1 s* | 51.3 s* | mem | <=8 ok | <=8 ok | <=8 ok |
+| hypercube_L4 | 1296 | 1296 | 16 | >=11 | >=11 | >=11 | >=13 | 12..16 | 1..16 | t/o | 4..16 | >=13 | >=10 | >=1 | >=1 | t/o | t/o | mem | <=16 ok | <=16 ok | <=16 ok |
+| **solved exactly** (of 13) | | | | **6** | **11** | **6** | **6** | **6** | **5** | **4** | **5** | **6** | **5** | **5** | **5** | **6** | **5** | **2** |  |  |  |
+<!-- TABLE:lowwidth:END -->
+
+Second tier, 32 threads, 90 GB, 3600 s (an empty cell means the instance was solved in the first tier):
+
+<!-- TABLE:lowwidth-B32:BEGIN -->
+| instance | n | columns | distance | ours | ours + DP |
+|---|---:|---:|---:|---:|---:|
+| color_cc_d23 | 397 | 397 | 23 | 56.9 s |  |
+| color_cc_d27 | 547 | 547 | 27 | >=26 |  |
+| color_cc_d31 | 721 | 721 | 31 | skip |  |
+| color_cc_d35 | 919 | 919 | 35 | skip | >=26 |
+| concat_steane_L3 | 343 | 343 | 27 | 1897 s |  |
+| concat_steane_L4 | 2401 | 2401 | 81 | >=23 |  |
+| hypercube_L4 | 1296 | 1296 | 16 | >=14 | >=14 |
+| **solved exactly** (of 7) | | | | **2** | **0** |
+<!-- TABLE:lowwidth-B32:END -->
+
+In the first tier, ours + DP solves 11 of the 13 instances and every other method at most 6.
+
+- **Concatenated Steane codes:** the DP has cut rank 9 and 12 and takes 2 and 11 ms. The 1.2 s is mostly the
+  search's 1 s head start. No other method solves [[2401,1,81]]; at [[343,1,27]] the best other is SAT, 3.4 s.
+- **Color codes:**
+  - d = 19 to 27: the DP has cut rank 19 to 27 and takes 0.02 to 0.8 s.
+  - d = 31: the DP has cut rank 31 and takes 127 s; it starts after the search has run for the DP's predicted
+    203 s.
+  - The best other method stops at d = 19 (dist-m4ri CC, 67 s).
+
+With 32 threads and an hour, the search alone adds two instances. It stops at color d = 27 (d ≥ 26) and at
+[[2401,1,81]] (d ≥ 23):
+
+- color d = 23, in 57 s;
+- [[343,1,27]], in 1897 s, against 1.2 s with the DP on one thread.
+
+The color code with d = 35 needs a DP table of 2^36 bytes (64 GiB). The estimate asks for 128 GiB, because it
+adds a one-bit margin for further logical operators, which a code with k = 1 does not need. Either is more than
+the 45 GiB of the second tier. It was run once outside the protocol, with a table budget of 140 GiB and 32
+threads (`results/bench_lowwidth_extra/`). The search first ran for the DP's predicted 276 s and reached
+d ≥ 23. The DP then certified d = 35 in 126 s, a single-threshold search found a witness in 3 ms, and peak
+memory was 66 GB.
+
+The hypercube code with L = 4 is open for every method.
+
+![low-width trial](../results/bench_lowwidth/lowwidth_trial.png)
+
 ## Reproduce
 
 ```sh
@@ -1423,6 +1509,10 @@ python bench/tier_b.py sparseL                   # integer programming and SAT o
 python papers/codedistance_export.py papers/downloads/codedistance papers/downloads/codedistance_codes.json
 python bench/export_wjh.py
 python bench/tier_b.py wjh1 wjh2 wjh8h
+# trial on narrow problems of large distance (on 5090; paths in the scripts)
+python bench/export_lowwidth.py
+bash scripts/server/lowwidth_trial.sh && bash scripts/server/lowwidth_tier2.sh
+python scripts/plot_lowwidth.py results/bench_lowwidth/lowwidth_trial.png
 python bench/summary_table.py results/bench --variant sector --track circuit
 python bench/make_benchmark_md.py
 ```
