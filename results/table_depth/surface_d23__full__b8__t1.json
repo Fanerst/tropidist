@@ -1,0 +1,142 @@
+{
+ "instance": "bench/instances/surface_d23",
+ "variant": "full",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 749,
+   "k_asked": 3,
+   "k": 3,
+   "bytes": 2415919104,
+   "entries": 67905766,
+   "build_seconds": 2.321,
+   "seconds": 2.584,
+   "at": 12.448
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 1035,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 18874368,
+   "entries": 534613,
+   "build_seconds": 0.009,
+   "seconds": 0.013,
+   "at": 15.058
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 749,
+   "K": 23,
+   "k": 3,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.002,
+   "nodes": [
+    0,
+    749,
+    664,
+    486,
+    1336,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 3,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 1,
+   "false_hits": 0
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 1035,
+   "K": 23,
+   "k": 2,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.668,
+   "nodes": [
+    0,
+    1035,
+    539,
+    1278,
+    2962,
+    4,
+    9,
+    18,
+    46,
+    90,
+    227,
+    498,
+    1270,
+    2917,
+    7521,
+    17901,
+    46256,
+    112091,
+    290632,
+    715107,
+    1860610,
+    4631569,
+    0,
+    0,
+    0
+   ],
+   "lookups": 4631569,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 1,
+   "false_hits": 232428
+  }
+ ],
+ "status": "exact",
+ "seconds": 15.743,
+ "lower": 23,
+ "upper": 23,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 34915,
+    "fits": false,
+    "decision": "search (too many columns for the DP)"
+   },
+   "collapsed": {
+    "columns": 749,
+    "cut_rank": 15,
+    "peak_bits": 17,
+    "work": 5513088,
+    "queries": 1,
+    "estimate_seconds": 0.368,
+    "fits": true,
+    "predicted_seconds": 0.004,
+    "decision": "dp after a head start of the search; the search then starts at its value",
+    "value": 23,
+    "seconds": 0.005
+   }
+  }
+ }
+}

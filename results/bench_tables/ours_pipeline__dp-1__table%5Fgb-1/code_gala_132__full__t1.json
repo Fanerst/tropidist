@@ -1,0 +1,131 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "code_gala_132",
+  "variant": "full",
+  "rows": 55,
+  "cols": 132,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 12,
+  "upper_bound": 12,
+  "witness": [
+    0,
+    7,
+    13,
+    23,
+    30,
+    36,
+    38,
+    53,
+    70,
+    93,
+    94,
+    127
+  ],
+  "witness_ok": true,
+  "seconds": 1.403,
+  "trace": [
+    {
+      "t": 0.078,
+      "lb": 1
+    },
+    {
+      "t": 0.159,
+      "lb": 2
+    },
+    {
+      "t": 0.159,
+      "lb": 3
+    },
+    {
+      "t": 0.16,
+      "lb": 4
+    },
+    {
+      "t": 0.161,
+      "lb": 5
+    },
+    {
+      "t": 0.161,
+      "lb": 6
+    },
+    {
+      "t": 0.162,
+      "lb": 7
+    },
+    {
+      "t": 0.163,
+      "lb": 8
+    },
+    {
+      "t": 0.171,
+      "lb": 9
+    },
+    {
+      "t": 0.205,
+      "lb": 10
+    },
+    {
+      "t": 0.368,
+      "lb": 11
+    },
+    {
+      "t": 1.293,
+      "lb": 12
+    },
+    {
+      "t": 1.387,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 59.4,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 132, \"cut_rank\": 43, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.014, \"fits\": false, \"peak_bits\": 43, \"predicted_seconds\": null, \"queries\": 30, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 132, \"rows\": 55, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015783309936523438, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.699562072753906e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.461143493652344e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011467933654785156, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012564659118652344, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002949237823486328, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0012326240539550781, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0073773860931396484, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.03385210037231445, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.16203641891479492, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.9247629642486572, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": 12, \"nsol_recorded\": 1, \"seconds\": 0.09284162521362305, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/code_gala_132",
+    "family": "gala",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      30
+    ],
+    "started_at": "2026-10-23T06:15:40.535809+00:00",
+    "ended_at": "2026-10-23T06:15:42.021846+00:00",
+    "wall_seconds": 1.485309,
+    "adapter_seconds": 1.403,
+    "trace_offset_seconds": 0.082309,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/code_gala_132__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/code_gala_132__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 72.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

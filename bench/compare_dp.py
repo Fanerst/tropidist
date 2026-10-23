@@ -103,8 +103,9 @@ def main(argv):
         print("%(both)d variants with both records: %(newly)d solved only with the DP front end, %(lost)d only without "
               "it; of those solved by both, %(faster)d at least 1.5x and 1 s faster with it, %(slower)d slower." % n)
     else:
-        print(("%(both)d variants with both records: %(newly)d solved only with " + names[1] + ", %(lost)d only with "
-               + names[0] + "; of those solved by both, %(faster)d at least 1.5x and 1 s faster with " + names[1] +
+        na, nb = (x.replace("%", "%%") for x in names)       # folder names may hold %-escapes (table%5Fgb-1)
+        print(("%(both)d variants with both records: %(newly)d solved only with " + nb + ", %(lost)d only with "
+               + na + "; of those solved by both, %(faster)d at least 1.5x and 1 s faster with " + nb +
                ", %(slower)d slower.") % n)
 
 

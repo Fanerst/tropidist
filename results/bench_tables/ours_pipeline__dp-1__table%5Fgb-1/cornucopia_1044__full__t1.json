@@ -1,0 +1,102 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "cornucopia_1044",
+  "variant": "full",
+  "rows": 3132,
+  "cols": 271440,
+  "obs": 526,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.085,
+  "trace": [
+    {
+      "t": 10.426,
+      "lb": 1
+    },
+    {
+      "t": 86.733,
+      "lb": 2
+    },
+    {
+      "t": 86.735,
+      "lb": 3
+    },
+    {
+      "t": 86.75,
+      "lb": 4
+    },
+    {
+      "t": 87.004,
+      "lb": 5
+    },
+    {
+      "t": 87.055,
+      "lb": 6
+    },
+    {
+      "t": 88.129,
+      "lb": 7
+    },
+    {
+      "t": 106.886,
+      "lb": 8
+    },
+    {
+      "t": 390.716,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 836.5,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 3393, \"cut_rank\": 259, \"decision\": \"search\", \"estimate_seconds\": 0.062, \"fits\": false, \"peak_bits\": 259, \"predicted_seconds\": null, \"queries\": 526, \"work\": null}, \"main\": {\"columns\": 35496, \"decision\": \"search (too many columns for the DP)\", \"fits\": false}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_reduction_exact\": true, \"sector_symmetries_used\": 28, \"stages\": {\"collapsed\": {\"cols\": 3393, \"rows\": 261, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002327442169189453, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0023336410522460938, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01461338996887207, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.254011869430542, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.05040574073791504, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.0737781524658203, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 18.75618553161621, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 283.82934188842773, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_budget_gib\": 1.0, \"table_k_reduced\": [[3393, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/cornucopia_1044",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      24
+    ],
+    "started_at": "2026-10-23T06:32:59.457463+00:00",
+    "ended_at": "2026-10-23T06:42:59.776208+00:00",
+    "wall_seconds": 600.318572,
+    "adapter_seconds": 600.085,
+    "trace_offset_seconds": 0.233572,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/cornucopia_1044__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/cornucopia_1044__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 604.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,268 @@
+{
+ "instance": "bench/instances/mitten_300",
+ "variant": "sector",
+ "budget_gb": 1.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "k_asked": 3,
+   "k": 2,
+   "bytes": 9437184,
+   "entries": 513451,
+   "build_seconds": 0.007,
+   "seconds": 0.011,
+   "at": 3.126
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 1,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    102,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 2,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    102,
+    0,
+    0
+   ],
+   "lookups": 102,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 102
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 3,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.005,
+   "nodes": [
+    0,
+    102,
+    0,
+    0,
+    0
+   ],
+   "lookups": 102,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 102
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 4,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.037,
+   "nodes": [
+    0,
+    102,
+    2076,
+    0,
+    0,
+    0
+   ],
+   "lookups": 2076,
+   "cover_calls": 151,
+   "cover_pruned": 5,
+   "hits": 0,
+   "false_hits": 2076
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 5,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.023,
+   "nodes": [
+    0,
+    102,
+    2081,
+    39785,
+    0,
+    0,
+    0
+   ],
+   "lookups": 39785,
+   "cover_calls": 2233,
+   "cover_pruned": 1072,
+   "hits": 0,
+   "false_hits": 294
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 6,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.409,
+   "nodes": [
+    0,
+    102,
+    2081,
+    78492,
+    447601,
+    0,
+    0,
+    0
+   ],
+   "lookups": 447592,
+   "cover_calls": 82594,
+   "cover_pruned": 67208,
+   "hits": 0,
+   "false_hits": 1399
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 7,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 8.634,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79551,
+    2261532,
+    4172741,
+    0,
+    0,
+    0
+   ],
+   "lookups": 4172724,
+   "cover_calls": 2399112,
+   "cover_pruned": 2180284,
+   "hits": 0,
+   "false_hits": 5878
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 8,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 181.03,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79557,
+    3142231,
+    47623445,
+    36591350,
+    0,
+    0,
+    0
+   ],
+   "lookups": 36591165,
+   "cover_calls": 52034043,
+   "cover_pruned": 48650958,
+   "hits": 0,
+   "false_hits": 43326
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 9,
+   "k": 2,
+   "relaxed": [],
+   "status": "timeout",
+   "seconds": 406.873,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79557,
+    3156681,
+    13233849,
+    101974016,
+    35702739,
+    0,
+    0,
+    0
+   ],
+   "lookups": 35702635,
+   "cover_calls": 118717600,
+   "cover_pruned": 112414929,
+   "hits": 0,
+   "false_hits": 40464
+  }
+ ],
+ "stop_reason": "search exhausted the remaining wall-time budget",
+ "status": "timeout",
+ "seconds": 600.152,
+ "lower": 9,
+ "upper": null,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 11820,
+    "cut_rank": 153,
+    "peak_bits": 153,
+    "work": null,
+    "queries": 60,
+    "estimate_seconds": 0.194,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   },
+   "collapsed": {
+    "columns": 1020,
+    "cut_rank": 118,
+    "peak_bits": 118,
+    "work": null,
+    "queries": 60,
+    "estimate_seconds": 0.73,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search"
+   }
+  },
+  "table_k_reduced": [
+   [
+    1020,
+    3,
+    2
+   ]
+  ]
+ }
+}

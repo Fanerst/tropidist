@@ -1,0 +1,125 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "routing_110",
+  "variant": "sector",
+  "rows": 385,
+  "cols": 4070,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 10,
+  "upper_bound": 10,
+  "witness": [
+    0,
+    2,
+    231,
+    266,
+    269,
+    469,
+    575,
+    660,
+    684,
+    1188
+  ],
+  "witness_ok": true,
+  "seconds": 40.698,
+  "trace": [
+    {
+      "t": 0.08,
+      "lb": 1
+    },
+    {
+      "t": 2.177,
+      "lb": 2
+    },
+    {
+      "t": 2.177,
+      "lb": 3
+    },
+    {
+      "t": 2.178,
+      "lb": 4
+    },
+    {
+      "t": 2.178,
+      "lb": 5
+    },
+    {
+      "t": 2.18,
+      "lb": 6
+    },
+    {
+      "t": 2.191,
+      "lb": 7
+    },
+    {
+      "t": 2.51,
+      "lb": 8
+    },
+    {
+      "t": 2.543,
+      "ub": 11
+    },
+    {
+      "t": 8.234,
+      "lb": 9
+    },
+    {
+      "t": 38.934,
+      "lb": 10
+    },
+    {
+      "t": 40.671,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 375.5,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 330, \"cut_rank\": 43, \"decision\": \"search\", \"estimate_seconds\": 0.067, \"fits\": false, \"peak_bits\": 43, \"predicted_seconds\": null, \"queries\": 8, \"work\": null}, \"main\": {\"columns\": 4070, \"cut_rank\": 97, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.055, \"fits\": false, \"peak_bits\": 97, \"predicted_seconds\": null, \"queries\": 8, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 3, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"orbit_lower_bound\": 8, \"sector_symmetries_used\": 54, \"stages\": {\"collapsed\": {\"cols\": 330, \"rows\": 55, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016427040100097656, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.940696716308594e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011920928955078125, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003254413604736328, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00142669677734375, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.010983705520629883, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 0.005063772201538086, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 330, \"rows\": 55, \"runs\": [{\"K\": 7, \"best\": 7, \"nsol_recorded\": 8, \"seconds\": 0.01641225814819336, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 74, \"rows\": 385, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013875961303710938, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 49, \"rows\": 385, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.153915405273438e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_2\": {\"cols\": 49, \"rows\": 385, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.772445678710938e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_1_0\": {\"cols\": 404, \"rows\": 385, \"runs\": [{\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008704662322998047, \"status\": \"exhausted\"}]}, \"orbit_lift_1_1\": {\"cols\": 379, \"rows\": 385, \"runs\": [{\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006356239318847656, \"status\": \"exhausted\"}]}, \"orbit_lift_1_2\": {\"cols\": 379, \"rows\": 385, \"runs\": [{\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006229877471923828, \"status\": \"exhausted\"}]}, \"quick_lift_0\": {\"cols\": 74, \"rows\": 385, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015091896057128906, \"status\": \"exhausted\"}]}, \"sector\": {\"cols\": 4070, \"rows\": 385, \"runs\": [{\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.4448671340942383, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 30.699628353118896, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 1.7364723682403564, \"status\": \"found\"}]}, \"window_t0_at_d_coll\": {\"cols\": 110, \"rows\": 55, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012874603271484375, \"status\": \"exhausted\"}]}, \"window_t1\": {\"cols\": 110, \"rows\": 55, \"runs\": [{\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003075599670410156, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008337497711181641, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0027430057525634766, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": 11, \"nsol_recorded\": 1, \"seconds\": 0.0003695487976074219, \"status\": \"found\"}]}, \"window_t1_at_d_coll\": {\"cols\": 110, \"rows\": 55, \"runs\": [{\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00014019012451171875, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/routing_110",
+    "family": "routing",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      29
+    ],
+    "started_at": "2026-10-23T06:15:48.852876+00:00",
+    "ended_at": "2026-10-23T06:16:29.622750+00:00",
+    "wall_seconds": 40.762226,
+    "adapter_seconds": 40.698,
+    "trace_offset_seconds": 0.064226,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/routing_110__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/routing_110__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 383.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

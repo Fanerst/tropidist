@@ -1,7 +1,7 @@
 """Exported-instance adapter for the collapsed/lift/window/sector pipeline.
 
 config: symmetry=1, cover=1, collapse=1, lift=1, window=1,
-        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10, dp_head=-1.
+        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10, dp_head=-1, deepen=1.
 
 collapse controls the standalone collapsed lower bound and the pruning table.
 With collapse=0 and lift=1, collapsed solutions are still generated for lifting
@@ -24,6 +24,17 @@ witness, or the lower bound u; without u, sweeps at l, l + 1, ...).  Its time is
 sector search runs first for that time (a race: each method gets the time the DP needs), then the sparse DP, if it
 fits in the table budget and the remaining time; dp_head >= 0 sets that head start in seconds instead (0: the DP
 first).  Code instances run as with dp=1: on them the search or the dense DP is faster (results/sparse_dp).
+
+Lookup tables: each search keeps a table of all column subsets of size <= k_table (k_coll on the time-collapsed
+problem) keyed by syndrome.  Tables are built up front only as deep as EAGER_TABLE_BYTES allows for all live
+tables (1 GiB, the depth of every benchmark record before commit 7ef27aa).  A deeper table pays only for long
+searches, and then not always (results/table_depth):
+- on short or low-weight searches its build dominates;
+- on wide circuits the extra label-free hits cost more than they save (color_d11 full: 9-17x slower per level).
+With deepen=1, after an exhausted level that took DEEPEN_FACTOR times the deeper table's predicted build time,
+that table is built (within the table budget). Both tables then run the same level on a sample of the anchors,
+each for at most DEEPEN_SAMPLE of that level's time. The search continues with the deeper table only if it is
+DEEPEN_GAIN times faster there.
 """
 import json
 import math
@@ -39,12 +50,17 @@ import common
 
 
 DEFAULTS = dict(symmetry=1, cover=1, collapse=1, lift=1, window=1,
-                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10, dp_head=-1)
-SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp")
+                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10, dp_head=-1, deepen=1)
+SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp", "deepen")
 DP_MAX_COLUMNS = 30000          # beyond this the order search alone is slow, and no such DP would fit
 DP_HEAD_START = 1.0             # seconds the search runs before a DP predicted to be cheap
 DP_FAST_TRACEBACK = 1 << 28     # DP work (table entries) up to which the traceback runs before the witness search
 TABLE_BUDGET = 1 << 30          # leave space below 2 GiB for search/Python arrays
+EAGER_TABLE_BYTES = 1 << 30     # live lookup tables built up front (see the module docstring)
+TABLE_SECONDS_PER_ENTRY = 4e-8  # building a lookup table, one thread on 5090 (results/table_depth: 32-47 ns)
+DEEPEN_FACTOR = 4.0             # a level must take this many times the deeper table's predicted build time
+DEEPEN_SAMPLE = 0.05            # share of the anchors, and of the level's time, for comparing the two tables
+DEEPEN_GAIN = 1.25              # the deeper table must run the sample this many times faster
 SOL_CAP = 100000
 
 
@@ -147,18 +163,26 @@ class Pipeline:
             raise Deadline("whole-run wall-time limit reached")
         return value
 
-    def table(self, p, k, seed=12345):
+    def table(self, p, k, seed=12345, budget=None, exact=False):
+        """The lookup table of all column subsets of size <= k of p, fewer when the live tables would exceed
+        `budget` bytes (default: EAGER_TABLE_BYTES, within the table budget; deepen() builds deeper ones).
+        exact: depth k, or None if it does not fit in `budget`."""
         self.remaining()
+        budget = min(TABLE_BUDGET, EAGER_TABLE_BYTES) if budget is None else min(budget, TABLE_BUDGET)
         def nbytes(kk):
             total = sum(math.comb(p.ncols, i) for i in range(min(kk, p.ncols) + 1))
             return 9 * (1 << max(10, math.ceil(math.log2(total / 0.5 + 1))))   # label-free: nine bytes per slot
         k0 = k
-        while k > 1 and nbytes(k) + self.table_bytes > TABLE_BUDGET:
+        while k > 1 and nbytes(k) + self.table_bytes > budget:
+            if exact:
+                return None
             k -= 1                    # a smaller table is always valid: it only moves work into the search
         if k != k0:
             self.notes.setdefault("table_k_reduced", []).append([p.ncols, k0, k])
         size = nbytes(k)
-        if size + self.table_bytes > TABLE_BUDGET:
+        if size + self.table_bytes > (budget if exact else TABLE_BUDGET):
+            if exact:
+                return None
             raise ResourceLimit("live lookup tables would exceed the table budget of %.1f GiB" % (TABLE_BUDGET / 2 ** 30))
         # Register before __init__: an interruption during native construction
         # must still free a handle that has already been allocated.
@@ -169,6 +193,61 @@ class Pipeline:
         tab.__init__(p, k, seed=seed, labelfree=True)
         self.remaining()
         return tab
+
+    def deepen(self, S, p, tab, K, r, info, enum_all=False):
+        """After the exhausted level K, run in r["seconds"] by S with the main table `tab`: the table one weight
+        deeper if that level took DEEPEN_FACTOR times its predicted build time, it fits in the table budget, and it
+        runs level K DEEPEN_GAIN times faster on a sample of the anchors.  Both tables run the same sample for at
+        most DEEPEN_SAMPLE of the level's time (0.5 s at least), so the trial costs about a tenth of the level and
+        the build.  The runs take the anchors as their tasks (task depth 1: the kernel enumerates the prefixes of
+        deeper tasks before it starts, which would fill the node counts above them at once), and their speeds are
+        compared by the nodes they visit per second at depth K - tab.k - 2, the deepest one both tables expand
+        alike, or by their times if both finish.  Returns (the table to continue with, whether a later level may
+        try again)."""
+        import numpy as np
+        k = tab.k + 1
+        entries = sum(math.comb(p.ncols, i) for i in range(min(k, p.ncols) + 1))
+        predicted = TABLE_SECONDS_PER_ENTRY * entries
+        if r["seconds"] < DEEPEN_FACTOR * predicted:
+            return tab, True
+        rec = {"K": K, "k": k, "level_seconds": round(r["seconds"], 3), "predicted_build_seconds": round(predicted, 3)}
+        info.setdefault("deepen", []).append(rec)
+        deep = self.table(p, k, budget=TABLE_BUDGET, exact=True)
+        if deep is None:
+            rec["decision"] = "kept (the deeper table does not fit in the table budget)"
+            return tab, False
+        rec["build_seconds"] = round(deep.build_seconds, 3)
+        share = min(1.0, max(DEEPEN_SAMPLE, 0.5 / max(r["seconds"], 1e-9)))
+        anchors = S.anchors[::max(1, int(round(1 / share)))]
+        limit = max(0.5, DEEPEN_SAMPLE * r["seconds"])
+        d = K - tab.k - 2                      # below the anchors (depth 1), or no progress measure: times only
+        cover = bool(self.cfg["cover"])
+
+        def run(t):
+            x = S.search(K, enum_all=enum_all, task_depth=1, time_limit=min(self.remaining(), limit),
+                         sol_cap=SOL_CAP, cover=cover, anchors=anchors)
+            return x, (x["nodes"][d] / max(x["seconds"], 1e-6) if d >= 2 else 0.0)
+
+        a, rate_a = run(tab)
+        shallow = S.tables[S.main]
+        S.tables[S.main] = (deep, np.ascontiguousarray(deep.zh), np.ascontiguousarray(deep.zl))
+        b, rate_b = run(deep)
+        if a["status"] == b["status"] == "exhausted":
+            keep = b["seconds"] * DEEPEN_GAIN <= a["seconds"]
+        else:
+            keep = {a["status"], b["status"]} <= {"exhausted", "timeout"} and rate_a > 0 and \
+                rate_b >= DEEPEN_GAIN * rate_a
+        rec.update(sample_anchors=int(len(anchors)), limit_seconds=round(limit, 3), depth=d,
+                   shallow=[a["status"], round(a["seconds"], 3), int(a["nodes"][max(d, 0)])],
+                   deep=[b["status"], round(b["seconds"], 3), int(b["nodes"][max(d, 0)])],
+                   decision="deeper table" if keep else "kept")
+        self.checkpoint()
+        if keep:
+            self.free(tab)
+            return deep, True
+        S.tables[S.main] = shallow
+        self.free(deep)
+        return tab, False
 
     def free(self, tab):
         if getattr(tab, "handle", None):
@@ -238,6 +317,7 @@ class Pipeline:
         tab = self.table(p, k)
         try:
             S.add_table(tab, exact=True)
+            deepen = bool(self.cfg["deepen"]) and tab.k < k
             for K in range(start, kmax + 1):
                 # Supply task_depth explicitly to avoid retries that each get
                 # a fresh native time budget.  Retry with updated remaining time.
@@ -277,6 +357,9 @@ class Pipeline:
                 if r["best"] is not None:
                     break
                 result["complete"] = r["status"] == "exhausted"
+                if deepen and r["status"] == "exhausted" and K < kmax:
+                    tab, deepen = self.deepen(S, p, tab, K, r, info, enum_all)
+                    deepen = deepen and tab.k < k
             return result
         finally:
             self.free(tab)

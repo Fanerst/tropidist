@@ -1,0 +1,244 @@
+{
+ "instance": "bench/instances/cornucopia_252",
+ "variant": "full",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "k_asked": 3,
+   "k": 2,
+   "bytes": 9437184,
+   "entries": 331206,
+   "build_seconds": 0.004,
+   "seconds": 0.007,
+   "at": 2.592,
+   "deepened": false
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 56,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 36864,
+   "entries": 1579,
+   "build_seconds": 0.0,
+   "seconds": 0.0,
+   "at": 2.924,
+   "deepened": false
+  },
+  {
+   "stage": "window_t0_at_d_coll",
+   "cols": 315,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 1179648,
+   "entries": 49456,
+   "build_seconds": 0.001,
+   "seconds": 0.001,
+   "at": 2.942,
+   "deepened": false
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "K": 1,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    117,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "K": 2,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    117,
+    0,
+    0
+   ],
+   "lookups": 117,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 117
+  },
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "K": 3,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.012,
+   "nodes": [
+    0,
+    117,
+    0,
+    0,
+    0
+   ],
+   "lookups": 117,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 117
+  },
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "K": 4,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.309,
+   "nodes": [
+    0,
+    117,
+    4481,
+    0,
+    0,
+    0
+   ],
+   "lookups": 4481,
+   "cover_calls": 156,
+   "cover_pruned": 6,
+   "hits": 0,
+   "false_hits": 4481
+  },
+  {
+   "stage": "collapsed",
+   "cols": 819,
+   "K": 5,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.003,
+   "nodes": [
+    0,
+    117,
+    95,
+    7689,
+    0,
+    0,
+    0
+   ],
+   "lookups": 7689,
+   "cover_calls": 178,
+   "cover_pruned": 3,
+   "hits": 1,
+   "false_hits": 6
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 56,
+   "K": 5,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.0,
+   "nodes": [
+    0,
+    56,
+    16,
+    17,
+    0,
+    0,
+    0
+   ],
+   "lookups": 17,
+   "cover_calls": 38,
+   "cover_pruned": 20,
+   "hits": 0,
+   "false_hits": 6
+  },
+  {
+   "stage": "window_t0_at_d_coll",
+   "cols": 315,
+   "K": 5,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.0,
+   "nodes": [
+    0,
+    45,
+    220,
+    30,
+    0,
+    0,
+    0
+   ],
+   "lookups": 30,
+   "cover_calls": 214,
+   "cover_pruned": 80,
+   "hits": 1,
+   "false_hits": 1
+  }
+ ],
+ "status": "exact",
+ "seconds": 2.944,
+ "lower": 5,
+ "upper": 5,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 8568,
+    "cut_rank": 118,
+    "peak_bits": 118,
+    "work": null,
+    "queries": 130,
+    "estimate_seconds": 0.165,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   },
+   "collapsed": {
+    "columns": 819,
+    "cut_rank": 59,
+    "peak_bits": 59,
+    "work": null,
+    "queries": 130,
+    "estimate_seconds": 0.377,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search"
+   }
+  },
+  "table_k_reduced": [
+   [
+    819,
+    3,
+    2
+   ]
+  ]
+ },
+ "deepen": {}
+}

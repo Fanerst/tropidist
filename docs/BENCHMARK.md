@@ -1569,6 +1569,43 @@ weight-3 table of its 680-column time-collapsed problem speeds up the collapsed 
 The tables of this document are left as they are. Their records of our pipeline used the 1 GiB tables, and
 `dp=2` has no column in them.
 
+### A depth rule for the lookup tables (deepen=1)
+
+The pipeline now builds its lookup tables up front within 1 GiB for all live tables, the depth of every record
+above (`bench/adapters/ours_pipeline.py`, `results/table_depth/README.md`). It deepens a table only while it
+searches:
+- **Trigger:** an exhausted level took 4 times the predicted build time of the table one weight deeper.
+- **Trial:** that table is built, and both tables run the same level on 5% of the anchors, each for at most 5% of
+  that level's time.
+- **Switch:** the search continues with the deeper table if it visits 1.25 times as many nodes per second at the
+  deepest depth both expand alike.
+- The dense and sparse DP keep the memory budget of 7ef27aa.
+- The kernel now reads its clock every 1,024 node visits and completions, so the trial's time limits hold.
+
+Where the time went (`scripts/table_depth_probe.py`):
+- A deeper table costs about 40 ns per entry to build, 2-6 s for the 1.2-4.8 GB tables above.
+- Short searches only pay for that build. surface d = 21-25 even builds it twice, once in the head start before the
+  dense DP.
+- On color_d11 full the weight-2 table makes every level 3-17x slower. In a label-free table, every syndrome
+  match is a hit that has to be completed explicitly.
+- Long collapsed searches gain: mitten_200's level 9 takes 153 s instead of 1,168 s on 16 threads, and mitten_300's
+  level 8 takes 72 s instead of 181 s.
+
+The main suite's first tier with `dp=1`, under the rule and with `table_gb=1` (the behaviour before 7ef27aa), side by
+side (`results/bench_tables`):
+- **Of the 102 variants, none is solved by only one, and none is 1.5x and 1 s faster or slower.** The rule takes
+  1.02x the time.
+- color_d11 full is solved again (247 s).
+- 9 records hold a trial: mitten_200 and mitten_300 switch to the deeper table, and mitten_200 ends at the lower
+  bound 9 instead of 8.
+
+For the published records this means:
+- **Default and dp=1:** they stand. Under the rule, their tables up front are those they ran with, and they could
+  change only where a trial switches: in the main suite's first tier no outcome changes, and in the second tier
+  mitten_200 would take minutes instead of 1,038 s.
+- **dp=2:** its records above ran with the deep tables up front of 7ef27aa. Under the rule, its 19 affected
+  first-tier records would return to the times of 1 GiB tables, and color_d11 full would be solved.
+
 ## Reproduce
 
 ```sh

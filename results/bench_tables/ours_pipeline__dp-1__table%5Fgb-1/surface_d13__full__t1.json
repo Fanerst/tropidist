@@ -1,0 +1,136 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "surface_d13",
+  "variant": "full",
+  "rows": 2184,
+  "cols": 41909,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 13,
+  "upper_bound": 13,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16,
+    24
+  ],
+  "witness_ok": true,
+  "seconds": 0.537,
+  "trace": [
+    {
+      "t": 0.146,
+      "lb": 1
+    },
+    {
+      "t": 0.476,
+      "lb": 2
+    },
+    {
+      "t": 0.477,
+      "lb": 3
+    },
+    {
+      "t": 0.477,
+      "lb": 4
+    },
+    {
+      "t": 0.478,
+      "lb": 5
+    },
+    {
+      "t": 0.479,
+      "lb": 6
+    },
+    {
+      "t": 0.48,
+      "lb": 7
+    },
+    {
+      "t": 0.481,
+      "lb": 8
+    },
+    {
+      "t": 0.483,
+      "lb": 9
+    },
+    {
+      "t": 0.485,
+      "lb": 10
+    },
+    {
+      "t": 0.488,
+      "lb": 11
+    },
+    {
+      "t": 0.495,
+      "lb": 12
+    },
+    {
+      "t": 0.51,
+      "lb": 13
+    },
+    {
+      "t": 0.516,
+      "ub": 13
+    }
+  ],
+  "peak_rss_mb": 137.6,
+  "truth": 13,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 229, \"cut_rank\": 8, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.04, \"fits\": true, \"peak_bits\": 10, \"predicted_seconds\": 0.0, \"queries\": 1, \"work\": 35532}, \"main\": {\"columns\": 6085, \"cut_rank\": 91, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.023, \"fits\": false, \"peak_bits\": 91, \"predicted_seconds\": null, \"queries\": 1, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_reduction_exact\": true, \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 229, \"rows\": 84, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003197193145751953, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00026726722717285156, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00033926963806152344, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006487369537353516, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007863044738769531, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006685256958007812, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008375644683837891, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0010581016540527344, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0018088817596435547, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003319263458251953, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.006869316101074219, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.013936281204223633, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": 13, \"nsol_recorded\": 1, \"seconds\": 0.00029277801513671875, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 325, \"rows\": 1176, \"runs\": [{\"K\": 13, \"best\": 13, \"nsol_recorded\": 1, \"seconds\": 0.0007331371307373047, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/surface_d13",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      33
+    ],
+    "started_at": "2026-10-23T06:16:34.265844+00:00",
+    "ended_at": "2026-10-23T06:16:35.015430+00:00",
+    "wall_seconds": 0.69969,
+    "adapter_seconds": 0.537,
+    "trace_offset_seconds": 0.16269,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/surface_d13__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/surface_d13__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 140.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

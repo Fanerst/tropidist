@@ -284,12 +284,24 @@ typedef struct {
     int *task_buf; int64_t *ntask; int64_t task_cap;
     double deadline;
     volatile int *timed_out;
+    uint32_t ticks;              // node visits and completions of this thread, for the deadline check
 } Ctx;
 
 static double now_sec(void) {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return ts.tv_sec + 1e-9 * ts.tv_nsec;
+}
+
+// The deadline is read every 1024 node visits and completions of a thread.  Counted apart from nodes[], which the
+// leaf fast path raises by whole batches of children, and including the explicit completions of table hits, which
+// dominate on wide label-free problems.
+static inline int past_deadline(Ctx *c) {
+    if ((++c->ticks & 0x3FF) || c->deadline <= 0) return 0;
+    if (now_sec() <= c->deadline) return 0;
+    *c->timed_out = 1;
+    *c->stop = 1;
+    return 1;
 }
 
 static inline int popcnt_state(const State *st, int W) {
@@ -431,6 +443,7 @@ static void record(Ctx *c, int weight, const int *cols) {
 // siblings, so each B is produced once.  Returns the number of completions.
 static int64_t complete(Ctx *c, const State *st, int a, int R, int *cols, uint8_t *tmpforb, int na0) {
     const Prob *P = c->P;
+    if (*c->stop || past_deadline(c)) return 0;
     int pc = popcnt_state(st, P->W);
     if (pc == 0) {
         if (sol_nonzero(P, st, cols, a) != g_kernel_mode) { record(c, a, cols); return 1; }
@@ -578,11 +591,7 @@ static void dfs(Ctx *c, int a) {
     State *st = &c->stack[a];
     if (*c->stop) return;
     c->nodes[a]++;
-    if ((c->nodes[a] & 0xFFFF) == 0 && c->deadline > 0 && now_sec() > c->deadline) {
-        *c->timed_out = 1;
-        *c->stop = 1;
-        return;
-    }
+    if (past_deadline(c)) return;
     int pc = popcnt_state(st, P->W);
     if (pc == 0) {
         if (sol_nonzero(P, st, c->path, a) != g_kernel_mode) record(c, a, c->path);
