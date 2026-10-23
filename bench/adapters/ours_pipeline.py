@@ -19,7 +19,8 @@ dp=1 adds the dense Rank DP (cdist.auto) where its exactly computed cost is smal
 dp=2 is dp=1 plus the weight-truncated sparse Rank DP (cdist.auto.sparse_*, results/sparse_dp) on what the
 circuit stages leave: before the final sector search, with the certified lower bound l and the upper bound u of
 the lift and window stages, one meet-in-the-middle sweep at threshold u - 1 decides (a lighter solution, with its
-witness, or the lower bound u; without u, sweeps at l, l + 1, ...).  Its time is predicted from probe sweeps; the
+witness, or the lower bound u; without u, sweeps at l, l + 1, ...).  Its time is predicted from probe sweeps
+(cdist.auto.sparse_estimate: weight 2, and weight 3 where that is cheap next to the predicted sweep); the
 sector search runs first for that time (a race: each method gets the time the DP needs), then the sparse DP, if it
 fits in the table budget and the remaining time; dp_head >= 0 sets that head start in seconds instead (0: the DP
 first).  Code instances run as with dp=1: on them the search or the dense DP is faster (results/sparse_dp).
@@ -574,11 +575,12 @@ class Pipeline:
         except ValueError as exc:                     # more row slots than a state holds
             info["decision"] = "search (%s)" % exc
             return search()
-        est = self.auto.sparse_estimate(p, K, order, trellises=trs)
         budget = max(0, TABLE_BUDGET - self.table_bytes)
+        est = self.auto.sparse_estimate(p, K, order, trellises=trs, max_bytes=budget,
+                                        max_seconds=self.remaining() if self.deadline is not None else None)
         info.update({k: (round(v, 3) if isinstance(v, float) else v) for k, v in est.items()
                      if k in ("fits", "reason", "slots", "predicted_seconds", "predicted_work", "predicted_bytes",
-                              "probe_seconds", "estimate_seconds", "schedule_runs")})
+                              "probe_seconds", "probe_weights", "estimate_seconds", "schedule_runs")})
         if not est["fits"] or est["predicted_bytes"] > budget or est["predicted_seconds"] > self.remaining():
             info["decision"] = "search (the sparse DP %s)" % (
                 est.get("reason") if not est["fits"] else
@@ -603,7 +605,8 @@ class Pipeline:
                 return
             K = upper - 1 if upper is not None else lower
             if K != schedK:                                    # deepening without an upper bound
-                est = self.auto.sparse_estimate(p, K, order, trellises=trs)
+                est = self.auto.sparse_estimate(p, K, order, trellises=trs, max_bytes=budget,
+                                                max_seconds=self.remaining() if self.deadline is not None else None)
                 if not est["fits"] or est["predicted_seconds"] > self.remaining():
                     info["stopped"] = "threshold %d would not finish in time; the search continues" % K
                     return search()

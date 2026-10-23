@@ -188,6 +188,13 @@ def dp_witness(p, order, obs, max_bytes=1 << 30):
 SPARSE_SECONDS_PER_STATE = 1.0e-8
 SPARSE_SECONDS_PER_STEP = 2.0e-5
 SPARSE_MAX_SLOTS = 56                # row slots of the C tables
+# The probe measures the states of weight <= 2 in both directions, and those of weight 3 in a direction whose
+# weight-3 states (estimated from weights 1 and 2, 1.4-4x high on the benchmark circuits) cost at most this share
+# of the sweep predicted from weight 2, and only when that prediction is within SPARSE_PROBE_SLACK of the caller's
+# limits.  Measuring weight 3 lowers the prediction 1.2-4x on the superdense circuits; on star_42 it cost 10.7 s
+# against a 0.7 s search and changed the prediction by 3% (results/sparse_dp).
+SPARSE_PROBE_SHARE = 0.25
+SPARSE_PROBE_SLACK = 10.0
 
 
 def sparse_trellises(p, order):
@@ -197,13 +204,16 @@ def sparse_trellises(p, order):
     return [sparse_dp.Trellis.for_query(p, i, order) for i in range(p.nobs)]
 
 
-def sparse_estimate(p, K, order, trellises=None, probe=3):
+def sparse_estimate(p, K, order, trellises=None, probe=3, max_seconds=None, max_bytes=None):
     """Predicted cost of one meet-in-the-middle sweep at threshold K on every observable: the split schedule and
-    the work come from probe sweeps (weights <= probe) of the first observable, whose trellis differs from the
-    others only in the target row, and are scaled by the number of observables.  On circuits the prediction is
-    within 0.8-1.0x of the work done; on codes it can be 10x low (sparse_dp.choose_schedule).  fits=False if a
-    trellis needs more row slots than the C tables hold.  Memory: the checkpoints, one recomputed segment of
-    tables and the step buffers, 8 bytes per state, from the predicted table at every cut."""
+    the work come from probe sweeps of the first observable, whose trellis differs from the others only in the
+    target row, and are scaled by the number of observables.  The probe keeps weights <= 2, and <= `probe` in a
+    direction where that is cheap next to the predicted sweep (SPARSE_PROBE_SHARE), unless the prediction from
+    weight 2 exceeds max_seconds or max_bytes more than SPARSE_PROBE_SLACK times.  On circuits the prediction is
+    within 0.8-1.0x of the work done with weight 3 measured, and 1-2.5x high from weight 2; on codes it can be 10x
+    low (sparse_dp.choose_schedule).  fits=False if a trellis needs more row slots than the C tables hold.
+    Memory: the checkpoints, one recomputed segment of tables and the step buffers, 8 bytes per state, from the
+    predicted table at every cut."""
     from . import sparse_dp
     t0 = time.time()
     out = {"K": K, "fits": False}
@@ -223,15 +233,23 @@ def sparse_estimate(p, K, order, trellises=None, probe=3):
         out.update(reason="the trellis needs %d row slots, the C tables hold %d" % (slots, SPARSE_MAX_SLOTS),
                    estimate_seconds=time.time() - t0)
         return out
-    sched, info = sparse_dp.choose_schedule(feas[0], K, "c", probe=probe)
     n = feas[0].N
-    work = info["predicted_work"] * len(feas)
     steps = 3 * n * len(feas)
-    mem = info["predicted_bytes"]                     # the queries run one after the other
-    out.update(fits=True, schedule=sched, schedule_runs=info["schedule"], predicted_work=work,
-               predicted_seconds=work * SPARSE_SECONDS_PER_STATE + steps * SPARSE_SECONDS_PER_STEP,
-               predicted_bytes=mem, predicted_peak_states=info["predicted_peak_states"],
-               probe_seconds=info["probe_seconds"], estimate_seconds=time.time() - t0)
+    seconds = lambda info: (info["predicted_work"] * len(feas) * SPARSE_SECONDS_PER_STATE
+                            + steps * SPARSE_SECONDS_PER_STEP)
+    sched, info = sparse_dp.choose_schedule(feas[0], K, "c", probe=min(2, probe))
+    probe_seconds = info["probe_seconds"]
+    if probe > 2 and (max_seconds is None or seconds(info) <= SPARSE_PROBE_SLACK * max_seconds) \
+            and (max_bytes is None or info["predicted_bytes"] <= SPARSE_PROBE_SLACK * max_bytes):
+        budget = min(2e9, SPARSE_PROBE_SHARE * info["predicted_work"] * len(feas))
+        sched, info = sparse_dp.choose_schedule(feas[0], K, "c", probe=probe, budget=budget)
+        probe_seconds += info["probe_seconds"]
+    out.update(fits=True, schedule=sched, schedule_runs=info["schedule"],
+               predicted_work=info["predicted_work"] * len(feas), predicted_seconds=seconds(info),
+               predicted_bytes=info["predicted_bytes"],                 # the queries run one after the other
+               predicted_peak_states=info["predicted_peak_states"], probe_seconds=probe_seconds,
+               probe_weights=[len(info["forward_profile"]) - 1, len(info["backward_profile"]) - 1],
+               estimate_seconds=time.time() - t0)
     return out
 
 

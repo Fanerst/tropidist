@@ -875,21 +875,26 @@ def cut_profiles(tr, direction, cap, backend="c"):
 
 
 def probe_profiles(tr, backend="c", probe=3, budget=2e9):
-    """Per-cut state counts of each weight in both directions, measured up to weight `probe` (or 2 when weight 3
-    would cost more than `budget` states): {+1: array, -1: array}.  They do not depend on the threshold, so they
-    are kept on the trellis; returns (profiles, seconds spent now)."""
-    key = ("profiles", probe, budget, backend)
-    if key in tr._bd:
-        return tr._bd[key], 0.0
+    """Per-cut state counts of each weight in both directions, measured up to weight `probe` (or 2 in a direction
+    whose weight-3 states, estimated from its weights 1 and 2, exceed `budget`: a number of states, or one per
+    direction as {+1: ..., -1: ...}): {+1: array, -1: array}.  They do not depend on the threshold, so they are
+    kept on the trellis; returns (profiles, seconds spent now)."""
     t0 = time.time()
+
+    def measured(direction, cap):
+        key = ("profile", direction, cap, backend)
+        if key not in tr._bd:
+            tr._bd[key] = cut_profiles(tr, direction, cap, backend)
+        return tr._bd[key]
+
     prof = {}
     for direction in (+1, -1):
-        p = cut_profiles(tr, direction, min(2, probe), backend)
+        b = budget[direction] if isinstance(budget, dict) else budget
+        p = measured(direction, min(2, probe))
         tot = p.sum(axis=0)
-        if probe > 2 and tot[1] > 0 and tot[2] * tot[2] / tot[1] < budget:
-            p = cut_profiles(tr, direction, probe, backend)
+        if probe > 2 and tot[1] > 0 and tot[2] * tot[2] / tot[1] < b:
+            p = measured(direction, probe)
         prof[direction] = p
-    tr._bd[key] = prof
     return prof, time.time() - t0
 
 

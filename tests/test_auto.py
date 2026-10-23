@@ -82,7 +82,9 @@ def test_sparse_front_end():
             trs = auto.sparse_trellises(p, order)
             est = auto.sparse_estimate(p, d - 1, order, trellises=trs)
             assert est["fits"] and est["predicted_work"] > 0 and est["predicted_seconds"] > 0
-            assert len(est["schedule"]) == trs[0].N + 1
+            assert len(est["schedule"]) == trs[0].N + 1 and set(est["probe_weights"]) <= {2, 3}
+            # far beyond the caller's limits at weight 2: no probe at weight 3
+            assert auto.sparse_estimate(p, d - 1, order, trellises=trs, max_seconds=1e-9)["probe_weights"] == [2, 2]
             assert auto.sparse_distance(p, d - 1, order, trellises=trs, schedule=est["schedule"]) is None
             for lower in (0, d):
                 value, cols, obs = auto.sparse_distance(p, d + 1, order, trellises=trs, lower=lower)
