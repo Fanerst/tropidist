@@ -40,8 +40,8 @@ sys.path[:0] = [ROOT, os.path.join(ROOT, "papers"), os.path.join(ROOT, "scripts"
 DEFAULT_CONFIGS = ("sparse:mitm:c:0:schedule,sparse:mitm:c:0:auto,sparse:mitm:c:1:auto,sparse:forward:c:1,"
                    "sparse:forward:c:0,dense,search")
 WJH_FOLDERS = {"surface": "01_surfacecodes", "midout": "03_colorcodes_midout", "superdense": "04_colorcodes_superdense"}
-# distances established by the benchmark (results/bench_wjh): surface and superdense d (superdense d11 open:
-# 8..11), midout (d + 1) / 2
+# distances established by the benchmark (results/bench_wjh): surface and superdense d, midout (d + 1) / 2;
+# superdense d11 was open there (10..11) and is tested at its upper bound 11 (it is 11: results/sparse_dp)
 WJH_KNOWN = {"surface": lambda d: d, "superdense": lambda d: None if d == 11 else d, "midout": lambda d: (d + 1) // 2}
 WJH_UPPER = {("superdense", 11): 11}
 BB_DISTANCE = {"bb72": 6, "bb90": 10, "bb108": 10, "gross": 12}

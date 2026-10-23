@@ -208,7 +208,9 @@ has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). All but on
 (the Tanner code of n = 252, 40 minutes on 32 threads) were obtained within the paper's own limits;
 the [[288,12,18]] circuit took 2.3 hours on one thread. For the 31 instances still open, the
 eight-hour runs certify lower bounds: 21 to 28 for the codes, 10 to 17 for the circuits (10 for the
-superdense colour-code circuit of d = 11, whose best value is 11). Its seven bivariate bicycle
+superdense colour-code circuit of d = 11, whose best value is 11). That circuit was settled later,
+outside these limits: the Rank DP truncated at a weight threshold shows that its distance is 11, in
+13 minutes on one thread (results/sparse_dp/README.md). Its seven bivariate bicycle
 circuits turn out to be the files of this project's first study, five of which are in the benchmark
 of section 4.1. Run here with first-tier limits, Gurobi solves 55 of the 126 instances (58 on the
 sparse basis of the codes) and the current dist-m4ri 76 (its September version 68), against 70 and 71 in

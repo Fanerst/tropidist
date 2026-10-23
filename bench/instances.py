@@ -141,6 +141,10 @@ WJH_CODES = "papers/downloads/codedistance_codes.json"
 WJH_CIRCUITS = (("surface", "01_surfacecodes"), ("midout", "03_colorcodes_midout"),
                 ("superdense", "04_colorcodes_superdense"), ("bb", "05_bivariatebicyclecodes"))
 WJH_CODE_FAMILIES = (("bb", 20), ("lp", 19), ("qt", 22), ("hsc", 21), ("hcc", 21))
+# Distances of WJH circuits established outside the benchmark runs: result files with certified bounds of the
+# sector problem (read by _truth like every truth file).  wjh_superdense_d11: the weight-truncated sparse Rank DP,
+# results/sparse_dp/README.md.
+WJH_TRUTH = {"wjh_superdense_d11": "results/sparse_dp/wjh_superdense_d11.json"}
 
 
 def _wjh_fields(filename):
@@ -160,7 +164,8 @@ def _wjh_register():
             else:
                 name = "wjh_%s_d%s" % (family, f["d"])
             _add(name, "circuit", "wjh_" + family + "_circuit", "wjh_circuit", path.name,
-                 circuit_file=str(path.relative_to(ROOT)), sector_high=True, registry=WJH)
+                 truth_file=WJH_TRUTH.get(name), circuit_file=str(path.relative_to(ROOT)), sector_high=True,
+                 registry=WJH)
     codes = []
     if (ROOT / WJH_CODES).is_file():
         codes = _json(WJH_CODES)["codes"]
@@ -189,6 +194,8 @@ def _prepare(spec):
             n, k = (3 * d * d + 1) // 4, 1
         spec.update(n=n, k=k, basis="Z", rounds=int(f["r"]), description="arXiv:2603.22532 circuit " + key,
                     truth={"sector": (None, "unknown", None), "collapsed": (None, "unknown", None)})
+        if path:
+            spec["truth"]["sector"] = _truth(_json(path), path)
         return
     if typ == "wjh_code":
         spec.update(description="arXiv:2603.22532 code %s %d (Z distance)" % key,

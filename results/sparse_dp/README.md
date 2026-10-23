@@ -15,9 +15,14 @@ superdense color-code circuits of arXiv:2603.22532:
 | d9 | 10 s | cannot run (cut rank 39) | 378 s |
 | d11 | 13 min: d = 11 | cannot run (cut rank 55) | ≥ 8 after 600 s |
 
-It settles the open instance. **The superdense color-code circuit of distance 11 has circuit distance 11**
-(memory-basis sector, the benchmark's quantity). Before, the bounds were 8..11 for every method at 600 s, and
-10..11 after an 8 h run of our pipeline and 32-thread runs.
+It settles the open instance. **The superdense color-code circuit of distance 11 has circuit distance 11.**
+This holds for its memory-basis sector (the benchmark's quantity) and for the full detector error model, of
+which the sector is an exact reduction. Before, the bounds were 8..11 for every method at 600 s, and 10..11
+after an 8 h run of our pipeline and 32-thread runs. The value is now the instance's recorded distance:
+- certificate `wjh_superdense_d11.json`;
+- `bench/instances.py` WJH_TRUTH and the instance's `meta.json`;
+- the WJH table of `docs/BENCHMARK.md`, marked and not counted there, since it comes from outside the
+  benchmark protocol.
 
 Elsewhere the old division stays:
 - **Narrow codes** go to the dense DP. On color codes the sparse DP is 5–9× slower, but 100× or more faster than
@@ -231,8 +236,12 @@ The runs (last table above, one thread on 5090):
     (zero syndrome, observable flipped, 11 distinct columns):
     `[0, 2, 8, 30, 43, 82, 104, 695, 752, 889, 944]` and `[0, 2, 8, 30, 43, 83, 96, 153, 175, 806, 882]`.
   - The pipeline's weight-11 witness (`results/bench_wjh_8h/ours_pipeline`) is a third one.
+  - The first witness, lifted column by column to the full detector error model (990 detectors, 41,044
+    columns), checks there too: `[0, 5, 16, 89, 137, 271, 319, 523, 604, 4266, 4977]`. The sector reduction
+    is exact, which the export checks.
 
-**Hence the distance is 11.** With the schedule the whole certificate takes 13 min and 15 GB on one thread.
+**Hence the distance is 11**, of the sector problem and of the full circuit. With the schedule the whole
+certificate takes 13 min and 15 GB on one thread.
 The K = 10 runs are complete sweeps of an exact procedure with different splits, hence different tables, so
 they guard each other against errors in the split logic.
 
@@ -330,5 +339,7 @@ Records in this folder (the summary takes the later file where a configuration a
   (the final code; it supersedes the first pass's entries for these configurations).
 - `d11`: the first pass on d11, with a 1e8-state budget.
 - `d11_K10_a5`, `d11_K10_schedule`, `d11_K11_a6`, `d11_K11_schedule`: the dedicated d11 runs.
+- `wjh_superdense_d11.json`: the certificate (certified bounds 11..11, the runs, the checked witnesses, the
+  hashes of the sector matrices); it is the instance's truth file.
 - `surface11`: numpy tables, because that trellis has 62 slots.
 - `logs/`: the dedicated d11 runs and the first d11 attempts.

@@ -1102,6 +1102,7 @@ the same mechanisms as the plain circuits, only other probabilities.
 
 - Our exact values agree with all 73 values certified by their exact methods.
 - Below their best known value: wjh_bb288_circuit: 16 (their best 24)
+- ‡ Distance established outside these runs, and not counted in the tables: wjh_superdense_d11 = 11 (weight-truncated sparse Rank DP, results/sparse_dp/wjh_superdense_d11.json).
 
 <details><summary>Surface-code circuits (5 instances)</summary>
 
@@ -1135,7 +1136,7 @@ the same mechanisms as the plain circuits, only other probabilities.
 | wjh_superdense_d5 | 19 | 1 | 414 | 5 | 5 | 0.2 s |  |  | 1.1 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
 | wjh_superdense_d7 | 37 | 1 | 1248 | 7 | 7 | 2.0 s |  |  | 6..7 |  | 24.1 s | 0.5 s |  | m4riCC, 46.2 s |
 | wjh_superdense_d9 | 61 | 1 | 2788 | 9 | 9 | 391 s |  |  | 5..9 |  | >=7 | 374 s |  | Magma, 28764 s |
-| wjh_superdense_d11 | 91 | 1 | 5250 | 10..11 | 11 | 8..11 | 10..11 | 10..11 | skip |  | >=7 | >=8 | 10..11 | none |
+| wjh_superdense_d11 | 91 | 1 | 5250 | 11‡ | 11 | 8..11 | 10..11 | 10..11 | skip |  | >=7 | >=8 | 10..11 | none |
 | wjh_superdense_mpp_d15 | 169 | 1 | 169 | 15 | 15 | 0.3 s |  |  | 45.1 s |  | 6.4 s | 0.6 s |  | m4riCC, 6.4 s |
 
 </details>

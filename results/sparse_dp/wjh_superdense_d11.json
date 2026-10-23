@@ -1,0 +1,160 @@
+{
+ "instance": "wjh_superdense_d11",
+ "variant": "sector",
+ "certified_lower_bound": 11,
+ "certified_upper_bound": 11,
+ "distance": 11,
+ "method": "weight-truncated sparse Rank DP, meet in the middle (cdist/sparse_dp.py, C tables, no lookahead), on the column order of the sector problem (cut rank 55)",
+ "lower_bound": {
+  "claim": "no undetected logical fault set of weight <= 10",
+  "runs": [
+   {
+    "record": "results/sparse_dp/d11_K10_a5.json",
+    "K": 10,
+    "split": 5,
+    "value": null,
+    "seconds": 807.7,
+    "peak_states": 122947097,
+    "maxrss_gb": 56.048
+   },
+   {
+    "record": "results/sparse_dp/d11_K10_schedule.json",
+    "K": 10,
+    "split": "10@0,7@3,6@451,5@694,1@5250",
+    "value": null,
+    "seconds": 670.4,
+    "peak_states": 27055874,
+    "maxrss_gb": 11.513
+   }
+  ],
+  "note": "two complete sweeps at threshold 10 with different weight splits (uniform a = 5 and the schedule 7, 6, 5); each returns the least weight of a solution if it is <= 10"
+ },
+ "upper_bound": {
+  "claim": "fault sets of weight 11 with zero syndrome that flip the observable",
+  "witnesses": [
+   {
+    "columns": [
+     0,
+     2,
+     8,
+     30,
+     43,
+     83,
+     96,
+     153,
+     175,
+     806,
+     882
+    ],
+    "record": "results/sparse_dp/d11_K11_schedule.json",
+    "K": 11,
+    "split": "11@0,8@3,7@451,6@694,2@5250",
+    "seconds": 101.7,
+    "check": {
+     "ok": true,
+     "weight": 11,
+     "syndrome_zero": true,
+     "logical_nonzero": true
+    }
+   },
+   {
+    "columns": [
+     0,
+     2,
+     8,
+     30,
+     43,
+     82,
+     104,
+     695,
+     752,
+     889,
+     944
+    ],
+    "record": "results/sparse_dp/d11_K11_a6.json",
+    "K": 11,
+    "split": 6,
+    "seconds": 350.6,
+    "check": {
+     "ok": true,
+     "weight": 11,
+     "syndrome_zero": true,
+     "logical_nonzero": true
+    }
+   },
+   {
+    "columns": [
+     469,
+     470,
+     511,
+     549,
+     628,
+     710,
+     827,
+     902,
+     974,
+     1007,
+     1027
+    ],
+    "record": "results/bench_wjh_8h/ours_pipeline/wjh_superdense_d11__sector__t1.json",
+    "check": {
+     "ok": true,
+     "weight": 11,
+     "syndrome_zero": true,
+     "logical_nonzero": true
+    }
+   }
+  ],
+  "full_dem_witness": {
+   "columns": [
+    0,
+    5,
+    16,
+    89,
+    137,
+    271,
+    319,
+    523,
+    604,
+    4266,
+    4977
+   ],
+   "from": "results/sparse_dp/d11_K11_schedule.json",
+   "check": {
+    "ok": true,
+    "weight": 11,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "note": "each sector column of the first witness lifted to the full-DEM column with the same detectors and no detector of the other type (the sector reduction is exact, checked by the export), checked on all 990 detectors"
+  }
+ },
+ "problem": {
+  "rows": 540,
+  "cols": 5250,
+  "obs": 1,
+  "sha256": {
+   "sector.H.mtx": "64ae7e3e7599d7314afd86786e34280ac6de48338722de7418eda48150504514",
+   "sector.L.mtx": "73fb427134403ccbd34db6f031f0020101839c31664e12f7ae2f97df36aa8f65"
+  },
+  "circuit": "papers/downloads/codedistance/examples/stim_circuits/04_colorcodes_superdense/05_r=11,d=11,p=0.0005,noise=uniform,c=superdense_color_code_Z,q=181,gates=all.stim"
+ },
+ "protocol": "a dedicated computation, outside the benchmark protocols of docs/BENCHMARK.md: one thread on the server 5090, 670 s for the scheduled sweep at K = 10 and 102 s for the witness at K = 11",
+ "code": {
+  "commits": [
+   "d84d70e",
+   "93cc46a",
+   "c5367b3",
+   "75d56de"
+  ],
+  "scripts": [
+   "scripts/sparse_dp_query.py",
+   "scripts/server/sparse_dp_eval.sh"
+  ]
+ },
+ "previous_bounds": {
+  "tier 1 (600 s, every method)": "8..11",
+  "ours, 1 thread, 8 h": "10..11",
+  "ours, 32 threads, 1 h": "10..11"
+ }
+}
