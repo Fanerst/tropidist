@@ -51,6 +51,24 @@ def test_many_observables_and_collapsed_circuit():
     assert auto.dp_distance(coll, est["order"])[0] == search_distance(coll)
 
 
+def test_estimate_memory_is_the_largest_table():
+    # one observable: the estimate is the plan's own largest table, so the DP runs in exactly that budget
+    hx, hz, n = dvs.color_code(9)
+    p = stabcode.css_distance_problem(hx, hz, n, "X")
+    est = auto.estimate(p)
+    assert p.nobs == 1 and est["fits"]
+    assert auto.dp_distance(p, est["order"], max_table_bytes=est["table_bytes"])[0] == 9
+    # several observables: one bit more, since the other observables' plans may need it
+    sys.path.insert(0, os.path.join(ROOT, "bench"))
+    import instances
+    spec = instances.INSTANCES["code_bb72"]
+    hx, hz, n, _ = instances._code(spec)
+    q = stabcode.css_distance_problem(hx, hz, n, spec["basis"])
+    est_q = auto.estimate(q)
+    plan = next(plan for _, plan in auto._plans(q, est_q["order"]) if plan.feasible)
+    assert est_q["peak_bits"] == plan.peak_bits + 1
+
+
 def test_estimate_stops_when_no_table_fits():
     hx, hz, n = dvs.rotated_surface(15)                       # cut rank 8: any table needs at least 2^8 bytes
     p = stabcode.css_distance_problem(hx, hz, n, "X")

@@ -92,7 +92,8 @@ def estimate(p, threads=1, seeds=2, time_limit=None, max_table_bytes=None):
     peak, work = 0, None
     for _, plan in _plans(p, order):
         if plan.feasible:
-            peak, work = plan.peak_bits + 1, plan.work() * p.nobs      # +1: a margin for the other target rows
+            # +1: a margin for the other target rows; a single observable has only this plan
+            peak, work = plan.peak_bits + (1 if p.nobs > 1 else 0), plan.work() * p.nobs
             break
     if work is None:
         work = 0
