@@ -4,9 +4,10 @@ For every instance variant with records of both configurations: status and time 
 DP front end decided for the main problem and for the time-collapsed problem (from the record's notes), and, when
 the second configuration has it (dp=2), what the sparse Rank DP decided on the sector's gap.
 
-usage: python bench/compare_dp.py [results/bench] [--all] [--a CONFIG] [--b CONFIG]
+usage: python bench/compare_dp.py [results/bench] [--all] [--a CONFIG] [--b CONFIG] [--threads N]
        --all also lists rows where nothing changed; --a, --b: the two configuration folders (default ours_pipeline
-       and ours_pipeline__dp-1), e.g. --a ours_pipeline__dp-1 --b ours_pipeline__dp-2
+       and ours_pipeline__dp-1), e.g. --a ours_pipeline__dp-1 --b ours_pipeline__dp-2; --threads: the records of
+       that thread count (32 for the second tier in results/bench_tierB)
 """
 import json
 import sys
@@ -15,9 +16,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def load(folder):
+def load(folder, threads=1):
     out = {}
-    for f in sorted(Path(folder).glob("*__t1.json")):
+    for f in sorted(Path(folder).glob("*__t%d.json" % threads)):
         r = json.loads(f.read_text())
         out[f.name] = r
     return out
@@ -62,7 +63,8 @@ def main(argv):
     show_all = "--all" in argv
     opt = lambda name, default: argv[argv.index(name) + 1] if name in argv else default
     names = opt("--a", "ours_pipeline"), opt("--b", "ours_pipeline__dp-1")
-    a, b = load(base / names[0]), load(base / names[1])
+    threads = int(opt("--threads", "1"))
+    a, b = load(base / names[0], threads), load(base / names[1], threads)
     sparse = any(sparse_decision(r) is not None for r in b.values())
     labels = ("default", "+ DP") if names == ("ours_pipeline", "ours_pipeline__dp-1") else names
     print("| instance variant | %s | %s | ratio | DP on main problem | DP on collapsed problem |%s" % (
@@ -93,7 +95,7 @@ def main(argv):
                 cells = (fmt(sa, ta, ra), fmt(sb, tb, rb))
             else:
                 cells = (fmt(sa, ta), fmt(sb, tb))
-            print("| %s | %s | %s | %s | %s | %s |%s" % (name.replace("__t1.json", "").replace("__", " "), cells[0],
+            print("| %s | %s | %s | %s | %s | %s |%s" % (name.replace("__t%d.json" % threads, "").replace("__", " "), cells[0],
                   cells[1], "" if ratio is None else "%.2g" % ratio, main_d, coll_d,
                   " %s |" % (sparse_decision(rb) or "") if sparse else ""))
     print()

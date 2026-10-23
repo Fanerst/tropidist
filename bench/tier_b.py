@@ -34,6 +34,11 @@
   wjh2       our pipeline at 32 threads / 90 GB / 3600 s on what it did not solve; results/bench_wjh_tierB.
              Gurobi and dist-m4ri (CC+RW) can be added with WJH2_METHODS. Gurobi was not run here (the paper
              ran it for 8 h with one thread on every instance); dist-m4ri 0.14.7 got this tier in phase dm4ri
+  dp2        our pipeline with config dp=2 (the sparse Rank DP, results/sparse_dp), first tier: the main suite (sector
+             and raw problems), then the instances of arXiv:2603.22532 (circuits: sector problem; codes as they are)
+  dp2b       its second tier (32 threads / 90 GB / 3600 s) on what its first tier left: the main suite on cores 0-95
+             (results/bench_tierB) and the instances of arXiv:2603.22532 on 96-191 (results/bench_wjh_tierB), in
+             parallel
 
 In b32 and b1 a method runs only on the instances it did not solve exactly in the first tier
 (sector problem of a circuit, the code itself on the code track), in order of size within a
@@ -157,7 +162,7 @@ def frontier(methods, tier_a, out, threads, mem, jobs, name, logs, dry, raw=Fals
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("phases", nargs="+", choices=["fix", "collapsed", "b32", "b1", "ablation", "stimsat", "b1s", "gurobi", "wjh1", "wjh2",
-                                         "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2"])
+                                         "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b"])
     ap.add_argument("--tier-a", default=str(ROOT / "results" / "bench"))
     ap.add_argument("--out", default=str(ROOT / "results" / "bench_tierB"))
     ap.add_argument("--dry-run", action="store_true")
@@ -299,6 +304,31 @@ def main():
             harness(["--methods", ",".join(ABLATION), "--instances", "@" + str(abl / "instances.txt"), "--variants", "sector",
                      "--threads", "1", "--time-limit", "600", "--mem-gb", "16", "--total-mem-gb", "288", "--jobs", "18",
                      "--out", str(abl), "--give-up", "2"], logs / "ablation.log", a.dry_run)
+        elif phase == "dp2":
+            # the flags of the first tier of dp=1 (scripts/server/dp_pass.sh), on the physical cores of socket 1
+            spec = "ours_pipeline:dp=2"
+            base = ["--threads", "1", "--time-limit", "600", "--mem-gb", "16", "--total-mem-gb", "288", "--jobs", "18",
+                    "--give-up", "2"] + REDO
+            harness(["--methods", spec, "--instances", "all", "--variants", "sector,full", "--out", str(tier_a)] + base,
+                    logs / "dp2_tier1.log", a.dry_run, "96-191")
+            wjh = ROOT / "results" / "bench_wjh"
+            for track, variant in (("circuit", "sector"), ("code", "full")):
+                harness(["--methods", spec, "--instances", "@" + str(wjh / ("instances_%s.txt" % track)), "--variants",
+                         variant, "--instance-dir", str(WJH_DIR), "--out", str(wjh)] + base, logs / "dp2_wjh_tier1.log",
+                        a.dry_run, "96-191")
+        elif phase == "dp2b":
+            import threading
+            spec = "ours_pipeline:dp=2"
+            jobs_ = [threading.Thread(target=frontier, args=([spec], tier_a, out, 32, 90, 3, "b32_dp2", logs, a.dry_run),
+                                      kwargs={"cpus": "0-95"}),
+                     threading.Thread(target=frontier, args=([spec], ROOT / "results" / "bench_wjh",
+                                                             ROOT / "results" / "bench_wjh_tierB", 32, 90, 2, "wjh2_dp2",
+                                                             logs, a.dry_run),
+                                      kwargs={"directory": WJH_DIR, "cpus": "96-191"})]
+            for j in jobs_:
+                j.start()
+            for j in jobs_:
+                j.join()
     print(time.strftime("%H:%M:%S"), "all phases done", flush=True)
 
 

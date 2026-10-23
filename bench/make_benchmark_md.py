@@ -39,15 +39,16 @@ def stim_set(m):
     return m.get("family") in STIM
 
 
-def overall_rows():
+def overall_rows(config="ours"):
     """One row per instance on its main problem (sector for CSS circuits, the code itself, the raw
     model for circuits without sectors): our best time and the best other exact method, per tier.  The superseded
-    dist-m4ri 0.9.0 is left out (it solves no instance that 0.14.7 does not).
+    dist-m4ri 0.9.0 is left out (it solves no instance that 0.14.7 does not).  config: the configuration of ours
+    counted (one configuration, not the better of two; the tables use "ours").
     Rows: (is_code, family, columns, name, n, distance, ours t1, ours t2, (t, method) t1, (t, method) t2)."""
     import json
     a, b32, b1 = T.load(A, 1), T.load(B, 32), T.load(B, 1)
-    ours = ("ours",)                       # one configuration: the pipeline, not the better of two
-    mine = ("ours", "ours, plain", "ours + DP")
+    ours = (config,)
+    mine = ("ours", "ours, plain", "ours + DP", "ours + sparse DP")
 
     def ex(recs, method, inst, variant):
         r = recs.get((method, inst, variant))
@@ -63,7 +64,7 @@ def overall_rows():
         comp = sorted(c for c in {k[0] for recs in (a, b32, b1) for k in recs if k[1] == name and k[2] == variant}
                       - set(mine) - set(T.HEURISTIC) if not OLD_DM4RI(c))
         oa = min((t for t in (ex(a, o, name, variant) for o in ours) if t is not None), default=None)
-        ob = ex(b32, "ours", name, variant)
+        ob = ex(b32, config, name, variant)
         ca = min(((t, c) for c in comp for t in [ex(a, c, name, variant)] if t is not None), default=None)
         cb = min(((t, c + (", 32 threads" if recs is b32 else ", 1 thread")) for recs in (b32, b1) for c in comp
                   for t in [ex(recs, c, name, variant)] if t is not None), default=None)
