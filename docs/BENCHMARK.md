@@ -1525,10 +1525,19 @@ First tier, against `dp=1`:
   - the sparse DP never sweeps there. Either the earlier stages settle the sector or use up the time, or the
     sector is too wide for the sparse tables, or the search finishes within its head start, or the sweep would
     not fit in the table budget;
-  - its probe costs about 0.3 s on star_42, routing_54 and walkingcat_54, and 2 s on sdbb_64 (1.45x);
+  - its probe costs 0.3-0.7 s on star_42, routing_54 and walkingcat_54, and 2 s on sdbb_64 (1.45x);
   - the records also differ from the dp=1 pass by the table budget fix below, which came between the two passes.
 
-### The table budget fix makes the search slower where its tables get deeper
+Second tier (32 threads, 90 GB, 3600 s), against the default configuration:
+
+- **The main suite** (`results/bench/dp2_vs_dp1.md`):
+  - the sparse DP never sweeps there either;
+  - solved: 58 instances against the default's 59. The difference is color_d11, lost in the first tier to the
+    deeper tables; a circuit without a sector problem gets no second tier;
+  - mitten_200 takes 144 s instead of 1,038 s, from the deeper table of its time-collapsed problem;
+  - the other second-tier runs agree with the default's within 15%.
+
+### The table budget fix: deeper lookup tables make most of these searches slower
 
 Since 7ef27aa (22 October, 11:12 UTC) the pipeline's worker builds its lookup tables as deep as half the memory
 limit allows. Before, they were silently held to 1 GiB. **The records of the default configuration and of
@@ -1545,6 +1554,10 @@ shows that the deeper tables make the search slower, for `dp=1` and `dp=2` alike
 - the sector problems of cornucopia_252 and of surface d = 21-25 take 2.2-3x as long, their full problems
   1.3-2.4x;
 - w8bb_144_16 gains nothing, and bb288_r18, mitten and routing_200_24 are not settled either way.
+
+The deeper tables do help elsewhere. In the second tier they make mitten_200 7x faster (1,038 s → 144 s): the
+weight-3 table of its 680-column time-collapsed problem speeds up the collapsed search at weight 9 from 965 s to
+100 s. So the depth needs a rule based on cost, not a return to 1 GiB.
 
 The tables of this document are left as they are. Their records of our pipeline used the 1 GiB tables, and
 `dp=2` has no column in them.

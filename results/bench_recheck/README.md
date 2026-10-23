@@ -91,7 +91,8 @@ These differences are not dp=2's. They apply to the default configuration as wel
 the main suite and on the instances of arXiv:2603.22532, predate 7ef27aa, so they all ran with 1 GiB tables.
 
 **dp=2's own cost on the main suite is its probe.**
-- About 0.3 s on star_42, routing_54 and walkingcat_54 (both variants), with weight 2 only.
+- 0.3-0.7 s on star_42, routing_54 and walkingcat_54 (both variants): the probe stops at weight 2 there
+  (0.27-0.46 s), and the trellises take about 0.1 s more.
 - About 2 s on sdbb_64 (4.3 s → 6.2 s, 1.45x). There the weight-3 probe of the forward direction (about 1 s) lowers
   the predicted sweep from 1,103 s to 306 s. That would decide the race if the search were slow, but here it
   finishes within its head start.

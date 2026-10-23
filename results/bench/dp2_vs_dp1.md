@@ -49,5 +49,54 @@ up to half the memory limit instead of 1 GiB. A rerun of these records with one 
 
 **dp=2's own cost is its probe:** up to 2 s, on sdbb_64 (4.3 s → 6.2 s side by side, 1.45x). There the weight-3
 probe of the forward direction lowers the predicted sweep from 1,103 s to 306 s, which only matters when the search
-is slow. On star_42, routing_54 and walkingcat_54 the probe stops at weight 2 and costs about 0.3 s. Before
-8ec918b it measured weight 3 there too: 10.6 s on star_42, whose search takes 0.7 s.
+is slow. On star_42, routing_54 and walkingcat_54 the probe stops at weight 2, and the sparse stage costs
+0.3-0.7 s. Before 8ec918b it measured weight 3 there too: 10.6 s on star_42, whose search takes 0.7 s.
+
+## Second tier (32 threads, 90 GB, 3600 s), against the default configuration
+
+Records: `results/bench_tierB/ours_pipeline__dp-2`.
+- The second tier of dp=2 ran on what its first tier left (`bench/tier_b.py dp2b`): the circuits' sector problems
+  and the codes, 3 jobs on cores 0-95 of 5090, 23 October 11:45-13:00 (UTC+8), code of 6798b88.
+- None of these runs reaches the sparse stage's probe, so they stand for 8ec918b too.
+- In that chain, give-up 1 skipped mitten_200 after mitten_300's timeout. mitten_200 then ran on its own
+  (`scripts/server/dp2_tier2_mitten200.sh`, 8ec918b, cores 160-191), as the default's record of it did on 5 October.
+
+The default's records are `results/bench_tierB/ours_pipeline` (4 October to 22 October). They predate 7ef27aa, so
+they ran with 1 GiB lookup tables, against 45 GiB for dp=2:
+
+| instance variant | default, tier 2 | dp=2, tier 2 |
+|---|---:|---:|
+| bb288_r18 sector | 242 s | 215 s |
+| code_balanced_625 full | 47.2 s | 50.4 s |
+| code_kasai_444 full | 57.5 s | 61.0 s |
+| code_kasai_492 full | 776 s | 797 s |
+| code_llmbb_360 full | 54.9 s | 56.9 s |
+| cornucopia_1044 sector | 881 s | 919 s |
+| cornucopia_900 sector | 485 s | 507 s |
+| mitten_200 sector | 1038 s | 144 s |
+| mitten_300 sector | timeout 11.. | timeout 11.. |
+| routing_140_13 sector | 103 s | 88.3 s |
+| routing_200_24 sector | 477 s | 492 s |
+| sdbb_120 sector | 1117 s | 1088 s |
+| surface_d23 sector | 23.7 s | (solved in tier 1) |
+| surface_d25 sector | 196 s | (solved in tier 1) |
+
+- surface d = 23 and 25: the default's second-tier records come from the rerun of 22 October after the lift fix. dp=2
+  solves both in its first tier, through the dense DP of dp=1.
+- **mitten_200: 1,038 s → 144 s.** This is the deeper table, not the sparse DP. The time-collapsed problem (680
+  columns) gets its weight-3 table, and the collapsed search at weight 9 takes 100 s instead of 965 s. In the first
+  tier the same deeper table lifts mitten_200's lower bound from 8 to 9. The deeper tables of 7ef27aa thus help
+  here, unlike on color_d11 full, cornucopia_252 and surface d = 21-25 (above).
+- The others agree within 15%. In this tier the sparse stage is either not reached, or the sector is too wide for
+  the sparse tables (cut rank above 56).
+
+Solved on the main suite, by its main problem (`bench/compare_dp2.py`):
+
+| configuration | instances | tier 1 | tiers 1 and 2 |
+|---|---:|---:|---:|
+| ours | 60 | 47 | 59 |
+| ours + DP | 60 | 48 | (tier 1 only) |
+| ours + sparse DP | 60 | 47 | 58 |
+
+The one instance that dp=2 leaves and the default solves is color_d11, lost in the first tier to the deeper tables.
+A circuit without a sector problem gets no second tier (`bench/tier_b.py`, `unsolved`).

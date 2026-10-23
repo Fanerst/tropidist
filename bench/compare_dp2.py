@@ -31,11 +31,14 @@ CONFIGS = ("ours", "ours + DP", "ours + sparse DP")
 
 def changes(rows_a, rows_b, label_a, label_b):
     """Rows (name, a, b) where one solves and the other does not, or both solve and the time differs by more than
-    1.5x and 1 s; per tier."""
+    1.5x and 1 s; per tier.  A second-tier row needs both first tiers to have left the instance (the first-tier row
+    shows the others)."""
     out = []
     for ra, rb in zip(rows_a, rows_b):
         name = ra[3]
         for tier, i in (("tier 1", 6), ("tier 2", 7)):
+            if tier == "tier 2" and (ra[6] is not None or rb[6] is not None):
+                continue
             ta, tb = ra[i], rb[i]
             if (ta is None) != (tb is None) or (ta is not None and abs(ta - tb) > 1 and max(ta, tb) > 1.5 * min(ta, tb)):
                 out.append((name, tier, ta, tb))
@@ -51,7 +54,8 @@ def main_suite():
         both = sum(x[6] is not None or x[7] is not None for x in r)
         lines.append("| %s | %d | %d | %s |" % (c, len(r), t1, both if c != "ours + DP" else "(tier 1 only)"))
     f = lambda t: "–" if t is None else T.seconds(t)
-    lines += ["", "Changed against the default (time differs by more than 1.5x and 1 s, or solved by one only):", "",
+    lines += ["", "Changed against the default (time differs by more than 1.5x and 1 s, or solved by one only; tier 2 "
+              "compares what both first tiers left):", "",
               "| instance | tier | ours | ours + sparse DP |", "|---|---|---:|---:|"]
     for name, tier, ta, tb in changes(rows["ours"], rows["ours + sparse DP"], "ours", "ours + sparse DP"):
         lines.append("| %s | %s | %s | %s |" % (name, tier, f(ta), f(tb)))
