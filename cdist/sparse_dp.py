@@ -956,10 +956,17 @@ def choose_schedule(tr, K, backend="c", probe=3, budget=2e9, window=100):
     av = np.array(sched)
     fwd = cF[idx, av - 1] + F[idx, av - 1]             # the forward table and its frontier
     bwd = cB[idx, K - av]
+    # memory of query(): the backward sweep's checkpoints (every isqrt(N) cuts), one recomputed segment of
+    # backward tables during the forward sweep, the forward checkpoints, and four step buffers; 8 bytes a state
+    every = max(1, int(math.isqrt(tr.N)))
+    ck = (idx % every == 0) | (idx == 0) | (idx == n - 1)
+    seg = np.add.reduceat(bwd, np.arange(0, n, every)).max()
+    states = bwd[ck].sum() + seg + cF[idx, av - 1][ck].sum() + 4 * max(fwd.max(), bwd.max())
     uniform = {a: float(cost[:, a].sum()) for a in range(1, K + 1)}
     return sched, {"predicted_work": float(best[n - 1].min()), "uniform_predicted_work": uniform,
                    "predicted_peak_states": float(max(fwd.max(), bwd.max())),
                    "predicted_mean_states": float((fwd.sum() + bwd.sum()) / (2 * n)),
+                   "predicted_bytes": float(8 * states),
                    "schedule": _runs(sched), "forward_profile": prof[+1].sum(axis=0).tolist(),
                    "backward_profile": prof[-1].sum(axis=0).tolist(), "probe_seconds": probe_seconds}
 

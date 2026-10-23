@@ -202,8 +202,8 @@ def sparse_estimate(p, K, order, trellises=None, probe=3):
     the work come from probe sweeps (weights <= probe) of the first observable, whose trellis differs from the
     others only in the target row, and are scaled by the number of observables.  On circuits the prediction is
     within 0.8-1.0x of the work done; on codes it can be 10x low (sparse_dp.choose_schedule).  fits=False if a
-    trellis needs more row slots than the C tables hold.  Memory: the checkpoints, one segment of tables and the
-    step buffers, 8 bytes per state."""
+    trellis needs more row slots than the C tables hold.  Memory: the checkpoints, one recomputed segment of
+    tables and the step buffers, 8 bytes per state, from the predicted table at every cut."""
     from . import sparse_dp
     t0 = time.time()
     out = {"K": K, "fits": False}
@@ -225,10 +225,9 @@ def sparse_estimate(p, K, order, trellises=None, probe=3):
         return out
     sched, info = sparse_dp.choose_schedule(feas[0], K, "c", probe=probe)
     n = feas[0].N
-    every = max(1, int(math.isqrt(n)))
     work = info["predicted_work"] * len(feas)
     steps = 3 * n * len(feas)
-    mem = 8 * (info["predicted_peak_states"] * (every + 4) + (n / every) * info["predicted_mean_states"])
+    mem = info["predicted_bytes"]                     # the queries run one after the other
     out.update(fits=True, schedule=sched, schedule_runs=info["schedule"], predicted_work=work,
                predicted_seconds=work * SPARSE_SECONDS_PER_STATE + steps * SPARSE_SECONDS_PER_STEP,
                predicted_bytes=mem, predicted_peak_states=info["predicted_peak_states"],
