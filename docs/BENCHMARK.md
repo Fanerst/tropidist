@@ -1495,6 +1495,27 @@ The hypercube code with L = 4 is open for every method.
 
 ![low-width trial](../results/bench_lowwidth/lowwidth_trial.png)
 
+## Changes of 23 October 2026
+
+### The sparse Rank DP as a third evaluator ("ours + sparse DP")
+
+`cdist/sparse_dp.py` runs the Rank DP's trellis truncated at a weight threshold K, with a meet-in-the-middle
+split of the weight between a forward and a backward sweep (`results/sparse_dp/README.md`). Its cost grows with K
+and with how many low-weight partial solutions stay distinct at a cut, not with the cut rank alone. It wins on
+wide problems whose partial solutions merge, the local circuits that are not graph-like. `cdist/auto.py` predicts
+its time and memory from probe sweeps (`sparse_estimate`).
+
+The pipeline's option `dp=2` is `dp=1` plus a race at the end of the circuit stages. After collapse, lift and
+window, the search on the sector runs for the sparse DP's predicted time. Then one sweep at the upper bound minus
+one decides, if it fits in the table budget and the remaining time. Code instances run as with `dp=1`.
+
+First tier on the 23 circuits of the prior benchmark (`results/bench_wjh/dp2_vs_dp1.md`):
+- No outcome changes and nothing is slower.
+- The superdense colour-code circuits are faster: d = 9 takes 15.8 s instead of 374 s, d = 7 0.8 s instead of
+  3.3 s.
+- d = 11 stays open in this tier: its sweep is predicted beyond 600 s and the 8 GiB table budget. A dedicated
+  run, outside the protocol, settles it at 11 (the footnote of the table above).
+
 ## Reproduce
 
 ```sh

@@ -427,6 +427,7 @@ class Pipeline:
             self.run_search()
             return
         est, info = self.dp_estimate(self.sector, "main")
+        self.main_estimate = est                      # its column order serves the sparse DP (dp=2) too
         if est is not None and self.dp_cheap(info):
             # a short head start lets the search settle the small instances, where it is faster than any DP
             done, _ = self.soft(self.run_search, DP_HEAD_START)
@@ -557,8 +558,12 @@ class Pipeline:
             info["decision"] = "search (too many columns for the DP)"
             return search()
         t = time.monotonic()
-        order = self.auto.best_order(p, seeds=0)[0]           # the given column order or its reverse
-        width = max(self.auto.trellis.cut_profile(p.h, order))
+        est0 = getattr(self, "main_estimate", None)            # the dense DP's estimate of the same problem
+        if est0 is not None and "order" in est0:
+            order, width = est0["order"], est0["cut_rank"]
+        else:
+            order = self.auto.best_order(p, seeds=0)[0]       # the given column order or its reverse
+            width = max(self.auto.trellis.cut_profile(p.h, order))
         info.update(cut_rank=width, order_seconds=round(time.monotonic() - t, 3))
         if width > self.auto.SPARSE_MAX_SLOTS:                 # the C tables hold at most this many row slots
             info["decision"] = "search (cut rank above the row slots of the sparse tables)"

@@ -307,6 +307,19 @@ except superdense d11 (15 GB with the schedule) and surface d11 (20 GB, numpy ta
 step (partition the state space by its top bits and merge the parts independently) is the obvious next step. It
 would not move the regimes, since the gaps above are mostly 10× or more.
 
+## In the pipeline
+
+The front end `cdist/auto.py` offers the sparse DP next to the dense one:
+- `sparse_estimate` predicts the time, work and memory at a threshold from the probe sweeps;
+- `sparse_distance` runs the sweep and returns the least weight ≤ K with a witness, else none.
+
+The pipeline's option `dp=2` uses it where the circuit stages leave a gap. The search runs for the predicted
+time, then one sweep at the upper bound minus one decides. First tier on the 23 WJH circuits
+(`results/bench_wjh/dp2_vs_dp1.md`):
+- superdense d9: 374 s → 15.8 s;
+- superdense d7: 3.3 s → 0.8 s;
+- no outcome changes, nothing slower.
+
 ## The unified picture (for the paper)
 
 The three evaluators compute the same min-plus sum over the trellis, and differ in what they keep:
