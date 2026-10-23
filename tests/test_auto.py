@@ -67,3 +67,64 @@ def test_witness_by_traceback():
         cols = auto.dp_witness(p, est["order"], per.index(value))
         assert value == d and len(cols) == d and search.verify(p, tuple(cols))
     assert auto.dp_witness(p, est["order"], 0, max_bytes=1) is None       # tables over the cap: no traceback
+
+
+def test_sparse_front_end():
+    # the sparse DP's sweep at K returns the distance when it is <= K (with a witness), else None, and agrees with
+    # the dense DP; its estimate predicts the work from probe sweeps, and a trellis wider than the C tables does
+    # not fit
+    for build, d in ((dvs.rotated_surface, 7), (dvs.color_code, 9)):
+        hx, hz, n = build(d)
+        for sector in ("X", "Z"):
+            p = stabcode.css_distance_problem(hx, hz, n, sector)
+            order = auto.best_order(p)[0]
+            assert auto.dp_distance(p, order)[0] == d
+            trs = auto.sparse_trellises(p, order)
+            est = auto.sparse_estimate(p, d - 1, order, trellises=trs)
+            assert est["fits"] and est["predicted_work"] > 0 and est["predicted_seconds"] > 0
+            assert len(est["schedule"]) == trs[0].N + 1
+            assert auto.sparse_distance(p, d - 1, order, trellises=trs, schedule=est["schedule"]) is None
+            for lower in (0, d):
+                value, cols, obs = auto.sparse_distance(p, d + 1, order, trellises=trs, lower=lower)
+                assert value == d and len(cols) == d and search.verify(p, tuple(cols))
+    import random
+    rng = random.Random(1)
+    wide = problem.Problem("wide", 80, 1, [rng.getrandbits(80) | 1 for _ in range(160)],
+                           [rng.getrandbits(1) for _ in range(160)], [(i, 0) for i in range(80)])
+    est = auto.sparse_estimate(wide, 5, list(range(160)))
+    assert est["fits"] is False and (est["slots"] is None or est["slots"] > auto.SPARSE_MAX_SLOTS)
+
+
+def test_pipeline_option_dp2(tmp_path):
+    # the pipeline with dp=2 on an exported surface-code circuit: the sparse DP closes the sector's gap with an
+    # upper bound (window stage on: one sweep at u - 1) and without one (every stage off: deepening from 1)
+    import json
+    import subprocess
+    sys.path.insert(0, os.path.join(ROOT, "bench"))
+    import common
+    import stim_families
+    circ, _ = stim_families.surface_circuit(5)
+    meta = {"family": "surface", "description": "test", "n": 25, "k": 1, "basis": "Z", "rounds": 5,
+            "source": "stim_families.surface_circuit(5)", "truth": {"sector": (5, "exact", "graph-like distance")}}
+    common.export_circuit_instance("surf5", circ, [], meta, root=str(tmp_path))
+    adapter = os.path.join(ROOT, "bench", "adapters", "ours_pipeline.py")
+    for config, sweeps in (("dp=2", None), ("dp=2,dp_head=0,collapse=0,lift=0,window=1", [4]),
+                           ("dp=2,dp_head=0,collapse=0,lift=0,window=0", [1, 2, 3, 4, 5])):
+        out = tmp_path / ("%s.json" % config.replace(",", "_").replace("=", "-"))
+        subprocess.run([sys.executable, adapter, "--instance", str(tmp_path / "surf5"), "--variant", "sector",
+                        "--time-limit", "120", "--threads", "1", "--out", str(out), "--config", config],
+                       check=True, capture_output=True)
+        r = json.loads(out.read_text())
+        notes = json.loads(r["notes"])
+        assert r["status"] == "exact" and r["lower_bound"] == r["upper_bound"] == 5 and r["witness_ok"], r
+        if sweeps is not None:
+            assert notes["sparse"]["decision"].startswith("sparse DP"), notes["sparse"]
+            assert [x["K"] for x in notes["sparse"]["sweeps"]] == sweeps
+    sys.path.insert(0, os.path.join(ROOT, "bench", "adapters"))
+    import ours_pipeline
+    for bad in ({"dp": 3}, {"dp_head": -2}):
+        try:
+            ours_pipeline.configuration(bad)
+        except ValueError:
+            continue
+        raise AssertionError("accepted %s" % bad)

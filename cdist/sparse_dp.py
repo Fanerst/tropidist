@@ -608,7 +608,12 @@ BACKENDS = {"numpy": NumpyTables, "c": CTables}
 
 
 class BudgetExceeded(RuntimeError):
-    """A table outgrew max_states or a sweep ran past its deadline (time.monotonic())."""
+    """A table outgrew max_states (kind "states") or a sweep ran past its deadline (kind "deadline",
+    time.monotonic())."""
+
+    def __init__(self, message, kind):
+        super().__init__(message)
+        self.kind = kind
 
 
 # ---------------------------------------------------------------------- sweeps
@@ -734,9 +739,9 @@ class Sweep:
                 ck_bytes += self.be.nbytes(tab)
             self.peak_bytes = max(self.peak_bytes, ck_bytes + self.be.nbytes(tab))
             if self.max_states is not None and max(n, nc) > self.max_states:
-                raise BudgetExceeded("%d states at cut %d" % (max(n, nc), c))
+                raise BudgetExceeded("%d states at cut %d" % (max(n, nc), c), "states")
             if self.deadline is not None and time.monotonic() > self.deadline:
-                raise BudgetExceeded("deadline at cut %d" % c)
+                raise BudgetExceeded("deadline at cut %d" % c, "deadline")
             if on_cut and on_cut(c, tab, ch, extra):
                 return c
         return stop
@@ -869,14 +874,13 @@ def cut_profiles(tr, direction, cap, backend="c"):
     return out
 
 
-def choose_schedule(tr, K, backend="c", probe=3, budget=2e9, window=100):
-    """A split a(c) per cut, non-increasing, minimising the predicted work
-
-        sum_c  F_c(<= a(c) - 1) + F_c(a(c) - 1) + 2 B_c(<= K - a(c)),
-
-    with F_c(w), B_c(w) the forward and backward states of weight w at cut c: measured up to weight `probe` and
-    extrapolated with the growth factor of the last two weights over a window of cuts (a dynamic programme over
-    the cuts and the values of a).  Returns (schedule, info)."""
+def probe_profiles(tr, backend="c", probe=3, budget=2e9):
+    """Per-cut state counts of each weight in both directions, measured up to weight `probe` (or 2 when weight 3
+    would cost more than `budget` states): {+1: array, -1: array}.  They do not depend on the threshold, so they
+    are kept on the trellis; returns (profiles, seconds spent now)."""
+    key = ("profiles", probe, budget, backend)
+    if key in tr._bd:
+        return tr._bd[key], 0.0
     t0 = time.time()
     prof = {}
     for direction in (+1, -1):
@@ -885,6 +889,21 @@ def choose_schedule(tr, K, backend="c", probe=3, budget=2e9, window=100):
         if probe > 2 and tot[1] > 0 and tot[2] * tot[2] / tot[1] < budget:
             p = cut_profiles(tr, direction, probe, backend)
         prof[direction] = p
+    tr._bd[key] = prof
+    return prof, time.time() - t0
+
+
+def choose_schedule(tr, K, backend="c", probe=3, budget=2e9, window=100):
+    """A split a(c) per cut, non-increasing, minimising the predicted work
+
+        sum_c  F_c(<= a(c) - 1) + F_c(a(c) - 1) + 2 B_c(<= K - a(c)),
+
+    with F_c(w), B_c(w) the forward and backward states of weight w at cut c: measured up to weight `probe`
+    (probe_profiles) and extrapolated with the growth factor of the last two weights over a window of cuts (a
+    dynamic programme over the cuts and the values of a).  The extrapolation is close on circuits and low by up
+    to 10x on codes (results/sparse_dp).  Returns (schedule, info); info has the predicted work and the predicted
+    largest table (states)."""
+    prof, probe_seconds = probe_profiles(tr, backend, probe, budget)
 
     def wsum(x):                                       # sums over the window of cuts around each cut
         cs = np.concatenate([[0.0], np.cumsum(x)])
@@ -933,10 +952,16 @@ def choose_schedule(tr, K, backend="c", probe=3, budget=2e9, window=100):
         sched[c] = a
         if c:
             a = int(arg[c, a])
+    idx = np.arange(n)
+    av = np.array(sched)
+    fwd = cF[idx, av - 1] + F[idx, av - 1]             # the forward table and its frontier
+    bwd = cB[idx, K - av]
     uniform = {a: float(cost[:, a].sum()) for a in range(1, K + 1)}
     return sched, {"predicted_work": float(best[n - 1].min()), "uniform_predicted_work": uniform,
+                   "predicted_peak_states": float(max(fwd.max(), bwd.max())),
+                   "predicted_mean_states": float((fwd.sum() + bwd.sum()) / (2 * n)),
                    "schedule": _runs(sched), "forward_profile": prof[+1].sum(axis=0).tolist(),
-                   "backward_profile": prof[-1].sum(axis=0).tolist(), "probe_seconds": time.time() - t0}
+                   "backward_profile": prof[-1].sum(axis=0).tolist(), "probe_seconds": probe_seconds}
 
 
 # ---------------------------------------------------------------------- one query at one threshold

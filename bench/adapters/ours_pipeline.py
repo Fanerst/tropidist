@@ -1,7 +1,7 @@
 """Exported-instance adapter for the collapsed/lift/window/sector pipeline.
 
 config: symmetry=1, cover=1, collapse=1, lift=1, window=1,
-        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10.
+        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10, dp_head=-1.
 
 collapse controls the standalone collapsed lower bound and the pruning table.
 With collapse=0 and lift=1, collapsed solutions are still generated for lifting
@@ -15,6 +15,14 @@ dp=1 adds the dense Rank DP (cdist.auto) where its exactly computed cost is smal
     time and the DP runs if the search has not finished;
   - the time-collapsed problem of a circuit: if its DP is predicted within dp_fast seconds, it
     certifies the collapsed distance and the collapsed search starts at that threshold.
+
+dp=2 is dp=1 plus the weight-truncated sparse Rank DP (cdist.auto.sparse_*, results/sparse_dp) on what the
+circuit stages leave: before the final sector search, with the certified lower bound l and the upper bound u of
+the lift and window stages, one meet-in-the-middle sweep at threshold u - 1 decides (a lighter solution, with its
+witness, or the lower bound u; without u, sweeps at l, l + 1, ...).  Its time is predicted from probe sweeps; the
+sector search runs first for that time (a race: each method gets the time the DP needs), then the sparse DP, if it
+fits in the table budget and the remaining time; dp_head >= 0 sets that head start in seconds instead (0: the DP
+first).  Code instances run as with dp=1: on them the search or the dense DP is faster (results/sparse_dp).
 """
 import json
 import math
@@ -30,7 +38,7 @@ import common
 
 
 DEFAULTS = dict(symmetry=1, cover=1, collapse=1, lift=1, window=1,
-                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10)
+                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10, dp_head=-1)
 SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp")
 DP_MAX_COLUMNS = 30000          # beyond this the order search alone is slow, and no such DP would fit
 DP_HEAD_START = 1.0             # seconds the search runs before a DP predicted to be cheap
@@ -54,13 +62,13 @@ def configuration(values):
     cfg = dict(DEFAULTS)
     cfg.update({k: int(v) for k, v in values.items()})
     for k in SWITCHES:
-        if cfg[k] not in (0, 1):
-            raise ValueError(k + " must be 0 or 1")
+        if cfg[k] not in ((0, 1, 2) if k == "dp" else (0, 1)):
+            raise ValueError(k + (" must be 0, 1 or 2" if k == "dp" else " must be 0 or 1"))
     for k in ("k_coll", "k_table", "kmax"):
         if not 1 <= cfg[k] <= 40:
             raise ValueError(k + " must be between 1 and 40")
-    if cfg["dp_fast"] < 0:
-        raise ValueError("dp_fast must be nonnegative")
+    if cfg["dp_fast"] < 0 or cfg["dp_head"] < -1:
+        raise ValueError("dp_fast must be nonnegative, dp_head at least -1")
     global TABLE_BUDGET
     TABLE_BUDGET = table_budget(cfg["table_gb"])
     return cfg
@@ -514,6 +522,15 @@ class Pipeline:
                         "window_t1")
         if self.tr.upper is not None and self.tr.lower == self.tr.upper:
             return
+        if self.cfg["dp"] == 2:
+            self.sparse_settle(lambda: self.sector_search(coll))
+        else:
+            self.sector_search(coll)
+
+    def sector_search(self, coll):
+        """The search on the sector from the certified lower bound up to below the upper bound."""
+        if self.tr.upper is not None and self.tr.lower >= self.tr.upper:
+            return
         ctab = None
         try:
             relaxed = []
@@ -526,6 +543,87 @@ class Pipeline:
         finally:
             if ctab is not None:
                 self.free(ctab)
+
+    # ---------------- sparse Rank DP (config dp=2)
+    def sparse_settle(self, search):
+        """The sector's gap [lower, upper) by the weight-truncated sparse Rank DP, after a head start of the
+        search (see the module docstring); search() is the sector search."""
+        p = self.sector
+        info = self.notes.setdefault("sparse", {"columns": p.ncols})
+        lower, upper = self.tr.lower, self.tr.upper
+        K = upper - 1 if upper is not None else lower
+        info.update(lower=lower, upper=upper, K=K)
+        if p.ncols > DP_MAX_COLUMNS:
+            info["decision"] = "search (too many columns for the DP)"
+            return search()
+        t = time.monotonic()
+        order = self.auto.best_order(p, seeds=0)[0]           # the given column order or its reverse
+        width = max(self.auto.trellis.cut_profile(p.h, order))
+        info.update(cut_rank=width, order_seconds=round(time.monotonic() - t, 3))
+        if width > self.auto.SPARSE_MAX_SLOTS:                 # the C tables hold at most this many row slots
+            info["decision"] = "search (cut rank above the row slots of the sparse tables)"
+            return search()
+        self.remaining()
+        try:
+            trs = self.auto.sparse_trellises(p, order)
+        except ValueError as exc:                     # more row slots than a state holds
+            info["decision"] = "search (%s)" % exc
+            return search()
+        est = self.auto.sparse_estimate(p, K, order, trellises=trs)
+        budget = max(0, TABLE_BUDGET - self.table_bytes)
+        info.update({k: (round(v, 3) if isinstance(v, float) else v) for k, v in est.items()
+                     if k in ("fits", "reason", "slots", "predicted_seconds", "predicted_work", "predicted_bytes",
+                              "probe_seconds", "estimate_seconds", "schedule_runs")})
+        if not est["fits"] or est["predicted_bytes"] > budget or est["predicted_seconds"] > self.remaining():
+            info["decision"] = "search (the sparse DP %s)" % (
+                est.get("reason") if not est["fits"] else
+                "would exceed the table budget" if est["predicted_bytes"] > budget else "would not finish in time")
+            return search()
+        # the search's head start: the DP's predicted time, as with dp=1, but leaving the DP 1.5 times its
+        # prediction before the run's deadline
+        pred = est["predicted_seconds"]
+        head = self.cfg["dp_head"] if self.cfg["dp_head"] >= 0 else \
+            max(0.0, min(pred, self.remaining() - 1.5 * pred) if self.deadline else pred)
+        if head > 0:
+            done, _ = self.soft(search, head)
+            if done:
+                info["decision"] = "search (finished within its head start of %.1f s)" % head
+                return
+        self.close()
+        info["decision"] = "sparse DP (after a %.1f s head start of the search)" % head
+        sched, schedK = est["schedule"], K
+        while True:
+            lower, upper = self.tr.lower, self.tr.upper
+            if upper is not None and lower >= upper:
+                return
+            K = upper - 1 if upper is not None else lower
+            if K != schedK:                                    # deepening without an upper bound
+                est = self.auto.sparse_estimate(p, K, order, trellises=trs)
+                if not est["fits"] or est["predicted_seconds"] > self.remaining():
+                    info["stopped"] = "threshold %d would not finish in time; the search continues" % K
+                    return search()
+                sched, schedK = est["schedule"], K
+            t = time.monotonic()
+            try:
+                best = self.auto.sparse_distance(p, K, order, trellises=trs, schedule=sched, lower=lower,
+                                                 deadline=self.deadline,
+                                                 max_bytes=max(0, TABLE_BUDGET - self.table_bytes))
+            except TimeoutError as exc:
+                raise Deadline(str(exc))
+            except MemoryError as exc:
+                info["stopped"] = "%s; the search continues" % exc
+                return search()
+            info.setdefault("sweeps", []).append({"K": K, "value": None if best is None else best[0],
+                                                  "seconds": round(time.monotonic() - t, 3)})
+            if best is not None:
+                value, cols, _ = best
+                if value < lower:
+                    raise ValueError("sparse DP solution below the certified lower bound")
+                self.found(cols)
+                self.tr.lb(value)                              # the sweep returns the least weight <= K
+            else:
+                self.tr.lb(K + 1)
+            self.checkpoint()
 
 
 def worker(prob, cfg, t0, deadline, conn):

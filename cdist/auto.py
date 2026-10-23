@@ -1,4 +1,4 @@
-"""Choice between the two exact evaluators of the distance.
+"""Choice between the exact evaluators of the distance.
 
 The dense Rank DP on a linear decomposition (trellis.py, kernel.py) costs about
 (number of logical queries) x (table entries touched), which is set by the cut
@@ -13,6 +13,14 @@ the front end decides from it:
   estimate(p)       column order, largest table (bytes) and the work of all
                     logical queries, and a predicted time from a calibrated rate
   dp_distance(p)    exact distance by the DP (one query per logical observable)
+
+The third evaluator is the same trellis truncated at a weight threshold K, with a meet-in-the-middle split of the
+weight (sparse_dp.py, results/sparse_dp).  Its cost grows with K and with how many low-weight partial solutions
+stay distinct at a cut; it wins on wide problems whose partial solutions merge (local circuits that are not
+graph-like), and it needs a threshold to aim at, usually an upper bound minus one:
+
+  sparse_estimate(p, K, order)    predicted time, work and memory of the sweep at K, from probe sweeps
+  sparse_distance(p, K, order)    the least weight of a solution if it is <= K, with a witness; else None
 
 The choice itself (DP now, search first with the DP as fallback, or search only)
 belongs to the caller, which knows its time and memory budget; see the dp option
@@ -171,3 +179,88 @@ def dp_witness(p, order, obs, max_bytes=1 << 30):
                 assert int(before[state]) == value
     assert value == 0
     return sorted(used)
+
+
+# ---------------------------------------------------------------------- the sparse (weight-truncated) Rank DP
+# Seconds per state and column of the C tables (one thread, 5090, results/sparse_dp: 7-14 ns on large sweeps) and
+# per column step (Python and call overhead), for predictions only.  A meet-in-the-middle sweep makes about three
+# passes over the columns (backward, forward, recomputation of the backward tables).
+SPARSE_SECONDS_PER_STATE = 1.0e-8
+SPARSE_SECONDS_PER_STEP = 2.0e-5
+SPARSE_MAX_SLOTS = 56                # row slots of the C tables
+
+
+def sparse_trellises(p, order):
+    """One trellis per observable of p in the given column order (sparse_dp.Trellis; infeasible where the
+    observable is a combination of the checks)."""
+    from . import sparse_dp
+    return [sparse_dp.Trellis.for_query(p, i, order) for i in range(p.nobs)]
+
+
+def sparse_estimate(p, K, order, trellises=None, probe=3):
+    """Predicted cost of one meet-in-the-middle sweep at threshold K on every observable: the split schedule and
+    the work come from probe sweeps (weights <= probe) of the first observable, whose trellis differs from the
+    others only in the target row, and are scaled by the number of observables.  On circuits the prediction is
+    within 0.8-1.0x of the work done; on codes it can be 10x low (sparse_dp.choose_schedule).  fits=False if a
+    trellis needs more row slots than the C tables hold.  Memory: the checkpoints, one segment of tables and the
+    step buffers, 8 bytes per state."""
+    from . import sparse_dp
+    t0 = time.time()
+    out = {"K": K, "fits": False}
+    try:
+        trs = sparse_trellises(p, order) if trellises is None else trellises
+    except ValueError as exc:                          # more row slots than a 64-bit state holds
+        out.update(reason=str(exc), slots=None, estimate_seconds=time.time() - t0)
+        return out
+    feas = [t for t in trs if t.feasible]
+    out["queries"] = len(feas)
+    if not feas:
+        out.update(reason="no observable can be flipped", estimate_seconds=time.time() - t0)
+        return out
+    slots = max(t.nslots for t in feas)
+    out.update(slots=slots, cut_rank=max(max(t.width) for t in feas))
+    if slots > SPARSE_MAX_SLOTS:
+        out.update(reason="the trellis needs %d row slots, the C tables hold %d" % (slots, SPARSE_MAX_SLOTS),
+                   estimate_seconds=time.time() - t0)
+        return out
+    sched, info = sparse_dp.choose_schedule(feas[0], K, "c", probe=probe)
+    n = feas[0].N
+    every = max(1, int(math.isqrt(n)))
+    work = info["predicted_work"] * len(feas)
+    steps = 3 * n * len(feas)
+    mem = 8 * (info["predicted_peak_states"] * (every + 4) + (n / every) * info["predicted_mean_states"])
+    out.update(fits=True, schedule=sched, schedule_runs=info["schedule"], predicted_work=work,
+               predicted_seconds=work * SPARSE_SECONDS_PER_STATE + steps * SPARSE_SECONDS_PER_STEP,
+               predicted_bytes=mem, predicted_peak_states=info["predicted_peak_states"],
+               probe_seconds=info["probe_seconds"], estimate_seconds=time.time() - t0)
+    return out
+
+
+def sparse_distance(p, K, order, trellises=None, schedule=None, lower=0, deadline=None, max_bytes=None, log=None):
+    """The least weight of a solution of min{|e| : H e = 0, L e != 0} if it is <= K, as (value, columns of p,
+    observable); None if no solution has weight <= K.  One meet-in-the-middle sweep per observable (after a
+    solution of weight v the others are swept at v - 1); schedule: a split per cut (e.g. sparse_estimate's), else
+    one is chosen per observable.  lower: a certified lower bound, a solution of that weight ends the sweeps.
+    Raises TimeoutError past deadline (time.monotonic()), MemoryError where the tables would exceed max_bytes."""
+    from . import sparse_dp
+    trs = sparse_trellises(p, order) if trellises is None else trellises
+    best = None
+    for i, tr in enumerate(trs):
+        if not tr.feasible:
+            continue
+        k = K if best is None else best[0] - 1
+        if k < max(1, lower):
+            break
+        split = schedule if schedule is not None and len(schedule) == tr.N + 1 else "schedule"
+        every = max(1, int(math.isqrt(tr.N)))
+        cap = None if max_bytes is None else max(1, int(max_bytes // (8 * (every + 4))))
+        try:
+            r = sparse_dp.query(tr, k, mode="mitm", split=split, use_h=False, witness=True, lower=lower,
+                                backend="c", deadline=deadline, max_states=cap, log=log)
+        except sparse_dp.BudgetExceeded as exc:
+            raise (TimeoutError if exc.kind == "deadline" else MemoryError)(str(exc))
+        if r["value"] is not None:
+            best = (r["value"], r["witness"], i)
+            if r["value"] <= lower:
+                break
+    return best
