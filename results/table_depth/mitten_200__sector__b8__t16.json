@@ -1,0 +1,298 @@
+{
+ "instance": "bench/instances/mitten_200",
+ "variant": "sector",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 16,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "k_asked": 3,
+   "k": 3,
+   "bytes": 1207959552,
+   "entries": 49139721,
+   "build_seconds": 2.292,
+   "seconds": 2.343,
+   "at": 1.313
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 208,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 589824,
+   "entries": 21665,
+   "build_seconds": 0.001,
+   "seconds": 0.002,
+   "at": 200.042
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 1,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.003,
+   "nodes": [
+    0,
+    170,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 2,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    170,
+    0,
+    0
+   ],
+   "lookups": 170,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 170
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 3,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.008,
+   "nodes": [
+    0,
+    170,
+    0,
+    0,
+    0
+   ],
+   "lookups": 170,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 170
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 4,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.212,
+   "nodes": [
+    0,
+    170,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 170,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 170
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 5,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.11,
+   "nodes": [
+    0,
+    170,
+    2659,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 2659,
+   "cover_calls": 250,
+   "cover_pruned": 10,
+   "hits": 0,
+   "false_hits": 2659
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 6,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 1.738,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96739,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 96739,
+   "cover_calls": 5332,
+   "cover_pruned": 26,
+   "hits": 0,
+   "false_hits": 96739
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 7,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 1.807,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3574183,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 3574168,
+   "cover_calls": 195762,
+   "cover_pruned": 585,
+   "hits": 0,
+   "false_hits": 37498
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 8,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 39.859,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3582474,
+    127424971,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 127424897,
+   "cover_calls": 7183325,
+   "cover_pruned": 80513,
+   "hits": 0,
+   "false_hits": 181598
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 9,
+   "k": 3,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 152.639,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3582662,
+    129644561,
+    4252372711,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 4252372285,
+   "cover_calls": 136899253,
+   "cover_pruned": 7472065,
+   "hits": 1,
+   "false_hits": 992794
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 208,
+   "K": 9,
+   "k": 2,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    208,
+    92,
+    103,
+    125,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lookups": 1,
+   "cover_calls": 194,
+   "cover_pruned": 90,
+   "hits": 1,
+   "false_hits": 0
+  }
+ ],
+ "status": "exact",
+ "seconds": 200.047,
+ "lower": 9,
+ "upper": 9,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 15560,
+    "cut_rank": 149,
+    "peak_bits": 149,
+    "work": null,
+    "queries": 40,
+    "estimate_seconds": 0.239,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   },
+   "collapsed": {
+    "columns": 680,
+    "cut_rank": 79,
+    "peak_bits": 79,
+    "work": null,
+    "queries": 40,
+    "estimate_seconds": 0.265,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search"
+   }
+  }
+ }
+}

@@ -1,0 +1,158 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "code_llmbb_360",
+  "variant": "full",
+  "rows": 180,
+  "cols": 360,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 23,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.016,
+  "trace": [
+    {
+      "t": 0.077,
+      "lb": 1
+    },
+    {
+      "t": 0.259,
+      "lb": 2
+    },
+    {
+      "t": 0.259,
+      "lb": 3
+    },
+    {
+      "t": 0.26,
+      "lb": 4
+    },
+    {
+      "t": 0.261,
+      "lb": 5
+    },
+    {
+      "t": 0.261,
+      "lb": 6
+    },
+    {
+      "t": 0.262,
+      "lb": 7
+    },
+    {
+      "t": 0.262,
+      "lb": 8
+    },
+    {
+      "t": 0.262,
+      "lb": 9
+    },
+    {
+      "t": 0.263,
+      "lb": 10
+    },
+    {
+      "t": 0.264,
+      "lb": 11
+    },
+    {
+      "t": 0.266,
+      "lb": 12
+    },
+    {
+      "t": 0.271,
+      "lb": 13
+    },
+    {
+      "t": 0.287,
+      "lb": 14
+    },
+    {
+      "t": 0.33,
+      "lb": 15
+    },
+    {
+      "t": 0.465,
+      "lb": 16
+    },
+    {
+      "t": 0.865,
+      "lb": 17
+    },
+    {
+      "t": 2.129,
+      "lb": 18
+    },
+    {
+      "t": 5.75,
+      "lb": 19
+    },
+    {
+      "t": 17.124,
+      "lb": 20
+    },
+    {
+      "t": 51.292,
+      "lb": 21
+    },
+    {
+      "t": 153.362,
+      "lb": 22
+    },
+    {
+      "t": 443.881,
+      "lb": 23
+    }
+  ],
+  "peak_rss_mb": 68.7,
+  "truth": 24,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 360, \"cut_rank\": 77, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.124, \"fits\": false, \"peak_bits\": 77, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 360, \"rows\": 180, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013065338134765625, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.747245788574219e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.67572021484375e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001227855682373047, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.749961853027344e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.891654968261719e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.465217590332031e-05, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017499923706054688, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003314018249511719, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006797313690185547, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001798868179321289, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004918575286865234, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01512908935546875, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.042983293533325195, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.1340799331665039, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.3994579315185547, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.2635517120361328, \"status\": \"exhausted\"}, {\"K\": 18, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.619694709777832, \"status\": \"exhausted\"}, {\"K\": 19, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 11.373570442199707, \"status\": \"exhausted\"}, {\"K\": 20, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 34.16735482215881, \"status\": \"exhausted\"}, {\"K\": 21, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 102.06953287124634, \"status\": \"exhausted\"}, {\"K\": 22, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 290.51800775527954, \"status\": \"exhausted\"}, {\"K\": 23, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 156.11904454231262, \"status\": \"timeout\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/code_llmbb_360",
+    "family": "estimated_codes",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      9
+    ],
+    "started_at": "2026-10-23T06:15:45.679917+00:00",
+    "ended_at": "2026-10-23T06:25:45.905585+00:00",
+    "wall_seconds": 600.225449,
+    "adapter_seconds": 600.016,
+    "trace_offset_seconds": 0.209449,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1/code_llmbb_360__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1/code_llmbb_360__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 78.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

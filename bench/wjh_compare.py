@@ -158,7 +158,7 @@ def report():
                "| dist-m4ri 0.14.7, 600 s + 32 threads, 1 h "
                "| theirs, 1 core, 8 h, 8 GB: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |",
                "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|"]
-    detail, notes, total = [], [], {}
+    detail, notes, total, settled = [], [], {}, []
     for family, sheet, title in FAMILIES:
         path = SHEETS / sheet
         book = xlsx_lite.read(str(path))
@@ -225,6 +225,16 @@ def report():
             ubs = [r["upper_bound"] for r in recs if r.get("upper_bound") is not None and r.get("witness_ok")]
             d = (str(min(ubs)) if lbs and ubs and max(lbs) == min(ubs) else
                  ("%d..%d" % (max(lbs), min(ubs)) if lbs and ubs else (">=%d" % max(lbs) if lbs else "?")))
+            if v.get("distance_kind") == "exact" and v.get("distance") is not None and not d.isdigit():
+                # a distance established outside these runs (instances.WJH_TRUTH): shown, never counted
+                t = v["distance"]
+                if (lbs and max(lbs) > t) or (ubs and min(ubs) < t):
+                    notes.append("CONTRADICTION: %s has distance %d in its metadata, our runs give %s" % (n, t, d))
+                src = v.get("distance_source")
+                how = json.loads((ROOT / src).read_text()).get("method", "").split(",")[0] if src and \
+                    (ROOT / src).is_file() else ""
+                settled.append("%s = %d (%s%s)" % (n, t, how + ", " if how else "", src))
+                d = "%d‡" % t
             fast = min(exact_theirs[n]) if exact_theirs[n] else None
             bk = best_map.get(n)
             lines.append("| %s | %s | %s | %d | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
@@ -242,6 +252,9 @@ def report():
         total["n"], total["o1"], total["o8"], total["o"], total["g1"], total["gs"], total["m0"], total["m1"], total["m"],
         " / ".join(str(total["t_" + k]) for k, _ in THEIR_EXACT), total["any"]))
     notes += agreement(ms, a1, b32, h8)
+    if settled:
+        notes.append("‡ Distance established outside these runs, and not counted in the tables: " +
+                     ", ".join(settled) + ".")
     return "\n".join(summary + ([""] + ["- " + x for x in notes] if notes else []) + detail)
 
 

@@ -56,7 +56,7 @@ certified bounds, the search log per weight threshold, and the fault set with it
 
 | path | content |
 |---|---|
-| `cdist/` | the library: problem construction and reductions, the search kernel (C), lifting, replay in Stim, dense trellis and binary-tree dynamic programs |
+| `cdist/` | the library: problem construction and reductions, the search kernel (C), lifting, replay in Stim, dense trellis and binary-tree dynamic programs, the weight-truncated sparse trellis DP (`sparse_dp.py`) |
 | `run_bb.py` | one-file driver: a Stim memory circuit in, certified bounds out |
 | `scripts/` | further drivers and the generators of the report tables; `scripts/server/` holds the launchers used on our machine |
 | `papers/` | builders and drivers for published circuits and codes; `papers/new/` has the reading notes per paper |
@@ -78,6 +78,7 @@ certified bounds, the search log per weight threshold, and the fault set with it
 | [docs/PHASE4.md](docs/PHASE4.md) | bounds inside the search: what was tried, what helps |
 | [docs/TREE_DENSE_DP.md](docs/TREE_DENSE_DP.md) | exact dense tree realization, memory/work preflight, and local validation |
 | [docs/RANKWIDTH_SOLVER_REVIEW.md](docs/RANKWIDTH_SOLVER_REVIEW.md) | applied exact and heuristic rank-width solvers, verified trees, and limits |
+| [results/sparse_dp/README.md](results/sparse_dp/README.md) | the Rank DP truncated at a weight threshold, with a meet-in-the-middle split: against the dense DP and the search; superdense d11 decided |
 | [docs/SUMMARY.md](docs/SUMMARY.md) | one page of representative cases (4 October) |
 | [docs/RESULTS.md](docs/RESULTS.md), [docs/PAPERS_RESULTS.md](docs/PAPERS_RESULTS.md) | generated tables of the first study and of the first batch of papers |
 | [docs/next_step.md](docs/next_step.md) | what is parked |

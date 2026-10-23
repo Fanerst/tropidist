@@ -1,0 +1,100 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1
+  },
+  "instance": "wjh_midout_d11",
+  "variant": "sector",
+  "rows": 300,
+  "cols": 1907,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    0,
+    4,
+    24,
+    69,
+    126,
+    162
+  ],
+  "witness_ok": true,
+  "seconds": 0.217,
+  "trace": [
+    {
+      "t": 0.064,
+      "lb": 1
+    },
+    {
+      "t": 0.195,
+      "lb": 2
+    },
+    {
+      "t": 0.195,
+      "lb": 3
+    },
+    {
+      "t": 0.196,
+      "lb": 4
+    },
+    {
+      "t": 0.199,
+      "lb": 5
+    },
+    {
+      "t": 0.202,
+      "lb": 6
+    },
+    {
+      "t": 0.203,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 93.3,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 217, \"cut_rank\": 13, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.025, \"fits\": true, \"peak_bits\": 16, \"predicted_seconds\": 0.001, \"queries\": 1, \"work\": 1027384}, \"main\": {\"columns\": 1907, \"cut_rank\": 31, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.011, \"fits\": true, \"peak_bits\": 33, \"predicted_seconds\": 1265.406, \"queries\": 1, \"work\": 1645027211772}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 217, \"rows\": 50, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002543926239013672, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00023937225341796875, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004425048828125, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0020847320556640625, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003002643585205078, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.0002923011779785156, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 36, \"rows\": 300, \"runs\": [{\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 6.270408630371094e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_midout_d11",
+    "family": "wjh_midout_circuit",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      97
+    ],
+    "started_at": "2026-10-23T01:24:54.715436+00:00",
+    "ended_at": "2026-10-23T01:24:54.999526+00:00",
+    "wall_seconds": 0.282052,
+    "adapter_seconds": 0.217,
+    "trace_offset_seconds": 0.065052,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_midout_d11__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_midout_d11__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

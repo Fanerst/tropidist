@@ -1,0 +1,202 @@
+{
+ "instance": "bench/instances/color_d11",
+ "variant": "full",
+ "budget_gb": 1.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "k_asked": 2,
+   "k": 1,
+   "bytes": 589824,
+   "entries": 16423,
+   "build_seconds": 0.0,
+   "seconds": 0.021,
+   "at": 3.072
+  }
+ ],
+ "levels": [
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 1,
+   "k": 1,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.805,
+   "nodes": [
+    0,
+    16422,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 2,
+   "k": 1,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.853,
+   "nodes": [
+    0,
+    16422,
+    0,
+    0
+   ],
+   "lookups": 16422,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 16422
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 3,
+   "k": 1,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 1.678,
+   "nodes": [
+    0,
+    16422,
+    236910,
+    0,
+    0
+   ],
+   "lookups": 236910,
+   "cover_calls": 30002,
+   "cover_pruned": 572,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 4,
+   "k": 1,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 3.25,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    10064231,
+    0,
+    0
+   ],
+   "lookups": 10064231,
+   "cover_calls": 252590,
+   "cover_pruned": 20124,
+   "hits": 0,
+   "false_hits": 130540
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 5,
+   "k": 1,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 71.881,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    10817268,
+    390457486,
+    0,
+    0
+   ],
+   "lookups": 390327554,
+   "cover_calls": 11088060,
+   "cover_pruned": 3580498,
+   "hits": 0,
+   "false_hits": 3679967
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 6,
+   "k": 1,
+   "relaxed": [],
+   "status": "too_many_tasks",
+   "seconds": 67.913,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    10817268,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 10357091,
+   "cover_pruned": 53897,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 6,
+   "k": 1,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 92.415,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    263364,
+    17461067,
+    608570775,
+    0,
+    0
+   ],
+   "lookups": 608513599,
+   "cover_calls": 17700769,
+   "cover_pruned": 8573242,
+   "hits": 1,
+   "false_hits": 3276026
+  }
+ ],
+ "status": "exact",
+ "seconds": 241.89,
+ "lower": 6,
+ "upper": 6,
+ "notes": {
+  "mode": "circuit without CSS sectors: plain weight-bounded search (as ours.py)",
+  "dp": {
+   "main": {
+    "columns": 16422,
+    "cut_rank": 96,
+    "peak_bits": 96,
+    "work": null,
+    "queries": 1,
+    "estimate_seconds": 0.153,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   }
+  },
+  "table_k_reduced": [
+   [
+    16422,
+    2,
+    1
+   ]
+  ]
+ }
+}

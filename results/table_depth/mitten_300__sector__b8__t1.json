@@ -1,0 +1,261 @@
+{
+ "instance": "bench/instances/mitten_300",
+ "variant": "sector",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "k_asked": 3,
+   "k": 3,
+   "bytes": 4831838208,
+   "entries": 169517681,
+   "build_seconds": 6.352,
+   "seconds": 6.876,
+   "at": 3.047
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 1,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    102,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 2,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    102,
+    0,
+    0
+   ],
+   "lookups": 102,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 102
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 3,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.005,
+   "nodes": [
+    0,
+    102,
+    0,
+    0,
+    0
+   ],
+   "lookups": 102,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 102
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 4,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.126,
+   "nodes": [
+    0,
+    102,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 102,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 102
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 5,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.887,
+   "nodes": [
+    0,
+    102,
+    2081,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 2081,
+   "cover_calls": 152,
+   "cover_pruned": 4,
+   "hits": 0,
+   "false_hits": 2081
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 6,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 13.184,
+   "nodes": [
+    0,
+    102,
+    2081,
+    78492,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 78492,
+   "cover_calls": 4111,
+   "cover_pruned": 55,
+   "hits": 0,
+   "false_hits": 78492
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 7,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 8.618,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79551,
+    2261532,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 2261523,
+   "cover_calls": 137604,
+   "cover_pruned": 23585,
+   "hits": 0,
+   "false_hits": 23332
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 8,
+   "k": 3,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 72.467,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79557,
+    3142231,
+    47623445,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 47623428,
+   "cover_calls": 4410787,
+   "cover_pruned": 1955660,
+   "hits": 0,
+   "false_hits": 105329
+  },
+  {
+   "stage": "collapsed",
+   "cols": 1020,
+   "K": 9,
+   "k": 3,
+   "relaxed": [],
+   "status": "timeout",
+   "seconds": 495.229,
+   "nodes": [
+    0,
+    102,
+    2081,
+    79557,
+    3156681,
+    50593792,
+    393999054,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 393998982,
+   "cover_calls": 54916552,
+   "cover_pruned": 41985012,
+   "hits": 0,
+   "false_hits": 221000
+  }
+ ],
+ "stop_reason": "search exhausted the remaining wall-time budget",
+ "status": "timeout",
+ "seconds": 600.448,
+ "lower": 9,
+ "upper": null,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 11820,
+    "cut_rank": 153,
+    "peak_bits": 153,
+    "work": null,
+    "queries": 60,
+    "estimate_seconds": 0.191,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   },
+   "collapsed": {
+    "columns": 1020,
+    "cut_rank": 118,
+    "peak_bits": 118,
+    "work": null,
+    "queries": 60,
+    "estimate_seconds": 0.66,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search"
+   }
+  }
+ }
+}

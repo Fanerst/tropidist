@@ -1,0 +1,148 @@
+{
+ "instance": "bench/instances/color_d11",
+ "variant": "full",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 1,
+ "tables": [
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 4831838208,
+   "entries": 133590521,
+   "build_seconds": 5.003,
+   "seconds": 5.61,
+   "at": 3.034
+  }
+ ],
+ "levels": [
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 1,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.9,
+   "nodes": [
+    0,
+    16422,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 2,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.949,
+   "nodes": [
+    0,
+    16422,
+    0,
+    0
+   ],
+   "lookups": 16422,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 16422
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 3,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 5.14,
+   "nodes": [
+    0,
+    16422,
+    0,
+    0,
+    0
+   ],
+   "lookups": 16422,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 16422
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 4,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 55.046,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    0,
+    0,
+    0
+   ],
+   "lookups": 237344,
+   "cover_calls": 23480,
+   "cover_pruned": 248,
+   "hits": 0,
+   "false_hits": 237344
+  },
+  {
+   "stage": "plain",
+   "cols": 16422,
+   "K": 5,
+   "k": 2,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 636.078,
+   "nodes": [
+    0,
+    16422,
+    237344,
+    10817268,
+    0,
+    0,
+    0
+   ],
+   "lookups": 10817268,
+   "cover_calls": 425046,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 2669828
+  }
+ ],
+ "stop_reason": "whole-run wall-time limit reached",
+ "status": "timeout",
+ "seconds": 706.763,
+ "lower": 6,
+ "upper": null,
+ "notes": {
+  "mode": "circuit without CSS sectors: plain weight-bounded search (as ours.py)",
+  "dp": {
+   "main": {
+    "columns": 16422,
+    "cut_rank": 96,
+    "peak_bits": 96,
+    "work": null,
+    "queries": 1,
+    "estimate_seconds": 0.149,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   }
+  }
+ }
+}

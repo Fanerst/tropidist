@@ -1,0 +1,106 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "surface_d7",
+  "variant": "full",
+  "rows": 336,
+  "cols": 5471,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 7,
+  "upper_bound": 7,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    15
+  ],
+  "witness_ok": true,
+  "seconds": 0.179,
+  "trace": [
+    {
+      "t": 0.085,
+      "lb": 1
+    },
+    {
+      "t": 0.161,
+      "lb": 2
+    },
+    {
+      "t": 0.161,
+      "lb": 3
+    },
+    {
+      "t": 0.162,
+      "lb": 4
+    },
+    {
+      "t": 0.162,
+      "lb": 5
+    },
+    {
+      "t": 0.163,
+      "lb": 6
+    },
+    {
+      "t": 0.163,
+      "lb": 7
+    },
+    {
+      "t": 0.165,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 65.5,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 61, \"cut_rank\": 5, \"decision\": \"search (finished within the head start)\", \"estimate_seconds\": 0.003, \"fits\": true, \"peak_bits\": 7, \"predicted_seconds\": 0.0, \"queries\": 1, \"work\": 1352}, \"main\": {\"columns\": 883, \"cut_rank\": 28, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.006, \"fits\": false, \"peak_bits\": 31, \"predicted_seconds\": 175.469, \"queries\": 1, \"work\": 228109948068}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_reduction_exact\": true, \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 61, \"rows\": 24, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012087821960449219, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.677078247070312e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.369850158691406e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016617774963378906, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018477439880371094, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00015926361083984375, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 7.867813110351562e-05, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 91, \"rows\": 192, \"runs\": [{\"K\": 7, \"best\": 7, \"nsol_recorded\": 1, \"seconds\": 0.0001163482666015625, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/surface_d7",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      33
+    ],
+    "started_at": "2026-10-23T06:16:21.366261+00:00",
+    "ended_at": "2026-10-23T06:16:21.680350+00:00",
+    "wall_seconds": 0.30869,
+    "adapter_seconds": 0.179,
+    "trace_offset_seconds": 0.12969,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/surface_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench_tables/ours_pipeline__dp-1__table%5Fgb-1/surface_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 18.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

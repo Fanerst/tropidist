@@ -194,7 +194,7 @@ with 32 threads and 90 GB for tools that use threads.
 | lrgross | 144 | 4464 | 11 | 19.8 s |  |  |  |
 | mitten_150 | 150 | 9750 | 8 | 130 s |  |  | 1485 s (dist-m4ri CC+RW, 32 threads) |
 | mitten_300 | 300 | 11820 | >=12 |  |  |  |  |
-| mitten_200 | 200 | 15560 | 9 |  | 1038 s |  |  |
+| mitten_200 | 200 | 15560 | 9 |  | 148 s |  |  |
 | routing_54 | 54 | 1998 | 6 | 0.9 s |  | 0.1 s (dist-m4ri CC) | 206 s (Gurobi, 32 threads) |
 | routing_90 | 90 | 3330 | 9 | 5.4 s |  | 477 s (dist-m4ri CC) |  |
 | routing_110 | 110 | 4070 | 10 | 35.3 s |  |  | 408 s (dist-m4ri CC+RW, 32 threads) |
@@ -464,7 +464,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | lrgross | 144 | 4464 | 11 |  | >=10 | 10..11 | 5..11 | 4..11 |  |  |  |
 | mitten_150 | 150 | 9750 | 8 |  |  | 1485 s | 3..9 | 4..9 |  |  |  |
 | mitten_300 | 300 | 11820 | >=12 | >=11 | >=8 | 8..14 | skip | skip |  |  |  |
-| mitten_200 | 200 | 15560 | 9 | 1038 s |  | skip | skip | skip | - | - | - |
+| mitten_200 | 200 | 15560 | 9 | 148 s |  | skip | skip | skip | - | - | - |
 | routing_54 | 54 | 1998 | 6 |  |  |  | 2457 s | 206 s |  |  |  |
 | routing_90 | 90 | 3330 | 9 |  |  |  | 1..9 | 5..9 |  |  |  |
 | routing_110 | 110 | 4070 | 10 |  |  | 408 s | skip | skip | - | - | - |
@@ -1102,6 +1102,7 @@ the same mechanisms as the plain circuits, only other probabilities.
 
 - Our exact values agree with all 73 values certified by their exact methods.
 - Below their best known value: wjh_bb288_circuit: 16 (their best 24)
+- ‡ Distance established outside these runs, and not counted in the tables: wjh_superdense_d11 = 11 (weight-truncated sparse Rank DP, results/sparse_dp/wjh_superdense_d11.json).
 
 <details><summary>Surface-code circuits (5 instances)</summary>
 
@@ -1135,7 +1136,7 @@ the same mechanisms as the plain circuits, only other probabilities.
 | wjh_superdense_d5 | 19 | 1 | 414 | 5 | 5 | 0.2 s |  |  | 1.1 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
 | wjh_superdense_d7 | 37 | 1 | 1248 | 7 | 7 | 2.0 s |  |  | 6..7 |  | 24.1 s | 0.5 s |  | m4riCC, 46.2 s |
 | wjh_superdense_d9 | 61 | 1 | 2788 | 9 | 9 | 391 s |  |  | 5..9 |  | >=7 | 374 s |  | Magma, 28764 s |
-| wjh_superdense_d11 | 91 | 1 | 5250 | 10..11 | 11 | 8..11 | 10..11 | 10..11 | skip |  | >=7 | >=8 | 10..11 | none |
+| wjh_superdense_d11 | 91 | 1 | 5250 | 11‡ | 11 | 8..11 | 10..11 | 10..11 | skip |  | >=7 | >=8 | 10..11 | none |
 | wjh_superdense_mpp_d15 | 169 | 1 | 169 | 15 | 15 | 0.3 s |  |  | 45.1 s |  | 6.4 s | 0.6 s |  | m4riCC, 6.4 s |
 
 </details>
@@ -1329,6 +1330,8 @@ the same mechanisms as the plain circuits, only other probabilities.
   had skipped it because mitten 300 has fewer columns and came first), and dist-m4ri and CP-SAT on
   the color-code circuits (left out of the 32-thread pass by the driver). They ran with the same
   limits while the single-thread pass used other cores of the socket.
+  - Ours on mitten 200 was rerun on 23 October under the lookup-table depth rule (148 s, against 1,038 s on
+    5 October; see the changes of 23 October).
 - dist-m4ri 0.14.7's random-window mode, a heuristic, was at first put under the give-up rule: the harness
   split its list of heuristic methods at every comma, so a specification with options
   (`distm4ri:build=0.14.7,mode=rw`) was not recognised. Its 49 first-tier runs skipped that way were made
@@ -1493,6 +1496,124 @@ memory was 66 GB.
 The hypercube code with L = 4 is open for every method.
 
 ![low-width trial](../results/bench_lowwidth/lowwidth_trial.png)
+
+## Changes of 23 October 2026
+
+### The sparse Rank DP as a third evaluator ("ours + sparse DP")
+
+`cdist/sparse_dp.py` runs the Rank DP's trellis truncated at a weight threshold K, with a meet-in-the-middle
+split of the weight between a forward and a backward sweep (`results/sparse_dp/README.md`). Its cost grows with K
+and with how many low-weight partial solutions stay distinct at a cut, not with the cut rank alone. It wins on
+wide problems whose partial solutions merge, the local circuits that are not graph-like. `cdist/auto.py` predicts
+its time and memory from probe sweeps (`sparse_estimate`).
+
+The pipeline's option `dp=2` is `dp=1` plus a race at the end of the circuit stages. After collapse, lift and
+window, the search on the sector runs for the sparse DP's predicted time. Then one sweep at the upper bound minus
+one decides, if it fits in the table budget and the remaining time. Code instances run as with `dp=1`.
+
+The probe measures the states of weight up to 2 in both directions, and those of weight 3 only where that is
+cheap next to the predicted sweep (commit 8ec918b). Before, it measured weight 3 wherever that stayed under 2e9
+states: 10.6 s on star_42, whose search takes 0.7 s.
+
+First tier, against `dp=1`:
+
+- **The 126 instances of the prior benchmark** (`results/bench_wjh/dp2_vs_dp1.md`):
+  - no outcome changes and nothing is slower;
+  - the superdense colour-code circuits are faster: d = 9 takes 17.0 s instead of 374 s, d = 7 0.7 s instead
+    of 3.3 s;
+  - d = 11 stays open in this tier: its sweep is predicted beyond the 8 GiB table budget. A dedicated run,
+    outside the protocol, settles it at 11 (the footnote of the table above).
+- **The 102 variants of the main suite** (`results/bench/dp2_vs_dp1.md`):
+  - the sparse DP never sweeps there. Either the earlier stages settle the sector or use up the time, or the
+    sector is too wide for the sparse tables, or the search finishes within its head start, or the sweep would
+    not fit in the table budget;
+  - its probe costs 0.3-0.7 s on star_42, routing_54 and walkingcat_54, and 2 s on sdbb_64 (1.45x);
+  - no other variant changes by 1.5x and 1 s, and both solve the same 48 of the 60 instances;
+  - the 19 variants whose tables the table budget fix below made deeper were rerun under the depth rule that
+    replaced it. In the first pass they were slower or lost (color_d11 full).
+
+Second tier (32 threads, 90 GB, 3600 s), against the default configuration:
+
+- **The main suite** (`results/bench/dp2_vs_dp1.md`):
+  - the sparse DP never sweeps there either;
+  - solved: the same 59 instances as the default (all but mitten_300). surface d = 25 needs no second tier;
+  - mitten_200 takes 144 s, from the deeper table of its time-collapsed problem. The default's record of 1,038 s
+    was rerun under the depth rule below: 148 s;
+  - the other second-tier runs agree with the default's within 15%. They ran with the deep tables of 7ef27aa, not
+    under the depth rule.
+- **The 126 instances of the prior benchmark** (`results/bench_wjh/dp2_vs_dp1.md`):
+  - **superdense d = 11 is settled at 11 within the protocol: 1,803 s, 11.3 GB.** The search's head start
+    exhausts the weights 7 to 9 on 32 threads, then one sweep of the sparse DP at K = 10 takes 672 s on one
+    thread. The default stops at 10..11;
+  - solved: 97 against the default's 96, the one more being d = 11;
+  - the other runs: the codes take 0.7-0.9x the default's time and bb288 1.2x; the timeouts end at the same
+    lower bounds.
+
+### The table budget fix: deeper lookup tables make most of these searches slower
+
+Since 7ef27aa (22 October, 11:12 UTC) the pipeline's worker builds its lookup tables as deep as half the memory
+limit allows. Before, they were silently held to 1 GiB. **The records of the default configuration and of
+`dp=1` predate that fix:**
+- on the main suite, in its second tier and in the ablation;
+- on the instances of arXiv:2603.22532.
+
+The last of them started at 07:18 UTC that day, so they all ran with 1 GiB tables.
+
+A rerun of the affected first-tier records, with one code and at one time (`results/bench_recheck/README.md`),
+shows that the deeper tables make the search slower, for `dp=1` and `dp=2` alike:
+- **color_d11 full is lost:** 244 s with 1 GiB tables, a timeout with the weight-2 table of 4.8 GB that the full
+  problem's 16,422 columns now get;
+- the sector problems of cornucopia_252 and of surface d = 21-25 take 2.2-3x as long, their full problems
+  1.3-2.4x;
+- w8bb_144_16 gains nothing, and bb288_r18, mitten and routing_200_24 are not settled either way.
+
+The deeper tables do help elsewhere. In the second tier they make mitten_200 7x faster (1,038 s → 144 s): the
+weight-3 table of its 680-column time-collapsed problem speeds up the collapsed search at weight 9 from 965 s to
+100 s. So the depth needs a rule based on cost, not a return to 1 GiB.
+
+The tables of this document are left as they are. Their records of our pipeline used the 1 GiB tables, and
+`dp=2` has no column in them.
+
+### A depth rule for the lookup tables (deepen=1)
+
+The pipeline now builds its lookup tables up front within 1 GiB for all live tables, the depth of every record
+above (`bench/adapters/ours_pipeline.py`, `results/table_depth/README.md`). It deepens a table only while it
+searches:
+- **Trigger:** an exhausted level took 4 times the predicted build time of the table one weight deeper.
+- **Trial:** that table is built, and both tables run the same level on 5% of the anchors, each for at most 5% of
+  that level's time.
+- **Switch:** the search continues with the deeper table if it visits 1.25 times as many nodes per second at the
+  deepest depth both expand alike.
+- The dense and sparse DP keep the memory budget of 7ef27aa.
+- The kernel now reads its clock every 1,024 node visits and completions, so the trial's time limits hold.
+
+Where the time went (`scripts/table_depth_probe.py`):
+- A deeper table costs about 40 ns per entry to build, 2-6 s for the 1.2-4.8 GB tables above.
+- Short searches only pay for that build. surface d = 21-25 even builds it twice, once in the head start before the
+  dense DP.
+- On color_d11 full the weight-2 table makes every level 3-17x slower. In a label-free table, every syndrome
+  match is a hit that has to be completed explicitly.
+- Long collapsed searches gain: mitten_200's level 9 takes 153 s instead of 1,168 s on 16 threads, and mitten_300's
+  level 8 takes 72 s instead of 181 s.
+
+The main suite's first tier with `dp=1`, under the rule and with `table_gb=1` (the behaviour before 7ef27aa), side by
+side (`results/bench_tables`):
+- **Of the 102 variants, none is solved by only one, and none is 1.5x and 1 s faster or slower.** The rule takes
+  1.02x the time.
+- color_d11 full is solved again (247 s).
+- 9 records hold a trial: mitten_200 and mitten_300 switch to the deeper table, and mitten_200 ends at the lower
+  bound 9 instead of 8.
+
+For the published records this means (reruns of 23 October, `scripts/server/rule_reruns.sh`):
+- **Default and dp=1:** they stand. Under the rule, their tables up front are those they ran with, and they could
+  change only where a trial switches. In the main suite's first tier no outcome changes. In the second tier, the
+  default's mitten_200 was rerun and takes 148 s instead of 1,038 s.
+- **dp=2:** its 21 first-tier records whose tables 7ef27aa had made deeper were rerun under the rule: the 19 of
+  the main suite and the bb288 and bb360 circuits of the prior benchmark.
+  - color_d11 full is solved (246 s);
+  - surface d = 21-25 and cornucopia_252 are back to their dp=1 times;
+  - the others end as before.
+  - Its second-tier records still ran with the deep tables up front.
 
 ## Reproduce
 

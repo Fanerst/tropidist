@@ -1,0 +1,408 @@
+{
+ "instance": "bench/instances/mitten_200",
+ "variant": "sector",
+ "budget_gb": 8.0,
+ "config": "dp=1",
+ "threads": 16,
+ "tables": [
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "k_asked": 3,
+   "k": 2,
+   "bytes": 4718592,
+   "entries": 226691,
+   "build_seconds": 0.013,
+   "seconds": 0.016,
+   "at": 1.358,
+   "deepened": false
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "k_asked": 3,
+   "k": 3,
+   "bytes": 1207959552,
+   "entries": 49139721,
+   "build_seconds": 2.147,
+   "seconds": 2.175,
+   "at": 74.122,
+   "deepened": true
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 208,
+   "k_asked": 2,
+   "k": 2,
+   "bytes": 589824,
+   "entries": 21665,
+   "build_seconds": 0.001,
+   "seconds": 0.002,
+   "at": 227.289,
+   "deepened": false
+  }
+ ],
+ "levels": [
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 1,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    170,
+    0
+   ],
+   "lookups": 0,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 0
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 2,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.001,
+   "nodes": [
+    0,
+    170,
+    0,
+    0
+   ],
+   "lookups": 170,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 170
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 3,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.007,
+   "nodes": [
+    0,
+    170,
+    0,
+    0,
+    0
+   ],
+   "lookups": 170,
+   "cover_calls": 0,
+   "cover_pruned": 0,
+   "hits": 0,
+   "false_hits": 170
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 4,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.012,
+   "nodes": [
+    0,
+    170,
+    2658,
+    0,
+    0,
+    0
+   ],
+   "lookups": 2658,
+   "cover_calls": 249,
+   "cover_pruned": 11,
+   "hits": 0,
+   "false_hits": 2658
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 5,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.013,
+   "nodes": [
+    0,
+    170,
+    2659,
+    82493,
+    0,
+    0,
+    0
+   ],
+   "lookups": 82493,
+   "cover_calls": 2909,
+   "cover_pruned": 453,
+   "hits": 0,
+   "false_hits": 495
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 6,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 0.07,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96739,
+    1688321,
+    0,
+    0,
+    0
+   ],
+   "lookups": 1688306,
+   "cover_calls": 102062,
+   "cover_pruned": 50921,
+   "hits": 0,
+   "false_hits": 2313
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 7,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 2.09,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3574183,
+    30113032,
+    0,
+    0,
+    0
+   ],
+   "lookups": 30112958,
+   "cover_calls": 3769918,
+   "cover_pruned": 2744868,
+   "hits": 0,
+   "false_hits": 13584
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 8,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "exhausted",
+   "seconds": 70.551,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3582474,
+    127424971,
+    494275427,
+    0,
+    0,
+    0
+   ],
+   "lookups": 494274999,
+   "cover_calls": 134607958,
+   "cover_pruned": 113479164,
+   "hits": 0,
+   "false_hits": 92489
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 8,
+   "k": 2,
+   "trial": true,
+   "relaxed": [],
+   "status": "timeout",
+   "seconds": 3.532,
+   "nodes": [
+    0,
+    9,
+    65,
+    1832,
+    59739,
+    2030912,
+    8968936,
+    0,
+    0,
+    0
+   ],
+   "lookups": 8968936,
+   "cover_calls": 2092543,
+   "cover_pruned": 1778219,
+   "hits": 0,
+   "false_hits": 454
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 8,
+   "k": 3,
+   "trial": true,
+   "relaxed": [],
+   "status": "timeout",
+   "seconds": 3.53,
+   "nodes": [
+    0,
+    9,
+    127,
+    5128,
+    208555,
+    8219565,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 8219563,
+   "cover_calls": 213812,
+   "cover_pruned": 3593,
+   "hits": 0,
+   "false_hits": 8659
+  },
+  {
+   "stage": "collapsed",
+   "cols": 680,
+   "K": 9,
+   "k": 3,
+   "trial": false,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 143.923,
+   "nodes": [
+    0,
+    170,
+    2659,
+    96836,
+    3582662,
+    129644603,
+    4252373010,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lookups": 4252372584,
+   "cover_calls": 136899298,
+   "cover_pruned": 7472076,
+   "hits": 1,
+   "false_hits": 992792
+  },
+  {
+   "stage": "quick_lift_0",
+   "cols": 208,
+   "K": 9,
+   "k": 2,
+   "trial": false,
+   "relaxed": [],
+   "status": "found",
+   "seconds": 0.0,
+   "nodes": [
+    0,
+    208,
+    92,
+    103,
+    125,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lookups": 1,
+   "cover_calls": 194,
+   "cover_pruned": 90,
+   "hits": 1,
+   "false_hits": 0
+  }
+ ],
+ "status": "exact",
+ "seconds": 227.292,
+ "lower": 9,
+ "upper": 9,
+ "notes": {
+  "mode": "circuit collapsed/lift/window/sector pipeline",
+  "dp": {
+   "main": {
+    "columns": 15560,
+    "cut_rank": 149,
+    "peak_bits": 149,
+    "work": null,
+    "queries": 40,
+    "estimate_seconds": 0.238,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search (the DP does not fit or is too slow)"
+   },
+   "collapsed": {
+    "columns": 680,
+    "cut_rank": 79,
+    "peak_bits": 79,
+    "work": null,
+    "queries": 40,
+    "estimate_seconds": 0.264,
+    "fits": false,
+    "predicted_seconds": null,
+    "decision": "search"
+   }
+  },
+  "table_k_reduced": [
+   [
+    680,
+    3,
+    2
+   ]
+  ]
+ },
+ "deepen": {
+  "collapsed": [
+   {
+    "K": 8,
+    "k": 3,
+    "level_seconds": 70.551,
+    "predicted_build_seconds": 2.096,
+    "build_seconds": 2.147,
+    "sample_anchors": 9,
+    "limit_seconds": 3.528,
+    "depth": 4,
+    "shallow": [
+     "timeout",
+     3.532,
+     59739
+    ],
+    "deep": [
+     "timeout",
+     3.53,
+     208555
+    ],
+    "decision": "deeper table"
+   }
+  ]
+ }
+}
