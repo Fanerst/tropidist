@@ -1,0 +1,150 @@
+{
+ "note": "Ground truth of the main-suite instances added for the Rank DP evaluators (bench/instances.py, DP_TRUTH), read from the records that certify them.  Every exact value needs a finished record with a checked witness; where a value rests on a theorem (the concatenation bound of the many-hypercube code) the record supplies the witness.",
+ "instances": {
+  "color_cc_d19": {
+   "n": 271,
+   "k": 1,
+   "description": "triangular 6.6.6 color code, [[271,1,19]]",
+   "certified_lower_bound": 19,
+   "certified_upper_bound": 19,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/color_cc_d19__full__t1.json"
+   ]
+  },
+  "color_cc_d23": {
+   "n": 397,
+   "k": 1,
+   "description": "triangular 6.6.6 color code, [[397,1,23]]",
+   "certified_lower_bound": 23,
+   "certified_upper_bound": 23,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/color_cc_d23__full__t1.json"
+   ]
+  },
+  "color_cc_d27": {
+   "n": 547,
+   "k": 1,
+   "description": "triangular 6.6.6 color code, [[547,1,27]]",
+   "certified_lower_bound": 27,
+   "certified_upper_bound": 27,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/color_cc_d27__full__t1.json"
+   ]
+  },
+  "color_cc_d31": {
+   "n": 721,
+   "k": 1,
+   "description": "triangular 6.6.6 color code, [[721,1,31]]",
+   "certified_lower_bound": 31,
+   "certified_upper_bound": 31,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/color_cc_d31__full__t1.json"
+   ]
+  },
+  "concat_steane_L3": {
+   "n": 343,
+   "k": 1,
+   "description": "Steane code concatenated 3 times, [[343,1,27]]",
+   "certified_lower_bound": 27,
+   "certified_upper_bound": 27,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/concat_steane_L3__full__t1.json"
+   ]
+  },
+  "concat_steane_L4": {
+   "n": 2401,
+   "k": 1,
+   "description": "Steane code concatenated 4 times, [[2401,1,81]]",
+   "certified_lower_bound": 81,
+   "certified_upper_bound": 81,
+   "sources": [
+    "results/bench_lowwidth/ours_pipeline__dp-1/concat_steane_L4__full__t1.json"
+   ]
+  },
+  "hypercube_L4": {
+   "n": 1296,
+   "k": 256,
+   "description": "many-hypercube code (concatenated [[6,4,2]]), [[1296,256,16]]",
+   "certified_lower_bound": 16,
+   "certified_upper_bound": 16,
+   "sources": [
+    "concatenation bound: a logical of level L is a logical of some level-L [[6,4,2]] code, so it acts on at least two level-(L-1) blocks, each with weight >= 2^(L-1)",
+    "results/bench_lowwidth/bposd/hypercube_L4__full__t1.json"
+   ]
+  },
+  "dtc_w5_259_2_4": {
+   "n": 259,
+   "k": 2,
+   "description": "directional tile code of arXiv:2606.19482 Table III, X distance (paper: <= 37, a QDistRnd upper bound)",
+   "certified_lower_bound": 36,
+   "certified_upper_bound": 36,
+   "sources": [
+    "results/planar_dp/code_dp1/dtc_w5_259_2_4_Z__t32.json",
+    "results/planar_dp/code_dp0/dtc_w5_259_2_4_Z__t32.json"
+   ]
+  },
+  "dtc_w7_269_4_5": {
+   "n": 269,
+   "k": 4,
+   "description": "directional tile code of arXiv:2606.19482 Table III, X distance (paper: <= 28, a QDistRnd upper bound)",
+   "certified_lower_bound": 28,
+   "certified_upper_bound": 28,
+   "sources": [
+    "results/planar_dp/code_dp1/dtc_w7_269_4_5_Z__t32.json",
+    "results/planar_dp/code_dp0/dtc_w7_269_4_5_Z__t32.json"
+   ]
+  },
+  "dtc_w9_365_10_4": {
+   "n": 365,
+   "k": 10,
+   "description": "directional tile code of arXiv:2606.19482 Table III, X distance (paper: <= 31, a QDistRnd upper bound)",
+   "certified_lower_bound": 31,
+   "certified_upper_bound": 31,
+   "sources": [
+    "results/planar_dp/code_dp1/dtc_w9_365_10_4_Z__t32.json",
+    "results/planar_dp/code_dp0/dtc_w9_365_10_4_Z__t32.json"
+   ]
+  },
+  "dtc_w11_537_14_12": {
+   "n": 537,
+   "k": 14,
+   "description": "directional tile code of arXiv:2606.19482 Table III, X distance (paper: <= 35, a QDistRnd upper bound)",
+   "certified_lower_bound": 19,
+   "certified_upper_bound": 30,
+   "sources": [
+    "results/planar_dp/code_dp0/dtc_w11_537_14_12_Z__t32.json",
+    "results/planar_dp/isd/dtc_w11_537_14_12_Z__t4.json"
+   ]
+  },
+  "superdense_d7": {
+   "n": null,
+   "k": 1,
+   "description": "superdense color-code memory circuit of arXiv:2603.22532, memory-basis sector",
+   "certified_lower_bound": 7,
+   "certified_upper_bound": 7,
+   "sources": [
+    "results/bench_wjh/ours_pipeline/wjh_superdense_d7__sector__t1.json"
+   ]
+  },
+  "superdense_d9": {
+   "n": null,
+   "k": 1,
+   "description": "superdense color-code memory circuit of arXiv:2603.22532, memory-basis sector",
+   "certified_lower_bound": 9,
+   "certified_upper_bound": 9,
+   "sources": [
+    "results/bench_wjh/ours_pipeline/wjh_superdense_d9__sector__t1.json"
+   ]
+  },
+  "superdense_d11": {
+   "n": null,
+   "k": 1,
+   "description": "superdense color-code memory circuit of arXiv:2603.22532, memory-basis sector",
+   "certified_lower_bound": 11,
+   "certified_upper_bound": 11,
+   "sources": [
+    "results/sparse_dp/wjh_superdense_d11.json"
+   ]
+  }
+ }
+}

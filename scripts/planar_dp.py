@@ -163,6 +163,28 @@ def widths(family, names=None, seeds=2, improve_iters=3000):
     return records
 
 
+def ordered_code(inst, basis, rec):
+    """(hx, hz) of an instance with its qubits renumbered in the best order found for that memory basis (rec: the
+    instance's entry of results/planar_dp/widths_<family>.json): the columns of the order, each followed by the
+    qubits merged into it."""
+    p = stabcode.css_distance_problem(inst["hx"], inst["hz"], inst["n"], basis, name=inst["name"])
+    qorder = [q for j in rec["bases"][basis]["order"] for (_, q) in p.col_meta[j]]
+    assert sorted(qorder) == list(range(inst["n"]))
+    new = {q: i for i, q in enumerate(qorder)}
+
+    def relabel(rows):
+        return [sum(1 << new[q] for q in stabcode.bits(r)) for r in rows]
+    return relabel(inst["hx"]), relabel(inst["hz"])
+
+
+def family_code(family, name, basis):
+    """(hx, hz, n, instance) of a named family instance in its best order (what export() writes); the main suite
+    builds the directional tile codes of arXiv:2606.19482 Table III with it (bench/instances.py)."""
+    inst = next(i for i in load_family(family) if i["name"] == name)
+    rec = json.load(open(os.path.join(OUT, "widths_%s.json" % family)))[name]
+    return (*ordered_code(inst, basis, rec), inst["n"], inst)
+
+
 def export(family, names=None):
     import common
     insts = {i["name"]: i for i in load_family(family)}
@@ -174,17 +196,11 @@ def export(family, names=None):
             continue
         for basis in ("Z", "X"):
             b = rec[name]["bases"][basis]
-            p = stabcode.css_distance_problem(inst["hx"], inst["hz"], inst["n"], basis, name=name)
-            # qubit order: the columns of the best order, each followed by the qubits merged into it
-            qorder = [q for j in b["order"] for (_, q) in p.col_meta[j]]
-            assert sorted(qorder) == list(range(inst["n"]))
-            new = {q: i for i, q in enumerate(qorder)}
-
-            def relabel(rows):
-                return [sum(1 << new[q] for q in stabcode.bits(r)) for r in rows]
+            hx, hz = ordered_code(inst, basis, rec[name])
             dkey = "dx" if basis == "Z" else "dz"
             truth = {}
-            if inst.get(dkey) is not None and inst.get("d_kind") == "exact":
+            kind = inst.get(dkey + "_kind") or inst.get("d_kind")     # Table III: d_Z exact, d_X an upper bound
+            if inst.get(dkey) is not None and kind == "exact":
                 truth = {"full": (inst[dkey], "exact", "%s %s" % (inst["arxiv"], inst.get("locator")))}
             meta = dict(family=inst["family"], description="%s, %s distance (%s)" % (name, dkey, inst.get("locator")),
                         k=inst["k"], source="scripts/planar_dp.py from papers/planar_%s.py" % family,
@@ -192,7 +208,7 @@ def export(family, names=None):
                         qubit_order="best order of results/planar_dp/widths_%s.json (%s)" % (family, b["best"]),
                         truth=truth)
             iname = "%s_%s" % (name, basis)
-            common.export_code_instance(iname, relabel(inst["hx"]), relabel(inst["hz"]), inst["n"], basis, None, meta,
+            common.export_code_instance(iname, hx, hz, inst["n"], basis, None, meta,
                                         root=root)
             out.append(iname)
             print("exported", iname)

@@ -179,6 +179,35 @@ def _wjh_register():
 
 _wjh_register()
 
+# Problems where the Rank DP evaluators decide (added 23 October 2026, docs/BENCHMARK.md):
+#   - narrow codes of large distance, for the dense DP: color codes and concatenated Steane codes
+#     (bench/export_lowwidth.py, as in the low-width trial);
+#   - the long thin directional tile codes of arXiv:2606.19482 Table III, whose X distance the paper gives as upper
+#     bounds only (papers/planar_nngrid.py, in the qubit order of the planar study, scripts/planar_dp.py);
+#   - a many-hypercube code that no method solves, as a contrast;
+#   - the superdense color-code circuits of arXiv:2603.22532, where the sparse DP decides.
+# Ground truth: DP_TRUTH, written by scripts/dp_friendly_truth.py from the records that certify it.
+DP_TRUTH = "results/dp_friendly_truth.json"
+for _kind, _size, _name, _family in ([("color", d, "color_cc_d%d" % d, "color_cc") for d in (19, 23, 27, 31)]
+                                     + [("steane", L, "concat_steane_L%d" % L, "concat_steane") for L in (3, 4)]
+                                     + [("hypercube", 4, "hypercube_L4", "hypercube")]):
+    _add(_name, "code", _family, "lowwidth", (_kind, _size), DP_TRUTH, truth_key=_name)
+for _name in ("dtc_w5_259_2_4", "dtc_w7_269_4_5", "dtc_w9_365_10_4", "dtc_w11_537_14_12"):
+    _add(_name, "code", "dtc_strip", "dtc", _name, DP_TRUTH, truth_key=_name)
+for _d in (7, 9, 11):
+    _w = WJH.get("wjh_superdense_d%d" % _d)
+    if _w is not None:
+        _add("superdense_d%d" % _d, "circuit", "superdense", "wjh_circuit", _w["key"], DP_TRUTH,
+             circuit_file=_w["circuit_file"], sector_high=True, truth_key="superdense_d%d" % _d)
+
+
+def _truth_record(path, spec):
+    """The record of a truth file; a file with an "instances" map holds one record per instance (DP_TRUTH)."""
+    data = _json(path)
+    if "instances" in data:
+        return data["instances"][spec["truth_key"]], path + "#instances." + spec["truth_key"]
+    return data, path
+
 
 def _prepare(spec):
     """Resolve file-backed metadata without building circuits or running a solver."""
@@ -195,11 +224,16 @@ def _prepare(spec):
         spec.update(n=n, k=k, basis="Z", rounds=int(f["r"]), description="arXiv:2603.22532 circuit " + key,
                     truth={"sector": (None, "unknown", None), "collapsed": (None, "unknown", None)})
         if path:
-            spec["truth"]["sector"] = _truth(_json(path), path)
+            spec["truth"]["sector"] = _truth(*_truth_record(path, spec))
         return
     if typ == "wjh_code":
         spec.update(description="arXiv:2603.22532 code %s %d (Z distance)" % key,
                     truth={"full": (None, "unknown", None)})
+        return
+    if typ in ("lowwidth", "dtc"):
+        record, source = _truth_record(path, spec)
+        spec.update(n=record["n"], k=record["k"], description=record["description"],
+                    truth={"full": _truth(record, source)})
         return
     if typ in ("stim_surface", "stim_color"):
         try:
@@ -409,6 +443,19 @@ def _wjh_code_perms(family, hx, n):
 
 def _code(spec):
     typ, key = spec["builder"], spec["key"]
+    if typ == "lowwidth":
+        try:
+            from . import export_lowwidth
+        except ImportError:
+            import export_lowwidth
+        return (*export_lowwidth.code(*key), [])
+    if typ == "dtc":
+        import sys
+        if str(ROOT / "scripts") not in sys.path:
+            sys.path.insert(0, str(ROOT / "scripts"))
+        import planar_dp
+        hx, hz, n, _ = planar_dp.family_code("nngrid", key, spec["basis"])
+        return hx, hz, n, []
     if typ == "wjh_code":
         family, index = key
         c = next(c for c in _json(WJH_CODES)["codes"] if c["family"] == family and c["index"] == index)

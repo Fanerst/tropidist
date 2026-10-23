@@ -248,11 +248,15 @@ HEX = ("square-lattice tile code of ENES2WS2ENE; the hexagonal grid enters only 
        "(Fig. 3, degree-3 brick-wall graph, drawn rotated by 90 degrees). The paper gives no M, N for hexagonal codes")
 
 
-def _dtc(name, word_key, M, N, n, k, d, locator, dx=None, dz=None, d_kind="unknown", d_method=D_UNSTATED, notes=""):
+def _dtc(name, word_key, M, N, n, k, d, locator, dx=None, dz=None, d_kind="unknown", d_method=D_UNSTATED, notes="",
+         dx_kind=None):
+    """dx_kind: the kind of the paper's dx where it differs from d_kind (Table III: d_Z exact, d_X an upper bound)."""
     inst = directional_tile_code(WORDS[word_key], M, N)
     inst.update(name=name, family=FAMILY, arxiv=ARXIV, locator=locator, grid="hexagonal" if word_key == "hex"
                 else "square", n_paper=n, k_paper=k, dx=dx, dz=dz, d=d, d_kind=d_kind, d_method=d_method,
                 notes=("(M,N) = (%d,%d), word %s. " % (M, N, WORDS[word_key])) + notes)
+    if dx_kind is not None:
+        inst["dx_kind"] = dx_kind
     return inst
 
 
@@ -265,7 +269,7 @@ def instances():
                     "10 Z checks, as built. Exhaustive check here (sanity check of the dx/dz orientation): dx = 3, "
                     "dz = 2."))
     out.append(_dtc("dtc_w5_259_2_4", "w5", 22, 3, 259, 2, 4, "Table III row 1 (App. B, biased noise)",
-                    dx=37, dz=4, d_kind="exact", d_method=D_TABLE3 % 37,
+                    dx=37, dz=4, d_kind="exact", d_method=D_TABLE3 % 37, dx_kind="upper_bound",
                     notes="Paper: [[259,2,<=37,4]], n_r = 58. dx = 37 is an upper bound only."))
     # w = 7, N2ESEN2: M = N = d - 2 (Table V lists d = 3..9; Table VI d = 3..6; Table II d = 5, 9; Figs. 1, 9)
     w7 = {3: "Table V; Table VI", 4: "Table V; Table VI", 5: "Table II; Table V; Table VI; Fig. 1(b); Fig. 7; "
@@ -277,13 +281,15 @@ def instances():
         out.append(_dtc("dtc_w7_%d_4_%d" % (n, d), "w7", d - 2, d - 2, n, 4, d, loc,
                         notes=FIG8 + "." + (fig1 if d == 5 else "")))
     out.append(_dtc("dtc_w7_269_4_5", "w7", 22, 3, 269, 4, 5, "Table III row 2", dx=28, dz=5, d_kind="exact",
-                    d_method=D_TABLE3 % 28, notes="Paper: [[269,4,<=28,5]], n_r = 87. dx = 28 is an upper bound only."))
+                    d_method=D_TABLE3 % 28, dx_kind="upper_bound",
+                    notes="Paper: [[269,4,<=28,5]], n_r = 87. dx = 28 is an upper bound only."))
     # w = 9, N2E2SE2N2: (M,N) from the Fig. 8 routing counts (= Table IV formulas)
     for (M, N, n, d, loc) in [(1, 3, 52, 3, "Table VI"), (2, 4, 76, 4, "Table VI"), (3, 6, 115, 5, "Table VI"),
                               (4, 8, 162, 6, "Table II; Table VI"), (7, 14, 351, 9, "Table II")]:
         out.append(_dtc("dtc_w9_%d_10_%d" % (n, d), "w9", M, N, n, 10, d, loc, notes=FIG8 + "."))
     out.append(_dtc("dtc_w9_365_10_4", "w9", 19, 4, 365, 10, 4, "Table III row 3", dx=31, dz=4, d_kind="exact",
-                    d_method=D_TABLE3 % 31, notes="Paper: [[365,10,<=31,4]], n_r = 196. dx = 31 is an upper bound "
+                    d_method=D_TABLE3 % 31, dx_kind="upper_bound",
+                    notes="Paper: [[365,10,<=31,4]], n_r = 196. dx = 31 is an upper bound "
                     "only."))
     # w = 11, N2E2SESE2N2
     for (M, N, n, d, loc) in [(1, 5, 74, 5, "Table VI"), (2, 6, 104, 6, "Table VI"), (3, 11, 182, 10, "Table VI"),
@@ -291,7 +297,7 @@ def instances():
                               (5, 16, 323, 15, "Table II; abstract; Example 4 (346 -> 235 -> 165 routing sites)")]:
         out.append(_dtc("dtc_w11_%d_14_%d" % (n, d), "w11", M, N, n, 14, d, loc, notes=FIG8 + "."))
     out.append(_dtc("dtc_w11_537_14_12", "w11", 12, 13, 537, 14, 12, "Table III row 4", dx=35, dz=12,
-                    d_kind="exact", d_method=D_TABLE3 % 35,
+                    d_kind="exact", d_method=D_TABLE3 % 35, dx_kind="upper_bound",
                     notes="Paper: [[537,14,<=35,12]], n_r = 216. dx = 35 is an upper bound only."))
     # hexagonal grid, ENES2WS2ENE
     out.append(_dtc("dtc_hex_52_10_3", "hex", 3, 1, 52, 10, 3, "Table II; Table VI; Fig. 3", notes=HEX +

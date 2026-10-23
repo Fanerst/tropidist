@@ -79,6 +79,20 @@ B1 = ["sat:mode=incremental", "sat:mode=maxsat", CASHW, ENMAX, "milp:backend=sci
 GUROBI = "milp:backend=gurobi"      # gurobipy, or gurobi_cl from $GUROBI_HOME/bin
 
 
+# The final pass (Feng, 23 October 2026): dp=2 is our final configuration, the only column of ours in the tables.
+# It reruns that configuration on every set with one code version, and runs every other solver on the instances
+# added for the Rank DP evaluators (bench/instances.py DP_TRUTH).  dist-m4ri runs as 0.14.7 only (the 0.9.0 build
+# has its own section); "ours, plain" and the other configurations of ours are not run.
+FINAL = "ours_pipeline:dp=2"
+DP_FRIENDLY = ["color_cc_d19", "color_cc_d23", "color_cc_d27", "color_cc_d31", "concat_steane_L3", "concat_steane_L4",
+               "hypercube_L4", "dtc_w5_259_2_4", "dtc_w7_269_4_5", "dtc_w9_365_10_4", "dtc_w11_537_14_12",
+               "superdense_d7", "superdense_d9", "superdense_d11"]
+ABLATION_FINAL = [FINAL + "," + s for s in ("symmetry=0", "cover=0", "collapse=0", "lift=0", "window=0",
+                                            "collapse=0,lift=0,window=0",
+                                            "symmetry=0,cover=0,collapse=0,lift=0,window=0")] \
+    + ["ours_pipeline:dp=1", "ours_pipeline"]          # without the sparse DP; without either DP
+
+
 def folder(spec):
     return run_matrix.parse_methods(spec, HERE / "adapters", set())[0]["folder"]
 
@@ -101,13 +115,15 @@ def instances(directory=None):
     return out
 
 
-def unsolved(spec, tier_a, raw=False, directory=None, first=None, tracks=None):
+def unsolved(spec, tier_a, raw=False, directory=None, first=None, tracks=None, names=None):
     """{variant: [instance names]} that the method did not solve exactly in the first tier.
     raw: the method takes the raw problem of a circuit (variant full) and no code instances.
-    first: the first-tier method whose records count (default: the same spec)."""
+    first: the first-tier method whose records count (default: the same spec).  names: only these instances."""
     res = {"sector": [], "full": []}
     for m in instances(directory):
         if tracks and m["track"] not in tracks:
+            continue
+        if names is not None and m["name"] not in names:
             continue
         variant = "full" if m["track"] == "code" or raw else "sector"
         if variant not in m["variants"] or (raw and m["track"] == "code"):
@@ -142,12 +158,13 @@ def harness_parallel(calls, log, dry):
 
 
 def frontier(methods, tier_a, out, threads, mem, jobs, name, logs, dry, raw=False, directory=None, firsts=None,
-             cpus=None, tracks=None):
+             cpus=None, tracks=None, only=None):
     lists = out / "lists"
     lists.mkdir(parents=True, exist_ok=True)
     extra = ["--instance-dir", str(directory)] if directory else []
     for i, spec in enumerate(methods):
-        for variant, names in unsolved(spec, tier_a, raw, directory, firsts[i] if firsts else None, tracks).items():
+        for variant, names in unsolved(spec, tier_a, raw, directory, firsts[i] if firsts else None, tracks,
+                                       only).items():
             if not names:
                 continue
             path = lists / ("%s__%s__%s.txt" % (name, folder(spec)[:60], variant))
@@ -162,7 +179,8 @@ def frontier(methods, tier_a, out, threads, mem, jobs, name, logs, dry, raw=Fals
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("phases", nargs="+", choices=["fix", "collapsed", "b32", "b1", "ablation", "stimsat", "b1s", "gurobi", "wjh1", "wjh2",
-                                         "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b"])
+                                         "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b",
+                                         "final1", "final8h", "final2"])
     ap.add_argument("--tier-a", default=str(ROOT / "results" / "bench"))
     ap.add_argument("--out", default=str(ROOT / "results" / "bench_tierB"))
     ap.add_argument("--dry-run", action="store_true")
@@ -329,6 +347,100 @@ def main():
                 j.start()
             for j in jobs_:
                 j.join()
+        elif phase == "final1":
+            # First tier.  Socket 0: the final configuration on the main suite, the other solvers on the added
+            # instances (then their collapsed problems, DEM input, Stim's WCNF and the sparse logical basis).
+            # Socket 1: the final configuration on arXiv:2603.22532, and its ablation (results/bench_ablation_final).
+            import threading
+            added = logs / "final_added.txt"
+            added.write_text("\n".join(DP_FRIENDLY) + "\n")
+            circuits = [n for n in DP_FRIENDLY if n.startswith("superdense")]
+            (logs / "final_added_circuits.txt").write_text("\n".join(circuits) + "\n")
+            # the sparse logical basis exists where bench/standard_logicals.py could write it (not for a code
+            # whose problem merges equal columns: dtc_w7_269_4_5)
+            codes = [n for n in DP_FRIENDLY if n not in circuits and (HERE / "instances" / n / "full.L.std.mtx").exists()]
+            (logs / "final_added_codes.txt").write_text("\n".join(codes) + "\n")
+            base = ["--threads", "1", "--time-limit", "600", "--mem-gb", "16", "--give-up", "2"] + REDO
+            heur = "bposd,isd,stim_search," + DM4_RW
+            others = [DM4_CC, DM4_BR, DM4_RW, "milp:backend=scipy", "milp:backend=cpsat", "sat:mode=incremental",
+                      "sat:mode=maxsat", CASHW, ENMAX] + QSERF + ["bposd", "isd", "stim_search"]
+            certifying = [DM4_CC, DM4_BR, "milp:backend=scipy", "milp:backend=cpsat", "sat:mode=incremental",
+                          "sat:mode=maxsat", CASHW, ENMAX, GUROBI]
+            sl = lambda spec: spec + ",lbasis=std"
+            sparse_l = [sl(x) for x in ("milp:backend=cpsat", GUROBI, "milp:backend=scipy", "sat:mode=incremental",
+                                        "sat:mode=maxsat", CASHW, ENMAX)]
+            wjh = ROOT / "results" / "bench_wjh"
+            abl = ROOT / "results" / "bench_ablation_final"
+            abl.mkdir(parents=True, exist_ok=True)
+            (abl / "instances.txt").write_text("\n".join(m["name"] for m in instances() if m["track"] == "circuit") + "\n")
+
+            def socket0():
+                harness_parallel([
+                    (["--methods", FINAL, "--instances", "all", "--variants", "sector,full", "--jobs", "18",
+                      "--total-mem-gb", "288", "--out", str(tier_a)] + base, "0-17"),
+                    (["--methods", ",".join(others), "--instances", "@" + str(added), "--variants", "sector,full",
+                      "--heuristic-methods", heur, "--jobs", "18", "--total-mem-gb", "288", "--out", str(tier_a)] + base,
+                     "18-35"),
+                    (["--methods", GUROBI, "--instances", "@" + str(added), "--variants", "sector,full", "--jobs", "6",
+                      "--total-mem-gb", "96", "--out", str(tier_a)] + base, "36-41"),
+                ], logs / "final1_socket0.log", a.dry_run)
+                harness_parallel([
+                    (["--methods", ",".join(certifying), "--instances", "@" + str(logs / "final_added_circuits.txt"),
+                      "--variants", "collapsed", "--jobs", "9", "--total-mem-gb", "144", "--out", str(tier_a)] + base,
+                     "0-8"),
+                    (["--methods", ",".join([DM4_CC + ",input=dem", DM4_BR + ",input=dem"] + STIMSAT), "--instances",
+                      "@" + str(logs / "final_added_circuits.txt"), "--variants", "full", "--jobs", "5",
+                      "--total-mem-gb", "80", "--out", str(tier_a)] + base, "9-13"),
+                    (["--methods", ",".join(sparse_l), "--instances", "@" + str(logs / "final_added_codes.txt"),
+                      "--variants", "full", "--jobs", "14", "--total-mem-gb", "224", "--out", str(tier_a)] + base,
+                     "14-27"),
+                ], logs / "final1_socket0b.log", a.dry_run)
+
+            def socket1():
+                for track, variant in (("circuit", "sector"), ("code", "full")):
+                    harness(["--methods", FINAL, "--instances", "@" + str(wjh / ("instances_%s.txt" % track)),
+                             "--variants", variant, "--instance-dir", str(WJH_DIR), "--jobs", "18", "--total-mem-gb",
+                             "288", "--out", str(wjh)] + base, logs / "final1_wjh.log", a.dry_run, "142-159")
+
+            def ablation():
+                harness(["--methods", ",".join(ABLATION_FINAL), "--instances", "@" + str(abl / "instances.txt"),
+                         "--variants", "sector", "--jobs", "18", "--total-mem-gb", "288", "--out", str(abl)] + base,
+                        logs / "final1_ablation.log", a.dry_run, "160-177")
+            jobs_ = [threading.Thread(target=f) for f in (socket0, socket1, ablation)]
+            for j in jobs_:
+                j.start()
+            for j in jobs_:
+                j.join()
+        elif phase == "final8h":
+            # the protocol of arXiv:2603.22532 (1 core, 8 h, 8 GB, every instance, no give-up rule) for the final
+            # configuration on all 126 of its instances, 46 at a time on physical cores of socket 1
+            out8 = ROOT / "results" / "bench_wjh_8h"
+            wjh = ROOT / "results" / "bench_wjh"
+            calls = []
+            for (track, variant), cpus in ((("circuit", "sector"), "96-107"), (("code", "full"), "108-141")):
+                jobs = len(run_matrix.parse_cpus(cpus))
+                calls.append((["--methods", FINAL, "--instances", "@" + str(wjh / ("instances_%s.txt" % track)),
+                               "--variants", variant, "--instance-dir", str(WJH_DIR), "--threads", "1", "--time-limit",
+                               "28800", "--mem-gb", "8", "--total-mem-gb", str(8 * jobs), "--jobs", str(jobs),
+                               "--out", str(out8)] + REDO, cpus))
+            harness_parallel(calls, logs / "final8h.log", a.dry_run)
+        elif phase == "final2":
+            # Second tier on socket 0, one pass after the other: the final configuration on the main suite, the
+            # other solvers on the added instances, then the final configuration on arXiv:2603.22532.
+            frontier([FINAL], tier_a, out, 32, 90, 3, "final2_ours", logs, a.dry_run, cpus="0-95")
+            frontier([DM4_BR, "milp:backend=cpsat"] + QSERF + [GUROBI], tier_a, out, 32, 90, 3, "final2_b32", logs,
+                     a.dry_run, cpus="0-95", only=set(DP_FRIENDLY))
+            frontier(B1, tier_a, out, 1, 16, 18, "final2_b1", logs, a.dry_run, cpus="0-17", only=set(DP_FRIENDLY))
+            frontier(STIMSAT, tier_a, out, 1, 16, 3, "final2_b1s", logs, a.dry_run, raw=True, cpus="18-20",
+                     only=set(DP_FRIENDLY))
+            sl = lambda spec: spec + ",lbasis=std"
+            frontier([sl("milp:backend=cpsat"), sl(GUROBI)], tier_a, out, 32, 90, 2, "final2_sparseL_b32", logs,
+                     a.dry_run, cpus="32-95", tracks=("code",), only=set(DP_FRIENDLY))
+            frontier([sl(x) for x in ("milp:backend=scipy", "sat:mode=incremental", "sat:mode=maxsat", CASHW, ENMAX)],
+                     tier_a, out, 1, 16, 14, "final2_sparseL_b1", logs, a.dry_run, cpus="0-13", tracks=("code",),
+                     only=set(DP_FRIENDLY))
+            frontier([FINAL], ROOT / "results" / "bench_wjh", ROOT / "results" / "bench_wjh_tierB", 32, 90, 3,
+                     "final2_wjh", logs, a.dry_run, directory=WJH_DIR, cpus="0-95")
     print(time.strftime("%H:%M:%S"), "all phases done", flush=True)
 
 

@@ -66,6 +66,15 @@ def hypercube(L):
     return xs, zs, 6 ** L
 
 
+def code(kind, size):
+    """(hx, hz, n) of a trial code: ("color", d), ("steane", L) or ("hypercube", L).  The main suite builds its
+    instances of these families with it (bench/instances.py)."""
+    if kind == "color":
+        import dp_vs_search_local as dvs
+        return dvs.color_code(size)
+    return {"steane": concat_steane, "hypercube": hypercube}[kind](size)
+
+
 def main(out=str(HERE / "instances_lowwidth")):
     import dp_vs_search_local as dvs
     specs = [("color_cc_d%d" % d, "color_cc", lambda d=d: dvs.color_code(d), d,
