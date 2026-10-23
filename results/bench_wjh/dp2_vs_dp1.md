@@ -68,3 +68,50 @@ Elsewhere the sparse stage is not reached:
 - The surface, midout and BB circuits up to [[144,12,12]] are settled by the earlier stages.
 - bb288 and bb360 stop in the collapsed search. Their sector problems (cut rank 61 to 211) would be too wide for
   the sparse tables anyway.
+
+## Second tier (32 threads, 90 GB, 3600 s), against the default configuration
+
+Records: `results/bench_wjh_tierB/ours_pipeline__dp-2`.
+- The run (`bench/tier_b.py dp2b`, code of 6798b88) covers what dp=2's first tier left: 4 circuits on their sector
+  problem and 35 codes.
+- With give-up 1, a family's larger instances are skipped after its first timeout: 26 of the 39 (the default:
+  27 of 40).
+- 2 jobs on cores 96-159 of 5090, 23 October 11:45-14:25 (UTC+8).
+- Only superdense d11 reaches the sparse stage. Under 8ec918b its probe would measure the same weights, so its
+  decision and schedule stand for 8ec918b too.
+
+The default's records (`results/bench_wjh_tierB/ours_pipeline`, October) ran with 1 GiB lookup tables, those of
+dp=2 with 45 GiB (7ef27aa):
+
+| instance variant | default, tier 2 | dp=2, tier 2 |
+|---|---:|---:|
+| wjh_bb288_circuit sector | 196 s | 236 s |
+| wjh_bb360_circuit sector | timeout 17.. | timeout 17.. |
+| wjh_bb_n360 full | 76.1 s | 56.4 s |
+| wjh_bb_n576 full | 44.3 s | 39.5 s |
+| wjh_bb_n648 full | timeout 28.. | timeout 28.. |
+| wjh_lp_aj61 full | 93.5 s | 73.6 s |
+| wjh_lp_aj73 full | 70.5 s | 63.1 s |
+| wjh_lp_aj85 full | 68.6 s | 55.5 s |
+| wjh_lp_aj95 full | 62.8 s | 44.3 s |
+| wjh_lp_xu42 full | 133 s | 105 s |
+| wjh_qt_216_4_18 full | 27.2 s | (solved in tier 1) |
+| wjh_qt_252_2_21 full | 2390 s | 1847 s |
+| wjh_qt_288_2_24 full | timeout 22.. | timeout 22.. |
+| wjh_superdense_d11 sector | timeout 10..11 | 1803 s |
+
+**Superdense d11 is settled within the protocol: 11, in 1,803 s and 11.3 GB.**
+- The window stage finds a weight-11 fault set after 1 s.
+- The sector search then has its 1,122 s head start (the sparse DP's predicted time) and exhausts the weights 7
+  to 9 on 32 threads.
+- One sweep of the sparse DP at K = 10 (one thread, 672 s) leaves no solution of weight up to 10.
+- The default stops at 10..11 after 3,600 s.
+
+The other second-tier runs:
+- The codes run as with dp=1 and take 0.7-0.9x the default's time.
+- bb288 takes 1.2x.
+- The timeouts end at the same lower bounds (bb360 17, bb_n648 28, qt_288 22).
+- qt_216_4_18 is settled in dp=2's first tier (586 s, at the limit, as with dp=1).
+
+Solved over both tiers (`bench/compare_dp2.py`): **97 of the 126 instances with dp=2, 96 with the default.** The one more
+is superdense d11.

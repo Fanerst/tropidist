@@ -88,9 +88,9 @@ def wjh():
         for n in names:
             for tier, recs in (("tier 1", a1), ("tier 2", b32)):
                 ta, tb = secs(recs, "ours", n, variant), secs(recs, "ours + sparse DP", n, variant)
-                if tier == "tier 2":            # tier 2 ran only on what each configuration's tier 1 left
-                    ta = ta if secs(a1, "ours", n, variant) is None else None
-                    tb = tb if secs(a1, "ours + sparse DP", n, variant) is None else None
+                if tier == "tier 2" and (secs(a1, "ours", n, variant) is not None or
+                                         secs(a1, "ours + sparse DP", n, variant) is not None):
+                    continue                    # compared where both first tiers left the instance
                 if (ta is None) != (tb is None) or (ta is not None and abs(ta - tb) > 1 and
                                                     max(ta, tb) > 1.5 * min(ta, tb)):
                     diff.append((n, tier, ta, tb))
@@ -98,8 +98,8 @@ def wjh():
         lines.append("| %s | %d | %d | %d | %d | %d |" % ((title,) + tuple(c)))
     lines.append("| **all** | %d | %d | %d | %d | %d |" % tuple(total))
     f = lambda t: "–" if t is None else T.seconds(t)
-    lines += ["", "Changed (time differs by more than 1.5x and 1 s, or solved by one only; tier 2 counts the runs of "
-              "what tier 1 left):", "", "| instance | tier | ours | ours + sparse DP |", "|---|---|---:|---:|"]
+    lines += ["", "Changed (time differs by more than 1.5x and 1 s, or solved by one only; tier 2 compares what both "
+              "first tiers left):", "", "| instance | tier | ours | ours + sparse DP |", "|---|---|---:|---:|"]
     lines += ["| %s | %s | %s | %s |" % (n, tier, f(ta), f(tb)) for n, tier, ta, tb in diff]
     return "\n".join(lines)
 

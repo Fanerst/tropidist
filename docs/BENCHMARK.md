@@ -1536,6 +1536,13 @@ Second tier (32 threads, 90 GB, 3600 s), against the default configuration:
     deeper tables; a circuit without a sector problem gets no second tier;
   - mitten_200 takes 144 s instead of 1,038 s, from the deeper table of its time-collapsed problem;
   - the other second-tier runs agree with the default's within 15%.
+- **The 126 instances of the prior benchmark** (`results/bench_wjh/dp2_vs_dp1.md`):
+  - **superdense d = 11 is settled at 11 within the protocol: 1,803 s, 11.3 GB.** The search's head start
+    exhausts the weights 7 to 9 on 32 threads, then one sweep of the sparse DP at K = 10 takes 672 s on one
+    thread. The default stops at 10..11;
+  - solved: 97 against the default's 96, the one more being d = 11;
+  - the other runs: the codes take 0.7-0.9x the default's time and bb288 1.2x; the timeouts end at the same
+    lower bounds.
 
 ### The table budget fix: deeper lookup tables make most of these searches slower
 
