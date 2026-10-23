@@ -1,0 +1,159 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 1,
+    "dp": 1,
+    "dp_fast": 10,
+    "dp_head": -1
+  },
+  "instance": "surface_d21",
+  "variant": "full",
+  "rows": 9240,
+  "cols": 190173,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 21,
+  "upper_bound": 21,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16,
+    18,
+    19,
+    21,
+    22,
+    24,
+    25,
+    27,
+    28,
+    36
+  ],
+  "witness_ok": true,
+  "seconds": 5.619,
+  "trace": [
+    {
+      "t": 0.64,
+      "lb": 1
+    },
+    {
+      "t": 4.428,
+      "lb": 2
+    },
+    {
+      "t": 4.429,
+      "lb": 3
+    },
+    {
+      "t": 4.431,
+      "lb": 4
+    },
+    {
+      "t": 4.434,
+      "lb": 5
+    },
+    {
+      "t": 4.436,
+      "lb": 6
+    },
+    {
+      "t": 4.438,
+      "lb": 7
+    },
+    {
+      "t": 4.44,
+      "lb": 8
+    },
+    {
+      "t": 4.444,
+      "lb": 9
+    },
+    {
+      "t": 4.448,
+      "lb": 10
+    },
+    {
+      "t": 4.456,
+      "lb": 11
+    },
+    {
+      "t": 4.471,
+      "lb": 12
+    },
+    {
+      "t": 4.507,
+      "lb": 13
+    },
+    {
+      "t": 4.587,
+      "lb": 14
+    },
+    {
+      "t": 4.776,
+      "lb": 15
+    },
+    {
+      "t": 5.229,
+      "lb": 16
+    },
+    {
+      "t": 5.428,
+      "lb": 21
+    },
+    {
+      "t": 5.56,
+      "ub": 21
+    }
+  ],
+  "peak_rss_mb": 564.9,
+  "truth": 21,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 621, \"cut_rank\": 16, \"decision\": \"dp after a head start of the search; the search then starts at its value\", \"estimate_seconds\": 0.264, \"fits\": true, \"peak_bits\": 18, \"predicted_seconds\": 0.005, \"queries\": 1, \"seconds\": 0.005, \"value\": 21, \"work\": 6663696}, \"main\": {\"columns\": 26461, \"cut_rank\": 231, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.164, \"fits\": false, \"peak_bits\": 231, \"predicted_seconds\": null, \"queries\": 1, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_reduction_exact\": true, \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 621, \"rows\": 220, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0012347698211669922, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0012240409851074219, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0014233589172363281, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002531290054321289, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002344846725463867, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0020427703857421875, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001998424530029297, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002892017364501953, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004075765609741211, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.007589578628540039, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.014768600463867188, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.03600168228149414, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.07933259010314941, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.18894600868225098, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.4520430564880371, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.19351506233215332, \"status\": \"timeout\"}, {\"K\": 21, \"best\": 21, \"nsol_recorded\": 1, \"seconds\": 0.0013284683227539062, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 861, \"rows\": 4840, \"runs\": [{\"K\": 21, \"best\": 21, \"nsol_recorded\": 1, \"seconds\": 0.09888315200805664, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0, \"table_k_reduced\": [[621, 3, 2], [621, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=1,table_gb=1",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=1,table_gb=1",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/sparse_dp/repo4/bench/instances/surface_d21",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      168
+    ],
+    "started_at": "2026-10-23T04:18:07.767546+00:00",
+    "ended_at": "2026-10-23T04:18:13.731265+00:00",
+    "wall_seconds": 5.715028,
+    "adapter_seconds": 5.619,
+    "trace_offset_seconds": 0.096028,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo4/results/bench_recheck/ours_pipeline__dp-1__table%5Fgb-1/surface_d21__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo4/results/bench_recheck/ours_pipeline__dp-1__table%5Fgb-1/surface_d21__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 463.6,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

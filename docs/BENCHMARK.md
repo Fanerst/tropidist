@@ -1509,12 +1509,45 @@ The pipeline's option `dp=2` is `dp=1` plus a race at the end of the circuit sta
 window, the search on the sector runs for the sparse DP's predicted time. Then one sweep at the upper bound minus
 one decides, if it fits in the table budget and the remaining time. Code instances run as with `dp=1`.
 
-First tier on the 23 circuits of the prior benchmark (`results/bench_wjh/dp2_vs_dp1.md`):
-- No outcome changes and nothing is slower.
-- The superdense colour-code circuits are faster: d = 9 takes 15.8 s instead of 374 s, d = 7 0.8 s instead of
-  3.3 s.
-- d = 11 stays open in this tier: its sweep is predicted beyond 600 s and the 8 GiB table budget. A dedicated
-  run, outside the protocol, settles it at 11 (the footnote of the table above).
+The probe measures the states of weight up to 2 in both directions, and those of weight 3 only where that is
+cheap next to the predicted sweep (commit 8ec918b). Before, it measured weight 3 wherever that stayed under 2e9
+states: 10.6 s on star_42, whose search takes 0.7 s.
+
+First tier, against `dp=1`:
+
+- **The 126 instances of the prior benchmark** (`results/bench_wjh/dp2_vs_dp1.md`):
+  - no outcome changes and nothing is slower;
+  - the superdense colour-code circuits are faster: d = 9 takes 17.0 s instead of 374 s, d = 7 0.7 s instead
+    of 3.3 s;
+  - d = 11 stays open in this tier: its sweep is predicted beyond the 8 GiB table budget. A dedicated run,
+    outside the protocol, settles it at 11 (the footnote of the table above).
+- **The 102 variants of the main suite** (`results/bench/dp2_vs_dp1.md`):
+  - the sparse DP never sweeps there. Either the earlier stages settle the sector or use up the time, or the
+    sector is too wide for the sparse tables, or the search finishes within its head start, or the sweep would
+    not fit in the table budget;
+  - its probe costs about 0.3 s on star_42, routing_54 and walkingcat_54, and 2 s on sdbb_64 (1.45x);
+  - the records also differ from the dp=1 pass by the table budget fix below, which came between the two passes.
+
+### The table budget fix makes the search slower where its tables get deeper
+
+Since 7ef27aa (22 October, 11:12 UTC) the pipeline's worker builds its lookup tables as deep as half the memory
+limit allows. Before, they were silently held to 1 GiB. **The records of the default configuration and of
+`dp=1` predate that fix:**
+- on the main suite, in its second tier and in the ablation;
+- on the instances of arXiv:2603.22532.
+
+The last of them started at 07:18 UTC that day, so they all ran with 1 GiB tables.
+
+A rerun of the affected first-tier records, with one code and at one time (`results/bench_recheck/README.md`),
+shows that the deeper tables make the search slower, for `dp=1` and `dp=2` alike:
+- **color_d11 full is lost:** 244 s with 1 GiB tables, a timeout with the weight-2 table of 4.8 GB that the full
+  problem's 16,422 columns now get;
+- the sector problems of cornucopia_252 and of surface d = 21-25 take 2.2-3x as long, their full problems
+  1.3-2.4x;
+- w8bb_144_16 gains nothing, and bb288_r18, mitten and routing_200_24 are not settled either way.
+
+The tables of this document are left as they are. Their records of our pipeline used the 1 GiB tables, and
+`dp=2` has no column in them.
 
 ## Reproduce
 

@@ -6,14 +6,22 @@ Main suite: one row per instance on its main problem, as in the overall table of
 arXiv:2603.22532: per family as in bench/wjh_compare.py, tier 1 = results/bench_wjh, tier 2 = results/bench_wjh_tierB.
 dp=1 ("ours + DP") has first-tier records only.
 
+Then the first-tier records rerun with one code and at one time (results/bench_recheck, scripts/server/
+dp2_recheck*.sh, dp1_table1gb.sh): those whose sparse stage runs the probe and those whose lookup tables got deeper
+with the table budget fix of 7ef27aa, under dp=1, dp=2 and dp=1 with the former 1 GiB table budget, beside the
+first dp=1 pass.
+
 usage: python bench/compare_dp2.py [--out FILE]
 """
 import argparse
+import json
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
+import compare_dp as C
 import make_benchmark_md as M
 import summary_table as T
 import wjh_compare as W
@@ -92,8 +100,59 @@ def wjh():
     return "\n".join(lines)
 
 
+def recheck(folder=ROOT / "results" / "bench_recheck"):
+    """One row per record of the recheck (its dp=1 runs): the first dp=1 pass, then dp=1 with 1 GiB tables, dp=1
+    and dp=2 rerun side by side, and what dp=2's sparse stage did (its probe time and weights).  dp=2's reruns of
+    the records whose sparse stage runs the probe replaced the first pass in results/bench and results/bench_wjh;
+    those of the others are in the recheck folder."""
+    res = ROOT / "results"
+    first = [res / "bench" / "ours_pipeline__dp-1", res / "bench_wjh" / "ours_pipeline__dp-1"]
+    cols = [("dp=1, 22 Oct", first), ("dp=1, 1 GiB tables", [folder / "ours_pipeline__dp-1__table%5Fgb-1"]),
+            ("dp=1", [folder / "ours_pipeline__dp-1"]),
+            ("dp=2", [folder / "ours_pipeline__dp-2", res / "bench" / "ours_pipeline__dp-2",
+                      res / "bench_wjh" / "ours_pipeline__dp-2"])]
+    names = sorted(f.name for f in (folder / "ours_pipeline__dp-1").glob("*__t1.json"))
+
+    def record(dirs, name):
+        for d in dirs:
+            if (d / name).exists():
+                return json.loads((d / name).read_text())
+        return None
+
+    def cell(r):
+        if r is None:
+            return ""
+        if r.get("status") == "exact":
+            return T.seconds(r["seconds"])
+        lb, ub = r.get("lower_bound"), r.get("upper_bound")
+        return r.get("status", "") + ("" if lb is None else " %s..%s" % (lb, "" if ub is None else ub))
+
+    def probe(r):
+        notes = r.get("notes") if r else None
+        try:
+            notes = json.loads(notes) if isinstance(notes, str) else (notes or {})
+        except ValueError:
+            notes = {}
+        sp = notes.get("sparse") or {}
+        if "probe_seconds" not in sp:
+            return ""
+        return "%.2f s (weights %s)" % (sp["probe_seconds"], "/".join(map(str, sp.get("probe_weights", ["≤3"]))))
+
+    lines = ["| instance variant | " + " | ".join(c for c, _ in cols) + " | dp=2: sparse stage | dp=2: probe |",
+             "|---|" + "---:|" * len(cols) + "---|---|"]
+    for name in names:
+        rs = [record(dirs, name) for _, dirs in cols]
+        lines.append("| %s | %s | %s | %s |" % (name.replace("__t1.json", "").replace("__", " "),
+                                                " | ".join(cell(r) for r in rs),
+                                                (C.sparse_decision(rs[-1]) or "") if rs[-1] else "", probe(rs[-1])))
+    return "\n".join(lines)
+
+
 def report():
-    return "\n".join(["### Main suite", "", main_suite(), "", "### Instances of arXiv:2603.22532", "", wjh()])
+    parts = ["### Main suite", "", main_suite(), "", "### Instances of arXiv:2603.22532", "", wjh()]
+    if (ROOT / "results" / "bench_recheck").exists():
+        parts += ["", "### First tier rerun with one code and at one time", "", recheck()]
+    return "\n".join(parts)
 
 
 def main():
