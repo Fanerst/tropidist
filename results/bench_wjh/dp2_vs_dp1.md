@@ -11,7 +11,10 @@ Setup:
   - the circuits ran with commit 7c38b1f, the codes with 6798b88 (`bench/tier_b.py dp2`);
   - the four superdense circuits whose sparse stage runs its probe (d = 5 to 11) were rerun with 8ec918b, which
     measures weight 3 only where that is cheap next to the predicted sweep (`results/bench_recheck`);
-  - the other circuits never reach the probe, so their records stand for 8ec918b too.
+  - the bb288 and bb360 circuits were rerun under the lookup-table depth rule of c030477
+    (`scripts/server/rule_reruns.sh`, `results/table_depth`). They had run with deeper tables than the rule builds
+    up front, and both still time out at the lower bound 14;
+  - the other circuits never reach the probe and build the same tables, so their records stand for c030477 too.
 
 What dp=2 adds: `bench/adapters/ours_pipeline.py`.
 - The circuit stages (collapse, lift, window) leave a gap [l, u) on the sector.
@@ -79,6 +82,7 @@ Records: `results/bench_wjh_tierB/ours_pipeline__dp-2`.
 - 2 jobs on cores 96-159 of 5090, 23 October 11:45-14:25 (UTC+8).
 - Only superdense d11 reaches the sparse stage. Under 8ec918b its probe would measure the same weights, so its
   decision and schedule stand for 8ec918b too.
+- The second tier ran with 45 GiB of lookup tables up front (7ef27aa), not yet under the depth rule of c030477.
 
 The default's records (`results/bench_wjh_tierB/ours_pipeline`, October) ran with 1 GiB lookup tables, those of
 dp=2 with 45 GiB (7ef27aa):

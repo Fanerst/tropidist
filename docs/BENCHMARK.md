@@ -194,7 +194,7 @@ with 32 threads and 90 GB for tools that use threads.
 | lrgross | 144 | 4464 | 11 | 19.8 s |  |  |  |
 | mitten_150 | 150 | 9750 | 8 | 130 s |  |  | 1485 s (dist-m4ri CC+RW, 32 threads) |
 | mitten_300 | 300 | 11820 | >=12 |  |  |  |  |
-| mitten_200 | 200 | 15560 | 9 |  | 1038 s |  |  |
+| mitten_200 | 200 | 15560 | 9 |  | 148 s |  |  |
 | routing_54 | 54 | 1998 | 6 | 0.9 s |  | 0.1 s (dist-m4ri CC) | 206 s (Gurobi, 32 threads) |
 | routing_90 | 90 | 3330 | 9 | 5.4 s |  | 477 s (dist-m4ri CC) |  |
 | routing_110 | 110 | 4070 | 10 | 35.3 s |  |  | 408 s (dist-m4ri CC+RW, 32 threads) |
@@ -464,7 +464,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | lrgross | 144 | 4464 | 11 |  | >=10 | 10..11 | 5..11 | 4..11 |  |  |  |
 | mitten_150 | 150 | 9750 | 8 |  |  | 1485 s | 3..9 | 4..9 |  |  |  |
 | mitten_300 | 300 | 11820 | >=12 | >=11 | >=8 | 8..14 | skip | skip |  |  |  |
-| mitten_200 | 200 | 15560 | 9 | 1038 s |  | skip | skip | skip | - | - | - |
+| mitten_200 | 200 | 15560 | 9 | 148 s |  | skip | skip | skip | - | - | - |
 | routing_54 | 54 | 1998 | 6 |  |  |  | 2457 s | 206 s |  |  |  |
 | routing_90 | 90 | 3330 | 9 |  |  |  | 1..9 | 5..9 |  |  |  |
 | routing_110 | 110 | 4070 | 10 |  |  | 408 s | skip | skip | - | - | - |
@@ -1330,6 +1330,8 @@ the same mechanisms as the plain circuits, only other probabilities.
   had skipped it because mitten 300 has fewer columns and came first), and dist-m4ri and CP-SAT on
   the color-code circuits (left out of the 32-thread pass by the driver). They ran with the same
   limits while the single-thread pass used other cores of the socket.
+  - Ours on mitten 200 was rerun on 23 October under the lookup-table depth rule (148 s, against 1,038 s on
+    5 October; see the changes of 23 October).
 - dist-m4ri 0.14.7's random-window mode, a heuristic, was at first put under the give-up rule: the harness
   split its list of heuristic methods at every comma, so a specification with options
   (`distm4ri:build=0.14.7,mode=rw`) was not recognised. Its 49 first-tier runs skipped that way were made
@@ -1526,16 +1528,19 @@ First tier, against `dp=1`:
     sector is too wide for the sparse tables, or the search finishes within its head start, or the sweep would
     not fit in the table budget;
   - its probe costs 0.3-0.7 s on star_42, routing_54 and walkingcat_54, and 2 s on sdbb_64 (1.45x);
-  - the records also differ from the dp=1 pass by the table budget fix below, which came between the two passes.
+  - no other variant changes by 1.5x and 1 s, and both solve the same 48 of the 60 instances;
+  - the 19 variants whose tables the table budget fix below made deeper were rerun under the depth rule that
+    replaced it. In the first pass they were slower or lost (color_d11 full).
 
 Second tier (32 threads, 90 GB, 3600 s), against the default configuration:
 
 - **The main suite** (`results/bench/dp2_vs_dp1.md`):
   - the sparse DP never sweeps there either;
-  - solved: 58 instances against the default's 59. The difference is color_d11, lost in the first tier to the
-    deeper tables; a circuit without a sector problem gets no second tier;
-  - mitten_200 takes 144 s instead of 1,038 s, from the deeper table of its time-collapsed problem;
-  - the other second-tier runs agree with the default's within 15%.
+  - solved: the same 59 instances as the default (all but mitten_300). surface d = 25 needs no second tier;
+  - mitten_200 takes 144 s, from the deeper table of its time-collapsed problem. The default's record of 1,038 s
+    was rerun under the depth rule below: 148 s;
+  - the other second-tier runs agree with the default's within 15%. They ran with the deep tables of 7ef27aa, not
+    under the depth rule.
 - **The 126 instances of the prior benchmark** (`results/bench_wjh/dp2_vs_dp1.md`):
   - **superdense d = 11 is settled at 11 within the protocol: 1,803 s, 11.3 GB.** The search's head start
     exhausts the weights 7 to 9 on 32 threads, then one sweep of the sparse DP at K = 10 takes 672 s on one
@@ -1599,12 +1604,16 @@ side (`results/bench_tables`):
 - 9 records hold a trial: mitten_200 and mitten_300 switch to the deeper table, and mitten_200 ends at the lower
   bound 9 instead of 8.
 
-For the published records this means:
+For the published records this means (reruns of 23 October, `scripts/server/rule_reruns.sh`):
 - **Default and dp=1:** they stand. Under the rule, their tables up front are those they ran with, and they could
-  change only where a trial switches: in the main suite's first tier no outcome changes, and in the second tier
-  mitten_200 would take minutes instead of 1,038 s.
-- **dp=2:** its records above ran with the deep tables up front of 7ef27aa. Under the rule, its 19 affected
-  first-tier records would return to the times of 1 GiB tables, and color_d11 full would be solved.
+  change only where a trial switches. In the main suite's first tier no outcome changes. In the second tier, the
+  default's mitten_200 was rerun and takes 148 s instead of 1,038 s.
+- **dp=2:** its 21 first-tier records whose tables 7ef27aa had made deeper were rerun under the rule: the 19 of
+  the main suite and the bb288 and bb360 circuits of the prior benchmark.
+  - color_d11 full is solved (246 s);
+  - surface d = 21-25 and cornucopia_252 are back to their dp=1 times;
+  - the others end as before.
+  - Its second-tier records still ran with the deep tables up front.
 
 ## Reproduce
 

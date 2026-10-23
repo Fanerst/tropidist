@@ -13,7 +13,8 @@
     "table_gb": 0,
     "dp": 2,
     "dp_fast": 10,
-    "dp_head": -1
+    "dp_head": -1,
+    "deepen": 1
   },
   "instance": "color_d11",
   "variant": "full",
@@ -22,38 +23,53 @@
   "obs": 1,
   "threads": 1,
   "time_limit": 600.0,
-  "status": "timeout",
-  "lower_bound": 5,
-  "upper_bound": null,
-  "witness": null,
-  "witness_ok": null,
-  "seconds": 601.023,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    190,
+    192,
+    1014,
+    1648,
+    2061,
+    2252
+  ],
+  "witness_ok": true,
+  "seconds": 246.421,
   "trace": [
     {
-      "t": 0.085,
+      "t": 0.094,
       "lb": 1
     },
     {
-      "t": 8.825,
+      "t": 3.718,
       "lb": 2
     },
     {
-      "t": 9.638,
+      "t": 4.546,
       "lb": 3
     },
     {
-      "t": 14.641,
+      "t": 6.194,
       "lb": 4
     },
     {
-      "t": 67.546,
+      "t": 9.362,
       "lb": 5
+    },
+    {
+      "t": 79.935,
+      "lb": 6
+    },
+    {
+      "t": 246.406,
+      "ub": 6
     }
   ],
-  "peak_rss_mb": 4727.8,
+  "peak_rss_mb": 4700.5,
   "truth": null,
   "truth_kind": "unknown",
-  "notes": "{\"dp\": {\"main\": {\"columns\": 16422, \"cut_rank\": 96, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.143, \"fits\": false, \"peak_bits\": 96, \"predicted_seconds\": null, \"queries\": 1, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit without CSS sectors: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 16422, \"rows\": 495, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.7638678550720215, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8126635551452637, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.002058744430542, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 52.90528416633606, \"status\": \"exhausted\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\"}",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 16422, \"cut_rank\": 96, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.145, \"fits\": false, \"peak_bits\": 96, \"predicted_seconds\": null, \"queries\": 1, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit without CSS sectors: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 16422, \"deepen\": [{\"K\": 5, \"build_seconds\": 4.423, \"decision\": \"kept\", \"deep\": [\"timeout\", 3.529, 1564], \"depth\": 2, \"k\": 2, \"level_seconds\": 70.572, \"limit_seconds\": 3.529, \"predicted_build_seconds\": 5.394, \"sample_anchors\": 822, \"shallow\": [\"timeout\", 3.53, 11850]}], \"rows\": 495, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.7838184833526611, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8277919292449951, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.6476407051086426, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.1677744388580322, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 70.57221293449402, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 89.57332396507263, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0, \"table_k_reduced\": [[16422, 2, 1]]}",
   "value_only": false,
   "agrees_with_truth": null,
   "harness": {
@@ -61,25 +77,25 @@
     "adapter": "ours_pipeline",
     "config_string": "dp=2",
     "method_kind": "certifying",
-    "instance_dir": "/data/panfeng/claude_runs/sparse_dp/repo3/bench/instances/color_d11",
+    "instance_dir": "/data/panfeng/claude_runs/table_depth/repo/bench/instances/color_d11",
     "family": "stim_color",
     "memory_limit_gb": 16.0,
     "time_limit": 600.0,
     "cpus": [
-      110
+      108
     ],
-    "started_at": "2026-10-23T02:12:15.152502+00:00",
-    "ended_at": "2026-10-23T02:22:16.380348+00:00",
-    "wall_seconds": 601.227643,
-    "adapter_seconds": 601.023,
-    "trace_offset_seconds": 0.204643,
+    "started_at": "2026-10-23T08:50:16.281403+00:00",
+    "ended_at": "2026-10-23T08:54:22.768128+00:00",
+    "wall_seconds": 246.46558,
+    "adapter_seconds": 246.421,
+    "trace_offset_seconds": 0.04458,
     "exit_code": 0,
     "error_reason": null,
     "stderr_tail": [],
-    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench/ours_pipeline__dp-2/color_d11__full__t1.stdout.log",
-    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench/ours_pipeline__dp-2/color_d11__full__t1.stderr.log",
+    "stdout_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench/ours_pipeline__dp-2/color_d11__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/table_depth/repo/results/bench/ours_pipeline__dp-2/color_d11__full__t1.stderr.log",
     "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
-    "peak_group_rss_mb": 4714.1,
+    "peak_group_rss_mb": 4713.5,
     "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
   }
 }

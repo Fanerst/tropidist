@@ -18,6 +18,10 @@ import summary_table as T
 A, B, ABL = ROOT / "results" / "bench", ROOT / "results" / "bench_tierB", ROOT / "results" / "bench_ablation"
 EXACT = [name for _, name in T.SHORT if name not in T.HEURISTIC]
 OLD_DM4RI = lambda name: name.startswith("dist-m4ri 0.9.0")      # superseded build: own section only
+# Configurations of our pipeline under evaluation are compared in the text of docs/BENCHMARK.md, not in its tables:
+# the tables will carry one column of ours, the final configuration's (Feng, 23 October 2026).
+UNDER_EVALUATION = ("ours + sparse DP",)
+HIDE = lambda name: OLD_DM4RI(name) or name in UNDER_EVALUATION
 DM4RI_VERSIONS = ["dist-m4ri 0.9.0 CC", "dist-m4ri 0.9.0 CC, no cutoff", "dist-m4ri CC", "dist-m4ri CC+RW"]
 DM4RI_VERSIONS_RAW = DM4RI_VERSIONS + ["dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
 # tools whose code results depend on the logical basis: the main tables keep their runs on the instances' first
@@ -104,13 +108,13 @@ def tables():
     if A.is_dir() and B.is_dir():
         t["overall"] = overall()
     if A.is_dir():
-        t["A-circuit-sector"] = T.table(A, "sector", "circuit", 1, select=main_set, exclude=OLD_DM4RI)
-        t["A-circuit-full"] = T.table(A, "full", "circuit", 1, select=main_set, exclude=OLD_DM4RI)
-        t["A-code"] = T.table(A, "full", "code", 1, exclude=lambda n: OLD_DM4RI(n) or SPARSE_L(n))
+        t["A-circuit-sector"] = T.table(A, "sector", "circuit", 1, select=main_set, exclude=HIDE)
+        t["A-circuit-full"] = T.table(A, "full", "circuit", 1, select=main_set, exclude=HIDE)
+        t["A-code"] = T.table(A, "full", "code", 1, exclude=lambda n: HIDE(n) or SPARSE_L(n))
         t["L-code"] = T.table(A, "full", "code", 1, methods=BASIS_COLUMNS)
-        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"], exclude=OLD_DM4RI)
-        t["A-stim-sector"] = T.table(A, "sector", "circuit", 1, select=stim_set, exclude=OLD_DM4RI)
-        t["A-stim-full"] = T.table(A, "full", "circuit", 1, select=stim_set, exclude=OLD_DM4RI)
+        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"], exclude=HIDE)
+        t["A-stim-sector"] = T.table(A, "sector", "circuit", 1, select=stim_set, exclude=HIDE)
+        t["A-stim-full"] = T.table(A, "full", "circuit", 1, select=stim_set, exclude=HIDE)
         # the two dist-m4ri builds side by side (first tier)
         t["DM-sector"] = T.table(A, "sector", "circuit", 1, methods=DM4RI_VERSIONS)
         t["DM-code"] = T.table(A, "full", "code", 1, methods=DM4RI_VERSIONS)
@@ -122,7 +126,7 @@ def tables():
         for threads, key in ((32, "B32"), (1, "B1")):
             for variant, track in (("sector", "circuit"), ("full", "circuit"), ("full", "code")):
                 try:
-                    excl = (lambda n: OLD_DM4RI(n) or SPARSE_L(n)) if track == "code" else OLD_DM4RI
+                    excl = (lambda n: HIDE(n) or SPARSE_L(n)) if track == "code" else HIDE
                     t["%s-%s-%s" % (key, track, variant)] = T.table(B, variant, track, threads, exclude=excl)
                 except (OSError, ValueError):
                     pass

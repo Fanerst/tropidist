@@ -150,12 +150,19 @@ configuration and of dp=1 (1 GiB). A record changes only where a trial switches 
 slow:
 - **Main suite, first tier:** nothing changes in outcome. mitten_200 times out with the lower bound 9 instead of 8.
   mitten_300 also switches and times out where it did.
-- **Second tier:** mitten_200 would take a few minutes instead of the default's 1,038 s: 227 s on 16 threads
-  here, and 144 s on 32 threads with the deep table up front. Other long searches may switch as well; they are
-  not rerun here.
-- **dp=2, run on 23 October with the deep tables up front (7ef27aa):**
-  - its 19 first-tier records whose tables got deeper (results/bench_recheck) would return to the 1 GiB times:
-    color_d11 full is solved again, and surface d = 21-25 and cornucopia_252 are 2-3x faster;
-  - its second tier keeps its outcomes (mitten_200 and the superdense d = 11 run are settled either way).
+- **Second tier:** mitten_200 now takes 148 s (32 threads; `results/bench_tierB/ours_pipeline`), instead of the
+  default's 1,038 s of 5 October.
+  - It switches to the deeper table after a trial at weight 8, and comes close to the 144 s of dp=2 with the deep
+    table up front.
+  - Other long searches may switch as well; they are not rerun.
 
-Whether the default, dp=1 and dp=2 records get rerun under the rule is open (docs/BENCHMARK.md).
+Reruns approved by Feng and done on 23 October (`scripts/server/rule_reruns.sh`, c030477):
+- The default configuration's second-tier mitten_200, as above.
+- dp=2's 21 first-tier records whose tables 7ef27aa had made deeper: the 19 of results/bench_recheck, and the bb288
+  and bb360 circuits of arXiv:2603.22532.
+  - color_d11 full is solved again (246 s).
+  - surface d = 21-25 and cornucopia_252 are back to their dp=1 times.
+  - w8bb_144_16 takes 165 s, against 154 s with the deep table up front: its trial found the deeper table only
+    1.05x faster.
+  - The timeouts end at the same lower bounds.
+- dp=2's second-tier records still ran with the deep tables up front.
