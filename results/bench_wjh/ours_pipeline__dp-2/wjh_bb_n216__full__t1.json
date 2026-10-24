@@ -13,7 +13,8 @@
     "table_gb": 0,
     "dp": 2,
     "dp_fast": 10,
-    "dp_head": -1
+    "dp_head": -1,
+    "deepen": 1
   },
   "instance": "wjh_bb_n216",
   "variant": "full",
@@ -38,57 +39,57 @@
     210
   ],
   "witness_ok": true,
-  "seconds": 0.162,
+  "seconds": 0.198,
   "trace": [
     {
-      "t": 0.062,
+      "t": 0.075,
       "lb": 1
     },
     {
-      "t": 0.146,
+      "t": 0.178,
       "lb": 2
     },
     {
-      "t": 0.146,
+      "t": 0.178,
       "lb": 3
     },
     {
-      "t": 0.147,
+      "t": 0.179,
       "lb": 4
     },
     {
-      "t": 0.147,
+      "t": 0.179,
       "lb": 5
     },
     {
-      "t": 0.147,
+      "t": 0.18,
       "lb": 6
     },
     {
-      "t": 0.147,
+      "t": 0.18,
       "lb": 7
     },
     {
-      "t": 0.148,
+      "t": 0.181,
       "lb": 8
     },
     {
-      "t": 0.148,
+      "t": 0.181,
       "lb": 9
     },
     {
-      "t": 0.149,
+      "t": 0.182,
       "lb": 10
     },
     {
-      "t": 0.149,
+      "t": 0.182,
       "ub": 10
     }
   ],
-  "peak_rss_mb": 58.5,
+  "peak_rss_mb": 59.5,
   "truth": null,
   "truth_kind": "unknown",
-  "notes": "{\"dp\": {\"main\": {\"columns\": 216, \"cut_rank\": 27, \"decision\": \"search (finished within the DP's predicted time)\", \"estimate_seconds\": 0.034, \"fits\": true, \"peak_bits\": 30, \"predicted_seconds\": 29.417, \"queries\": 8, \"work\": 38242323392}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 216, \"rows\": 108, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.489059448242188e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.125999450683594e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.1021575927734375e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.557868957519531e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.079673767089844e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.699562072753906e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.799003601074219e-05, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017905235290527344, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00039267539978027344, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 9.584426879882812e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 216, \"cut_rank\": 27, \"decision\": \"search (finished within the DP's predicted time)\", \"estimate_seconds\": 0.042, \"fits\": true, \"peak_bits\": 30, \"predicted_seconds\": 29.417, \"queries\": 8, \"work\": 38242323392}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 216, \"rows\": 108, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001342296600341797, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.104873657226562e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.937980651855469e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011610984802246094, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.726119995117188e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.584426879882812e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00013875961303710938, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00024437904357910156, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005471706390380859, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 0.0001308917999267578, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
   "value_only": false,
   "agrees_with_truth": null,
   "harness": {
@@ -96,25 +97,25 @@
     "adapter": "ours_pipeline",
     "config_string": "dp=2",
     "method_kind": "certifying",
-    "instance_dir": "/data/panfeng/claude_runs/sparse_dp/repo3/bench/instances_wjh/wjh_bb_n216",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_bb_n216",
     "family": "wjh_bb",
     "memory_limit_gb": 16.0,
     "time_limit": 600.0,
     "cpus": [
-      96
+      142
     ],
-    "started_at": "2026-10-23T02:37:37.015124+00:00",
-    "ended_at": "2026-10-23T02:37:37.293734+00:00",
-    "wall_seconds": 0.277943,
-    "adapter_seconds": 0.162,
-    "trace_offset_seconds": 0.115943,
+    "started_at": "2026-10-23T12:10:14.235954+00:00",
+    "ended_at": "2026-10-23T12:10:14.577980+00:00",
+    "wall_seconds": 0.341323,
+    "adapter_seconds": 0.198,
+    "trace_offset_seconds": 0.143323,
     "exit_code": 0,
     "error_reason": null,
     "stderr_tail": [],
-    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n216__full__t1.stdout.log",
-    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n216__full__t1.stderr.log",
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n216__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n216__full__t1.stderr.log",
     "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
-    "peak_group_rss_mb": 17.5,
+    "peak_group_rss_mb": 17.6,
     "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
   }
 }

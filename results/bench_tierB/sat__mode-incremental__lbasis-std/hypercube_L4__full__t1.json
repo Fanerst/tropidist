@@ -1,0 +1,140 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 16,
+  "upper_bound": 16,
+  "witness": [
+    434,
+    435,
+    458,
+    459,
+    578,
+    579,
+    602,
+    603,
+    866,
+    867,
+    890,
+    891,
+    1010,
+    1011,
+    1034,
+    1035
+  ],
+  "witness_ok": true,
+  "seconds": 1225.403,
+  "trace": [
+    {
+      "t": 0.006,
+      "lb": 1
+    },
+    {
+      "t": 0.683,
+      "lb": 2
+    },
+    {
+      "t": 1.495,
+      "lb": 3
+    },
+    {
+      "t": 3.159,
+      "lb": 4
+    },
+    {
+      "t": 6.404,
+      "lb": 5
+    },
+    {
+      "t": 12.153,
+      "lb": 6
+    },
+    {
+      "t": 19.978,
+      "lb": 7
+    },
+    {
+      "t": 33.253,
+      "lb": 8
+    },
+    {
+      "t": 63.345,
+      "lb": 9
+    },
+    {
+      "t": 101.39,
+      "lb": 10
+    },
+    {
+      "t": 178.527,
+      "lb": 11
+    },
+    {
+      "t": 308.436,
+      "lb": 12
+    },
+    {
+      "t": 475.174,
+      "lb": 13
+    },
+    {
+      "t": 764.335,
+      "lb": 14
+    },
+    {
+      "t": 1224.157,
+      "lb": 15
+    },
+    {
+      "t": 1225.388,
+      "lb": 16
+    },
+    {
+      "t": 1225.395,
+      "ub": 16
+    }
+  ],
+  "peak_rss_mb": 306.9,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      47
+    ],
+    "started_at": "2026-10-24T08:44:26.210102+00:00",
+    "ended_at": "2026-10-24T09:04:51.694354+00:00",
+    "wall_seconds": 1225.472658,
+    "adapter_seconds": 1225.403,
+    "trace_offset_seconds": 0.069658,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/hypercube_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/hypercube_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -15,13 +15,14 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 import summary_table as T
 
-A, B, ABL = ROOT / "results" / "bench", ROOT / "results" / "bench_tierB", ROOT / "results" / "bench_ablation"
+A, B = ROOT / "results" / "bench", ROOT / "results" / "bench_tierB"
+ABL = ROOT / "results" / "bench_ablation_final"       # one component off at a time, relative to the final configuration
 EXACT = [name for _, name in T.SHORT if name not in T.HEURISTIC]
 OLD_DM4RI = lambda name: name.startswith("dist-m4ri 0.9.0")      # superseded build: own section only
-# Configurations of our pipeline under evaluation are compared in the text of docs/BENCHMARK.md, not in its tables:
-# the tables will carry one column of ours, the final configuration's (Feng, 23 October 2026).
-UNDER_EVALUATION = ("ours + sparse DP",)
-HIDE = lambda name: OLD_DM4RI(name) or name in UNDER_EVALUATION
+# The tables carry one column of ours, the final configuration dp=2 ("ours"; Feng, 23 October 2026).  The other
+# configurations of our pipeline are compared in the text of docs/BENCHMARK.md and in the ablation.
+OTHER_CONFIGS = ("ours, search only", "ours + DP", "ours, plain")
+HIDE = lambda name: OLD_DM4RI(name) or name in OTHER_CONFIGS
 DM4RI_VERSIONS = ["dist-m4ri 0.9.0 CC", "dist-m4ri 0.9.0 CC, no cutoff", "dist-m4ri CC", "dist-m4ri CC+RW"]
 DM4RI_VERSIONS_RAW = DM4RI_VERSIONS + ["dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
 # tools whose code results depend on the logical basis: the main tables keep their runs on the instances' first
@@ -52,7 +53,7 @@ def overall_rows(config="ours"):
     import json
     a, b32, b1 = T.load(A, 1), T.load(B, 32), T.load(B, 1)
     ours = (config,)
-    mine = ("ours", "ours, plain", "ours + DP", "ours + sparse DP")
+    mine = ("ours",) + OTHER_CONFIGS
 
     def ex(recs, method, inst, variant):
         r = recs.get((method, inst, variant))
@@ -97,9 +98,11 @@ def overall():
         n["all"] += 1; n["o1"] += oa is not None; n["o"] += o; n["c1"] += ca is not None; n["c"] += c
         n["only"] += o and not c; n["lost"] += c and not o
     lines.append("")
+    verb = lambda k: "is" if n[k] == 1 else "are"
     lines.append("Of %(all)d instances: ours solves %(o1)d in the first tier and %(o)d over both tiers; some other exact "
-                 "method solves %(c1)d in the first tier and %(c)d over both. %(only)d are solved by ours only; "
-                 "%(lost)d are solved by another method and not by ours." % n)
+                 "method solves %(c1)d in the first tier and %(c)d over both. " % n
+                 + "%d %s solved by ours only; %d %s solved by another method and not by ours."
+                 % (n["only"], verb("only"), n["lost"], verb("lost")))
     return "\n".join(lines)
 
 
@@ -112,7 +115,9 @@ def tables():
         t["A-circuit-full"] = T.table(A, "full", "circuit", 1, select=main_set, exclude=HIDE)
         t["A-code"] = T.table(A, "full", "code", 1, exclude=lambda n: HIDE(n) or SPARSE_L(n))
         t["L-code"] = T.table(A, "full", "code", 1, methods=BASIS_COLUMNS)
-        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"], exclude=HIDE)
+        # our plain search stays in this table: it is ours on the same relaxed input as the other solvers
+        t["A-collapsed"] = T.table(A, "collapsed", "circuit", 1, methods=[m for m in EXACT if m != "ours"],
+                                   exclude=lambda n: OLD_DM4RI(n) or (n in OTHER_CONFIGS and n != "ours, plain"))
         t["A-stim-sector"] = T.table(A, "sector", "circuit", 1, select=stim_set, exclude=HIDE)
         t["A-stim-full"] = T.table(A, "full", "circuit", 1, select=stim_set, exclude=HIDE)
         # the two dist-m4ri builds side by side (first tier)
@@ -143,12 +148,6 @@ def tables():
     if (ROOT / "results" / "bench_wjh").is_dir():
         import wjh_compare
         t["wjh"] = wjh_compare.report()
-    # trial on narrow problems of large distance (bench/export_lowwidth.py), not part of the standard benchmark
-    LW, LW2 = ROOT / "results" / "bench_lowwidth", ROOT / "results" / "bench_lowwidth_tierB"
-    if LW.is_dir():
-        t["lowwidth"] = T.table(LW, "full", "code", 1, instance_dir=HERE / "instances_lowwidth")
-    if LW2.is_dir():
-        t["lowwidth-B32"] = T.table(LW2, "full", "code", 32, instance_dir=HERE / "instances_lowwidth")
     return t
 
 

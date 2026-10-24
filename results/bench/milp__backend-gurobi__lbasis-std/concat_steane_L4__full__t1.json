@@ -1,0 +1,251 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L4",
+  "variant": "full",
+  "rows": 1200,
+  "cols": 2401,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": 81,
+  "witness": [
+    455,
+    458,
+    459,
+    469,
+    470,
+    471,
+    476,
+    477,
+    478,
+    553,
+    556,
+    557,
+    567,
+    568,
+    569,
+    574,
+    575,
+    576,
+    604,
+    605,
+    608,
+    616,
+    621,
+    622,
+    623,
+    624,
+    625,
+    1143,
+    1144,
+    1147,
+    1148,
+    1149,
+    1150,
+    1171,
+    1173,
+    1174,
+    1227,
+    1228,
+    1231,
+    1261,
+    1263,
+    1265,
+    1267,
+    1272,
+    1273,
+    1289,
+    1291,
+    1293,
+    1296,
+    1298,
+    1300,
+    1317,
+    1320,
+    1322,
+    1829,
+    1831,
+    1832,
+    1843,
+    1845,
+    1846,
+    1850,
+    1852,
+    1853,
+    1876,
+    1879,
+    1880,
+    1884,
+    1886,
+    1888,
+    1905,
+    1908,
+    1910,
+    2023,
+    2028,
+    2029,
+    2037,
+    2040,
+    2041,
+    2044,
+    2047,
+    2048
+  ],
+  "witness_ok": true,
+  "seconds": 598.839,
+  "trace": [
+    {
+      "t": 0.307,
+      "ub": 2401
+    },
+    {
+      "t": 0.307,
+      "ub": 2389
+    },
+    {
+      "t": 0.307,
+      "ub": 2365
+    },
+    {
+      "t": 0.308,
+      "ub": 2169
+    },
+    {
+      "t": 0.308,
+      "ub": 2153
+    },
+    {
+      "t": 0.308,
+      "lb": 1
+    },
+    {
+      "t": 0.515,
+      "ub": 1933
+    },
+    {
+      "t": 0.515,
+      "ub": 1901
+    },
+    {
+      "t": 0.515,
+      "ub": 1737
+    },
+    {
+      "t": 0.516,
+      "ub": 1733
+    },
+    {
+      "t": 0.516,
+      "ub": 1729
+    },
+    {
+      "t": 0.516,
+      "ub": 1581
+    },
+    {
+      "t": 0.516,
+      "ub": 1573
+    },
+    {
+      "t": 0.516,
+      "ub": 1561
+    },
+    {
+      "t": 0.516,
+      "ub": 1509
+    },
+    {
+      "t": 0.517,
+      "ub": 1505
+    },
+    {
+      "t": 0.517,
+      "ub": 1493
+    },
+    {
+      "t": 0.517,
+      "lb": 2
+    },
+    {
+      "t": 0.917,
+      "ub": 157
+    },
+    {
+      "t": 0.917,
+      "ub": 141
+    },
+    {
+      "t": 0.917,
+      "ub": 97
+    },
+    {
+      "t": 1.119,
+      "ub": 93
+    },
+    {
+      "t": 1.119,
+      "ub": 81
+    },
+    {
+      "t": 5.125,
+      "lb": 5
+    },
+    {
+      "t": 45.184,
+      "lb": 6
+    },
+    {
+      "t": 65.215,
+      "lb": 7
+    },
+    {
+      "t": 110.285,
+      "lb": 8
+    },
+    {
+      "t": 250.3,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 1058.2,
+  "truth": 81,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L4",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      22
+    ],
+    "started_at": "2026-10-23T13:23:39.860170+00:00",
+    "ended_at": "2026-10-23T13:33:38.917782+00:00",
+    "wall_seconds": 599.054934,
+    "adapter_seconds": 598.839,
+    "trace_offset_seconds": 0.215934,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/concat_steane_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/concat_steane_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1090.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

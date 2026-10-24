@@ -1,0 +1,121 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "wjh_hcc_16_n672",
+  "variant": "full",
+  "rows": 252,
+  "cols": 672,
+  "obs": 172,
+  "threads": 1,
+  "time_limit": 28800.0,
+  "status": "exact",
+  "lower_bound": 10,
+  "upper_bound": 10,
+  "witness": [
+    0,
+    37,
+    65,
+    73,
+    96,
+    146,
+    286,
+    466,
+    507,
+    559
+  ],
+  "witness_ok": true,
+  "seconds": 0.994,
+  "trace": [
+    {
+      "t": 0.09,
+      "lb": 1
+    },
+    {
+      "t": 0.608,
+      "lb": 2
+    },
+    {
+      "t": 0.611,
+      "lb": 3
+    },
+    {
+      "t": 0.614,
+      "lb": 4
+    },
+    {
+      "t": 0.619,
+      "lb": 5
+    },
+    {
+      "t": 0.624,
+      "lb": 6
+    },
+    {
+      "t": 0.631,
+      "lb": 7
+    },
+    {
+      "t": 0.659,
+      "lb": 8
+    },
+    {
+      "t": 0.722,
+      "lb": 9
+    },
+    {
+      "t": 0.975,
+      "lb": 10
+    },
+    {
+      "t": 0.979,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 63.7,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 672, \"cut_rank\": 125, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.448, \"fits\": false, \"peak_bits\": 125, \"predicted_seconds\": null, \"queries\": 172, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 672, \"rows\": 252, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0020203590393066406, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0021674633026123047, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002336263656616211, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0052030086517333984, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0037975311279296875, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0074007511138916016, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02743387222290039, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0628516674041748, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.25212979316711426, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 0.003928422927856445, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hcc_16_n672",
+    "family": "wjh_hcc",
+    "memory_limit_gb": 8.0,
+    "time_limit": 28800.0,
+    "cpus": [
+      110
+    ],
+    "started_at": "2026-10-23T11:50:08.455370+00:00",
+    "ended_at": "2026-10-23T11:50:09.703680+00:00",
+    "wall_seconds": 1.239642,
+    "adapter_seconds": 0.994,
+    "trace_offset_seconds": 0.245642,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_8h/ours_pipeline__dp-2/wjh_hcc_16_n672__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_8h/ours_pipeline__dp-2/wjh_hcc_16_n672__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 76.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

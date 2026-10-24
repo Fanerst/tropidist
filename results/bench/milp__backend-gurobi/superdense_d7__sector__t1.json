@@ -1,0 +1,92 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "superdense_d7",
+  "variant": "sector",
+  "rows": 144,
+  "cols": 1248,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 6,
+  "upper_bound": 7,
+  "witness": [
+    977,
+    1039,
+    1094,
+    1100,
+    1107,
+    1237,
+    1239
+  ],
+  "witness_ok": true,
+  "seconds": 600.556,
+  "trace": [
+    {
+      "t": 6.938,
+      "ub": 15
+    },
+    {
+      "t": 6.938,
+      "ub": 7
+    },
+    {
+      "t": 6.938,
+      "lb": 1
+    },
+    {
+      "t": 11.944,
+      "lb": 3
+    },
+    {
+      "t": 16.95,
+      "lb": 4
+    },
+    {
+      "t": 82.038,
+      "lb": 5
+    },
+    {
+      "t": 416.882,
+      "lb": 6
+    }
+  ],
+  "peak_rss_mb": 574.9,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl wrote no result (exit -9, killed at the deadline); 055    6.00000   53    2    7.00000    6.00000  14.3%   2.6  575s / 2371465 104639 infeasible   71         7.00000    6.00000  14.3%   2.6  580s / 2388814 99225 infeasible   37         7.00000    6.00000  14.3%   2.6  585s / 2406789 93402 infeasible   51         7.00000    6.00000  14.3%   2.6  590s",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d7",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      40
+    ],
+    "started_at": "2026-10-23T11:50:07.930888+00:00",
+    "ended_at": "2026-10-23T12:00:08.646850+00:00",
+    "wall_seconds": 600.714577,
+    "adapter_seconds": 600.556,
+    "trace_offset_seconds": 0.158577,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d7__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d7__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 606.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

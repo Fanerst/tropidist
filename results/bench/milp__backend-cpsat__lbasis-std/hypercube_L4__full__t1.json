@@ -1,0 +1,90 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 0,
+  "upper_bound": 16,
+  "witness": [
+    36,
+    39,
+    54,
+    57,
+    108,
+    111,
+    126,
+    129,
+    468,
+    471,
+    486,
+    489,
+    540,
+    543,
+    558,
+    561
+  ],
+  "witness_ok": true,
+  "seconds": 600.018,
+  "trace": [
+    {
+      "t": 147.446,
+      "ub": 20
+    },
+    {
+      "t": 147.446,
+      "lb": 0
+    },
+    {
+      "t": 174.969,
+      "ub": 18
+    },
+    {
+      "t": 175.041,
+      "ub": 16
+    }
+  ],
+  "peak_rss_mb": 191.8,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      21
+    ],
+    "started_at": "2026-10-23T13:33:39.427674+00:00",
+    "ended_at": "2026-10-23T13:43:39.663859+00:00",
+    "wall_seconds": 600.230658,
+    "adapter_seconds": 600.018,
+    "trace_offset_seconds": 0.212658,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/hypercube_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/hypercube_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 203.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

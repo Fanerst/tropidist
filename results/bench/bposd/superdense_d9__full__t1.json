@@ -1,0 +1,80 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "superdense_d9",
+  "variant": "full",
+  "rows": 540,
+  "cols": 21277,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    10834,
+    10838,
+    13445,
+    14008,
+    14009,
+    14295,
+    14298,
+    14474,
+    14477
+  ],
+  "witness_ok": true,
+  "seconds": 600.043,
+  "trace": [
+    {
+      "t": 1.552,
+      "ub": 11
+    },
+    {
+      "t": 2.615,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 964.8,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=632; completed_shots=631; valid_outputs=631; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d9",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      27
+    ],
+    "started_at": "2026-10-23T12:56:43.819989+00:00",
+    "ended_at": "2026-10-23T13:06:44.023915+00:00",
+    "wall_seconds": 600.170817,
+    "adapter_seconds": 600.043,
+    "trace_offset_seconds": 0.127817,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/superdense_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/superdense_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 977.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

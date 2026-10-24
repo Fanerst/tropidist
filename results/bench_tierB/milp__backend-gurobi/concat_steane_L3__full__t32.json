@@ -1,0 +1,211 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 24,
+  "upper_bound": 27,
+  "witness": [
+    0,
+    1,
+    2,
+    7,
+    8,
+    9,
+    14,
+    15,
+    16,
+    245,
+    246,
+    247,
+    252,
+    253,
+    254,
+    259,
+    260,
+    261,
+    294,
+    295,
+    296,
+    301,
+    302,
+    303,
+    308,
+    309,
+    310
+  ],
+  "witness_ok": true,
+  "seconds": 3600.834,
+  "trace": [
+    {
+      "t": 0.249,
+      "ub": 343
+    },
+    {
+      "t": 0.249,
+      "ub": 339
+    },
+    {
+      "t": 0.249,
+      "ub": 319
+    },
+    {
+      "t": 0.249,
+      "ub": 299
+    },
+    {
+      "t": 0.249,
+      "ub": 295
+    },
+    {
+      "t": 0.249,
+      "ub": 271
+    },
+    {
+      "t": 0.249,
+      "ub": 267
+    },
+    {
+      "t": 0.249,
+      "ub": 263
+    },
+    {
+      "t": 0.249,
+      "ub": 51
+    },
+    {
+      "t": 0.249,
+      "ub": 27
+    },
+    {
+      "t": 0.249,
+      "lb": 1
+    },
+    {
+      "t": 0.249,
+      "lb": 2
+    },
+    {
+      "t": 0.249,
+      "lb": 3
+    },
+    {
+      "t": 0.249,
+      "lb": 4
+    },
+    {
+      "t": 5.259,
+      "lb": 14
+    },
+    {
+      "t": 10.267,
+      "lb": 16
+    },
+    {
+      "t": 20.482,
+      "lb": 17
+    },
+    {
+      "t": 100.606,
+      "lb": 18
+    },
+    {
+      "t": 145.676,
+      "lb": 19
+    },
+    {
+      "t": 240.428,
+      "lb": 20
+    },
+    {
+      "t": 450.369,
+      "lb": 21
+    },
+    {
+      "t": 820.754,
+      "lb": 22
+    },
+    {
+      "t": 1640.671,
+      "lb": 23
+    },
+    {
+      "t": 2875.471,
+      "lb": 24
+    }
+  ],
+  "peak_rss_mb": 4242.2,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-24T02:22:03.889245+00:00",
+    "ended_at": "2026-10-24T03:22:04.837359+00:00",
+    "wall_seconds": 3600.947464,
+    "adapter_seconds": 3600.834,
+    "trace_offset_seconds": 0.113464,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-gurobi/concat_steane_L3__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-gurobi/concat_steane_L3__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 4273.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

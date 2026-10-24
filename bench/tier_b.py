@@ -158,14 +158,14 @@ def harness_parallel(calls, log, dry):
 
 
 def frontier(methods, tier_a, out, threads, mem, jobs, name, logs, dry, raw=False, directory=None, firsts=None,
-             cpus=None, tracks=None, only=None):
+             cpus=None, tracks=None, only=None, variants=None):
     lists = out / "lists"
     lists.mkdir(parents=True, exist_ok=True)
     extra = ["--instance-dir", str(directory)] if directory else []
     for i, spec in enumerate(methods):
         for variant, names in unsolved(spec, tier_a, raw, directory, firsts[i] if firsts else None, tracks,
                                        only).items():
-            if not names:
+            if not names or (variants and variant not in variants):
                 continue
             path = lists / ("%s__%s__%s.txt" % (name, folder(spec)[:60], variant))
             path.write_text("\n".join(names) + "\n")
@@ -180,7 +180,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("phases", nargs="+", choices=["fix", "collapsed", "b32", "b1", "ablation", "stimsat", "b1s", "gurobi", "wjh1", "wjh2",
                                          "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b",
-                                         "final1", "final8h", "final2"])
+                                         "final1", "final8h", "final2", "final2b"])
     ap.add_argument("--tier-a", default=str(ROOT / "results" / "bench"))
     ap.add_argument("--out", default=str(ROOT / "results" / "bench_tierB"))
     ap.add_argument("--dry-run", action="store_true")
@@ -441,6 +441,41 @@ def main():
                      only=set(DP_FRIENDLY))
             frontier([FINAL], ROOT / "results" / "bench_wjh", ROOT / "results" / "bench_wjh_tierB", 32, 90, 3,
                      "final2_wjh", logs, a.dry_run, directory=WJH_DIR, cpus="0-95")
+        elif phase == "final2b":
+            # The rest of final2, in parallel (final2 ran its passes one after another: 24 October 2026, after the
+            # final configuration's second tier on the main suite, the other solvers' 32-thread pass, and the
+            # 1-thread pass of SAT; RC2's sector part was still running).  Every (method, variant) gets its own
+            # cores; mitten_200 reruns alone (the give-up order put mitten_300, fewer columns, first).
+            import threading
+            only = set(DP_FRIENDLY)
+            only_std = {n for n in only if (HERE / "instances" / n / "full.L.std.mtx").exists()}
+            sl = lambda spec: spec + ",lbasis=std"
+            singles = [(["sat:mode=maxsat"], ("full",), "18-21"), ([CASHW], ("sector",), "22"), ([CASHW], ("full",), "23-26"),
+                       ([ENMAX], ("sector",), "27"), ([ENMAX], ("full",), "28-31"),
+                       (["milp:backend=scipy"], ("sector",), "32"), (["milp:backend=scipy"], ("full",), "33-36")]
+            work = [lambda m=m, v=v, c=c: frontier(m, tier_a, out, 1, 16, len(run_matrix.parse_cpus(c)), "final2_b1", logs,
+                                                   a.dry_run, cpus=c, only=only, variants=v) for m, v, c in singles]
+            work += [lambda m=m, c=c: frontier([m], tier_a, out, 1, 16, 1, "final2_b1s", logs, a.dry_run, raw=True, cpus=c,
+                                               only=only) for m, c in zip(STIMSAT, ("37", "38", "39"))]
+            work += [lambda m=m, c=c: frontier([sl(m)], tier_a, out, 1, 16, 4, "final2_sparseL_b1", logs, a.dry_run, cpus=c,
+                                               tracks=("code",), only=only_std)
+                     for m, c in zip(("milp:backend=scipy", "sat:mode=incremental", "sat:mode=maxsat", CASHW, ENMAX),
+                                     ("40-43", "44-47", "48-51", "52-55", "56-59"))]
+
+            def cores_60_91():
+                harness(["--methods", FINAL, "--instances", "mitten_200", "--variants", "sector", "--threads", "32",
+                         "--time-limit", "3600", "--mem-gb", "90", "--total-mem-gb", "90", "--jobs", "1", "--out", str(out),
+                         "--give-up", "1", "--redo", "status=skipped"], logs / "final2_mitten200.log", a.dry_run, "60-91")
+                frontier([sl("milp:backend=cpsat"), sl(GUROBI)], tier_a, out, 32, 90, 1, "final2_sparseL_b32", logs,
+                         a.dry_run, cpus="60-91", tracks=("code",), only=only_std)
+            work += [cores_60_91,
+                     lambda: frontier([FINAL], ROOT / "results" / "bench_wjh", ROOT / "results" / "bench_wjh_tierB", 32, 90,
+                                      3, "final2_wjh", logs, a.dry_run, directory=WJH_DIR, cpus="96-191")]
+            jobs_ = [threading.Thread(target=f) for f in work]
+            for j in jobs_:
+                j.start()
+            for j in jobs_:
+                j.join()
     print(time.strftime("%H:%M:%S"), "all phases done", flush=True)
 
 

@@ -1,0 +1,112 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "superdense_d7",
+  "variant": "full",
+  "rows": 252,
+  "cols": 9143,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 4,
+  "upper_bound": 7,
+  "witness": [
+    5110,
+    5115,
+    5263,
+    6281,
+    6925,
+    6933,
+    6991
+  ],
+  "witness_ok": true,
+  "seconds": 600.604,
+  "trace": [
+    {
+      "t": 7.162,
+      "ub": 725
+    },
+    {
+      "t": 7.162,
+      "ub": 724
+    },
+    {
+      "t": 7.162,
+      "ub": 676
+    },
+    {
+      "t": 7.162,
+      "ub": 637
+    },
+    {
+      "t": 7.162,
+      "lb": 1
+    },
+    {
+      "t": 7.367,
+      "ub": 21
+    },
+    {
+      "t": 7.367,
+      "ub": 16
+    },
+    {
+      "t": 7.367,
+      "ub": 11
+    },
+    {
+      "t": 7.369,
+      "ub": 7
+    },
+    {
+      "t": 7.77,
+      "lb": 2
+    },
+    {
+      "t": 21.987,
+      "lb": 3
+    },
+    {
+      "t": 491.981,
+      "lb": 4
+    }
+  ],
+  "peak_rss_mb": 1628.6,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl wrote no result (exit -9, killed at the deadline); 3015    4.00000   58    3    7.00000    3.50000  50.0%   3.0  575s / 636162 437810    4.00000   37    1    7.00000    3.50000  50.0%   3.0  580s / 642263 442003    4.00000   85    2    7.00000    3.50000  50.0%   3.0  585s / 647874 445522    5.00000   73    3    7.00000    3.50000  50.0%   3.0  590s",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d7",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      41
+    ],
+    "started_at": "2026-10-23T11:50:07.933038+00:00",
+    "ended_at": "2026-10-23T12:00:08.659476+00:00",
+    "wall_seconds": 600.714238,
+    "adapter_seconds": 600.604,
+    "trace_offset_seconds": 0.110238,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1664.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

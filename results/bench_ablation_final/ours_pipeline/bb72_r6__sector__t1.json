@@ -1,0 +1,101 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 0,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "bb72_r6",
+  "variant": "sector",
+  "rows": 252,
+  "cols": 2232,
+  "obs": 12,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    324,
+    326,
+    346,
+    366,
+    398,
+    436
+  ],
+  "witness_ok": true,
+  "seconds": 0.275,
+  "trace": [
+    {
+      "t": 0.086,
+      "lb": 1
+    },
+    {
+      "t": 0.197,
+      "lb": 2
+    },
+    {
+      "t": 0.197,
+      "lb": 3
+    },
+    {
+      "t": 0.198,
+      "lb": 4
+    },
+    {
+      "t": 0.198,
+      "lb": 5
+    },
+    {
+      "t": 0.247,
+      "lb": 6
+    },
+    {
+      "t": 0.254,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 77.4,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "{\"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"orbit_lower_bound\": 6, \"sector_symmetries_used\": 2, \"stages\": {\"collapsed\": {\"cols\": 180, \"rows\": 36, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012183189392089844, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.175041198730469e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.724761962890625e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002491474151611328, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 0.0002734661102294922, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 180, \"rows\": 36, \"runs\": [{\"K\": 5, \"best\": 5, \"nsol_recorded\": 4, \"seconds\": 0.001291513442993164, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 56, \"rows\": 252, \"runs\": [{\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.107589721679688e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_1_0\": {\"cols\": 272, \"rows\": 252, \"runs\": [{\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004608631134033203, \"status\": \"exhausted\"}]}, \"quick_lift_0\": {\"cols\": 56, \"rows\": 252, \"runs\": [{\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.678436279296875e-05, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 72, \"rows\": 36, \"runs\": [{\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.298324584960938e-05, \"status\": \"exhausted\"}]}, \"window_t1\": {\"cols\": 108, \"rows\": 36, \"runs\": [{\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.00020813941955566406, \"status\": \"found\"}]}, \"window_t1_at_d_coll\": {\"cols\": 108, \"rows\": 36, \"runs\": [{\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011229515075683594, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline",
+    "adapter": "ours_pipeline",
+    "config_string": "",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb72_r6",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      169
+    ],
+    "started_at": "2026-10-23T11:50:08.094282+00:00",
+    "ended_at": "2026-10-23T11:50:08.429908+00:00",
+    "wall_seconds": 0.331107,
+    "adapter_seconds": 0.275,
+    "trace_offset_seconds": 0.056107,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline/bb72_r6__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline/bb72_r6__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 18.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

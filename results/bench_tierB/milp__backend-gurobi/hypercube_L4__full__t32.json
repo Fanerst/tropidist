@@ -1,0 +1,152 @@
+{
+  "method": "milp",
+  "version": null,
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": 16,
+  "witness": [
+    777,
+    778,
+    783,
+    784,
+    813,
+    814,
+    819,
+    820,
+    993,
+    994,
+    999,
+    1000,
+    1029,
+    1030,
+    1035,
+    1036
+  ],
+  "witness_ok": true,
+  "seconds": 3601.004,
+  "trace": [
+    {
+      "t": 0.259,
+      "ub": 24
+    },
+    {
+      "t": 0.26,
+      "ub": 16
+    },
+    {
+      "t": 0.26,
+      "lb": 1
+    },
+    {
+      "t": 0.46,
+      "lb": 2
+    },
+    {
+      "t": 6.068,
+      "lb": 3
+    },
+    {
+      "t": 15.282,
+      "lb": 4
+    },
+    {
+      "t": 21.891,
+      "lb": 5
+    },
+    {
+      "t": 45.728,
+      "lb": 6
+    },
+    {
+      "t": 125.648,
+      "lb": 7
+    },
+    {
+      "t": 431.6,
+      "lb": 8
+    },
+    {
+      "t": 926.532,
+      "lb": 9
+    },
+    {
+      "t": 2001.32,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 38.0,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); wall-time watchdog stopped worker",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-24T03:22:04.938387+00:00",
+    "ended_at": "2026-10-24T04:22:06.055548+00:00",
+    "wall_seconds": 3601.111551,
+    "adapter_seconds": 3601.004,
+    "trace_offset_seconds": 0.107551,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-gurobi/hypercube_L4__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/milp__backend-gurobi/hypercube_L4__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 10481.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

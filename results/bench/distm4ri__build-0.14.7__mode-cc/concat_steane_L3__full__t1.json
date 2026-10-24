@@ -1,0 +1,143 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-nededj69/codewords.nz",
+    "timeout": "599.893785110"
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 20,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 599.907,
+  "trace": [
+    {
+      "t": 0.01,
+      "lb": 2
+    },
+    {
+      "t": 0.01,
+      "lb": 3
+    },
+    {
+      "t": 0.01,
+      "lb": 4
+    },
+    {
+      "t": 0.01,
+      "lb": 5
+    },
+    {
+      "t": 0.011,
+      "lb": 6
+    },
+    {
+      "t": 0.011,
+      "lb": 7
+    },
+    {
+      "t": 0.012,
+      "lb": 8
+    },
+    {
+      "t": 0.013,
+      "lb": 9
+    },
+    {
+      "t": 0.016,
+      "lb": 10
+    },
+    {
+      "t": 0.026,
+      "lb": 11
+    },
+    {
+      "t": 0.05,
+      "lb": 12
+    },
+    {
+      "t": 0.157,
+      "lb": 13
+    },
+    {
+      "t": 0.422,
+      "lb": 14
+    },
+    {
+      "t": 1.161,
+      "lb": 15
+    },
+    {
+      "t": 3.747,
+      "lb": 16
+    },
+    {
+      "t": 16.635,
+      "lb": 17
+    },
+    {
+      "t": 46.919,
+      "lb": 18
+    },
+    {
+      "t": 141.097,
+      "lb": 19
+    },
+    {
+      "t": 496.363,
+      "lb": 20
+    }
+  ],
+  "peak_rss_mb": 34.8,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 20 0 0 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      33
+    ],
+    "started_at": "2026-10-23T12:00:08.410258+00:00",
+    "ended_at": "2026-10-23T12:10:08.376069+00:00",
+    "wall_seconds": 599.965653,
+    "adapter_seconds": 599.907,
+    "trace_offset_seconds": 0.058653,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/concat_steane_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc/concat_steane_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

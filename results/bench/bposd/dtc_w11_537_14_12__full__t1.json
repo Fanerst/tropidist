@@ -1,0 +1,141 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "dtc_w11_537_14_12",
+  "variant": "full",
+  "rows": 299,
+  "cols": 537,
+  "obs": 14,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 38,
+  "witness": [
+    1,
+    2,
+    38,
+    46,
+    87,
+    108,
+    109,
+    118,
+    126,
+    128,
+    142,
+    143,
+    153,
+    161,
+    182,
+    186,
+    188,
+    192,
+    225,
+    234,
+    275,
+    302,
+    326,
+    348,
+    364,
+    367,
+    371,
+    388,
+    403,
+    410,
+    433,
+    447,
+    465,
+    472,
+    475,
+    484,
+    489,
+    528
+  ],
+  "witness_ok": true,
+  "seconds": 600.006,
+  "trace": [
+    {
+      "t": 0.337,
+      "ub": 59
+    },
+    {
+      "t": 0.341,
+      "ub": 56
+    },
+    {
+      "t": 0.38,
+      "ub": 53
+    },
+    {
+      "t": 0.384,
+      "ub": 49
+    },
+    {
+      "t": 0.388,
+      "ub": 47
+    },
+    {
+      "t": 0.396,
+      "ub": 45
+    },
+    {
+      "t": 0.434,
+      "ub": 44
+    },
+    {
+      "t": 0.438,
+      "ub": 42
+    },
+    {
+      "t": 0.549,
+      "ub": 41
+    },
+    {
+      "t": 0.716,
+      "ub": 38
+    }
+  ],
+  "peak_rss_mb": 102.7,
+  "truth": 19,
+  "truth_kind": "lower_bound",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=147881; completed_shots=147880; valid_outputs=147880; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w11_537_14_12",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      27
+    ],
+    "started_at": "2026-10-23T12:21:57.645644+00:00",
+    "ended_at": "2026-10-23T12:31:57.749929+00:00",
+    "wall_seconds": 600.102984,
+    "adapter_seconds": 600.006,
+    "trace_offset_seconds": 0.096984,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/dtc_w11_537_14_12__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/dtc_w11_537_14_12__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 116.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

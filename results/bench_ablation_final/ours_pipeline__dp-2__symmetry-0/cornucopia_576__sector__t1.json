@@ -1,0 +1,94 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 0,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "cornucopia_576",
+  "variant": "sector",
+  "rows": 1008,
+  "cols": 19584,
+  "obs": 292,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.022,
+  "trace": [
+    {
+      "t": 0.811,
+      "lb": 1
+    },
+    {
+      "t": 5.19,
+      "lb": 2
+    },
+    {
+      "t": 5.211,
+      "lb": 3
+    },
+    {
+      "t": 5.447,
+      "lb": 4
+    },
+    {
+      "t": 9.554,
+      "lb": 5
+    },
+    {
+      "t": 10.492,
+      "lb": 6
+    },
+    {
+      "t": 32.585,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 169.0,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 1872, \"cut_rank\": 136, \"decision\": \"search\", \"estimate_seconds\": 2.747, \"fits\": false, \"peak_bits\": 136, \"predicted_seconds\": null, \"queries\": 292, \"work\": null}, \"main\": {\"columns\": 19584, \"cut_rank\": 271, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 1.039, \"fits\": false, \"peak_bits\": 271, \"predicted_seconds\": null, \"queries\": 292, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 1872, \"rows\": 144, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.017895221710205078, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.021127700805664062, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.23536229133605957, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.107008695602417, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.9372048377990723, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 22.093108654022217, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 567.4174826145172, \"status\": \"timeout\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_budget_gib\": 8.0, \"table_k_reduced\": [[1872, 3, 2]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2,symmetry=0",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2,symmetry=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/cornucopia_576",
+    "family": "cornucopia",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      173
+    ],
+    "started_at": "2026-10-23T12:00:12.557672+00:00",
+    "ended_at": "2026-10-23T12:10:12.776465+00:00",
+    "wall_seconds": 600.218575,
+    "adapter_seconds": 600.022,
+    "trace_offset_seconds": 0.196575,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0/cornucopia_576__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0/cornucopia_576__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 180.9,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

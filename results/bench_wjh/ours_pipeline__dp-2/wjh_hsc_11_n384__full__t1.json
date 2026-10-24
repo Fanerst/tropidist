@@ -13,7 +13,8 @@
     "table_gb": 0,
     "dp": 2,
     "dp_fast": 10,
-    "dp_head": -1
+    "dp_head": -1,
+    "deepen": 1
   },
   "instance": "wjh_hsc_11_n384",
   "variant": "full",
@@ -32,33 +33,33 @@
     181
   ],
   "witness_ok": true,
-  "seconds": 0.211,
+  "seconds": 0.26,
   "trace": [
     {
-      "t": 0.061,
+      "t": 0.077,
       "lb": 1
     },
     {
-      "t": 0.196,
+      "t": 0.242,
       "lb": 2
     },
     {
-      "t": 0.196,
+      "t": 0.242,
       "lb": 3
     },
     {
-      "t": 0.198,
+      "t": 0.245,
       "lb": 4
     },
     {
-      "t": 0.198,
+      "t": 0.246,
       "ub": 4
     }
   ],
-  "peak_rss_mb": 58.3,
+  "peak_rss_mb": 59.1,
   "truth": null,
   "truth_kind": "unknown",
-  "notes": "{\"dp\": {\"main\": {\"columns\": 384, \"cut_rank\": 46, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.089, \"fits\": false, \"peak_bits\": 46, \"predicted_seconds\": null, \"queries\": 34, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 384, \"rows\": 96, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00046515464782714844, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004773139953613281, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007333755493164062, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.0004496574401855469, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 384, \"cut_rank\": 46, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.109, \"fits\": false, \"peak_bits\": 46, \"predicted_seconds\": null, \"queries\": 34, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 384, \"rows\": 96, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0006263256072998047, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005993843078613281, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0009219646453857422, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.0005445480346679688, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
   "value_only": false,
   "agrees_with_truth": null,
   "harness": {
@@ -66,25 +67,25 @@
     "adapter": "ours_pipeline",
     "config_string": "dp=2",
     "method_kind": "certifying",
-    "instance_dir": "/data/panfeng/claude_runs/sparse_dp/repo3/bench/instances_wjh/wjh_hsc_11_n384",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_hsc_11_n384",
     "family": "wjh_hsc",
     "memory_limit_gb": 16.0,
     "time_limit": 600.0,
     "cpus": [
-      98
+      144
     ],
-    "started_at": "2026-10-23T02:37:39.661140+00:00",
-    "ended_at": "2026-10-23T02:37:39.933208+00:00",
-    "wall_seconds": 0.271131,
-    "adapter_seconds": 0.211,
-    "trace_offset_seconds": 0.060131,
+    "started_at": "2026-10-23T12:10:17.499254+00:00",
+    "ended_at": "2026-10-23T12:10:17.834955+00:00",
+    "wall_seconds": 0.334754,
+    "adapter_seconds": 0.26,
+    "trace_offset_seconds": 0.074754,
     "exit_code": 0,
     "error_reason": null,
     "stderr_tail": [],
-    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_hsc_11_n384__full__t1.stdout.log",
-    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_hsc_11_n384__full__t1.stderr.log",
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_hsc_11_n384__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_hsc_11_n384__full__t1.stderr.log",
     "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
-    "peak_group_rss_mb": 17.5,
+    "peak_group_rss_mb": 17.6,
     "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
   }
 }

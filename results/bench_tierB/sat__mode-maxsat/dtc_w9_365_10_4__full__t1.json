@@ -1,0 +1,214 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "dtc_w9_365_10_4",
+  "variant": "full",
+  "rows": 240,
+  "cols": 365,
+  "obs": 10,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 31,
+  "upper_bound": 31,
+  "witness": [
+    1,
+    21,
+    46,
+    69,
+    90,
+    93,
+    97,
+    103,
+    107,
+    109,
+    129,
+    135,
+    141,
+    143,
+    146,
+    149,
+    169,
+    193,
+    215,
+    237,
+    262,
+    282,
+    287,
+    290,
+    296,
+    300,
+    303,
+    323,
+    351,
+    354,
+    355
+  ],
+  "witness_ok": true,
+  "seconds": 2350.135,
+  "trace": [
+    {
+      "t": 0.004,
+      "lb": 1
+    },
+    {
+      "t": 0.148,
+      "lb": 2
+    },
+    {
+      "t": 0.154,
+      "lb": 3
+    },
+    {
+      "t": 0.154,
+      "lb": 4
+    },
+    {
+      "t": 0.174,
+      "lb": 5
+    },
+    {
+      "t": 0.174,
+      "lb": 6
+    },
+    {
+      "t": 0.197,
+      "lb": 7
+    },
+    {
+      "t": 0.257,
+      "lb": 8
+    },
+    {
+      "t": 0.375,
+      "lb": 9
+    },
+    {
+      "t": 0.619,
+      "lb": 10
+    },
+    {
+      "t": 0.693,
+      "lb": 11
+    },
+    {
+      "t": 1.468,
+      "lb": 12
+    },
+    {
+      "t": 1.836,
+      "lb": 13
+    },
+    {
+      "t": 3.572,
+      "lb": 14
+    },
+    {
+      "t": 4.366,
+      "lb": 15
+    },
+    {
+      "t": 7.538,
+      "lb": 16
+    },
+    {
+      "t": 8.229,
+      "lb": 17
+    },
+    {
+      "t": 15.961,
+      "lb": 18
+    },
+    {
+      "t": 15.982,
+      "lb": 19
+    },
+    {
+      "t": 33.434,
+      "lb": 20
+    },
+    {
+      "t": 34.799,
+      "lb": 21
+    },
+    {
+      "t": 75.147,
+      "lb": 22
+    },
+    {
+      "t": 77.441,
+      "lb": 23
+    },
+    {
+      "t": 224.838,
+      "lb": 24
+    },
+    {
+      "t": 247.451,
+      "lb": 25
+    },
+    {
+      "t": 533.757,
+      "lb": 26
+    },
+    {
+      "t": 539.708,
+      "lb": 27
+    },
+    {
+      "t": 735.933,
+      "lb": 28
+    },
+    {
+      "t": 1094.126,
+      "lb": 29
+    },
+    {
+      "t": 1679.102,
+      "lb": 30
+    },
+    {
+      "t": 2342.557,
+      "lb": 31
+    },
+    {
+      "t": 2350.131,
+      "ub": 31
+    }
+  ],
+  "peak_rss_mb": 225.8,
+  "truth": 31,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w9_365_10_4",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      20
+    ],
+    "started_at": "2026-10-24T09:14:07.509073+00:00",
+    "ended_at": "2026-10-24T09:53:17.801970+00:00",
+    "wall_seconds": 2350.29204,
+    "adapter_seconds": 2350.135,
+    "trace_offset_seconds": 0.15704,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/dtc_w9_365_10_4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat/dtc_w9_365_10_4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

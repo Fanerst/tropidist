@@ -1,0 +1,74 @@
+{
+  "method": "bposd",
+  "version": "2.4.1",
+  "config": {
+    "logical": "random",
+    "seed": 1,
+    "shots": 0,
+    "bp_method": "minimum_sum",
+    "max_iter": 100,
+    "osd_method": "OSD_CS",
+    "osd_order": 2,
+    "error_rate": 0.01,
+    "jitter": 0.5
+  },
+  "instance": "superdense_d7",
+  "variant": "sector",
+  "rows": 144,
+  "cols": 1248,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 7,
+  "witness": [
+    721,
+    861,
+    900,
+    941,
+    969,
+    1082,
+    1083
+  ],
+  "witness_ok": true,
+  "seconds": 600.005,
+  "trace": [
+    {
+      "t": 0.308,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 105.6,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "worker 0 closed without a terminal message (exitcode -15); shots=78620; completed_shots=78619; valid_outputs=78619; workers=1; one decoder thread per worker; worker seeds=seed+1000003*worker_index",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "bposd",
+    "adapter": "bposd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d7",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      19
+    ],
+    "started_at": "2026-10-23T12:37:19.514602+00:00",
+    "ended_at": "2026-10-23T12:47:19.746271+00:00",
+    "wall_seconds": 600.230168,
+    "adapter_seconds": 600.005,
+    "trace_offset_seconds": 0.225168,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/superdense_d7__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/bposd/superdense_d7__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 119.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

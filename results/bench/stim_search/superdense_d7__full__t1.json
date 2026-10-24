@@ -1,0 +1,67 @@
+{
+  "method": "stim_search",
+  "version": "1.15.0",
+  "config": {
+    "ladder": "2:2:1;3:3:1;4:4:1;4:6:1;4:10:1;4:10:0",
+    "graphlike": "1"
+  },
+  "instance": "superdense_d7",
+  "variant": "full",
+  "rows": 252,
+  "cols": 9143,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": null,
+  "upper_bound": 7,
+  "witness": [
+    5,
+    15,
+    54,
+    173,
+    355,
+    503,
+    595
+  ],
+  "witness_ok": true,
+  "seconds": 147.55,
+  "trace": [
+    {
+      "t": 0.234,
+      "ub": 7
+    }
+  ],
+  "peak_rss_mb": 2052.9,
+  "truth": 7,
+  "truth_kind": "exact",
+  "notes": "Stim searches are serial; --threads is ignored; all reported bounds are heuristic upper bounds; undecomposed DEM graphlike: False; search (4, 10, False): MemoryError: std::bad_alloc; search calls: 6; valid outputs: 5",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "stim_search",
+    "adapter": "stim_search",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d7",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      22
+    ],
+    "started_at": "2026-10-23T12:56:00.380679+00:00",
+    "ended_at": "2026-10-23T12:58:28.071478+00:00",
+    "wall_seconds": 147.677906,
+    "adapter_seconds": 147.55,
+    "trace_offset_seconds": 0.127906,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/superdense_d7__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/stim_search/superdense_d7__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 2066.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

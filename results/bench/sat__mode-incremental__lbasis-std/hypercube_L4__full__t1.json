@@ -1,0 +1,111 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "hypercube_L4",
+  "variant": "full",
+  "rows": 520,
+  "cols": 1296,
+  "obs": 256,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 14,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.021,
+  "trace": [
+    {
+      "t": 0.006,
+      "lb": 1
+    },
+    {
+      "t": 0.629,
+      "lb": 2
+    },
+    {
+      "t": 1.251,
+      "lb": 3
+    },
+    {
+      "t": 2.652,
+      "lb": 4
+    },
+    {
+      "t": 5.382,
+      "lb": 5
+    },
+    {
+      "t": 10.253,
+      "lb": 6
+    },
+    {
+      "t": 16.704,
+      "lb": 7
+    },
+    {
+      "t": 27.257,
+      "lb": 8
+    },
+    {
+      "t": 49.301,
+      "lb": 9
+    },
+    {
+      "t": 77.556,
+      "lb": 10
+    },
+    {
+      "t": 130.53,
+      "lb": 11
+    },
+    {
+      "t": 215.608,
+      "lb": 12
+    },
+    {
+      "t": 324.52,
+      "lb": 13
+    },
+    {
+      "t": 509.176,
+      "lb": 14
+    }
+  ],
+  "peak_rss_mb": 308.5,
+  "truth": 16,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/hypercube_L4",
+    "family": "hypercube",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15
+    ],
+    "started_at": "2026-10-23T13:33:40.608284+00:00",
+    "ended_at": "2026-10-23T13:43:41.834835+00:00",
+    "wall_seconds": 601.226368,
+    "adapter_seconds": 601.021,
+    "trace_offset_seconds": 0.205368,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/hypercube_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/hypercube_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

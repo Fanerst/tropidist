@@ -1,0 +1,60 @@
+{
+  "method": "sat_maxsat",
+  "version": null,
+  "config": {
+    "mode": "maxsat",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL",
+    "lbasis": "std"
+  },
+  "instance": "dtc_w9_365_10_4",
+  "variant": "full",
+  "rows": 240,
+  "cols": 365,
+  "obs": 10,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 1,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3599.911,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    }
+  ],
+  "peak_rss_mb": 102.7,
+  "truth": 31,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); threads unused while building/dumping encoding; external backend has no standard thread option; threads ignored; external exit=-9; status=None",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=maxsat,binary=/data/panfeng/claude_runs/circuit_distance/bench/external/enMaxCDCL,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w9_365_10_4",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      58
+    ],
+    "started_at": "2026-10-24T08:57:40.450839+00:00",
+    "ended_at": "2026-10-24T09:57:40.447305+00:00",
+    "wall_seconds": 3599.996286,
+    "adapter_seconds": 3599.911,
+    "trace_offset_seconds": 0.085286,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL__lbasis-std/dtc_w9_365_10_4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-maxsat__binary-%2Fdata%2Fpanfeng%2Fclaude%5Fruns%2Fcircuit%5Fdistance%2Fbench%2Fexternal%2FenMaxCDCL__lbasis-std/dtc_w9_365_10_4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

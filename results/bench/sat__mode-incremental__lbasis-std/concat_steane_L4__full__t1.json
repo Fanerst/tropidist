@@ -1,0 +1,243 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "concat_steane_L4",
+  "variant": "full",
+  "rows": 1200,
+  "cols": 2401,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 47,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.01,
+  "trace": [
+    {
+      "t": 0.005,
+      "lb": 1
+    },
+    {
+      "t": 0.161,
+      "lb": 2
+    },
+    {
+      "t": 0.197,
+      "lb": 3
+    },
+    {
+      "t": 0.263,
+      "lb": 4
+    },
+    {
+      "t": 0.381,
+      "lb": 5
+    },
+    {
+      "t": 0.671,
+      "lb": 6
+    },
+    {
+      "t": 0.994,
+      "lb": 7
+    },
+    {
+      "t": 1.536,
+      "lb": 8
+    },
+    {
+      "t": 2.075,
+      "lb": 9
+    },
+    {
+      "t": 2.902,
+      "lb": 10
+    },
+    {
+      "t": 3.934,
+      "lb": 11
+    },
+    {
+      "t": 4.915,
+      "lb": 12
+    },
+    {
+      "t": 4.92,
+      "lb": 13
+    },
+    {
+      "t": 8.581,
+      "lb": 14
+    },
+    {
+      "t": 10.395,
+      "lb": 15
+    },
+    {
+      "t": 12.976,
+      "lb": 16
+    },
+    {
+      "t": 16.162,
+      "lb": 17
+    },
+    {
+      "t": 18.573,
+      "lb": 18
+    },
+    {
+      "t": 21.824,
+      "lb": 19
+    },
+    {
+      "t": 25.601,
+      "lb": 20
+    },
+    {
+      "t": 28.995,
+      "lb": 21
+    },
+    {
+      "t": 33.684,
+      "lb": 22
+    },
+    {
+      "t": 38.383,
+      "lb": 23
+    },
+    {
+      "t": 44.253,
+      "lb": 24
+    },
+    {
+      "t": 50.156,
+      "lb": 25
+    },
+    {
+      "t": 58.466,
+      "lb": 26
+    },
+    {
+      "t": 69.931,
+      "lb": 27
+    },
+    {
+      "t": 82.861,
+      "lb": 28
+    },
+    {
+      "t": 95.881,
+      "lb": 29
+    },
+    {
+      "t": 112.055,
+      "lb": 30
+    },
+    {
+      "t": 129.687,
+      "lb": 31
+    },
+    {
+      "t": 146.938,
+      "lb": 32
+    },
+    {
+      "t": 163.527,
+      "lb": 33
+    },
+    {
+      "t": 181.789,
+      "lb": 34
+    },
+    {
+      "t": 200.825,
+      "lb": 35
+    },
+    {
+      "t": 222.217,
+      "lb": 36
+    },
+    {
+      "t": 246.294,
+      "lb": 37
+    },
+    {
+      "t": 271.513,
+      "lb": 38
+    },
+    {
+      "t": 301.66,
+      "lb": 39
+    },
+    {
+      "t": 335.145,
+      "lb": 40
+    },
+    {
+      "t": 370.502,
+      "lb": 41
+    },
+    {
+      "t": 410.244,
+      "lb": 42
+    },
+    {
+      "t": 443.613,
+      "lb": 43
+    },
+    {
+      "t": 478.01,
+      "lb": 44
+    },
+    {
+      "t": 514.351,
+      "lb": 45
+    },
+    {
+      "t": 546.257,
+      "lb": 46
+    },
+    {
+      "t": 577.726,
+      "lb": 47
+    }
+  ],
+  "peak_rss_mb": 227.2,
+  "truth": 81,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface); whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L4",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      24
+    ],
+    "started_at": "2026-10-23T13:13:44.496616+00:00",
+    "ended_at": "2026-10-23T13:23:45.760367+00:00",
+    "wall_seconds": 601.263524,
+    "adapter_seconds": 601.01,
+    "trace_offset_seconds": 0.253524,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/concat_steane_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-incremental__lbasis-std/concat_steane_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 32.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

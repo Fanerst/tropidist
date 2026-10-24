@@ -1,0 +1,130 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L4/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L4/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-lc09zrf0/codewords.nz",
+    "timeout": "599.892142126"
+  },
+  "instance": "concat_steane_L4",
+  "variant": "full",
+  "rows": 1200,
+  "cols": 2401,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "error",
+  "lower_bound": 17,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 218.137,
+  "trace": [
+    {
+      "t": 0.013,
+      "lb": 2
+    },
+    {
+      "t": 4.093,
+      "lb": 3
+    },
+    {
+      "t": 8.299,
+      "lb": 4
+    },
+    {
+      "t": 12.682,
+      "lb": 5
+    },
+    {
+      "t": 16.922,
+      "lb": 6
+    },
+    {
+      "t": 21.719,
+      "lb": 7
+    },
+    {
+      "t": 25.481,
+      "lb": 8
+    },
+    {
+      "t": 29.297,
+      "lb": 9
+    },
+    {
+      "t": 33.412,
+      "lb": 10
+    },
+    {
+      "t": 37.734,
+      "lb": 11
+    },
+    {
+      "t": 42.9,
+      "lb": 12
+    },
+    {
+      "t": 47.297,
+      "lb": 13
+    },
+    {
+      "t": 53.149,
+      "lb": 14
+    },
+    {
+      "t": 62.102,
+      "lb": 15
+    },
+    {
+      "t": 83.046,
+      "lb": 16
+    },
+    {
+      "t": 173.341,
+      "lb": 17
+    }
+  ],
+  "peak_rss_mb": 16393.6,
+  "truth": 81,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. dist-m4ri exited 255 without a result: # run plan: method=3 (bracketing), 1 threads (RW on up to 1), steps=100000, min_hits=5, ksub=0, CC from w=1, timeout=599.892s, seed=1806746978 | # CC round w=1 finished in 0.001s (1 CC threads, 0 RW threads): no codewords -> dmin=2 | # [thread 0] RW found new upper bound cw of weight 81 (using 1 RW threads) | # CC round w=2 finished in 4.080s (1 CC threads, 0 RW threads): no codewords -> dmin=3 | # CC round w=3 finished in 4.206s (1 CC threads, 0 RW threads): no codewords -> dmin=4 | # CC round w=4 finished in 4.383s (1 CC threads, 0 RW threads): no codewords -> dmin=5 | # CC round w=5 finished in 4.240s (1 CC threads, 0 RW threads): no codewords -> dmin=6 | # CC round w=6 finished in 4.797s (1 CC threads, 0 RW threads): no codewords -> dmin=7 | # CC round w=7 finished in 3.762s (1 CC threads, 0 RW threads): no codewords -> dmin=8 | # CC round w=8 finished in 3.816s (1 CC threads, 0 RW threads): no codewords -> dmin=9 | # CC round w=9 finished in 4.115s (1 CC threads, 0 RW threads): no codewords -> dmin=10 | # CC round w=10 finished in 4.322s (1 CC threads, 0 RW threads): no codewords -> dmin=11 | # CC round w=11 finished in 5.166s (1 CC threads, 0 RW threads): no codewords -> dmin=12 | # CC round w=12 finished in 4.398s (1 CC threads, 0 RW threads): no codewords -> dmin=13 | # CC round w=13 finished in 5.851s (1 CC threads, 0 RW threads): no codewords -> dmin=14 | # CC round w=14 finished in 8.953s (1 CC threads, 0 RW threads): no codewords -> dmin=15 | # CC round w=15 finished in 20.944s (1 CC threads, 0 RW threads): no codewords -> dmin=16 | # CC round w=16 finished in 90.295s (1 CC threads, 0 RW threads): no codewords -> dmin=17 | util_io.c:2665: *** ERROR in function 'codeword_add_maybe()' *** |  \u001b[31;1m memory allocation \u001b[0m",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L4",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      31
+    ],
+    "started_at": "2026-10-23T12:10:08.486463+00:00",
+    "ended_at": "2026-10-23T12:13:46.692967+00:00",
+    "wall_seconds": 218.206275,
+    "adapter_seconds": 218.137,
+    "trace_offset_seconds": 0.069275,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/concat_steane_L4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket/concat_steane_L4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.0,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

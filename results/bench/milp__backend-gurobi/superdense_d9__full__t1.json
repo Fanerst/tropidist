@@ -1,0 +1,90 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "superdense_d9",
+  "variant": "full",
+  "rows": 540,
+  "cols": 21277,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 3,
+  "upper_bound": 9,
+  "witness": [
+    18647,
+    18653,
+    19521,
+    19527,
+    19893,
+    19898,
+    20025,
+    21250,
+    21274
+  ],
+  "witness_ok": true,
+  "seconds": 598.446,
+  "trace": [
+    {
+      "t": 0.599,
+      "lb": 1
+    },
+    {
+      "t": 1.004,
+      "ub": 16
+    },
+    {
+      "t": 1.008,
+      "ub": 10
+    },
+    {
+      "t": 1.809,
+      "lb": 2
+    },
+    {
+      "t": 3.817,
+      "ub": 9
+    },
+    {
+      "t": 70.306,
+      "lb": 3
+    }
+  ],
+  "peak_rss_mb": 1774.7,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d9",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      41
+    ],
+    "started_at": "2026-10-23T12:00:08.763393+00:00",
+    "ended_at": "2026-10-23T12:10:07.301867+00:00",
+    "wall_seconds": 598.50936,
+    "adapter_seconds": 598.446,
+    "trace_offset_seconds": 0.06336,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/superdense_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1819.9,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

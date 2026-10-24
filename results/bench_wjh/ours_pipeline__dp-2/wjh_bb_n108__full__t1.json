@@ -13,7 +13,8 @@
     "table_gb": 0,
     "dp": 2,
     "dp_fast": 10,
-    "dp_head": -1
+    "dp_head": -1,
+    "deepen": 1
   },
   "instance": "wjh_bb_n108",
   "variant": "full",
@@ -38,57 +39,57 @@
     101
   ],
   "witness_ok": true,
-  "seconds": 0.134,
+  "seconds": 0.164,
   "trace": [
     {
-      "t": 0.063,
+      "t": 0.078,
       "lb": 1
     },
     {
-      "t": 0.117,
+      "t": 0.145,
       "lb": 2
     },
     {
-      "t": 0.118,
+      "t": 0.145,
       "lb": 3
     },
     {
-      "t": 0.118,
+      "t": 0.146,
       "lb": 4
     },
     {
-      "t": 0.119,
+      "t": 0.146,
       "lb": 5
     },
     {
-      "t": 0.119,
+      "t": 0.147,
       "lb": 6
     },
     {
-      "t": 0.119,
+      "t": 0.147,
       "lb": 7
     },
     {
-      "t": 0.119,
+      "t": 0.147,
       "lb": 8
     },
     {
-      "t": 0.12,
+      "t": 0.148,
       "lb": 9
     },
     {
-      "t": 0.12,
+      "t": 0.149,
       "lb": 10
     },
     {
-      "t": 0.121,
+      "t": 0.149,
       "ub": 10
     }
   ],
-  "peak_rss_mb": 58.1,
+  "peak_rss_mb": 59.3,
   "truth": null,
   "truth_kind": "unknown",
-  "notes": "{\"dp\": {\"main\": {\"columns\": 108, \"cut_rank\": 29, \"decision\": \"search (finished within the DP's predicted time)\", \"estimate_seconds\": 0.009, \"fits\": true, \"peak_bits\": 32, \"predicted_seconds\": 106.175, \"queries\": 8, \"work\": 138027450848}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 108, \"rows\": 54, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.417533874511719e-05, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.744529724121094e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 4.506111145019531e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.62939453125e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.626678466796875e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.9604644775390625e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010085105895996094, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018143653869628906, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004253387451171875, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 0.00016880035400390625, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 108, \"cut_rank\": 29, \"decision\": \"search (finished within the DP's predicted time)\", \"estimate_seconds\": 0.011, \"fits\": true, \"peak_bits\": 32, \"predicted_seconds\": 106.175, \"queries\": 8, \"work\": 138027450848}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 108, \"rows\": 54, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010061264038085938, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.817413330078125e-05, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 5.745887756347656e-05, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.392333984375e-05, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.009506225585938e-05, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.653236389160156e-05, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00012254714965820312, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002193450927734375, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005171298980712891, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": 10, \"nsol_recorded\": 1, \"seconds\": 0.00018978118896484375, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
   "value_only": false,
   "agrees_with_truth": null,
   "harness": {
@@ -96,25 +97,25 @@
     "adapter": "ours_pipeline",
     "config_string": "dp=2",
     "method_kind": "certifying",
-    "instance_dir": "/data/panfeng/claude_runs/sparse_dp/repo3/bench/instances_wjh/wjh_bb_n108",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_bb_n108",
     "family": "wjh_bb",
     "memory_limit_gb": 16.0,
     "time_limit": 600.0,
     "cpus": [
-      96
+      142
     ],
-    "started_at": "2026-10-23T02:37:36.345868+00:00",
-    "ended_at": "2026-10-23T02:37:36.628480+00:00",
-    "wall_seconds": 0.282118,
-    "adapter_seconds": 0.134,
-    "trace_offset_seconds": 0.148118,
+    "started_at": "2026-10-23T12:10:13.386941+00:00",
+    "ended_at": "2026-10-23T12:10:13.719930+00:00",
+    "wall_seconds": 0.332489,
+    "adapter_seconds": 0.164,
+    "trace_offset_seconds": 0.168489,
     "exit_code": 0,
     "error_reason": null,
     "stderr_tail": [],
-    "stdout_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n108__full__t1.stdout.log",
-    "stderr_file": "/data/panfeng/claude_runs/sparse_dp/repo3/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n108__full__t1.stderr.log",
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n108__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/ours_pipeline__dp-2/wjh_bb_n108__full__t1.stderr.log",
     "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
-    "peak_group_rss_mb": 17.3,
+    "peak_group_rss_mb": 17.6,
     "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
   }
 }

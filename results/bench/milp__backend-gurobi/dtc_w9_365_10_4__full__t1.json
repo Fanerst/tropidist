@@ -1,0 +1,160 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "dtc_w9_365_10_4",
+  "variant": "full",
+  "rows": 240,
+  "cols": 365,
+  "obs": 10,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 14,
+  "upper_bound": 31,
+  "witness": [
+    16,
+    17,
+    18,
+    40,
+    63,
+    85,
+    113,
+    130,
+    132,
+    136,
+    142,
+    147,
+    148,
+    172,
+    194,
+    213,
+    217,
+    221,
+    222,
+    228,
+    231,
+    256,
+    281,
+    300,
+    303,
+    307,
+    313,
+    316,
+    319,
+    340,
+    359
+  ],
+  "witness_ok": true,
+  "seconds": 599.863,
+  "trace": [
+    {
+      "t": 0.287,
+      "ub": 77
+    },
+    {
+      "t": 0.287,
+      "ub": 73
+    },
+    {
+      "t": 0.287,
+      "ub": 72
+    },
+    {
+      "t": 0.287,
+      "ub": 66
+    },
+    {
+      "t": 0.287,
+      "ub": 58
+    },
+    {
+      "t": 0.287,
+      "ub": 33
+    },
+    {
+      "t": 0.287,
+      "ub": 31
+    },
+    {
+      "t": 0.287,
+      "lb": 1
+    },
+    {
+      "t": 0.287,
+      "lb": 2
+    },
+    {
+      "t": 5.293,
+      "lb": 6
+    },
+    {
+      "t": 10.299,
+      "lb": 7
+    },
+    {
+      "t": 20.111,
+      "lb": 8
+    },
+    {
+      "t": 30.122,
+      "lb": 9
+    },
+    {
+      "t": 50.145,
+      "lb": 10
+    },
+    {
+      "t": 90.192,
+      "lb": 11
+    },
+    {
+      "t": 160.286,
+      "lb": 12
+    },
+    {
+      "t": 285.25,
+      "lb": 13
+    },
+    {
+      "t": 525.161,
+      "lb": 14
+    }
+  ],
+  "peak_rss_mb": 1486.5,
+  "truth": 31,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl status 9 (time limit)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w9_365_10_4",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      38
+    ],
+    "started_at": "2026-10-23T12:00:21.029657+00:00",
+    "ended_at": "2026-10-23T12:10:21.068056+00:00",
+    "wall_seconds": 600.037639,
+    "adapter_seconds": 599.863,
+    "trace_offset_seconds": 0.174639,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/dtc_w9_365_10_4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/dtc_w9_365_10_4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1517.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

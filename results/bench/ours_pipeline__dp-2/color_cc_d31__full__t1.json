@@ -1,0 +1,186 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "color_cc_d31",
+  "variant": "full",
+  "rows": 360,
+  "cols": 721,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 31,
+  "upper_bound": 31,
+  "witness": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "witness_ok": true,
+  "seconds": 350.946,
+  "trace": [
+    {
+      "t": 0.078,
+      "lb": 1
+    },
+    {
+      "t": 0.642,
+      "lb": 2
+    },
+    {
+      "t": 0.644,
+      "lb": 3
+    },
+    {
+      "t": 0.647,
+      "lb": 4
+    },
+    {
+      "t": 0.652,
+      "lb": 5
+    },
+    {
+      "t": 0.655,
+      "lb": 6
+    },
+    {
+      "t": 0.658,
+      "lb": 7
+    },
+    {
+      "t": 0.663,
+      "lb": 8
+    },
+    {
+      "t": 0.67,
+      "lb": 9
+    },
+    {
+      "t": 0.679,
+      "lb": 10
+    },
+    {
+      "t": 0.702,
+      "lb": 11
+    },
+    {
+      "t": 0.741,
+      "lb": 12
+    },
+    {
+      "t": 0.859,
+      "lb": 13
+    },
+    {
+      "t": 1.139,
+      "lb": 14
+    },
+    {
+      "t": 1.981,
+      "lb": 15
+    },
+    {
+      "t": 4.028,
+      "lb": 16
+    },
+    {
+      "t": 10.094,
+      "lb": 17
+    },
+    {
+      "t": 24.896,
+      "lb": 18
+    },
+    {
+      "t": 66.921,
+      "lb": 19
+    },
+    {
+      "t": 169.324,
+      "lb": 20
+    },
+    {
+      "t": 350.914,
+      "lb": 31
+    },
+    {
+      "t": 350.929,
+      "ub": 31
+    }
+  ],
+  "peak_rss_mb": 4166.3,
+  "truth": 31,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 721, \"cut_rank\": 31, \"decision\": \"dp (the search did not finish within the DP's predicted time)\", \"estimate_seconds\": 0.496, \"fits\": true, \"peak_bits\": 32, \"predicted_seconds\": 203.277, \"queries\": 1, \"seconds\": 147.005, \"value\": 31, \"work\": 264259793356}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"main_witness\": {\"cols\": 721, \"rows\": 360, \"runs\": [{\"K\": 31, \"best\": 31, \"nsol_recorded\": 1, \"seconds\": 0.002043008804321289, \"status\": \"found\"}]}, \"plain\": {\"cols\": 721, \"rows\": 360, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0019028186798095703, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0017752647399902344, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002380847930908203, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0044116973876953125, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0025670528411865234, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0033054351806640625, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004946470260620117, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.005862712860107422, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.009215354919433594, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.022628307342529297, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.03851628303527832, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.1175546646118164, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.2795445919036865, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8413674831390381, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 2.0467512607574463, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 6.065195322036743, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 14.800873041152954, \"status\": \"exhausted\"}, {\"K\": 18, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 42.02453136444092, \"status\": \"exhausted\"}, {\"K\": 19, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 102.40245604515076, \"status\": \"exhausted\"}, {\"K\": 20, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 34.583468437194824, \"status\": \"timeout\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_cc_d31",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-23T11:50:15.393813+00:00",
+    "ended_at": "2026-10-23T11:56:06.557870+00:00",
+    "wall_seconds": 351.162276,
+    "adapter_seconds": 350.946,
+    "trace_offset_seconds": 0.216276,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-2/color_cc_d31__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/ours_pipeline__dp-2/color_cc_d31__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 4173.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

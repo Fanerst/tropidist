@@ -1,0 +1,156 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "wjh_qt_180_2_17",
+  "variant": "full",
+  "rows": 90,
+  "cols": 180,
+  "obs": 2,
+  "threads": 1,
+  "time_limit": 28800.0,
+  "status": "exact",
+  "lower_bound": 17,
+  "upper_bound": 17,
+  "witness": [
+    5,
+    40,
+    54,
+    61,
+    70,
+    74,
+    84,
+    109,
+    115,
+    119,
+    124,
+    131,
+    135,
+    140,
+    141,
+    151,
+    164
+  ],
+  "witness_ok": true,
+  "seconds": 278.968,
+  "trace": [
+    {
+      "t": 0.081,
+      "lb": 1
+    },
+    {
+      "t": 0.163,
+      "lb": 2
+    },
+    {
+      "t": 0.164,
+      "lb": 3
+    },
+    {
+      "t": 0.165,
+      "lb": 4
+    },
+    {
+      "t": 0.166,
+      "lb": 5
+    },
+    {
+      "t": 0.167,
+      "lb": 6
+    },
+    {
+      "t": 0.168,
+      "lb": 7
+    },
+    {
+      "t": 0.172,
+      "lb": 8
+    },
+    {
+      "t": 0.185,
+      "lb": 9
+    },
+    {
+      "t": 0.221,
+      "lb": 10
+    },
+    {
+      "t": 0.327,
+      "lb": 11
+    },
+    {
+      "t": 0.63,
+      "lb": 12
+    },
+    {
+      "t": 1.568,
+      "lb": 13
+    },
+    {
+      "t": 4.524,
+      "lb": 14
+    },
+    {
+      "t": 13.914,
+      "lb": 15
+    },
+    {
+      "t": 44.003,
+      "lb": 16
+    },
+    {
+      "t": 142.746,
+      "lb": 17
+    },
+    {
+      "t": 278.951,
+      "ub": 17
+    }
+  ],
+  "peak_rss_mb": 62.7,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 180, \"cut_rank\": 48, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.028, \"fits\": false, \"peak_bits\": 48, \"predicted_seconds\": null, \"queries\": 2, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 180, \"rows\": 90, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.000240325927734375, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002200603485107422, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0003902912139892578, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0007503032684326172, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00074005126953125, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0014519691467285156, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0038347244262695312, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.012223958969116211, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.03578662872314453, \"status\": \"exhausted\"}, {\"K\": 10, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.10588502883911133, \"status\": \"exhausted\"}, {\"K\": 11, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.3023054599761963, \"status\": \"exhausted\"}, {\"K\": 12, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.9371380805969238, \"status\": \"exhausted\"}, {\"K\": 13, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 2.9550557136535645, \"status\": \"exhausted\"}, {\"K\": 14, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.3898606300354, \"status\": \"exhausted\"}, {\"K\": 15, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 30.088607788085938, \"status\": \"exhausted\"}, {\"K\": 16, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 98.74221467971802, \"status\": \"exhausted\"}, {\"K\": 17, \"best\": 17, \"nsol_recorded\": 1, \"seconds\": 136.2043969631195, \"status\": \"found\"}]}}, \"table_budget_gib\": 4.0}",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_qt_180_2_17",
+    "family": "wjh_qt",
+    "memory_limit_gb": 8.0,
+    "time_limit": 28800.0,
+    "cpus": [
+      139
+    ],
+    "started_at": "2026-10-23T11:50:10.533099+00:00",
+    "ended_at": "2026-10-23T11:54:49.763406+00:00",
+    "wall_seconds": 279.229548,
+    "adapter_seconds": 278.968,
+    "trace_offset_seconds": 0.261548,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_8h/ours_pipeline__dp-2/wjh_qt_180_2_17__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh_8h/ours_pipeline__dp-2/wjh_qt_180_2_17__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 75.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

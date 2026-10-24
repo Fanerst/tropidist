@@ -1,0 +1,111 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 0,
+    "lift": 0,
+    "window": 0,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "bb108_r10",
+  "variant": "sector",
+  "rows": 594,
+  "cols": 5508,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    486,
+    488,
+    520,
+    589,
+    638,
+    705,
+    776,
+    806
+  ],
+  "witness_ok": true,
+  "seconds": 2.249,
+  "trace": [
+    {
+      "t": 0.087,
+      "lb": 1
+    },
+    {
+      "t": 1.258,
+      "lb": 2
+    },
+    {
+      "t": 1.261,
+      "lb": 3
+    },
+    {
+      "t": 1.265,
+      "lb": 4
+    },
+    {
+      "t": 1.277,
+      "lb": 5
+    },
+    {
+      "t": 1.289,
+      "lb": 6
+    },
+    {
+      "t": 1.348,
+      "lb": 7
+    },
+    {
+      "t": 1.73,
+      "lb": 8
+    },
+    {
+      "t": 2.23,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 355.9,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 5508, \"cut_rank\": 87, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.064, \"fits\": false, \"peak_bits\": 87, \"predicted_seconds\": null, \"queries\": 8, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 2, \"sparse\": {\"K\": 1, \"columns\": 5508, \"cut_rank\": 87, \"decision\": \"search (cut rank above the row slots of the sparse tables)\", \"lower\": 1, \"order_seconds\": 0.0, \"upper\": null}, \"stages\": {\"sector\": {\"cols\": 5508, \"rows\": 594, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002464771270751953, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.002153635025024414, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003728628158569336, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.011452674865722656, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.011609792709350586, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0591130256652832, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.3812556266784668, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": 8, \"nsol_recorded\": 1, \"seconds\": 0.49999189376831055, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2,collapse=0,lift=0,window=0",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2,collapse=0,lift=0,window=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_r10",
+    "family": "bb6_si1000",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      172
+    ],
+    "started_at": "2026-10-23T11:50:10.990991+00:00",
+    "ended_at": "2026-10-23T11:50:13.397393+00:00",
+    "wall_seconds": 2.392109,
+    "adapter_seconds": 2.249,
+    "trace_offset_seconds": 0.143109,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__collapse-0__lift-0__window-0/bb108_r10__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__collapse-0__lift-0__window-0/bb108_r10__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 367.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

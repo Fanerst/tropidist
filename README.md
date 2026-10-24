@@ -14,15 +14,19 @@ fault set replayed in Stim. The same engine computes code distances.
 - **A method**, the tropical partition function method. Reduce the circuit's fault model to the detectors of one memory basis (exact), merge
   each check's detectors over time (a certified lower bound that no longer depends on the number of
   rounds), search by weight with a meet-in-the-middle table and the code's symmetry, and lift the
-  relaxed solutions back to real fault sets.
+  relaxed solutions back to real fault sets. Where the problem is narrow, two Rank DP evaluators of the
+  same tropical partition function decide instead: a dense one whose cost does not depend on the
+  distance, and one truncated at a weight threshold; the cost model chooses.
 - **A benchmark** against other exact solvers (connected-cluster enumeration, integer programming
-  including Gurobi, SAT, MaxSAT) on 60 instances. It solves 47 with one thread in 600 s and 59 with
+  including Gurobi, SAT, MaxSAT) on 74 instances. It solves 59 with one thread in 600 s and 71 with
   32 threads in an hour; all other methods together, among them the October version of dist-m4ri,
-  solve 30 and 38, and none solves an instance it does not.
+  solve 36 and 48. One instance, a many-hypercube code with 256 logical qubits, is solved by another
+  method (SAT) and not by this one.
 - **The instances of the prior benchmark** (Webster, Jacob, Higgott, arXiv:2603.22532), from its own
   files and under its limits (one core, 8 GB, eight hours per run): of its 126 CSS codes and circuits
   it solves 95, against 73 for its five exact methods together (86 already with one thread in
-  600 s, 96 with 32 threads in an hour).
+  600 s, 97 with 32 threads in an hour, among them the superdense color-code circuit of d = 11, whose
+  distance 11 no method had certified).
 - **Results for published circuits and codes**: bivariate bicycle codes up to [[288,12,18]]
   (circuit distance 16), circuits from 17 papers, and 15 code distances that arXiv:2610.03682 could
   only bracket, for codes of up to 31,200 qubits.

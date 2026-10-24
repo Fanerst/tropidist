@@ -1,0 +1,160 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 17,
+  "upper_bound": 27,
+  "witness": [
+    0,
+    1,
+    2,
+    7,
+    8,
+    9,
+    14,
+    15,
+    16,
+    49,
+    50,
+    51,
+    56,
+    57,
+    58,
+    63,
+    64,
+    65,
+    98,
+    99,
+    100,
+    105,
+    106,
+    107,
+    112,
+    113,
+    114
+  ],
+  "witness_ok": true,
+  "seconds": 600.667,
+  "trace": [
+    {
+      "t": 7.142,
+      "ub": 343
+    },
+    {
+      "t": 7.142,
+      "ub": 323
+    },
+    {
+      "t": 7.142,
+      "ub": 319
+    },
+    {
+      "t": 7.142,
+      "ub": 279
+    },
+    {
+      "t": 7.142,
+      "ub": 275
+    },
+    {
+      "t": 7.142,
+      "ub": 43
+    },
+    {
+      "t": 7.142,
+      "ub": 27
+    },
+    {
+      "t": 7.142,
+      "lb": 1
+    },
+    {
+      "t": 7.142,
+      "lb": 2
+    },
+    {
+      "t": 7.142,
+      "lb": 3
+    },
+    {
+      "t": 7.142,
+      "lb": 4
+    },
+    {
+      "t": 12.148,
+      "lb": 10
+    },
+    {
+      "t": 17.154,
+      "lb": 11
+    },
+    {
+      "t": 22.161,
+      "lb": 12
+    },
+    {
+      "t": 32.173,
+      "lb": 13
+    },
+    {
+      "t": 57.203,
+      "lb": 14
+    },
+    {
+      "t": 97.254,
+      "lb": 15
+    },
+    {
+      "t": 187.162,
+      "lb": 16
+    },
+    {
+      "t": 357.167,
+      "lb": 17
+    }
+  ],
+  "peak_rss_mb": 146.8,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); gurobi_cl wrote no result (exit -9, killed at the deadline); 4 87411   17.85926   51  119   27.00000   16.73974  38.0%  40.2  575s / 203097 88087   24.50000   58   31   27.00000   16.75055  38.0%  40.2  580s / 204926 88867   20.01428   55  116   27.00000   16.76186  37.9%  40.2  585s / 206885 89626   22.80306   54   94   27.00000   16.77603  37.9%  40.1  590s",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi",
+    "adapter": "milp",
+    "config_string": "backend=gurobi",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      37
+    ],
+    "started_at": "2026-10-23T11:50:07.923219+00:00",
+    "ended_at": "2026-10-23T12:00:08.870327+00:00",
+    "wall_seconds": 600.946527,
+    "adapter_seconds": 600.667,
+    "trace_offset_seconds": 0.279527,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/concat_steane_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi/concat_steane_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 178.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "dtc_w7_269_4_5",
+  "variant": "full",
+  "rows": 161,
+  "cols": 261,
+  "obs": 4,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 26,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 601.008,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.119,
+      "lb": 2
+    },
+    {
+      "t": 0.119,
+      "lb": 3
+    },
+    {
+      "t": 0.119,
+      "lb": 4
+    },
+    {
+      "t": 0.13,
+      "lb": 5
+    },
+    {
+      "t": 0.13,
+      "lb": 6
+    },
+    {
+      "t": 0.15,
+      "lb": 7
+    },
+    {
+      "t": 0.15,
+      "lb": 8
+    },
+    {
+      "t": 0.188,
+      "lb": 9
+    },
+    {
+      "t": 0.271,
+      "lb": 10
+    },
+    {
+      "t": 0.281,
+      "lb": 11
+    },
+    {
+      "t": 0.388,
+      "lb": 12
+    },
+    {
+      "t": 0.8,
+      "lb": 13
+    },
+    {
+      "t": 1.154,
+      "lb": 14
+    },
+    {
+      "t": 2.246,
+      "lb": 15
+    },
+    {
+      "t": 3.179,
+      "lb": 16
+    },
+    {
+      "t": 3.301,
+      "lb": 17
+    },
+    {
+      "t": 11.872,
+      "lb": 18
+    },
+    {
+      "t": 11.906,
+      "lb": 19
+    },
+    {
+      "t": 39.035,
+      "lb": 20
+    },
+    {
+      "t": 39.521,
+      "lb": 21
+    },
+    {
+      "t": 70.932,
+      "lb": 22
+    },
+    {
+      "t": 212.488,
+      "lb": 23
+    },
+    {
+      "t": 212.939,
+      "lb": 24
+    },
+    {
+      "t": 504.025,
+      "lb": 25
+    },
+    {
+      "t": 504.074,
+      "lb": 26
+    }
+  ],
+  "peak_rss_mb": 155.9,
+  "truth": 28,
+  "truth_kind": "exact",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0; whole-run wall-time watchdog stopped the solver",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w7_269_4_5",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      24
+    ],
+    "started_at": "2026-10-23T12:20:47.620877+00:00",
+    "ended_at": "2026-10-23T12:30:48.855115+00:00",
+    "wall_seconds": 601.234026,
+    "adapter_seconds": 601.008,
+    "trace_offset_seconds": 0.226026,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/dtc_w7_269_4_5__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/dtc_w7_269_4_5__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

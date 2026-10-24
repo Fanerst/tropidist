@@ -1,0 +1,104 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "superdense_d9",
+  "variant": "full",
+  "rows": 540,
+  "cols": 21277,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 9,
+  "witness": [
+    4,
+    10,
+    57,
+    219,
+    2197,
+    3931,
+    3937,
+    5582,
+    6070
+  ],
+  "witness_ok": true,
+  "seconds": 600.053,
+  "trace": [
+    {
+      "t": 0.213,
+      "ub": 37
+    },
+    {
+      "t": 0.263,
+      "ub": 23
+    },
+    {
+      "t": 0.316,
+      "ub": 19
+    },
+    {
+      "t": 0.61,
+      "ub": 16
+    },
+    {
+      "t": 1.076,
+      "ub": 15
+    },
+    {
+      "t": 1.809,
+      "ub": 12
+    },
+    {
+      "t": 2.989,
+      "ub": 11
+    },
+    {
+      "t": 4.15,
+      "ub": 10
+    },
+    {
+      "t": 47.831,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 62.7,
+  "truth": 9,
+  "truth_kind": "exact",
+  "notes": "search calls: 1964; valid outputs: 9; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d9",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      28
+    ],
+    "started_at": "2026-10-23T12:57:44.496115+00:00",
+    "ended_at": "2026-10-23T13:07:44.692234+00:00",
+    "wall_seconds": 600.165019,
+    "adapter_seconds": 600.053,
+    "trace_offset_seconds": 0.112019,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/superdense_d9__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/superdense_d9__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 32.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

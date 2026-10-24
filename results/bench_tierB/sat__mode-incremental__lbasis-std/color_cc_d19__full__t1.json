@@ -1,0 +1,155 @@
+{
+  "method": "sat_incremental",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "incremental",
+    "lbasis": "std"
+  },
+  "instance": "color_cc_d19",
+  "variant": "full",
+  "rows": 135,
+  "cols": 271,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 3600.0,
+  "status": "exact",
+  "lower_bound": 19,
+  "upper_bound": 19,
+  "witness": [
+    1,
+    19,
+    54,
+    87,
+    103,
+    117,
+    145,
+    157,
+    180,
+    201,
+    210,
+    219,
+    220,
+    229,
+    236,
+    243,
+    244,
+    245,
+    246
+  ],
+  "witness_ok": true,
+  "seconds": 3171.005,
+  "trace": [
+    {
+      "t": 0.002,
+      "lb": 1
+    },
+    {
+      "t": 0.141,
+      "lb": 2
+    },
+    {
+      "t": 0.141,
+      "lb": 3
+    },
+    {
+      "t": 0.141,
+      "lb": 4
+    },
+    {
+      "t": 0.141,
+      "lb": 5
+    },
+    {
+      "t": 0.175,
+      "lb": 6
+    },
+    {
+      "t": 0.302,
+      "lb": 7
+    },
+    {
+      "t": 0.521,
+      "lb": 8
+    },
+    {
+      "t": 0.961,
+      "lb": 9
+    },
+    {
+      "t": 2.109,
+      "lb": 10
+    },
+    {
+      "t": 4.087,
+      "lb": 11
+    },
+    {
+      "t": 11.717,
+      "lb": 12
+    },
+    {
+      "t": 28.698,
+      "lb": 13
+    },
+    {
+      "t": 70.026,
+      "lb": 14
+    },
+    {
+      "t": 142.774,
+      "lb": 15
+    },
+    {
+      "t": 447.752,
+      "lb": 16
+    },
+    {
+      "t": 1202.962,
+      "lb": 17
+    },
+    {
+      "t": 3169.459,
+      "lb": 18
+    },
+    {
+      "t": 3170.987,
+      "lb": 19
+    },
+    {
+      "t": 3170.997,
+      "ub": 19
+    }
+  ],
+  "peak_rss_mb": 231.4,
+  "truth": 19,
+  "truth_kind": "exact",
+  "notes": "logical matrix full.L.std.mtx (lbasis=std); PySAT threads ignored (single-threaded solver interface); PySAT cadical153 ignores threads (single-threaded solver interface)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "sat:mode=incremental,lbasis=std",
+    "adapter": "sat",
+    "config_string": "mode=incremental,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_cc_d19",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      44
+    ],
+    "started_at": "2026-10-24T08:44:26.201981+00:00",
+    "ended_at": "2026-10-24T09:37:17.306508+00:00",
+    "wall_seconds": 3171.103481,
+    "adapter_seconds": 3171.005,
+    "trace_offset_seconds": 0.098481,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/color_cc_d19__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/sat__mode-incremental__lbasis-std/color_cc_d19__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 31.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

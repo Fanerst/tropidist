@@ -20,7 +20,9 @@ HERE = Path(__file__).resolve().parent
 
 # dist-m4ri: the unqualified names are the current version (0.14.7, commit bed621e); the records of the
 # 0.9.0 build (commit 1f46277) that the benchmark first ran are kept under their own names
-SHORT = [("ours_pipeline", "ours"), ("ours_pipeline__dp-1", "ours + DP"), ("ours_pipeline__dp-2", "ours + sparse DP"),
+# "ours" is the final configuration of our pipeline, dp=2 (Feng, 23 October 2026); the tables carry only it.  The
+# other configurations keep their own names for the comparisons in the text and the ablation.
+SHORT = [("ours_pipeline__dp-2", "ours"), ("ours_pipeline", "ours, search only"), ("ours_pipeline__dp-1", "ours + DP"),
          ("ours", "ours, plain"),
          ("distm4ri__build-0.14.7__mode-cc", "dist-m4ri CC"), ("distm4ri__build-0.14.7__mode-bracket", "dist-m4ri CC+RW"),
          ("distm4ri__build-0.14.7__mode-cc__input-dem", "dist-m4ri CC, DEM input"),
@@ -43,7 +45,10 @@ def short(folder):
         if folder == key:
             return name
     if folder.startswith("ours_pipeline__"):
-        return "ours, " + folder[len("ours_pipeline__"):].replace("__", " ").replace("-0", " off")
+        # an ablation: one component off, relative to the final configuration (dp-2) or to the earlier default
+        rest = folder[len("ours_pipeline__"):]
+        rest = rest[len("dp-2__"):] if rest.startswith("dp-2__") else rest
+        return "ours, " + rest.replace("__", " ").replace("-0", " off")
     stim = " (Stim WCNF)" if "encoding-stim" in folder else ""
     for key, name in SHORT:
         if key in ("CASHW", "enMaxCDCL"):

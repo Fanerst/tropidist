@@ -1,0 +1,101 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 1,
+    "cover": 1,
+    "collapse": 0,
+    "lift": 0,
+    "window": 0,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "star_42",
+  "variant": "sector",
+  "rows": 147,
+  "cols": 1806,
+  "obs": 6,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 6,
+  "upper_bound": 6,
+  "witness": [
+    0,
+    10,
+    66,
+    145,
+    155,
+    270
+  ],
+  "witness_ok": true,
+  "seconds": 1.23,
+  "trace": [
+    {
+      "t": 0.081,
+      "lb": 1
+    },
+    {
+      "t": 1.053,
+      "lb": 2
+    },
+    {
+      "t": 1.055,
+      "lb": 3
+    },
+    {
+      "t": 1.059,
+      "lb": 4
+    },
+    {
+      "t": 1.087,
+      "lb": 5
+    },
+    {
+      "t": 1.116,
+      "lb": 6
+    },
+    {
+      "t": 1.21,
+      "ub": 6
+    }
+  ],
+  "peak_rss_mb": 124.2,
+  "truth": 6,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 1806, \"cut_rank\": 38, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.011, \"fits\": false, \"peak_bits\": 38, \"predicted_seconds\": null, \"queries\": 6, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 20, \"sparse\": {\"K\": 1, \"columns\": 1806, \"cut_rank\": 38, \"decision\": \"search (finished within its head start of 0.7 s)\", \"estimate_seconds\": 0.302, \"fits\": true, \"lower\": 1, \"order_seconds\": 0.0, \"predicted_bytes\": 1088.0, \"predicted_seconds\": 0.651, \"predicted_work\": 42720.0, \"probe_seconds\": 0.29, \"probe_weights\": [2, 2], \"schedule_runs\": \"1\", \"slots\": 39, \"upper\": null}, \"stages\": {\"sector\": {\"cols\": 1806, \"rows\": 147, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008094310760498047, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0008244514465332031, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003984212875366211, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.027678728103637695, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.02859950065612793, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": 6, \"nsol_recorded\": 1, \"seconds\": 0.09378910064697266, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2,collapse=0,lift=0,window=0",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2,collapse=0,lift=0,window=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/star_42",
+    "family": "star",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      165
+    ],
+    "started_at": "2026-10-23T12:40:11.152947+00:00",
+    "ended_at": "2026-10-23T12:40:12.547391+00:00",
+    "wall_seconds": 1.390091,
+    "adapter_seconds": 1.23,
+    "trace_offset_seconds": 0.160091,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__collapse-0__lift-0__window-0/star_42__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__collapse-0__lift-0__window-0/star_42__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 132.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 0,
+    "cover": 0,
+    "collapse": 0,
+    "lift": 0,
+    "window": 0,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "mitten_150",
+  "variant": "sector",
+  "rows": 660,
+  "cols": 9750,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 7,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 600.018,
+  "trace": [
+    {
+      "t": 0.107,
+      "lb": 1
+    },
+    {
+      "t": 2.008,
+      "lb": 2
+    },
+    {
+      "t": 2.433,
+      "lb": 3
+    },
+    {
+      "t": 3.23,
+      "lb": 4
+    },
+    {
+      "t": 4.213,
+      "lb": 5
+    },
+    {
+      "t": 13.897,
+      "lb": 6
+    },
+    {
+      "t": 406.332,
+      "lb": 7
+    }
+  ],
+  "peak_rss_mb": 1223.6,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"main\": {\"columns\": 9750, \"cut_rank\": 83, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.137, \"fits\": false, \"peak_bits\": 83, \"predicted_seconds\": null, \"queries\": 30, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"sparse\": {\"K\": 1, \"columns\": 9750, \"cut_rank\": 83, \"decision\": \"search (cut rank above the row slots of the sparse tables)\", \"lower\": 1, \"order_seconds\": 0.0, \"upper\": null}, \"stages\": {\"sector\": {\"cols\": 9750, \"deepen\": [{\"K\": 5, \"build_seconds\": 1.829, \"decision\": \"kept\", \"deep\": [\"timeout\", 0.5, 8294], \"depth\": 2, \"k\": 2, \"level_seconds\": 9.683, \"limit_seconds\": 0.5, \"predicted_build_seconds\": 1.901, \"sample_anchors\": 514, \"shallow\": [\"exhausted\", 0.5, 13307]}], \"rows\": 660, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.40203070640563965, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.42456722259521484, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.7960488796234131, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.9830889701843262, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.682971715927124, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 387.7547905445099, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 191.9933500289917, \"status\": \"timeout\"}]}}, \"stop_reason\": \"whole-run wall-time limit reached\", \"table_budget_gib\": 8.0, \"table_k_reduced\": [[9750, 2, 1]]}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2,symmetry=0,cover=0,collapse=0,lift=0,window=0",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2,symmetry=0,cover=0,collapse=0,lift=0,window=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      172
+    ],
+    "started_at": "2026-10-23T12:09:16.943577+00:00",
+    "ended_at": "2026-10-23T12:19:17.097485+00:00",
+    "wall_seconds": 600.153633,
+    "adapter_seconds": 600.018,
+    "trace_offset_seconds": 0.135633,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0__cover-0__collapse-0__lift-0__window-0/mitten_150__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0__cover-0__collapse-0__lift-0__window-0/mitten_150__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 1234.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

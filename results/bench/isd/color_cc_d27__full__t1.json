@@ -1,0 +1,106 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "color_cc_d27",
+  "variant": "full",
+  "rows": 273,
+  "cols": 547,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 27,
+  "witness": [
+    3,
+    5,
+    6,
+    9,
+    10,
+    11,
+    12,
+    15,
+    16,
+    17,
+    18,
+    30,
+    33,
+    34,
+    39,
+    40,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    55,
+    103,
+    127
+  ],
+  "witness_ok": true,
+  "seconds": 600.016,
+  "trace": [
+    {
+      "t": 0.122,
+      "ub": 41
+    },
+    {
+      "t": 0.123,
+      "ub": 37
+    },
+    {
+      "t": 0.125,
+      "ub": 31
+    },
+    {
+      "t": 0.13,
+      "ub": 29
+    },
+    {
+      "t": 0.141,
+      "ub": 27
+    }
+  ],
+  "peak_rss_mb": 55.1,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "search calls: 2380; valid outputs: 5; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_cc_d27",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      34
+    ],
+    "started_at": "2026-10-23T11:50:18.831085+00:00",
+    "ended_at": "2026-10-23T12:00:18.949741+00:00",
+    "wall_seconds": 600.117749,
+    "adapter_seconds": 600.016,
+    "trace_offset_seconds": 0.101749,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/color_cc_d27__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/color_cc_d27__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

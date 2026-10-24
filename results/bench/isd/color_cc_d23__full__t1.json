@@ -1,0 +1,94 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "color_cc_d23",
+  "variant": "full",
+  "rows": 198,
+  "cols": 397,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 23,
+  "witness": [
+    2,
+    9,
+    10,
+    19,
+    20,
+    23,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    43,
+    44,
+    45
+  ],
+  "witness_ok": true,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 0.117,
+      "ub": 27
+    },
+    {
+      "t": 0.119,
+      "ub": 25
+    },
+    {
+      "t": 0.124,
+      "ub": 23
+    }
+  ],
+  "peak_rss_mb": 53.0,
+  "truth": 23,
+  "truth_kind": "exact",
+  "notes": "search calls: 2386; valid outputs: 3; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/color_cc_d23",
+    "family": "color_cc",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      35
+    ],
+    "started_at": "2026-10-23T11:50:08.016797+00:00",
+    "ended_at": "2026-10-23T12:00:08.299771+00:00",
+    "wall_seconds": 600.282351,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.265351,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/color_cc_d23__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/color_cc_d23__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "method": "milp",
+  "version": "9.15.6755",
+  "config": {
+    "backend": "cpsat",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "dtc_w5_259_2_4",
+  "variant": "full",
+  "rows": 161,
+  "cols": 259,
+  "obs": 2,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 2,
+  "upper_bound": 36,
+  "witness": [
+    10,
+    17,
+    25,
+    34,
+    42,
+    50,
+    56,
+    59,
+    67,
+    74,
+    77,
+    84,
+    92,
+    99,
+    109,
+    115,
+    118,
+    125,
+    132,
+    141,
+    148,
+    151,
+    158,
+    166,
+    174,
+    182,
+    189,
+    192,
+    199,
+    207,
+    215,
+    222,
+    225,
+    232,
+    240,
+    246
+  ],
+  "witness_ok": true,
+  "seconds": 600.009,
+  "trace": [
+    {
+      "t": 0.296,
+      "ub": 83
+    },
+    {
+      "t": 0.296,
+      "lb": 0
+    },
+    {
+      "t": 0.296,
+      "ub": 56
+    },
+    {
+      "t": 0.302,
+      "ub": 51
+    },
+    {
+      "t": 0.318,
+      "ub": 50
+    },
+    {
+      "t": 0.339,
+      "ub": 49
+    },
+    {
+      "t": 0.452,
+      "ub": 47
+    },
+    {
+      "t": 0.557,
+      "ub": 46
+    },
+    {
+      "t": 0.73,
+      "ub": 44
+    },
+    {
+      "t": 3.582,
+      "ub": 39
+    },
+    {
+      "t": 3.859,
+      "ub": 38
+    },
+    {
+      "t": 12.868,
+      "ub": 37
+    },
+    {
+      "t": 13.074,
+      "ub": 36
+    },
+    {
+      "t": 600.003,
+      "lb": 2
+    }
+  ],
+  "peak_rss_mb": 123.5,
+  "truth": 36,
+  "truth_kind": "exact",
+  "notes": "threads honoured through CP-SAT num_search_workers; logical matrix full.L.std.mtx (lbasis=std); FEASIBLE",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=cpsat,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=cpsat,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w5_259_2_4",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      24
+    ],
+    "started_at": "2026-10-23T13:23:45.861485+00:00",
+    "ended_at": "2026-10-23T13:33:45.930105+00:00",
+    "wall_seconds": 600.068097,
+    "adapter_seconds": 600.009,
+    "trace_offset_seconds": 0.059097,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/dtc_w5_259_2_4__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-cpsat__lbasis-std/dtc_w5_259_2_4__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 135.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

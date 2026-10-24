@@ -1,0 +1,137 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "dtc_w11_537_14_12",
+  "variant": "full",
+  "rows": 299,
+  "cols": 537,
+  "obs": 14,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 30,
+  "witness": [
+    2,
+    17,
+    87,
+    88,
+    89,
+    109,
+    118,
+    129,
+    162,
+    193,
+    214,
+    237,
+    246,
+    253,
+    260,
+    276,
+    289,
+    305,
+    324,
+    332,
+    342,
+    358,
+    359,
+    369,
+    378,
+    408,
+    415,
+    471,
+    523,
+    527
+  ],
+  "witness_ok": true,
+  "seconds": 600.017,
+  "trace": [
+    {
+      "t": 0.108,
+      "ub": 72
+    },
+    {
+      "t": 0.112,
+      "ub": 71
+    },
+    {
+      "t": 0.114,
+      "ub": 63
+    },
+    {
+      "t": 0.124,
+      "ub": 61
+    },
+    {
+      "t": 0.126,
+      "ub": 56
+    },
+    {
+      "t": 0.136,
+      "ub": 51
+    },
+    {
+      "t": 0.186,
+      "ub": 50
+    },
+    {
+      "t": 0.3,
+      "ub": 49
+    },
+    {
+      "t": 0.323,
+      "ub": 37
+    },
+    {
+      "t": 4.143,
+      "ub": 35
+    },
+    {
+      "t": 14.208,
+      "ub": 34
+    },
+    {
+      "t": 33.595,
+      "ub": 30
+    }
+  ],
+  "peak_rss_mb": 55.2,
+  "truth": 19,
+  "truth_kind": "lower_bound",
+  "notes": "search calls: 2387; valid outputs: 12; kernel maximum threads: 1",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w11_537_14_12",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      34
+    ],
+    "started_at": "2026-10-23T12:27:18.402450+00:00",
+    "ended_at": "2026-10-23T12:37:18.561561+00:00",
+    "wall_seconds": 600.157815,
+    "adapter_seconds": 600.017,
+    "trace_offset_seconds": 0.140815,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/dtc_w11_537_14_12__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/isd/dtc_w11_537_14_12__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

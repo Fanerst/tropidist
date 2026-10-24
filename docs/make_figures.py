@@ -166,10 +166,11 @@ def fig_benchmark():
     rows = rows[:1] + sorted(rows[1:], key=lambda r: (-r[2], -r[1]))      # the others by count
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.1), sharey=True)
     fig.subplots_adjust(left=0.235, right=0.975, top=0.86, bottom=0.14, wspace=0.12)
+    total = len(main)
     for ax, col, title in ((axes[0], 1, "1 thread, 600 s, 16 GB"), (axes[1], 2, "plus one hour (32 threads where supported)")):
-        ax.set_xlim(0, 66)
+        ax.set_xlim(0, total * 1.12)
         ax.set_ylim(len(rows) - 0.5, -0.5)
-        ax.set_xticks([0, 20, 40, 60])
+        ax.set_xticks([0, 20, 40, 60, total] if total - 60 > 6 else [0, 20, 40, total])
         style_axes(ax)
         ax.spines["left"].set_color(AXIS)
         ax.set_title(title, fontsize=9, color=INK, loc="left", pad=8)
@@ -179,8 +180,8 @@ def fig_benchmark():
             hbar(ax, y, r[col], color=BLUE if y == 0 else GRAY)
             ax.text(r[col] + 1.4, y, str(r[col]), va="center", fontsize=8.5, color=INK,
                     fontweight="bold" if y == 0 else "normal")
-        ax.axvline(60, color=AXIS, linewidth=0.72, zorder=1)
-        ax.set_xlabel("instances solved exactly (of 60)", fontsize=8.5)
+        ax.axvline(total, color=AXIS, linewidth=0.72, zorder=1)
+        ax.set_xlabel("instances solved exactly (of %d)" % total, fontsize=8.5)
     save(fig, "fig2_benchmark.png")
     return rows
 
@@ -207,20 +208,25 @@ def fig_surface():
                 marker="o", markersize=6.2, markeredgecolor=SURFACE, markeredgewidth=1.5, zorder=4 if color == BLUE else 3)
         if xs:
             ends[label] = (xs[-1], ys[-1])
-    # the same with the dense Rank DP front end (ours + DP, first tier): the DP settles the collapsed problem
-    dp = [(d, exact(a, "ours + DP", "surface_d%d" % d, "sector")) for d in range(3, 27, 2)]
-    dp = [(d, max(t, 0.01)) for d, t in dp if t is not None]
-    if dp:
-        ax.plot([d for d, _ in dp], [t for _, t in dp], color=AQUA, linewidth=1.8, linestyle=(0, (4, 2)),
+    # the same pipeline without its Rank DP evaluators (ablation of the final pass): the search alone
+    abl = T.load(ROOT / "results" / "bench_ablation_final", 1)
+    so = [(d, exact(abl, "ours, search only", "surface_d%d" % d, "sector")) for d in range(3, 27, 2)]
+    so = [(d, max(t, 0.01)) for d, t in so if t is not None]
+    if so:
+        ax.plot([d for d, _ in so], [t for _, t in so], color=AQUA, linewidth=1.8, linestyle=(0, (4, 2)),
                 marker="s", markersize=5.6, markeredgecolor=SURFACE, markeredgewidth=1.3, zorder=5)
-        ax.text(21.6, 0.75, "this method with the\nRank DP front end", fontsize=7.8, color=INK2,
-                ha="center", va="top", linespacing=1.3)
-    # second tier of this method: 32 threads, one hour
-    t2 = [(d, exact(b32, "ours", "surface_d%d" % d, "sector")) for d in (23, 25)]
-    ax.plot([d for d, _ in t2], [t for _, t in t2], color=BLUE, linewidth=0, marker="o", markersize=6.2,
-            markerfacecolor=SURFACE, markeredgecolor=BLUE, markeredgewidth=1.5, zorder=4)
-    ax.text(24.1, 62, "32 threads,\none hour", fontsize=7.8, color=INK2, ha="center", va="center", linespacing=1.3)
-    ax.text(18.7, 62, "this method", fontsize=8.5, color=INK, fontweight="bold", ha="right", va="center")
+        ax.text(so[-1][0] + 0.45, so[-1][1], "without the\nRank DP evaluators", fontsize=7.8, color=INK2,
+                ha="left", va="center", linespacing=1.3)
+    # second tier of this method (32 threads, one hour) where its first tier did not solve the circuit
+    t2 = [(d, exact(b32, "ours", "surface_d%d" % d, "sector")) for d in range(3, 27, 2)
+          if exact(a, "ours", "surface_d%d" % d, "sector") is None]
+    t2 = [(d, t) for d, t in t2 if t is not None]
+    if t2:
+        ax.plot([d for d, _ in t2], [t for _, t in t2], color=BLUE, linewidth=0, marker="o", markersize=6.2,
+                markerfacecolor=SURFACE, markeredgecolor=BLUE, markeredgewidth=1.5, zorder=4)
+    if "this method" in ends:
+        x, y = ends["this method"]
+        ax.text(x + 0.45, y, "this method", fontsize=8.5, color=INK, fontweight="bold", ha="left", va="center")
     # labels at the end of each line; SAT and Gurobi end at the same point, so they share a label
     shared = "SAT" in ends and "Gurobi" in ends and ends["SAT"][0] == ends["Gurobi"][0] and \
         0.7 < ends["SAT"][1] / ends["Gurobi"][1] < 1.4
@@ -244,10 +250,12 @@ def fig_surface():
 # ---------------------------------------------------------------------- figure 5: ablation
 def fig_ablation():
     a, b32, b1, metas = bench()
-    abl = T.load(ROOT / "results" / "bench_ablation", 1)
+    abl = T.load(ROOT / "results" / "bench_ablation_final", 1)     # relative to the final configuration (dp=2)
     circ = [m["name"] for m in metas if m["track"] == "circuit" and "sector" in m["variants"]]
     count = lambda recs, name: sum(exact(recs, name, i, "sector") is not None for i in circ)
     rows = [("full pipeline", count(a, "ours")),
+            ("without the sparse DP", count(abl, "ours + DP")),
+            ("without either DP", count(abl, "ours, search only")),
             ("without lifting", count(abl, "ours, lift off")),
             ("without covering bound", count(abl, "ours, cover off")),
             ("without windows", count(abl, "ours, window off")),
@@ -255,9 +263,9 @@ def fig_ablation():
             ("without time collapse", count(abl, "ours, collapse off")),
             ("search only (no collapse, lifting, windows)", count(abl, "ours, collapse off lift off window off")),
             ("search only, no symmetry, no covering bound", count(abl, "ours, symmetry off cover off collapse off lift off window off"))]
-    fig, ax = plt.subplots(figsize=(7.2, 2.7))
-    fig.subplots_adjust(left=0.43, right=0.96, top=0.95, bottom=0.17)
-    ax.set_xlim(0, 41)
+    fig, ax = plt.subplots(figsize=(7.2, 3.2))
+    fig.subplots_adjust(left=0.43, right=0.96, top=0.95, bottom=0.15)
+    ax.set_xlim(0, len(circ) + 3)
     ax.set_ylim(len(rows) - 0.5, -0.5)
     style_axes(ax)
     ax.set_yticks(range(len(rows)))

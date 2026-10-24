@@ -1,0 +1,111 @@
+{
+  "method": "ours_pipeline",
+  "version": null,
+  "config": {
+    "symmetry": 0,
+    "cover": 1,
+    "collapse": 1,
+    "lift": 1,
+    "window": 1,
+    "k_coll": 3,
+    "k_table": 2,
+    "kmax": 40,
+    "table_gb": 0,
+    "dp": 2,
+    "dp_fast": 10,
+    "dp_head": -1,
+    "deepen": 1
+  },
+  "instance": "mitten_150",
+  "variant": "sector",
+  "rows": 660,
+  "cols": 9750,
+  "obs": 30,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    3,
+    64,
+    133,
+    319,
+    323,
+    475,
+    559,
+    735
+  ],
+  "witness_ok": true,
+  "seconds": 547.369,
+  "trace": [
+    {
+      "t": 0.113,
+      "lb": 1
+    },
+    {
+      "t": 1.458,
+      "lb": 2
+    },
+    {
+      "t": 1.46,
+      "lb": 3
+    },
+    {
+      "t": 1.491,
+      "lb": 4
+    },
+    {
+      "t": 2.66,
+      "lb": 5
+    },
+    {
+      "t": 14.364,
+      "lb": 6
+    },
+    {
+      "t": 260.942,
+      "lb": 7
+    },
+    {
+      "t": 428.836,
+      "lb": 8
+    },
+    {
+      "t": 547.352,
+      "ub": 8
+    }
+  ],
+  "peak_rss_mb": 710.8,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "{\"dp\": {\"collapsed\": {\"columns\": 510, \"cut_rank\": 59, \"decision\": \"search\", \"estimate_seconds\": 0.177, \"fits\": false, \"peak_bits\": 59, \"predicted_seconds\": null, \"queries\": 30, \"work\": null}, \"main\": {\"columns\": 9750, \"cut_rank\": 83, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.14, \"fits\": false, \"peak_bits\": 83, \"predicted_seconds\": null, \"queries\": 30, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 510, \"rows\": 60, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0015435218811035156, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0020515918731689453, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.030434846878051758, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 1.168138027191162, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 11.703989505767822, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 246.57706999778748, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 167.8937041759491, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": 8, \"nsol_recorded\": 1, \"seconds\": 46.94843077659607, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 173, \"rows\": 660, \"runs\": [{\"K\": 8, \"best\": 8, \"nsol_recorded\": 1, \"seconds\": 0.0004944801330566406, \"status\": \"found\"}]}}, \"table_budget_gib\": 8.0}",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "ours_pipeline:dp=2,symmetry=0",
+    "adapter": "ours_pipeline",
+    "config_string": "dp=2,symmetry=0",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/mitten_150",
+    "family": "mitten",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      166
+    ],
+    "started_at": "2026-10-23T12:08:44.954258+00:00",
+    "ended_at": "2026-10-23T12:17:52.422747+00:00",
+    "wall_seconds": 547.439924,
+    "adapter_seconds": 547.369,
+    "trace_offset_seconds": 0.070924,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0/mitten_150__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_ablation_final/ours_pipeline__dp-2__symmetry-0/mitten_150__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 721.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

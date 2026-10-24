@@ -1,0 +1,185 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3/full.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3/full.L.mtx",
+    "outC": "/tmp/bench-distm4ri-x5fd994c/codewords.nz",
+    "timeout": "3599.895908846"
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 23,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3601.17,
+  "trace": [
+    {
+      "t": 0.008,
+      "lb": 2
+    },
+    {
+      "t": 0.008,
+      "lb": 3
+    },
+    {
+      "t": 38.915,
+      "lb": 4
+    },
+    {
+      "t": 40.627,
+      "lb": 5
+    },
+    {
+      "t": 40.702,
+      "lb": 6
+    },
+    {
+      "t": 40.97,
+      "lb": 7
+    },
+    {
+      "t": 40.994,
+      "lb": 8
+    },
+    {
+      "t": 41.004,
+      "lb": 9
+    },
+    {
+      "t": 41.692,
+      "lb": 10
+    },
+    {
+      "t": 41.722,
+      "lb": 11
+    },
+    {
+      "t": 41.783,
+      "lb": 12
+    },
+    {
+      "t": 41.96,
+      "lb": 13
+    },
+    {
+      "t": 42.133,
+      "lb": 14
+    },
+    {
+      "t": 43.208,
+      "lb": 15
+    },
+    {
+      "t": 43.858,
+      "lb": 16
+    },
+    {
+      "t": 49.108,
+      "lb": 17
+    },
+    {
+      "t": 88.021,
+      "lb": 18
+    },
+    {
+      "t": 119.525,
+      "lb": 19
+    },
+    {
+      "t": 149.052,
+      "lb": 20
+    },
+    {
+      "t": 267.448,
+      "lb": 21
+    },
+    {
+      "t": 469.953,
+      "lb": 22
+    },
+    {
+      "t": 1174.824,
+      "lb": 23
+    }
+  ],
+  "peak_rss_mb": 25763.3,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Native upper estimate 27 has no exported verified witness; it is not reported as upper_bound. Wall deadline reached; process group killed. Only completed proofs and available checked witnesses retained.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-23T16:58:01.115496+00:00",
+    "ended_at": "2026-10-23T17:58:02.397961+00:00",
+    "wall_seconds": 3601.282257,
+    "adapter_seconds": 3601.17,
+    "trace_offset_seconds": 0.112257,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket/concat_steane_L3__full__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket/concat_steane_L3__full__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

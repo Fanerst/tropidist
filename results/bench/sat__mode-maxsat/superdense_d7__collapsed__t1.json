@@ -1,0 +1,79 @@
+{
+  "method": "sat_maxsat",
+  "version": "1.8.dev26",
+  "config": {
+    "mode": "maxsat"
+  },
+  "instance": "superdense_d7",
+  "variant": "collapsed",
+  "rows": 18,
+  "cols": 73,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 4,
+  "upper_bound": 4,
+  "witness": [
+    12,
+    18,
+    21,
+    61
+  ],
+  "witness_ok": true,
+  "seconds": 0.131,
+  "trace": [
+    {
+      "t": 0.003,
+      "lb": 1
+    },
+    {
+      "t": 0.129,
+      "lb": 2
+    },
+    {
+      "t": 0.129,
+      "lb": 3
+    },
+    {
+      "t": 0.129,
+      "lb": 4
+    },
+    {
+      "t": 0.129,
+      "ub": 4
+    }
+  ],
+  "peak_rss_mb": 41.6,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "PySAT threads ignored (single-threaded solver interface); PySAT RC2/cadical153 ignores threads (single-threaded solver interface); RC2 adapt=0 exhaust=1 minz=0 trim=0",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "sat:mode=maxsat",
+    "adapter": "sat",
+    "config_string": "mode=maxsat",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d7",
+    "family": "superdense",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-23T13:13:38.956565+00:00",
+    "ended_at": "2026-10-23T13:13:39.285054+00:00",
+    "wall_seconds": 0.328242,
+    "adapter_seconds": 0.131,
+    "trace_offset_seconds": 0.197242,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/superdense_d7__collapsed__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/sat__mode-maxsat/superdense_d7__collapsed__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 17.3,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

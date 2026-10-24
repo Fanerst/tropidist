@@ -1,0 +1,93 @@
+{
+  "method": "milp",
+  "version": "1.16.3",
+  "config": {
+    "backend": "scipy",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "dtc_w7_269_4_5",
+  "variant": "full",
+  "rows": 161,
+  "cols": 261,
+  "obs": 4,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 11,
+  "upper_bound": 28,
+  "witness": [
+    3,
+    7,
+    17,
+    38,
+    54,
+    68,
+    77,
+    87,
+    88,
+    95,
+    108,
+    112,
+    116,
+    119,
+    134,
+    150,
+    164,
+    177,
+    179,
+    186,
+    192,
+    199,
+    219,
+    232,
+    237,
+    247,
+    248,
+    253
+  ],
+  "witness_ok": true,
+  "seconds": 600.07,
+  "trace": [
+    {
+      "t": 600.045,
+      "ub": 28
+    },
+    {
+      "t": 600.045,
+      "lb": 11
+    }
+  ],
+  "peak_rss_mb": 580.9,
+  "truth": 28,
+  "truth_kind": "exact",
+  "notes": "threads honoured through HiGHS threads option (forwarded by SciPy); Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=scipy",
+    "adapter": "milp",
+    "config_string": "backend=scipy",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/dtc_w7_269_4_5",
+    "family": "dtc_strip",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      31
+    ],
+    "started_at": "2026-10-23T12:23:36.766192+00:00",
+    "ended_at": "2026-10-23T12:33:37.038813+00:00",
+    "wall_seconds": 600.271957,
+    "adapter_seconds": 600.07,
+    "trace_offset_seconds": 0.201957,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/dtc_w7_269_4_5__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-scipy/dtc_w7_269_4_5__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 592.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -16,8 +16,8 @@ import make_benchmark_md as MB
 import summary_table as T
 import wjh_compare as W
 
-A, B, ABL = ROOT / "results/bench", ROOT / "results/bench_tierB", ROOT / "results/bench_ablation"
-MINE = {"ours", "ours, plain", "ours + DP"}
+A, B, ABL = ROOT / "results/bench", ROOT / "results/bench_tierB", ROOT / "results/bench_ablation_final"
+MINE = {"ours", "ours, search only", "ours, plain", "ours + DP"}
 CODE_D = {72: 6, 90: 10, 108: 10, 144: 12, 288: 18}          # code distances of the BB codes, for labels
 
 

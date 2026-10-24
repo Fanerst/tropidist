@@ -1,0 +1,173 @@
+{
+  "method": "milp",
+  "version": "gurobi_cl 13.0.3",
+  "config": {
+    "backend": "gurobi",
+    "lbasis": "std",
+    "mode": "optimize",
+    "threads_honoured": true
+  },
+  "instance": "concat_steane_L3",
+  "variant": "full",
+  "rows": 171,
+  "cols": 343,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 15,
+  "upper_bound": 27,
+  "witness": [
+    14,
+    15,
+    16,
+    28,
+    29,
+    30,
+    35,
+    38,
+    39,
+    63,
+    64,
+    65,
+    77,
+    78,
+    79,
+    84,
+    85,
+    86,
+    98,
+    99,
+    100,
+    105,
+    108,
+    109,
+    112,
+    113,
+    114
+  ],
+  "witness_ok": true,
+  "seconds": 600.633,
+  "trace": [
+    {
+      "t": 6.525,
+      "ub": 343
+    },
+    {
+      "t": 6.525,
+      "ub": 339
+    },
+    {
+      "t": 6.525,
+      "ub": 323
+    },
+    {
+      "t": 6.525,
+      "ub": 319
+    },
+    {
+      "t": 6.525,
+      "ub": 287
+    },
+    {
+      "t": 6.525,
+      "ub": 283
+    },
+    {
+      "t": 6.525,
+      "ub": 271
+    },
+    {
+      "t": 6.525,
+      "ub": 251
+    },
+    {
+      "t": 6.525,
+      "ub": 43
+    },
+    {
+      "t": 6.525,
+      "lb": 1
+    },
+    {
+      "t": 6.525,
+      "lb": 2
+    },
+    {
+      "t": 6.525,
+      "lb": 3
+    },
+    {
+      "t": 6.725,
+      "ub": 39
+    },
+    {
+      "t": 6.725,
+      "ub": 27
+    },
+    {
+      "t": 11.532,
+      "lb": 7
+    },
+    {
+      "t": 16.539,
+      "lb": 9
+    },
+    {
+      "t": 26.553,
+      "lb": 10
+    },
+    {
+      "t": 41.575,
+      "lb": 11
+    },
+    {
+      "t": 66.411,
+      "lb": 12
+    },
+    {
+      "t": 121.49,
+      "lb": 13
+    },
+    {
+      "t": 231.451,
+      "lb": 14
+    },
+    {
+      "t": 451.578,
+      "lb": 15
+    }
+  ],
+  "peak_rss_mb": 678.9,
+  "truth": 27,
+  "truth_kind": "exact",
+  "notes": "threads honoured through Gurobi Threads (gurobi_cl on an LP file); logical matrix full.L.std.mtx (lbasis=std); gurobi_cl wrote no result (exit -9, killed at the deadline); 7   24.00000   62    7   27.00000   15.00000  44.4%   3.4  575s / 1652787 691298   18.00000   55    5   27.00000   15.00000  44.4%   3.4  580s / 1670388 698042 infeasible   64        27.00000   15.00000  44.4%   3.4  585s / 1688835 705529   25.00000   70    6   27.00000   15.00000  44.4%   3.4  590s",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "milp:backend=gurobi,lbasis=std",
+    "adapter": "milp",
+    "config_string": "backend=gurobi,lbasis=std",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/concat_steane_L3",
+    "family": "concat_steane",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      22
+    ],
+    "started_at": "2026-10-23T13:13:38.936681+00:00",
+    "ended_at": "2026-10-23T13:23:39.755785+00:00",
+    "wall_seconds": 600.818589,
+    "adapter_seconds": 600.633,
+    "trace_offset_seconds": 0.185589,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/concat_steane_L3__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/milp__backend-gurobi__lbasis-std/concat_steane_L3__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 709.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

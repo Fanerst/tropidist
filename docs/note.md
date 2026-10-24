@@ -2,9 +2,11 @@
 
 Notes on the method and its numerical results, 7 October 2026, updated 19 October 2026 (Gurobi in
 the benchmark; the instances of the prior benchmark, section 4.2; the October version of dist-m4ri; a
-sparse logical basis for the code instances). Name of the method, provisional: the **tropical partition
-function method**. The distance is a minimum of tropical partition functions; here it is evaluated by a
-weight-bounded search with certified relaxations (collapse, lift, meet in the middle, bound). Full tables are in
+sparse logical basis for the code instances) and 25 October 2026 (the final configuration with two Rank DP
+evaluators, section 3.6; 14 instances added to the benchmark). Name of the method, provisional: the
+**tropical partition function method**. The distance is a minimum of tropical partition functions; here it
+is evaluated by a weight-bounded search with certified relaxations (collapse, lift, meet in the middle,
+bound) and by two Rank DP evaluators of the same functions. Full tables are in
 [BENCHMARK.md](BENCHMARK.md) and [PAPERS.md](PAPERS.md); the figures here are drawn from the result
 records by `docs/make_figures.py`.
 
@@ -18,14 +20,16 @@ The method computes it exactly, as an interval that closes: a lower bound proved
 lighter fault set, and an upper bound given by an explicit fault set replayed in the simulator. Its
 cost is governed by the distance and by a small relaxed problem, not by the size of the circuit.
 
-- On a benchmark of 60 instances it solves 47 with one thread in 600 s and 59 with 32 threads in an
+- On a benchmark of 74 instances it solves 59 with one thread in 600 s and 71 with 32 threads in an
   hour. All other exact methods together, among them Gurobi and the October version of dist-m4ri,
-  solve 30 and 38, and none solves an instance it does not.
+  solve 36 and 48. One instance, a many-hypercube code with 256 logical qubits, is solved by another
+  method (SAT, in 21 minutes) and not by this one.
 - On the 126 CSS instances of the most recent benchmark of distance methods (arXiv:2603.22532), run
   from that study's own files and under its own limits (one core, 8 GB and eight hours per run), it
   solves 95; that study's five exact methods together solved 73, all of them among these. With one
   thread and 600 s it already solves 86 (the current dist-m4ri, run here: 76); with 32 threads and an
-  hour, 96 (dist-m4ri: 80).
+  hour, 97 (dist-m4ri: 80), among them the superdense color-code circuit of d = 11, whose distance (11)
+  no method had certified.
 - Largest circuits closed: the [[288,12,18]] bivariate bicycle circuit (distance 16, 206,352 fault
   mechanisms) and a [[1044,526,12]] circuit (distance 10, 271,440 mechanisms).
 - For a paper posted on 2 October 2026 it closed 15 code distances that the authors could only
@@ -103,8 +107,8 @@ kept sparse.
 
 The dense form of the same recursion, a min-plus dynamic program over all partial syndromes at a
 cut ("Rank DP"), does not depend on the distance, but its table has 2^(cut rank) entries and the cut
-rank grows with the code (97 for the collapsed [[288,12,18]] problem). It stops at about 90 qubits.
-The sparse form keeps only the states reachable within the weight budget.
+rank grows with the code (97 for the collapsed [[288,12,18]] problem). On expanding codes it stops at
+about 90 qubits; where the cut rank stays small it is the faster evaluator (section 3.6).
 
 ### 3.4 Closing the interval: lifting
 
@@ -121,12 +125,33 @@ how many columns touch a detector. Circuit size enters only through the orbit co
 This is why a 31,200-qubit code of distance 24 takes minutes while a 720-qubit circuit whose
 distance lies between 17 and 21 is still open: the exponent is the distance.
 
+### 3.6 Two Rank DP evaluators of the same quantity
+
+The final configuration of the method uses three exact evaluators of the same minimum and chooses
+between them by predicted cost, never by hand:
+
+- the **dense Rank DP** sweeps the columns in one order and keeps, for every state of the boundary between
+  processed and unprocessed columns, the least weight that reaches it. Its cost is computed exactly from
+  its plan before it runs, about 2^w per column for a boundary of rank w, independent of the distance. It
+  settles narrow problems of large distance (the color code of d = 31 in six minutes, the concatenated
+  Steane code [[2401,1,81]] in 1.2 s, of which the DP takes 11 ms) and the time-collapsed problems of
+  surface-code circuits (rank 13 to 16) in milliseconds;
+- the **weight-truncated sparse Rank DP** keeps only states of weight at most K, split between a forward
+  and a backward sweep that meet at every cut. It decides wider local problems whose partial fault sets
+  merge: it certified the superdense color-code circuit of d = 11, whose sector problem has rank 54;
+- the **weight-bounded search** above decides everything else, in particular expanding qLDPC codes, whose
+  boundary rank is large.
+
 ## 4. Numerical results
 
 ### 4.1 Benchmark against other exact methods
 
-Sixty instances: 44 circuits (bivariate bicycle codes, circuits from recent papers, Stim's surface-
-and color-code memories) and 16 code-distance problems, n up to 1044. Every method gets the same
+74 instances: 47 circuits (bivariate bicycle codes, circuits from recent papers, Stim's surface-
+and color-code memories, superdense color-code circuits) and 27 code-distance problems, n up to 2401.
+14 of them were added on 23 October where the Rank DP evaluators decide: color codes of d = 19 to 31,
+concatenated Steane codes, the thin tile codes of arXiv:2606.19482 (whose X distances that paper gives
+only as upper bounds; [[259,2]] has 36, one below its bound), a many-hypercube code and the superdense
+circuits of d = 7 to 11. Every method gets the same
 matrices on the same machine (one socket of an AMD EPYC 9654): first 1 thread, 600 s and 16 GB, then
 one hour, with 32 threads and 90 GB where the tool uses threads. Competing solvers are given the
 sector problem, their best case. A harness checks every witness; no two records contradict.
@@ -139,33 +164,38 @@ tool counts an instance if any of its configurations solves it.*
 
 | instance | columns | d | this method | best other exact method |
 |---|---:|---:|---|---|
-| [[72,12,6]] circuit | 2232 | 6 | 0.4 s | dist-m4ri, 0.1 s |
-| [[90,8,10]] circuit | 4590 | 8 | 0.4 s | dist-m4ri, 60 s |
-| [[144,12,12]] circuit | 8784 | 10 | 1.4 s | dist-m4ri, 532 s on 32 threads |
-| [[288,12,18]] circuit | 26,208 | 16 | 209 s on 32 threads | none |
-| [[1044,526,12]] circuit | 35,496 | 10 | 881 s on 32 threads | none |
-| [[288,12,18]] code | 288 | 18 | 3.1 s | dist-m4ri, 115 s |
-| [[625,125,20]] code | 625 | 20 | 47 s on 32 threads | none |
+| [[72,12,6]] circuit | 2232 | 6 | 0.3 s | dist-m4ri, 0.1 s |
+| [[90,8,10]] circuit | 4590 | 8 | 0.5 s | dist-m4ri, 60 s |
+| [[144,12,12]] circuit | 8784 | 10 | 1.6 s | dist-m4ri, 532 s on 32 threads |
+| [[288,12,18]] circuit | 26,208 | 16 | 220 s on 32 threads | none |
+| [[1044,526,12]] circuit | 35,496 | 10 | 927 s on 32 threads | none |
+| superdense color-code circuit, d = 11 | 5250 | 11 | 30 min on 32 threads | none |
+| [[288,12,18]] code | 288 | 18 | 1.8 s | dist-m4ri, 115 s |
+| [[625,125,20]] code | 625 | 20 | 59 s on 32 threads | none |
+| color code, d = 31 | 721 | 31 | 351 s | none |
+| concatenated Steane code [[2401,1,81]] | 2401 | 81 | 1.2 s | SAT, 16 min |
+| many-hypercube code [[1296,256,16]] | 1296 | 16 | at least 14 | SAT, 21 min |
 
 Times without a thread count are single-thread. MaxSAT on Stim's own export of the whole circuit,
 the recipe behind the exact values published so far, proves no qLDPC circuit distance within an
-hour; its best lower bound is 3. Gurobi, run when a licence became available, solves 11 instances in
-the first tier and 19 over both, each of them also solved by another method; the [[72,12,6]]
-circuit takes it 534 s on 32 threads.
+hour; its best lower bound is 3. Gurobi, run when a licence became available, solves 12 instances in
+the first tier and 22 over both, each of them also solved by another method; the [[72,12,6]]
+circuit takes it 534 s on 32 threads. SAT, given an hour, solves several of the instances added for the
+DP evaluators that this method solves in seconds, and the many-hypercube code that it does not.
 
 The strongest competitor, dist-m4ri, improved a lot during this work: its version of 15 October (0.14.7)
-solves 30 and 38 of the instances, where the September version solved 17 and 26 (BENCHMARK.md compares
-the two). It is now faster than this method on 17 instances: on 14 of them both need less than two
-seconds; the others are Stim's color-code circuits of d = 9 and 11, to which none of the reductions
-applies, and a circuit of the shift family, whose relaxation is loose (2 against 8; the search without it
-takes 1.4 s, dist-m4ri 24 s). It solves no instance that this method does not, and on the eight other
-instances where both need more than a second it is 19 to 88 times slower.
+solves 30 and 38 of the first 60 instances, where the September version solved 17 and 26 (BENCHMARK.md
+compares the two). It is now faster than this method on 17 instances: on 14 of them both need less than
+two seconds; the others are Stim's color-code circuits of d = 9 and 11, to which none of the reductions
+applies, and the Cornucopia circuit of n = 252 (0.4 s against 2.4 s). It solves no instance that this
+method does not, and on the 19 instances where both need more than a second and this method is faster,
+this method is 2 to 1228 times faster.
 
 The logical operators of the code instances were first computed by a generic construction whose rows are,
 on codes with many logical qubits, up to 5 times denser than the standard form that the prior benchmark
 uses. Integer programs and SAT encodings turn every logical row into a parity constraint, so these tools
-were run again on a sparse basis of the same logical space. On the 16 codes here this gains them
-nothing, and Gurobi loses two of them ([[288,12,18]] and [[324,12,18]]); on the hyperbolic codes of
+were run again on a sparse basis of the same logical space. On the 27 codes here this gains them
+nothing, and some lose codes on it (Gurobi [[288,12,18]] and [[324,12,18]]); on the hyperbolic codes of
 section 4.2, which have many logical qubits, it lets Gurobi solve 33 of 42 within 600 s instead of 30.
 A tool is credited with an instance it solves on either basis.
 
@@ -183,12 +213,12 @@ core, 8 GB and eight hours each on their cluster; their own result sheets are us
 
 | family | instances | this method, 1 thread, 600 s | 1 thread, 8 h, 8 GB | 600 s + 32 threads, 1 h | any of their five (1 core, 8 h, 8 GB each) |
 |---|---:|---:|---:|---:|---:|
-| circuits (four families) | 23 | 19 | 20 | 20 | 15 |
+| circuits (four families) | 23 | 19 | 20 | 21 | 15 |
 | hyperbolic surface and colour codes | 42 | 42 | 42 | 42 | 42 |
 | lifted-product codes | 19 | 14 | 19 | 19 | 6 |
 | bivariate bicycle codes | 20 | 6 | 8 | 8 | 5 |
 | quantum Tanner codes | 22 | 5 | 6 | 7 | 5 |
-| **all** | 126 | **86** | **95** | **96** | **73** |
+| **all** | 126 | **86** | **95** | **97** | **73** |
 
 ![Prior benchmark](figs/fig3_prior.png)
 
@@ -226,29 +256,30 @@ at the time limit with the right value but without a proof. This method takes 0.
 
 *Figure 4. Time to the certified distance of Stim's own surface-code memory circuit, generated here
 up to d = 25 (sector problem, one thread, 600 s limit). Each line ends at the last distance the
-method solved. Dashed: the same method with the dense Rank DP front end (benchmark configuration
-"ours + DP"). Hollow: this method with 32 threads and one hour.*
+method solved. Dashed: the same pipeline without its Rank DP evaluators (ablation of the final pass).*
 
-The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight. It
-reaches d = 23 in 552 s with one thread and d = 25 in 196 s on 32 threads. The cost is the
-exhaustive search of the collapsed problem, whose Rank DP width is only 13 to 16, so the DP front end
-settles it in milliseconds, and d = 25 then takes 7 s with one thread. One caveat: surface codes are graph-like, so a shortest-path
-computation solves them at any size. The family is shown because others report on it.
+The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight, and reaches
+d = 25 in 8.6 s with one thread. Without the DP evaluators the cost is the exhaustive search of the
+collapsed problem, and the search alone stops at d = 21 (77 s); that problem's Rank DP width is only
+13 to 16, so the dense DP settles it in milliseconds. One caveat: surface codes are graph-like, so a
+shortest-path computation solves them at any size. The family is shown because others report on it.
 
 ### 4.4 Which ingredient matters
 
 ![Ablation](figs/fig5_ablation.png)
 
-*Figure 5. The pipeline with one ingredient removed at a time, on the 39 circuits that have a sector
-problem.*
+*Figure 5. The final configuration with one ingredient removed at a time, on the 42 circuits that have a
+sector problem (one thread, 600 s).*
 
-The time collapse and the symmetry carry the method: without the collapse 21 circuits are solved in
-place of 29, and the plain search without symmetry and covering bound solves 17. The windows contribute one case.
-Lifting and the covering bound (a bound on the faults still needed for the fired detectors) do not
-pay at this scale; several instances run faster without them.
+The time collapse and the symmetry carry the method: without the collapse 23 circuits are solved in
+place of 33, and the plain search without symmetry and covering bound solves 18. The dense DP adds the
+surface code of d = 23 and 25 (31 without either DP evaluator); the sparse DP adds no circuit at this
+limit but takes the superdense circuit of d = 9 from 458 s to 17 s, and decides the one of d = 11 in the
+second tier. The windows and the covering bound contribute one case each. Lifting does not pay at this
+scale; several instances run faster without it.
 
 The relaxation is a contribution on its own. Given the collapsed problems, the current dist-m4ri solves
-26 of 39 where it solves 16 of the sector problems, and the search of section 3.3 solves 33 of them.
+28 of 42 where it solves 18 of the sector problems, and the search of section 3.3 solves 36 of them.
 
 ### 4.5 Published circuits
 
@@ -299,15 +330,19 @@ it reports 8.
 - The exponent is the distance. Circuit distances up to about 16 are reachable for qLDPC codes, and
   code distances up to about 28 on two-dimensional lattices. The [[360,12,24]] circuit (17 to 21)
   and the mitten circuits of 500 qubits or more remain open.
+- The Rank DP evaluators need a narrow problem: their cost grows with the boundary rank, not with the
+  distance. On the many-hypercube code [[1296,256,16]] (rank 85) neither applies, and SAT is the only
+  method that solves it (21 minutes, one thread). The sparse DP's certificate for the superdense circuit
+  of d = 11 needs about 12 GB, so under the prior benchmark's 8 GB limit that circuit stays open.
 - The reductions need structure: a CSS memory experiment, detectors that can be assigned to a check
   and a round, and symmetries supplied by the user. Without them the method is a plain search; on
   Stim's color-code circuits the current dist-m4ri is faster at every distance tested (d = 11: 28 s
-  against 240 s). On instances that take either tool a second or two, dist-m4ri is also faster; most of
+  against 280 s). On instances that take either tool a second or two, dist-m4ri is also faster; most of
   this method's time there is the start of Python.
 - Of the prior benchmark's exact methods, SCIP, CLISAT and Magma were not run here; their published
   eight-hour runs are compared instead (section 4.2). Every tool ran with default settings, the
   method included.
 - A lower bound is as trustworthy as the enumeration code. It is checked against ground truth and
-  against the bounds of eleven other tools on 60 instances, against the published results of the
+  against the bounds of eleven other tools on 74 instances, against the published results of the
   prior benchmark on 126 instances, and against 15 certified values of the hyperbolic-code paper,
   without a contradiction.
