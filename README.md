@@ -101,6 +101,7 @@ so; everything else runs without them.
 | needed for | what | where it goes |
 |---|---|---|
 | mitten circuits (`papers/mitten_circuit.py`) | `processor_codes/mitten` of github.com/a7b/yarn, commit `1b58edd`; file list with checksums in `papers/mitten/manifest.json` | `papers/mitten/mitten/` |
+| structured mitten circuits and code distances (`papers/smitten_*.py`) | `processor_codes/structured_mitten` and `processor_codes/abelian_poly_LP` of the same commit (matrices, logicals, schedules; same manifest) | `papers/mitten/structured_mitten/`, `papers/mitten/abelian_poly_LP/` |
 | amplified-code circuits (`papers/amplified_circuit.py`) | github.com/zijian-liang/dp_certificates_github, commit `0772a00` | `papers/amplified/repo/` |
 | cross-check of the Cornucopia circuits (`papers/cornucopia_crosscheck.py`) | github.com/ZhideLu/Cornucopia_code, commit `fc12c97` | `papers/downloads/cornucopia_repo/` |
 | Kasai's codes (`papers/kasai_codes.py`) | the `.npz` files of kasai.ict.eng.isct.ac.jp/pair_partition_cpm_css_codes_20260714.html | `papers/downloads/kasai/` |

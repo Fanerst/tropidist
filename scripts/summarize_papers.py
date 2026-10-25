@@ -85,6 +85,85 @@ if idle:
     out += [f"Idle-fault sensitivity: adding a depolarizing fault on every idle data qubit leaves the distance problem "
             f"unchanged for {', '.join(sorted({k.split(':')[0] for k in idle}))} (identical column sets: {same}).", ""]
 
+# ------------------------------------------------------------------ structured mitten
+SHEAD = {}         # structured mitten circuits: code -> {named, Z: (lb, ub), X: (lb, ub)}
+SCODE = {}         # code distances (data errors only): code -> {family, named, Z: (lb, ub, symmetries), X: ...}
+
+
+def nkd(name):
+    return tuple(int(x) for x in name.split("/")[-1].strip("[]").split(","))
+
+
+out += ["## Structured mitten codes (arXiv:2607.28795, github.com/a7b/yarn), published \"hook-free\" SE schedules", "",
+        "Named distance: the d in the repository's folder name; the paper prints it as an estimate (≤ d) and states no "
+        "circuit distance for these schedules.", "",
+        "| code | named distance | basis | exhaustive exclusion up to | certified lower bound | verified upper bound | circuit distance | witness circuit |",
+        "|---|---:|:-:|---:|---:|---:|---:|---|"]
+stags = sorted({re.match(r"smitten(\d+d\d+)_", os.path.basename(f)).group(1)
+                for f in glob.glob("results/papers/smitten[0-9]*_[ZX]*.json")}, key=lambda t: tuple(map(int, t.split("d"))))
+for t in stags:
+    for b in "ZX":
+        lb = ub = None
+        name = wit = None
+        for f in sorted(glob.glob(f"results/papers/smitten{t}_{b}*.json")):
+            r = load(f)
+            name = r.get("code", name).split("/")[-1]
+            if "runs" in r:
+                done = [x["K"] for x in r["runs"] if x["status"] == "exhausted" and x["best"] is None]
+                if done:
+                    lb = max(lb or 0, max(done) + 1)
+                if r.get("distance") is not None:
+                    lb = max(lb or 0, r["distance"])
+            if r.get("certified_upper_bound") is not None and (ub is None or r["certified_upper_bound"] < ub):
+                ub = r["certified_upper_bound"]
+                wit = r["witness"]
+        if name is None:
+            continue
+        SHEAD.setdefault(name, {"named": nkd(name)[2]})[b] = (lb, ub)
+        out.append(f"| {name} | {nkd(name)[2]} | {b} | {lb - 1 if lb else '–'} | {lb if lb else '–'} | {ub if ub else '–'} | "
+                   f"{rng(lb, ub)} | " + (f"{wit['rounds']} rounds, {wit['weight']} faults, verified: {wit['verified']} |"
+                                          if wit else "– |"))
+out.append("")
+for f in glob.glob("results/papers/smitten_code_*.json"):
+    r = load(f)
+    family, _, name = r["code"].rpartition("/")
+    v = SCODE.setdefault(name, {"family": family, "named": r["named_distance"]})
+    v[r["basis"]] = (r.get("certified_lower_bound"), r.get("certified_upper_bound"), r.get("symmetries"))
+if SCODE:
+    out += ["Code distance (data errors only): exhaustive search below the weight of an information-set witness, the "
+            "witness checked against the published matrices (`papers/smitten_code_distance.py`). d_X: X-type logical "
+            "operators (they bound the Z-basis memory); d_Z: Z-type.", "",
+            "| code | family | named distance | d_X | d_Z | symmetries used |", "|---|---|---:|---:|---:|---:|"]
+    for name in sorted(SCODE, key=nkd):
+        v = SCODE[name]
+        cells = [rng(*v[b][:2]) if b in v else "–" for b in "ZX"]
+        out.append(f"| {name} | {v['family']} | {v['named']} | {cells[0]} | {cells[1]} | "
+                   f"{max(v[b][2] or 1 for b in 'ZX' if b in v)} |")
+    out.append("")
+chk = (load("results/papers/smitten_checks.json") or {}).get("circuits")
+if chk:
+    v = list(chk.values())
+
+    def count(key):
+        return f"{sum(1 for x in v if x[key])} of {len(v)}"
+
+    out += [f"Construction checks (`papers/smitten_check.py`, rounds {sorted({x['rounds'] for x in v})}): every "
+            f"detector deterministic in {count('deterministic')} circuits, exact sector reduction in "
+            f"{count('sector_is_exact')}; the problem built from the matrices and schedule has exactly the columns of "
+            f"the time-collapsed Stim problem in {count('effective_equals_collapsed')} and of its single-round window in "
+            f"{count('effective_equals_window')}. Single-qubit faults on both CX qubits give the same problem in "
+            f"{count('single_equals_two')}; single-qubit faults after the CX gates only give a sub-problem in "
+            f"{count('single_gates_subset_of_two')} (equal in {count('single_gates_equals_two')}); idle data faults "
+            f"change nothing in {count('idle_equals_two')}.", ""]
+wit = (load("results/papers/smitten_checks.json") or {}).get("witnesses")
+if wit:
+    xw = [w for f, w in wit.items() if re.search(r"_X(_|\.json)", f)]
+    short = [w["replayed_at_named_rounds"] for w in wit.values() if "replayed_at_named_rounds" in w]
+    out += [f"Witnesses: {sum(1 for w in xw if w['in_single_gates'])} of {len(xw)} X-basis fault sets use only "
+            f"single-qubit faults right after a CX (so they are fault sets of the narrowest model too); "
+            f"{sum(1 for w in short if w['verified'])} of {len(short)} fault sets found on 3-round circuits also replay "
+            f"on the circuit with as many rounds as the named distance.", ""]
+
 # ------------------------------------------------------------------ amplified
 out += ["## Amplified qLDPC memories (arXiv:2609.37231), authors' circuit builder", "",
         "Certified bound of the paper: 3 x 2^level; target (static distance): 4 x 2^level.", "",
@@ -183,6 +262,21 @@ for name in sorted(HEAD, key=lambda x: int(x.strip("[]").split(",")[0])):
     below = "yes" if ubs and min(ubs) < v["claimed"] else "not shown"
     est = int(name.strip("[]").split(",")[0]) >= 630      # the paper gives these three distances as estimates
     h.append(f"| {name} | {'≤ ' if est else ''}{v['claimed']} | {rng(*v.get('Z', (None, None)))} | {rng(*v.get('X', (None, None)))} | {below} |")
+if SHEAD or SCODE:
+    h += ["", "**Structured mitten codes** (the same paper's repository; published \"hook-free\" schedules, paper's fault "
+          "model). Named distance: the d of the folder name, an estimate in the paper. Code distance d_X / d_Z from the "
+          "matrices. Bold = exact; otherwise certified lower bound – verified upper bound.", "",
+          "| code | named distance | code distance d_X / d_Z | circuit distance, Z basis | circuit distance, X basis | below the named distance? |",
+          "|---|---:|---|---:|---:|---|"]
+    for name in sorted(set(SHEAD) | set(SCODE), key=nkd):
+        v, c = SHEAD.get(name, {}), SCODE.get(name, {})
+        named = nkd(name)[2]
+        code_d = " / ".join(rng(*c[b][:2]) if b in c else "–" for b in "ZX")
+        ubs = [v[b][1] for b in "ZX" if b in v and v[b][1] is not None]
+        below = ("yes" if ubs and min(ubs) < named else "no" if ubs else
+                 "no schedule published" if c.get("family") != "abelian_poly_LP" else "no schedule (abelian LP code)")
+        circ = [rng(*v[b]) if b in v else "–" for b in "ZX"]
+        h.append(f"| {name} | {named} | {code_d} | {circ[0]} | {circ[1]} | {below} |")
 h += ["", "**Amplified qLDPC memories** (authors' circuits, 8 rounds for levels 0 and 1; paper's fault model).", "",
       "| level | code | paper: certified ≥ | paper: target | circuit distance, Z | circuit distance, X |",
       "|---:|---|---:|---:|---:|---:|"]

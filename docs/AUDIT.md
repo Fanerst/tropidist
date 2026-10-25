@@ -19,7 +19,8 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
   are counted where the paper states a distance, an estimate, an expectation or a bound that a reader takes as
   the distance; misprinted table rows are not counted. All 10 are circuit distances, or code distances
   estimated by sampling. The mitten values were also checked under the fault model of that paper's
-  estimator: they hold.
+  estimator: they hold. The mitten paper's count includes the structured-mitten schedules of its repository
+  (checked 25 October 2026).
 - **Settled:** 2 conjectures confirmed. 15 open ranges of one paper closed, plus several single open values,
   among them the superdense color-code circuit of d = 11 that no method had certified.
 - **Confirmed:** hundreds of published values, among them every code distance that a paper states as exact.
@@ -35,6 +36,10 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | mitten codes | [[300,60,14]] circuit | 14 (same) | **12** | A | weight 11 excluded in 2.7 h (X) and 4.0 h (Z) on 64 threads |
 | mitten codes | [[500,100,16]] circuit | 16 (same) | **9** (X basis), 11–16 (Z) | A | |
 | mitten codes | [[540,108,18]] to [[975,195,24]] circuits | 18, 20, 22, 24 (same) | 10–13, 9–12, 9–16, 9–17 | A | intervals over both bases: certified lower bound and lightest fault set found; every upper bound is below the claim |
+| mitten codes, structured subfamily (the paper's repository) | [[330,66,12]] circuit, published schedule | 12: the code's named distance. No circuit distance is printed; the repository calls the schedule hook-free, the paper's word for schedules found to "likely preserve the circuit-level distance" | **7** (both bases) | A | code distance exactly 12. A minimum fault set is seven ancilla faults after the second or third of nine gates |
+| mitten codes, structured | [[600,120,14]], [[600,120,16]] circuits | 14, 16 (same) | **11** (Z) and **10** (X); **10** (Z) and **11** (X) | A | code distances exactly 14 and 16 |
+| mitten codes, structured | [[840,168,18]] circuit | 18 (same) | 11–14 (both bases) | A | weight 10 excluded; verified fault sets of weight 14 |
+| mitten codes, structured | [[840,168,18]] code | ≤ 18 (sampled: at least 50M rounds of sQetch and 50k of a BP+OSD estimator) | **17** (d_X = 17, d_Z 17–18) | A | a checked X-type logical operator of weight 17, weight 16 excluded in both types. dist-m4ri's benchmark (October 2026) has d_X 15–17 |
 | Cornucopia codes, 2608.02773 | [[900,454,10]] circuit | ≤ 10 (BP-OSD) | **9** | R | matrices and gate orders equal to the authors' repository; same value in their own one-cycle, CNOT-only setting |
 | Cornucopia codes | [[1044,526,12]] circuit | ≤ 11 (BP-OSD) | **10** | R | |
 | Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | 12–14 | R | a weight-14 fault set, also in the authors' one-cycle setting |
@@ -68,6 +73,16 @@ in `results/papers/mitten_fault_models.json`):
     excluded; the 25-minute run stopped before it found the weight-9 fault set.
 - **Idle faults** can only lower a distance, so they cannot make a published value correct. For the three smallest
   codes they leave the problem unchanged ([PAPERS.md](PAPERS.md)).
+
+**Fault model of the structured-mitten rows.** The same comparison (`papers/smitten_check.py`, results in
+`results/papers/smitten_checks.json`) gives the same picture for all five circuits in both bases, at 3 rounds:
+- single-qubit faults on both CX qubits give exactly our columns;
+- single-qubit faults after the CX gates only drop one column per data qubit, in the X basis only;
+- idle data faults change nothing.
+
+Every X-basis fault set on record uses only single-qubit faults right after a CX, so it is also a fault set of the
+narrowest model. In the Z basis that model gives exactly our problem. Every structured-mitten value therefore holds
+in all three models.
 
 ## 2. Conjectures confirmed and open values settled
 
@@ -106,6 +121,8 @@ in `results/papers/mitten_fault_models.json`):
 | benchmark of distance methods, 2603.22532 | 73 values certified by its five exact methods | all agree |
 | IBM bivariate bicycle codes, 2308.07915 | [[72,12,6]], [[90,8,10]], [[108,8,10]], [[144,12,12]] circuits | the BP-OSD bounds ≤ 6, ≤ 8, ≤ 8, ≤ 10 are exact (6, 8, 8, 10); also certified by others: 6 and 8 by MaxSAT (Tesseract, 2503.10988), 8, 8 and 10 by dist-m4ri (October 2026) |
 | mitten codes, 2607.28795 v2 | [[150,30,10]] circuit | 8 as stated in v2 (v1 implied 10) |
+| mitten codes, structured subfamily and abelian LP code (the paper's repository) | code distances, both CSS types | the sampled estimates of [[330,66,12]], [[600,120,14]], [[600,120,16]] and [[560,112,14]] are exact: 12, 14, 16, 14. The paper says [[560,112,14]] attains its proven ceiling of 14, which is now certified. [[300,60,9]] has distance 10, not the "≤ 9" printed in Tables XI and XIII; 9 is the exact circuit distance of its schedule. Table VI lists [[280,56,≤10]] in that row instead |
+| mitten codes, structured | [[300,60,9]] circuit | 9, its named distance (exact, both bases) |
 
 ## 4. Exact distance as a design tool (circuits found here)
 
@@ -129,12 +146,14 @@ in `results/papers/mitten_fault_models.json`):
 - GALA circuits, 2608.07431: the printed layer order does not give deterministic measurements as read.
 - 2610.19073's merged codes: graphs not public.
 - Still open: mitten codes from n = 500 (intervals), [[1764,886,14]] Cornucopia circuit (12–14, the paper's
-  bound ≤ 14), [[756,16,≤34]] IBM circuit (only lower bounds), amplified level 2 (12–16).
+  bound ≤ 14), [[756,16,≤34]] IBM circuit (only lower bounds), amplified level 2 (12–16), the structured
+  [[840,168,18]] circuit (11–14), and the code distance of the structured [[1200,240,20]] (15–20 in both types; it
+  is only in the repository, with no schedule).
 
 ## For the paper
 
 - **Clean headline items:**
-  - the mitten circuits (authors' own schedules, exact, losses of 2 to 7);
+  - the mitten circuits (authors' own schedules, exact, losses of 2 to 7), with the structured [[330,66,12]] at 7;
   - Cornucopia (authors' setting reproduced; consequence for their extrapolated error rates);
   - routing [[200,24,14]] (10 against 14);
   - the WJH [[288,12,18]] circuit (16 against 24);

@@ -44,6 +44,39 @@ Independent solver (SciPy / HiGHS mixed-integer program) on the same problem:
 
 Idle-fault sensitivity: adding a depolarizing fault on every idle data qubit leaves the distance problem unchanged for [[150,30,10]], [[200,40,12]], [[300,60,14]] (identical column sets: True).
 
+## Structured mitten codes (arXiv:2607.28795, github.com/a7b/yarn), published "hook-free" SE schedules
+
+Named distance: the d in the repository's folder name; the paper prints it as an estimate (≤ d) and states no circuit distance for these schedules.
+
+| code | named distance | basis | exhaustive exclusion up to | certified lower bound | verified upper bound | circuit distance | witness circuit |
+|---|---:|:-:|---:|---:|---:|---:|---|
+| [[300,60,9]] | 9 | Z | 8 | 9 | 9 | **9** | 9 rounds, 9 faults, verified: True |
+| [[300,60,9]] | 9 | X | 8 | 9 | 9 | **9** | 9 rounds, 9 faults, verified: True |
+| [[330,66,12]] | 12 | Z | 6 | 7 | 7 | **7** | 12 rounds, 7 faults, verified: True |
+| [[330,66,12]] | 12 | X | 6 | 7 | 7 | **7** | 12 rounds, 7 faults, verified: True |
+| [[600,120,14]] | 14 | Z | 10 | 11 | 11 | **11** | 3 rounds, 11 faults, verified: True |
+| [[600,120,14]] | 14 | X | 9 | 10 | 10 | **10** | 14 rounds, 10 faults, verified: True |
+| [[600,120,16]] | 16 | Z | 9 | 10 | 10 | **10** | 16 rounds, 10 faults, verified: True |
+| [[600,120,16]] | 16 | X | 10 | 11 | 11 | **11** | 3 rounds, 11 faults, verified: True |
+| [[840,168,18]] | 18 | Z | 10 | 11 | 14 | 11 – 14 | 3 rounds, 14 faults, verified: True |
+| [[840,168,18]] | 18 | X | 10 | 11 | 14 | 11 – 14 | 3 rounds, 14 faults, verified: True |
+
+Code distance (data errors only): exhaustive search below the weight of an information-set witness, the witness checked against the published matrices (`papers/smitten_code_distance.py`). d_X: X-type logical operators (they bound the Z-basis memory); d_Z: Z-type.
+
+| code | family | named distance | d_X | d_Z | symmetries used |
+|---|---|---:|---:|---:|---:|
+| [[300,60,9]] | structured_mitten | 9 | **10** | **10** | 10 |
+| [[330,66,12]] | structured_mitten | 12 | **12** | **12** | 11 |
+| [[560,112,14]] | abelian_poly_LP | 14 | **14** | **14** | 28 |
+| [[600,120,14]] | structured_mitten | 14 | **14** | **14** | 5 |
+| [[600,120,16]] | structured_mitten | 16 | **16** | **16** | 5 |
+| [[840,168,18]] | structured_mitten | 18 | **17** | 17 – 18 | 7 |
+| [[1200,240,20]] | structured_mitten | 20 | 15 – 20 | 15 – 20 | 1 |
+
+Construction checks (`papers/smitten_check.py`, rounds [3]): every detector deterministic in 10 of 10 circuits, exact sector reduction in 10 of 10; the problem built from the matrices and schedule has exactly the columns of the time-collapsed Stim problem in 10 of 10 and of its single-round window in 10 of 10. Single-qubit faults on both CX qubits give the same problem in 10 of 10; single-qubit faults after the CX gates only give a sub-problem in 10 of 10 (equal in 5 of 10); idle data faults change nothing in 10 of 10.
+
+Witnesses: 7 of 7 X-basis fault sets use only single-qubit faults right after a CX (so they are fault sets of the narrowest model too); 8 of 8 fault sets found on 3-round circuits also replay on the circuit with as many rounds as the named distance.
+
 ## Amplified qLDPC memories (arXiv:2609.37231), authors' circuit builder
 
 Certified bound of the paper: 3 x 2^level; target (static distance): 4 x 2^level.

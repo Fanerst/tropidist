@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 import mitten_effective
 from cdist import isd, search
 from cdist.problem import Problem
-from run_mitten import verify_on_circuit
+from run_mitten import code_of, verify_on_circuit
 
 
 def log(*a):
@@ -28,8 +28,7 @@ def log(*a):
 
 def main(name, basis, out, seconds, verify_rounds=3):
     seconds, verify_rounds = float(seconds), int(verify_rounds)
-    code_dir = os.path.join(HERE, "mitten", "mitten", name)
-    n, k, d = [int(x) for x in name.strip("[]").split(",")]
+    code_dir, tag, (n, k, d) = code_of(name)
     eff = mitten_effective.effective_problem(code_dir, basis)
     positions = sorted({x[2] for ms in eff.col_meta for x in ms if x[0] == "hook"})
     subsets = [()] + [(m,) for m in positions] + list(itertools.combinations(positions, 2))
@@ -49,7 +48,7 @@ def main(name, basis, out, seconds, verify_rounds=3):
     res["best_weight"] = best
     if best_sol is not None:
         res["solution_faults"] = [list(eff.col_meta[j][0]) for j in best_sol]
-        w = verify_on_circuit(code_dir, n, basis, verify_rounds, eff, best_sol)
+        w = verify_on_circuit(code_dir, tag, basis, verify_rounds, eff, best_sol)
         res["witness"] = w
         if w["verified"]:
             res["certified_upper_bound"] = w["weight"]

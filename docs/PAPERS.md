@@ -20,6 +20,7 @@ citation counts instead.
 |---|---:|---|---|
 | IBM bivariate bicycle, 2308.07915 | 857 | Stim circuits (tesseract-decoder test data) | [[360,12,≤24]], [[756,16,≤34]] |
 | Mitten codes, 2607.28795 | 9 | check matrices, logicals, gate-by-gate "hook-free" schedules | d = 10 … 18 exact, ≤ 20, 22, 24; schedules chosen so that they "likely preserve the circuit-level distance" |
+| Structured mitten codes, same paper (added 25 October 2026) | – | in the paper's repository: matrices and logicals of six codes, "hook-free" schedules for five of them, matrices of a 2×4 abelian lifted-product code | code distances ≤ 9, ≤ 12, ≤ 14, ≤ 16, ≤ 18 and ≤ 14, sampled estimates ([[1200,240,20]] appears only in the repository); no circuit distance is printed for these schedules |
 | Amplified qLDPC, 2609.37231 | 0 (days old) | Python circuit builder | circuit distance ≥ 3·2^level, target 4·2^level |
 
 ## Results
@@ -37,6 +38,18 @@ citation counts instead.
 | [[630,126,20]] | ≤ 20 | 9 – 12 | 9 – 12 | yes |
 | [[780,156,22]] | ≤ 22 | 9 – 17 | 9 – 16 | yes |
 | [[975,195,24]] | ≤ 24 | 9 – 17 | 9 – 19 | yes |
+
+**Structured mitten codes** (the same paper's repository; published "hook-free" schedules, paper's fault model). Named distance: the d of the folder name, an estimate in the paper. Code distance d_X / d_Z from the matrices. Bold = exact; otherwise certified lower bound – verified upper bound.
+
+| code | named distance | code distance d_X / d_Z | circuit distance, Z basis | circuit distance, X basis | below the named distance? |
+|---|---:|---|---:|---:|---|
+| [[300,60,9]] | 9 | **10** / **10** | **9** | **9** | no |
+| [[330,66,12]] | 12 | **12** / **12** | **7** | **7** | yes |
+| [[560,112,14]] | 14 | **14** / **14** | – | – | no schedule (abelian LP code) |
+| [[600,120,14]] | 14 | **14** / **14** | **11** | **10** | yes |
+| [[600,120,16]] | 16 | **16** / **16** | **10** | **11** | yes |
+| [[840,168,18]] | 18 | **17** / 17 – 18 | 11 – 14 | 11 – 14 | yes |
+| [[1200,240,20]] | 20 | 15 – 20 / 15 – 20 | – | – | no schedule published |
 
 **Amplified qLDPC memories** (authors' circuits, 8 rounds for levels 0 and 1; paper's fault model).
 
@@ -66,6 +79,26 @@ round spreads to up to four data qubits of one weight-9 check. With data errors 
 search returns 10 and 12 for the two smallest codes, so the code distances themselves are as
 stated. The paper selected these schedules with a randomised distance estimator; an exhaustive
 search finds what it missed.
+
+**Structured mitten codes: their published schedules lose more.** The paper's repository also
+ships "hook-free" schedules for five codes of the structured subfamily (its Appendix A.4). The
+paper times their syndrome-extraction cycles (Table XI) but prints no circuit distance for them.
+- [[330,66,12]] has circuit distance 7 in both bases, against a code distance of exactly 12. A
+  minimum fault set is seven ancilla faults alone, each after the second or third of its check's
+  nine gates. Up to the check itself, each such fault is a data error of weight 2 or 3.
+- [[600,120,14]] has 11 (Z) and 10 (X), and [[600,120,16]] has 10 (Z) and 11 (X), against code
+  distances of exactly 14 and 16.
+- [[840,168,18]] lies between 11 and 14 in both bases: weight 10 is excluded, and verified fault
+  sets of weight 14 exist. Even the fault sets made of data errors and hooks after a check's
+  second or third gate alone need weight 12 or more (weight 11 excluded in that class).
+- [[300,60,9]] has circuit distance exactly 9 in both bases, its name, while its code distance is
+  10 in both bases. The paper prints "≤ 9" for this code (Tables XI and XIII; Table VI has
+  [[280,56,≤10]] in its place). So the name matches its circuit, not its code.
+- The other code distances are as named: 12, 14, 16, and 14 for the abelian lifted-product code
+  [[560,112,14]], whose 14 the paper calls attaining its proven ceiling. [[840,168,18]] has
+  distance exactly 17: an X-type logical operator of weight 17, and weight 16 excluded in both
+  types. Its sampled estimate 18 is too high (dist-m4ri's benchmark had 15–17).
+- The dp=2 pipeline, run on the Stim circuits alone, confirms 9 and 7 for the two smaller codes.
 
 **Amplified qLDPC memories: the first level is better than certified.** The seed circuit has
 distance 4 and the first amplification has distance exactly 8 in both bases, the full code
@@ -98,6 +131,20 @@ circuit distance and 24 on the code distance.
   and the distance problem can be written down directly from the matrices and the gate order
   (`papers/mitten_effective.py`). That matrix-level problem and the one extracted from the Stim
   circuit have identical column sets.
+- **Structured mitten circuits** are built the same way from the repository's other five schedule
+  files (`papers/mitten/structured_mitten/`, same commit; the drivers take names such as
+  `structured_mitten/[[330,66,12]]`). `papers/smitten_check.py` checks, for every code and basis on
+  the 3-round circuit: every detector is deterministic, the sector reduction is exact, and the
+  matrix-level problem has exactly the columns of the time-collapsed Stim problem and of its
+  single-round window. The dp=2 pipeline run on the Stim sector problem alone
+  (`papers/smitten_pipeline.py`, independent of the matrix-level construction) gives the same
+  values for the two smaller codes. The deeper exhaustive levels used a depth-3 lookup table
+  (`k_table` 3: about 24 times faster per thread, 143 GB per search for n = 600). Witnesses for
+  [[840,168,18]] also come from an exhaustive search restricted to data errors and hooks after a
+  check's second or third gate (`papers/mitten_restricted_exact.py`), the only hooks in the
+  minimum fault sets of the other codes. Code distances: `papers/smitten_code_distance.py` (an
+  information-set witness checked against the published matrices, then an exhaustive search
+  below it).
 - **Amplified circuits** are the authors' `build_memory(level, basis, rounds, p)`, reproduced gate
   for gate (asserted) with detector annotations added (`papers/amplified_circuit.py`).
 - **Fault models** are the papers' own: faults on preparation, two-qubit gates (depolarizing) and
@@ -898,6 +945,13 @@ claim.
     .venv/bin/python papers/run_mitten.py "[[150,30,10]]" Z results/papers/mitten150_Z.json 10 2 600
     .venv/bin/python papers/run_mitten_isd.py "[[540,108,18]]" X out.json 1500           # witness search
     .venv/bin/python papers/mitten_restricted_isd.py "[[780,156,22]]" X out.json 60     # restricted witness search
+    .venv/bin/python papers/smitten_check.py 3                                          # structured mitten: construction and fault-model checks
+    .venv/bin/python papers/run_mitten.py "structured_mitten/[[330,66,12]]" Z out.json 12 2 0 0      # 7, in seconds
+    .venv/bin/python papers/run_mitten.py "structured_mitten/[[600,120,14]]" Z out.json 14 3 0 0 10  # from the certified bound 10, k_table 3
+    .venv/bin/python papers/mitten_restricted_exact.py "structured_mitten/[[840,168,18]]" Z out.json 2,3 16 2   # hooks after gate 2 or 3 only
+    .venv/bin/python papers/smitten_code_distance.py "structured_mitten/[[840,168,18]]" Z out.json 30 21600 900 3   # code distance
+    .venv/bin/python papers/smitten_pipeline.py "structured_mitten/[[330,66,12]]" X out.json 3 6 1800   # cross-check: dp=2 pipeline on the Stim circuit
+    .venv/bin/python papers/smitten_check.py witnesses                                  # fault kinds of every structured-mitten witness
     .venv/bin/python papers/amplified_circuit.py 1 Z 8 circuits/papers/amp1_r8_Z.stim
     .venv/bin/python run_bb.py circuits/papers/amp1_r8_Z.stim results/papers/amp1_r8_Z.json --sector-high --no-sym --folds 2
     .venv/bin/python scripts/run_deep.py circuits/bb360_r24_Z.stim out.json --skip-ub --kmax 16 --k-table 4 --table-load 0.8
@@ -938,6 +992,10 @@ claim.
 The exhaustive runs for [[300,60,14]] at weight 11 took 2.7 hours (X) and 4.0 hours (Z) on 64
 threads each;
 the BB360 lower bound took 1.5 to 2 hours on 80 threads per basis with a 300 GB lookup table.
+For the structured mitten codes with n = 600 and 840, weight 9 took 27 to 46 minutes on 32
+threads with the depth-2 table, and weight 10 took 11 to 26 minutes (n = 600, 32 threads) and
+31 to 35 minutes (n = 840, 48 threads) with the depth-3 table (143 GB and about 430 GB, built
+in 2 to 15 minutes).
 Everything else ran in minutes. Server logs are in `logs/server/papers/`.
 
 ## Limits
@@ -947,6 +1005,10 @@ Everything else ran in minutes. Server logs are in `logs/server/papers/`.
   the numbers do not transfer.
 - For mitten codes with n ≥ 500 only the X-basis value of [[500,100,16]] is exact. The other
   entries are intervals; the upper ends may drop with a longer search.
+- The structured [[840,168,18]] circuits stay at 11–14. The full search at weight 11 would take
+  about 16 hours on 48 threads with a 430 GB lookup table per basis; the upper end comes from
+  witness searches that can miss lighter fault sets. [[1200,240,20]] has no published schedule,
+  and its code distance is only bounded (15–20).
 - The second amplification level could not be decided: the search grows by a factor of about 30
   per unit of weight on that problem, and the gap between the paper's bound (12) and the code
   distance (16) is out of reach.
