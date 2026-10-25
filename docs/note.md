@@ -227,20 +227,22 @@ core, 8 GB and eight hours each on their cluster; their own result sheets are us
 methods on their machine. Points on the right are instances only this method solves; no instance
 that they solve is missing. Times near 0.1 s are mostly the start of the Python process.*
 
-Where their exact methods certified a distance (73 instances), the values agree. Of the 23 values
+Where their exact methods certified a distance (73 instances), the values agree. Of the 24 values
 certified only here, all but one confirm the best value their heuristics had found; the exception
 is the [[288,12,18]] bivariate bicycle circuit, whose distance is 16 where the best value found there
 is 24. The new values include the remaining bivariate bicycle circuits up to [[288,12,18]], the
 surface-code circuit of d = 11, every lifted-product code from n = 714 to 3230 (distances 16 to 24),
 the bivariate bicycle codes [[288,12,18]], [[360,12,24]] and [[576,8,24]], and the quantum Tanner
 codes of n = 216 and 252 (distances 18 and 22). Its [[360,12,24]] circuit, with best value 88 there,
-has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). All but one of the new values
-(the Tanner code of n = 252, 40 minutes on 32 threads) were obtained within the paper's own limits;
+has distance at least 17 (17 to 21 after longer runs, see PAPERS.md). All but two of the new values
+(the Tanner code of n = 252, 40 minutes on 32 threads, and the superdense colour-code circuit of d = 11,
+30 minutes on 32 threads) were obtained within the paper's own limits;
 the [[288,12,18]] circuit took 2.3 hours on one thread. For the 31 instances still open, the
 eight-hour runs certify lower bounds: 21 to 28 for the codes, 10 to 17 for the circuits (10 for the
-superdense colour-code circuit of d = 11, whose best value is 11). That circuit was settled later,
-outside these limits: the Rank DP truncated at a weight threshold shows that its distance is 11, in
-13 minutes on one thread (results/sparse_dp/README.md). Its seven bivariate bicycle
+superdense colour-code circuit of d = 11, whose best value is 11). That circuit is settled outside these
+limits: the Rank DP truncated at a weight threshold shows that its distance is 11 (13 minutes on one
+thread, results/sparse_dp/README.md; 30 minutes in the benchmark's second tier), but its certificate needs
+about 12 GB, more than the 8 GB of the paper's limits. Its seven bivariate bicycle
 circuits turn out to be the files of this project's first study, five of which are in the benchmark
 of section 4.1. Run here with first-tier limits, Gurobi solves 55 of the 126 instances (58 on the
 sparse basis of the codes) and the current dist-m4ri 76 (its September version 68), against 70 and 71 in
