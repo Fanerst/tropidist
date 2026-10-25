@@ -126,3 +126,7 @@ kept), the circuits of
   the stated fault model. Where a paper's circuit files are not public, the choices made in
   rebuilding it are listed in the notes of `papers/new/`.
 - Result records were produced on our server and contain its absolute paths.
+
+## License
+
+MIT; see [LICENSE](LICENSE). The third-party material listed above is not covered and is not included.
