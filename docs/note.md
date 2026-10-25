@@ -279,7 +279,7 @@ second tier. The windows and the covering bound contribute one case each. Liftin
 scale; several instances run faster without it.
 
 The relaxation is a contribution on its own. Given the collapsed problems, the current dist-m4ri solves
-28 of 42 where it solves 18 of the sector problems, and the search of section 3.3 solves 36 of them.
+29 of 42 where it solves 18 of the sector problems, and the search of section 3.3 solves 36 of them.
 
 ### 4.5 Published circuits
 

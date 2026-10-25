@@ -90,7 +90,7 @@ integer-programming and SAT tools with either logical basis of a code.
 Qualifications:
 
 1. Two things carry the result, and the tables separate them. The time-collapsed relaxation helps
-   every solver: on the collapsed problems dist-m4ri 0.14.7 solves 28 of 42 and HiGHS 23, against
+   every solver: on the collapsed problems dist-m4ri 0.14.7 solves 29 of 42 and HiGHS 23, against
    18 and 3 of the same 42 circuits on the sector problem (first tier). Our search is then still
    ahead on identical input (36 of 42).
 2. Without the reductions, on Stim's color-code circuits, dist-m4ri 0.14.7 is the faster method at every
