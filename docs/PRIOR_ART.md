@@ -117,5 +117,7 @@ As far as the three searches reach:
 - `bench/METHODS.md`: arXiv:2604.09797 is Shaw–Terhal, not "Webster–Higgott" (checked on arXiv).
 - [AUDIT.md](AUDIT.md):
   - IBM's ≤ 18 for the [[288,12,18]] circuit is now a row: we find 16.
-  - The mitten rows wait for a fault-model check: version 2 of that paper states 8 for [[150,30,10]], as we find,
-    and its other values come from a single-qubit-fault estimator on two rounds.
+  - The mitten rows: version 2 of that paper states 8 for [[150,30,10]], as we find, and its other values come from
+    a single-qubit-fault estimator on two rounds. Single-qubit faults on both qubits of every CX give exactly the
+    same sector problems as the two-qubit faults of our runs, for all eight codes in both bases, so our values hold
+    under the estimator's fault model, with or without preparation and measurement faults (see AUDIT.md).

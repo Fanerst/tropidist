@@ -15,10 +15,11 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 ## Summary
 
 - 26 papers (and one data page) with checked numbers.
-- **Published values that are too high:** in 10 papers at least one is above the exact or certified value; for
-  one of them, the mitten codes, the fault model still has to be matched. These are counted where the paper
-  states a distance, an estimate, an expectation or a bound that a reader takes as the distance; misprinted
-  table rows are not counted. All 10 are circuit distances, or code distances estimated by sampling.
+- **Published values that are too high:** in 10 papers at least one is above the exact or certified value. These
+  are counted where the paper states a distance, an estimate, an expectation or a bound that a reader takes as
+  the distance; misprinted table rows are not counted. All 10 are circuit distances, or code distances
+  estimated by sampling. The mitten values were also checked under the fault model of that paper's
+  estimator: they hold.
 - **Settled:** 2 conjectures confirmed. 15 open ranges of one paper closed, plus several single open values,
   among them the superdense color-code circuit of d = 11 that no method had certified.
 - **Confirmed:** hundreds of published values, among them every code distance that a paper states as exact.
@@ -30,10 +31,10 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 
 | paper | object | published value (how stated) | here | prov. | notes |
 |---|---|---|---|---|---|
-| mitten codes, 2607.28795 v2 | [[200,40,12]] circuit | 12 (stated as distance-preserving; an upper bound from the GPU estimator sQetch on a two-round circuit with single-qubit Pauli faults) | **9** | A | FAULT MODEL TO CHECK: our runs count a two-qubit depolarizing fault at a CNOT as one fault. v2 states 8 for [[150,30,10]], as we find. The data-only distances are as stated |
-| mitten codes | [[300,60,14]] circuit | 14 (same) | **12** | A | same check; weight 11 excluded in 2.7 h (X) and 4.0 h (Z) on 64 threads |
-| mitten codes | [[500,100,16]] circuit | 16 (same) | **9** (X basis), 11–16 (Z) | A | same check |
-| mitten codes | [[540,108,18]] to [[975,195,24]] circuits | 18, 20, 22, 24 (same) | intervals, every upper bound below the claim (13 to 19) | A | same check |
+| mitten codes, 2607.28795 v2 | [[200,40,12]] circuit | 12 (stated as distance-preserving; an upper bound from the GPU estimator sQetch on a two-round circuit with single-qubit Pauli faults) | **9** | A | v2 states 8 for [[150,30,10]], as we find. The values hold under the estimator's fault model too (note below the table). The data-only distances are as stated |
+| mitten codes | [[300,60,14]] circuit | 14 (same) | **12** | A | weight 11 excluded in 2.7 h (X) and 4.0 h (Z) on 64 threads |
+| mitten codes | [[500,100,16]] circuit | 16 (same) | **9** (X basis), 11–16 (Z) | A | |
+| mitten codes | [[540,108,18]] to [[975,195,24]] circuits | 18, 20, 22, 24 (same) | 10–13, 9–12, 9–16, 9–17 | A | intervals over both bases: certified lower bound and lightest fault set found; every upper bound is below the claim |
 | Cornucopia codes, 2608.02773 | [[900,454,10]] circuit | ≤ 10 (BP-OSD) | **9** | R | matrices and gate orders equal to the authors' repository; same value in their own one-cycle, CNOT-only setting |
 | Cornucopia codes | [[1044,526,12]] circuit | ≤ 11 (BP-OSD) | **10** | R | |
 | Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | 12–14 | R | a weight-14 fault set, also in the authors' one-cycle setting |
@@ -48,6 +49,25 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | multivariate multicycle codes, 2601.18879 | [[324,12]] code | 20 (estimate) | **18** | R | 12 more table rows differ, several with visible misprints; only the distance of the printed code is established |
 | benchmark of distance methods, 2603.22532 | [[288,12,18]] bivariate bicycle circuit | 24 (best known value, heuristic) | **16** | A | their own circuit file |
 | IBM bivariate bicycle codes, 2308.07915 (Nature 2024) | [[288,12,18]] circuit, standard depth-7 schedule | ≤ 18 (BP-OSD) | **16** (both bases) | A | tesseract-decoder SI1000 files of the IBM schedule. The same bound recurs in later papers; dist-m4ri's benchmark (October 2026) leaves it at 12–18 |
+
+**Fault model of the mitten rows.** Our runs use the noise of the paper's simulations: a two-qubit depolarizing
+fault after every CX, plus preparation and measurement faults. The paper's estimator, sQetch, used single-qubit
+Pauli faults. `papers/mitten_fault_model_check.py` compares the memory-sector problems column by column (results
+in `results/papers/mitten_fault_models.json`):
+
+- **Single-qubit faults on both qubits of every CX**, with the same preparation and measurement faults: the
+  problems have exactly the same columns as ours. This holds for all eight codes in both bases, at 3 rounds and
+  at the 10 and 12 rounds of the [[150]] and [[200]] runs. The distances are the same.
+- **Single-qubit faults after the CX gates only:** the Z-basis problems are again identical. The X-basis problems
+  lack one column per data qubit (a Z fault before the first round).
+  - Every fault of this model is a single fault of ours, so its distances are at least ours.
+  - Every X-basis fault set on record uses only single-qubit faults right after a CX, so each is also a fault
+    set of this model.
+  - Every exact value and interval in the mitten rows therefore holds in this model too.
+  - Direct runs in this model (X basis, 3 rounds): exactly 8 for [[150,30,10]]. For [[200,40,12]], weight 8 is
+    excluded; the 25-minute run stopped before it found the weight-9 fault set.
+- **Idle faults** can only lower a distance, so they cannot make a published value correct. For the three smallest
+  codes they leave the problem unchanged ([PAPERS.md](PAPERS.md)).
 
 ## 2. Conjectures confirmed and open values settled
 
@@ -130,5 +150,5 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 - **Before using any row:**
   - Recheck its record.
   - Recheck the paper's version: the mitten paper changed between versions.
-  - Recheck the fault model behind its number. A circuit distance depends on what counts as one fault. Where the
-    paper's estimator used a different fault model (mitten: single-qubit Pauli faults), compare under that model too.
+  - Recheck the fault model behind its number. A circuit distance depends on what counts as one fault. For the
+    mitten codes, see the fault-model note in section 1.

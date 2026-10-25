@@ -8,6 +8,10 @@ each, in the order given by the schedule file.  Fault model of the paper:
 depolarizing noise on state preparation, two-qubit gates and measurements,
 no idle noise.  `idle=True` adds a depolarizing fault on every data qubit
 that sits out an entangling layer (sensitivity check, not the paper's model).
+`gate_noise="single"` puts independent single-qubit depolarizing faults on the two
+qubits of every CX instead of a two-qubit fault, the fault model of the paper's
+distance estimator; `prep_meas=False` drops the preparation and measurement faults
+(both for the fault-model check, papers/mitten_fault_model_check.py).
 
 Detector coordinates are (check index, 0, round, type) with type 3 for Z
 checks and 0 for X checks, the convention `cdist.problem` expects.
@@ -40,7 +44,7 @@ def layers_of(sched, key, H):
     return out
 
 
-def build(code_dir, basis, rounds, p=0.001, idle=False):
+def build(code_dir, basis, rounds, p=0.001, idle=False, gate_noise="two", prep_meas=True):
     H, sched = load(code_dir)
     Hx, Hz = H["Hx"], H["Hz"]
     n, nx, nz = Hx.shape[1], Hx.shape[0], Hz.shape[0]
@@ -51,36 +55,41 @@ def build(code_dir, basis, rounds, p=0.001, idle=False):
     zl = layers_of(sched, "Z_layers", Hz)
     c = stim.Circuit()
     c.append("RX" if basis == "X" else "R", data)
-    c.append("DEPOLARIZE1", data, p)
+    if prep_meas:
+        c.append("DEPOLARIZE1", data, p)
     c.append("TICK")
 
     def x_round():
         c.append("RX", xa)
-        c.append("DEPOLARIZE1", xa, p)
+        if prep_meas:
+            c.append("DEPOLARIZE1", xa, p)
         for gates in xl:
             c.append("TICK")
             tg = [q for i, j in gates for q in (xa[i], j)]
             c.append("CX", tg)
-            c.append("DEPOLARIZE2", tg, p)
+            c.append("DEPOLARIZE2" if gate_noise == "two" else "DEPOLARIZE1", tg, p)
             if idle:
                 busy = {j for _, j in gates}
                 c.append("DEPOLARIZE1", [q for q in data if q not in busy], p)
-        c.append("DEPOLARIZE1", xa, p)
+        if prep_meas:
+            c.append("DEPOLARIZE1", xa, p)
         c.append("MX", xa)
         c.append("TICK")
 
     def z_round():
         c.append("R", za)
-        c.append("DEPOLARIZE1", za, p)
+        if prep_meas:
+            c.append("DEPOLARIZE1", za, p)
         for gates in zl:
             c.append("TICK")
             tg = [q for i, j in gates for q in (j, za[i])]
             c.append("CX", tg)
-            c.append("DEPOLARIZE2", tg, p)
+            c.append("DEPOLARIZE2" if gate_noise == "two" else "DEPOLARIZE1", tg, p)
             if idle:
                 busy = {j for _, j in gates}
                 c.append("DEPOLARIZE1", [q for q in data if q not in busy], p)
-        c.append("DEPOLARIZE1", za, p)
+        if prep_meas:
+            c.append("DEPOLARIZE1", za, p)
         c.append("M", za)
         c.append("TICK")
 
@@ -103,7 +112,8 @@ def build(code_dir, basis, rounds, p=0.001, idle=False):
                     c.append("DETECTOR", [cur], (i, 0, 0, 3))
             else:
                 c.append("DETECTOR", [cur, stim.target_rec(-nz - per + i)], (i, 0, t, 3))
-    c.append("DEPOLARIZE1", data, p)
+    if prep_meas:
+        c.append("DEPOLARIZE1", data, p)
     c.append("MX" if basis == "X" else "M", data)
     Hm = Hx if basis == "X" else Hz
     nm = Hm.shape[0]
