@@ -1,0 +1,281 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 10,
+    "model_seconds": 515.37,
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "dmin": "10",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120/sector.L.mtx",
+    "timeout": "3084.513112721"
+  },
+  "instance": "sdbb_120",
+  "variant": "sector",
+  "rows": 420,
+  "cols": 5160,
+  "obs": 8,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": 12,
+  "witness": [
+    5049,
+    5060,
+    5061,
+    5079,
+    5090,
+    5091,
+    5122,
+    5125,
+    5130,
+    5135,
+    5158,
+    5159
+  ],
+  "witness_ok": true,
+  "seconds": 3599.915,
+  "trace": [
+    {
+      "t": 515.387,
+      "lb": 10
+    },
+    {
+      "t": 515.4,
+      "ub": 161
+    },
+    {
+      "t": 515.4,
+      "ub": 141
+    },
+    {
+      "t": 515.4,
+      "ub": 129
+    },
+    {
+      "t": 515.401,
+      "ub": 128
+    },
+    {
+      "t": 515.402,
+      "ub": 127
+    },
+    {
+      "t": 515.402,
+      "ub": 125
+    },
+    {
+      "t": 515.402,
+      "ub": 104
+    },
+    {
+      "t": 515.403,
+      "ub": 98
+    },
+    {
+      "t": 515.403,
+      "ub": 97
+    },
+    {
+      "t": 515.403,
+      "ub": 96
+    },
+    {
+      "t": 515.403,
+      "ub": 94
+    },
+    {
+      "t": 515.404,
+      "ub": 85
+    },
+    {
+      "t": 515.404,
+      "ub": 84
+    },
+    {
+      "t": 515.404,
+      "ub": 79
+    },
+    {
+      "t": 515.404,
+      "ub": 78
+    },
+    {
+      "t": 515.404,
+      "ub": 77
+    },
+    {
+      "t": 515.404,
+      "ub": 70
+    },
+    {
+      "t": 515.405,
+      "ub": 64
+    },
+    {
+      "t": 515.406,
+      "ub": 62
+    },
+    {
+      "t": 515.406,
+      "ub": 61
+    },
+    {
+      "t": 515.407,
+      "ub": 59
+    },
+    {
+      "t": 515.407,
+      "ub": 57
+    },
+    {
+      "t": 515.407,
+      "ub": 56
+    },
+    {
+      "t": 515.408,
+      "ub": 46
+    },
+    {
+      "t": 515.408,
+      "ub": 45
+    },
+    {
+      "t": 515.408,
+      "ub": 44
+    },
+    {
+      "t": 515.408,
+      "ub": 40
+    },
+    {
+      "t": 515.408,
+      "ub": 39
+    },
+    {
+      "t": 515.409,
+      "ub": 38
+    },
+    {
+      "t": 515.409,
+      "ub": 37
+    },
+    {
+      "t": 515.409,
+      "ub": 36
+    },
+    {
+      "t": 515.409,
+      "ub": 35
+    },
+    {
+      "t": 515.409,
+      "ub": 24
+    },
+    {
+      "t": 515.414,
+      "ub": 21
+    },
+    {
+      "t": 515.415,
+      "ub": 20
+    },
+    {
+      "t": 515.415,
+      "ub": 19
+    },
+    {
+      "t": 515.415,
+      "ub": 18
+    },
+    {
+      "t": 515.416,
+      "ub": 16
+    },
+    {
+      "t": 515.416,
+      "ub": 14
+    },
+    {
+      "t": 515.427,
+      "ub": 13
+    },
+    {
+      "t": 515.427,
+      "ub": 12
+    }
+  ],
+  "peak_rss_mb": 141.5,
+  "truth": 12,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 10 from a 60 x 420 model of 39840 DEM mechanisms, model bounds [10, 10, 0], in 515.4 s; passed to the binary as dmin. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 10 12 100000 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_120",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "started_at": "2026-10-25T11:06:28.150948+00:00",
+    "ended_at": "2026-10-25T12:06:28.137317+00:00",
+    "wall_seconds": 3599.97169,
+    "adapter_seconds": 3599.915,
+    "trace_offset_seconds": 0.05669,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket__bound-model/sdbb_120__sector__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-bracket__bound-model/sdbb_120__sector__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.8,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

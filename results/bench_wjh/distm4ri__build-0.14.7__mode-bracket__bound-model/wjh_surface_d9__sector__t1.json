@@ -1,0 +1,87 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 9,
+    "model_seconds": 0.893,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "dmin": "9",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_surface_d9/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_surface_d9/sector.L.mtx",
+    "timeout": "598.983789175"
+  },
+  "instance": "wjh_surface_d9",
+  "variant": "sector",
+  "rows": 400,
+  "cols": 1945,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 9,
+  "upper_bound": 9,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    15
+  ],
+  "witness_ok": true,
+  "seconds": 0.944,
+  "trace": [
+    {
+      "t": 0.916,
+      "lb": 9
+    },
+    {
+      "t": 0.942,
+      "ub": 9
+    }
+  ],
+  "peak_rss_mb": 92.3,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 9 from a 40 x 105 model of 15745 DEM mechanisms, model bounds [9, 9, 0], in 0.9 s; passed to the binary as dmin. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 9 9 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_surface_d9",
+    "family": "wjh_surface_circuit",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-25T07:18:53.281651+00:00",
+    "ended_at": "2026-10-25T07:18:54.470902+00:00",
+    "wall_seconds": 1.186089,
+    "adapter_seconds": 0.944,
+    "trace_offset_seconds": 0.242089,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_surface_d9__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_surface_d9__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.7,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -147,14 +147,19 @@ def fig_method():
 
 
 # ------------------------------------------------------------------- figure 2: benchmark counts
+DM4RI = ["dist-m4ri CC", "dist-m4ri CC+RW", "dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input",
+         "dist-m4ri CC, model bound", "dist-m4ri CC+RW, model bound", "dist-m4ri CC, DEM input, model bound",
+         "dist-m4ri CC+RW, DEM input, model bound"]
+
+
 def fig_benchmark():
     a, b32, b1, metas = bench()
     main = {m["name"]: ("full" if (m["track"] == "code" or "sector" not in m["variants"]) else "sector") for m in metas}
     # a tool counts an instance as solved with any of its configurations: dist-m4ri 0.14.7 in CC or CC+RW mode
-    # (from our matrices or Stim's DEM), the integer-programming and SAT tools with either logical basis of a code
+    # (from our matrices or Stim's DEM, with or without its model lower bound), the integer-programming and SAT
+    # tools with either logical basis of a code
     both = lambda name: [name, name + ", sparse L"]
-    groups = [("this method", ["ours"]),
-              ("dist-m4ri", ["dist-m4ri CC", "dist-m4ri CC+RW", "dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]),
+    groups = [("this method", ["ours"]), ("dist-m4ri", DM4RI),
               ("CP-SAT", both("CP-SAT")), ("HiGHS", both("HiGHS")), ("Gurobi", both("Gurobi")), ("SAT (CaDiCaL)", both("SAT")),
               ("RC2", both("RC2")), ("enMaxCDCL", both("enMaxCDCL")), ("CASHWMaxSAT", both("CASHWMaxSAT")),
               ("Qubitserf (codes only)", ["Qubitserf CC", "Qubitserf BZ", "Qubitserf MITM"])]
@@ -189,7 +194,8 @@ def fig_benchmark():
 # ---------------------------------------------------------------- figure 4: surface-code scaling
 def fig_surface():
     a, b32, b1, metas = bench()
-    series = [("this method", "ours", BLUE), ("dist-m4ri", "dist-m4ri CC", GRAY), ("SAT", "SAT", GRAY),
+    # dist-m4ri: its fastest configuration at each distance (with its model lower bound from d = 9 on)
+    series = [("this method", "ours", BLUE), ("dist-m4ri", DM4RI, GRAY), ("SAT", "SAT", GRAY),
               ("RC2", "RC2", GRAY), ("HiGHS", "HiGHS", GRAY), ("CP-SAT", "CP-SAT", GRAY), ("Gurobi", "Gurobi", GRAY)]
     fig, ax = plt.subplots(figsize=(7.2, 3.3))
     fig.subplots_adjust(left=0.1, right=0.86, top=0.9, bottom=0.15)
@@ -201,7 +207,9 @@ def fig_surface():
     ax.text(26.4, 600, "600 s limit", fontsize=7.8, color=MUTED, va="center", ha="left")
     ends = {}
     for label, key, color in series:
-        pts = [(d, exact(a, key, "surface_d%d" % d, "sector")) for d in range(3, 27, 2)]
+        keys = key if isinstance(key, list) else [key]
+        pts = [(d, min((t for k in keys for t in [exact(a, k, "surface_d%d" % d, "sector")] if t is not None),
+                       default=None)) for d in range(3, 27, 2)]
         pts = [(d, t) for d, t in pts if t is not None]
         xs, ys = [p[0] for p in pts], [max(p[1], 0.01) for p in pts]
         ax.plot(xs, ys, color=color, linewidth=1.5 if color == GRAY else 1.8, solid_capstyle="round", solid_joinstyle="round",

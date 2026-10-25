@@ -92,9 +92,11 @@ As far as the three searches reach:
 - **Lifting:** independent and concurrent with Pan's preprint. Our lifting is for a fixed number of rounds, while
   Pan covers every round count by a gap argument; a reviewer will ask about this.
 - **"First exact" or "first certified":** only for named instances, never in general.
-- **Benchmark against dist-m4ri:** name the commit (0.14.7, bed621e). dist-m4ri changed 49 times in a month and
-  now has a model lower bound, exact DEM reduction, first-row cluster extension and a hash-table last step.
-  Re-run against its newest version before submission, and against Pan's code if it is released.
+- **Benchmark against dist-m4ri:** name the commit (0.14.7, bed621e). dist-m4ri changed 49 times in a month; that
+  version has a model lower bound, exact DEM reduction, first-row cluster extension and a hash-table last step.
+  The benchmark ran it with and without its model lower bound (25 October; BENCHMARK.md). On 25 October no newer
+  code existed (its development branch adds only benchmark data and plans). Check again before submission, and
+  run Pan's code if it is released.
 
 ## What this means for the paper
 

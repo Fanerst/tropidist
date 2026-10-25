@@ -19,9 +19,9 @@ fault set replayed in Stim. The same engine computes code distances.
   distance, and one truncated at a weight threshold; the cost model chooses.
 - **A benchmark** against other exact solvers (connected-cluster enumeration, integer programming
   including Gurobi, SAT, MaxSAT) on 74 instances. It solves 59 with one thread in 600 s and 71 with
-  32 threads in an hour; all other methods together, among them the October version of dist-m4ri,
-  solve 36 and 48. One instance, a many-hypercube code with 256 logical qubits, is solved by another
-  method (SAT) and not by this one.
+  32 threads in an hour; all other methods together, among them the October version of dist-m4ri with
+  its model lower bound, solve 38 and 53. One instance, a many-hypercube code with 256 logical qubits,
+  is solved by another method (SAT) and not by this one.
 - **The instances of the prior benchmark** (Webster, Jacob, Higgott, arXiv:2603.22532), from its own
   files and under its limits (one core, 8 GB, eight hours per run): of its 126 CSS codes and circuits
   it solves 95, against 73 for its five exact methods together (86 already with one thread in

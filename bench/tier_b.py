@@ -26,6 +26,14 @@
              timeout (cutoff=0: the October runs lost time to its predictive cutoff), both versions on the
              instances of arXiv:2603.22532, then 0.14.7 CC+RW at 32 threads / 90 GB / 3600 s on what its first
              tier left (main suite on cores 0-63 and the paper's instances on 64-95, in parallel)
+  dm4mb1     dist-m4ri 0.14.7 with its model lower bound (bound=model: the bound of --model-lb, then the binary
+             from that bound), first tier, CC and CC+RW: every circuit of the main suite on its main problem
+             (sector; the raw problem when it has no sectors) and as Stim DEM input, and the circuits of
+             arXiv:2603.22532 (25 October 2026)
+  dm4mb2     its second tier: CC+RW and CC with the model bound, each at 32 threads / 90 GB / 3600 s on the
+             circuits its own first tier left; the main suite (two runs at a time per mode) and the paper's
+             instances (one per mode) all in parallel, on the physical cores of both sockets.
+             DM4MB_MODES=cc or =bracket restricts both phases to one mode (default: both)
   sparseL    the integer-programming and SAT tools again on the code instances, now with the sparse logical
              basis full.L.std.mtx (bench/standard_logicals.py; the problem is the same, only the parity rows
              are lighter): first tier for HiGHS, CP-SAT, Gurobi, SAT, RC2, CASHWMaxSAT and enMaxCDCL on the
@@ -99,6 +107,8 @@ def folder(spec):
 
 DM4 = "distm4ri:build=0.14.7"                  # dist-m4ri 0.14.7; the plain "distm4ri:..." specs are 0.9.0
 DM4_CC, DM4_BR, DM4_RW = DM4 + ",mode=cc", DM4 + ",mode=bracket", DM4 + ",mode=rw"
+DM4_CC_MB, DM4_BR_MB = DM4_CC + ",bound=model", DM4_BR + ",bound=model"     # with the model lower bound (--model-lb)
+MB_MODES = os.environ.get("DM4MB_MODES", "cc,bracket").split(",")
 DM0_CC_FULL = "distm4ri:mode=cc,cutoff=0"       # 0.9.0 with the whole time budget
 WJH_DIR = HERE / "instances_wjh"
 WJH1 = ["ours_pipeline", GUROBI, "distm4ri:mode=cc"]
@@ -179,7 +189,7 @@ def frontier(methods, tier_a, out, threads, mem, jobs, name, logs, dry, raw=Fals
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("phases", nargs="+", choices=["fix", "collapsed", "b32", "b1", "ablation", "stimsat", "b1s", "gurobi", "wjh1", "wjh2",
-                                         "wjh8h", "dm4ri", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b",
+                                         "wjh8h", "dm4ri", "dm4mb1", "dm4mb2", "sparseL", "sparseL1", "sparseL2", "dp2", "dp2b",
                                          "final1", "final8h", "final2", "final2b"])
     ap.add_argument("--tier-a", default=str(ROOT / "results" / "bench"))
     ap.add_argument("--out", default=str(ROOT / "results" / "bench_tierB"))
@@ -257,6 +267,46 @@ def main():
                      threading.Thread(target=frontier, args=([DM4_BR], wjh_a, ROOT / "results" / "bench_wjh_tierB", 32, 90, 1,
                                                              "dm4ri_wjh2", logs, a.dry_run),
                                       kwargs=dict(directory=WJH_DIR, firsts=[DM4_CC], cpus="64-95"))]
+            for t in jobs_:
+                t.start()
+            for t in jobs_:
+                t.join()
+        elif phase == "dm4mb1":
+            wjh_a = ROOT / "results" / "bench_wjh"
+            ms = [m for m in instances() if m["track"] == "circuit"]
+            lists = {"sector": [m["name"] for m in ms if "sector" in m["variants"]],
+                     "raw": [m["name"] for m in ms if "sector" not in m["variants"]],
+                     "dem": [m["name"] for m in ms]}
+            for key, names in lists.items():
+                (logs / ("dm4mb_%s.txt" % key)).write_text("\n".join(names) + "\n")
+            base = ["--threads", "1", "--time-limit", "600", "--mem-gb", "16", "--give-up", "2"] + REDO
+            mb = [spec for key, spec in (("cc", DM4_CC_MB), ("bracket", DM4_BR_MB)) if key in MB_MODES]
+            mb_dem = [spec.replace(",bound=model", ",input=dem,bound=model") for spec in mb]
+            harness_parallel([
+                (["--methods", ",".join(mb), "--instances", "@" + str(logs / "dm4mb_sector.txt"),
+                  "--variants", "sector", "--jobs", "5", "--total-mem-gb", "80", "--out", str(tier_a)] + base, "0-4"),
+                (["--methods", ",".join(mb), "--instances", "@" + str(logs / "dm4mb_raw.txt"),
+                  "--variants", "full", "--jobs", "1", "--total-mem-gb", "16", "--out", str(tier_a)] + base, "5"),
+                (["--methods", ",".join(mb_dem), "--instances", "@" + str(logs / "dm4mb_dem.txt"), "--variants", "full",
+                  "--jobs", "4", "--total-mem-gb", "64", "--out", str(tier_a)] + base, "6-9"),
+                (["--methods", ",".join(mb), "--instances", "@" + str(wjh_a / "instances_circuit.txt"),
+                  "--variants", "sector", "--instance-dir", str(WJH_DIR), "--jobs", "2", "--total-mem-gb", "32",
+                  "--out", str(wjh_a)] + base, "10-11"),
+            ], logs / "dm4mb_tier1.log", a.dry_run)
+        elif phase == "dm4mb2":
+            # both modes (with the bound, CC alone solved two circuits in the first tier), on the physical cores
+            # of both sockets: CC+RW on 0-95, CC on 96-191
+            import threading
+            wjh_a, wjh_b = ROOT / "results" / "bench_wjh", ROOT / "results" / "bench_wjh_tierB"
+            jobs_ = [threading.Thread(target=frontier, args=([spec], tier_a, out, 32, 90, 2, "dm4mb_b32_" + key, logs,
+                                                             a.dry_run), kwargs=dict(cpus=cpus, tracks=("circuit",)))
+                     for spec, key, cpus in ((DM4_BR_MB, "br", "0-63"), (DM4_CC_MB, "cc", "96-159"))
+                     if (key == "br" and "bracket" in MB_MODES) or (key == "cc" and "cc" in MB_MODES)] \
+                + [threading.Thread(target=frontier, args=([spec], wjh_a, wjh_b, 32, 90, 1, "dm4mb_wjh2_" + key, logs,
+                                                           a.dry_run),
+                                    kwargs=dict(directory=WJH_DIR, cpus=cpus, tracks=("circuit",)))
+                   for spec, key, cpus in ((DM4_BR_MB, "br", "64-95"), (DM4_CC_MB, "cc", "160-191"))
+                   if (key == "br" and "bracket" in MB_MODES) or (key == "cc" and "cc" in MB_MODES)]
             for t in jobs_:
                 t.start()
             for t in jobs_:

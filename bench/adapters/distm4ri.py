@@ -3,8 +3,14 @@
 Config: binary=<path> or build=<version> (bench/external/dist-m4ri-<version>/src/dist_m4ri;
 default: the 0.9.0 build in bench/external/dist-m4ri), mode=cc|rw|bracket, input=mtx|dem,
 cutoff=1|0 (0: a native timeout far beyond the budget, so the program runs until the wall
-deadline kills it, which avoids 0.9.0's predictive skipping of a CC round), followed by documented dist-m4ri
-key=value options. DEM is restricted to circuit/full and pmin=0.
+deadline kills it, which avoids 0.9.0's predictive skipping of a CC round), bound=none|model,
+followed by documented dist-m4ri key=value options. DEM is restricted to circuit/full and pmin=0.
+
+bound=model (0.14.5 and later, circuits, mode cc or bracket) is the model lower bound of
+dist-m4ri's --model-lb: compute_model_lower_bound() of the build's dist_m4ri.py, with its cache
+off, on the instance's circuit.stim, within half of the remaining budget; then the binary runs
+as usual with dmin set to that certified bound, so CC starts there, as compute_dem_distance()
+does with the cached bound.
 Input paths/method are owned by the adapter; classical=1 changes the problem and
 is rejected. Assumed dmin/dmax, noscan, and restricted columns disable all lower
 bound claims. --threads is authoritative and nothrottle=1 is mandatory.
@@ -63,6 +69,7 @@ COMPLETION = re.compile(
     r"^# CC (?:w=(\d+) completed|round w=(\d+) finished) .*"
     r": no codewords(?: found)? -> dmin=(\d+)\s*$")
 FOUND = re.compile(r"^# CC found min-weight codeword: d=(\d+)\b")
+CODEWORD = re.compile(r"codeword of weight (\d+) \(1-based columns\): ([\d ]+?)\s*$")   # debug bit 32
 COINCIDE = re.compile(r"^# bracketing bounds coincide: dmin = dmax = (\d+)\b")
 
 
@@ -138,6 +145,11 @@ def settings(cfg, threads):
     input_kind = cfg.pop("input", "mtx")
     if mode not in METHODS or input_kind not in ("mtx", "dem"):
         raise ValueError("mode must be cc/rw/bracket and input must be mtx/dem")
+    bound = cfg.pop("bound", "none")
+    if bound not in ("none", "model"):
+        raise ValueError("bound must be none or model")
+    if bound == "model" and (mode == "rw" or "dmin" in cfg):
+        raise ValueError("bound=model needs mode cc or bracket and supplies dmin itself")
     options = {}
     for key, value in cfg.items():
         if key in INT_OPTIONS:
@@ -191,18 +203,27 @@ def settings(cfg, threads):
     if mode == "rw" and int(options.get("steps", 1000)) == 0:
         raise ValueError("rw requires positive steps (bracket permits steps=0)")
     options.update(threads=str(threads), nothrottle="1", classical="0", css="1")
-    # Pass exactly one debug argument: the source rejects conflicting duplicates.
-    options["debug"] = str(int(options.get("debug", 0)) | 1)
+    # Pass exactly one debug argument: the source rejects conflicting duplicates.  Bracket with bound=model takes
+    # its witnesses from stderr (bit 32: each new lightest codeword; 2048: no cutoff of its support), see main().
+    options["debug"] = str(int(options.get("debug", 0)) | 1 | (2080 if stderr_witness(mode, bound) else 0))
     if (mode == "cc" and "maxC" not in options and "finC" not in options and
             int(options.get("dW", 0)) == 0):
         options["maxC"] = "1"
     if cutoff == "0" and "timeout" in options:
         raise ValueError("cutoff=0 and an explicit timeout contradict each other")
-    return binary, mode, input_kind, options, cutoff == "1"
+    return binary, mode, input_kind, options, cutoff == "1", bound
 
 
-def proof_eligible(options, ncols):
-    return (int(options.get("dmin", 1)) <= 1 and
+def stderr_witness(mode, bound):
+    """Bracket mode with the model bound runs without outC, as dist-m4ri's own flow does: with outC the program
+    goes on enumerating every codeword of the minimum weight once the bounds meet (its first CC round is at the
+    bound itself), and a cap (maxC) also counts the heavier RW codewords and ends the run early."""
+    return mode == "bracket" and bound == "model"
+
+
+def proof_eligible(options, ncols, certified=1):
+    """certified: a lower bound already proved (the model bound), from which CC may start."""
+    return (int(options.get("dmin", 1)) <= max(1, certified) and
             int(options.get("dmax", 0)) == 0 and
             int(options.get("noscan", 0)) == 0 and
             int(options.get("start", -1)) == -1 and
@@ -249,6 +270,32 @@ def prepare_dem(instance, dem_path, map_path):
     dem.to_file(dem_path)
     with open(map_path, "w") as stream:
         json.dump(mapping, stream)
+
+
+def wrapper_path(binary):
+    """The build's dist_m4ri.py: next to the binary, or one level up (the source tree's src/dist_m4ri)."""
+    for directory in (Path(binary).parent, Path(binary).parent.parent):
+        if (directory / "dist_m4ri.py").is_file():
+            return directory / "dist_m4ri.py"
+    return None
+
+
+def model_bound(circuit, wrapper, binary, *args):
+    """Runs in a child: dist-m4ri's model bound of a Stim circuit, as JSON in the last argument.
+    args: method=, threads=, timeout= (the threads= token also sets OMP_NUM_THREADS in run_process)."""
+    import importlib.util
+    *settings_, out_path = args
+    kw = dict(arg.split("=", 1) for arg in settings_)
+    spec = importlib.util.spec_from_file_location("dist_m4ri", wrapper)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.disable_distance_cache()          # nothing carried over between runs
+    bound, info = module.compute_model_lower_bound(
+        circuit=circuit, dist_m4ri=binary, method=int(kw["method"]), threads=int(kw["threads"]),
+        timeout=float(kw["timeout"]), nothrottle=True, return_info=True)
+    keep = ("model_d_info", "measured_d_info", "rows", "cols", "rows_measured", "cols_measured", "dem_cols", "trivial")
+    with open(out_path, "w") as stream:
+        json.dump(dict({k: info.get(k) for k in keep}, bound=int(bound)), stream, default=int)
 
 
 def map_witness(support, mapping):
@@ -389,8 +436,10 @@ def main():
     try:
         if not 1 <= a.threads <= 2147483647 or not math.isfinite(a.time_limit) or a.time_limit < 0:
             raise ValueError("threads must be positive and time-limit finite/nonnegative")
-        binary, mode, input_kind, options, native_limit = settings(a.cfg, a.threads)
+        binary, mode, input_kind, options, native_limit, bound_kind = settings(a.cfg, a.threads)
         effective.update(binary=binary, mode=mode, input=input_kind)
+        if bound_kind == "model" and (prob.meta.get("track") != "circuit" or a.variant not in ("sector", "full")):
+            raise ValueError("bound=model requires a circuit instance and variant sector or full")
         if not Path(binary).is_file() or not os.access(binary, os.X_OK):
             status = "unavailable"
             notes.append("dist-m4ri binary is missing or not executable: %s" % binary)
@@ -419,6 +468,39 @@ def main():
                     notes.append("dist-m4ri %s: completed-weight trace via debug bits 1|2." % version)
                 if version_killed and time.monotonic() >= deadline:
                     status = "timeout"
+                certified = 1
+                if bound_kind == "model" and status != "timeout":
+                    wrapper = wrapper_path(binary)
+                    circuit = Path(a.instance).resolve() / "circuit.stim"
+                    if wrapper is None or not circuit.is_file():
+                        raise ValueError("bound=model needs the build's dist_m4ri.py and the instance's circuit.stim")
+                    model_path, model_lines = str(Path(temp) / "model.json"), []
+                    started = time.monotonic()
+                    rc, killed = run_process(
+                        [sys.executable, str(Path(__file__).resolve()), "--_model-bound", str(circuit), str(wrapper),
+                         binary, "method=%d" % METHODS[mode], "threads=%d" % a.threads,
+                         "timeout=%.3f" % max(0.001, (deadline - started) / 2), model_path], deadline,
+                        lambda stream, line: model_lines.append(line) if len(model_lines) < 30 else None)
+                    if killed:
+                        status = "timeout"
+                    elif rc != 0:
+                        raise ValueError("model bound failed: " + " | ".join(model_lines[-10:]))
+                    else:
+                        with open(model_path) as stream:
+                            model = json.load(stream)
+                        certified = int(model["bound"])
+                        if certified < 1:
+                            raise ValueError("model bound returned no bound")
+                        tr.lb(certified)
+                        if certified > 1:
+                            options["dmin"] = str(certified)
+                        seconds = time.monotonic() - started
+                        effective.update(model_bound=certified, model_seconds=round(seconds, 3))
+                        notes.append("Model bound (compute_model_lower_bound of %s, method %d, cache off): d >= %d "
+                                     "from a %s x %s model of %s DEM mechanisms, model bounds %s, in %.1f s; "
+                                     "passed to the binary as dmin." % (wrapper, METHODS[mode], certified,
+                                     model.get("rows"), model.get("cols"), model.get("dem_cols"),
+                                     model.get("model_d_info"), seconds))
                 mapping = None
                 if input_kind == "dem" and status != "timeout":
                     dem_path, map_path = str(Path(temp) / "input.dem"), str(Path(temp) / "map.json")
@@ -448,7 +530,7 @@ def main():
                     max_distance = max(ncols, int(options.get("dmax", 0)))
                     if int(options.get("dW", 0)) > 2147483647 - max_distance - 1:
                         raise ValueError("dW would overflow dist-m4ri's C weight arithmetic")
-                    safe = mode != "rw" and proof_eligible(options, ncols)
+                    safe = mode != "rw" and proof_eligible(options, ncols, certified)
                     if mode == "rw":
                         notes.append("RW is heuristic; printed dmin is not a certified lower bound.")
                     elif not safe:
@@ -481,6 +563,11 @@ def main():
                             notes.append("cutoff=0: native timeout 1e9 s, far beyond the budget, so the program runs "
                                          "until the wall deadline kills it (completed rounds give the lower bound; a "
                                          "codeword found by CC is exported by the program before it exits).")
+                        from_stderr = stderr_witness(mode, bound_kind)
+                        if from_stderr:
+                            del options["outC"]
+                            notes.append("Bracket mode with the model bound: no outC, so the program stops when the "
+                                         "bounds meet; witnesses are the supports it prints (debug bit 32), checked here.")
                         effective.update(options)
                         command = [binary, "method=%d" % METHODS[mode]] + [
                             "%s=%s" % (key, value) for key, value in options.items()]
@@ -488,13 +575,25 @@ def main():
                         native_cutoff = False
 
                         def on_line(stream, line):
-                            nonlocal triple, native_cutoff
+                            nonlocal triple, native_cutoff, witness
                             if stream == "stdout" and TRIPLE.fullmatch(line):
                                 triple = parse_triple(line)
                             if stream == "stderr":
                                 if len(diagnostics) >= 20:
                                     diagnostics.pop(0)
                                 diagnostics.append(line)
+                                printed = CODEWORD.search(line) if from_stderr else None
+                                if printed:
+                                    support = [int(j) - 1 for j in printed.group(2).split()]
+                                    if (len(support) != int(printed.group(1)) or support != sorted(set(support))
+                                            or any(j < 0 or j >= ncols for j in support)):
+                                        raise ValueError("invalid codeword support on stderr")
+                                    candidate = map_witness(support, mapping)
+                                    if not common.check_witness(prob, candidate)["ok"]:
+                                        raise ValueError("printed codeword fails H/L witness verification")
+                                    if tr.upper is None or len(candidate) < tr.upper:
+                                        witness = candidate
+                                        tr.ub(len(candidate))
                                 if safe:
                                     progress = parse_progress(line)
                                     if progress:
@@ -566,5 +665,7 @@ def main():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--_prepare-dem":
         prepare_dem(*sys.argv[2:])
+    elif len(sys.argv) > 1 and sys.argv[1] == "--_model-bound":
+        model_bound(*sys.argv[2:])
     else:
         main()

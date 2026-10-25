@@ -6,7 +6,8 @@ in the tables comes from one pass of that configuration with one code version (c
 October; section "Final configuration"). The suite has 74 instances: the 60 of the first passes and 14 added
 on 23 October where the Rank DP evaluators decide. Every other solver ran on the 14 with the protocol below;
 its records on the 60 are those of the passes of 6 to 19 October (Gurobi from 15 October, dist-m4ri 0.14.7
-from 18 October, the sparse logical basis from 19 October). Tables are filled by `bench/make_benchmark_md.py`
+from 18 October, the sparse logical basis from 19 October); dist-m4ri with its model lower bound ran on
+25 October. Tables are filled by `bench/make_benchmark_md.py`
 from the records in `results/bench/`, `results/bench_tierB/`, `results/bench_ablation_final/`,
 `results/bench_wjh/`, `results/bench_wjh_8h/` and `results/bench_wjh_tierB/`.
 
@@ -21,22 +22,22 @@ checked.
 ## Answer
 
 On these 74 instances, yes, with the qualifications given below. A tool is credited with an instance if
-any of its configurations solves it: dist-m4ri 0.14.7 in either mode and from either input, the
-integer-programming and SAT tools with either logical basis of a code.
+any of its configurations solves it: dist-m4ri 0.14.7 in either mode, from either input and with or
+without its model lower bound, the integer-programming and SAT tools with either logical basis of a code.
 
 - **Coverage.** Ours solves 59 instances exactly with one thread in 600 s and 71 with 32 threads in
-  an hour. The other exact methods together solve 36 and 48. 24 instances are solved by ours only and
+  an hour. The other exact methods together solve 38 and 53. 19 instances are solved by ours only and
   one by another method only: the many-hypercube code [[1296,256,16]], which incremental SAT solves in
   1245 s with one thread (ours certifies at least 14 with 32 threads). Two instances are open for every
   method: the mitten [[300,60,14]] circuit (ours certifies at least 11) and the directional tile code
   [[537,14]] of arXiv:2606.19482, whose X distance lies between 20 (ours) and 30 (ISD); the paper gives
   at most 35.
-- **Circuits** (47): ours 38 in the first tier, 46 over both; all others together 23 and 29. Where
-  another method needs the second tier (dist-m4ri on six circuits, 7 to 60 minutes on 32 threads), ours
-  solves the circuit with one thread in 0.3 to 435 s. The gross-code circuit with the best depth-7
-  schedule, BB288, Cornucopia from n = 900, the routing circuits from n = 140, the mitten circuit of
-  n = 200, the weight-8 and the self-dual BB circuits of n = 144 and 120, the left-right gross circuit,
-  the surface code from d = 15 and the superdense color-code circuit of d = 11 are solved by ours only.
+- **Circuits** (47): ours 38 in the first tier, 46 over both; all others together 25 and 34. Where
+  another method needs the second tier (dist-m4ri on nine circuits, 10 s to 52 minutes on 32 threads),
+  ours solves the circuit with one thread in 1.6 to 435 s. BB288, Cornucopia from n = 900, the routing
+  circuits from n = 140, the mitten circuit of n = 200, the weight-8 and the self-dual BB circuits of
+  n = 144 and 120, the surface code from d = 21 and the superdense color-code circuit of d = 11 are
+  solved by ours only.
 - **Codes** (27): ours 21 and 25; all others together 13 and 19. The strongest other tool is
   dist-m4ri 0.14.7: the BB288 code in 115 s with one thread (ours 1.8 s), the Kasai [[372,130,16]] code in
   30 minutes on 32 threads (ours 120 s on one). Solved by ours only: the bivariate bicycle code
@@ -56,20 +57,27 @@ integer-programming and SAT tools with either logical basis of a code.
   qLDPC and superdense circuits as on the sector problem. dist-m4ri 0.14.7 solves 4 of them from our
   matrices and 13 when it reads Stim's detector error model, on which it applies its own exact
   reduction (it drops the detectors of the other basis when that is exact, much as our sector
-  reduction does).
+  reduction does). Its model lower bound adds none of them.
 - **MaxSAT as it is used in the literature** (Stim's own WCNF export of the whole circuit, then a
   MaxSAT solver; the recipe behind the published exact values for the BB72 and [[90,8,10]]
   circuits): none of the three solvers proves the distance of any qLDPC or superdense circuit, in
   600 s or in an hour. It solves the surface code up to d = 5 and Stim's color-code circuits up to d = 7.
-- **Where another tool is faster.** dist-m4ri 0.14.7 is faster than ours on 17 instances. On 14 of them
-  both need less than two seconds (it takes 0.01 to 0.4 s, ours 0.1 to 1.8 s, which is mostly the start
-  of Python and of the DP front end). The other three are Stim's color-code circuits of d = 9 and 11,
-  where none of our reductions applies (0.4 s against 39 s, 28 s against 280 s), and the Cornucopia
-  circuit of n = 252 (0.4 s against 2.4 s). On the 19 instances that take both tools more than a second
-  and where ours is faster, it is 2 to 1228 times faster.
+- **Where another tool is faster.** dist-m4ri 0.14.7 is faster than ours on 18 instances. On 14 of them
+  both need less than two seconds (it takes 0.01 to 0.3 s, ours 0.1 to 1.8 s, which is mostly the start
+  of Python and of the DP front end). The other four are Stim's color-code circuits of d = 9 and 11,
+  where none of our reductions applies (0.4 s against 39 s, 20 s against 280 s), the Cornucopia
+  circuit of n = 252 (0.4 s against 2.4 s) and the shift circuit of n = 120, where its model lower bound
+  helps (2.3 s against 13 s). On the 20 instances that take both tools more than a second and where ours
+  is faster, it is 3 to 509 times faster (dist-m4ri's fastest exact run in either tier, against ours with
+  one thread).
 - **dist-m4ri versions.** The benchmark first ran dist-m4ri 0.9.0 (18 September); its version of 15
   October, 0.14.7, solves 30 and 38 of the first 60 instances where 0.9.0 solved 17 and 26. Both are
   compared in a section of their own; on the 14 added instances only 0.14.7 ran.
+- **dist-m4ri's model lower bound** (`--model-lb`, part of 0.14.7; run on 25 October, section "With its
+  model lower bound"). On the circuits it adds the surface code of d = 13 and 15 in the first tier, and
+  in the second the surface code of d = 17 and 19 and the gross-code circuits with the best depth-7 and
+  with the left-right schedule. Five instances move from "ours only" to solved by both; it costs
+  dist-m4ri no instance.
 - **Gurobi** (added on 15 October, same protocol): 12 instances in the first tier and 22 over
   both, each of them also solved by another method. Of the circuits it solves the surface code up to
   d = 9, the color code up to d = 7, the superdense circuit of d = 7 and the three smallest qLDPC
@@ -83,7 +91,8 @@ integer-programming and SAT tools with either logical basis of a code.
 - **The prior benchmark's own instances** (126 CSS codes and circuits of arXiv:2603.22532, section
   below): under that paper's own limits (one core, 8 GB, eight hours per run) ours solves 95; its five
   exact methods together solved 73, and their values agree with ours. With one thread and 600 s ours
-  solves 86 and dist-m4ri 0.14.7 76; with the 32-thread hour added, 97 and 80. The superdense
+  solves 86 and dist-m4ri 0.14.7 76; with the 32-thread hour added, 97 and 80 (its model lower bound
+  adds none of these instances). The superdense
   color-code circuit of d = 11 is among the 97: its distance is 11, a value no method had certified.
 - **Correctness.** No record of any method contradicts the ground truth or another method's bounds.
 
@@ -92,14 +101,16 @@ Qualifications:
 1. Two things carry the result, and the tables separate them. The time-collapsed relaxation helps
    every solver: on the collapsed problems dist-m4ri 0.14.7 solves 29 of 42 and HiGHS 23, against
    18 and 3 of the same 42 circuits on the sector problem (first tier). Our search is then still
-   ahead on identical input (36 of 42).
+   ahead on identical input (36 of 42). dist-m4ri's model lower bound, its own form of this relaxation,
+   raises its count on the sector problems to 20.
 2. Without the reductions, on Stim's color-code circuits, dist-m4ri 0.14.7 is the faster method at every
-   distance tested (d = 11: 28 s against 280 s).
+   distance tested (d = 11: 20 s against 280 s).
 3. The surface-code family is graph-like: a shortest-path computation solves it at any size, and is
    how its ground truth was obtained here. It is in the benchmark because the prior exact-solver
    benchmark uses it, not because it is hard in principle.
 4. Competing tools change: dist-m4ri gained a large factor between September and October. The
-   comparison is with the versions named in the methods table.
+   comparison is with the versions named in the methods table. dist-m4ri's model lower bound, part of
+   the version tested, was left out at first and added to the comparison on 25 October.
 5. The 14 added instances were chosen for the regime of the Rank DP evaluators, after the 60 had shown
    it missing (section "Final configuration"). Three of their families have distances known by
    construction (color, concatenated Steane and many-hypercube codes) and test how methods scale; the
@@ -157,6 +168,7 @@ table itself when their bounds close.
 | dist-m4ri CC | connected-cluster enumeration | dist-m4ri 0.14.7 (commit bed621e, 15 Oct 2026), m4ri 20260122; first runs with 0.9.0, see the section on the two builds | yes |
 | dist-m4ri CC+RW | the same with random-window upper bounds | same binary, `mode=bracket` | yes |
 | … DEM input | the same programs reading Stim's detector error model, so that their own exact reductions (merging equal columns, dropping detectors) apply | same binary, `input=dem` (raw circuits only) | yes |
+| … model bound | the same programs started at dist-m4ri's model lower bound (`--model-lb`): the certified distance of a code-sized model of the circuit (each check's detectors summed over the rounds), computed by its own `compute_model_lower_bound()` within half of the budget; the binary then starts its cluster search at that weight. Bracketing mode runs without codeword export and stops when its bounds meet | the build's `dist_m4ri.py` and binary, `bound=model` (circuits only; added 25 October 2026) | yes |
 | HiGHS | integer linear program | HiGHS as bundled with SciPy 1.16.3 | no gain |
 | CP-SAT | integer program by lazy clause generation | OR-Tools 9.15.6755 | yes |
 | Gurobi | integer linear program, the same model as HiGHS | Gurobi 13.0.3, academic licence, run as `gurobi_cl` on an LP file written by the adapter | yes |
@@ -210,53 +222,53 @@ with 32 threads and 90 GB for tools that use threads.
 <!-- TABLE:overall:BEGIN -->
 | instance | n | columns | distance | ours, tier 1 | ours, tier 2 | best other, tier 1 | best other, tier 2 |
 |---|---:|---:|---:|---:|---:|---|---|
-| bb108_best_r6 | 108 | 3348 | 10 | 13.7 s |  |  | 3600 s (dist-m4ri CC+RW, 32 threads) |
-| gross_best_r6 | 144 | 4464 | 11 | 83.9 s |  |  |  |
+| bb108_best_r6 | 108 | 3348 | 10 | 13.7 s |  |  | 184 s (dist-m4ri CC, model bound, 32 threads) |
+| gross_best_r6 | 144 | 4464 | 11 | 83.9 s |  |  | 3117 s (dist-m4ri CC, model bound, 32 threads) |
 | bb72_r6 | 72 | 2232 | 6 | 0.3 s |  | 0.1 s (dist-m4ri CC) | 534 s (Gurobi, 32 threads) |
-| bb90_r10 | 90 | 4590 | 8 | 0.5 s |  | 59.8 s (dist-m4ri CC) |  |
-| bb108_r10 | 108 | 5508 | 8 | 0.6 s |  | 57.4 s (dist-m4ri CC) |  |
-| bb144_r12 | 144 | 8784 | 10 | 1.6 s |  |  | 532 s (dist-m4ri CC+RW, 32 threads) |
+| bb90_r10 | 90 | 4590 | 8 | 0.5 s |  | 33.5 s (dist-m4ri CC+RW, model bound) |  |
+| bb108_r10 | 108 | 5508 | 8 | 0.6 s |  | 37.2 s (dist-m4ri CC+RW, model bound) |  |
+| bb144_r12 | 144 | 8784 | 10 | 1.6 s |  |  | 348 s (dist-m4ri CC+RW, model bound, 32 threads) |
 | bb288_r18 | 288 | 26208 | 16 |  | 220 s |  |  |
 | w8bb_72 | 72 | 3096 | 8 | 5.0 s |  | 205 s (dist-m4ri CC) |  |
 | w8bb_144_16 | 144 | 6192 | 10 | 185 s |  |  |  |
 | cornucopia_252 | 252 | 8568 | 5 | 2.4 s |  | 0.4 s (dist-m4ri CC) |  |
-| cornucopia_576 | 576 | 19584 | 8 | 435 s |  |  | 1263 s (dist-m4ri CC+RW, 32 threads) |
+| cornucopia_576 | 576 | 19584 | 8 | 435 s |  |  | 214 s (dist-m4ri CC+RW, model bound, 32 threads) |
 | cornucopia_900 | 900 | 30600 | 9 |  | 509 s |  |  |
 | cornucopia_1044 | 1044 | 35496 | 10 |  | 927 s |  |  |
-| lrgross | 144 | 4464 | 11 | 22.3 s |  |  |  |
-| mitten_150 | 150 | 9750 | 8 | 153 s |  |  | 1485 s (dist-m4ri CC+RW, 32 threads) |
+| lrgross | 144 | 4464 | 11 | 22.3 s |  |  | 706 s (dist-m4ri CC+RW, model bound, 32 threads) |
+| mitten_150 | 150 | 9750 | 8 | 153 s |  |  | 21.0 s (dist-m4ri CC+RW, model bound, 32 threads) |
 | mitten_300 | 300 | 11820 | >=12 |  |  |  |  |
 | mitten_200 | 200 | 15560 | 9 |  | 185 s |  |  |
 | routing_54 | 54 | 1998 | 6 | 1.4 s |  | 0.1 s (dist-m4ri CC) | 206 s (Gurobi, 32 threads) |
-| routing_90 | 90 | 3330 | 9 | 6.1 s |  | 477 s (dist-m4ri CC) |  |
-| routing_110 | 110 | 4070 | 10 | 41.0 s |  |  | 408 s (dist-m4ri CC+RW, 32 threads) |
+| routing_90 | 90 | 3330 | 9 | 6.1 s |  | 374 s (dist-m4ri CC, model bound) | 17.0 s (dist-m4ri CC+RW, model bound, 32 threads) |
+| routing_110 | 110 | 4070 | 10 | 41.0 s |  |  | 252 s (dist-m4ri CC, model bound, 32 threads) |
 | routing_140_13 | 140 | 5180 | 12 |  | 88.8 s |  |  |
 | routing_200_24 | 200 | 11700 | 10 |  | 509 s |  |  |
-| sdbb_64 | 64 | 2752 | 8 | 6.4 s |  | 121 s (dist-m4ri CC) |  |
+| sdbb_64 | 64 | 2752 | 8 | 6.4 s |  | 99.6 s (dist-m4ri CC, model bound) |  |
 | sdbb_120 | 120 | 5160 | 12 |  | 1174 s |  |  |
-| shift_120d | 120 | 3720 | 8 | 12.9 s |  | 24.2 s (dist-m4ri CC) |  |
+| shift_120d | 120 | 3720 | 8 | 12.9 s |  | 2.3 s (dist-m4ri CC, model bound) |  |
 | star_42 | 42 | 1806 | 6 | 1.2 s |  | 0.2 s (dist-m4ri CC) | 389 s (Gurobi, 32 threads) |
 | color_d3 | 7 | 72 | 2† | 0.1 s |  | 0.0 s (dist-m4ri CC) |  |
 | color_d5 | 19 | 1104 | 3† | 0.9 s |  | 0.0 s (dist-m4ri CC) |  |
 | color_d7 | 37 | 3651 | 4† | 1.8 s |  | 0.0 s (dist-m4ri CC) | 379 s (CP-SAT, 32 threads) |
 | color_d9 | 61 | 7683 | 5† | 38.8 s |  | 0.4 s (dist-m4ri CC) |  |
-| color_d11 | 91 | 16422 | 6† | 280 s |  | 27.9 s (dist-m4ri CC, DEM input) |  |
+| color_d11 | 91 | 16422 | 6† | 280 s |  | 19.7 s (dist-m4ri CC+RW, DEM input, model bound) |  |
 | superdense_d7 | 37 | 1248 | 7 | 0.7 s |  | 0.3 s (dist-m4ri CC) | 37.7 s (Gurobi, 32 threads) |
-| superdense_d9 | 61 | 2788 | 9 | 17.0 s |  | 248 s (dist-m4ri CC) |  |
+| superdense_d9 | 61 | 2788 | 9 | 17.0 s |  | 245 s (dist-m4ri CC, model bound) |  |
 | superdense_d11 | 91 | 5250 | 11 |  | 1793 s |  |  |
 | surface_d3 | 9 | 55 | 3 | 0.1 s |  | 0.0 s (dist-m4ri CC) |  |
 | surface_d5 | 25 | 301 | 5 | 0.1 s |  | 0.0 s (dist-m4ri CC) |  |
 | surface_d7 | 49 | 883 | 7 | 0.2 s |  | 0.0 s (dist-m4ri CC) | 82.5 s (CP-SAT, 32 threads) |
-| surface_d9 | 81 | 1945 | 9 | 0.2 s |  | 1.8 s (dist-m4ri CC) | 815 s (Gurobi, 32 threads) |
-| surface_d11 | 121 | 3631 | 11 | 0.2 s |  | 244 s (dist-m4ri CC) |  |
-| surface_d13 | 169 | 6085 | 13 | 0.3 s |  |  | 1287 s (dist-m4ri CC+RW, 32 threads) |
-| surface_d15 | 225 | 9451 | 15 | 0.8 s |  |  |  |
-| surface_d17 | 289 | 13873 | 17 | 1.9 s |  |  |  |
-| surface_d19 | 361 | 19495 | 19 | 1.7 s |  |  |  |
+| surface_d9 | 81 | 1945 | 9 | 0.2 s |  | 0.3 s (dist-m4ri CC, model bound) | 815 s (Gurobi, 32 threads) |
+| surface_d11 | 121 | 3631 | 11 | 0.2 s |  | 0.5 s (dist-m4ri CC, model bound) |  |
+| surface_d13 | 169 | 6085 | 13 | 0.3 s |  | 2.0 s (dist-m4ri CC, model bound) | 1287 s (dist-m4ri CC+RW, 32 threads) |
+| surface_d15 | 225 | 9451 | 15 | 0.8 s |  | 60.9 s (dist-m4ri CC, model bound) |  |
+| surface_d17 | 289 | 13873 | 17 | 1.9 s |  |  | 9.7 s (dist-m4ri CC, model bound, 32 threads) |
+| surface_d19 | 361 | 19495 | 19 | 1.7 s |  |  | 188 s (dist-m4ri CC, model bound, 32 threads) |
 | surface_d21 | 441 | 26461 | 21 | 2.1 s |  |  |  |
 | surface_d23 | 529 | 34915 | 23 | 2.9 s |  |  |  |
 | surface_d25 | 625 | 45001 | 25 | 8.6 s |  |  |  |
-| walkingcat_54 | 54 | 2322 | 8 | 8.1 s |  | 129 s (dist-m4ri CC) |  |
+| walkingcat_54 | 54 | 2322 | 8 | 8.1 s |  | 104 s (dist-m4ri CC, model bound) |  |
 | code_bb72 | 72 | 72 | 6 | 0.2 s |  | 0.0 s (dist-m4ri CC) |  |
 | code_bb90 | 90 | 90 | 10 | 0.2 s |  | 0.0 s (dist-m4ri CC) |  |
 | code_bb108 | 108 | 108 | 10 | 0.2 s |  | 0.0 s (dist-m4ri CC) |  |
@@ -285,7 +297,7 @@ with 32 threads and 90 GB for tools that use threads.
 | code_kasai_492 | 492 | 492 | 20 |  | 1054 s |  |  |
 | code_sdbb_200 | 200 | 200 | 12 | 0.3 s |  | 1.2 s (dist-m4ri CC) | 1204 s (CP-SAT, 32 threads) |
 
-Of 74 instances: ours solves 59 in the first tier and 71 over both tiers; some other exact method solves 36 in the first tier and 48 over both. 24 are solved by ours only; 1 is solved by another method and not by ours.
+Of 74 instances: ours solves 59 in the first tier and 71 over both tiers; some other exact method solves 38 in the first tier and 53 over both. 19 are solved by ours only; 1 is solved by another method and not by ours.
 <!-- TABLE:overall:END -->
 
 ## Results, first tier (1 thread, 600 s, 16 GB)
@@ -297,77 +309,77 @@ All first-tier records are mutually consistent and consistent with the ground tr
 ### Circuits, sector problem
 
 <!-- TABLE:A-circuit-sector:BEGIN -->
-| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 | 13.7 s | >=9 | 9..10 | 1..12 | <=11 | 3..12 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
-| gross_best_r6 | 144 | 4464 | 11 | 83.9 s | >=9 | 9..11 | 1..31 | t/o | 3..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
-| bb72_r6 | 72 | 2232 | 6 | 0.3 s | 0.1 s | 1.5 s | 1..6 | <=6 ok | 3..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| bb90_r10 | 90 | 4590 | 8 | 0.5 s | 59.8 s | 473 s | 1..27 | <=13 | 3..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| bb108_r10 | 108 | 5508 | 8 | 0.6 s | 57.4 s | 567 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=8 ok | <=8 ok | mem | <=8 ok |
-| bb144_r12 | 144 | 8784 | 10 | 1.6 s | >=8 | 8..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=11 | mem | <=10 ok |
-| bb288_r18 | 288 | 26208 | 16 | >=14 | >=8 | 8..18 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=26 | <=35 | mem | <=18 |
-| w8bb_72 | 72 | 3096 | 8 | 5.0 s | 205 s | 296 s | 1..8 | <=8 ok | 3..8 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | <=8 ok | <=8 ok |
-| w8bb_144_16 | 144 | 6192 | 10 | 185 s | >=8 | 8..10 | t/o | t/o | 2..10 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
-| cornucopia_252 | 252 | 8568 | 5 | 2.4 s | 0.4 s | 12.5 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | mem | <=5 ok |
-| cornucopia_576 | 576 | 19584 | 8 | 435 s | >=7 | >=7 | t/o | t/o | 1..33 | >=2 | >=1 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | t/o |
-| cornucopia_900 | 900 | 30600 | 9 | >=9 | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | t/o | mem | t/o |
-| cornucopia_1044 | 1044 | 35496 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | t/o | t/o | mem | t/o |
-| lrgross | 144 | 4464 | 11 | 22.3 s | >=8 | 8..11 | t/o | t/o | 3..11 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
-| mitten_150 | 150 | 9750 | 8 | 153 s | >=7 | 7..8 | 1..10 | t/o | 2..10 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=9 | <=8 ok | mem | <=8 ok |
-| mitten_300 | 300 | 11820 | >=12 | >=9 | >=6 | 6..14 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
-| mitten_200 | 200 | 15560 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=16 | mem | <=9 ok |
-| routing_54 | 54 | 1998 | 6 | 1.4 s | 0.1 s | 1.9 s | 2..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| routing_90 | 90 | 3330 | 9 | 6.1 s | 477 s | 507 s | 2..26 | t/o | 4..9 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
-| routing_110 | 110 | 4070 | 10 | 41.0 s | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=10 ok | <=10 ok | mem | <=10 ok |
-| routing_140_13 | 140 | 5180 | 12 | 11..13 | >=9 | 9..12 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | <=12 ok | mem | <=12 ok |
-| routing_200_24 | 200 | 11700 | 10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | <=11 | t/o | <=10 ok |
-| sdbb_64 | 64 | 2752 | 8 | 6.4 s | 121 s | 202 s | 1..8 | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| sdbb_120 | 120 | 5160 | 12 | 11..12 | >=8 | 8..12 | t/o | t/o | 2..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=13 | <=13 | mem | <=12 ok |
-| shift_120d | 120 | 3720 | 8 | 12.9 s | 24.2 s | 423 s | t/o | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| star_42 | 42 | 1806 | 6 | 1.2 s | 0.2 s | 4.8 s | 3..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| superdense_d7 | 37 | 1248 | 7 | 0.7 s | 0.3 s | 6.9 s | 4..7 | 3..7 | 6..7 | >=5 | >=6 | >=1 | >=1 | - | - | - | <=7 ok | <=7 ok | err | <=7 ok |
-| superdense_d9 | 61 | 2788 | 9 | 17.0 s | 248 s | 326 s | 3..9 | 2..9 | 5..9 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | err | <=9 ok |
-| superdense_d11 | 91 | 5250 | 11 | 8..11 | >=9 | 9..11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
-| walkingcat_54 | 54 | 2322 | 8 | 8.1 s | 129 s | 188 s | 2..11 | <=9 | 4..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| **solved exactly** (of 30) | | | | **21** | **13** | **13** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 3348 | 10 | 13.7 s | >=9 | 9..10 | >=9 | 9..10 | 1..12 | <=11 | 3..12 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
+| gross_best_r6 | 144 | 4464 | 11 | 83.9 s | >=9 | 9..11 | >=9 | >=9 | 1..31 | t/o | 3..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
+| bb72_r6 | 72 | 2232 | 6 | 0.3 s | 0.1 s | 1.5 s | 2.1 s | 0.9 s | 1..6 | <=6 ok | 3..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| bb90_r10 | 90 | 4590 | 8 | 0.5 s | 59.8 s | 473 s | 50.9 s | 33.5 s | 1..27 | <=13 | 3..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| bb108_r10 | 108 | 5508 | 8 | 0.6 s | 57.4 s | 567 s | 56.7 s | 37.2 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=8 ok | <=8 ok | mem | <=8 ok |
+| bb144_r12 | 144 | 8784 | 10 | 1.6 s | >=8 | 8..10 | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=11 | mem | <=10 ok |
+| bb288_r18 | 288 | 26208 | 16 | >=14 | >=8 | 8..18 | >=10 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=26 | <=35 | mem | <=18 |
+| w8bb_72 | 72 | 3096 | 8 | 5.0 s | 205 s | 296 s | 244 s | 247 s | 1..8 | <=8 ok | 3..8 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | <=8 ok | <=8 ok |
+| w8bb_144_16 | 144 | 6192 | 10 | 185 s | >=8 | 8..10 | >=8 | 8..10 | t/o | t/o | 2..10 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=10 ok | <=10 ok | mem | <=10 ok |
+| cornucopia_252 | 252 | 8568 | 5 | 2.4 s | 0.4 s | 12.5 s | 2.4 s | 3.5 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | mem | <=5 ok |
+| cornucopia_576 | 576 | 19584 | 8 | 435 s | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 1..33 | >=2 | >=1 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | t/o |
+| cornucopia_900 | 900 | 30600 | 9 | >=9 | >=6 | >=6 | >=7 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | t/o | mem | t/o |
+| cornucopia_1044 | 1044 | 35496 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | t/o | t/o | mem | t/o |
+| lrgross | 144 | 4464 | 11 | 22.3 s | >=8 | 8..11 | >=9 | >=9 | t/o | t/o | 3..11 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
+| mitten_150 | 150 | 9750 | 8 | 153 s | >=7 | 7..8 | >=7 | >=7 | 1..10 | t/o | 2..10 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=9 | <=8 ok | mem | <=8 ok |
+| mitten_300 | 300 | 11820 | >=12 | >=9 | >=6 | 6..14 | >=7 | >=7 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
+| mitten_200 | 200 | 15560 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=16 | mem | <=9 ok |
+| routing_54 | 54 | 1998 | 6 | 1.4 s | 0.1 s | 1.9 s | 0.6 s | 1.1 s | 2..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| routing_90 | 90 | 3330 | 9 | 6.1 s | 477 s | 507 s | 374 s | 8..9 | 2..26 | t/o | 4..9 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
+| routing_110 | 110 | 4070 | 10 | 41.0 s | >=9 | 9..10 | >=9 | 8..11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=10 ok | <=10 ok | mem | <=10 ok |
+| routing_140_13 | 140 | 5180 | 12 | 11..13 | >=9 | 9..12 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | <=12 ok | mem | <=12 ok |
+| routing_200_24 | 200 | 11700 | 10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=18 | <=11 | t/o | <=10 ok |
+| sdbb_64 | 64 | 2752 | 8 | 6.4 s | 121 s | 202 s | 99.6 s | 160 s | 1..8 | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| sdbb_120 | 120 | 5160 | 12 | 11..12 | >=8 | 8..12 | >=8 | >=8 | t/o | t/o | 2..12 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=13 | <=13 | mem | <=12 ok |
+| shift_120d | 120 | 3720 | 8 | 12.9 s | 24.2 s | 423 s | 2.3 s | 5.0 s | t/o | <=12 | 3..8 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| star_42 | 42 | 1806 | 6 | 1.2 s | 0.2 s | 4.8 s | 0.5 s | 1.3 s | 3..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| superdense_d7 | 37 | 1248 | 7 | 0.7 s | 0.3 s | 6.9 s | 0.6 s | 1.3 s | 4..7 | 3..7 | 6..7 | >=5 | >=6 | >=1 | >=1 | - | - | - | <=7 ok | <=7 ok | err | <=7 ok |
+| superdense_d9 | 61 | 2788 | 9 | 17.0 s | 248 s | 326 s | 245 s | 498 s | 3..9 | 2..9 | 5..9 | >=5 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | err | <=9 ok |
+| superdense_d11 | 91 | 5250 | 11 | 8..11 | >=9 | 9..11 | >=9 | 8..11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
+| walkingcat_54 | 54 | 2322 | 8 | 8.1 s | 129 s | 188 s | 104 s | 192 s | 2..11 | <=9 | 4..9 | >=4 | >=4 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| **solved exactly** (of 30) | | | | **21** | **13** | **13** | **13** | **12** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-circuit-sector:END -->
 
 ### Circuits, raw detector error model
 
 <!-- TABLE:A-circuit-full:BEGIN -->
-| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 24246 | 10 | 13.9 s | >=6 | 6..10 | >=9 | 9..10 | t/o | t/o | 2..10 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=12 | <=16 | mem | <=10 ok |
-| gross_best_r6 | 144 | 32328 | 11 | 82.5 s | >=6 | 6..11 | >=9 | 9..11 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=111 | mem | <=11 ok |
-| bb72_r6 | 72 | 16164 | 6 | 0.3 s | 94.3 s | 162 s | 0.8 s | 1.7 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| bb90_r10 | 90 | 34965 | 8 | 0.7 s | >=6 | 6..8 | 42.4 s | 353 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=11 | mem | <=8 ok |
-| bb108_r10 | 108 | 41958 | 8 | 0.8 s | >=6 | 6..8 | 50.7 s | 419 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=53 | mem | <=8 ok |
-| bb144_r12 | 144 | 67752 | 10 | 2.0 s | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 | <=31 | mem | <=10 ok |
-| bb288_r18 | 288 | 206352 | 16 | >=14 | skip | skip | >=8 | >=8 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| w8bb_72 | 72 | 23904 | 8 | 5.1 s | >=5 | 5..8 | 140 s | 218 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=10 | <=10 | <=8 ok | <=8 ok |
-| w8bb_144_16 | 144 | 47808 | 10 | 187 s | >=5 | >=5 | >=8 | 8..10 | t/o | t/o | 1..13 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=14 | t/o | mem | t/o |
-| cornucopia_252 | 252 | 65450 | 5 | 3.4 s | 64.0 s | >=5 | 6.5 s | 9.5 s | t/o | t/o | 1..8 | >=1 | mem | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=6 | <=7 | mem | t/o |
-| cornucopia_576 | 576 | 149760 | 8 | 443 s | >=5 | >=5 | >=7 | >=7 | skip | skip | skip | skip | skip | skip | skip | mem | >=1 | >=1 | skip | skip | skip | mem | t/o | mem | t/o |
-| cornucopia_900 | 900 | 234000 | 9 | >=9 | >=5 | skip | >=6 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| cornucopia_1044 | 1044 | 271440 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| lrgross | 144 | 31488 | 11 | 22.6 s | >=6 | 6..11 | >=8 | >=8 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 ok | <=12 | mem | <=11 ok |
-| mitten_150 | 150 | 76395 | 8 | 154 s | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 2..10 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=10 | <=67 | mem | t/o |
-| mitten_300 | 300 | 87780 | >=12 | >=9 | >=5 | >=5 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
-| mitten_200 | 200 | 123792 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| routing_54 | 54 | 14958 | 6 | 1.5 s | 189 s | 343 s | 0.5 s | 2.0 s | t/o | t/o | 3..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| routing_90 | 90 | 25020 | 9 | 6.5 s | >=6 | 6..9 | 398 s | 479 s | t/o | t/o | 2..9 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=9 ok | <=38 | mem | <=9 ok |
-| routing_110 | 110 | 30580 | 10 | 40.4 s | >=6 | 6..10 | >=9 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=92 | mem | <=10 ok |
-| routing_140_13 | 140 | 38920 | 12 | 11..13 | skip | skip | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | t/o | mem | <=13 |
-| routing_200_24 | 200 | 95200 | 10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | t/o | t/o |
-| sdbb_64 | 64 | 21248 | 8 | 6.1 s | >=6 | 6..8 | 68.6 s | 131 s | t/o | t/o | 2..8 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
-| sdbb_120 | 120 | 39840 | 12 | 11..12 | >=5 | 5..15 | >=8 | 8..12 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=19 | <=116 | mem | <=12 ok |
-| shift_120d | 120 | 27000 | 8 | 12.8 s | >=6 | 6..9 | 15.3 s | 244 s | t/o | t/o | 2..14 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=18 | mem | <=8 ok |
-| star_42 | 42 | 13902 | 6 | 1.3 s | 383 s | 600 s | 0.5 s | 3.4 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
-| superdense_d7 | 37 | 9143 | 7 | 0.7 s | >=6 | 6..7 | 0.4 s | 5.5 s | 2..7 | 2..8 | 4..7 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | - | - | - | <=7 ok | <=7 ok | mem | <=7 ok |
-| superdense_d9 | 61 | 21277 | 9 | 17.0 s | >=6 | 6..9 | 143 s | 224 s | t/o | 2..51 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
-| superdense_d11 | 91 | 41044 | 11 | 8..11 | skip | skip | >=9 | 9..11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=14 | mem | <=11 ok |
-| walkingcat_54 | 54 | 17820 | 8 | 9.4 s | >=6 | 6..8 | 67.9 s | 117 s | t/o | <=68 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=14 | mem | <=8 ok |
-| **solved exactly** (of 30) | | | | **21** | **4** | **3** | **13** | **13** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | dist-m4ri CC, DEM input, model bound | dist-m4ri CC+RW, DEM input, model bound | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 24246 | 10 | 13.9 s | >=6 | 6..10 | >=9 | 9..10 | >=9 | 9..10 | t/o | t/o | 2..10 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=12 | <=16 | mem | <=10 ok |
+| gross_best_r6 | 144 | 32328 | 11 | 82.5 s | >=6 | 6..11 | >=9 | 9..11 | >=9 | >=9 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=111 | mem | <=11 ok |
+| bb72_r6 | 72 | 16164 | 6 | 0.3 s | 94.3 s | 162 s | 0.8 s | 1.7 s | 2.6 s | 1.2 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| bb90_r10 | 90 | 34965 | 8 | 0.7 s | >=6 | 6..8 | 42.4 s | 353 s | 44.4 s | 29.5 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=11 | mem | <=8 ok |
+| bb108_r10 | 108 | 41958 | 8 | 0.8 s | >=6 | 6..8 | 50.7 s | 419 s | 52.2 s | 26.2 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=53 | mem | <=8 ok |
+| bb144_r12 | 144 | 67752 | 10 | 2.0 s | skip | skip | >=9 | >=9 | >=9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=16 | <=31 | mem | <=10 ok |
+| bb288_r18 | 288 | 206352 | 16 | >=14 | skip | skip | >=8 | >=8 | >=10 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| w8bb_72 | 72 | 23904 | 8 | 5.1 s | >=5 | 5..8 | 140 s | 218 s | 132 s | 220 s | t/o | t/o | 2..8 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=10 | <=10 | <=8 ok | <=8 ok |
+| w8bb_144_16 | 144 | 47808 | 10 | 187 s | >=5 | >=5 | >=8 | 8..10 | >=8 | 8..10 | t/o | t/o | 1..13 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=14 | t/o | mem | t/o |
+| cornucopia_252 | 252 | 65450 | 5 | 3.4 s | 64.0 s | >=5 | 6.5 s | 9.5 s | 8.0 s | 10.4 s | t/o | t/o | 1..8 | >=1 | mem | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=6 | <=7 | mem | t/o |
+| cornucopia_576 | 576 | 149760 | 8 | 443 s | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | skip | skip | skip | skip | skip | skip | skip | mem | >=1 | >=1 | skip | skip | skip | mem | t/o | mem | t/o |
+| cornucopia_900 | 900 | 234000 | 9 | >=9 | >=5 | skip | >=6 | >=6 | >=7 | >=6 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| cornucopia_1044 | 1044 | 271440 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| lrgross | 144 | 31488 | 11 | 22.6 s | >=6 | 6..11 | >=8 | >=8 | >=9 | >=9 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 ok | <=12 | mem | <=11 ok |
+| mitten_150 | 150 | 76395 | 8 | 154 s | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 2..10 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=10 | <=67 | mem | t/o |
+| mitten_300 | 300 | 87780 | >=12 | >=9 | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
+| mitten_200 | 200 | 123792 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| routing_54 | 54 | 14958 | 6 | 1.5 s | 189 s | 343 s | 0.5 s | 2.0 s | 1.2 s | 2.1 s | t/o | t/o | 3..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| routing_90 | 90 | 25020 | 9 | 6.5 s | >=6 | 6..9 | 398 s | 479 s | 345 s | 8..9 | t/o | t/o | 2..9 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=9 ok | <=38 | mem | <=9 ok |
+| routing_110 | 110 | 30580 | 10 | 40.4 s | >=6 | 6..10 | >=9 | 9..10 | >=9 | 8..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 | <=92 | mem | <=10 ok |
+| routing_140_13 | 140 | 38920 | 12 | 11..13 | skip | skip | >=9 | >=9 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 ok | t/o | mem | <=13 |
+| routing_200_24 | 200 | 95200 | 10 | 9..10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | t/o | t/o |
+| sdbb_64 | 64 | 21248 | 8 | 6.1 s | >=6 | 6..8 | 68.6 s | 131 s | 57.3 s | 103 s | t/o | t/o | 2..8 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=8 ok | mem | <=8 ok |
+| sdbb_120 | 120 | 39840 | 12 | 11..12 | >=5 | 5..15 | >=8 | 8..12 | >=8 | >=8 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=19 | <=116 | mem | <=12 ok |
+| shift_120d | 120 | 27000 | 8 | 12.8 s | >=6 | 6..9 | 15.3 s | 244 s | 2.8 s | 6.9 s | t/o | t/o | 2..14 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 | <=18 | mem | <=8 ok |
+| star_42 | 42 | 13902 | 6 | 1.3 s | 383 s | 600 s | 0.5 s | 3.4 s | 0.8 s | 1.8 s | t/o | t/o | 2..6 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
+| superdense_d7 | 37 | 9143 | 7 | 0.7 s | >=6 | 6..7 | 0.4 s | 5.5 s | 0.6 s | 1.3 s | 2..7 | 2..8 | 4..7 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | - | - | - | <=7 ok | <=7 ok | mem | <=7 ok |
+| superdense_d9 | 61 | 21277 | 9 | 17.0 s | >=6 | 6..9 | 143 s | 224 s | 141 s | 324 s | t/o | 2..51 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=3 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
+| superdense_d11 | 91 | 41044 | 11 | 8..11 | skip | skip | >=9 | 9..11 | >=9 | 8..11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=14 | mem | <=11 ok |
+| walkingcat_54 | 54 | 17820 | 8 | 9.4 s | >=6 | 6..8 | 67.9 s | 117 s | 58.0 s | 98.8 s | t/o | <=68 | 3..9 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=8 ok | <=14 | mem | <=8 ok |
+| **solved exactly** (of 30) | | | | **21** | **4** | **3** | **13** | **13** | **13** | **12** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-circuit-full:END -->
 
 ### Codes
@@ -408,46 +420,46 @@ All first-tier records are mutually consistent and consistent with the ground tr
 ### Stim surface-code circuits, sector problem
 
 <!-- TABLE:A-stim-sector:BEGIN -->
-| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| surface_d3 | 9 | 55 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.2 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| surface_d5 | 25 | 301 | 5 | 0.1 s | 0.0 s | 0.0 s | 0.7 s | 21.5 s | 0.5 s | 0.3 s | 0.4 s | 1.4 s | 0.2 s | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| surface_d7 | 49 | 883 | 7 | 0.2 s | 0.0 s | 0.3 s | 168 s | 4..7 | 29.0 s | 31.1 s | 62.4 s | >=1 | 131 s | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
-| surface_d9 | 81 | 1945 | 9 | 0.2 s | 1.8 s | 17.2 s | 5..9 | 3..9 | 6..9 | >=6 | >=7 | >=1 | >=1 | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
-| surface_d11 | 121 | 3631 | 11 | 0.2 s | 244 s | 509 s | 3..11 | skip | 5..11 | >=6 | >=7 | skip | >=1 | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
-| surface_d13 | 169 | 6085 | 13 | 0.3 s | >=11 | 11..13 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
-| surface_d15 | 225 | 9451 | 15 | 0.8 s | >=10 | 10..15 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=15 ok | mem | <=15 ok |
-| surface_d17 | 289 | 13873 | 17 | 1.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=17 ok | <=17 ok | mem | <=17 ok |
-| surface_d19 | 361 | 19495 | 19 | 1.7 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=19 ok | <=19 ok | err | <=19 ok |
-| surface_d21 | 441 | 26461 | 21 | 2.1 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=21 ok | <=23 | mem | <=21 ok |
-| surface_d23 | 529 | 34915 | 23 | 2.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=23 ok | <=27 | mem | <=23 ok |
-| surface_d25 | 625 | 45001 | 25 | 8.6 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=25 ok | t/o | err | <=25 ok |
-| **solved exactly** (of 12) | | | | **12** | **5** | **5** | **3** | **2** | **3** | **3** | **3** | **2** | **3** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| surface_d3 | 9 | 55 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.2 s | 0.7 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.2 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| surface_d5 | 25 | 301 | 5 | 0.1 s | 0.0 s | 0.0 s | 0.2 s | 0.8 s | 0.7 s | 21.5 s | 0.5 s | 0.3 s | 0.4 s | 1.4 s | 0.2 s | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| surface_d7 | 49 | 883 | 7 | 0.2 s | 0.0 s | 0.3 s | 0.3 s | 0.5 s | 168 s | 4..7 | 29.0 s | 31.1 s | 62.4 s | >=1 | 131 s | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
+| surface_d9 | 81 | 1945 | 9 | 0.2 s | 1.8 s | 17.2 s | 0.3 s | 0.7 s | 5..9 | 3..9 | 6..9 | >=6 | >=7 | >=1 | >=1 | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
+| surface_d11 | 121 | 3631 | 11 | 0.2 s | 244 s | 509 s | 0.5 s | 0.8 s | 3..11 | skip | 5..11 | >=6 | >=7 | skip | >=1 | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
+| surface_d13 | 169 | 6085 | 13 | 0.3 s | >=11 | 11..13 | 2.0 s | 3.1 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
+| surface_d15 | 225 | 9451 | 15 | 0.8 s | >=10 | 10..15 | 60.9 s | 117 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=15 ok | mem | <=15 ok |
+| surface_d17 | 289 | 13873 | 17 | 1.9 s | skip | skip | >=17 | >=16 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=17 ok | <=17 ok | mem | <=17 ok |
+| surface_d19 | 361 | 19495 | 19 | 1.7 s | skip | skip | >=16 | >=16 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=19 ok | <=19 ok | err | <=19 ok |
+| surface_d21 | 441 | 26461 | 21 | 2.1 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=21 ok | <=23 | mem | <=21 ok |
+| surface_d23 | 529 | 34915 | 23 | 2.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=23 ok | <=27 | mem | <=23 ok |
+| surface_d25 | 625 | 45001 | 25 | 8.6 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=25 ok | t/o | err | <=25 ok |
+| **solved exactly** (of 12) | | | | **12** | **5** | **5** | **7** | **7** | **3** | **2** | **3** | **3** | **3** | **2** | **3** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-stim-sector:END -->
 
 ### Stim surface- and color-code circuits, raw detector error model
 
 <!-- TABLE:A-stim-full:BEGIN -->
-| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| color_d3 | 7 | 72 | 2† | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | - | - | - | <=2 ok | <=2 ok | <=2 ok | <=2 ok |
-| color_d5 | 19 | 1104 | 3† | 0.9 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 1.9 s | 35.1 s | 0.3 s | 1.0 s | 1.0 s | 5.8 s | 2.3 s | 0.9 s | 5.0 s | 2.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| color_d7 | 37 | 3651 | 4† | 1.8 s | 0.0 s | 0.2 s | 0.1 s | 0.3 s | 47.8 s | 2..4 | 6.9 s | 37.4 s | 45.0 s | 63.6 s | >=1 | 49.5 s | 198 s | >=1 | skip | skip | skip | <=4 ok | <=4 ok | <=4 ok | <=4 ok |
-| color_d9 | 61 | 7683 | 5† | 38.8 s | 0.4 s | 11.2 s | 0.5 s | 4.6 s | 2..5 | 2..5 | 4..5 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | skip | skip | skip | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| color_d11 | 91 | 16422 | 6† | 280 s | 38.3 s | 600 s | 27.9 s | 522 s | 1..6 | skip | 3..6 | >=4 | >=3 | >=1 | skip | >=3 | >=1 | skip | skip | skip | skip | <=6 ok | <=6 ok | err | <=6 ok |
-| surface_d3 | 9 | 219 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.4 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
-| surface_d5 | 25 | 1677 | 5 | 0.1 s | 0.0 s | 0.4 s | 0.1 s | 0.1 s | 16.9 s | 3..5 | 7.5 s | 30.8 s | 75.0 s | >=1 | >=1 | 48.0 s | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
-| surface_d7 | 49 | 5471 | 7 | 0.2 s | 28.2 s | 7..7 | 0.2 s | 0.5 s | 3..7 | 2..7 | 4..7 | >=5 | >=5 | >=1 | >=1 | >=5 | >=1 | >=1 | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
-| surface_d9 | 81 | 12705 | 9 | 0.2 s | >=7 | 7..9 | 1.8 s | 16.3 s | 3..9 | skip | 4..9 | >=4 | >=4 | skip | skip | >=4 | skip | skip | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
-| surface_d11 | 121 | 24483 | 11 | 0.4 s | >=7 | skip | 221 s | 480 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
-| surface_d13 | 169 | 41909 | 13 | 0.5 s | skip | skip | >=11 | >=11 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
-| surface_d15 | 225 | 66087 | 15 | 1.1 s | skip | skip | >=10 | >=10 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=20 | mem | <=15 ok |
-| surface_d17 | 289 | 98121 | 17 | 2.9 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | <=17 ok |
-| surface_d19 | 361 | 139115 | 19 | 4.3 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | <=24 |
-| surface_d21 | 441 | 190173 | 21 | 5.5 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| surface_d23 | 529 | 252399 | 23 | 10.0 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
-| surface_d25 | 625 | 326897 | 25 | 20.5 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | t/o |
-| **solved exactly** (of 17) | | | | **17** | **8** | **7** | **10** | **10** | **5** | **3** | **5** | **5** | **5** | **4** | **3** | **5** | **4** | **3** | **0** | **0** | **0** |  |  |  |  |
+| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound | dist-m4ri CC, DEM input, model bound | dist-m4ri CC+RW, DEM input, model bound | HiGHS | CP-SAT | Gurobi | SAT | RC2 | CASHWMaxSAT | enMaxCDCL | RC2 (Stim WCNF) | CASHWMaxSAT (Stim WCNF) | enMaxCDCL (Stim WCNF) | Qubitserf CC | Qubitserf BZ | Qubitserf MITM | BP+OSD | ISD | Stim search | dist-m4ri RW |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| color_d3 | 7 | 72 | 2† | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.4 s | 0.5 s | 0.3 s | 0.4 s | 0.3 s | 0.3 s | 0.3 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | 0.1 s | - | - | - | <=2 ok | <=2 ok | <=2 ok | <=2 ok |
+| color_d5 | 19 | 1104 | 3† | 0.9 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s | 0.3 s | 0.5 s | 0.3 s | 0.5 s | 1.9 s | 35.1 s | 0.3 s | 1.0 s | 1.0 s | 5.8 s | 2.3 s | 0.9 s | 5.0 s | 2.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| color_d7 | 37 | 3651 | 4† | 1.8 s | 0.0 s | 0.2 s | 0.1 s | 0.3 s | 0.5 s | 0.5 s | 0.3 s | 1.1 s | 47.8 s | 2..4 | 6.9 s | 37.4 s | 45.0 s | 63.6 s | >=1 | 49.5 s | 198 s | >=1 | skip | skip | skip | <=4 ok | <=4 ok | <=4 ok | <=4 ok |
+| color_d9 | 61 | 7683 | 5† | 38.8 s | 0.4 s | 11.2 s | 0.5 s | 4.6 s | 1.3 s | 0.8 s | 0.6 s | 1.4 s | 2..5 | 2..5 | 4..5 | >=4 | >=4 | >=1 | >=1 | >=4 | >=1 | >=1 | skip | skip | skip | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| color_d11 | 91 | 16422 | 6† | 280 s | 38.3 s | 600 s | 27.9 s | 522 s | 45.9 s | 34.9 s | 22.6 s | 19.7 s | 1..6 | skip | 3..6 | >=4 | >=3 | >=1 | skip | >=3 | >=1 | skip | skip | skip | skip | <=6 ok | <=6 ok | err | <=6 ok |
+| surface_d3 | 9 | 219 | 3 | 0.1 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s |  |  | 0.3 s | 0.6 s | 0.3 s | 0.4 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | 0.1 s | 0.3 s | 0.1 s | - | - | - | <=3 ok | <=3 ok | <=3 ok | <=3 ok |
+| surface_d5 | 25 | 1677 | 5 | 0.1 s | 0.0 s | 0.4 s | 0.1 s | 0.1 s |  |  | 0.3 s | 0.6 s | 16.9 s | 3..5 | 7.5 s | 30.8 s | 75.0 s | >=1 | >=1 | 48.0 s | >=1 | >=1 | - | - | - | <=5 ok | <=5 ok | <=5 ok | <=5 ok |
+| surface_d7 | 49 | 5471 | 7 | 0.2 s | 28.2 s | 7..7 | 0.2 s | 0.5 s |  |  | 0.4 s | 1.0 s | 3..7 | 2..7 | 4..7 | >=5 | >=5 | >=1 | >=1 | >=5 | >=1 | >=1 | skip | skip | skip | <=7 ok | <=7 ok | mem | <=7 ok |
+| surface_d9 | 81 | 12705 | 9 | 0.2 s | >=7 | 7..9 | 1.8 s | 16.3 s |  |  | 0.5 s | 0.9 s | 3..9 | skip | 4..9 | >=4 | >=4 | skip | skip | >=4 | skip | skip | skip | skip | skip | <=9 ok | <=9 ok | mem | <=9 ok |
+| surface_d11 | 121 | 24483 | 11 | 0.4 s | >=7 | skip | 221 s | 480 s |  |  | 0.8 s | 1.3 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=11 ok | <=11 ok | err | <=11 ok |
+| surface_d13 | 169 | 41909 | 13 | 0.5 s | skip | skip | >=11 | >=11 |  |  | 2.6 s | 5.4 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=13 ok | <=13 ok | mem | <=13 ok |
+| surface_d15 | 225 | 66087 | 15 | 1.1 s | skip | skip | >=10 | >=10 |  |  | 69.8 s | 129 s | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=15 ok | <=20 | mem | <=15 ok |
+| surface_d17 | 289 | 98121 | 17 | 2.9 s | skip | skip | skip | skip |  |  | >=17 | >=16 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | <=17 ok |
+| surface_d19 | 361 | 139115 | 19 | 4.3 s | skip | skip | skip | skip |  |  | >=16 | >=16 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | <=24 |
+| surface_d21 | 441 | 190173 | 21 | 5.5 s | skip | skip | skip | skip |  |  | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| surface_d23 | 529 | 252399 | 23 | 10.0 s | skip | skip | skip | skip |  |  | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
+| surface_d25 | 625 | 326897 | 25 | 20.5 s | skip | skip | skip | skip |  |  | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | err | t/o |
+| **solved exactly** (of 17) | | | | **17** | **8** | **7** | **10** | **10** | **5** | **5** | **12** | **12** | **5** | **3** | **5** | **5** | **5** | **4** | **3** | **5** | **4** | **3** | **0** | **0** | **0** |  |  |  |  |
 <!-- TABLE:A-stim-full:END -->
 
 ### Time-collapsed relaxation
@@ -512,49 +524,49 @@ All second-tier records are mutually consistent and consistent with the ground t
 ### 32 threads, 90 GB, 3600 s: circuits, sector problem
 
 <!-- TABLE:B32-circuit-sector:BEGIN -->
-| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | CP-SAT | Gurobi | Qubitserf CC | Qubitserf BZ | Qubitserf MITM |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 |  |  | 3600 s | 3..10 | 5..10 |  |  |  |
-| gross_best_r6 | 144 | 4464 | 11 |  |  | 10..11 | skip | skip |  |  |  |
-| bb72_r6 | 72 | 2232 | 6 |  |  |  | 2732 s | 534 s |  |  |  |
-| bb90_r10 | 90 | 4590 | 8 |  |  |  | 4..8 | 4..8 |  |  |  |
-| bb108_r10 | 108 | 5508 | 8 |  |  |  | skip | skip | - | - | - |
-| bb144_r12 | 144 | 8784 | 10 |  |  | 532 s | skip | skip | skip | skip | skip |
-| bb288_r18 | 288 | 26208 | 16 | 220 s | >=10 | 10..18 | skip | skip | skip | skip | skip |
-| w8bb_72 | 72 | 3096 | 8 |  |  |  | 5..8 | 4..8 |  |  |  |
-| w8bb_144_16 | 144 | 6192 | 10 |  |  | 9..10 | skip | skip |  |  |  |
-| cornucopia_252 | 252 | 8568 | 5 |  |  |  | 3..5 | 2..5 |  |  |  |
-| cornucopia_576 | 576 | 19584 | 8 |  |  | 1263 s | skip | skip |  |  |  |
-| cornucopia_900 | 900 | 30600 | 9 | 509 s | >=8 | 8..9 | skip | skip | - | - | - |
-| cornucopia_1044 | 1044 | 35496 | 10 | 927 s |  | skip | skip | skip | skip | skip | skip |
-| lrgross | 144 | 4464 | 11 |  | >=10 | 10..11 | 5..11 | 4..11 |  |  |  |
-| mitten_150 | 150 | 9750 | 8 |  |  | 1485 s | 3..9 | 4..9 |  |  |  |
-| mitten_300 | 300 | 11820 | >=12 | >=11 | >=8 | 8..14 | skip | skip |  |  |  |
-| mitten_200 | 200 | 15560 | 9 | 185 s |  | skip | skip | skip | - | - | - |
-| routing_54 | 54 | 1998 | 6 |  |  |  | 2457 s | 206 s |  |  |  |
-| routing_90 | 90 | 3330 | 9 |  |  |  | 1..9 | 5..9 |  |  |  |
-| routing_110 | 110 | 4070 | 10 |  |  | 408 s | skip | skip | - | - | - |
-| routing_140_13 | 140 | 5180 | 12 | 88.8 s | >=10 | 10..12 | skip | skip | skip | skip | skip |
-| routing_200_24 | 200 | 11700 | 10 | 509 s |  | skip | skip | skip | skip | skip | skip |
-| sdbb_64 | 64 | 2752 | 8 |  |  |  | 5..8 | 5..8 |  |  |  |
-| sdbb_120 | 120 | 5160 | 12 | 1174 s |  | 9..12 | skip | skip |  |  |  |
-| shift_120d | 120 | 3720 | 8 |  |  |  | 3..8 | 4..8 |  |  |  |
-| star_42 | 42 | 1806 | 6 |  |  |  | 2..6 | 389 s |  |  |  |
-| superdense_d7 | 37 | 1248 | 7 |  |  |  | 6..7 | 37.7 s |  |  |  |
-| superdense_d9 | 61 | 2788 | 9 |  |  |  | skip | mem |  |  |  |
-| superdense_d11 | 91 | 5250 | 11 | 1793 s |  | 10..11 | skip | skip | - | - | - |
-| surface_d7 | 49 | 883 | 7 |  |  |  | 82.5 s |  | - | - | - |
-| surface_d9 | 81 | 1945 | 9 |  |  |  | 1..9 | 815 s | skip | skip | skip |
-| surface_d11 | 121 | 3631 | 11 |  |  |  | skip | mem | skip | skip | skip |
-| surface_d13 | 169 | 6085 | 13 |  |  | 1287 s | skip | skip | skip | skip | skip |
-| surface_d15 | 225 | 9451 | 15 |  | >=13 | 13..15 | skip | skip | skip | skip | skip |
-| surface_d17 | 289 | 13873 | 17 |  |  | skip | skip | skip | skip | skip | skip |
-| surface_d19 | 361 | 19495 | 19 |  |  | skip | skip | skip | skip | skip | skip |
-| surface_d21 | 441 | 26461 | 21 |  |  | skip | skip | skip | skip | skip | skip |
-| surface_d23 | 529 | 34915 | 23 |  |  | skip | skip | skip | skip | skip | skip |
-| surface_d25 | 625 | 45001 | 25 |  |  | skip | skip | skip | skip | skip | skip |
-| walkingcat_54 | 54 | 2322 | 8 |  |  |  | 5..8 | 5..8 |  |  |  |
-| **solved exactly** (of 40) | | | | **8** | **0** | **6** | **3** | **5** | **0** | **0** | **0** |
+| instance | n | columns | distance | ours | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound | CP-SAT | Gurobi | Qubitserf CC | Qubitserf BZ | Qubitserf MITM |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 3348 | 10 |  |  | 3600 s | 184 s | 196 s | 3..10 | 5..10 |  |  |  |
+| gross_best_r6 | 144 | 4464 | 11 |  |  | 10..11 | 3117 s | 3336 s | skip | skip |  |  |  |
+| bb72_r6 | 72 | 2232 | 6 |  |  |  |  |  | 2732 s | 534 s |  |  |  |
+| bb90_r10 | 90 | 4590 | 8 |  |  |  |  |  | 4..8 | 4..8 |  |  |  |
+| bb108_r10 | 108 | 5508 | 8 |  |  |  |  |  | skip | skip | - | - | - |
+| bb144_r12 | 144 | 8784 | 10 |  |  | 532 s | 646 s | 348 s | skip | skip | skip | skip | skip |
+| bb288_r18 | 288 | 26208 | 16 | 220 s | >=10 | 10..18 | >=12 | 12..18 | skip | skip | skip | skip | skip |
+| w8bb_72 | 72 | 3096 | 8 |  |  |  |  |  | 5..8 | 4..8 |  |  |  |
+| w8bb_144_16 | 144 | 6192 | 10 |  |  | 9..10 | >=9 | 9..10 | skip | skip |  |  |  |
+| cornucopia_252 | 252 | 8568 | 5 |  |  |  |  |  | 3..5 | 2..5 |  |  |  |
+| cornucopia_576 | 576 | 19584 | 8 |  |  | 1263 s | 264 s | 214 s | skip | skip |  |  |  |
+| cornucopia_900 | 900 | 30600 | 9 | 509 s | >=8 | 8..9 | >=8 | 8..9 | skip | skip | - | - | - |
+| cornucopia_1044 | 1044 | 35496 | 10 | 927 s |  | skip | skip | skip | skip | skip | skip | skip | skip |
+| lrgross | 144 | 4464 | 11 |  | >=10 | 10..11 | 717 s | 706 s | 5..11 | 4..11 |  |  |  |
+| mitten_150 | 150 | 9750 | 8 |  |  | 1485 s | 77.1 s | 21.0 s | 3..9 | 4..9 |  |  |  |
+| mitten_300 | 300 | 11820 | >=12 | >=11 | >=8 | 8..14 | >=9 | 9..14 | skip | skip |  |  |  |
+| mitten_200 | 200 | 15560 | 9 | 185 s |  | skip | skip | skip | skip | skip | - | - | - |
+| routing_54 | 54 | 1998 | 6 |  |  |  |  |  | 2457 s | 206 s |  |  |  |
+| routing_90 | 90 | 3330 | 9 |  |  |  |  | 17.0 s | 1..9 | 5..9 |  |  |  |
+| routing_110 | 110 | 4070 | 10 |  |  | 408 s | 252 s | 291 s | skip | skip | - | - | - |
+| routing_140_13 | 140 | 5180 | 12 | 88.8 s | >=10 | 10..12 | >=10 | 11..12 | skip | skip | skip | skip | skip |
+| routing_200_24 | 200 | 11700 | 10 | 509 s |  | skip | skip | skip | skip | skip | skip | skip | skip |
+| sdbb_64 | 64 | 2752 | 8 |  |  |  |  |  | 5..8 | 5..8 |  |  |  |
+| sdbb_120 | 120 | 5160 | 12 | 1174 s |  | 9..12 | >=10 | 10..12 | skip | skip |  |  |  |
+| shift_120d | 120 | 3720 | 8 |  |  |  |  |  | 3..8 | 4..8 |  |  |  |
+| star_42 | 42 | 1806 | 6 |  |  |  |  |  | 2..6 | 389 s |  |  |  |
+| superdense_d7 | 37 | 1248 | 7 |  |  |  |  |  | 6..7 | 37.7 s |  |  |  |
+| superdense_d9 | 61 | 2788 | 9 |  |  |  |  |  | skip | mem |  |  |  |
+| superdense_d11 | 91 | 5250 | 11 | 1793 s |  | 10..11 | >=10 | 10..11 | skip | skip | - | - | - |
+| surface_d7 | 49 | 883 | 7 |  |  |  |  |  | 82.5 s |  | - | - | - |
+| surface_d9 | 81 | 1945 | 9 |  |  |  |  |  | 1..9 | 815 s | skip | skip | skip |
+| surface_d11 | 121 | 3631 | 11 |  |  |  |  |  | skip | mem | skip | skip | skip |
+| surface_d13 | 169 | 6085 | 13 |  |  | 1287 s |  |  | skip | skip | skip | skip | skip |
+| surface_d15 | 225 | 9451 | 15 |  | >=13 | 13..15 |  |  | skip | skip | skip | skip | skip |
+| surface_d17 | 289 | 13873 | 17 |  |  | skip | 9.7 s | 9.9 s | skip | skip | skip | skip | skip |
+| surface_d19 | 361 | 19495 | 19 |  |  | skip | 188 s | 190 s | skip | skip | skip | skip | skip |
+| surface_d21 | 441 | 26461 | 21 |  |  | skip | >=20 | 20..21 | skip | skip | skip | skip | skip |
+| surface_d23 | 529 | 34915 | 23 |  |  | skip | skip | skip | skip | skip | skip | skip | skip |
+| surface_d25 | 625 | 45001 | 25 |  |  | skip | skip | skip | skip | skip | skip | skip | skip |
+| walkingcat_54 | 54 | 2322 | 8 |  |  |  |  |  | 5..8 | 5..8 |  |  |  |
+| **solved exactly** (of 40) | | | | **8** | **0** | **6** | **9** | **10** | **3** | **5** | **0** | **0** | **0** |
 <!-- TABLE:B32-circuit-sector:END -->
 
 ### 32 threads: Stim color-code circuits, raw detector error model
@@ -897,54 +909,105 @@ collapse: 26 of the 39 collapsed problems against 16 sector problems (0.9.0: 21 
 Stim's detector error model, its own exact reduction solves 11 of the 27 raw qLDPC circuits, against 4
 from our matrices of the raw model.
 
+### With its model lower bound (25 October 2026)
+
+dist-m4ri added `--model-lb` to its Python interface on 15 October (commit 6241d59, version 0.14.5), and
+0.14.7 has it: a certified lower bound on the distance of a Stim memory circuit, the distance of a
+code-sized model of the circuit. Each row of the model is the sum of the detector rows of one check over
+the rounds, so the model is a time-collapsed problem much like our collapsed relaxation, with a few
+columns per data qubit. The bound
+is cached as the starting weight of the next run on the circuit's detector error model, whose cluster
+search then begins there. The passes of 18 October did not use it. On 25 October every circuit was run
+again with it (`bench/tier_b.py dm4mb1 dm4mb2`, adapter option `bound=model`): in both modes, on the
+main problems, on the raw circuits read as Stim's detector error model and on the 23 circuits of the
+prior benchmark, first with one thread and 600 s, then with 32 threads and an hour on what each mode
+left. The adapter calls dist-m4ri's own `compute_model_lower_bound()` on the instance's circuit, with
+its cache off, within half of the budget, and then runs the binary as before with `dmin` set to the
+bound, as `compute_dem_distance()` does with the cached bound.
+
+| main problems of the 47 circuits | first tier | both tiers |
+|---|---:|---:|
+| dist-m4ri 0.14.7 without the model bound | 23 | 29 |
+| dist-m4ri 0.14.7 with the model bound | 25 | 34 |
+| ours | 38 | 46 |
+
+- **Where it decides.** The bound settles circuits where it equals the distance and the cluster search
+  then finds a codeword of that weight:
+  - the surface code: d = 13 and 15 with one thread (2 s and 61 s), d = 17 and 19 with 32 threads
+    (10 s and 3 minutes);
+  - the gross-code circuit with the best depth-7 schedule (52 minutes on 32 threads);
+  - the left-right gross circuit (12 minutes).
+  It also shortens runs that succeeded before, for example surface d = 11 (0.5 s against 244 s) and the
+  shift circuit of n = 120 (2.3 s against 24 s).
+- **Where it does not.**
+  - The BB circuits: 1 or 2 below the distance, as its README states.
+  - The mitten circuits of n = 150 and 300: 7 after half of the first-tier budget on one thread.
+  - The superdense circuits: the trivial bound 1. Their detectors do not form the chains the model
+    expects (11 rows for the circuit of d = 9), so some faults flip the observable without changing any
+    row.
+  - The 23 circuits of the prior benchmark: no change (18 in the first tier and 19 over both, with or
+    without the bound).
+- **Cost.** Starting Python and building the model take about 2 s, which makes the smallest instances
+  slower (the [[72,12,6]] circuit: 2.1 s against 0.1 s). It costs dist-m4ri no instance.
+
+Bracketing mode needed one adjustment. Asked to export its codewords, as the benchmark asks every tool
+for witnesses, it goes on enumerating every codeword of the minimum weight once its bounds meet. With the
+bound its first cluster round is at that weight, and the first runs spent the rest of the budget there
+(surface code d = 11: bounds 11 = 11 after 0.5 s, recorded as a timeout). dist-m4ri's own flow exports
+nothing and stops when the bounds meet. Bracketing with the bound therefore runs without export, and its
+witness is the support it prints for each new lightest codeword (`debug` bit 32), checked against H and L
+like every witness. Its runs without the bound kept the export: one of them (surface code d = 7, raw
+problem) reached matching bounds and timed out, and the times of their other solved runs include the
+enumeration.
+
 ### First tier, circuits, sector problem
 
 <!-- TABLE:DM-sector:BEGIN -->
-| instance | n | columns | distance | dist-m4ri 0.9.0 CC | dist-m4ri 0.9.0 CC, no cutoff | dist-m4ri CC | dist-m4ri CC+RW |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 | >=7 | >=7 | >=9 | 9..10 |
-| gross_best_r6 | 144 | 4464 | 11 | >=7 | >=7 | >=9 | 9..11 |
-| bb72_r6 | 72 | 2232 | 6 | 5.0 s | 4.9 s | 0.1 s | 1.5 s |
-| bb90_r10 | 90 | 4590 | 8 | >=7 | >=7 | 59.8 s | 473 s |
-| bb108_r10 | 108 | 5508 | 8 | >=7 | >=7 | 57.4 s | 567 s |
-| bb144_r12 | 144 | 8784 | 10 | skip | skip | >=8 | 8..10 |
-| bb288_r18 | 288 | 26208 | 16 | skip | skip | >=8 | 8..18 |
-| w8bb_72 | 72 | 3096 | 8 | >=6 | >=6 | 205 s | 296 s |
-| w8bb_144_16 | 144 | 6192 | 10 | >=6 | >=6 | >=8 | 8..10 |
-| cornucopia_252 | 252 | 8568 | 5 | 47.3 s | 88.8 s | 0.4 s | 12.5 s |
-| cornucopia_576 | 576 | 19584 | 8 | >=5 | >=5 | >=7 | >=7 |
-| cornucopia_900 | 900 | 30600 | 9 | >=5 | >=4 | >=6 | >=6 |
-| cornucopia_1044 | 1044 | 35496 | 10 | skip | skip | skip | skip |
-| lrgross | 144 | 4464 | 11 | >=6 | >=6 | >=8 | 8..11 |
-| mitten_150 | 150 | 9750 | 8 | >=5 | >=5 | >=7 | 7..8 |
-| mitten_300 | 300 | 11820 | >=12 | >=5 | >=5 | >=6 | 6..14 |
-| mitten_200 | 200 | 15560 | 9 | skip | skip | skip | skip |
-| routing_54 | 54 | 1998 | 6 | 9.3 s | 14.6 s | 0.1 s | 1.9 s |
-| routing_90 | 90 | 3330 | 9 | >=7 | >=7 | 477 s | 507 s |
-| routing_110 | 110 | 4070 | 10 | >=7 | >=6 | >=9 | 9..10 |
-| routing_140_13 | 140 | 5180 | 12 | skip | skip | >=9 | 9..12 |
-| routing_200_24 | 200 | 11700 | 10 | skip | skip | skip | skip |
-| sdbb_64 | 64 | 2752 | 8 | >=6 | >=6 | 121 s | 202 s |
-| sdbb_120 | 120 | 5160 | 12 | >=6 | >=6 | >=8 | 8..12 |
-| shift_120d | 120 | 3720 | 8 | >=7 | >=7 | 24.2 s | 423 s |
-| star_42 | 42 | 1806 | 6 | 42.6 s | 57.3 s | 0.2 s | 4.8 s |
-| superdense_d7 | 37 | 1248 | 7 |  |  | 0.3 s | 6.9 s |
-| superdense_d9 | 61 | 2788 | 9 |  |  | 248 s | 326 s |
-| superdense_d11 | 91 | 5250 | 11 |  |  | >=9 | 9..11 |
-| surface_d3 | 9 | 55 | 3 | 0.0 s | 0.1 s | 0.0 s | 0.0 s |
-| surface_d5 | 25 | 301 | 5 | 0.0 s | 0.0 s | 0.0 s | 0.0 s |
-| surface_d7 | 49 | 883 | 7 | 0.1 s | 0.2 s | 0.0 s | 0.3 s |
-| surface_d9 | 81 | 1945 | 9 | 20.0 s | 26.9 s | 1.8 s | 17.2 s |
-| surface_d11 | 121 | 3631 | 11 | >=10 | >=10 | 244 s | 509 s |
-| surface_d13 | 169 | 6085 | 13 | >=9 | >=9 | >=11 | 11..13 |
-| surface_d15 | 225 | 9451 | 15 | skip | skip | >=10 | 10..15 |
-| surface_d17 | 289 | 13873 | 17 | skip | skip | skip | skip |
-| surface_d19 | 361 | 19495 | 19 | skip | skip | skip | skip |
-| surface_d21 | 441 | 26461 | 21 | skip | skip | skip | skip |
-| surface_d23 | 529 | 34915 | 23 | skip | skip | skip | skip |
-| surface_d25 | 625 | 45001 | 25 | skip | skip | skip | skip |
-| walkingcat_54 | 54 | 2322 | 8 | >=6 | >=6 | 129 s | 188 s |
-| **solved exactly** (of 42) | | | | **8** | **8** | **18** | **18** |
+| instance | n | columns | distance | dist-m4ri 0.9.0 CC | dist-m4ri 0.9.0 CC, no cutoff | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 3348 | 10 | >=7 | >=7 | >=9 | 9..10 | >=9 | 9..10 |
+| gross_best_r6 | 144 | 4464 | 11 | >=7 | >=7 | >=9 | 9..11 | >=9 | >=9 |
+| bb72_r6 | 72 | 2232 | 6 | 5.0 s | 4.9 s | 0.1 s | 1.5 s | 2.1 s | 0.9 s |
+| bb90_r10 | 90 | 4590 | 8 | >=7 | >=7 | 59.8 s | 473 s | 50.9 s | 33.5 s |
+| bb108_r10 | 108 | 5508 | 8 | >=7 | >=7 | 57.4 s | 567 s | 56.7 s | 37.2 s |
+| bb144_r12 | 144 | 8784 | 10 | skip | skip | >=8 | 8..10 | >=9 | >=9 |
+| bb288_r18 | 288 | 26208 | 16 | skip | skip | >=8 | 8..18 | >=10 | >=10 |
+| w8bb_72 | 72 | 3096 | 8 | >=6 | >=6 | 205 s | 296 s | 244 s | 247 s |
+| w8bb_144_16 | 144 | 6192 | 10 | >=6 | >=6 | >=8 | 8..10 | >=8 | 8..10 |
+| cornucopia_252 | 252 | 8568 | 5 | 47.3 s | 88.8 s | 0.4 s | 12.5 s | 2.4 s | 3.5 s |
+| cornucopia_576 | 576 | 19584 | 8 | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 |
+| cornucopia_900 | 900 | 30600 | 9 | >=5 | >=4 | >=6 | >=6 | >=7 | >=6 |
+| cornucopia_1044 | 1044 | 35496 | 10 | skip | skip | skip | skip | skip | skip |
+| lrgross | 144 | 4464 | 11 | >=6 | >=6 | >=8 | 8..11 | >=9 | >=9 |
+| mitten_150 | 150 | 9750 | 8 | >=5 | >=5 | >=7 | 7..8 | >=7 | >=7 |
+| mitten_300 | 300 | 11820 | >=12 | >=5 | >=5 | >=6 | 6..14 | >=7 | >=7 |
+| mitten_200 | 200 | 15560 | 9 | skip | skip | skip | skip | skip | skip |
+| routing_54 | 54 | 1998 | 6 | 9.3 s | 14.6 s | 0.1 s | 1.9 s | 0.6 s | 1.1 s |
+| routing_90 | 90 | 3330 | 9 | >=7 | >=7 | 477 s | 507 s | 374 s | 8..9 |
+| routing_110 | 110 | 4070 | 10 | >=7 | >=6 | >=9 | 9..10 | >=9 | 8..11 |
+| routing_140_13 | 140 | 5180 | 12 | skip | skip | >=9 | 9..12 | >=10 | skip |
+| routing_200_24 | 200 | 11700 | 10 | skip | skip | skip | skip | skip | skip |
+| sdbb_64 | 64 | 2752 | 8 | >=6 | >=6 | 121 s | 202 s | 99.6 s | 160 s |
+| sdbb_120 | 120 | 5160 | 12 | >=6 | >=6 | >=8 | 8..12 | >=8 | >=8 |
+| shift_120d | 120 | 3720 | 8 | >=7 | >=7 | 24.2 s | 423 s | 2.3 s | 5.0 s |
+| star_42 | 42 | 1806 | 6 | 42.6 s | 57.3 s | 0.2 s | 4.8 s | 0.5 s | 1.3 s |
+| superdense_d7 | 37 | 1248 | 7 |  |  | 0.3 s | 6.9 s | 0.6 s | 1.3 s |
+| superdense_d9 | 61 | 2788 | 9 |  |  | 248 s | 326 s | 245 s | 498 s |
+| superdense_d11 | 91 | 5250 | 11 |  |  | >=9 | 9..11 | >=9 | 8..11 |
+| surface_d3 | 9 | 55 | 3 | 0.0 s | 0.1 s | 0.0 s | 0.0 s | 0.2 s | 0.7 s |
+| surface_d5 | 25 | 301 | 5 | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.2 s | 0.8 s |
+| surface_d7 | 49 | 883 | 7 | 0.1 s | 0.2 s | 0.0 s | 0.3 s | 0.3 s | 0.5 s |
+| surface_d9 | 81 | 1945 | 9 | 20.0 s | 26.9 s | 1.8 s | 17.2 s | 0.3 s | 0.7 s |
+| surface_d11 | 121 | 3631 | 11 | >=10 | >=10 | 244 s | 509 s | 0.5 s | 0.8 s |
+| surface_d13 | 169 | 6085 | 13 | >=9 | >=9 | >=11 | 11..13 | 2.0 s | 3.1 s |
+| surface_d15 | 225 | 9451 | 15 | skip | skip | >=10 | 10..15 | 60.9 s | 117 s |
+| surface_d17 | 289 | 13873 | 17 | skip | skip | skip | skip | >=17 | >=16 |
+| surface_d19 | 361 | 19495 | 19 | skip | skip | skip | skip | >=16 | >=16 |
+| surface_d21 | 441 | 26461 | 21 | skip | skip | skip | skip | skip | skip |
+| surface_d23 | 529 | 34915 | 23 | skip | skip | skip | skip | skip | skip |
+| surface_d25 | 625 | 45001 | 25 | skip | skip | skip | skip | skip | skip |
+| walkingcat_54 | 54 | 2322 | 8 | >=6 | >=6 | 129 s | 188 s | 104 s | 192 s |
+| **solved exactly** (of 42) | | | | **8** | **8** | **18** | **18** | **20** | **19** |
 <!-- TABLE:DM-sector:END -->
 
 ### First tier, codes
@@ -985,56 +1048,56 @@ from our matrices of the raw model.
 ### First tier, circuits, raw detector error model
 
 <!-- TABLE:DM-full:BEGIN -->
-| instance | n | columns | distance | dist-m4ri 0.9.0 CC | dist-m4ri 0.9.0 CC, no cutoff | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 24246 | 10 | >=5 | >=5 | >=6 | 6..10 | >=9 | 9..10 |
-| gross_best_r6 | 144 | 32328 | 11 | >=4 | >=4 | >=6 | 6..11 | >=9 | 9..11 |
-| bb72_r6 | 72 | 16164 | 6 | >=5 | >=5 | 94.3 s | 162 s | 0.8 s | 1.7 s |
-| bb90_r10 | 90 | 34965 | 8 | >=5 | >=4 | >=6 | 6..8 | 42.4 s | 353 s |
-| bb108_r10 | 108 | 41958 | 8 | skip | skip | >=6 | 6..8 | 50.7 s | 419 s |
-| bb144_r12 | 144 | 67752 | 10 | skip | skip | skip | skip | >=9 | >=9 |
-| bb288_r18 | 288 | 206352 | 16 | skip | skip | skip | skip | >=8 | >=8 |
-| w8bb_72 | 72 | 23904 | 8 | >=4 | >=4 | >=5 | 5..8 | 140 s | 218 s |
-| w8bb_144_16 | 144 | 47808 | 10 | >=4 | >=4 | >=5 | >=5 | >=8 | 8..10 |
-| cornucopia_252 | 252 | 65450 | 5 | >=4 | >=4 | 64.0 s | >=5 | 6.5 s | 9.5 s |
-| cornucopia_576 | 576 | 149760 | 8 | skip | skip | >=5 | >=5 | >=7 | >=7 |
-| cornucopia_900 | 900 | 234000 | 9 | skip | skip | >=5 | skip | >=6 | >=6 |
-| cornucopia_1044 | 1044 | 271440 | 10 | skip | skip | skip | skip | skip | skip |
-| lrgross | 144 | 31488 | 11 | >=5 | >=5 | >=6 | 6..11 | >=8 | >=8 |
-| mitten_150 | 150 | 76395 | 8 | >=4 | >=4 | >=5 | >=5 | >=7 | >=7 |
-| mitten_300 | 300 | 87780 | >=12 | >=4 | >=4 | >=5 | >=5 | >=7 | >=7 |
-| mitten_200 | 200 | 123792 | 9 | skip | skip | skip | skip | skip | skip |
-| routing_54 | 54 | 14958 | 6 | >=4 | >=4 | 189 s | 343 s | 0.5 s | 2.0 s |
-| routing_90 | 90 | 25020 | 9 | >=4 | >=4 | >=6 | 6..9 | 398 s | 479 s |
-| routing_110 | 110 | 30580 | 10 | skip | skip | >=6 | 6..10 | >=9 | 9..10 |
-| routing_140_13 | 140 | 38920 | 12 | skip | skip | skip | skip | >=9 | >=9 |
-| routing_200_24 | 200 | 95200 | 10 | skip | skip | skip | skip | skip | skip |
-| sdbb_64 | 64 | 21248 | 8 | >=4 | >=4 | >=6 | 6..8 | 68.6 s | 131 s |
-| sdbb_120 | 120 | 39840 | 12 | >=4 | >=4 | >=5 | 5..15 | >=8 | 8..12 |
-| shift_120d | 120 | 27000 | 8 | >=5 | >=5 | >=6 | 6..9 | 15.3 s | 244 s |
-| star_42 | 42 | 13902 | 6 | >=4 | >=4 | 383 s | 600 s | 0.5 s | 3.4 s |
-| color_d3 | 7 | 72 | 2† | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s |
-| color_d5 | 19 | 1104 | 3† | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s |
-| color_d7 | 37 | 3651 | 4† | 0.6 s | 0.9 s | 0.0 s | 0.2 s | 0.1 s | 0.3 s |
-| color_d9 | 61 | 7683 | 5† | 142 s | 202 s | 0.4 s | 11.2 s | 0.5 s | 4.6 s |
-| color_d11 | 91 | 16422 | 6† | >=5 | >=5 | 38.3 s | 600 s | 27.9 s | 522 s |
-| superdense_d7 | 37 | 9143 | 7 |  |  | >=6 | 6..7 | 0.4 s | 5.5 s |
-| superdense_d9 | 61 | 21277 | 9 |  |  | >=6 | 6..9 | 143 s | 224 s |
-| superdense_d11 | 91 | 41044 | 11 |  |  | skip | skip | >=9 | 9..11 |
-| surface_d3 | 9 | 219 | 3 | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.1 s | 0.1 s |
-| surface_d5 | 25 | 1677 | 5 | 0.3 s | 0.5 s | 0.0 s | 0.4 s | 0.1 s | 0.1 s |
-| surface_d7 | 49 | 5471 | 7 | >=6 | >=6 | 28.2 s | 7..7 | 0.2 s | 0.5 s |
-| surface_d9 | 81 | 12705 | 9 | >=6 | >=6 | >=7 | 7..9 | 1.8 s | 16.3 s |
-| surface_d11 | 121 | 24483 | 11 | skip | skip | >=7 | skip | 221 s | 480 s |
-| surface_d13 | 169 | 41909 | 13 | skip | skip | skip | skip | >=11 | >=11 |
-| surface_d15 | 225 | 66087 | 15 | skip | skip | skip | skip | >=10 | >=10 |
-| surface_d17 | 289 | 98121 | 17 | skip | skip | skip | skip | skip | skip |
-| surface_d19 | 361 | 139115 | 19 | skip | skip | skip | skip | skip | skip |
-| surface_d21 | 441 | 190173 | 21 | skip | skip | skip | skip | skip | skip |
-| surface_d23 | 529 | 252399 | 23 | skip | skip | skip | skip | skip | skip |
-| surface_d25 | 625 | 326897 | 25 | skip | skip | skip | skip | skip | skip |
-| walkingcat_54 | 54 | 17820 | 8 | >=4 | >=4 | >=6 | 6..8 | 67.9 s | 117 s |
-| **solved exactly** (of 47) | | | | **6** | **6** | **12** | **10** | **23** | **23** |
+| instance | n | columns | distance | dist-m4ri 0.9.0 CC | dist-m4ri 0.9.0 CC, no cutoff | dist-m4ri CC | dist-m4ri CC+RW | dist-m4ri CC, model bound | dist-m4ri CC+RW, model bound | dist-m4ri CC, DEM input | dist-m4ri CC+RW, DEM input | dist-m4ri CC, DEM input, model bound | dist-m4ri CC+RW, DEM input, model bound |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 24246 | 10 | >=5 | >=5 | >=6 | 6..10 |  |  | >=9 | 9..10 | >=9 | 9..10 |
+| gross_best_r6 | 144 | 32328 | 11 | >=4 | >=4 | >=6 | 6..11 |  |  | >=9 | 9..11 | >=9 | >=9 |
+| bb72_r6 | 72 | 16164 | 6 | >=5 | >=5 | 94.3 s | 162 s |  |  | 0.8 s | 1.7 s | 2.6 s | 1.2 s |
+| bb90_r10 | 90 | 34965 | 8 | >=5 | >=4 | >=6 | 6..8 |  |  | 42.4 s | 353 s | 44.4 s | 29.5 s |
+| bb108_r10 | 108 | 41958 | 8 | skip | skip | >=6 | 6..8 |  |  | 50.7 s | 419 s | 52.2 s | 26.2 s |
+| bb144_r12 | 144 | 67752 | 10 | skip | skip | skip | skip |  |  | >=9 | >=9 | >=9 | >=9 |
+| bb288_r18 | 288 | 206352 | 16 | skip | skip | skip | skip |  |  | >=8 | >=8 | >=10 | >=10 |
+| w8bb_72 | 72 | 23904 | 8 | >=4 | >=4 | >=5 | 5..8 |  |  | 140 s | 218 s | 132 s | 220 s |
+| w8bb_144_16 | 144 | 47808 | 10 | >=4 | >=4 | >=5 | >=5 |  |  | >=8 | 8..10 | >=8 | 8..10 |
+| cornucopia_252 | 252 | 65450 | 5 | >=4 | >=4 | 64.0 s | >=5 |  |  | 6.5 s | 9.5 s | 8.0 s | 10.4 s |
+| cornucopia_576 | 576 | 149760 | 8 | skip | skip | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
+| cornucopia_900 | 900 | 234000 | 9 | skip | skip | >=5 | skip |  |  | >=6 | >=6 | >=7 | >=6 |
+| cornucopia_1044 | 1044 | 271440 | 10 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| lrgross | 144 | 31488 | 11 | >=5 | >=5 | >=6 | 6..11 |  |  | >=8 | >=8 | >=9 | >=9 |
+| mitten_150 | 150 | 76395 | 8 | >=4 | >=4 | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
+| mitten_300 | 300 | 87780 | >=12 | >=4 | >=4 | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
+| mitten_200 | 200 | 123792 | 9 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| routing_54 | 54 | 14958 | 6 | >=4 | >=4 | 189 s | 343 s |  |  | 0.5 s | 2.0 s | 1.2 s | 2.1 s |
+| routing_90 | 90 | 25020 | 9 | >=4 | >=4 | >=6 | 6..9 |  |  | 398 s | 479 s | 345 s | 8..9 |
+| routing_110 | 110 | 30580 | 10 | skip | skip | >=6 | 6..10 |  |  | >=9 | 9..10 | >=9 | 8..10 |
+| routing_140_13 | 140 | 38920 | 12 | skip | skip | skip | skip |  |  | >=9 | >=9 | >=10 | skip |
+| routing_200_24 | 200 | 95200 | 10 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| sdbb_64 | 64 | 21248 | 8 | >=4 | >=4 | >=6 | 6..8 |  |  | 68.6 s | 131 s | 57.3 s | 103 s |
+| sdbb_120 | 120 | 39840 | 12 | >=4 | >=4 | >=5 | 5..15 |  |  | >=8 | 8..12 | >=8 | >=8 |
+| shift_120d | 120 | 27000 | 8 | >=5 | >=5 | >=6 | 6..9 |  |  | 15.3 s | 244 s | 2.8 s | 6.9 s |
+| star_42 | 42 | 13902 | 6 | >=4 | >=4 | 383 s | 600 s |  |  | 0.5 s | 3.4 s | 0.8 s | 1.8 s |
+| color_d3 | 7 | 72 | 2† | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.4 s | 0.5 s | 0.1 s | 0.1 s | 0.3 s | 0.4 s |
+| color_d5 | 19 | 1104 | 3† | 0.0 s | 0.0 s | 0.0 s | 0.0 s | 0.3 s | 0.5 s | 0.1 s | 0.1 s | 0.3 s | 0.5 s |
+| color_d7 | 37 | 3651 | 4† | 0.6 s | 0.9 s | 0.0 s | 0.2 s | 0.5 s | 0.5 s | 0.1 s | 0.3 s | 0.3 s | 1.1 s |
+| color_d9 | 61 | 7683 | 5† | 142 s | 202 s | 0.4 s | 11.2 s | 1.3 s | 0.8 s | 0.5 s | 4.6 s | 0.6 s | 1.4 s |
+| color_d11 | 91 | 16422 | 6† | >=5 | >=5 | 38.3 s | 600 s | 45.9 s | 34.9 s | 27.9 s | 522 s | 22.6 s | 19.7 s |
+| superdense_d7 | 37 | 9143 | 7 |  |  | >=6 | 6..7 |  |  | 0.4 s | 5.5 s | 0.6 s | 1.3 s |
+| superdense_d9 | 61 | 21277 | 9 |  |  | >=6 | 6..9 |  |  | 143 s | 224 s | 141 s | 324 s |
+| superdense_d11 | 91 | 41044 | 11 |  |  | skip | skip |  |  | >=9 | 9..11 | >=9 | 8..11 |
+| surface_d3 | 9 | 219 | 3 | 0.0 s | 0.0 s | 0.0 s | 0.0 s |  |  | 0.1 s | 0.1 s | 0.3 s | 0.6 s |
+| surface_d5 | 25 | 1677 | 5 | 0.3 s | 0.5 s | 0.0 s | 0.4 s |  |  | 0.1 s | 0.1 s | 0.3 s | 0.6 s |
+| surface_d7 | 49 | 5471 | 7 | >=6 | >=6 | 28.2 s | 7..7 |  |  | 0.2 s | 0.5 s | 0.4 s | 1.0 s |
+| surface_d9 | 81 | 12705 | 9 | >=6 | >=6 | >=7 | 7..9 |  |  | 1.8 s | 16.3 s | 0.5 s | 0.9 s |
+| surface_d11 | 121 | 24483 | 11 | skip | skip | >=7 | skip |  |  | 221 s | 480 s | 0.8 s | 1.3 s |
+| surface_d13 | 169 | 41909 | 13 | skip | skip | skip | skip |  |  | >=11 | >=11 | 2.6 s | 5.4 s |
+| surface_d15 | 225 | 66087 | 15 | skip | skip | skip | skip |  |  | >=10 | >=10 | 69.8 s | 129 s |
+| surface_d17 | 289 | 98121 | 17 | skip | skip | skip | skip |  |  | skip | skip | >=17 | >=16 |
+| surface_d19 | 361 | 139115 | 19 | skip | skip | skip | skip |  |  | skip | skip | >=16 | >=16 |
+| surface_d21 | 441 | 190173 | 21 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| surface_d23 | 529 | 252399 | 23 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| surface_d25 | 625 | 326897 | 25 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
+| walkingcat_54 | 54 | 17820 | 8 | >=4 | >=4 | >=6 | 6..8 |  |  | 67.9 s | 117 s | 58.0 s | 98.8 s |
+| **solved exactly** (of 47) | | | | **6** | **6** | **12** | **10** | **5** | **5** | **23** | **23** | **25** | **24** |
 <!-- TABLE:DM-full:END -->
 
 ### First tier, time-collapsed relaxation
@@ -1090,49 +1153,49 @@ from our matrices of the raw model.
 ### Second tier (32 threads, 90 GB, 3600 s), circuits, sector problem
 
 <!-- TABLE:DM-B32-circuit:BEGIN -->
-| instance | n | columns | distance | dist-m4ri 0.9.0 CC+RW | dist-m4ri CC+RW | dist-m4ri CC |
-|---|---:|---:|---:|---:|---:|---:|
-| bb108_best_r6 | 108 | 3348 | 10 | 9..11 | 3600 s |  |
-| gross_best_r6 | 144 | 4464 | 11 | skip | 10..11 |  |
-| bb72_r6 | 72 | 2232 | 6 |  |  |  |
-| bb90_r10 | 90 | 4590 | 8 | 2203 s |  |  |
-| bb108_r10 | 108 | 5508 | 8 | 2483 s |  |  |
-| bb144_r12 | 144 | 8784 | 10 | 8..13 | 532 s |  |
-| bb288_r18 | 288 | 26208 | 16 | skip | 10..18 | >=10 |
-| w8bb_72 | 72 | 3096 | 8 | 2659 s |  |  |
-| w8bb_144_16 | 144 | 6192 | 10 | 7..12 | 9..10 |  |
-| cornucopia_252 | 252 | 8568 | 5 |  |  |  |
-| cornucopia_576 | 576 | 19584 | 8 | >=6 | 1263 s |  |
-| cornucopia_900 | 900 | 30600 | 9 | skip | 8..9 | >=8 |
-| cornucopia_1044 | 1044 | 35496 | 10 | skip | skip |  |
-| lrgross | 144 | 4464 | 11 | 8..12 | 10..11 | >=10 |
-| mitten_150 | 150 | 9750 | 8 | 6..9 | 1485 s |  |
-| mitten_300 | 300 | 11820 | >=12 | skip | 8..14 | >=8 |
-| mitten_200 | 200 | 15560 | 9 | skip | skip |  |
-| routing_54 | 54 | 1998 | 6 |  |  |  |
-| routing_90 | 90 | 3330 | 9 | 8..11 |  |  |
-| routing_110 | 110 | 4070 | 10 | skip | 408 s |  |
-| routing_140_13 | 140 | 5180 | 12 | skip | 10..12 | >=10 |
-| routing_200_24 | 200 | 11700 | 10 | skip | skip |  |
-| sdbb_64 | 64 | 2752 | 8 | 788 s |  |  |
-| sdbb_120 | 120 | 5160 | 12 | 7..27 | 9..12 |  |
-| shift_120d | 120 | 3720 | 8 | 1640 s |  |  |
-| star_42 | 42 | 1806 | 6 |  |  |  |
-| superdense_d7 | 37 | 1248 | 7 |  |  |  |
-| superdense_d9 | 61 | 2788 | 9 |  |  |  |
-| superdense_d11 | 91 | 5250 | 11 |  | 10..11 |  |
-| surface_d7 | 49 | 883 | 7 |  |  |  |
-| surface_d9 | 81 | 1945 | 9 |  |  |  |
-| surface_d11 | 121 | 3631 | 11 | 136 s |  |  |
-| surface_d13 | 169 | 6085 | 13 | 12..13 | 1287 s |  |
-| surface_d15 | 225 | 9451 | 15 | skip | 13..15 | >=13 |
-| surface_d17 | 289 | 13873 | 17 | skip | skip |  |
-| surface_d19 | 361 | 19495 | 19 | skip | skip |  |
-| surface_d21 | 441 | 26461 | 21 | skip | skip |  |
-| surface_d23 | 529 | 34915 | 23 | skip | skip |  |
-| surface_d25 | 625 | 45001 | 25 | skip | skip |  |
-| walkingcat_54 | 54 | 2322 | 8 | 8..10 |  |  |
-| **solved exactly** (of 40) | | | | **6** | **6** | **0** |
+| instance | n | columns | distance | dist-m4ri 0.9.0 CC+RW | dist-m4ri CC+RW | dist-m4ri CC | dist-m4ri CC+RW, model bound |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| bb108_best_r6 | 108 | 3348 | 10 | 9..11 | 3600 s |  | 196 s |
+| gross_best_r6 | 144 | 4464 | 11 | skip | 10..11 |  | 3336 s |
+| bb72_r6 | 72 | 2232 | 6 |  |  |  |  |
+| bb90_r10 | 90 | 4590 | 8 | 2203 s |  |  |  |
+| bb108_r10 | 108 | 5508 | 8 | 2483 s |  |  |  |
+| bb144_r12 | 144 | 8784 | 10 | 8..13 | 532 s |  | 348 s |
+| bb288_r18 | 288 | 26208 | 16 | skip | 10..18 | >=10 | 12..18 |
+| w8bb_72 | 72 | 3096 | 8 | 2659 s |  |  |  |
+| w8bb_144_16 | 144 | 6192 | 10 | 7..12 | 9..10 |  | 9..10 |
+| cornucopia_252 | 252 | 8568 | 5 |  |  |  |  |
+| cornucopia_576 | 576 | 19584 | 8 | >=6 | 1263 s |  | 214 s |
+| cornucopia_900 | 900 | 30600 | 9 | skip | 8..9 | >=8 | 8..9 |
+| cornucopia_1044 | 1044 | 35496 | 10 | skip | skip |  | skip |
+| lrgross | 144 | 4464 | 11 | 8..12 | 10..11 | >=10 | 706 s |
+| mitten_150 | 150 | 9750 | 8 | 6..9 | 1485 s |  | 21.0 s |
+| mitten_300 | 300 | 11820 | >=12 | skip | 8..14 | >=8 | 9..14 |
+| mitten_200 | 200 | 15560 | 9 | skip | skip |  | skip |
+| routing_54 | 54 | 1998 | 6 |  |  |  |  |
+| routing_90 | 90 | 3330 | 9 | 8..11 |  |  | 17.0 s |
+| routing_110 | 110 | 4070 | 10 | skip | 408 s |  | 291 s |
+| routing_140_13 | 140 | 5180 | 12 | skip | 10..12 | >=10 | 11..12 |
+| routing_200_24 | 200 | 11700 | 10 | skip | skip |  | skip |
+| sdbb_64 | 64 | 2752 | 8 | 788 s |  |  |  |
+| sdbb_120 | 120 | 5160 | 12 | 7..27 | 9..12 |  | 10..12 |
+| shift_120d | 120 | 3720 | 8 | 1640 s |  |  |  |
+| star_42 | 42 | 1806 | 6 |  |  |  |  |
+| superdense_d7 | 37 | 1248 | 7 |  |  |  |  |
+| superdense_d9 | 61 | 2788 | 9 |  |  |  |  |
+| superdense_d11 | 91 | 5250 | 11 |  | 10..11 |  | 10..11 |
+| surface_d7 | 49 | 883 | 7 |  |  |  |  |
+| surface_d9 | 81 | 1945 | 9 |  |  |  |  |
+| surface_d11 | 121 | 3631 | 11 | 136 s |  |  |  |
+| surface_d13 | 169 | 6085 | 13 | 12..13 | 1287 s |  |  |
+| surface_d15 | 225 | 9451 | 15 | skip | 13..15 | >=13 |  |
+| surface_d17 | 289 | 13873 | 17 | skip | skip |  | 9.9 s |
+| surface_d19 | 361 | 19495 | 19 | skip | skip |  | 190 s |
+| surface_d21 | 441 | 26461 | 21 | skip | skip |  | 20..21 |
+| surface_d23 | 529 | 34915 | 23 | skip | skip |  | skip |
+| surface_d25 | 625 | 45001 | 25 | skip | skip |  | skip |
+| walkingcat_54 | 54 | 2322 | 8 | 8..10 |  |  |  |
+| **solved exactly** (of 40) | | | | **6** | **6** | **0** | **10** |
 <!-- TABLE:DM-B32-circuit:END -->
 
 ### Second tier, codes
@@ -1252,7 +1315,9 @@ the same mechanisms as the plain circuits, only other probabilities.
   dist-m4ri CC (0.9.0 without its predictive cutoff, and 0.14.7) (`results/bench_wjh/`); then our
   pipeline under their own limits on all 126 instances (one thread, 8 GB, eight hours, no give-up rule;
   `results/bench_wjh_8h/`), and the second tier (32 threads, 90 GB, one hour) for our pipeline and for
-  dist-m4ri 0.14.7 (`results/bench_wjh_tierB/`). Our records are those of the final configuration. The
+  dist-m4ri 0.14.7 (`results/bench_wjh_tierB/`). On the 23 circuits dist-m4ri also ran with its model
+  lower bound, in both modes and both tiers (25 October; section "With its model lower bound"). Our
+  records are those of the final configuration. The
   superdense circuit of d = 11 is solved in the second tier but not under their limits: its sparse DP
   sweep needs about 12 GB, more than their 8 GB, and the search alone ends at 10..11 after eight hours. Gurobi was not given a second tier
   here: the paper ran it itself for eight hours on every instance, and those runs are in the last
@@ -1262,208 +1327,208 @@ the same mechanisms as the plain circuits, only other probabilities.
   Hyperbolic and quantum Tanner codes get the plain search.
 
 <!-- TABLE:wjh:BEGIN -->
-| family | instances | ours, 1 thread, 600 s | ours, 1 thread, 8 h, 8 GB | ours, 600 s + 32 threads, 1 h | Gurobi, 1 thread, 600 s | Gurobi, sparse L, 1 thread, 600 s | dist-m4ri 0.9.0 CC, 1 thread, 600 s | dist-m4ri 0.14.7 CC, 1 thread, 600 s | dist-m4ri 0.14.7, 600 s + 32 threads, 1 h | theirs, 1 core, 8 h, 8 GB: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|
-| surface-code circuits | 5 | 5 | 5 | 5 | 3 | – | 4 | 5 | 5 | 3 / 3 / 2 / 4 / 2 | 4 |
-| colour-code circuits, midout | 5 | 5 | 5 | 5 | 5 | – | 5 | 5 | 5 | 5 / 4 / 5 / 5 / 4 | 5 |
-| colour-code circuits, superdense | 6 | 5 | 5 | 6 | 3 | – | 4 | 5 | 5 | 4 / 4 / 4 / 4 / 3 | 5 |
-| bivariate bicycle circuits | 7 | 4 | 5 | 5 | 0 | – | 1 | 3 | 4 | 1 / 0 / 0 / 1 / 0 | 1 |
-| hyperbolic surface codes | 21 | 21 | 21 | 21 | 15 | 17 | 21 | 21 | 21 | 21 / 21 / 21 / 21 / 14 | 21 |
-| hyperbolic colour codes | 21 | 21 | 21 | 21 | 15 | 16 | 20 | 21 | 21 | 20 / 17 / 20 / 21 / 9 | 21 |
-| lifted-product codes | 19 | 14 | 19 | 19 | 5 | 5 | 5 | 6 | 8 | 6 / 6 / 6 / 6 / 3 | 6 |
-| bivariate bicycle codes | 20 | 6 | 8 | 8 | 5 | 5 | 5 | 6 | 6 | 5 / 5 / 5 / 5 / 1 | 5 |
-| quantum Tanner codes | 22 | 5 | 6 | 7 | 4 | 4 | 3 | 4 | 5 | 5 / 4 / 4 / 4 / 3 | 5 |
-| **all** | 126 | **86** | **95** | **97** | 55 | 47 (codes) | 68 | 76 | 80 | 70 / 64 / 67 / 71 / 39 | 73 |
+| family | instances | ours, 1 thread, 600 s | ours, 1 thread, 8 h, 8 GB | ours, 600 s + 32 threads, 1 h | Gurobi, 1 thread, 600 s | Gurobi, sparse L, 1 thread, 600 s | dist-m4ri 0.9.0 CC, 1 thread, 600 s | dist-m4ri 0.14.7 CC, 1 thread, 600 s | dist-m4ri 0.14.7, 600 s + 32 threads, 1 h | dist-m4ri 0.14.7 with its model bound, 1 thread, 600 s | the same, + 32 threads, 1 h | theirs, 1 core, 8 h, 8 GB: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|
+| surface-code circuits | 5 | 5 | 5 | 5 | 3 | – | 4 | 5 | 5 | 5 | 5 | 3 / 3 / 2 / 4 / 2 | 4 |
+| colour-code circuits, midout | 5 | 5 | 5 | 5 | 5 | – | 5 | 5 | 5 | 5 | 5 | 5 / 4 / 5 / 5 / 4 | 5 |
+| colour-code circuits, superdense | 6 | 5 | 5 | 6 | 3 | – | 4 | 5 | 5 | 5 | 5 | 4 / 4 / 4 / 4 / 3 | 5 |
+| bivariate bicycle circuits | 7 | 4 | 5 | 5 | 0 | – | 1 | 3 | 4 | 3 | 4 | 1 / 0 / 0 / 1 / 0 | 1 |
+| hyperbolic surface codes | 21 | 21 | 21 | 21 | 15 | 17 | 21 | 21 | 21 | – | – | 21 / 21 / 21 / 21 / 14 | 21 |
+| hyperbolic colour codes | 21 | 21 | 21 | 21 | 15 | 16 | 20 | 21 | 21 | – | – | 20 / 17 / 20 / 21 / 9 | 21 |
+| lifted-product codes | 19 | 14 | 19 | 19 | 5 | 5 | 5 | 6 | 8 | – | – | 6 / 6 / 6 / 6 / 3 | 6 |
+| bivariate bicycle codes | 20 | 6 | 8 | 8 | 5 | 5 | 5 | 6 | 6 | – | – | 5 / 5 / 5 / 5 / 1 | 5 |
+| quantum Tanner codes | 22 | 5 | 6 | 7 | 4 | 4 | 3 | 4 | 5 | – | – | 5 / 4 / 4 / 4 / 3 | 5 |
+| **all** | 126 | **86** | **95** | **97** | 55 | 47 (codes) | 68 | 76 | 80 | 18 (circuits) | 19 (circuits) | 70 / 64 / 67 / 71 / 39 | 73 |
 
 - Our exact values agree with all 73 values certified by their exact methods.
 - Below their best known value: wjh_bb288_circuit: 16 (their best 24)
 
 <details><summary>Surface-code circuits (5 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_surface_d3 | 9 | 1 | 55 | 3 | 3 | 0.1 s | 0.2 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | MIP-SCIP, 0.0 s |
-| wjh_surface_d5 | 25 | 1 | 301 | 5 | 5 | 0.1 s | 0.2 s |  | 0.5 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_surface_d7 | 49 | 1 | 883 | 7 | 7 | 0.2 s | 0.2 s |  | 29.5 s |  | 0.2 s | 0.1 s |  | m4riCC, 0.9 s |
-| wjh_surface_d9 | 81 | 1 | 1945 | 9 | 9 | 0.2 s | 0.2 s |  | 6..9 |  | 27.7 s | 2.1 s |  | m4riCC, 253 s |
-| wjh_surface_d11 | 121 | 1 | 3631 | 11 | 11 | 0.2 s | 0.2 s |  | 5..11 |  | >=10 | 285 s |  | none |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_surface_d3 | 9 | 1 | 55 | 3 | 3 | 0.1 s | 0.2 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | MIP-SCIP, 0.0 s |
+| wjh_surface_d5 | 25 | 1 | 301 | 5 | 5 | 0.1 s | 0.2 s |  | 0.5 s |  | 0.0 s | 0.0 s |  | 0.4 s |  | m4riCC, 0.1 s |
+| wjh_surface_d7 | 49 | 1 | 883 | 7 | 7 | 0.2 s | 0.2 s |  | 29.5 s |  | 0.2 s | 0.1 s |  | 0.4 s |  | m4riCC, 0.9 s |
+| wjh_surface_d9 | 81 | 1 | 1945 | 9 | 9 | 0.2 s | 0.2 s |  | 6..9 |  | 27.7 s | 2.1 s |  | 0.5 s |  | m4riCC, 253 s |
+| wjh_surface_d11 | 121 | 1 | 3631 | 11 | 11 | 0.2 s | 0.2 s |  | 5..11 |  | >=10 | 285 s |  | 0.5 s |  | none |
 
 </details>
 
 <details><summary>Colour-code circuits, midout (5 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_midout_d3 | 7 | 1 | 33 | 2 | 2 | 0.1 s | 0.1 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | CLISAT, 0.0 s |
-| wjh_midout_d5 | 19 | 1 | 171 | 3 | 3 | 0.1 s | 0.1 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_midout_d7 | 37 | 1 | 475 | 4 | 4 | 0.2 s | 0.2 s |  | 0.5 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_midout_d9 | 61 | 1 | 1041 | 5 | 5 | 0.2 s | 0.2 s |  | 6.3 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.3 s |
-| wjh_midout_d11 | 91 | 1 | 1907 | 6 | 6 | 0.3 s | 0.2 s |  | 288 s |  | 0.6 s | 0.1 s |  | m4riCC, 2.2 s |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_midout_d3 | 7 | 1 | 33 | 2 | 2 | 0.1 s | 0.1 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | CLISAT, 0.0 s |
+| wjh_midout_d5 | 19 | 1 | 171 | 3 | 3 | 0.1 s | 0.1 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | m4riCC, 0.0 s |
+| wjh_midout_d7 | 37 | 1 | 475 | 4 | 4 | 0.2 s | 0.2 s |  | 0.5 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | m4riCC, 0.1 s |
+| wjh_midout_d9 | 61 | 1 | 1041 | 5 | 5 | 0.2 s | 0.2 s |  | 6.3 s |  | 0.0 s | 0.0 s |  | 0.4 s |  | m4riCC, 0.3 s |
+| wjh_midout_d11 | 91 | 1 | 1907 | 6 | 6 | 0.3 s | 0.2 s |  | 288 s |  | 0.6 s | 0.1 s |  | 0.5 s |  | m4riCC, 2.2 s |
 
 </details>
 
 <details><summary>Colour-code circuits, superdense (6 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_superdense_d3 | 7 | 1 | 70 | 3 | 3 | 0.1 s | 0.2 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_superdense_d5 | 19 | 1 | 414 | 5 | 5 | 0.2 s | 0.2 s |  | 1.1 s |  | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_superdense_d7 | 37 | 1 | 1248 | 7 | 7 | 0.7 s | 0.7 s |  | 6..7 |  | 24.1 s | 0.5 s |  | m4riCC, 46.2 s |
-| wjh_superdense_d9 | 61 | 1 | 2788 | 9 | 9 | 17.4 s | 17.3 s |  | 5..9 |  | >=7 | 374 s |  | Magma, 28764 s |
-| wjh_superdense_d11 | 91 | 1 | 5250 | 11 | 11 | 8..11 | 10..11 | 1819 s | skip |  | >=7 | >=8 | 10..11 | none |
-| wjh_superdense_mpp_d15 | 169 | 1 | 169 | 15 | 15 | 0.3 s | 0.4 s |  | 45.1 s |  | 6.4 s | 0.6 s |  | m4riCC, 6.4 s |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_superdense_d3 | 7 | 1 | 70 | 3 | 3 | 0.1 s | 0.2 s |  | 0.3 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | m4riCC, 0.0 s |
+| wjh_superdense_d5 | 19 | 1 | 414 | 5 | 5 | 0.2 s | 0.2 s |  | 1.1 s |  | 0.0 s | 0.0 s |  | 0.3 s |  | m4riCC, 0.1 s |
+| wjh_superdense_d7 | 37 | 1 | 1248 | 7 | 7 | 0.7 s | 0.7 s |  | 6..7 |  | 24.1 s | 0.5 s |  | 0.8 s |  | m4riCC, 46.2 s |
+| wjh_superdense_d9 | 61 | 1 | 2788 | 9 | 9 | 17.4 s | 17.3 s |  | 5..9 |  | >=7 | 374 s |  | 330 s |  | Magma, 28764 s |
+| wjh_superdense_d11 | 91 | 1 | 5250 | 11 | 11 | 8..11 | 10..11 | 1819 s | skip |  | >=7 | >=8 | 10..11 | >=9 | >=10 | none |
+| wjh_superdense_mpp_d15 | 169 | 1 | 169 | 15 | 15 | 0.3 s | 0.4 s |  | 45.1 s |  | 6.4 s | 0.6 s |  | 0.7 s |  | m4riCC, 6.4 s |
 
 </details>
 
 <details><summary>Bivariate bicycle circuits (7 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_bb72_circuit | 72 | 12 | 2232 | 6 | 6 | 0.3 s | 0.3 s |  | 4..6 |  | 4.5 s | 0.1 s |  | m4riCC, 11.0 s |
-| wjh_bb90_circuit | 90 | 8 | 4590 | 8 | 8 | 0.5 s | 0.5 s |  | 3..9 |  | >=7 | 46.8 s |  | none |
-| wjh_bb108_circuit | 108 | 8 | 5508 | 8 | 8 | 0.6 s | 0.6 s |  | skip |  | >=7 | 64.3 s |  | none |
-| wjh_bb144_circuit | 144 | 12 | 8784 | 10 | 10 | 1.6 s | 1.6 s |  | skip |  | skip | >=8 | 538 s | none |
-| wjh_bb288_circuit | 288 | 12 | 26208 | 16 | 24 | >=14 | 6706 s | 244 s | skip |  | skip | >=8 | 10..18 | none |
-| wjh_bb360_circuit | 360 | 12 | 43560 | >=17 | 88 | >=14 | >=16 | >=17 | skip |  | skip | skip | skip | none |
-| wjh_bb756_circuit | 756 | 16 | 129276 | >=17 | 56 | skip | >=17 | skip | skip |  | skip | skip | skip | none |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_bb72_circuit | 72 | 12 | 2232 | 6 | 6 | 0.3 s | 0.3 s |  | 4..6 |  | 4.5 s | 0.1 s |  | 1.2 s |  | m4riCC, 11.0 s |
+| wjh_bb90_circuit | 90 | 8 | 4590 | 8 | 8 | 0.5 s | 0.5 s |  | 3..9 |  | >=7 | 46.8 s |  | 34.6 s |  | none |
+| wjh_bb108_circuit | 108 | 8 | 5508 | 8 | 8 | 0.6 s | 0.6 s |  | skip |  | >=7 | 64.3 s |  | 47.4 s |  | none |
+| wjh_bb144_circuit | 144 | 12 | 8784 | 10 | 10 | 1.6 s | 1.6 s |  | skip |  | skip | >=8 | 538 s | >=9 | 346 s | none |
+| wjh_bb288_circuit | 288 | 12 | 26208 | 16 | 24 | >=14 | 6706 s | 244 s | skip |  | skip | >=8 | 10..18 | >=10 | >=12 | none |
+| wjh_bb360_circuit | 360 | 12 | 43560 | >=17 | 88 | >=14 | >=16 | >=17 | skip |  | skip | skip | skip | skip | skip | none |
+| wjh_bb756_circuit | 756 | 16 | 129276 | >=17 | 56 | skip | >=17 | skip | skip |  | skip | skip | skip | skip | skip | none |
 
 </details>
 
 <details><summary>Hyperbolic surface codes (21 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_hsc_00_n6 | 6 | 1 | 6 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  | MIP-SCIP, 0.0 s |
-| wjh_hsc_01_n24 | 24 | 4 | 24 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_02_n48 | 48 | 6 | 48 | 3 | 3 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_03_n84 | 84 | 9 | 84 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_04_n84 | 84 | 9 | 84 | 3 | 3 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_05_n96 | 96 | 10 | 96 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_06_n168 | 168 | 16 | 168 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.6 s | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_07_n168 | 168 | 16 | 168 | 4 | 4 | 0.2 s | 0.2 s |  | 0.5 s | 0.6 s | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_08_n180 | 180 | 17 | 180 | 5 | 5 | 0.2 s | 0.2 s |  | 1.5 s | 1.6 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_09_n252 | 252 | 23 | 252 | 4 | 4 | 0.2 s | 0.2 s |  | 0.7 s | 0.8 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_10_n360 | 360 | 32 | 360 | 5 | 5 | 0.3 s | 0.2 s |  | 2.5 s | 3.2 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_11_n384 | 384 | 34 | 384 | 4 | 4 | 0.3 s | 0.3 s |  | 0.5 s | 1.0 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_12_n504 | 504 | 44 | 504 | 6 | 6 | 0.3 s | 0.4 s |  | 329 s | 171 s | 0.1 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_13_n504 | 504 | 44 | 504 | 6 | 6 | 0.4 s | 0.4 s |  | 278 s | 120 s | 0.1 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_14_n540 | 540 | 47 | 540 | 5 | 5 | 0.4 s | 0.4 s |  | 45.2 s | 9.2 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hsc_15_n768 | 768 | 66 | 768 | 6 | 6 | 0.7 s | 0.9 s |  | 4..6 | 250 s | 0.1 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_16_n1008 | 1008 | 86 | 1008 | 6 | 6 | 1.1 s | 1.1 s |  | 3..6 | 4..6 | 0.2 s | 0.1 s |  | m4riCC, 0.1 s |
-| wjh_hsc_17_n1080 | 1080 | 92 | 1080 | 6 | 6 | 1.2 s | 1.2 s |  | skip | 4..6 | 0.2 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_18_n1080 | 1080 | 92 | 1080 | 5 | 5 | 1.2 s | 1.2 s |  | skip | 58.2 s | 0.1 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_19_n1224 | 1224 | 104 | 1224 | 6 | 6 | 1.6 s | 1.6 s |  | skip | 4..6 | 0.3 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hsc_20_n1224 | 1224 | 104 | 1224 | 6 | 6 | 1.6 s | 1.6 s |  | skip | 4..6 | 0.3 s | 0.1 s |  | m4riCC, 0.1 s |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_hsc_00_n6 | 6 | 1 | 6 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  |  |  | MIP-SCIP, 0.0 s |
+| wjh_hsc_01_n24 | 24 | 4 | 24 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_02_n48 | 48 | 6 | 48 | 3 | 3 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_03_n84 | 84 | 9 | 84 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_04_n84 | 84 | 9 | 84 | 3 | 3 | 0.2 s | 0.2 s |  | 0.3 s | 0.3 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_05_n96 | 96 | 10 | 96 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_06_n168 | 168 | 16 | 168 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.6 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_07_n168 | 168 | 16 | 168 | 4 | 4 | 0.2 s | 0.2 s |  | 0.5 s | 0.6 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_08_n180 | 180 | 17 | 180 | 5 | 5 | 0.2 s | 0.2 s |  | 1.5 s | 1.6 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_09_n252 | 252 | 23 | 252 | 4 | 4 | 0.2 s | 0.2 s |  | 0.7 s | 0.8 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_10_n360 | 360 | 32 | 360 | 5 | 5 | 0.3 s | 0.2 s |  | 2.5 s | 3.2 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_11_n384 | 384 | 34 | 384 | 4 | 4 | 0.3 s | 0.3 s |  | 0.5 s | 1.0 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_12_n504 | 504 | 44 | 504 | 6 | 6 | 0.3 s | 0.4 s |  | 329 s | 171 s | 0.1 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_13_n504 | 504 | 44 | 504 | 6 | 6 | 0.4 s | 0.4 s |  | 278 s | 120 s | 0.1 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_14_n540 | 540 | 47 | 540 | 5 | 5 | 0.4 s | 0.4 s |  | 45.2 s | 9.2 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hsc_15_n768 | 768 | 66 | 768 | 6 | 6 | 0.7 s | 0.9 s |  | 4..6 | 250 s | 0.1 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_16_n1008 | 1008 | 86 | 1008 | 6 | 6 | 1.1 s | 1.1 s |  | 3..6 | 4..6 | 0.2 s | 0.1 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_17_n1080 | 1080 | 92 | 1080 | 6 | 6 | 1.2 s | 1.2 s |  | skip | 4..6 | 0.2 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_18_n1080 | 1080 | 92 | 1080 | 5 | 5 | 1.2 s | 1.2 s |  | skip | 58.2 s | 0.1 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_19_n1224 | 1224 | 104 | 1224 | 6 | 6 | 1.6 s | 1.6 s |  | skip | 4..6 | 0.3 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hsc_20_n1224 | 1224 | 104 | 1224 | 6 | 6 | 1.6 s | 1.6 s |  | skip | 4..6 | 0.3 s | 0.1 s |  |  |  | m4riCC, 0.1 s |
 
 </details>
 
 <details><summary>Hyperbolic colour codes (21 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_hcc_00_n4 | 4 | 2 | 4 | 2 | 2 | 0.1 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  | MIP-SCIP, 0.0 s |
-| wjh_hcc_01_n16 | 16 | 8 | 16 | 2 | 2 | 0.1 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | CLISAT, 0.0 s |
-| wjh_hcc_02_n32 | 32 | 12 | 32 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_03_n56 | 56 | 14 | 56 | 6 | 6 | 0.2 s | 0.2 s |  | 0.3 s | 0.6 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_04_n56 | 56 | 14 | 56 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_05_n64 | 64 | 20 | 64 | 4 | 4 | 0.1 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_06_n112 | 112 | 28 | 112 | 6 | 6 | 0.2 s | 0.2 s |  | 1.1 s | 1.2 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_07_n112 | 112 | 28 | 112 | 8 | 8 | 0.2 s | 0.2 s |  | 4.3 s | 5.0 s | 0.2 s | 0.0 s |  | m4riCC, 0.2 s |
-| wjh_hcc_08_n120 | 120 | 30 | 120 | 8 | 8 | 0.2 s | 0.2 s |  | 9.1 s | 6.4 s | 0.3 s | 0.0 s |  | m4riCC, 0.2 s |
-| wjh_hcc_09_n168 | 168 | 46 | 168 | 6 | 6 | 0.2 s | 0.2 s |  | 2.1 s | 1.2 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_hcc_10_n240 | 240 | 60 | 240 | 8 | 8 | 0.2 s | 0.2 s |  | 59.0 s | 48.3 s | 0.5 s | 0.0 s |  | m4riCC, 0.4 s |
-| wjh_hcc_11_n256 | 256 | 68 | 256 | 8 | 8 | 0.2 s | 0.2 s |  | 46.0 s | 8.6 s | 0.4 s | 0.0 s |  | m4riCC, 0.4 s |
-| wjh_hcc_12_n336 | 336 | 88 | 336 | 6 | 6 | 0.3 s | 0.3 s |  | 13.7 s | 14.0 s | 0.0 s | 0.0 s |  | m4riCC, 0.1 s |
-| wjh_hcc_13_n336 | 336 | 88 | 336 | 8 | 8 | 0.3 s | 0.3 s |  | 122 s | 48.1 s | 0.5 s | 0.0 s |  | m4riCC, 0.4 s |
-| wjh_hcc_14_n360 | 360 | 90 | 360 | 8 | 8 | 0.3 s | 0.3 s |  | 313 s | 108 s | 0.7 s | 0.1 s |  | m4riCC, 0.6 s |
-| wjh_hcc_15_n512 | 512 | 132 | 512 | 8 | 8 | 0.5 s | 0.5 s |  | 4..8 | 140 s | 0.9 s | 0.1 s |  | m4riCC, 0.7 s |
-| wjh_hcc_16_n672 | 672 | 172 | 672 | 10 | 10 | 1.0 s | 1.0 s |  | 2..10 | 5..10 | 26.4 s | 0.6 s |  | m4riCC, 22.5 s |
-| wjh_hcc_17_n720 | 720 | 184 | 720 | 8 | 8 | 0.8 s | 0.8 s |  | skip | 5..8 | 0.8 s | 0.1 s |  | m4riCC, 0.8 s |
-| wjh_hcc_18_n720 | 720 | 180 | 720 | 10 | 10 | 1.1 s | 1.1 s |  | skip | 4..10 | 27.8 s | 0.7 s |  | m4riCC, 30.5 s |
-| wjh_hcc_19_n816 | 816 | 204 | 816 | 12 | 12 | 7.7 s | 7.6 s |  | skip | skip | >=11 | 11.4 s |  | m4riCC, 1149 s |
-| wjh_hcc_20_n816 | 816 | 204 | 816 | 6 | 6 | 0.9 s | 0.9 s |  | skip | skip | 0.1 s | 0.1 s |  | m4riCC, 0.1 s |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_hcc_00_n4 | 4 | 2 | 4 | 2 | 2 | 0.1 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  |  |  | MIP-SCIP, 0.0 s |
+| wjh_hcc_01_n16 | 16 | 8 | 16 | 2 | 2 | 0.1 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | CLISAT, 0.0 s |
+| wjh_hcc_02_n32 | 32 | 12 | 32 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_03_n56 | 56 | 14 | 56 | 6 | 6 | 0.2 s | 0.2 s |  | 0.3 s | 0.6 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_04_n56 | 56 | 14 | 56 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_05_n64 | 64 | 20 | 64 | 4 | 4 | 0.1 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_06_n112 | 112 | 28 | 112 | 6 | 6 | 0.2 s | 0.2 s |  | 1.1 s | 1.2 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_07_n112 | 112 | 28 | 112 | 8 | 8 | 0.2 s | 0.2 s |  | 4.3 s | 5.0 s | 0.2 s | 0.0 s |  |  |  | m4riCC, 0.2 s |
+| wjh_hcc_08_n120 | 120 | 30 | 120 | 8 | 8 | 0.2 s | 0.2 s |  | 9.1 s | 6.4 s | 0.3 s | 0.0 s |  |  |  | m4riCC, 0.2 s |
+| wjh_hcc_09_n168 | 168 | 46 | 168 | 6 | 6 | 0.2 s | 0.2 s |  | 2.1 s | 1.2 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_hcc_10_n240 | 240 | 60 | 240 | 8 | 8 | 0.2 s | 0.2 s |  | 59.0 s | 48.3 s | 0.5 s | 0.0 s |  |  |  | m4riCC, 0.4 s |
+| wjh_hcc_11_n256 | 256 | 68 | 256 | 8 | 8 | 0.2 s | 0.2 s |  | 46.0 s | 8.6 s | 0.4 s | 0.0 s |  |  |  | m4riCC, 0.4 s |
+| wjh_hcc_12_n336 | 336 | 88 | 336 | 6 | 6 | 0.3 s | 0.3 s |  | 13.7 s | 14.0 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.1 s |
+| wjh_hcc_13_n336 | 336 | 88 | 336 | 8 | 8 | 0.3 s | 0.3 s |  | 122 s | 48.1 s | 0.5 s | 0.0 s |  |  |  | m4riCC, 0.4 s |
+| wjh_hcc_14_n360 | 360 | 90 | 360 | 8 | 8 | 0.3 s | 0.3 s |  | 313 s | 108 s | 0.7 s | 0.1 s |  |  |  | m4riCC, 0.6 s |
+| wjh_hcc_15_n512 | 512 | 132 | 512 | 8 | 8 | 0.5 s | 0.5 s |  | 4..8 | 140 s | 0.9 s | 0.1 s |  |  |  | m4riCC, 0.7 s |
+| wjh_hcc_16_n672 | 672 | 172 | 672 | 10 | 10 | 1.0 s | 1.0 s |  | 2..10 | 5..10 | 26.4 s | 0.6 s |  |  |  | m4riCC, 22.5 s |
+| wjh_hcc_17_n720 | 720 | 184 | 720 | 8 | 8 | 0.8 s | 0.8 s |  | skip | 5..8 | 0.8 s | 0.1 s |  |  |  | m4riCC, 0.8 s |
+| wjh_hcc_18_n720 | 720 | 180 | 720 | 10 | 10 | 1.1 s | 1.1 s |  | skip | 4..10 | 27.8 s | 0.7 s |  |  |  | m4riCC, 30.5 s |
+| wjh_hcc_19_n816 | 816 | 204 | 816 | 12 | 12 | 7.7 s | 7.6 s |  | skip | skip | >=11 | 11.4 s |  |  |  | m4riCC, 1149 s |
+| wjh_hcc_20_n816 | 816 | 204 | 816 | 6 | 6 | 0.9 s | 0.9 s |  | skip | skip | 0.1 s | 0.1 s |  |  |  | m4riCC, 0.1 s |
 
 </details>
 
 <details><summary>Lifted-product codes (19 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_lp_aj01 | 34 | 20 | 34 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  | CLISAT, 0.0 s |
-| wjh_lp_aj04 | 136 | 32 | 136 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_lp_aj07 | 238 | 44 | 238 | 6 | 6 | 0.2 s | 0.2 s |  | 3.1 s | 1.4 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_lp_aj10 | 340 | 56 | 340 | 8 | 8 | 0.3 s | 0.3 s |  | 29.3 s | 12.4 s | 0.6 s | 0.0 s |  | m4riCC, 0.4 s |
-| wjh_lp_aj13 | 442 | 68 | 442 | 10 | 10 | 0.4 s | 0.4 s |  | 496 s | 513 s | 27.4 s | 0.4 s |  | m4riCC, 20.4 s |
-| wjh_lp_xu16 | 544 | 80 | 544 | 12 | 12 | 0.5 s | 0.5 s |  | 6..12 | 8..12 | >=11 | 4.4 s |  | m4riCC, 984 s |
-| wjh_lp_xu21 | 714 | 100 | 714 | 16 | 16 | 2.3 s | 2.2 s |  | 3..16 | 5..16 | >=11 | >=15 | 328 s | none |
-| wjh_lp_xu30 | 1020 | 136 | 1020 | 16 | 16 | 2.9 s | 2.7 s |  | skip | skip | skip | >=15 | 428 s | none |
-| wjh_lp_pk31 | 1054 | 140 | 1054 | 20 | 20 | 69.5 s | 69.2 s |  | skip | skip | skip | skip | 18..20 | none |
-| wjh_lp_xu42 | 1428 | 184 | 1428 | 24 | 24 | >=22 | 3316 s | 118 s | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj52 | 1768 | 224 | 1768 | 22 | 22 | 422 s | 433 s |  | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj58 | 1972 | 248 | 1972 | 20 | 20 | 56.5 s | 59.0 s |  | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj60 | 2040 | 256 | 2040 | 20 | 20 | 62.5 s | 64.6 s |  | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj61 | 2074 | 260 | 2074 | 24 | 24 | >=22 | 2360 s | 83.3 s | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj67 | 2278 | 284 | 2278 | 22 | 22 | 362 s | 375 s |  | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj73 | 2482 | 308 | 2482 | 24 | 24 | >=22 | 1834 s | 60.5 s | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj80 | 2720 | 336 | 2720 | 22 | 22 | 250 s | 279 s |  | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj85 | 2890 | 356 | 2890 | 24 | 24 | >=23 | 1716 s | 62.0 s | skip | skip | skip | skip | skip | none |
-| wjh_lp_aj95 | 3230 | 396 | 3230 | 24 | 24 | >=23 | 1598 s | 67.8 s | skip | skip | skip | skip | skip | none |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_lp_aj01 | 34 | 20 | 34 | 2 | 2 | 0.2 s | 0.2 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  |  |  | CLISAT, 0.0 s |
+| wjh_lp_aj04 | 136 | 32 | 136 | 4 | 4 | 0.2 s | 0.2 s |  | 0.3 s | 0.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_lp_aj07 | 238 | 44 | 238 | 6 | 6 | 0.2 s | 0.2 s |  | 3.1 s | 1.4 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_lp_aj10 | 340 | 56 | 340 | 8 | 8 | 0.3 s | 0.3 s |  | 29.3 s | 12.4 s | 0.6 s | 0.0 s |  |  |  | m4riCC, 0.4 s |
+| wjh_lp_aj13 | 442 | 68 | 442 | 10 | 10 | 0.4 s | 0.4 s |  | 496 s | 513 s | 27.4 s | 0.4 s |  |  |  | m4riCC, 20.4 s |
+| wjh_lp_xu16 | 544 | 80 | 544 | 12 | 12 | 0.5 s | 0.5 s |  | 6..12 | 8..12 | >=11 | 4.4 s |  |  |  | m4riCC, 984 s |
+| wjh_lp_xu21 | 714 | 100 | 714 | 16 | 16 | 2.3 s | 2.2 s |  | 3..16 | 5..16 | >=11 | >=15 | 328 s |  |  | none |
+| wjh_lp_xu30 | 1020 | 136 | 1020 | 16 | 16 | 2.9 s | 2.7 s |  | skip | skip | skip | >=15 | 428 s |  |  | none |
+| wjh_lp_pk31 | 1054 | 140 | 1054 | 20 | 20 | 69.5 s | 69.2 s |  | skip | skip | skip | skip | 18..20 |  |  | none |
+| wjh_lp_xu42 | 1428 | 184 | 1428 | 24 | 24 | >=22 | 3316 s | 118 s | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj52 | 1768 | 224 | 1768 | 22 | 22 | 422 s | 433 s |  | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj58 | 1972 | 248 | 1972 | 20 | 20 | 56.5 s | 59.0 s |  | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj60 | 2040 | 256 | 2040 | 20 | 20 | 62.5 s | 64.6 s |  | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj61 | 2074 | 260 | 2074 | 24 | 24 | >=22 | 2360 s | 83.3 s | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj67 | 2278 | 284 | 2278 | 22 | 22 | 362 s | 375 s |  | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj73 | 2482 | 308 | 2482 | 24 | 24 | >=22 | 1834 s | 60.5 s | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj80 | 2720 | 336 | 2720 | 22 | 22 | 250 s | 279 s |  | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj85 | 2890 | 356 | 2890 | 24 | 24 | >=23 | 1716 s | 62.0 s | skip | skip | skip | skip | skip |  |  | none |
+| wjh_lp_aj95 | 3230 | 396 | 3230 | 24 | 24 | >=23 | 1598 s | 67.8 s | skip | skip | skip | skip | skip |  |  | none |
 
 </details>
 
 <details><summary>Bivariate bicycle codes (20 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_bb_n72 | 72 | 12 | 72 | 6 | 6 | 0.2 s | 0.1 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  | m4riCC, 0.0 s |
-| wjh_bb_n90 | 90 | 8 | 90 | 10 | 10 | 0.2 s | 0.2 s |  | 3.3 s | 8.2 s | 0.3 s | 0.0 s |  | m4riCC, 0.3 s |
-| wjh_bb_n108 | 108 | 8 | 108 | 10 | 10 | 0.2 s | 0.2 s |  | 4.9 s | 4.6 s | 0.3 s | 0.0 s |  | m4riCC, 0.4 s |
-| wjh_bb_n144 | 144 | 12 | 144 | 12 | 12 | 0.2 s | 0.2 s |  | 52.7 s | 69.1 s | 5.0 s | 0.1 s |  | m4riCC, 5.7 s |
-| wjh_bb_n288 | 288 | 12 | 288 | 18 | 18 | 1.9 s | 1.8 s |  | 9..18 | 7..18 | >=14 | 142 s |  | none |
-| wjh_bb_n360 | 360 | 12 | 360 | 24 | 24 | >=23 | 1293 s | 68.5 s | 7..26 | 7..26 | >=14 | >=18 | 23..24 | none |
-| wjh_bb_n756 | 756 | 16 | 756 | >=28 | 34 | skip | >=28 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n216 | 216 | 8 | 216 | 10 | 10 | 0.2 s | 0.2 s |  | 4.3 s | 6.6 s | 0.5 s | 0.1 s |  | m4riCC, 0.7 s |
-| wjh_bb_n576 | 576 | 8 | 576 | 24 | 24 | >=23 | 752 s | 47.5 s | skip | skip | skip | >=18 | skip | none |
-| wjh_bb_n864 | 864 | 4 | 864 | >=27 | 40 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n648 | 648 | 4 | 648 | >=28 | 32 | skip | >=27 | >=28 | skip | skip | skip | skip | skip | none |
-| wjh_bb_n1080 | 1080 | 4 | 1080 | >=27 | 54 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n1296 | 1296 | 4 | 1296 | >=28 | 46 | skip | >=28 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n1152 | 1152 | 4 | 1152 | >=27 | 36 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n1728 | 1728 | 4 | 1728 | >=28 | 64 | skip | >=28 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n2016 | 2016 | 8 | 2016 | >=27 | 54 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n2160 | 2160 | 8 | 2160 | >=28 | 64 | skip | >=28 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n2520 | 2520 | 8 | 2520 | >=27 | 50 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n2592 | 2592 | 8 | 2592 | >=27 | 36 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
-| wjh_bb_n3024 | 3024 | 4 | 3024 | >=27 | 78 | skip | >=27 | skip | skip | skip | skip | skip | skip | none |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_bb_n72 | 72 | 12 | 72 | 6 | 6 | 0.2 s | 0.1 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  |  |  | m4riCC, 0.0 s |
+| wjh_bb_n90 | 90 | 8 | 90 | 10 | 10 | 0.2 s | 0.2 s |  | 3.3 s | 8.2 s | 0.3 s | 0.0 s |  |  |  | m4riCC, 0.3 s |
+| wjh_bb_n108 | 108 | 8 | 108 | 10 | 10 | 0.2 s | 0.2 s |  | 4.9 s | 4.6 s | 0.3 s | 0.0 s |  |  |  | m4riCC, 0.4 s |
+| wjh_bb_n144 | 144 | 12 | 144 | 12 | 12 | 0.2 s | 0.2 s |  | 52.7 s | 69.1 s | 5.0 s | 0.1 s |  |  |  | m4riCC, 5.7 s |
+| wjh_bb_n288 | 288 | 12 | 288 | 18 | 18 | 1.9 s | 1.8 s |  | 9..18 | 7..18 | >=14 | 142 s |  |  |  | none |
+| wjh_bb_n360 | 360 | 12 | 360 | 24 | 24 | >=23 | 1293 s | 68.5 s | 7..26 | 7..26 | >=14 | >=18 | 23..24 |  |  | none |
+| wjh_bb_n756 | 756 | 16 | 756 | >=28 | 34 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n216 | 216 | 8 | 216 | 10 | 10 | 0.2 s | 0.2 s |  | 4.3 s | 6.6 s | 0.5 s | 0.1 s |  |  |  | m4riCC, 0.7 s |
+| wjh_bb_n576 | 576 | 8 | 576 | 24 | 24 | >=23 | 752 s | 47.5 s | skip | skip | skip | >=18 | skip |  |  | none |
+| wjh_bb_n864 | 864 | 4 | 864 | >=27 | 40 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n648 | 648 | 4 | 648 | >=28 | 32 | skip | >=27 | >=28 | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n1080 | 1080 | 4 | 1080 | >=27 | 54 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n1296 | 1296 | 4 | 1296 | >=28 | 46 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n1152 | 1152 | 4 | 1152 | >=27 | 36 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n1728 | 1728 | 4 | 1728 | >=28 | 64 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n2016 | 2016 | 8 | 2016 | >=27 | 54 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n2160 | 2160 | 8 | 2160 | >=28 | 64 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n2520 | 2520 | 8 | 2520 | >=27 | 50 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n2592 | 2592 | 8 | 2592 | >=27 | 36 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n3024 | 3024 | 4 | 3024 | >=27 | 78 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
 
 </details>
 
 <details><summary>Quantum Tanner codes (22 instances)</summary>
 
-| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | their fastest exact (8 h) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| wjh_qt_36_8_4 | 36 | 8 | 36 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  | CLISAT, 0.0 s |
-| wjh_qt_72_8_8 | 72 | 8 | 72 | 8 | 8 | 0.2 s | 0.2 s |  | 1.1 s | 1.0 s | 0.2 s | 0.1 s |  | m4riCC, 0.2 s |
-| wjh_qt_108_2_12 | 108 | 2 | 108 | 12 | 12 | 0.7 s | 0.7 s |  | 30.7 s | 58.1 s | 329 s | 8.0 s |  | Gurobi, 53.4 s |
-| wjh_qt_144_2_13 | 144 | 2 | 144 | 13 | 13 | 3.6 s | 3.6 s |  | 257 s | 432 s | >=12 | 116 s |  | Gurobi, 338 s |
-| wjh_qt_180_2_17 | 180 | 2 | 180 | 17 | 17 | 276 s | 279 s |  | 10..17 | 10..17 | >=12 | >=14 | 1788 s | Gurobi, 12287 s |
-| wjh_qt_216_4_18 | 216 | 4 | 216 | 18 | 18 | >=17 | 711 s | 28.4 s | 10..18 | 10..19 | skip | >=14 | 17..18 | none |
-| wjh_qt_252_2_21 | 252 | 2 | 252 | 22 | 22 | >=18 | >=21 | 1934 s | skip | skip | skip | skip | skip | none |
-| wjh_qt_288_2_24 | 288 | 2 | 288 | >=22 | 24 | skip | >=21 | >=22 | skip | skip | skip | skip | skip | none |
-| wjh_qt_324_4_25 | 324 | 4 | 324 | >=21 | 25 | skip | >=21 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_360_4_24 | 360 | 4 | 360 | >=21 | 24 | skip | >=21 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_396_4_26 | 396 | 4 | 396 | >=22 | 27 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_432_8_33 | 432 | 8 | 432 | >=22 | 30 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_468_4_31 | 468 | 4 | 468 | >=22 | 29 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_496_2_32 | 496 | 2 | 496 | >=21 | 30 | skip | >=21 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_504_2_45 | 504 | 2 | 504 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_540_4_40 | 540 | 4 | 540 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_576_2_57 | 576 | 2 | 576 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_576_2_59 | 576 | 2 | 576 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_612_2_52 | 612 | 2 | 612 | >=22 | 41 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_648_10_71 | 648 | 10 | 648 | >=22 | 33 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_648_14_50 | 648 | 14 | 648 | >=22 | 29 | skip | >=22 | skip | skip | skip | skip | skip | skip | none |
-| wjh_qt_684_2_29 | 684 | 2 | 684 | >=21 | 29 | skip | >=21 | skip | skip | skip | skip | skip | skip | none |
+| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 | Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 | dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| wjh_qt_36_8_4 | 36 | 8 | 36 | 4 | 4 | 0.1 s | 0.1 s |  | 0.3 s | 6.8 s | 0.0 s | 0.0 s |  |  |  | CLISAT, 0.0 s |
+| wjh_qt_72_8_8 | 72 | 8 | 72 | 8 | 8 | 0.2 s | 0.2 s |  | 1.1 s | 1.0 s | 0.2 s | 0.1 s |  |  |  | m4riCC, 0.2 s |
+| wjh_qt_108_2_12 | 108 | 2 | 108 | 12 | 12 | 0.7 s | 0.7 s |  | 30.7 s | 58.1 s | 329 s | 8.0 s |  |  |  | Gurobi, 53.4 s |
+| wjh_qt_144_2_13 | 144 | 2 | 144 | 13 | 13 | 3.6 s | 3.6 s |  | 257 s | 432 s | >=12 | 116 s |  |  |  | Gurobi, 338 s |
+| wjh_qt_180_2_17 | 180 | 2 | 180 | 17 | 17 | 276 s | 279 s |  | 10..17 | 10..17 | >=12 | >=14 | 1788 s |  |  | Gurobi, 12287 s |
+| wjh_qt_216_4_18 | 216 | 4 | 216 | 18 | 18 | >=17 | 711 s | 28.4 s | 10..18 | 10..19 | skip | >=14 | 17..18 |  |  | none |
+| wjh_qt_252_2_21 | 252 | 2 | 252 | 22 | 22 | >=18 | >=21 | 1934 s | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_288_2_24 | 288 | 2 | 288 | >=22 | 24 | skip | >=21 | >=22 | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_324_4_25 | 324 | 4 | 324 | >=21 | 25 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_360_4_24 | 360 | 4 | 360 | >=21 | 24 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_396_4_26 | 396 | 4 | 396 | >=22 | 27 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_432_8_33 | 432 | 8 | 432 | >=22 | 30 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_468_4_31 | 468 | 4 | 468 | >=22 | 29 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_496_2_32 | 496 | 2 | 496 | >=21 | 30 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_504_2_45 | 504 | 2 | 504 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_540_4_40 | 540 | 4 | 540 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_576_2_57 | 576 | 2 | 576 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_576_2_59 | 576 | 2 | 576 | >=22 | 39 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_612_2_52 | 612 | 2 | 612 | >=22 | 41 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_648_10_71 | 648 | 10 | 648 | >=22 | 33 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_648_14_50 | 648 | 14 | 648 | >=22 | 29 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_684_2_29 | 684 | 2 | 684 | >=21 | 29 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
 
 </details>
 <!-- TABLE:wjh:END -->

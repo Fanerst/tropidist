@@ -41,6 +41,14 @@ FAMILIES = [("surface_circuit", "08 qc_SC.xlsx", "surface-code circuits"),
 THEIR_EXACT = [("Gurobi", "Gurobi"), ("MIP-SCIP", "MIP-SCIP"), ("CLISAT", "CLISAT"), ("m4riCC", "m4ri_CC"),
                ("Magma", "magma")]
 OURS = [("ours", "ours"), ("Gurobi", "Gurobi"), ("dist-m4ri CC", "dist-m4ri"), ("dist-m4ri CC+RW", "dist-m4ri")]
+MODEL_BOUND = ("dist-m4ri CC, model bound", "dist-m4ri CC+RW, model bound")
+
+
+def best_of(recs, methods, name, variant):
+    """The fastest exact record among methods, else the first record present (None if there is none)."""
+    found = [r for r in (recs.get((m, name, variant)) for m in methods) if r is not None]
+    exact = [r for r in found if r.get("status") == "exact"]
+    return min(exact, key=lambda r: r["seconds"]) if exact else (found[0] if found else None)
 
 
 def sheet_rows(rows):
@@ -156,8 +164,9 @@ def report():
                "| Gurobi, 1 thread, 600 s | Gurobi, sparse L, 1 thread, 600 s "
                "| dist-m4ri 0.9.0 CC, 1 thread, 600 s | dist-m4ri 0.14.7 CC, 1 thread, 600 s "
                "| dist-m4ri 0.14.7, 600 s + 32 threads, 1 h "
+               "| dist-m4ri 0.14.7 with its model bound, 1 thread, 600 s | the same, + 32 threads, 1 h "
                "| theirs, 1 core, 8 h, 8 GB: Gurobi / MIP-SCIP / CLISAT / m4riCC / Magma | any of theirs |",
-               "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|"]
+               "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|"]
     detail, notes, total, settled = [], [], {}, []
     for family, sheet, title in FAMILIES:
         path = SHEETS / sheet
@@ -195,6 +204,9 @@ def report():
             c[key] = sum(solved(a1, method, n, variant) or any(solved(b32, m2, n, variant) for m2 in tier2)
                          for n in names)
         c["o8"] = sum(solved(a1, "ours", n, variant) or solved(h8, "ours", n, variant) for n in names)
+        # dist-m4ri with the model lower bound of --model-lb (circuits only): either mode in the first tier
+        c["b1"] = sum(any(solved(a1, m2, n, variant) for m2 in MODEL_BOUND) for n in names)
+        c["b"] = sum(any(solved(a1, m2, n, variant) or solved(b32, m2, n, variant) for m2 in MODEL_BOUND) for n in names)
         c["m0"] = sum(solved(a1, "dist-m4ri 0.9.0 CC, no cutoff", n, variant) for n in names)
         c["gs"] = sum(solved(a1, "Gurobi, sparse L", n, variant) for n in names)
         anyt = sum(1 for n in names if exact_theirs[n])
@@ -204,15 +216,16 @@ def report():
         total["any"] = total.get("any", 0) + anyt
         for k, v in counts.items():
             total["t_" + k] = total.get("t_" + k, 0) + v
-        summary.append("| %s | %d | %d | %d | %d | %d | %s | %d | %d | %d | %s | %d |" % (
-            title, len(names), c["o1"], c["o8"], c["o"], c["g1"], "–" if family.endswith("_circuit") else c["gs"],
-            c["m0"], c["m1"], c["m"],
+        circuit = family.endswith("_circuit")
+        summary.append("| %s | %d | %d | %d | %d | %d | %s | %d | %d | %d | %s | %s | %s | %d |" % (
+            title, len(names), c["o1"], c["o8"], c["o"], c["g1"], "–" if circuit else c["gs"],
+            c["m0"], c["m1"], c["m"], c["b1"] if circuit else "–", c["b"] if circuit else "–",
             " / ".join(str(counts[k]) for k, _ in THEIR_EXACT), anyt))
         lines = ["", "<details><summary>%s (%d instances)</summary>" % (title[0].upper() + title[1:], len(names)), "",
                  "| instance | n | k | columns | distance | their best | ours t1 | ours 1 thread, 8 h | ours t2 "
                  "| Gurobi t1 | Gurobi, sparse L, t1 | dist-m4ri 0.9.0 t1 | dist-m4ri 0.14.7 t1 | dist-m4ri 0.14.7 t2 "
-                 "| their fastest exact (8 h) |",
-                 "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
+                 "| dist-m4ri, model bound, t1 | dist-m4ri, model bound, t2 | their fastest exact (8 h) |",
+                 "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
         for n in names:
             m = ms[n]
             v = m["variants"][variant]
@@ -220,7 +233,8 @@ def report():
                                                                  "dist-m4ri 0.9.0 CC, no cutoff"))
                     if r is not None] + [r for r in (b32.get((x, n, variant)) for x in ("ours", "Gurobi", "dist-m4ri CC+RW",
                                                                                         "dist-m4ri CC"))
-                                         if r is not None] + [r for r in [h8.get(("ours", n, variant))] if r is not None]
+                                         if r is not None] + [r for r in [h8.get(("ours", n, variant))] if r is not None] \
+                + [r for x in MODEL_BOUND for r in (a1.get((x, n, variant)), b32.get((x, n, variant))) if r is not None]
             lbs = [r["lower_bound"] for r in recs if r.get("lower_bound") is not None and r.get("status") in ("exact", "bounds", "timeout")]
             ubs = [r["upper_bound"] for r in recs if r.get("upper_bound") is not None and r.get("witness_ok")]
             d = (str(min(ubs)) if lbs and ubs and max(lbs) == min(ubs) else
@@ -237,7 +251,7 @@ def report():
                 d = "%d‡" % t
             fast = min(exact_theirs[n]) if exact_theirs[n] else None
             bk = best_map.get(n)
-            lines.append("| %s | %s | %s | %d | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
+            lines.append("| %s | %s | %s | %d | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
                 n, m.get("n", ""), m.get("k", ""), v["cols"], d, bk[3] if bk else "",
                 ours_cell(a1.get(("ours", n, variant))), ours_cell(h8.get(("ours", n, variant))),
                 ours_cell(b32.get(("ours", n, variant))),
@@ -246,10 +260,13 @@ def report():
                 ours_cell(a1.get(("dist-m4ri CC", n, variant))),
                 ours_cell(next((r for r in [b32.get(("dist-m4ri CC", n, variant))] if r and r.get("status") == "exact"),
                                b32.get(("dist-m4ri CC+RW", n, variant)))),
+                ours_cell(best_of(a1, MODEL_BOUND, n, variant)), ours_cell(best_of(b32, MODEL_BOUND, n, variant)),
                 ("%s, %s" % (fast[1], T.seconds(fast[0]))) if fast else "none"))
         detail += lines + ["", "</details>"]
-    summary.append("| **all** | %d | **%d** | **%d** | **%d** | %d | %d (codes) | %d | %d | %d | %s | %d |" % (
+    summary.append("| **all** | %d | **%d** | **%d** | **%d** | %d | %d (codes) | %d | %d | %d | %d (circuits) | %d (circuits) "
+                   "| %s | %d |" % (
         total["n"], total["o1"], total["o8"], total["o"], total["g1"], total["gs"], total["m0"], total["m1"], total["m"],
+        total["b1"], total["b"],
         " / ".join(str(total["t_" + k]) for k, _ in THEIR_EXACT), total["any"]))
     notes += agreement(ms, a1, b32, h8)
     if settled:

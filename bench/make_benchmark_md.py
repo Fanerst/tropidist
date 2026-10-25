@@ -23,8 +23,11 @@ OLD_DM4RI = lambda name: name.startswith("dist-m4ri 0.9.0")      # superseded bu
 # configurations of our pipeline are compared in the text of docs/BENCHMARK.md and in the ablation.
 OTHER_CONFIGS = ("ours, search only", "ours + DP", "ours, plain")
 HIDE = lambda name: OLD_DM4RI(name) or name in OTHER_CONFIGS
-DM4RI_VERSIONS = ["dist-m4ri 0.9.0 CC", "dist-m4ri 0.9.0 CC, no cutoff", "dist-m4ri CC", "dist-m4ri CC+RW"]
-DM4RI_VERSIONS_RAW = DM4RI_VERSIONS + ["dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
+# with the model lower bound of --model-lb (bound=model, 25 October 2026) next to the runs without it
+DM4RI_VERSIONS = ["dist-m4ri 0.9.0 CC", "dist-m4ri 0.9.0 CC, no cutoff", "dist-m4ri CC", "dist-m4ri CC+RW",
+                  "dist-m4ri CC, model bound", "dist-m4ri CC+RW, model bound"]
+DM4RI_VERSIONS_RAW = DM4RI_VERSIONS + ["dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input",
+                                       "dist-m4ri CC, DEM input, model bound", "dist-m4ri CC+RW, DEM input, model bound"]
 # tools whose code results depend on the logical basis: the main tables keep their runs on the instances' first
 # basis; their runs on the sparse basis (full.L.std.mtx) are side by side in a section of their own, and the
 # coverage counts credit a tool with either basis
@@ -140,7 +143,8 @@ def tables():
             except (OSError, ValueError):
                 pass
         for variant, track in (("sector", "circuit"), ("full", "code")):
-            t["DM-B32-%s" % track] = T.table(B, variant, track, 32, methods=["dist-m4ri 0.9.0 CC+RW", "dist-m4ri CC+RW", "dist-m4ri CC"])
+            t["DM-B32-%s" % track] = T.table(B, variant, track, 32, methods=["dist-m4ri 0.9.0 CC+RW", "dist-m4ri CC+RW", "dist-m4ri CC",
+                                                                              "dist-m4ri CC+RW, model bound"])
         bad = T.consistency(B, 32) + T.consistency(B, 1)
         t["B-check"] = "\n".join("- " + b for b in bad) if bad else "All second-tier records are mutually consistent and consistent with the ground truth."
     if ABL.is_dir():

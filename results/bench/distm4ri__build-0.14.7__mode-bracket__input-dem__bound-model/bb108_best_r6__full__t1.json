@@ -1,0 +1,192 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "input": "dem",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "model_bound": 8,
+    "model_seconds": 1.509,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "dmin": "8",
+    "fdem": "/tmp/bench-distm4ri-6rz897zc/input.dem",
+    "pmin": "0",
+    "timeout": "597.665022948"
+  },
+  "instance": "bb108_best_r6",
+  "variant": "full",
+  "rows": 648,
+  "cols": 24246,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 9,
+  "upper_bound": 10,
+  "witness": [
+    21929,
+    21930,
+    22388,
+    22389,
+    22631,
+    22660,
+    22976,
+    24092,
+    24119,
+    24179
+  ],
+  "witness_ok": true,
+  "seconds": 347.065,
+  "trace": [
+    {
+      "t": 1.665,
+      "lb": 8
+    },
+    {
+      "t": 301.853,
+      "lb": 9
+    },
+    {
+      "t": 301.854,
+      "ub": 121
+    },
+    {
+      "t": 301.855,
+      "ub": 120
+    },
+    {
+      "t": 301.856,
+      "ub": 97
+    },
+    {
+      "t": 301.857,
+      "ub": 95
+    },
+    {
+      "t": 301.857,
+      "ub": 87
+    },
+    {
+      "t": 301.858,
+      "ub": 74
+    },
+    {
+      "t": 301.858,
+      "ub": 73
+    },
+    {
+      "t": 301.859,
+      "ub": 70
+    },
+    {
+      "t": 301.86,
+      "ub": 69
+    },
+    {
+      "t": 301.861,
+      "ub": 68
+    },
+    {
+      "t": 301.862,
+      "ub": 61
+    },
+    {
+      "t": 301.862,
+      "ub": 58
+    },
+    {
+      "t": 301.862,
+      "ub": 29
+    },
+    {
+      "t": 301.863,
+      "ub": 28
+    },
+    {
+      "t": 301.864,
+      "ub": 27
+    },
+    {
+      "t": 301.864,
+      "ub": 26
+    },
+    {
+      "t": 301.864,
+      "ub": 25
+    },
+    {
+      "t": 301.864,
+      "ub": 24
+    },
+    {
+      "t": 301.865,
+      "ub": 23
+    },
+    {
+      "t": 301.865,
+      "ub": 19
+    },
+    {
+      "t": 301.866,
+      "ub": 16
+    },
+    {
+      "t": 301.87,
+      "ub": 15
+    },
+    {
+      "t": 301.87,
+      "ub": 14
+    },
+    {
+      "t": 301.871,
+      "ub": 12
+    },
+    {
+      "t": 301.872,
+      "ub": 11
+    },
+    {
+      "t": 301.872,
+      "ub": 10
+    }
+  ],
+  "peak_rss_mb": 109.0,
+  "truth": 10,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 8 from a 54 x 270 model of 24246 DEM mechanisms, model bounds [8, 8, 0], in 1.5 s; passed to the binary as dmin. Undecomposed loop-flattened DEM; pmin=0 retains every mechanism. dist-m4ri ignores probabilities after filtering, using unit weights. Raw supports map to full columns with GF(2) cancellation. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 9 10 34018 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,input=dem,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,input=dem,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/bb108_best_r6",
+    "family": "bb6_depth7",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      6
+    ],
+    "started_at": "2026-10-25T07:01:35.523922+00:00",
+    "ended_at": "2026-10-25T07:07:22.986796+00:00",
+    "wall_seconds": 347.354566,
+    "adapter_seconds": 347.065,
+    "trace_offset_seconds": 0.289566,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem__bound-model/bb108_best_r6__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem__bound-model/bb108_best_r6__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 20.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 1,
+    "model_seconds": 1.218,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d11/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d11/sector.L.mtx",
+    "timeout": "598.669097703"
+  },
+  "instance": "wjh_superdense_d11",
+  "variant": "sector",
+  "rows": 540,
+  "cols": 5250,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": 8,
+  "upper_bound": 11,
+  "witness": [
+    3481,
+    3484,
+    3533,
+    3537,
+    3587,
+    3842,
+    4048,
+    4147,
+    4207,
+    4273,
+    4296
+  ],
+  "witness_ok": true,
+  "seconds": 452.647,
+  "trace": [
+    {
+      "t": 1.231,
+      "lb": 1
+    },
+    {
+      "t": 1.267,
+      "lb": 2
+    },
+    {
+      "t": 1.269,
+      "ub": 28
+    },
+    {
+      "t": 1.269,
+      "ub": 25
+    },
+    {
+      "t": 1.27,
+      "ub": 24
+    },
+    {
+      "t": 1.271,
+      "ub": 17
+    },
+    {
+      "t": 1.271,
+      "ub": 16
+    },
+    {
+      "t": 1.272,
+      "ub": 15
+    },
+    {
+      "t": 1.272,
+      "ub": 14
+    },
+    {
+      "t": 1.273,
+      "ub": 13
+    },
+    {
+      "t": 1.273,
+      "ub": 11
+    },
+    {
+      "t": 1.56,
+      "lb": 3
+    },
+    {
+      "t": 1.819,
+      "lb": 4
+    },
+    {
+      "t": 2.124,
+      "lb": 5
+    },
+    {
+      "t": 2.659,
+      "lb": 6
+    },
+    {
+      "t": 7.507,
+      "lb": 7
+    },
+    {
+      "t": 73.999,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 114.8,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 1 from a 14 x 70 model of 43501 DEM mechanisms, model bounds [], in 1.2 s; passed to the binary as dmin. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 8 11 100000 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d11",
+    "family": "wjh_superdense_circuit",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-25T07:11:17.203170+00:00",
+    "ended_at": "2026-10-25T07:18:50.120329+00:00",
+    "wall_seconds": 452.906798,
+    "adapter_seconds": 452.647,
+    "trace_offset_seconds": 0.259798,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_superdense_d11__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_superdense_d11__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

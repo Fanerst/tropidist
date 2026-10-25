@@ -1,0 +1,162 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "input": "dem",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "model_bound": 4,
+    "model_seconds": 0.968,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "dmin": "4",
+    "fdem": "/tmp/bench-distm4ri-0if15oey/input.dem",
+    "pmin": "0",
+    "timeout": "598.341361284"
+  },
+  "instance": "sdbb_64",
+  "variant": "full",
+  "rows": 384,
+  "cols": 21248,
+  "obs": 8,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 8,
+  "upper_bound": 8,
+  "witness": [
+    7754,
+    7846,
+    7991,
+    8308,
+    8317,
+    8907,
+    9525,
+    9593
+  ],
+  "witness_ok": true,
+  "seconds": 103.433,
+  "trace": [
+    {
+      "t": 1.053,
+      "lb": 4
+    },
+    {
+      "t": 1.7,
+      "lb": 5
+    },
+    {
+      "t": 1.701,
+      "ub": 92
+    },
+    {
+      "t": 1.702,
+      "ub": 84
+    },
+    {
+      "t": 1.703,
+      "ub": 49
+    },
+    {
+      "t": 1.703,
+      "ub": 48
+    },
+    {
+      "t": 1.703,
+      "ub": 36
+    },
+    {
+      "t": 1.704,
+      "ub": 26
+    },
+    {
+      "t": 1.705,
+      "ub": 21
+    },
+    {
+      "t": 1.705,
+      "ub": 20
+    },
+    {
+      "t": 1.705,
+      "ub": 19
+    },
+    {
+      "t": 1.706,
+      "ub": 18
+    },
+    {
+      "t": 1.706,
+      "ub": 17
+    },
+    {
+      "t": 1.706,
+      "ub": 16
+    },
+    {
+      "t": 1.706,
+      "ub": 15
+    },
+    {
+      "t": 1.707,
+      "ub": 11
+    },
+    {
+      "t": 1.708,
+      "ub": 10
+    },
+    {
+      "t": 1.708,
+      "ub": 8
+    },
+    {
+      "t": 1.918,
+      "lb": 6
+    },
+    {
+      "t": 5.182,
+      "lb": 7
+    },
+    {
+      "t": 103.429,
+      "lb": 8
+    }
+  ],
+  "peak_rss_mb": 110.7,
+  "truth": 8,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 4 from a 32 x 224 model of 21248 DEM mechanisms, model bounds [4, 4, 0], in 1.0 s; passed to the binary as dmin. Undecomposed loop-flattened DEM; pmin=0 retains every mechanism. dist-m4ri ignores probabilities after filtering, using unit weights. Raw supports map to full columns with GF(2) cancellation. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 8 8 300 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,input=dem,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,input=dem,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/sdbb_64",
+    "family": "sdbb_parallel",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      7
+    ],
+    "started_at": "2026-10-25T07:22:34.504064+00:00",
+    "ended_at": "2026-10-25T07:24:18.144644+00:00",
+    "wall_seconds": 103.517634,
+    "adapter_seconds": 103.433,
+    "trace_offset_seconds": 0.084634,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem__bound-model/sdbb_64__full__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-bracket__input-dem__bound-model/sdbb_64__full__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 18.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

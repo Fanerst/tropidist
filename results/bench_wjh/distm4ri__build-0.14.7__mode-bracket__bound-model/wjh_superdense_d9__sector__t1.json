@@ -1,0 +1,126 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "bracket",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 1,
+    "model_seconds": 0.928,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "2083",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d9/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d9/sector.L.mtx",
+    "timeout": "598.938202235"
+  },
+  "instance": "wjh_superdense_d9",
+  "variant": "sector",
+  "rows": 300,
+  "cols": 2788,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 9,
+  "upper_bound": 9,
+  "witness": [
+    3,
+    4,
+    33,
+    34,
+    77,
+    427,
+    435,
+    526,
+    532
+  ],
+  "witness_ok": true,
+  "seconds": 570.472,
+  "trace": [
+    {
+      "t": 0.962,
+      "lb": 1
+    },
+    {
+      "t": 0.993,
+      "lb": 2
+    },
+    {
+      "t": 0.994,
+      "ub": 11
+    },
+    {
+      "t": 0.994,
+      "ub": 10
+    },
+    {
+      "t": 0.994,
+      "ub": 9
+    },
+    {
+      "t": 1.203,
+      "lb": 3
+    },
+    {
+      "t": 1.324,
+      "lb": 4
+    },
+    {
+      "t": 1.453,
+      "lb": 5
+    },
+    {
+      "t": 1.793,
+      "lb": 6
+    },
+    {
+      "t": 4.913,
+      "lb": 7
+    },
+    {
+      "t": 33.245,
+      "lb": 8
+    },
+    {
+      "t": 570.469,
+      "lb": 9
+    }
+  ],
+  "peak_rss_mb": 95.2,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 3, cache off): d >= 1 from a 11 x 54 model of 22558 DEM mechanisms, model bounds [], in 0.9 s; passed to the binary as dmin. Bracket mode with the model bound: no outC, so the program stops when the bounds meet; witnesses are the supports it prints (debug bit 32), checked here. Native triple: 9 9 700 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=bracket,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=bracket,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_superdense_d9",
+    "family": "wjh_superdense_circuit",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      11
+    ],
+    "started_at": "2026-10-25T07:01:46.484338+00:00",
+    "ended_at": "2026-10-25T07:11:17.102027+00:00",
+    "wall_seconds": 570.611815,
+    "adapter_seconds": 570.472,
+    "trace_offset_seconds": 0.139815,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_superdense_d9__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_wjh/distm4ri__build-0.14.7__mode-bracket__bound-model/wjh_superdense_d9__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 15.9,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

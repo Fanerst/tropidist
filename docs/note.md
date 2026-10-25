@@ -3,7 +3,7 @@
 Notes on the method and its numerical results, 7 October 2026, updated 19 October 2026 (Gurobi in
 the benchmark; the instances of the prior benchmark, section 4.2; the October version of dist-m4ri; a
 sparse logical basis for the code instances) and 25 October 2026 (the final configuration with two Rank DP
-evaluators, section 3.6; 14 instances added to the benchmark). Name of the method, provisional: the
+evaluators, section 3.6; 14 instances added to the benchmark; dist-m4ri with its model lower bound). Name of the method, provisional: the
 **tropical partition function method**. The distance is a minimum of tropical partition functions; here it
 is evaluated by a weight-bounded search with certified relaxations (collapse, lift, meet in the middle,
 bound) and by two Rank DP evaluators of the same functions. Full tables are in
@@ -21,9 +21,9 @@ lighter fault set, and an upper bound given by an explicit fault set replayed in
 cost is governed by the distance and by a small relaxed problem, not by the size of the circuit.
 
 - On a benchmark of 74 instances it solves 59 with one thread in 600 s and 71 with 32 threads in an
-  hour. All other exact methods together, among them Gurobi and the October version of dist-m4ri,
-  solve 36 and 48. One instance, a many-hypercube code with 256 logical qubits, is solved by another
-  method (SAT, in 21 minutes) and not by this one.
+  hour. All other exact methods together, among them Gurobi and the October version of dist-m4ri with
+  its model lower bound, solve 38 and 53. One instance, a many-hypercube code with 256 logical qubits,
+  is solved by another method (SAT, in 21 minutes) and not by this one.
 - On the 126 CSS instances of the most recent benchmark of distance methods (arXiv:2603.22532), run
   from that study's own files and under its own limits (one core, 8 GB and eight hours per run), it
   solves 95; that study's five exact methods together solved 73, all of them among these. With one
@@ -159,14 +159,14 @@ sector problem, their best case. A harness checks every witness; no two records 
 ![Benchmark](figs/fig2_benchmark.png)
 
 *Figure 2. Instances solved exactly. Compared: connected-cluster enumeration (dist-m4ri in its version
-of 15 October, Qubitserf), integer programming (HiGHS, CP-SAT, Gurobi), SAT and three MaxSAT solvers. A
+of 15 October, with and without its model lower bound; Qubitserf), integer programming (HiGHS, CP-SAT, Gurobi), SAT and three MaxSAT solvers. A
 tool counts an instance if any of its configurations solves it.*
 
 | instance | columns | d | this method | best other exact method |
 |---|---:|---:|---|---|
 | [[72,12,6]] circuit | 2232 | 6 | 0.3 s | dist-m4ri, 0.1 s |
-| [[90,8,10]] circuit | 4590 | 8 | 0.5 s | dist-m4ri, 60 s |
-| [[144,12,12]] circuit | 8784 | 10 | 1.6 s | dist-m4ri, 532 s on 32 threads |
+| [[90,8,10]] circuit | 4590 | 8 | 0.5 s | dist-m4ri, 51 s |
+| [[144,12,12]] circuit | 8784 | 10 | 1.6 s | dist-m4ri, 348 s on 32 threads |
 | [[288,12,18]] circuit | 26,208 | 16 | 220 s on 32 threads | none |
 | [[1044,526,12]] circuit | 35,496 | 10 | 927 s on 32 threads | none |
 | superdense color-code circuit, d = 11 | 5250 | 11 | 30 min on 32 threads | none |
@@ -185,11 +185,15 @@ DP evaluators that this method solves in seconds, and the many-hypercube code th
 
 The strongest competitor, dist-m4ri, improved a lot during this work: its version of 15 October (0.14.7)
 solves 30 and 38 of the first 60 instances, where the September version solved 17 and 26 (BENCHMARK.md
-compares the two). It is now faster than this method on 17 instances: on 14 of them both need less than
-two seconds; the others are Stim's color-code circuits of d = 9 and 11, to which none of the reductions
-applies, and the Cornucopia circuit of n = 252 (0.4 s against 2.4 s). It solves no instance that this
-method does not, and on the 19 instances where both need more than a second and this method is faster,
-this method is 2 to 1228 times faster.
+compares the two). Its model lower bound (`--model-lb`, part of that version, run here on 25 October)
+adds five circuits that before only this method solved: the surface code of d = 15 to 19 and two
+gross-code circuits, one of them in 52 minutes on 32 threads (this method: 84 s on one). It is now faster
+than this method on 18 instances: on 14 of them both need less than two seconds; the others are Stim's
+color-code circuits of d = 9 and 11, to which none of the reductions applies, the Cornucopia circuit of
+n = 252 (0.4 s against 2.4 s) and a shift circuit of n = 120 (2.3 s against 13 s, with the model
+bound). It solves no instance that this method does not, and on the 20 instances where both need more
+than a second and this method is faster, this method is 3 to 509 times faster (dist-m4ri's best run in
+either tier against one thread of this method).
 
 The logical operators of the code instances were first computed by a generic construction whose rows are,
 on codes with many logical qubits, up to 5 times denser than the standard form that the prior benchmark
@@ -258,7 +262,8 @@ at the time limit with the right value but without a proof. This method takes 0.
 
 *Figure 4. Time to the certified distance of Stim's own surface-code memory circuit, generated here
 up to d = 25 (sector problem, one thread, 600 s limit). Each line ends at the last distance the
-method solved. Dashed: the same pipeline without its Rank DP evaluators (ablation of the final pass).*
+method solved; dist-m4ri is its fastest configuration at each distance, with its model lower bound from
+d = 9 on. Dashed: the same pipeline without its Rank DP evaluators (ablation of the final pass).*
 
 The method stays near 0.2 s up to d = 11, because the collapsed problem is small and tight, and reaches
 d = 25 in 8.6 s with one thread. Without the DP evaluators the cost is the exhaustive search of the
@@ -338,7 +343,7 @@ it reports 8.
   of d = 11 needs about 12 GB, so under the prior benchmark's 8 GB limit that circuit stays open.
 - The reductions need structure: a CSS memory experiment, detectors that can be assigned to a check
   and a round, and symmetries supplied by the user. Without them the method is a plain search; on
-  Stim's color-code circuits the current dist-m4ri is faster at every distance tested (d = 11: 28 s
+  Stim's color-code circuits the current dist-m4ri is faster at every distance tested (d = 11: 20 s
   against 280 s). On instances that take either tool a second or two, dist-m4ri is also faster; most of
   this method's time there is the start of Python.
 - Of the prior benchmark's exact methods, SCIP, CLISAT and Magma were not run here; their published

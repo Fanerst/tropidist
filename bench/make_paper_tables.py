@@ -123,6 +123,7 @@ def numbers(R):
         N[key + "First"], N[key + "Both"] = per.get(t, [0, 0])
     # where dist-m4ri is faster (first tier, both exact)
     new = ["dist-m4ri CC", "dist-m4ri CC+RW", "dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
+    new += [m + ", model bound" for m in new]          # with its model lower bound (25 October 2026)
     faster, slower = [], []
     for n in names:
         v = R.main[n]
@@ -151,8 +152,8 @@ def numbers(R):
     N["RawOurs"] = sum(R.ex(R.a, "ours", n, "full") for n in qldpc)
     N["SecOursQldpc"] = sum(R.ex(R.a, "ours", n, "sector") for n in qldpc)
     N["RawDmMatrix"] = sum(dm(n, "full") for n in qldpc)
-    N["RawDmDem"] = sum(R.ex(R.a, "dist-m4ri CC, DEM input", n, "full") or
-                        R.ex(R.a, "dist-m4ri CC+RW, DEM input", n, "full") for n in qldpc)
+    N["RawDmDem"] = sum(any(R.ex(R.a, m + b, n, "full") for m in ("dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input")
+                            for b in ("", ", model bound")) for n in qldpc)
     stim = [m for m in ("RC2 (Stim WCNF)", "CASHWMaxSAT (Stim WCNF)", "enMaxCDCL (Stim WCNF)")]
     N["WcnfQldpc"] = sum(any(R.ex(recs, m, n, "full") for recs in (R.a, R.b1) for m in stim) for n in qldpc)
     lbs = [r.get("lower_bound") or 0 for recs in (R.a, R.b1) for (m, n, v), r in recs.items()

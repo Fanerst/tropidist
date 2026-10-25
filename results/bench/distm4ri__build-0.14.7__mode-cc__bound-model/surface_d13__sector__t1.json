@@ -1,0 +1,93 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 13,
+    "model_seconds": 1.079,
+    "threads": "1",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "dmin": "13",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-z2x2j64a/codewords.nz",
+    "timeout": "598.798176999"
+  },
+  "instance": "surface_d13",
+  "variant": "sector",
+  "rows": 1176,
+  "cols": 6085,
+  "obs": 1,
+  "threads": 1,
+  "time_limit": 600.0,
+  "status": "exact",
+  "lower_bound": 13,
+  "upper_bound": 13,
+  "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16,
+    21
+  ],
+  "witness_ok": true,
+  "seconds": 1.97,
+  "trace": [
+    {
+      "t": 1.102,
+      "lb": 13
+    },
+    {
+      "t": 1.97,
+      "ub": 13
+    }
+  ],
+  "peak_rss_mb": 124.6,
+  "truth": 13,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=1. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 2, cache off): d >= 13 from a 84 x 229 model of 44381 DEM mechanisms, model bounds [13, 13, 0], in 1.1 s; passed to the binary as dmin. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 13 13 0 (dmin dmax rw_steps).",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/surface_d13",
+    "family": "surface",
+    "memory_limit_gb": 16.0,
+    "time_limit": 600.0,
+    "cpus": [
+      4
+    ],
+    "started_at": "2026-10-25T06:07:40.087298+00:00",
+    "ended_at": "2026-10-25T06:07:42.162075+00:00",
+    "wall_seconds": 2.070752,
+    "adapter_seconds": 1.97,
+    "trace_offset_seconds": 0.100752,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc__bound-model/surface_d13__sector__t1.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench/distm4ri__build-0.14.7__mode-cc__bound-model/surface_d13__sector__t1.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.5,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

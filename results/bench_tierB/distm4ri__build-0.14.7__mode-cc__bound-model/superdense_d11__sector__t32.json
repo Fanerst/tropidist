@@ -1,0 +1,141 @@
+{
+  "method": "distm4ri",
+  "version": "0.14.7",
+  "config": {
+    "build": "0.14.7",
+    "mode": "cc",
+    "bound": "model",
+    "binary": "/data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/src/dist_m4ri",
+    "input": "mtx",
+    "model_bound": 1,
+    "model_seconds": 0.534,
+    "threads": "32",
+    "nothrottle": "1",
+    "classical": "0",
+    "css": "1",
+    "debug": "3",
+    "maxC": "1",
+    "finH": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d11/sector.H.mtx",
+    "finL": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d11/sector.L.mtx",
+    "outC": "/tmp/bench-distm4ri-cr9bm25t/codewords.nz",
+    "timeout": "3599.353665551"
+  },
+  "instance": "superdense_d11",
+  "variant": "sector",
+  "rows": 540,
+  "cols": 5250,
+  "obs": 1,
+  "threads": 32,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": 10,
+  "upper_bound": null,
+  "witness": null,
+  "witness_ok": null,
+  "seconds": 3599.909,
+  "trace": [
+    {
+      "t": 0.546,
+      "lb": 1
+    },
+    {
+      "t": 0.556,
+      "lb": 2
+    },
+    {
+      "t": 0.557,
+      "lb": 3
+    },
+    {
+      "t": 0.557,
+      "lb": 4
+    },
+    {
+      "t": 0.558,
+      "lb": 5
+    },
+    {
+      "t": 0.573,
+      "lb": 6
+    },
+    {
+      "t": 0.667,
+      "lb": 7
+    },
+    {
+      "t": 2.147,
+      "lb": 8
+    },
+    {
+      "t": 23.871,
+      "lb": 9
+    },
+    {
+      "t": 385.911,
+      "lb": 10
+    }
+  ],
+  "peak_rss_mb": 117.1,
+  "truth": 11,
+  "truth_kind": "exact",
+  "notes": "Single-process completed-weight trace via debug bit 1; no repeated enumeration. Includes startup, progress logging and NZLIST export overhead. nothrottle=1; threads=32. dist-m4ri 0.14.7: completed-weight trace via debug bits 1|2. Model bound (compute_model_lower_bound of /data/panfeng/claude_runs/circuit_distance/bench/external/dist-m4ri-0.14.7/dist_m4ri.py, method 2, cache off): d >= 1 from a 14 x 70 model of 43501 DEM mechanisms, model bounds [], in 0.5 s; passed to the binary as dmin. maxC=1 stops at the first CC witness after exhausting lighter weights. Native triple: 10 0 0 (dmin dmax rw_steps). Native timeout or predictive timeout cutoff reached.",
+  "value_only": false,
+  "agrees_with_truth": true,
+  "harness": {
+    "method_spec": "distm4ri:build=0.14.7,mode=cc,bound=model",
+    "adapter": "distm4ri",
+    "config_string": "build=0.14.7,mode=cc,bound=model",
+    "method_kind": "certifying",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances/superdense_d11",
+    "family": "superdense",
+    "memory_limit_gb": 90.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ],
+    "started_at": "2026-10-25T10:12:47.189826+00:00",
+    "ended_at": "2026-10-25T11:12:47.325145+00:00",
+    "wall_seconds": 3600.13511,
+    "adapter_seconds": 3599.909,
+    "trace_offset_seconds": 0.22611,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-cc__bound-model/superdense_d11__sector__t32.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_tierB/distm4ri__build-0.14.7__mode-cc__bound-model/superdense_d11__sector__t32.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 16.1,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}
