@@ -42,13 +42,19 @@ def label(m):
         return "surface code, $d=%d$" % m["rounds"]
     if f == "stim_color":
         return "color code, $d=%d$" % m["rounds"]
+    if f == "superdense":
+        return "superdense color code, $d=%d$" % m["rounds"]
     if m["track"] == "code":
         kind = {"bb6": "BB", "cornucopia": "Cornucopia", "gala": "GALA", "kasai": "Kasai", "selfdual_bb": "self-dual BB",
-                "estimated_codes": None}[f]
+                "estimated_codes": None, "color_cc": "color", "concat_steane": "concatenated Steane",
+                "hypercube": "many-hypercube", "dtc_strip": "thin tile"}[f]
         if kind is None:
             kind = {"balanced": "balanced product", "llmbb": "LLM-searched BB", "mm": "multivariate multicycle",
                     "w8bb": "weight-8 BB"}[name.split("_")[1]]
-        return "%s $[[%d,%d,%d]]$" % (kind, n, k, m["variants"]["full"]["distance"])
+        v = m["variants"]["full"]
+        if v.get("distance_kind") != "exact":            # a thin tile code whose X distance is open
+            return "%s $[[%d,%d]]$" % (kind, n, k)
+        return "%s $[[%d,%d,%d]]$" % (kind, n, k, v["distance"])
     if f == "bb6_si1000":
         return "BB $[[%d,%d,%d]]$, %d rounds" % (n, k, CODE_D[n], m["rounds"])
     if f == "bb6_depth7":
@@ -183,12 +189,13 @@ def numbers(R):
     c = wjh_summary_rows()[-1]
     N["WjhNum"], N["WjhOursFirst"], N["WjhOursEight"], N["WjhOursBoth"] = c[1], c[2], c[3], c[4]
     N["WjhGurobiFirst"], N["WjhDmOld"], N["WjhDmFirst"], N["WjhDmBoth"] = c[5], c[7], c[8], c[9]
-    their = [int(x) for x in c[10].split(" / ")]
+    # columns 10 and 11: dist-m4ri with its model bound (circuits only); 12 and 13: the paper's own methods
+    their = [int(x) for x in c[12].split(" / ")]
     N["WjhTheirGurobi"], N["WjhTheirScip"], N["WjhTheirClisat"], N["WjhTheirDm"], N["WjhTheirMagma"] = their
-    N["WjhTheirs"] = c[11]
+    N["WjhTheirs"] = c[13]
     m = re.search(r"agree with all (\d+) values", rep)
     N["WjhAgree"] = m.group(1)
-    N["WjhNew"] = int(c[4]) - int(c[11])
+    N["WjhNew"] = int(c[4]) - int(c[13])
     N["WjhCodes"] = sum(1 for x in W.metas().values() if x["track"] == "code")
     N["WjhCircuits"] = sum(1 for x in W.metas().values() if x["track"] == "circuit")
     return N, faster
@@ -268,7 +275,7 @@ def wjh_table():
     for c in wjh_summary_rows():
         if c[0] == "all":
             lines.append(r"\midrule")
-        lines.append(" & ".join([FAMILY_LABEL[c[0]], c[1], c[2], c[3], c[4], c[8], c[5], c[10].replace(" / ", "/"), c[11]])
+        lines.append(" & ".join([FAMILY_LABEL[c[0]], c[1], c[2], c[3], c[4], c[8], c[5], c[12].replace(" / ", "/"), c[13]])
                      + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     (PAPER / "tables" / "wjh.tex").write_text("\n".join(lines) + "\n")
@@ -285,7 +292,8 @@ def codes_table(R):
         if m["track"] != "code":
             continue
         r = ob.get(name)
-        bench = m["variants"]["full"]["distance"]
+        v = m["variants"]["full"]
+        bench = (r"$\geq%d$" % v["distance"]) if v.get("distance_kind") == "lower_bound" else v["distance"]
         if r is None:
             vals = {"d_X": str(bench) if m["basis"] == "Z" else "", "d_Z": str(bench) if m["basis"] == "X" else ""}
         else:
