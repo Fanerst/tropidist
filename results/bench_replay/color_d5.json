@@ -1,0 +1,239 @@
+{
+ "instance": "color_d5",
+ "instance_dir": "bench/instances/color_d5",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "3d4c15fa26db9349f0f120ac2698647132d3600694ccb98e48088e33d2eff0d9",
+  "full.H.mtx": "00e763e8054038d06139f4c9355a6ffb79bd00500030a1c616043a8aa25840fa",
+  "full.L.mtx": "ab8eeedc240ebf26072553bb76662bfd1266b089f7af997f49242174547e150d",
+  "full.rowmeta.json": "496d3c947d812adb0f512ef27a1351a3c3c349dc3daa2896bac52f3f7cd5a91f"
+ },
+ "witnesses": [
+  {
+   "variant": "full",
+   "witness": [
+    14,
+    16,
+    254
+   ],
+   "weight": 3,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 45,
+     "cols": 1104,
+     "obs": 1,
+     "record": "results/bench/ours_pipeline__dp-2/color_d5__full__t1.json",
+     "started_at": "2026-10-23T11:52:16.745064+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 3,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 14,
+     "full_column": 14,
+     "detectors": [
+      0,
+      3,
+      4,
+      6,
+      9,
+      13
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 5,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Y",
+        9
+       ],
+       [
+        "Y",
+        10
+       ]
+      ],
+      "stack": [
+       [
+        30,
+        0,
+        2
+       ],
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 2,0,0]",
+       "D3[coords 3.5,1,0]",
+       "D4[coords 2,2,0]",
+       "D6[coords 3.5,3,0]",
+       "D9[coords 2,0,1]",
+       "D13[coords 2,2,1]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       3,
+       4,
+       6,
+       9,
+       13
+      ],
+      "observables": [
+       0
+      ]
+     }
+    },
+    {
+     "column": 16,
+     "full_column": 16,
+     "detectors": [
+      0,
+      3,
+      4,
+      7,
+      9,
+      13
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 4,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Y",
+        9
+       ],
+       [
+        "Z",
+        14
+       ]
+      ],
+      "stack": [
+       [
+        30,
+        0,
+        2
+       ],
+       [
+        12,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 2,0,0]",
+       "D3[coords 3.5,1,0]",
+       "D4[coords 2,2,0]",
+       "D7[coords 2,4,0]",
+       "D9[coords 2,0,1]",
+       "D13[coords 2,2,1]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       3,
+       4,
+       7,
+       9,
+       13
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 254,
+     "full_column": 254,
+     "detectors": [
+      6,
+      7
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 5,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Z",
+        26
+       ]
+      ],
+      "stack": [
+       [
+        30,
+        0,
+        2
+       ],
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D6[coords 3.5,3,0]",
+       "D7[coords 2,4,0]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       6,
+       7
+      ],
+      "observables": []
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "explain_seconds": 0.001,
+ "replay_seconds": 0.212,
+ "seconds": 0.218,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-04T09:17:17+00:00",
+   "full.H.mtx": "2026-10-04T09:17:17+00:00",
+   "full.L.mtx": "2026-10-04T09:17:17+00:00",
+   "full.rowmeta.json": "2026-10-04T09:17:17+00:00"
+  }
+ }
+}

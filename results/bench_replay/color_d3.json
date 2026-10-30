@@ -1,0 +1,152 @@
+{
+ "instance": "color_d3",
+ "instance_dir": "bench/instances/color_d3",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "1346aa14e8c2876accb8f37c9a899bf6dc55ec1e5f2eb084b07d47cc7fa525b2",
+  "full.H.mtx": "592cb51534d15b558145c3e87d1c780d3f810e09239c559b0b41bbf6e5c27502",
+  "full.L.mtx": "7369330a352d4cc65f3bd8b5ef0537464e4e00d473ace68b4c6eb66eaad4b8ca",
+  "full.rowmeta.json": "dd05db2b20c3fabebf84e771888d1613b5379a9790e6ba1ce83ace38c2f556ad"
+ },
+ "witnesses": [
+  {
+   "variant": "full",
+   "witness": [
+    0,
+    26
+   ],
+   "weight": 2,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 2,
+     "upper_bound": 2,
+     "rows": 9,
+     "cols": 72,
+     "obs": 1,
+     "record": "results/bench/ours_pipeline__dp-2/color_d3__full__t1.json",
+     "started_at": "2026-10-23T11:52:16.220542+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 2,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 3,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Z",
+        4
+       ]
+      ],
+      "stack": [
+       [
+        12,
+        0,
+        2
+       ],
+       [
+        9,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 2,0,0]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 26,
+     "full_column": 26,
+     "detectors": [
+      0
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        3
+       ]
+      ],
+      "stack": [
+       [
+        11,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 2,0,0]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "explain_seconds": 0.0,
+ "replay_seconds": 0.124,
+ "seconds": 0.126,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-04T09:17:17+00:00",
+   "full.H.mtx": "2026-10-04T09:17:17+00:00",
+   "full.L.mtx": "2026-10-04T09:17:17+00:00",
+   "full.rowmeta.json": "2026-10-04T09:17:17+00:00"
+  }
+ }
+}

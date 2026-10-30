@@ -1,0 +1,382 @@
+{
+ "instance": "wjh_surface_d7",
+ "instance_dir": "bench/instances_wjh/wjh_surface_d7",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "0ca131167ff03c286d0a839e6d45dc23f89a55b9f258eb62244cc909fc73fc61",
+  "full.H.mtx": "4e3bc15ca7a2d45abf08fe8999b41817601dfe8ffb462bb175849389b4b88b1a",
+  "full.L.mtx": "47b75588363879a2db522e72e22c8106c36eaebd9cb9f442fa81fdb578f3c710",
+  "full.rowmeta.json": "654dc58ed60fa8f6dd76fc70e1c233481de269e898a2a2ae34341ff833ab8431",
+  "sector.H.mtx": "2f38ac6635e1c50d436258e86e82b2374516cea17e53f0a26675da98746aab4d",
+  "sector.L.mtx": "3834f98efb6a4f16e153750c7a4962f684e718afc81f3a9f062110997c7bbb6e",
+  "sector.rowmeta.json": "d811ee0416f715604d5efbf90973e8c86b647666daa0f65884e39c7aa9556cec"
+ },
+ "witnesses": [
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    12
+   ],
+   "weight": 7,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 7,
+     "upper_bound": 7,
+     "rows": 192,
+     "cols": 883,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline/wjh_surface_d7__sector__t1.json",
+     "started_at": "2026-10-15T04:23:33.837561+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 7,
+     "upper_bound": 7,
+     "rows": 192,
+     "cols": 883,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-1/wjh_surface_d7__sector__t1.json",
+     "started_at": "2026-10-22T06:00:51.045247+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 7,
+     "upper_bound": 7,
+     "rows": 192,
+     "cols": 883,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-2/wjh_surface_d7__sector__t1.json",
+     "started_at": "2026-10-23T11:50:08.666576+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 7,
+     "upper_bound": 7,
+     "rows": 192,
+     "cols": 883,
+     "obs": 1,
+     "record": "results/bench_wjh_8h/ours_pipeline__dp-2/wjh_surface_d7__sector__t1.json",
+     "started_at": "2026-10-23T11:50:08.881939+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 7,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0,
+      3
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        1
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords -0.5,1.5,0,3]",
+       "D3[coords 0.5,0.5,0,4]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       3
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1,
+     "full_column": 1,
+     "detectors": [
+      0,
+      4
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        2
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords -0.5,1.5,0,3]",
+       "D4[coords 0.5,2.5,0,4]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       4
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 3,
+     "full_column": 3,
+     "detectors": [
+      1,
+      4
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        3
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords -0.5,3.5,0,3]",
+       "D4[coords 0.5,2.5,0,4]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       4
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 4,
+     "full_column": 4,
+     "detectors": [
+      1,
+      5
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        4
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords -0.5,3.5,0,3]",
+       "D5[coords 0.5,4.5,0,4]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       5
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 6,
+     "full_column": 6,
+     "detectors": [
+      2
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        6
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D2[coords -0.5,5.5,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       2
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 7,
+     "full_column": 7,
+     "detectors": [
+      2,
+      5
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        5
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D2[coords -0.5,5.5,0,3]",
+       "D5[coords 0.5,4.5,0,4]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       2,
+       5
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 12,
+     "full_column": 16,
+     "detectors": [
+      3
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        0
+       ]
+      ],
+      "stack": [
+       [
+        98,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D3[coords 0.5,0.5,0,4]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       3
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.006,
+ "replay_seconds": 2.129,
+ "seconds": 2.154,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-15T04:17:07+00:00",
+   "full.H.mtx": "2026-10-15T04:17:07+00:00",
+   "full.L.mtx": "2026-10-15T04:17:07+00:00",
+   "full.rowmeta.json": "2026-10-15T04:17:07+00:00",
+   "sector.H.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.L.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.rowmeta.json": "2026-10-15T04:17:07+00:00"
+  }
+ }
+}

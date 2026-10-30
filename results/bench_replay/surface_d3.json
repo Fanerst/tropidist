@@ -1,0 +1,350 @@
+{
+ "instance": "surface_d3",
+ "instance_dir": "bench/instances/surface_d3",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "6aab832dc03fc0c580bfd2dba968fdf473533f663fdf0a609551a6bb0e553ea7",
+  "full.H.mtx": "2e079174723ae904ec33d8588c1659ac466eb4807a8dcd8c5fcda513538e7390",
+  "full.L.mtx": "34d8d20f327ac2f19e76374f485b6bf1f667d1494f02a25bf5c6420af19f4b61",
+  "full.rowmeta.json": "bdd98e355990054ffb3ae64e7e1d8a99ffa2bd134b045cbb1847646e9ca5cca3",
+  "sector.H.mtx": "825a55915856d6ce67258a4f11254ff37a0296b34610e2c616eb9783d6607bdc",
+  "sector.L.mtx": "970b6a10f73d7efd92f75e607dd4621700d9214d82272087d548f70172907628",
+  "sector.rowmeta.json": "15a776948e90c3060c4feb8bcc806a5d43fdf814bba8c26762aee8b2db64c226"
+ },
+ "witnesses": [
+  {
+   "variant": "full",
+   "witness": [
+    0,
+    1,
+    9
+   ],
+   "weight": 3,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 24,
+     "cols": 219,
+     "obs": 1,
+     "record": "results/bench/ours_pipeline__dp-2/surface_d3__full__t1.json",
+     "started_at": "2026-10-23T11:56:07.110162+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 3,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        15
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1,
+     "full_column": 1,
+     "detectors": [
+      0,
+      1
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        8
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]",
+       "D1[coords 1,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       1
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 9,
+     "full_column": 9,
+     "detectors": [
+      1
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        1
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 1,0,0,3]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  },
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    1,
+    6
+   ],
+   "weight": 3,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 16,
+     "cols": 55,
+     "obs": 1,
+     "record": "results/bench/ours_pipeline__dp-2/surface_d3__sector__t1.json",
+     "started_at": "2026-10-23T11:56:06.659075+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 3,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        15
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1,
+     "full_column": 1,
+     "detectors": [
+      0,
+      1
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        8
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]",
+       "D1[coords 1,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       1
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 6,
+     "full_column": 9,
+     "detectors": [
+      1
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        1
+       ]
+      ],
+      "stack": [
+       [
+        18,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 1,0,0,3]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.001,
+ "replay_seconds": 0.156,
+ "seconds": 0.16,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-04T09:16:49+00:00",
+   "full.H.mtx": "2026-10-04T09:16:49+00:00",
+   "full.L.mtx": "2026-10-04T09:16:49+00:00",
+   "full.rowmeta.json": "2026-10-04T09:16:49+00:00",
+   "sector.H.mtx": "2026-10-04T09:16:49+00:00",
+   "sector.L.mtx": "2026-10-04T09:16:49+00:00",
+   "sector.rowmeta.json": "2026-10-04T09:16:49+00:00"
+  }
+ }
+}

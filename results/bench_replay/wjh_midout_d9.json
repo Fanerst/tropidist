@@ -1,0 +1,299 @@
+{
+ "instance": "wjh_midout_d9",
+ "instance_dir": "bench/instances_wjh/wjh_midout_d9",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "b7e3e12935e810aad75dc57385b22758da45a42bd859b2e643ec74202755ef85",
+  "full.H.mtx": "cb4e153a16c276eeeb8495d7301af985d2093732a23efc22e4135c883a6800d4",
+  "full.L.mtx": "64410b443fb5963d170861dc6025589baf8094da977bda9329cd0eef674ce088",
+  "full.rowmeta.json": "65e8fbaa36c714c900c8c4a134e1d8594853bed8c38fb8e84df146627e570b73",
+  "sector.H.mtx": "a08859dec889e54cfd9bb99b09b2bc453f385e08f18c2f5afe4816d397f42f7a",
+  "sector.L.mtx": "6f947f8b92cca1cc6bb70904d4bee3705b3a2f37db90a8b2178cc475ec9fd190",
+  "sector.rowmeta.json": "7eaf39f061dabec6e1e13fa3b188ab5dfa8a9b78169a3515bbfbeb55d59fbb2f"
+ },
+ "witnesses": [
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    4,
+    24,
+    68,
+    104
+   ],
+   "weight": 5,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 5,
+     "upper_bound": 5,
+     "rows": 170,
+     "cols": 1041,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline/wjh_midout_d9__sector__t1.json",
+     "started_at": "2026-10-15T04:23:34.297104+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 5,
+     "upper_bound": 5,
+     "rows": 170,
+     "cols": 1041,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-1/wjh_midout_d9__sector__t1.json",
+     "started_at": "2026-10-22T06:00:51.421133+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 5,
+     "upper_bound": 5,
+     "rows": 170,
+     "cols": 1041,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-2/wjh_midout_d9__sector__t1.json",
+     "started_at": "2026-10-23T11:50:09.092388+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 5,
+     "upper_bound": 5,
+     "rows": 170,
+     "cols": 1041,
+     "obs": 1,
+     "record": "results/bench_wjh_8h/ours_pipeline__dp-2/wjh_midout_d9__sector__t1.json",
+     "started_at": "2026-10-23T11:50:07.954769+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 5,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "M",
+      "paulis": [],
+      "stack": [
+       [
+        99,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": 18,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 4,
+     "full_column": 11,
+     "detectors": [
+      0,
+      3
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        7
+       ]
+      ],
+      "stack": [
+       [
+        71,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]",
+       "D3[coords 3,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       3
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 24,
+     "full_column": 87,
+     "detectors": [
+      3,
+      9
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        26
+       ]
+      ],
+      "stack": [
+       [
+        71,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D3[coords 3,2,1,5]",
+       "D9[coords 5,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       3,
+       9
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 68,
+     "full_column": 268,
+     "detectors": [
+      9,
+      14
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        50
+       ]
+      ],
+      "stack": [
+       [
+        71,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D9[coords 5,2,1,5]",
+       "D14[coords 7,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       9,
+       14
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 104,
+     "full_column": 425,
+     "detectors": [
+      14
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        65
+       ]
+      ],
+      "stack": [
+       [
+        71,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D14[coords 7,2,1,5]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       14
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.008,
+ "replay_seconds": 1.594,
+ "seconds": 1.635,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-15T04:17:07+00:00",
+   "full.H.mtx": "2026-10-15T04:17:07+00:00",
+   "full.L.mtx": "2026-10-15T04:17:07+00:00",
+   "full.rowmeta.json": "2026-10-15T04:17:07+00:00",
+   "sector.H.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.L.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.rowmeta.json": "2026-10-15T04:17:07+00:00"
+  }
+ }
+}
