@@ -104,7 +104,8 @@ def estimate(p, threads=1, seeds=2, time_limit=None, max_table_bytes=None):
 
 def dp_distance(p, order, max_table_bytes=None, deadline=None):
     """Exact distance min over observables i of min{|e| : H e = 0, (L e)_i = 1}; None if no logical exists.
-    Raises MemoryError if a table would exceed max_table_bytes, TimeoutError past deadline (time.monotonic)."""
+    Raises MemoryError if a table would exceed max_table_bytes, TimeoutError past deadline (time.monotonic),
+    OverflowError if an observable's distance is 255 or more (8-bit table entries)."""
     best = None
     per = []
     for i, plan in _plans(p, order):
@@ -125,7 +126,8 @@ def dp_distance(p, order, max_table_bytes=None, deadline=None):
 def dp_witness(p, order, obs, max_bytes=1 << 30):
     """Columns of a minimum-weight solution of min{|e| : H e = 0, (L e)_obs = 1}, by a traceback of the DP on the
     given order; None if no logical exists or the tables of all column steps (the plan's work, one byte each)
-    exceed max_bytes.  The trellis plan is replayed with numpy, keeping the table before every column step."""
+    exceed max_bytes; OverflowError if its weight is 255 or more.  The trellis plan is replayed with numpy,
+    keeping the table before every column step."""
     import numpy as np
     INF = kernel.INF
     hrows = trellis.minimal_span_form(trellis.rows_from_columns(p.h, order, p.nrows))
@@ -161,9 +163,7 @@ def dp_witness(p, order, obs, max_bytes=1 << 30):
             T = T[((np.arange(T.size, dtype=np.int64) >> pos) & 1) == target]
             hist.append(("select", pos, target))
             active.pop(pos)
-    if int(T[0]) == INF:
-        return None
-    state, value, used = 0, int(T[0]), []
+    state, value, used = 0, kernel.final_value(T[0]), []      # lrow != 0: a solution exists
     for step in reversed(hist):
         if step[0] == "select":
             _, pos, target = step

@@ -160,9 +160,10 @@ def main():
         st["lifts"] = lifts
         n0 = sum(1 for x in lifts if x["lift_slack0"] is not None)
         log(f"[collapsed] orbits lifting exactly: {n0} of {len(lifts)}")
-        if n0 == 0:
+        st["minimum_enumeration_complete"] = r["solutions_complete"]
+        if n0 == 0 and r["solutions_complete"]:
             # a real solution of weight d_coll would project onto a minimum
-            # collapsed solution with one member per class
+            # collapsed solution with one member per class (all of them are in the list)
             res["certified_lower_bound"] = r["distance"] + 1
         if best is not None:
             w = verify_witness(best[1])

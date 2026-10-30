@@ -86,6 +86,9 @@ class TopDown:
                 self.cls[i] = j
 
     def lift(self, classes, slack, time_limit=0.0):
+        """The record of the restricted search (Searcher.search).  Status "exhausted" with best None proves that
+        no real solution projects onto `classes` with at most `slack` further columns; "found" comes with
+        verified solutions (complete only if r["solutions_complete"]); any other status proves nothing."""
         onpat = np.zeros(self.relaxed.ncols, dtype=np.uint8)
         onpat[list(classes)] = 1
         anchor_class = min(classes, key=lambda j: len(self.relaxed.col_meta[j]))
@@ -139,10 +142,12 @@ def enumerate_solutions(p: Problem, K, k_table=3, rank=None, anchors=None, colma
     S.add_table(tab, exact=True)
     # the covering bound only uses that a completion avoids the forbidden
     # columns of its canonical path, so it is valid for non-minimum solutions too
-    r = S.search(K, enum_all=True, exclusions=False, sol_cap=sol_cap, cover=cover)
-    tab.free()
+    try:
+        r = S.search(K, enum_all=True, exclusions=False, sol_cap=sol_cap, cover=cover)
+    finally:
+        tab.free()
     assert r["status"] == "exhausted", r["status"]
-    assert r["nsol_recorded"] < sol_cap, "solution buffer overflow"
+    assert r["solutions_complete"], "solution buffer overflow: %d found, %d kept" % (r["nsol_found"], sol_cap)
     sols = set(r["solutions"])
     for s in sols:
         assert search.verify(p, s)

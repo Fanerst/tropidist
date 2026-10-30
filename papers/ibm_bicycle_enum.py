@@ -50,7 +50,7 @@ def main(key, basis, cycles, d, out, seconds, k_table=3, window=None):
     assert r["best"] is None or r["best"] >= d, "a fault set below the certified distance"
     res = {"code": key, "schedule": stag, "basis": basis, "cycles": cycles, "distance": d, "status": r["status"],
            "window_round": None if window is None else int(window), "searched_columns": target.ncols,
-           "complete": r["status"] == "exhausted", "n_orbit_representatives": len(sols), "solutions": [list(s) for s in sols],
+           "complete": r["solutions_complete"], "n_orbit_representatives": len(sols), "solutions": [list(s) for s in sols],
            "nodes": r["nodes"], "threads": r["threads"], "search_seconds": round(r["seconds"], 1),
            "seconds": round(time.time() - t0, 1)}
     json.dump(res, open(out, "w"))

@@ -10,9 +10,19 @@ import time
 
 import numpy as np
 
-INF = 255
+INF = 255               # 8-bit table entries; additions saturate here (final_value)
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _LIB = None
+
+
+def final_value(entry):
+    """Minimum cost from the last table entry of a feasible plan (a fault set with the target value exists).
+    Additions saturate at INF, so every entry equals min(true cost, INF): below INF it is exact, and INF means a
+    cost of at least 255, which the 8-bit entries cannot hold.  Never None: that would claim no logical."""
+    v = int(entry)
+    if v == INF:
+        raise OverflowError("the distance is at least %d, beyond the 8-bit entries of the dense DP" % INF)
+    return v
 
 
 def build(force=False):
@@ -60,7 +70,7 @@ def lib():
 
 
 def run_plan_numpy(plan):
-    """Reference executor.  Returns the minimum cost, or None if infeasible."""
+    """Reference executor.  Returns the minimum cost, or None if infeasible; OverflowError if it is >= 255."""
     if not plan.feasible:
         return None
     T = np.zeros(1, dtype=np.uint8)
@@ -78,11 +88,12 @@ def run_plan_numpy(plan):
             idx = np.arange(T.size, dtype=np.int64)
             T = T[((idx >> pos) & 1) == target]
     assert T.size == 1
-    return None if T[0] == INF else int(T[0])
+    return final_value(T[0])
 
 
 def run_plan(plan, log=None, progress_every=0.0):
-    """Run the plan with the C kernel.  Returns (min cost or None, stats)."""
+    """Run the plan with the C kernel.  Returns (min cost or None if infeasible, stats); OverflowError if the
+    cost is >= 255."""
     if not plan.feasible:
         return None, {"feasible": False}
     L = lib()
@@ -123,6 +134,5 @@ def run_plan(plan, log=None, progress_every=0.0):
             last = time.time()
             log(f"  op {i}/{nops}  col~{ncol}  bits={n.bit_length() - 1}  t={last - t0:.1f}s")
     assert n == 1
-    val = int(buf[0])
-    return (None if val == INF else val), {"seconds": time.time() - t0, "peak_bits": plan.peak_bits,
-                                           "threads": L.dp_num_threads()}
+    return final_value(buf[0]), {"seconds": time.time() - t0, "peak_bits": plan.peak_bits,
+                                 "threads": L.dp_num_threads()}

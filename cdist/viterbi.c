@@ -1,6 +1,8 @@
 // Dense min-plus sweep over a syndrome trellis (linear Rank DP, tropical semiring).
 // Table entry T[s] = minimum number of faults among processed columns whose
-// partial parities on the active rows equal s.  INF = 255.
+// partial parities on the active rows equal s.  INF = 255.  Every addition
+// saturates at INF, so each entry is min(true value, 255): exact below 255;
+// kernel.py rejects a final 255 of a feasible query (a cost of at least 255).
 //
 // Build: cc -O3 -march=native -fopenmp -shared -fPIC viterbi.c -o libviterbi.so
 #include <stdint.h>
