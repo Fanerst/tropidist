@@ -43,7 +43,8 @@ import numpy as np
 
 from . import trellis
 
-INF = 255
+INF = 255                       # an absent state: values are 8 bits (uint8, and the top byte of a C-table entry)
+MAX_WEIGHT = INF - 1            # so a table keeps weights <= 254; Sweep refuses larger caps
 Q = 720720                      # lcm(1..16); the lookahead weights are multiples of 1/Q (rounded down: admissible)
 U64 = np.uint64
 KEYMASK = (1 << 56) - 1
@@ -633,6 +634,10 @@ class Sweep:
                  dense=None, dense_max=1 << 30, max_states=None, deadline=None, caps=None):
         self.tr, self.direction, self.K = tr, direction, K
         self.caps = [min(int(x), K) for x in caps] if caps is not None else [min(cap, K)] * (tr.N + 1)
+        if max(self.caps) > MAX_WEIGHT:
+            # a value of 255 would read as an absent state, and 256 wraps to 0
+            raise ValueError("a sweep keeping weights up to %d: the tables hold at most %d (8-bit values)"
+                             % (max(self.caps), MAX_WEIGHT))
         if direction > 0:
             assert all(x >= y for x, y in zip(self.caps, self.caps[1:])), "forward caps must not increase"
         else:
@@ -981,7 +986,9 @@ def query(tr, K, mode="mitm", split=None, use_h=True, witness=True, lower=0, eve
           dense=None, dense_max=1 << 30, log=None, max_states=None, deadline=None):
     """Least weight of a solution of the trellis' query if it is <= K (else None), with per-cut statistics and a
     witness (columns of the problem).  lower: a known lower bound; reaching it stops the sweep.  max_states,
-    deadline (time.monotonic()): raise BudgetExceeded beyond them.
+    deadline (time.monotonic()): raise BudgetExceeded beyond them.  The tables hold weights <= MAX_WEIGHT (254):
+    a forward sweep takes K <= 254, a meet in the middle a split with a(c) <= 254 and K - a(c) <= 254; others
+    raise ValueError.
 
     mode "forward": one truncated sweep (weights <= K).
 
@@ -1041,6 +1048,8 @@ def query(tr, K, mode="mitm", split=None, use_h=True, witness=True, lower=0, eve
     assert len(sched) == tr.N + 1 and all(x >= y for x, y in zip(sched, sched[1:])), "split must not increase"
     bw = Sweep(tr, -1, K, use_h=use_h, every=every, backend=be, dense=dense, dense_max=dense_max,
                max_states=max_states, deadline=deadline, caps=[K - x for x in sched])
+    fw = Sweep(tr, +1, K, use_h=use_h, every=bw.every, frontier=True, backend=new_be(), max_states=max_states,
+               deadline=deadline, caps=sched)
     if log:
         log("K=%d split a=%s: backward sweep (weights <= %s)%s" % (
             K, _runs(sched), _runs([K - x for x in sched]), "" if predicted is None else
@@ -1049,8 +1058,6 @@ def query(tr, K, mode="mitm", split=None, use_h=True, witness=True, lower=0, eve
     t1 = time.time()
     if log:
         log("backward sweep done: %.1f s, peak %d states, %.3g states in all" % (t1 - t0, bw.peak, sum(bw.counts)))
-    fw = Sweep(tr, +1, K, use_h=use_h, every=bw.every, frontier=True, backend=new_be(), max_states=max_states,
-               deadline=deadline, caps=sched)
     best = [None]
     cache = {}
     joins = [0]
@@ -1104,7 +1111,8 @@ def distance(p, order=None, start=1, kmax=64, mode="mitm", use_h=True, witness=T
              backend="numpy", dense=None, split=None):
     """Exact distance by iterative deepening of the threshold K from `start`, which must be a lower bound (each
     threshold that fails for every observable proves the next one).  Returns a dict with the distance (None if
-    none <= kmax), a verified witness and one record per (threshold, observable)."""
+    none <= kmax), a verified witness and one record per (threshold, observable).  A threshold beyond the 8-bit
+    weights of the tables raises ValueError (see query)."""
     t0 = time.time()
     order = default_order(p) if order is None else order
     trs = [Trellis.for_query(p, i, order) for i in range(p.nobs)]

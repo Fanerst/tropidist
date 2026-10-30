@@ -15,7 +15,7 @@ from .problem import Problem
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _LIB = None
-DMAX = 40
+DMAX = 40               # largest threshold the kernel can search (its DMAX)
 
 
 def _build():
@@ -56,6 +56,13 @@ def lib():
 
 def _ptr(a):
     return a.ctypes.data_as(ctypes.c_void_p)
+
+
+def check_threshold(K):
+    """The kernel keeps one search state per level and cannot go deeper than DMAX."""
+    if K > DMAX:
+        raise ValueError(f"threshold {K} exceeds the search depth {DMAX} of the kernel; nothing can be "
+                         "concluded at this threshold")
 
 
 def row_hashes(nrows, seed):
@@ -244,6 +251,9 @@ class Searcher:
 
     def _call(self, K, nt, tabs, tzh, tzl, main, rank_arr, anchors_arr, use_ex, enum_all, task_depth, time_limit,
               sol_cap, kernel_mode=False, use_kernel=True, cover=False):
+        """One kernel run.  solutions_complete: the run was exhausted and every solution it found is in
+        `solutions` (none was dropped at sol_cap); only then is the list all the enumeration yields."""
+        check_threshold(K)
         L = lib()
         # cover: False, True / "ascent" (covering bound with the greedy dual
         # ascent), "simple" (first dual solution only), or a number g: ascent
@@ -282,6 +292,9 @@ class Searcher:
         L.gm_set_cover(ctypes.c_int(0), ctypes.c_int(0))
         L.gm_set_full_labels(None, ctypes.c_int(0))
         dt = time.time() - t0
+        if rc == 4:
+            raise RuntimeError(f"the search kernel refused threshold {K} or cut a branch at its depth limit {DMAX}; "
+                               "the run is not exhaustive")
         status = {0: "exhausted", 1: "found", 2: "timeout", 3: "too_many_tasks"}[rc]
         sols = []
         for i in range(min(nsol.value, sol_cap)):
@@ -289,7 +302,8 @@ class Searcher:
             sols.append(tuple(sorted(int(x) for x in sol[i, 1:1 + w])))
         return {
             "K": K, "status": status, "best": None if best.value < 0 else best.value,
-            "solutions": sols, "nsol_recorded": nsol.value,
+            "solutions": sols, "nsol_recorded": nsol.value, "nsol_found": int(stats[7]),
+            "solutions_complete": status == "exhausted" and int(stats[7]) == nsol.value,
             "nodes": [int(x) for x in nodes[:K + 2]], "lookups": int(stats[0]),
             "hits": int(stats[1]), "false_hits": int(stats[2]), "tasks": int(stats[3]),
             "cover_pruned": int(stats[4]), "ascent_pruned": int(stats[5]), "cover_calls": int(stats[6]),
@@ -305,7 +319,7 @@ class Searcher:
         tabs = (ctypes.c_void_p * 1)()
         r = self._call(wmax_s, 0, tabs, tabs, tabs, -1, self.rank, self.anchors, False, True,
                        max(1, min(task_depth, wmax_s - 1)), 0.0, sol_cap, kernel_mode=True, use_kernel=False)
-        assert r["status"] == "exhausted" and r["nsol_recorded"] <= sol_cap, r["status"]
+        assert r["solutions_complete"], (r["status"], r["nsol_found"], sol_cap)
         out = set(s for s in r["solutions"] if len(s) >= 3)
         if colmaps:
             from .lift import expand_orbits
@@ -316,6 +330,7 @@ class Searcher:
                pattern=None, anchors=None, rank=None, use_kernel=True, cover=False):
         """pattern = (cls, onpat, slack): class id per column (-1 for none),
         0/1 flag per class, and the number of off-pattern columns allowed."""
+        check_threshold(K)
         L = lib()
         if pattern is not None:
             cls = np.ascontiguousarray(pattern[0], dtype=np.int32)
@@ -357,7 +372,11 @@ def distance(p: Problem, k_table=2, kmax=20, relaxed=None, rank=None, anchors=No
 
     relaxed: optional list of (Table of a relaxed problem, per-column relaxed
     syndromes of p).  Returns a dict with the certified lower bound, the
-    distance if found, and per-threshold records.
+    distance if found, and per-threshold records.  solutions_complete: the
+    last threshold was exhausted and no solution was dropped at the buffer
+    cap, so with enum_all `solutions` holds every minimum solution the
+    enumeration yields; a caller that needs them all must check it.
+    Thresholds above DMAX raise ValueError.
     """
     S = Searcher(p, rank=rank, anchors=anchors, labelfree=labelfree)
     # Valid because thresholds are tried in increasing order: when K is
@@ -375,26 +394,29 @@ def distance(p: Problem, k_table=2, kmax=20, relaxed=None, rank=None, anchors=No
     S.add_table(main, exact=True)
     out = {"k_table": k_table, "table_entries": main.entries, "table_seconds": main.build_seconds,
            "exclusion_pairs": n_excl,
-           "runs": [], "lower_bound": start, "distance": None, "solutions": []}
-    for K in range(start, kmax + 1):
-        r = S.search(K, enum_all=enum_all, time_limit=time_limit, exclusions=exclusions, cover=cover)
-        for s in r["solutions"]:
-            assert verify(p, s), "reported solution failed verification"
-        rec = {x: r[x] for x in ("K", "status", "best", "nodes", "lookups", "hits", "false_hits", "seconds", "tasks",
-                                 "cover_pruned")}
-        out["runs"].append(rec)
-        if log:
-            log(f"  K={K}: {r['status']} best={r['best']} nodes={sum(r['nodes'])} lookups={r['lookups']} "
-                f"false_hits={r['false_hits']} {r['seconds']:.2f}s")
-        if on_run:
-            on_run(rec)
-        if r["status"] in ("timeout", "too_many_tasks"):
-            break
-        if r["best"] is not None:
-            out["distance"] = r["best"]
-            out["solutions"] = sorted({s for s in r["solutions"] if len(s) == r["best"]})
-            out["lower_bound"] = r["best"]
-            break
-        out["lower_bound"] = K + 1
-    main.free()
+           "runs": [], "lower_bound": start, "distance": None, "solutions": [], "solutions_complete": False}
+    try:
+        for K in range(start, kmax + 1):
+            r = S.search(K, enum_all=enum_all, time_limit=time_limit, exclusions=exclusions, cover=cover)
+            for s in r["solutions"]:
+                assert verify(p, s), "reported solution failed verification"
+            rec = {x: r[x] for x in ("K", "status", "best", "nodes", "lookups", "hits", "false_hits", "seconds",
+                                     "tasks", "cover_pruned", "nsol_recorded", "nsol_found", "solutions_complete")}
+            out["runs"].append(rec)
+            out["solutions_complete"] = r["solutions_complete"]
+            if log:
+                log(f"  K={K}: {r['status']} best={r['best']} nodes={sum(r['nodes'])} lookups={r['lookups']} "
+                    f"false_hits={r['false_hits']} {r['seconds']:.2f}s")
+            if on_run:
+                on_run(rec)
+            if r["status"] in ("timeout", "too_many_tasks"):
+                break
+            if r["best"] is not None:
+                out["distance"] = r["best"]
+                out["solutions"] = sorted({s for s in r["solutions"] if len(s) == r["best"]})
+                out["lower_bound"] = r["best"]
+                break
+            out["lower_bound"] = K + 1
+    finally:
+        main.free()
     return out

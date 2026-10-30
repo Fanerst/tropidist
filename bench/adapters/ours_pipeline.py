@@ -337,8 +337,7 @@ class Pipeline:
                                      ("K", "status", "best", "seconds", "nsol_recorded")})
                 if r["best"] is not None and sols:
                     sols = [s for s in sols if len(s) == r["best"]]
-                    result.update(distance=r["best"], solutions=sols,
-                                  complete=r["status"] == "exhausted" and r["nsol_recorded"] < SOL_CAP)
+                    result.update(distance=r["best"], solutions=sols, complete=r["solutions_complete"])
                     if witness_map is not None:
                         self.found(witness_map(sols[0]))
                     if certify:

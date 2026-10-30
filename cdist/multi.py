@@ -46,12 +46,15 @@ def distance(p: Problem, k_table=2, kmax=20, rank=None, anchors=None, time_limit
         log(f"  {len(groups)} observable group(s); table k={k_table}: {[t.entries for t in tabs]} entries, "
             f"2^{tabs[-1].log2slots} slots each, wide={tabs[-1].wide}")
     out = {"k_table": k_table, "groups": len(groups), "table_entries": [t.entries for t in tabs],
-           "exclusion_pairs": n_excl, "runs": [], "lower_bound": start, "distance": None, "solutions": []}
+           "exclusion_pairs": n_excl, "runs": [], "lower_bound": start, "distance": None, "solutions": [],
+           "solutions_complete": False}
     for K in range(start, kmax + 1):
         rec = {"K": K, "status": "exhausted", "best": None, "nodes": 0, "lookups": 0, "false_hits": 0, "seconds": 0.0}
         sols = []
+        complete = True             # every group exhausted, no solution dropped at the buffer cap
         for g, s in zip(groups, S):
             r = s.search(K, enum_all=enum_all, time_limit=time_limit, cover=cover)
+            complete = complete and r["solutions_complete"]
             rec["nodes"] += sum(r["nodes"])
             rec["lookups"] += r["lookups"]
             rec["false_hits"] += r["false_hits"]
@@ -67,6 +70,7 @@ def distance(p: Problem, k_table=2, kmax=20, rank=None, anchors=None, time_limit
                 if not enum_all:
                     rec["status"] = "found"
                     break
+        rec["solutions_complete"] = out["solutions_complete"] = complete
         out["runs"].append(rec)
         if log:
             log(f"  K={K}: {rec['status']} best={rec['best']} nodes={rec['nodes']} {rec['seconds']:.2f}s")

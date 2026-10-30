@@ -197,8 +197,10 @@ def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_
         # all minimum collapsed solutions, to decide whether weight d_coll is possible at all
         r = dist(coll, k_table=k_coll, kmax=d_coll, time_limit=time_limit, enum_all=True, log=log, start=d_coll,
                  **kw)
-        if r["runs"][-1]["status"] != "exhausted":
-            log("enumeration of minimum collapsed solutions did not finish")
+        # the lifting bound below needs every minimum solution: not if the run was cut or the list overflowed
+        st["minimum_enumeration_complete"] = r["solutions_complete"]
+        if not r["solutions_complete"]:
+            log("enumeration of minimum collapsed solutions did not finish or overflowed the solution buffer")
             save()
             return
         if sector_symmetric:

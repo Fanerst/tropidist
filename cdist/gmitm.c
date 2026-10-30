@@ -27,7 +27,7 @@
 #endif
 
 #define WMAX 256     // syndrome words (rows <= 16384)
-#define DMAX 40      // search depth
+#define DMAX 40      // search depth: gm_search refuses thresholds K > DMAX
 #define TMAX 4       // lookup tables per search
 #define LEAF_MAX 1024 // candidates handled by the leaf fast path
 
@@ -281,9 +281,11 @@ typedef struct {
     int *best;
     int sol_cap, sol_stride;
     int *sol_buf, *nsol;
+    int64_t *nfound;             // solutions found, recorded or not: the list is complete iff nfound == nsol
     int *task_buf; int64_t *ntask; int64_t task_cap;
     double deadline;
     volatile int *timed_out;
+    volatile int *depth_cut;     // a branch with budget left met the depth limit: the run is not exhaustive
     uint32_t ticks;              // node visits and completions of this thread, for the deadline check
 } Ctx;
 
@@ -428,6 +430,7 @@ static void record(Ctx *c, int weight, const int *cols) {
     #pragma omp critical(gm_record)
     {
         if (*c->best < 0 || weight < *c->best) *c->best = weight;
+        (*c->nfound)++;
         if (*c->nsol < c->sol_cap) {
             int *dst = c->sol_buf + (size_t)(*c->nsol) * c->sol_stride;
             dst[0] = weight;
@@ -441,6 +444,11 @@ static void record(Ctx *c, int weight, const int *cols) {
 // Enumerate sets B (|B| <= R) cancelling the syndrome of st with total logical != 0.
 // cols[0..a) holds A; B is appended.  Columns of A are excluded, as are earlier
 // siblings, so each B is produced once.  Returns the number of completions.
+// tmpforb holds 1 on A; completion level a - na0 stamps the columns it visits
+// with a - na0 + 2 and clears exactly that stamp on return, so every sibling
+// is restored whatever the degree of its row.  Levels stay below the depth of
+// the main table (R <= k) and each takes a new column, so the stamp fits in a
+// byte: a table with k > 253 over more than 253 columns cannot be built.
 static int64_t complete(Ctx *c, const State *st, int a, int R, int *cols, uint8_t *tmpforb, int na0) {
     const Prob *P = c->P;
     if (*c->stop || past_deadline(c)) return 0;
@@ -454,20 +462,19 @@ static int64_t complete(Ctx *c, const State *st, int a, int R, int *cols, uint8_
     for (int w = 0; w < P->W && r < 0; w++)
         if (st->s[w]) r = w * 64 + __builtin_ctzll(st->s[w]);
     int64_t found = 0;
-    int marked[4096];
-    int nm = 0;
+    uint8_t stamp = (uint8_t)(a - na0 + 2);
     State nx;
     for (int i = P->row_start[r]; i < P->row_start[r + 1]; i++) {
         int f = P->row_cols[i];
         if (tmpforb[f]) continue;
         apply_col(P, st, &nx, f);
-        tmpforb[f] = 1;
-        if (nm < 4096) marked[nm++] = f;
+        tmpforb[f] = stamp;
         cols[a] = f;
         found += complete(c, &nx, a + 1, R - 1, cols, tmpforb, na0);
         if (*c->stop) break;
     }
-    for (int i = 0; i < nm; i++) tmpforb[marked[i]] = 0;
+    for (int i = P->row_start[r]; i < P->row_start[r + 1]; i++)
+        if (tmpforb[P->row_cols[i]] == stamp) tmpforb[P->row_cols[i]] = 0;
     return found;
 }
 
@@ -637,7 +644,11 @@ static void dfs(Ctx *c, int a) {
         }
         return;
     }
-    if (a >= DMAX) return;
+    if (a >= DMAX) {             // unreachable for K <= DMAX; a cut branch must not pass for exhausted
+        *c->depth_cut = 1;
+        *c->stop = 1;
+        return;
+    }
     // pivot: unsatisfied row with the fewest free columns
     int piv = -1, best = 1 << 30;
     for (int w = 0; w < P->W; w++) {
@@ -786,8 +797,12 @@ static void run_prefix(Ctx *c, const int *prefix, int len) {
 
 // Search for a solution of weight <= K.
 //   returns 0 if the search space was exhausted, 1 if it stopped early
-//   (first solution found with enum_all = 0), 2 on timeout.
-//   *best = smallest weight recorded, or -1.
+//   (first solution found with enum_all = 0), 2 on timeout, 3 if there are too
+//   many tasks, 4 if K > DMAX (or a branch met the depth limit): nothing searched
+//   or proved.
+//   *best = smallest weight recorded, or -1.  At most sol_cap solutions are
+//   stored (*nsol); stats_out[7] counts all those found, so the stored list is
+//   complete iff the search was exhausted and stats_out[7] == *nsol.
 int gm_search(int W, int N, int M, int wmax,
               const uint64_t *col, const uint64_t *lg,
               const int *row_start, const int *row_cols,
@@ -798,6 +813,10 @@ int gm_search(int W, int N, int M, int wmax,
               int K, int enum_all, int task_depth, double time_limit,
               int64_t *nodes_out, int64_t *stats_out,
               int *best, int sol_cap, int sol_stride, int *sol_buf, int *nsol) {
+    *best = -1; *nsol = 0;
+    for (int d = 0; d <= DMAX; d++) nodes_out[d] = 0;
+    for (int i = 0; i < 8; i++) stats_out[i] = 0;
+    if (K > DMAX) return 4;      // the per-depth state stacks hold DMAX levels
     Prob P;
     P.W = W; P.N = N; P.M = M; P.wmax = wmax; P.col = col; P.lg = lg;
     P.row_start = row_start; P.row_cols = row_cols; P.col_start = col_start; P.col_rows = col_rows;
@@ -828,11 +847,9 @@ int gm_search(int W, int N, int M, int wmax,
     P.rc_bits = rc_bits; P.rc_rows = rc_rows;
     P.nks = g_nks; P.ks_start = g_ks_start; P.ks_cols = g_ks_cols; P.kc_start = g_kc_start; P.kc_ids = g_kc_ids;
     for (int t = 0; t < ntab; t++) { P.tab[t] = (const Table *)tabs[t]; P.tzh[t] = tzh[t]; P.tzl[t] = tzl[t]; }
-    volatile int stop = 0, timed_out = 0;
-    *best = -1; *nsol = 0;
+    volatile int stop = 0, timed_out = 0, depth_cut = 0;
+    int64_t nfound = 0;
     double deadline = time_limit > 0 ? now_sec() + time_limit : 0;
-    for (int d = 0; d <= DMAX; d++) nodes_out[d] = 0;
-    for (int i = 0; i < 8; i++) stats_out[i] = 0;
 
     // phase 1: collect prefixes of length task_depth (serial)
     int64_t task_cap = 1 << 22, ntask = 0;
@@ -849,7 +866,7 @@ int gm_search(int W, int N, int M, int wmax,
         c.cv_stamp = (int *)calloc(N, sizeof(int));
         c.stop = &stop; c.best = best; c.sol_cap = sol_cap; c.sol_stride = sol_stride;
         c.sol_buf = sol_buf; c.nsol = nsol; c.task_buf = task_buf; c.ntask = &ntask; c.task_cap = task_cap;
-        c.deadline = deadline; c.timed_out = &timed_out;
+        c.nfound = &nfound; c.deadline = deadline; c.timed_out = &timed_out; c.depth_cut = &depth_cut;
         int last_rank = -(1 << 30);
         for (int i = 0; i < n_anchor && !stop; i++) {
             if (P.rank[anchors[i]] != last_rank) { set_rank_forbidden(&c, anchors[i]); last_rank = P.rank[anchors[i]]; }
@@ -860,6 +877,8 @@ int gm_search(int W, int N, int M, int wmax,
         stats_out[5] += c.ascent_pruned; stats_out[6] += c.cover_calls;
         free(c.forb); free(c.avail); free(c.used); free(c.kcnt); free(c.cv_load); free(c.cv_stamp);
     }
+    stats_out[7] = nfound;
+    if (depth_cut) { free(task_buf); free(rc_bits); free(rc_rows); return 4; }
     if (ntask > task_cap) { free(task_buf); free(rc_bits); free(rc_rows); return 3; }   // too many tasks: lower task_depth
     stats_out[3] = ntask;
 
@@ -874,7 +893,8 @@ int gm_search(int W, int N, int M, int wmax,
         c.cv_load = (double *)malloc((size_t)N * sizeof(double));
         c.cv_stamp = (int *)calloc(N, sizeof(int));
         c.stop = &stop; c.best = best; c.sol_cap = sol_cap; c.sol_stride = sol_stride;
-        c.sol_buf = sol_buf; c.nsol = nsol; c.deadline = deadline; c.timed_out = &timed_out;
+        c.sol_buf = sol_buf; c.nsol = nsol; c.nfound = &nfound; c.deadline = deadline; c.timed_out = &timed_out;
+        c.depth_cut = &depth_cut;
         int last_rank = -(1 << 30);
         #pragma omp for schedule(dynamic, 1) nowait
         for (int64_t i = 0; i < ntask; i++) {
@@ -893,6 +913,8 @@ int gm_search(int W, int N, int M, int wmax,
     }
     free(task_buf);
     free(rc_bits); free(rc_rows);
+    stats_out[7] = nfound;
+    if (depth_cut) return 4;
     if (timed_out) return 2;
     return stop ? 1 : 0;
 }
@@ -913,7 +935,7 @@ int gm_num_threads(void) {
 // built with all logical labels zero (it is queried with label 1).  Used to
 // measure how much an admissible completion bound could prune.
 static int cancel_rec(const Prob *P, const Table *T, uint64_t *s, uint64_t sh, uint64_t sl, uint64_t lg,
-                      int use_logical, int r, uint8_t *forb) {
+                      int use_logical, int r, uint16_t *forb) {
     int pc = 0;
     for (int w = 0; w < P->W; w++) pc += __builtin_popcountll(s[w]);
     if (pc == 0) return use_logical ? lg != 0 : 1;
@@ -931,19 +953,21 @@ static int cancel_rec(const Prob *P, const Table *T, uint64_t *s, uint64_t sh, u
         }
     }
     if (best == 0) return 0;
-    int marked[4096], nm = 0, ok = 0;
+    // the budget r falls by one per level: as a stamp it tells this level's columns from its ancestors'
+    uint16_t stamp = (uint16_t)r;
+    int ok = 0;
     for (int i = P->row_start[piv]; i < P->row_start[piv + 1] && !ok; i++) {
         int f = P->row_cols[i];
         if (forb[f]) continue;
         const uint64_t *c = P->col + (size_t)f * P->W;
         for (int w = 0; w < P->W; w++) s[w] ^= c[w];
-        forb[f] = 1;
-        if (nm < 4096) marked[nm++] = f;
+        forb[f] = stamp;
         ok = cancel_rec(P, T, s, sh ^ P->tzh[0][f], sl ^ P->tzl[0][f], lg ^ (use_logical ? P->lg[f] : 0),
                         use_logical, r - 1, forb);
         for (int w = 0; w < P->W; w++) s[w] ^= c[w];
     }
-    for (int i = 0; i < nm; i++) forb[marked[i]] = 0;
+    for (int i = P->row_start[piv]; i < P->row_start[piv + 1]; i++)
+        if (forb[P->row_cols[i]] == stamp) forb[P->row_cols[i]] = 0;
     return ok;
 }
 
@@ -958,7 +982,7 @@ int gm_cancel_cost(int W, int N, int M, int wmax, const uint64_t *col, const uin
     P.ntab = 1; P.tab[0] = (const Table *)tab; P.tzh[0] = tzh; P.tzl[0] = tzl;
     uint64_t s[WMAX];
     for (int w = 0; w < W; w++) s[w] = sigma[w];
-    uint8_t *forb = (uint8_t *)calloc(N, 1);
+    uint16_t *forb = (uint16_t *)calloc(N, sizeof(uint16_t));
     int res = cap + 1;
     for (int r = 0; r <= cap; r++) {
         if (cancel_rec(&P, P.tab[0], s, sh, sl, lg0, use_logical, r, forb)) { res = r; break; }
