@@ -1,0 +1,283 @@
+{
+ "instance": "color_d7",
+ "instance_dir": "bench/instances/color_d7",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "8f9af7e368134f2e4240238291ad48c634cf536599dc110f5d780795073fadcc",
+  "full.H.mtx": "5fea545a7c0bf0526ccba53f2ef6fed3b8dc5aae2daa683afb88d4d5fcf65425",
+  "full.L.mtx": "522cec610021109bb29efadfa3b0abeb5c720875199f58b9ea03784bb131c157",
+  "full.rowmeta.json": "da77f544f87cee36fd773874d3e6ca6ef9e06105d596476cab0a9f59ada1a744"
+ },
+ "witnesses": [
+  {
+   "variant": "full",
+   "witness": [
+    72,
+    74,
+    508,
+    725
+   ],
+   "weight": 4,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 4,
+     "upper_bound": 4,
+     "rows": 126,
+     "cols": 3651,
+     "obs": 1,
+     "record": "results/bench/ours_pipeline__dp-2/color_d7__full__t1.json",
+     "started_at": "2026-10-23T11:52:17.858863+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 4,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 72,
+     "full_column": 72,
+     "detectors": [
+      1,
+      5,
+      7,
+      10,
+      19,
+      25
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 5,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Y",
+        15
+       ],
+       [
+        "Y",
+        16
+       ]
+      ],
+      "stack": [
+       [
+        57,
+        0,
+        2
+       ],
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 5,0,0]",
+       "D5[coords 6.5,1,0]",
+       "D7[coords 5,2,0]",
+       "D10[coords 6.5,3,0]",
+       "D19[coords 5,0,1]",
+       "D25[coords 5,2,1]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       5,
+       7,
+       10,
+       19,
+       25
+      ],
+      "observables": [
+       0
+      ]
+     }
+    },
+    {
+     "column": 74,
+     "full_column": 74,
+     "detectors": [
+      1,
+      5,
+      7,
+      12,
+      19,
+      25
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 4,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Y",
+        15
+       ],
+       [
+        "Z",
+        23
+       ]
+      ],
+      "stack": [
+       [
+        57,
+        0,
+        2
+       ],
+       [
+        12,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 5,0,0]",
+       "D5[coords 6.5,1,0]",
+       "D7[coords 5,2,0]",
+       "D12[coords 5,4,0]",
+       "D19[coords 5,0,1]",
+       "D25[coords 5,2,1]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       5,
+       7,
+       12,
+       19,
+       25
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 508,
+     "full_column": 508,
+     "detectors": [
+      10,
+      12,
+      15
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 5,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Z",
+        44
+       ]
+      ],
+      "stack": [
+       [
+        57,
+        0,
+        2
+       ],
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D10[coords 6.5,3,0]",
+       "D12[coords 5,4,0]",
+       "D15[coords 5,6,0]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       10,
+       12,
+       15
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 725,
+     "full_column": 725,
+     "detectors": [
+      15
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 3,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "Z",
+        49
+       ]
+      ],
+      "stack": [
+       [
+        57,
+        0,
+        2
+       ],
+       [
+        9,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D15[coords 5,6,0]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       15
+      ],
+      "observables": []
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "explain_seconds": 0.004,
+ "replay_seconds": 0.504,
+ "seconds": 0.52,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-04T09:17:17+00:00",
+   "full.H.mtx": "2026-10-04T09:17:17+00:00",
+   "full.L.mtx": "2026-10-04T09:17:17+00:00",
+   "full.rowmeta.json": "2026-10-04T09:17:17+00:00"
+  }
+ }
+}

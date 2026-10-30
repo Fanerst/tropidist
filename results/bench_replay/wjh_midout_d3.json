@@ -1,0 +1,182 @@
+{
+ "instance": "wjh_midout_d3",
+ "instance_dir": "bench/instances_wjh/wjh_midout_d3",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "df53690a8581ed99715cbd6dcf9c8f352e65a70a1ee51e4ea0e2268e3f78edff",
+  "full.H.mtx": "91925981d203021b5f4ab6395169ab7104dafaada6ae83ad4c4810e4bec3a8e0",
+  "full.L.mtx": "ca019d76fc920d9de64a0123f8c2e82c08c5e40103037a67a2e931557528c843",
+  "full.rowmeta.json": "6f59b4aacf3b6b1d9a2e2672c29175947ae5b932cb5216dcc1ddf53a260cc14a",
+  "sector.H.mtx": "d04592beede7237bbe2835d0daf4bd8a8faaccb2c989738b3b99636683a1f8a5",
+  "sector.L.mtx": "7b921447732f2c23db9f47c4157e69e8df3cb415cfca2656d5d0570a56e5bcc9",
+  "sector.rowmeta.json": "8335285ce30db04d22773f0a1da662ae68e11e84d8af2b5728d1556b7f5d030e"
+ },
+ "witnesses": [
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    5
+   ],
+   "weight": 2,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 2,
+     "upper_bound": 2,
+     "rows": 8,
+     "cols": 33,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline/wjh_midout_d3__sector__t1.json",
+     "started_at": "2026-10-15T04:23:32.977888+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 2,
+     "upper_bound": 2,
+     "rows": 8,
+     "cols": 33,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-1/wjh_midout_d3__sector__t1.json",
+     "started_at": "2026-10-22T06:00:50.266709+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 2,
+     "upper_bound": 2,
+     "rows": 8,
+     "cols": 33,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-2/wjh_midout_d3__sector__t1.json",
+     "started_at": "2026-10-23T11:50:07.869797+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 2,
+     "upper_bound": 2,
+     "rows": 8,
+     "cols": 33,
+     "obs": 1,
+     "record": "results/bench_wjh_8h/ours_pipeline__dp-2/wjh_midout_d3__sector__t1.json",
+     "started_at": "2026-10-23T11:50:07.947015+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 2,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "M",
+      "paulis": [],
+      "stack": [
+       [
+        39,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": 2,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 5,
+     "full_column": 23,
+     "detectors": [
+      0
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        5
+       ]
+      ],
+      "stack": [
+       [
+        11,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.0,
+ "replay_seconds": 0.147,
+ "seconds": 0.151,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-15T04:17:07+00:00",
+   "full.H.mtx": "2026-10-15T04:17:07+00:00",
+   "full.L.mtx": "2026-10-15T04:17:07+00:00",
+   "full.rowmeta.json": "2026-10-15T04:17:07+00:00",
+   "sector.H.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.L.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.rowmeta.json": "2026-10-15T04:17:07+00:00"
+  }
+ }
+}

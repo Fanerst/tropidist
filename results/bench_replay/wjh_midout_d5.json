@@ -1,0 +1,221 @@
+{
+ "instance": "wjh_midout_d5",
+ "instance_dir": "bench/instances_wjh/wjh_midout_d5",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "e5884ca2bb062eeb084df23cdf1a7ed69b2086ba598b11aaa84b54431d213a57",
+  "full.H.mtx": "4ccc02adb753f0789aa75a7d3868c4cd4d1808f5035cbda4583ec2a358d25d84",
+  "full.L.mtx": "3905afdae07705ba8178ae1485e3ecf7e144d368c5089bf7ba452306ff8d857f",
+  "full.rowmeta.json": "60290efd8dcaaf78b5d85e3e6cc7eef370b94b88b7fa0fb3bb300e7c81442ee2",
+  "sector.H.mtx": "43bd8aaa848bd36b7dfe60854c259702b768f81f4e95f93840f908d095a6a4d3",
+  "sector.L.mtx": "2fc427db70428ce350dd75a667bda8c7ccb6d7a8b6e52c62c4755b1a523b5018",
+  "sector.rowmeta.json": "5e309ab7631f61c6c52e8a27d11b5bac816748ca1e61e04ea54058ca65af22be"
+ },
+ "witnesses": [
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    4,
+    25
+   ],
+   "weight": 3,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 33,
+     "cols": 171,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline/wjh_midout_d5__sector__t1.json",
+     "started_at": "2026-10-15T04:23:33.408139+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 33,
+     "cols": 171,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-1/wjh_midout_d5__sector__t1.json",
+     "started_at": "2026-10-22T06:00:50.641903+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 33,
+     "cols": 171,
+     "obs": 1,
+     "record": "results/bench_wjh/ours_pipeline__dp-2/wjh_midout_d5__sector__t1.json",
+     "started_at": "2026-10-23T11:50:08.230282+00:00"
+    },
+    {
+     "status": "exact",
+     "lower_bound": 3,
+     "upper_bound": 3,
+     "rows": 33,
+     "cols": 171,
+     "obs": 1,
+     "record": "results/bench_wjh_8h/ours_pipeline__dp-2/wjh_midout_d5__sector__t1.json",
+     "started_at": "2026-10-23T11:50:07.949727+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 3,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 0,
+     "detectors": [
+      0
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "M",
+      "paulis": [],
+      "stack": [
+       [
+        53,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": 6,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 4,
+     "full_column": 11,
+     "detectors": [
+      0,
+      3
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        7
+       ]
+      ],
+      "stack": [
+       [
+        25,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 1,2,1,5]",
+       "D3[coords 3,2,1,5]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       3
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 25,
+     "full_column": 99,
+     "detectors": [
+      3
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "X_ERROR",
+      "paulis": [
+       [
+        "X",
+        19
+       ]
+      ],
+      "stack": [
+       [
+        25,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D3[coords 3,2,1,5]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       3
+      ],
+      "observables": [
+       0
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    0
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.001,
+ "replay_seconds": 0.317,
+ "seconds": 0.324,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-15T04:17:07+00:00",
+   "full.H.mtx": "2026-10-15T04:17:07+00:00",
+   "full.L.mtx": "2026-10-15T04:17:07+00:00",
+   "full.rowmeta.json": "2026-10-15T04:17:07+00:00",
+   "sector.H.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.L.mtx": "2026-10-15T04:17:07+00:00",
+   "sector.rowmeta.json": "2026-10-15T04:17:07+00:00"
+  }
+ }
+}

@@ -1,0 +1,1942 @@
+{
+ "instance": "routing_140_13",
+ "instance_dir": "bench/instances/routing_140_13",
+ "stim": "1.15.0",
+ "files": {
+  "circuit.stim": "7f21b3c05197d088cf85f9267d4e88bc960ec98280b030f4c0dfc174ca86e974",
+  "full.H.mtx": "ffcd35618c66a4e4c14bd3c665d0a551a83c7362734bfc5653ad7f6f9d8a646e",
+  "full.L.mtx": "13175965e0aa10b098647d41d1ee73c5cdffdfe611d69dbab9fafaa7437d1705",
+  "full.rowmeta.json": "d0058e417287d4e0bee8c609c5e0c01aa3ac2e8a68762c89a8ead85a3391f423",
+  "sector.H.mtx": "5418ecb11ffdbfc3665567e43e2d4f367ab1c2d328199d7119f05441e32a4fc0",
+  "sector.L.mtx": "c2b398f5469c864485595683a176b29b4914f283c43d592d4dc68f3253d05cf4",
+  "sector.rowmeta.json": "4c5492f5f252ca375549d9fa39040927c300f7ef8ce23a802bacc487b5d2d145"
+ },
+ "witnesses": [
+  {
+   "variant": "full",
+   "witness": [
+    4701,
+    4725,
+    4909,
+    4935,
+    5280,
+    5392,
+    5672,
+    6415,
+    9720,
+    10144,
+    10182,
+    10394,
+    10432
+   ],
+   "weight": 13,
+   "records": [
+    {
+     "status": "timeout",
+     "lower_bound": 11,
+     "upper_bound": 13,
+     "rows": 840,
+     "cols": 38920,
+     "obs": 8,
+     "record": "results/bench/ours_pipeline__dp-2/routing_140_13__full__t1.json",
+     "started_at": "2026-10-23T11:51:20.295637+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 13,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 4701,
+     "full_column": 4701,
+     "detectors": [
+      70,
+      71,
+      72,
+      98,
+      129
+     ],
+     "observables": [
+      1,
+      2,
+      3
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        161
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D70[coords 0,0,1,3]",
+       "D71[coords 1,0,1,3]",
+       "D72[coords 2,0,1,3]",
+       "D98[coords 28,0,1,3]",
+       "D129[coords 59,0,1,3]",
+       "L1",
+       "L2",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       70,
+       71,
+       72,
+       98,
+       129
+      ],
+      "observables": [
+       1,
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "column": 4725,
+     "full_column": 4725,
+     "detectors": [
+      70,
+      71,
+      74,
+      97,
+      128
+     ],
+     "observables": [
+      0,
+      2
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        169
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D70[coords 0,0,1,3]",
+       "D71[coords 1,0,1,3]",
+       "D74[coords 4,0,1,3]",
+       "D97[coords 27,0,1,3]",
+       "D128[coords 58,0,1,3]",
+       "L0",
+       "L2"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       70,
+       71,
+       74,
+       97,
+       128
+      ],
+      "observables": [
+       0,
+       2
+      ]
+     }
+    },
+    {
+     "column": 4909,
+     "full_column": 4909,
+     "detectors": [
+      71,
+      72,
+      73,
+      99,
+      125
+     ],
+     "observables": [
+      3
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        163
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D71[coords 1,0,1,3]",
+       "D72[coords 2,0,1,3]",
+       "D73[coords 3,0,1,3]",
+       "D99[coords 29,0,1,3]",
+       "D125[coords 55,0,1,3]",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       71,
+       72,
+       73,
+       99,
+       125
+      ],
+      "observables": [
+       3
+      ]
+     }
+    },
+    {
+     "column": 4935,
+     "full_column": 4935,
+     "detectors": [
+      71,
+      76
+     ],
+     "observables": [
+      1,
+      3,
+      5
+     ],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        158
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D71[coords 1,0,1,3]",
+       "D76[coords 6,0,1,3]",
+       "L1",
+       "L3",
+       "L5"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       71,
+       76
+      ],
+      "observables": [
+       1,
+       3,
+       5
+      ]
+     }
+    },
+    {
+     "column": 5280,
+     "full_column": 5280,
+     "detectors": [
+      73,
+      138
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        132
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D73[coords 3,0,1,3]",
+       "D138[coords 68,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       73,
+       138
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 5392,
+     "full_column": 5392,
+     "detectors": [
+      74,
+      139
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        134
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D74[coords 4,0,1,3]",
+       "D139[coords 69,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       74,
+       139
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 5672,
+     "full_column": 5672,
+     "detectors": [
+      76,
+      81
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        178
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D76[coords 6,0,1,3]",
+       "D81[coords 11,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       76,
+       81
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 6415,
+     "full_column": 6415,
+     "detectors": [
+      81,
+      97,
+      98,
+      99,
+      120
+     ],
+     "observables": [
+      4,
+      6
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        265
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D81[coords 11,0,1,3]",
+       "D97[coords 27,0,1,3]",
+       "D98[coords 28,0,1,3]",
+       "D99[coords 29,0,1,3]",
+       "D120[coords 50,0,1,3]",
+       "L4",
+       "L6"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       81,
+       97,
+       98,
+       99,
+       120
+      ],
+      "observables": [
+       4,
+       6
+      ]
+     }
+    },
+    {
+     "column": 9720,
+     "full_column": 9720,
+     "detectors": [
+      120,
+      125
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        76
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D120[coords 50,0,1,3]",
+       "D125[coords 55,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       120,
+       125
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 10144,
+     "full_column": 10144,
+     "detectors": [
+      128,
+      133
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        92
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D128[coords 58,0,1,3]",
+       "D133[coords 63,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       128,
+       133
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 10182,
+     "full_column": 10182,
+     "detectors": [
+      129,
+      134
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        94
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D129[coords 59,0,1,3]",
+       "D134[coords 64,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       129,
+       134
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 10394,
+     "full_column": 10394,
+     "detectors": [
+      133,
+      138
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        112
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D133[coords 63,0,1,3]",
+       "D138[coords 68,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       133,
+       138
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 10432,
+     "full_column": 10432,
+     "detectors": [
+      134,
+      139
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        114
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D134[coords 64,0,1,3]",
+       "D139[coords 69,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       134,
+       139
+      ],
+      "observables": []
+     }
+    }
+   ],
+   "predicted_observables": [
+    0,
+    3,
+    4,
+    5,
+    6
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  },
+  {
+   "variant": "sector",
+   "witness": [
+    0,
+    3,
+    29,
+    42,
+    50,
+    69,
+    468,
+    496,
+    688,
+    728,
+    741,
+    1401
+   ],
+   "weight": 12,
+   "records": [
+    {
+     "status": "exact",
+     "lower_bound": 12,
+     "upper_bound": 12,
+     "rows": 490,
+     "cols": 5180,
+     "obs": 8,
+     "record": "results/bench_tierB/ours_pipeline__dp-2/routing_140_13__sector__t32.json",
+     "started_at": "2026-10-23T14:01:39.129879+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 12,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 0,
+     "full_column": 1,
+     "detectors": [
+      0,
+      1,
+      2,
+      28,
+      59
+     ],
+     "observables": [
+      1,
+      2,
+      3
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        26
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]",
+       "D1[coords 1,0,0,3]",
+       "D2[coords 2,0,0,3]",
+       "D28[coords 28,0,0,3]",
+       "D59[coords 59,0,0,3]",
+       "L1",
+       "L2",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       1,
+       2,
+       28,
+       59
+      ],
+      "observables": [
+       1,
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "column": 3,
+     "full_column": 13,
+     "detectors": [
+      0,
+      1,
+      4,
+      27,
+      58
+     ],
+     "observables": [
+      0,
+      2
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        24
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D0[coords 0,0,0,3]",
+       "D1[coords 1,0,0,3]",
+       "D4[coords 4,0,0,3]",
+       "D27[coords 27,0,0,3]",
+       "D58[coords 58,0,0,3]",
+       "L0",
+       "L2"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       0,
+       1,
+       4,
+       27,
+       58
+      ],
+      "observables": [
+       0,
+       2
+      ]
+     }
+    },
+    {
+     "column": 29,
+     "full_column": 137,
+     "detectors": [
+      1,
+      2,
+      3,
+      29,
+      55
+     ],
+     "observables": [
+      3
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        28
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 1,0,0,3]",
+       "D2[coords 2,0,0,3]",
+       "D3[coords 3,0,0,3]",
+       "D29[coords 29,0,0,3]",
+       "D55[coords 55,0,0,3]",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       2,
+       3,
+       29,
+       55
+      ],
+      "observables": [
+       3
+      ]
+     }
+    },
+    {
+     "column": 42,
+     "full_column": 187,
+     "detectors": [
+      1,
+      32,
+      48,
+      115,
+      119
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 3,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        190
+       ]
+      ],
+      "stack": [
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D1[coords 1,0,0,3]",
+       "D32[coords 32,0,0,3]",
+       "D48[coords 48,0,0,3]",
+       "D115[coords 45,0,1,3]",
+       "D119[coords 49,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       1,
+       32,
+       48,
+       115,
+       119
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 50,
+     "full_column": 239,
+     "detectors": [
+      2,
+      3,
+      4,
+      25,
+      56
+     ],
+     "observables": [
+      0
+     ],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        20
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D2[coords 2,0,0,3]",
+       "D3[coords 3,0,0,3]",
+       "D4[coords 4,0,0,3]",
+       "D25[coords 25,0,0,3]",
+       "D56[coords 56,0,0,3]",
+       "L0"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       2,
+       3,
+       4,
+       25,
+       56
+      ],
+      "observables": [
+       0
+      ]
+     }
+    },
+    {
+     "column": 69,
+     "full_column": 324,
+     "detectors": [
+      2,
+      103,
+      115,
+      116,
+      119
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 5,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        130
+       ]
+      ],
+      "stack": [
+       [
+        21,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D2[coords 2,0,0,3]",
+       "D103[coords 33,0,1,3]",
+       "D115[coords 45,0,1,3]",
+       "D116[coords 46,0,1,3]",
+       "D119[coords 49,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       2,
+       103,
+       115,
+       116,
+       119
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 468,
+     "full_column": 2393,
+     "detectors": [
+      25,
+      28,
+      29,
+      77,
+      116
+     ],
+     "observables": [
+      6,
+      7
+     ],
+     "fault": {
+      "tick": 3,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        244
+       ]
+      ],
+      "stack": [
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D25[coords 25,0,0,3]",
+       "D28[coords 28,0,0,3]",
+       "D29[coords 29,0,0,3]",
+       "D77[coords 7,0,1,3]",
+       "D116[coords 46,0,1,3]",
+       "L6",
+       "L7"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       25,
+       28,
+       29,
+       77,
+       116
+      ],
+      "observables": [
+       6,
+       7
+      ]
+     }
+    },
+    {
+     "column": 496,
+     "full_column": 2546,
+     "detectors": [
+      27,
+      32
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        115
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D27[coords 27,0,0,3]",
+       "D32[coords 32,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       27,
+       32
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 688,
+     "full_column": 3701,
+     "detectors": [
+      48,
+      53
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        197
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D48[coords 48,0,0,3]",
+       "D53[coords 53,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       48,
+       53
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 728,
+     "full_column": 3946,
+     "detectors": [
+      53,
+      58
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 0,
+      "instruction": "DEPOLARIZE1",
+      "paulis": [
+       [
+        "X",
+        217
+       ]
+      ],
+      "stack": [
+       [
+        6,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D53[coords 53,0,0,3]",
+       "D58[coords 58,0,0,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       53,
+       58
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 741,
+     "full_column": 4026,
+     "detectors": [
+      55,
+      56,
+      59,
+      77,
+      108
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 3,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        86
+       ]
+      ],
+      "stack": [
+       [
+        15,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D55[coords 55,0,0,3]",
+       "D56[coords 56,0,0,3]",
+       "D59[coords 59,0,0,3]",
+       "D77[coords 7,0,1,3]",
+       "D108[coords 38,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       55,
+       56,
+       59,
+       77,
+       108
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1401,
+     "full_column": 8721,
+     "detectors": [
+      103,
+      108
+     ],
+     "observables": [
+      2,
+      4,
+      5
+     ],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        272
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D103[coords 33,0,1,3]",
+       "D108[coords 38,0,1,3]",
+       "L2",
+       "L4",
+       "L5"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       103,
+       108
+      ],
+      "observables": [
+       2,
+       4,
+       5
+      ]
+     }
+    }
+   ],
+   "predicted_observables": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     1,
+     2,
+     4,
+     5,
+     6,
+     7
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  },
+  {
+   "variant": "sector",
+   "witness": [
+    840,
+    843,
+    869,
+    874,
+    924,
+    940,
+    978,
+    1079,
+    1545,
+    1605,
+    1610,
+    1640,
+    1645
+   ],
+   "weight": 13,
+   "records": [
+    {
+     "status": "timeout",
+     "lower_bound": 11,
+     "upper_bound": 13,
+     "rows": 490,
+     "cols": 5180,
+     "obs": 8,
+     "record": "results/bench/ours_pipeline__dp-2/routing_140_13__sector__t1.json",
+     "started_at": "2026-10-23T11:51:01.408304+00:00"
+    }
+   ],
+   "check_witness": {
+    "ok": true,
+    "weight": 13,
+    "syndrome_zero": true,
+    "logical_nonzero": true
+   },
+   "columns": [
+    {
+     "column": 840,
+     "full_column": 4701,
+     "detectors": [
+      70,
+      71,
+      72,
+      98,
+      129
+     ],
+     "observables": [
+      1,
+      2,
+      3
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        161
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D70[coords 0,0,1,3]",
+       "D71[coords 1,0,1,3]",
+       "D72[coords 2,0,1,3]",
+       "D98[coords 28,0,1,3]",
+       "D129[coords 59,0,1,3]",
+       "L1",
+       "L2",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       70,
+       71,
+       72,
+       98,
+       129
+      ],
+      "observables": [
+       1,
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "column": 843,
+     "full_column": 4725,
+     "detectors": [
+      70,
+      71,
+      74,
+      97,
+      128
+     ],
+     "observables": [
+      0,
+      2
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        169
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D70[coords 0,0,1,3]",
+       "D71[coords 1,0,1,3]",
+       "D74[coords 4,0,1,3]",
+       "D97[coords 27,0,1,3]",
+       "D128[coords 58,0,1,3]",
+       "L0",
+       "L2"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       70,
+       71,
+       74,
+       97,
+       128
+      ],
+      "observables": [
+       0,
+       2
+      ]
+     }
+    },
+    {
+     "column": 869,
+     "full_column": 4909,
+     "detectors": [
+      71,
+      72,
+      73,
+      99,
+      125
+     ],
+     "observables": [
+      3
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        163
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D71[coords 1,0,1,3]",
+       "D72[coords 2,0,1,3]",
+       "D73[coords 3,0,1,3]",
+       "D99[coords 29,0,1,3]",
+       "D125[coords 55,0,1,3]",
+       "L3"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       71,
+       72,
+       73,
+       99,
+       125
+      ],
+      "observables": [
+       3
+      ]
+     }
+    },
+    {
+     "column": 874,
+     "full_column": 4935,
+     "detectors": [
+      71,
+      76
+     ],
+     "observables": [
+      1,
+      3,
+      5
+     ],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        158
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D71[coords 1,0,1,3]",
+       "D76[coords 6,0,1,3]",
+       "L1",
+       "L3",
+       "L5"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       71,
+       76
+      ],
+      "observables": [
+       1,
+       3,
+       5
+      ]
+     }
+    },
+    {
+     "column": 924,
+     "full_column": 5280,
+     "detectors": [
+      73,
+      138
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        132
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D73[coords 3,0,1,3]",
+       "D138[coords 68,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       73,
+       138
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 940,
+     "full_column": 5392,
+     "detectors": [
+      74,
+      139
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        134
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D74[coords 4,0,1,3]",
+       "D139[coords 69,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       74,
+       139
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 978,
+     "full_column": 5672,
+     "detectors": [
+      76,
+      81
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        178
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D76[coords 6,0,1,3]",
+       "D81[coords 11,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       76,
+       81
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1079,
+     "full_column": 6415,
+     "detectors": [
+      81,
+      97,
+      98,
+      99,
+      120
+     ],
+     "observables": [
+      4,
+      6
+     ],
+     "fault": {
+      "tick": 6,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        265
+       ]
+      ],
+      "stack": [
+       [
+        24,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D81[coords 11,0,1,3]",
+       "D97[coords 27,0,1,3]",
+       "D98[coords 28,0,1,3]",
+       "D99[coords 29,0,1,3]",
+       "D120[coords 50,0,1,3]",
+       "L4",
+       "L6"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       81,
+       97,
+       98,
+       99,
+       120
+      ],
+      "observables": [
+       4,
+       6
+      ]
+     }
+    },
+    {
+     "column": 1545,
+     "full_column": 9720,
+     "detectors": [
+      120,
+      125
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        76
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D120[coords 50,0,1,3]",
+       "D125[coords 55,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       120,
+       125
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1605,
+     "full_column": 10144,
+     "detectors": [
+      128,
+      133
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        92
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D128[coords 58,0,1,3]",
+       "D133[coords 63,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       128,
+       133
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1610,
+     "full_column": 10182,
+     "detectors": [
+      129,
+      134
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        94
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D129[coords 59,0,1,3]",
+       "D134[coords 64,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       129,
+       134
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1640,
+     "full_column": 10394,
+     "detectors": [
+      133,
+      138
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        112
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D133[coords 63,0,1,3]",
+       "D138[coords 68,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       133,
+       138
+      ],
+      "observables": []
+     }
+    },
+    {
+     "column": 1645,
+     "full_column": 10432,
+     "detectors": [
+      134,
+      139
+     ],
+     "observables": [],
+     "fault": {
+      "tick": 7,
+      "instruction": "DEPOLARIZE2",
+      "paulis": [
+       [
+        "X",
+        114
+       ]
+      ],
+      "stack": [
+       [
+        27,
+        0,
+        0
+       ]
+      ],
+      "flipped_measurement": null,
+      "dem_terms": [
+       "D134[coords 64,0,1,3]",
+       "D139[coords 69,0,1,3]"
+      ]
+     },
+     "alone": {
+      "detectors": [
+       134,
+       139
+      ],
+      "observables": []
+     }
+    }
+   ],
+   "predicted_observables": [
+    0,
+    3,
+    4,
+    5,
+    6
+   ],
+   "replay": {
+    "fired_detectors": [],
+    "flipped_observables": [
+     0,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "result": "pass",
+   "reasons": [],
+   "same_inputs_as_records": true
+  }
+ ],
+ "sector_rows_as_exported": true,
+ "explain_seconds": 0.036,
+ "replay_seconds": 15.998,
+ "seconds": 16.49,
+ "reference": {
+  "host": "5090",
+  "directory": "/data/panfeng/claude_runs/circuit_distance/bench",
+  "files": {
+   "circuit.stim": "identical",
+   "full.H.mtx": "identical",
+   "full.L.mtx": "identical",
+   "full.rowmeta.json": "identical",
+   "sector.H.mtx": "identical",
+   "sector.L.mtx": "identical",
+   "sector.rowmeta.json": "identical"
+  },
+  "mtime": {
+   "circuit.stim": "2026-10-04T08:26:52+00:00",
+   "full.H.mtx": "2026-10-04T08:26:58+00:00",
+   "full.L.mtx": "2026-10-04T08:26:58+00:00",
+   "full.rowmeta.json": "2026-10-04T08:26:58+00:00",
+   "sector.H.mtx": "2026-10-04T08:26:59+00:00",
+   "sector.L.mtx": "2026-10-04T08:26:59+00:00",
+   "sector.rowmeta.json": "2026-10-04T08:26:59+00:00"
+  }
+ }
+}
