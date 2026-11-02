@@ -1,7 +1,13 @@
 """Exported-instance adapter for the collapsed/lift/window/sector pipeline.
 
 config: symmetry=1, cover=1, collapse=1, lift=1, window=1,
-        k_coll=3, k_table=2, kmax=40, dp=0, dp_fast=10, dp_head=-1, deepen=1.
+        k_coll=3, k_table=2, kmax=40, kmin=1, dp=0, dp_fast=10, dp_head=-1, deepen=1.
+
+kmin starts the search at that threshold (on a circuit, the final sector search; the stages before it run as
+usual).  It continues a run whose record already excludes the lighter thresholds, so that one threshold can run
+apart from the others; the lower bound of the record then holds only together with that one.  With
+PIPELINE_PROGRESS set in the environment, the bounds
+are also written to that file at every update, for runs too long to wait for their record.
 
 collapse controls the standalone collapsed lower bound and the pruning table.
 With collapse=0 and lift=1, collapsed solutions are still generated for lifting
@@ -50,7 +56,7 @@ import common
 
 
 DEFAULTS = dict(symmetry=1, cover=1, collapse=1, lift=1, window=1,
-                k_coll=3, k_table=2, kmax=40, table_gb=0, dp=0, dp_fast=10, dp_head=-1, deepen=1)
+                k_coll=3, k_table=2, kmax=40, kmin=1, table_gb=0, dp=0, dp_fast=10, dp_head=-1, deepen=1)
 SWITCHES = ("symmetry", "cover", "collapse", "lift", "window", "dp", "deepen")
 DP_MAX_COLUMNS = 30000          # beyond this the order search alone is slow, and no such DP would fit
 DP_HEAD_START = 1.0             # seconds the search runs before a DP predicted to be cheap
@@ -81,9 +87,11 @@ def configuration(values):
     for k in SWITCHES:
         if cfg[k] not in ((0, 1, 2) if k == "dp" else (0, 1)):
             raise ValueError(k + (" must be 0, 1 or 2" if k == "dp" else " must be 0 or 1"))
-    for k in ("k_coll", "k_table", "kmax"):
+    for k in ("k_coll", "k_table", "kmax", "kmin"):
         if not 1 <= cfg[k] <= 40:
             raise ValueError(k + " must be between 1 and 40")
+    if cfg["kmin"] > cfg["kmax"]:
+        raise ValueError("kmin must not exceed kmax")
     if cfg["dp_fast"] < 0 or cfg["dp_head"] < -1:
         raise ValueError("dp_fast must be nonnegative, dp_head at least -1")
     global TABLE_BUDGET
@@ -535,7 +543,10 @@ class Pipeline:
 
     def run_search(self):
         if self.plain:
-            self.distance(self.sector, "plain", self.cfg["k_table"], perms=self.perms,
+            if self.cfg["kmin"] > 1:
+                self.notes["kmin"] = ("thresholds below %d were searched in a separate run; the lower bound "
+                                      "assumes them" % self.cfg["kmin"])
+            self.distance(self.sector, "plain", self.cfg["k_table"], start=self.cfg["kmin"], perms=self.perms,
                           certify=True, witness_map=list)
             return
         coll = None
@@ -621,7 +632,10 @@ class Pipeline:
             if self.cfg["collapse"]:
                 ctab = self.table(coll, self.cfg["k_coll"], seed=777)
                 relaxed = [(ctab, coll.image)]
-            self.distance(self.sector, "sector", self.cfg["k_table"], start=self.tr.lower,
+            if self.cfg["kmin"] > self.tr.lower:
+                self.notes["kmin"] = ("thresholds below %d were searched in a separate run; the lower bound "
+                                      "assumes them" % self.cfg["kmin"])
+            self.distance(self.sector, "sector", self.cfg["k_table"], start=max(self.tr.lower, self.cfg["kmin"]),
                           kmax=self.tr.upper - 1 if self.tr.upper else self.cfg["kmax"],
                           perms=self.perms, certify=True, witness_map=list, relaxed=relaxed)
         finally:
@@ -836,6 +850,7 @@ def main():
         proc.start()
         child.close()
         finished = False
+        progress_path = os.environ.get("PIPELINE_PROGRESS")
         while True:
             if parent.poll(0.02):
                 try:
@@ -847,6 +862,10 @@ def main():
                     break
                 tr.events, tr.lower, tr.upper = update["events"], update["lower"], update["upper"]
                 witness, detail = update["witness"], update["notes"]
+                if progress_path:
+                    with open(progress_path + ".tmp", "w") as f:
+                        json.dump({"lower": tr.lower, "upper": tr.upper, "seconds": round(tr.seconds(), 1)}, f)
+                    os.replace(progress_path + ".tmp", progress_path)
             if deadline is not None and time.monotonic() >= deadline:
                 status = "timeout"
                 detail["stop_reason"] = "whole-run wall-time limit reached"

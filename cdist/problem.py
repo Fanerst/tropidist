@@ -17,8 +17,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-import stim
-
 
 @dataclass
 class Problem:
@@ -68,6 +66,7 @@ def dedupe(h, l, meta=None):
 
 def load_dem_problem(path, name=None):
     """Full undecomposed DEM of a Stim circuit as a Problem."""
+    import stim         # here, so that code instances run where Stim is not installed
     circuit = stim.Circuit.from_file(path)
     dem = circuit.detector_error_model(decompose_errors=False, flatten_loops=True)
     coords = circuit.get_detector_coordinates()
