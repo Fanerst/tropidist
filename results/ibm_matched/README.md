@@ -135,7 +135,8 @@ before.
     which are ours.
   - So the X-basis bound lower-bounds the probability that any decoder of their experiment mispredicts an X-type
     logical, and hence their failure probability. Likewise for Z.
-  - The bounds of the two bases are equal. Their sum is not claimed.
+  - The bounds of the two bases are equal. This section does not claim their sum; the section on Fig. 4d does, with the
+    second-order term that makes it valid.
 - **Only copies of the C = 1 minimum fault sets enter.**
   - The 18-cycle circuit may have other undetected logical fault sets of weight 16 or less, for example spanning two
     cycles. They could only raise the bound.
@@ -143,7 +144,7 @@ before.
 - **The silence factor comes from the proof.** U must contain every set used, so the factor grows with C:
   10^-0.12 at 1e-4 and 10^-1.19 at 1e-3 for 18 cycles.
 
-## For the manuscript (not edited)
+## For the manuscript (written 30 October; superseded by the sections on Figs. 4d and 4e below)
 
 - **The "ten million" claim survives in the matched experiment:** 7.57 orders per cycle at p = 1e-4, against 7.44
   orders for C = 1.
@@ -168,3 +169,70 @@ OMP_NUM_THREADS=2 python papers/ibm_bicycle_matched_timing.py results/ibm_matche
 ```
 
 The X-basis distance runs are the same with X.
+
+## Fig. 4d: the published fit and the per-cycle bounds (2026-10-31)
+
+**The fit.** `papers/ibm_bicycle_fit.py` evaluates Tour de gross's eqs. 87-88 with its Table 6. It reproduces all eight idle and
+automorphism entries of Table 2 (record `fit_tour_de_gross.json`), with no further division by C. For the two-gross idle
+rate at p = 1e-4 the largest term has w = 19 (90% of the sum from w = 15-24) and w = 9 contributes 1.7e-5. Extending the same
+curve to w = 8 or w = 1 changes the rate by less than 1e-6 orders, so the assumed d* does not set it; gamma = 25.78 does.
+
+**Bounds per cycle, 18 cycles, both memory bases** (`papers/ibm_bicycle_code_logicals.py`, `bound_bb288_w{16,18}_c18_{X,Z}.json`).
+They differ from the section "Two-gross" above in two ways:
+- All 336 weight-18 logical operators of the code of each type (the number in Tour de gross App. A.1; enumerated in the
+  window of one round), with a greedy matching over their splits that keeps 8,166,816 of 8,168,160 per cycle.
+- The silence factor of each cycle's own mechanisms only, with a Bonferroni correction for different cycles (computed:
+  10^-54 against 10^-27 at 1e-4). Mechanisms of different cycles and of the two bases are disjoint, so the bounds add.
+
+| p | Table 2 | fit | weight 16, two bases | weight 18, two bases |
+|---|---|---|---|---|
+| 1e-4 | -38.3 +- 0.9 | -38.27 | -30.32 | -28.22 |
+| 7.322e-4 | | -22.98 | -23.44 | -20.52 |
+| 1e-3 | -20.1 +- 0.5 | -20.09 | -22.38 | -19.34 |
+
+- The weight-18 bound crosses the fit at p = 1.14e-3 (weight 16: 6.7e-4), and gives the higher bound above p = 1e-6.
+- Mechanism probabilities: 14q and 19q in the bulk; 7q and 14q in the cycle next to a noise-free boundary (the weight-16 sets:
+  2q and 14q, 2q and 12q). The C = 1 instruction therefore understates the bulk.
+- 6,048 copies per basis are checked in the detector error model; the 1,008 in cycles 1, 2 and 9 replay. The 648 copies of
+  the weight-16 sets replayed in `bound_bb288_standard_c18_{X,Z}.json`.
+- Per basis at 1e-4: -28.52 (weight 18), -30.62 (weight 16). Hand check of weight 18: 8.17e6 pairs x (1.1e-4)^9.
+
+```
+python papers/ibm_bicycle_code_logicals.py bb288 Z 18 18 results/ibm_matched/bound_bb288_w18_c18_Z.json code 1e-6 2e-6 5e-6 1e-5 2e-5 5e-5 7e-5 1e-4 1.4e-4 2e-4 3e-4 5e-4 7.322e-4 1e-3 1.4e-3 2e-3
+IBM_BOUND_REPLAY= python papers/ibm_bicycle_code_logicals.py bb288 X 18 16 results/ibm_matched/bound_bb288_w16_c18_X.json results/ibm/pipe_bb288_standard_c1_X.json,results/ibm/bound_bb288_standard_c1_X.json,results/ibm/enum_bb288_standard_c1_X.json <same p>
+IBM_BOUND_REPLAY= python papers/ibm_bicycle_code_logicals.py bb288 Z 18 16 results/ibm_matched/bound_bb288_w16_c18_Z.json results/ibm/pipe_bb288_standard_c1_Z.json <same p>
+python papers/ibm_bicycle_fit.py results/ibm_matched/fit_tour_de_gross.json results/ibm_matched/bound_bb288_w1*_c18_*.json
+```
+
+## Fig. 4e: the gross code with 10 cycles (2026-10-31)
+
+Three schedules: standard; the best of the 100 distance-11 schedules that fit eight timesteps, (5,6,1,2,3,4)/(3,2,4,0,1,5);
+the best of all 428, which needs nine, (1,0,6,4,3,2)/(3,4,2,5,6,0). "Best" means by the configurations of the minimum fault
+sets at C = 1 (`results/ibm/bound_gross_d11_c1.jsonl`).
+
+**Fault sets.** `papers/ibm_bicycle_matched_spectrum.py`: every set of weight <= 12, enumerated on 5090c (89 threads, 3-column tables)
+for 3 and 4 cycles, then translated in time to 10 (`spectrum_gross_c10_*.npz`, one set per orbit of the lattice translations).
+A 3-column table for 10 cycles would need 2^37 slots. The translates of 3 cycles reproduce the enumeration of 4 cycles exactly,
+except for one orbit of 72 sets of weight 12 in the X basis of both distance-11 schedules. For the standard schedule in the Z
+basis, a direct enumeration with 10 cycles (2-column table, 89 threads, 44 min; `spectrum_gross_c10_std_Z_direct.npz`) gives exactly
+the translated sets at weights 10, 11 and 12: 1,440, 141,912 and 7,497,120. The enumerations of 3 and 4 cycles are in `spectrum_c34/`.
+
+**Expansion.** `papers/ibm_bicycle_matched_mwd.py`, record `mwd_gross_c10.json`. Per cycle at p = 1e-4, summed over the bases: standard
+-16.47, 8 timesteps -17.24 (6.0x), 9 timesteps -16.74 (1.9x). At 1e-5: -21.60, -23.24 (44x), -22.74 (14x). C = 1 gave -16.9 and,
+for the nine-timestep schedule, -18.0 (12x): the noise-free boundaries of C = 1 understate the bulk, most for weight 12.
+
+**Simulations.** `papers/ibm_bicycle_sim.py` with `IBM_SIM_MATCHED=1 IBM_SIM_SECTOR=1` on 5090 (record `sim_gross_c10.jsonl`): BP-OSD on the
+detectors of the memory basis only. At C = 1 that decoder is better than the one on the full model (3.2e-4 against 1.9e-3 at
+p = 5e-3, Z basis). 1,000 iterations gave the same rate as 100 at p = 5e-3 (standard schedule, Z basis, 10 cycles: 89 and 86 failures
+in 800 shots). Summed over the bases, relative to the standard schedule, for p = 2.5e-3, 3e-3, 4e-3, ..., 8e-3: 8 timesteps 1.13, 0.98,
+1.00, 0.95, 0.98, 0.99, 0.99, at most 1.4 standard deviations away; 9 timesteps 2.48, 2.49, 2.28, 2.19, 1.81, 1.39, 1.14, the last ones
+limited by the failure probability of the 10 cycles approaching saturation.
+
+```
+IBM_SCHEDULE=... python papers/ibm_bicycle_matched_spectrum.py export gross Z 4 std_Z_c4.pkl     # also 3 and 10 cycles, X, each schedule
+OMP_NUM_THREADS=89 python papers/ibm_bicycle_matched_spectrum.py search std_Z_c4.pkl 10 12 std_Z_c4.npz 86400 3
+python papers/ibm_bicycle_matched_spectrum.py translate std_Z_c4.pkl std_Z_c4.npz std_Z_c10.pkl results/ibm_matched/spectrum_gross_c10_std_Z.npz
+OMP_NUM_THREADS=89 python papers/ibm_bicycle_matched_spectrum.py search std_Z_c10.pkl 10 12 std_Z_c10.npz 86400 2     # the direct check
+python papers/ibm_bicycle_matched_mwd.py results/ibm_matched/mwd_gross_c10.json results/ibm_matched/spectrum_gross_c10_*.npz
+IBM_SIM_MATCHED=1 IBM_SIM_SECTOR=1 IBM_SCHEDULE=... python papers/ibm_bicycle_sim.py gross 10 results/ibm_matched/sim_gross_c10.jsonl ...
+```
