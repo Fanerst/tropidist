@@ -1,0 +1,153 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 27
+  },
+  "instance": "wjh_qt_396_4_26",
+  "variant": "full",
+  "rows": 198,
+  "cols": 396,
+  "obs": 4,
+  "threads": 16,
+  "time_limit": 1800.0,
+  "status": "bounds",
+  "lower_bound": null,
+  "upper_bound": 27,
+  "witness": [
+    4,
+    14,
+    25,
+    37,
+    42,
+    65,
+    81,
+    108,
+    122,
+    131,
+    141,
+    147,
+    152,
+    170,
+    181,
+    254,
+    256,
+    280,
+    285,
+    291,
+    296,
+    322,
+    342,
+    353,
+    373,
+    384,
+    390
+  ],
+  "witness_ok": true,
+  "seconds": 5.277,
+  "trace": [
+    {
+      "t": 0.183,
+      "ub": 70
+    },
+    {
+      "t": 0.203,
+      "ub": 63
+    },
+    {
+      "t": 0.225,
+      "ub": 59
+    },
+    {
+      "t": 0.242,
+      "ub": 52
+    },
+    {
+      "t": 0.27,
+      "ub": 45
+    },
+    {
+      "t": 0.293,
+      "ub": 39
+    },
+    {
+      "t": 0.318,
+      "ub": 38
+    },
+    {
+      "t": 0.341,
+      "ub": 34
+    },
+    {
+      "t": 0.362,
+      "ub": 33
+    },
+    {
+      "t": 0.394,
+      "ub": 32
+    },
+    {
+      "t": 0.413,
+      "ub": 30
+    },
+    {
+      "t": 0.439,
+      "ub": 28
+    },
+    {
+      "t": 5.258,
+      "ub": 27
+    }
+  ],
+  "peak_rss_mb": 52.7,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "search calls: 31; valid outputs: 13; kernel maximum threads: 16",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "isd:stop_at=27",
+    "adapter": "isd",
+    "config_string": "stop_at=27",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_qt_396_4_26",
+    "family": "wjh_qt",
+    "memory_limit_gb": 16.0,
+    "time_limit": 1800.0,
+    "cpus": [
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175
+    ],
+    "started_at": "2026-10-29T06:21:31.899819+00:00",
+    "ended_at": "2026-10-29T06:21:37.286194+00:00",
+    "wall_seconds": 5.384713,
+    "adapter_seconds": 5.277,
+    "trace_offset_seconds": 0.107713,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_extended/isd__stop%5Fat-27/wjh_qt_396_4_26__full__t16.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_extended/isd__stop%5Fat-27/wjh_qt_396_4_26__full__t16.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.4,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

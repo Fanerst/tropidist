@@ -1,0 +1,136 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "wjh_bb_n756",
+  "variant": "full",
+  "rows": 378,
+  "cols": 756,
+  "obs": 16,
+  "threads": 16,
+  "time_limit": 3600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 34,
+  "witness": [
+    23,
+    63,
+    78,
+    83,
+    85,
+    118,
+    125,
+    129,
+    132,
+    133,
+    184,
+    188,
+    191,
+    195,
+    393,
+    400,
+    415,
+    416,
+    457,
+    461,
+    467,
+    482,
+    490,
+    531,
+    565,
+    613,
+    614,
+    655,
+    680,
+    681,
+    703,
+    729,
+    730,
+    745
+  ],
+  "witness_ok": true,
+  "seconds": 3600.038,
+  "trace": [
+    {
+      "t": 0.224,
+      "ub": 90
+    },
+    {
+      "t": 0.241,
+      "ub": 70
+    },
+    {
+      "t": 0.254,
+      "ub": 64
+    },
+    {
+      "t": 0.289,
+      "ub": 60
+    },
+    {
+      "t": 0.307,
+      "ub": 42
+    },
+    {
+      "t": 0.892,
+      "ub": 36
+    },
+    {
+      "t": 14.875,
+      "ub": 34
+    }
+  ],
+  "peak_rss_mb": 53.5,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "search calls: 13861; valid outputs: 7; kernel maximum threads: 16",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/data/panfeng/claude_runs/circuit_distance/bench/instances_wjh/wjh_bb_n756",
+    "family": "wjh_bb",
+    "memory_limit_gb": 16.0,
+    "time_limit": 3600.0,
+    "cpus": [
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175
+    ],
+    "started_at": "2026-10-29T03:52:05.947927+00:00",
+    "ended_at": "2026-10-29T04:52:06.079787+00:00",
+    "wall_seconds": 3600.128491,
+    "adapter_seconds": 3600.038,
+    "trace_offset_seconds": 0.090491,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_extended/isd/wjh_bb_n756__full__t16.stdout.log",
+    "stderr_file": "/data/panfeng/claude_runs/circuit_distance/results/bench_extended/isd/wjh_bb_n756__full__t16.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 30.2,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}

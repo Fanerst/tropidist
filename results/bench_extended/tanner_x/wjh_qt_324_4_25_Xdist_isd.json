@@ -1,0 +1,127 @@
+{
+  "method": "isd",
+  "version": "cdist/isd.c",
+  "config": {
+    "seed": 1,
+    "swaps_per_step": 4,
+    "chunk_seconds": 0.25,
+    "chunks": 0,
+    "stop_at": 1
+  },
+  "instance": "wjh_qt_324_4_25_Xdist",
+  "variant": "full",
+  "rows": 162,
+  "cols": 324,
+  "obs": 4,
+  "threads": 12,
+  "time_limit": 600.0,
+  "status": "timeout",
+  "lower_bound": null,
+  "upper_bound": 25,
+  "witness": [
+    11,
+    18,
+    30,
+    58,
+    76,
+    83,
+    98,
+    107,
+    108,
+    128,
+    159,
+    165,
+    180,
+    183,
+    192,
+    201,
+    228,
+    236,
+    237,
+    268,
+    279,
+    298,
+    301,
+    310,
+    316
+  ],
+  "witness_ok": true,
+  "seconds": 600.03,
+  "trace": [
+    {
+      "t": 0.326,
+      "ub": 42
+    },
+    {
+      "t": 0.327,
+      "ub": 37
+    },
+    {
+      "t": 0.328,
+      "ub": 35
+    },
+    {
+      "t": 0.33,
+      "ub": 33
+    },
+    {
+      "t": 0.332,
+      "ub": 29
+    },
+    {
+      "t": 0.334,
+      "ub": 27
+    },
+    {
+      "t": 0.35,
+      "ub": 26
+    },
+    {
+      "t": 1.752,
+      "ub": 25
+    }
+  ],
+  "peak_rss_mb": 64.5,
+  "truth": null,
+  "truth_kind": "unknown",
+  "notes": "search calls: 2391; valid outputs: 8; kernel maximum threads: 12",
+  "value_only": false,
+  "agrees_with_truth": null,
+  "harness": {
+    "method_spec": "isd",
+    "adapter": "isd",
+    "config_string": "",
+    "method_kind": "heuristic",
+    "instance_dir": "/ssd/home/panfeng/claude_runs/tanner_x/instances/wjh_qt_324_4_25_Xdist",
+    "family": "wjh_qt",
+    "memory_limit_gb": 8.0,
+    "time_limit": 600.0,
+    "cpus": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      24,
+      25,
+      27,
+      28
+    ],
+    "started_at": "2026-11-01T09:05:56.762024+00:00",
+    "ended_at": "2026-11-01T09:15:56.852392+00:00",
+    "wall_seconds": 600.088859,
+    "adapter_seconds": 600.03,
+    "trace_offset_seconds": 0.058859,
+    "exit_code": 0,
+    "error_reason": null,
+    "stderr_tail": [],
+    "stdout_file": "/ssd/home/panfeng/claude_runs/tanner_x/results/wjh_qt_324_4_25_Xdist/isd/wjh_qt_324_4_25_Xdist__full__t12.stdout.log",
+    "stderr_file": "/ssd/home/panfeng/claude_runs/tanner_x/results/wjh_qt_324_4_25_Xdist/isd/wjh_qt_324_4_25_Xdist__full__t12.stderr.log",
+    "memory_enforcement": "RLIMIT_AS plus process-group RSS polling (0.1 s; possible RSS overshoot)",
+    "peak_group_rss_mb": 28.6,
+    "peak_group_rss_sampling": "process-group RSS sampled every 0.1 s (short spikes can be missed)"
+  }
+}
