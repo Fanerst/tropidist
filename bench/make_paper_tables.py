@@ -54,6 +54,8 @@ def label(m):
         v = m["variants"]["full"]
         if v.get("distance_kind") != "exact":            # a thin tile code whose X distance is open
             return "%s $[[%d,%d]]$" % (kind, n, k)
+        if f == "dtc_strip":                             # one sector only: the paper's d_Z is 4 or 5
+            return "%s $[[%d,%d]]$, $d_X=%d$" % (kind, n, k, v["distance"])
         return "%s $[[%d,%d,%d]]$" % (kind, n, k, v["distance"])
     if f == "bb6_si1000":
         return "BB $[[%d,%d,%d]]$, %d rounds" % (n, k, CODE_D[n], m["rounds"])

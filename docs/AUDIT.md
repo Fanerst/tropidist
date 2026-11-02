@@ -16,8 +16,8 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 
 - 26 papers (and one data page) with checked numbers.
 - **Published values that are too high:** in 10 papers at least one is above the exact or certified value. These
-  are counted where the paper states a distance, an estimate, an expectation or a bound that a reader takes as
-  the distance; misprinted table rows are not counted. All 10 are circuit distances, or code distances
+  are counted where the paper states or implies a distance (a schedule called hook-free), or gives an estimate, an expectation or a bound that a reader takes as
+  the distance; a value not closed counts when the whole certified interval lies below it, as for planar [[537,14]] (≤ 35, certified 20–30); misprinted table rows are not counted. All 10 are circuit distances, or code distances
   estimated by sampling. The mitten values were also checked under the fault model of that paper's
   estimator: they hold. The mitten paper's count includes the structured-mitten schedules of its repository
   (checked 25 October 2026).
@@ -42,7 +42,7 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | mitten codes, structured | [[840,168,18]] code | ≤ 18 (sampled: at least 50M rounds of sQetch and 50k of a BP+OSD estimator) | **17** (d_X = 17, d_Z 17–18) | A | a checked X-type logical operator of weight 17, weight 16 excluded in both types. dist-m4ri's benchmark (October 2026) has d_X 15–17 |
 | Cornucopia codes, 2608.02773 | [[900,454,10]] circuit | ≤ 10 (BP-OSD) | **9** | R | matrices and gate orders equal to the authors' repository; same value in their own one-cycle, CNOT-only setting |
 | Cornucopia codes | [[1044,526,12]] circuit | ≤ 11 (BP-OSD) | **10** | R | |
-| Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | 12–14 | R | a weight-14 fault set, also in the authors' one-cycle setting |
+| Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | 13–14 | R | Z basis, 8 cycles; a weight-14 fault set, also in the authors' one-cycle setting |
 | Cornucopia codes | [[2844,1426,18]] circuit | ≤ 18 (BP-OSD) | 12–16 (8 cycles), 12–17 (1 cycle) | R | |
 | a modular architecture on Cornucopia, 2610.19073 | [[2844,1426,18]] logical error rate | 2.6e-16 per qubit and cycle, from a fit with exponent d/2 | optimistic | – | consequence of the row above: the leading order is at most p^8, not p^9 |
 | routing codes, 2606.25330 | [[200,24,14]] circuit, weight-11 checks | ≤ 14 (BP-OSD) | **10** | R | rebuilt code has distance 14; the loss is in the circuit |

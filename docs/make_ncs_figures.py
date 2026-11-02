@@ -34,6 +34,9 @@ WHITE = "#ffffff"
 BLUE, BLUE_LIGHT, ORANGE, AQUA = MF.BLUE, MF.BLUE_LIGHT, MF.ORANGE, MF.AQUA
 INK, INK2, MUTED, GRID, AXIS, GRAY, GRAY_LIGHT = MF.INK, MF.INK2, MF.MUTED, MF.GRID, MF.AXIS, MF.GRAY, MF.GRAY_LIGHT
 ORANGE_PALE, AQUA_PALE, BLUE_PALE, GRAY_PALE, PANEL = "#fbe1d6", "#d6f0e5", "#e3eefb", "#efeee9", "#f6f6f3"
+NAVY = "#1b4f91"
+# One meaning per color in all figures: blue, a certified result of this work; orange, a fault, a gap to a published value or a rejected case;
+# gray, published values and comparison methods.  Figures print at their true width of 183 mm, and no text is below 5 pt.
 MM = 1 / 25.4
 
 plt.rcParams.update({
@@ -77,11 +80,11 @@ def axes_mm(fig, x, y, w, h):
 def panel(ax, x, y, s, t=None):
     ax.text(x, y, s, fontsize=8, fontweight="bold", color=INK, ha="left", va="baseline")
     if t:
-        ax.text(x + 3.6, y, t, fontsize=6.8, fontweight="bold", color=INK, ha="left", va="baseline")
+        ax.text(x + 3.6, y, t, fontsize=7.0, fontweight="bold", color=INK, ha="left", va="baseline")
 
 
 def txt(ax, x, y, s, size=6.0, color=INK2, ha="left", va="center", **kw):
-    return ax.text(x, y, s, fontsize=size, color=color, ha=ha, va=va, **kw)
+    return ax.text(x, y, s, fontsize=max(size, 5.0), color=color, ha=ha, va=va, **kw)
 
 
 def rbox(ax, x, y, w, h, fc=WHITE, ec="none", lw=0.7, r=1.2, z=1, alpha=1.0):
@@ -263,12 +266,12 @@ def fig_schematic():
     yb = 72.5                                              # larger drawings over the full width of the column
     band(93.5, yb, 35.0, 31.0, 7, 10.4, 8.7, 34, [(BLUE, 0.5), (GRAY, 0.5)], GRAY_PALE)
     band(137.5, yb, 21.0, 18.0, 7, 6.5, 5.2, 14, [(BLUE, 1.0)], BLUE_PALE, dot=0.95)
-    rbox(ax, 165.0, yb, 12.0, 10.0, fc=AQUA_PALE, r=1.0, z=1)
-    ax.scatter(165.6 + rng.random(52) * 10.8, yb + 0.6 + rng.random(52) * 8.8, s=0.95, color=AQUA, linewidths=0,
+    rbox(ax, 165.0, yb, 12.0, 10.0, fc=BLUE_PALE, r=1.0, z=1)
+    ax.scatter(165.6 + rng.random(52) * 10.8, yb + 0.6 + rng.random(52) * 8.8, s=0.95, color=NAVY, linewidths=0,
                zorder=3)
     for xc, name, dims, note, ncol in ((111.0, "full error model", "5,184 × 206,352", None, None),
                                       (148.0, "one memory basis", "2,736 × 26,208", "same distance", BLUE),
-                                      (171.0, "collapsed over rounds", "144 × 720", "lower bound", AQUA)):
+                                      (171.0, "collapsed over rounds", "144 × 720", "lower bound", BLUE)):
         txt(ax, xc, yb - 2.6, name, 5.8, INK2, ha="center")
         txt(ax, xc, yb - 5.4, dims, 5.3, MUTED, ha="center")
         if note:
@@ -295,7 +298,7 @@ def fig_schematic():
     txt(ax, 30.0, 45.8, r"$Z_{\mathbf{M}}(t)\;=\;\min\,\{\,|e|\;:\;\mathbf{M}e=t\,\}$", 7.4, INK, ha="center")
     rbox(ax, 61.0, 42.2, CW, 7.2, fc=PANEL, r=1.6, z=2)
     txt(ax, 61.0 + CW / 2, 45.8, "a cost model runs\nthe cheapest", 5.4, INK2, ha="center", linespacing=1.15)
-    cards = [(2.0, AQUA, AQUA_PALE, "dense Rank DP"), (31.5, ORANGE, ORANGE_PALE, "truncated Rank DP"),
+    cards = [(2.0, BLUE, BLUE_PALE, "dense Rank DP"), (31.5, BLUE, BLUE_PALE, "truncated Rank DP"),
              (61.0, BLUE, BLUE_PALE, "weight-bounded search")]
     for x0, col, pale, name in cards:
         arrow(ax, 30.0, 42.0, x0 + CW / 2, 38.4, color=col, lw=0.75, ms=5)
@@ -306,7 +309,7 @@ def fig_schematic():
     # dense: the whole trellis
     x0 = 2.0
     txt(ax, x0 + CW / 2, 29.7, r"$2^{w}$ states at a cut of rank $w$", 5.0, MUTED, ha="center")
-    trellis(ax, np.linspace(x0 + 3.6, x0 + CW - 3.6, 6), 20.8, [1, 2, 4, 4, 2, 1], AQUA, AQUA_PALE,
+    trellis(ax, np.linspace(x0 + 3.6, x0 + CW - 3.6, 6), 20.8, [1, 2, 4, 4, 2, 1], BLUE, BLUE_PALE,
             spread=2.6, r=0.7, path=[0, 1, 2, 1, 0, 0])
     txt(ax, x0 + CW / 2, 8.0, r"cost $\approx\sum\,2^{w}$ over the cuts,", 5.2, INK2, ha="center")
     txt(ax, x0 + CW / 2, 4.7, "independent of the distance", 5.2, INK2, ha="center")
@@ -314,21 +317,21 @@ def fig_schematic():
     x0 = 31.5
     txt(ax, x0 + 7.2, 29.7, r"forward, $\leq T_{\mathrm{f}}$", 4.9, MUTED, ha="center")
     txt(ax, x0 + 20.8, 29.7, r"backward, $\leq T_{\mathrm{b}}$", 4.9, MUTED, ha="center")
-    pf = trellis(ax, np.linspace(x0 + 2.9, x0 + 11.5, 4), 20.8, [1, 2, 4, 4], ORANGE, ORANGE_PALE,
+    pf = trellis(ax, np.linspace(x0 + 2.9, x0 + 11.5, 4), 20.8, [1, 2, 4, 4], BLUE, BLUE_PALE,
                  spread=2.6, r=0.7, keep=[[1], [1, 1], [1, 1, 1, 0], [1, 0, 1, 1]], path=[0, 0, 1, 3])
-    pb = trellis(ax, np.linspace(x0 + 16.5, x0 + 25.1, 4), 20.8, [4, 4, 2, 1], ORANGE, ORANGE_PALE,
+    pb = trellis(ax, np.linspace(x0 + 16.5, x0 + 25.1, 4), 20.8, [4, 4, 2, 1], BLUE, BLUE_PALE,
                  spread=2.6, r=0.7, keep=[[1, 1, 0, 1], [0, 1, 1, 1], [1, 1], [1]], path=[3, 3, 1, 0], mirror=True)
     ax.plot([x0 + CW / 2, x0 + CW / 2], [14.0, 27.6], color=INK2, lw=0.55, ls=(0, (2, 1.4)), zorder=1)
     for i in (0, 3):
         on = i == 3
-        ax.plot([pf[-1][i][0], pb[0][i][0]], [pf[-1][i][1], pb[0][i][1]], color=ORANGE if on else GRAY_LIGHT,
+        ax.plot([pf[-1][i][0], pb[0][i][0]], [pf[-1][i][1], pb[0][i][1]], color=BLUE if on else GRAY_LIGHT,
                 lw=1.25 if on else 0.5, ls="-" if on else (0, (1.5, 1)), zorder=4)
     txt(ax, x0 + CW / 2, 12.6, "join", 4.9, MUTED, ha="center")
     txt(ax, x0 + CW / 2, 8.0, "keeps only light states;", 5.2, INK2, ha="center")
     txt(ax, x0 + CW / 2, 4.7, "cost set by their number", 5.2, INK2, ha="center")
     # search: canonical branching, pruning, completion by lookup
     x0 = 61.0
-    txt(ax, x0 + CW / 2, 29.7, r"a solution of weight $\leq K$?", 4.9, MUTED, ha="center")
+    txt(ax, x0 + CW / 2, 29.7, r"a solution of weight $\leq K$?", 5.0, MUTED, ha="center")
     root = (x0 + CW / 2, 25.8)
     l1 = [(x0 + 8.0 * k_, 21.7), (x0 + 17.0 * k_, 21.7), (x0 + 26.0 * k_, 21.7)]
     l2 = [(x0 + v * k_, 17.6) for v in (4.8, 11.2, 14.6, 19.4, 22.8, 29.2)]
@@ -354,7 +357,7 @@ def fig_schematic():
             ax.plot([p[0], tx + 0.8 + (k * 1.75)], [p[1] - 0.75, ty + 2 * ch], color=BLUE, lw=0.45, alpha=0.6,
                     ls=(0, (1.6, 1.0)), zorder=2)
     txt(ax, tx + 6 * cw + 0.7, ty + ch, "lookup", 4.9, MUTED, ha="left")
-    txt(ax, x0 + CW - 0.7, 27.3, "× pruned by a\ncovering bound", 4.3, ORANGE, ha="right", va="center", linespacing=1.1)
+    txt(ax, x0 + CW - 0.7, 26.6, "× covering\nbound", 5.0, ORANGE, ha="right", va="center", linespacing=1.05)
     txt(ax, x0 + CW / 2, 8.0, r"$K=1,2,\ldots$ excluded in turn;", 5.2, INK2, ha="center")
     txt(ax, x0 + CW / 2, 4.7, "cost set by d and symmetry", 5.2, INK2, ha="center")
 
@@ -586,13 +589,13 @@ PAPER_SHORT = {"Mitten codes": "Mitten", "Mitten codes (repository)": "Mitten, r
                "IBM bivariate bicycle codes": "IBM bivariate bicycle", "Distance-finding benchmark": "Distance benchmark",
                "Cornucopia codes": "Cornucopia", "Routing codes": "Routing", "Shift automorphism circuits": "Shift",
                "Walking Cat": "Walking Cat", "Left-right circuits": "Left-right", "Vine codes": "Vine",
-               "Amplified qLDPC codes": "Amplified", "Tile codes": "Tile", "Nearest-neighbour planar codes": "Planar",
+               "Amplified qLDPC codes": "Amplified", "Tile codes": "Tile", "Nearest-neighbor planar codes": "Planar",
                "Multivariate multicycle codes": "Multicycle", "Modular hyperbolic codes": "Modular hyperbolic",
                "Weight-8 bivariate bicycle codes": "Weight-8 BB", "Balanced-product codes": "Balanced product"}
 CIRC_GROUPS = ["Mitten codes", "Mitten codes (repository)", "IBM bivariate bicycle codes", "Distance-finding benchmark",
                "Cornucopia codes", "Routing codes", "Shift automorphism circuits", "Walking Cat", "Left-right circuits",
                "Vine codes", "Amplified qLDPC codes"]
-CODE_GROUPS = ["Tile codes", "Nearest-neighbour planar codes", "Multivariate multicycle codes", "Mitten codes (repository)",
+CODE_GROUPS = ["Tile codes", "Nearest-neighbor planar codes", "Multivariate multicycle codes", "Mitten codes (repository)",
                "Weight-8 bivariate bicycle codes", "Modular hyperbolic codes", "IBM bivariate bicycle codes",
                "Balanced-product codes"]
 VERDICT_COLOR = {"too_high": ORANGE, "settled": BLUE, "confirmed": GRAY, "open": GRAY}
@@ -606,7 +609,7 @@ def audit_rows():
 
 def short_object(s):
     s = s.replace(" circuit", "").replace(" code", "")
-    return {"gross, dynamic": "gross code, dynamic", "gross, three-colour": "gross code, 3-colour",
+    return {"gross, dynamic": "gross code, dynamic", "gross, three-color": "gross code, 3-color",
             "four patches of distance 10": "4 patches, d = 10", "superdense, d = 11": "superdense, d = 11",
             "[[90,8,8]] level-1": "[[90,8,8]], level 1"}.get(s, s).replace(", X distance", ", X")
 
@@ -615,7 +618,7 @@ def stated_text(r):
     lo, hi, st = int(float(r["pub_lo"])), int(float(r["pub_hi"])), r["stated"]
     if lo != hi:
         return "%d–%d" % (lo, hi)
-    return {"bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "conjecture": "%d?",
+    return {"bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d", "conjecture": "%d?",
             "lower_bound": "≥%d", "claim": "%d"}.get(st, "%d") % hi
 
 
@@ -645,210 +648,285 @@ def hook_example():
                 distance=rec["distance"], n=det.shape[1])
 
 
-def forest(fig, ax, rows, groups, x0, ytop, pitch, plot_x, plot_w, xlim, xticks, val_x):
-    """One audit panel: a row per value, grouped by paper, with the published value (open marker or range) and the
-    certified value or interval (filled), joined when they differ."""
-    marks = {"bound": "<", "best_known": "<", "claim": "o", "estimate": "D", "expected": "D", "conjecture": "s",
-             "lower_bound": ">"}
-    lines, y = [], 0.0
-    for g in groups:
-        sel = sorted([r for r in rows if r["paper"] == g], key=lambda r: VERDICT_ORDER[r["verdict"]])
-        for k, r in enumerate(sel):
-            lines.append((y, r, k == 0, g))
-            y += 1
-        y += 0.55
-    n = y - 0.55
-    h = n * pitch
-    axp = axes_mm(fig, plot_x, ytop - h, plot_w, h)
-    axp.set_ylim(n - 0.5, -0.5)
-    axp.set_xlim(*xlim)
-    # zebra by paper
-    gy = {}
-    for yy, r, first, g in lines:
-        gy.setdefault(g, []).append(yy)
-    for gi, g in enumerate(groups):
-        if gi % 2 == 0:
-            lo, hi = min(gy[g]) - 0.5, max(gy[g]) + 0.5
-            ax.add_patch(Rectangle((x0, ytop - (hi + 0.5) * pitch), val_x + 12.5 - x0, (hi - lo) * pitch,
-                                   facecolor=PANEL, edgecolor="none", zorder=0))
-    for yy, r, first, g in lines:
-        ym = ytop - (yy + 0.5) * pitch
-        if first:
-            txt(ax, x0 + 1.0, ym, PAPER_SHORT.get(g, g), 5.3, INK, fontweight="bold")
-        txt(ax, plot_x - 1.2, ym, short_object(r["object"]), 5.2, INK2, ha="right")
-        col = VERDICT_COLOR[r["verdict"]]
-        plo, phi, clo, chi = (float(r[k]) for k in ("pub_lo", "pub_hi", "cert_lo", "cert_hi"))
+# ---------------------------------------------------------------------------------------------------- Fig. 3
+EXT = ROOT / "results" / "bench_extended"
+SHEETS = ROOT / "papers" / "downloads" / "codedistance" / "paper results"
+
+
+def code_distance(s):
+    m = re.search(r"\[\[\d+,\d+,(\d+)\]\]", s)
+    return int(m.group(1)) if m else None
+
+
+def signed(stated, v):
+    return {"bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d", "lower_bound": "≥%d",
+            "conjecture": "%d?"}.get(stated, "%d") % v
+
+
+def closed(*records):
+    """Interval from extended-budget records of one problem (those present): the highest lower bound and the lightest verified witness."""
+    lo, hi = None, None
+    for p in records:
+        if not (EXT / p).exists():
+            continue
+        r = json.load(open(EXT / p))
+        if r["lower_bound"] is not None:
+            lo = max(lo or 0, r["lower_bound"])
+        if r["upper_bound"] is not None and r["witness_ok"]:
+            hi = min(hi or 10 ** 6, r["upper_bound"])
+    return lo, hi
+
+
+def best_known():
+    import xlsx_lite
+    out = {}
+    for sheet in ("12 tanner_codes.xlsx", "07 bivariate_bicycle.xlsx"):
+        for r in xlsx_lite.read(str(SHEETS / sheet))["best"]:
+            if len(r) > 3 and r[1].strip().isdigit():
+                out[r[0]] = int(float(r[3]))
+    return out
+
+
+class Column:
+    """Rows on one distance axis: code distance as a tick, published value hollow or a gray range, certified value blue, as a point or, if not closed,
+    an interval, with an orange line to a published value it lies below; the values in numbers at the right."""
+    SUB, SUBGAP = 2.9, 0.6
+
+    def __init__(self, ax, x_name, x_label, x0, x1, dmin, dmax, ynum):
+        self.ax, self.x_name, self.x_label, self.x0, self.x1, self.dmin, self.ynum = ax, x_name, x_label, x0, x1, dmin, ynum
+        self.unit = (x1 - x0) / (dmax - dmin)
+        self.spans = []
+
+    def X(self, d):
+        return self.x0 + (d - self.dmin) * self.unit
+
+    def start(self, y):
+        self.y, self.ytop = y, y
+
+    def close(self):
+        self.spans.append((self.y, self.ytop))
+
+    def sub(self, s, first=False):
+        if not first:
+            self.y -= self.SUBGAP
+        txt(self.ax, self.x_name, self.y - 1.3, s, 5.4, MUTED, fontweight="bold", zorder=1, bbox=dict(facecolor=WHITE, edgecolor="none", pad=0.6))
+        self.y -= self.SUB
+
+    def row(self, pitch, label, plo, phi, clo, chi, stated, name=None, tick=None, also=None):
+        ax, X = self.ax, self.X
+        ym = self.y - pitch / 2
+        if name:
+            txt(ax, self.x_name, ym, name, 5.8, INK, fontweight="bold")
+        txt(ax, self.x_label, ym, label, 5.6, INK2, ha="right")
+        if tick is not None:
+            ax.plot([X(tick)] * 2, [ym - 1.0, ym + 1.0], color=INK, lw=0.7, zorder=3, solid_capstyle="butt")
         if phi > plo:
-            axp.plot([plo, phi], [yy, yy], color=GRAY_LIGHT, lw=2.6, alpha=0.8, zorder=2, solid_capstyle="butt")
-        if r["verdict"] in ("too_high", "settled") and not (plo <= clo <= chi <= phi and phi > plo):
-            near = chi if phi >= chi else clo
-            axp.plot([phi if phi >= chi else plo, near], [yy, yy], color=col, lw=0.9, zorder=3)
-        if chi > clo:
-            axp.plot([clo, chi], [yy, yy], color=col, lw=2.6, zorder=4, solid_capstyle="round")
+            ax.plot([X(plo), X(phi)], [ym, ym], color=GRAY_LIGHT, lw=2.0, solid_capstyle="round", zorder=2)
+        elif phi != chi:
+            ax.plot([X(chi), X(phi)], [ym, ym], color=ORANGE if chi < phi else BLUE, lw=0.8, zorder=2)
+        if clo < chi:
+            ax.plot([X(clo), X(chi)], [ym, ym], color=BLUE, lw=2.0, solid_capstyle="round", zorder=3)
         else:
-            axp.scatter([clo], [yy], s=11, color=col, edgecolors=WHITE, linewidths=0.4, zorder=5)
+            ax.scatter([X(chi)], [ym], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4, zorder=5)
         if phi == plo:
-            axp.scatter([phi], [yy], s=13 if marks.get(r["stated"], "o") != "D" else 9, marker=marks.get(r["stated"], "o"),
-                        facecolors=WHITE, edgecolors=INK2 if r["verdict"] != "confirmed" else GRAY, linewidths=0.6,
-                        zorder=6 if r["verdict"] != "confirmed" else 4)
-        cert = "%d" % clo if chi == clo else "%d–%d" % (clo, chi)
-        txt(ax, val_x, ym, stated_text(r), 5.2, INK2, ha="right")
-        txt(ax, val_x + 1.0, ym, "→", 5.0, MUTED, ha="left")
-        txt(ax, val_x + 3.7, ym, cert, 5.2, col if r["verdict"] != "confirmed" else INK2, ha="left",
-            fontweight="bold" if r["verdict"] in ("too_high", "settled") else "normal")
-    axp.set_xticks(xticks)
-    axp.set_yticks([])
-    axp.spines["left"].set_visible(False)
-    axp.grid(axis="x", color=GRID, lw=0.45, zorder=0)
-    axp.set_axisbelow(True)
-    axp.tick_params(length=0)
-    axp.set_facecolor("none")
-    axp.set_xlabel("distance")
-    return axp
+            ax.scatter([X(phi)], [ym], s=11, facecolors=WHITE if phi != chi else "none", edgecolors=INK2, linewidths=0.6, zorder=6 if phi == chi else 4)
+        if also is not None:
+            ax.scatter([X(also)], [ym], s=9, marker="D", color=BLUE_LIGHT, edgecolors=WHITE, linewidths=0.3, zorder=5)
+        pub = "%d–%d" % (plo, phi) if phi > plo else signed(stated, phi)
+        cert = ("%d–%d" % (clo, chi) if clo < chi else "%d" % chi) + (" (%d)" % also if also is not None else "")
+        txt(ax, self.ynum - 0.9, ym, pub, 5.6, INK2, ha="right")
+        txt(ax, self.ynum, ym, "→", 5.2, MUTED, ha="center")
+        txt(ax, self.ynum + 0.9, ym, cert, 5.6, BLUE, fontweight="bold")
+        self.y -= pitch
+
+    def axis(self, ticks, xlabel, yb):
+        ax, X = self.ax, self.X
+        for lo, hi in self.spans:
+            for v in ticks:
+                ax.plot([X(v), X(v)], [max(lo, yb), hi], color=GRID, lw=0.4, zorder=0)
+        for v in ticks:
+            txt(ax, X(v), yb - 1.7, str(v), 5.5, INK2, ha="center")
+        ax.plot([self.x0, self.x1], [yb, yb], color=AXIS, lw=0.5, zorder=1)
+        txt(ax, (self.x0 + self.x1) / 2, yb - 4.1, xlabel, 5.8, INK2, ha="center")
+
+
+def tanner_distance(z, *xrecords):
+    """(value, closed in both bases): the code distance when the X search has ended, else the Z distance."""
+    xlo, xhi = closed(*xrecords)
+    if xlo is not None and xlo == xhi:
+        return min(z, xhi), True
+    return z, False
 
 
 def fig_audit():
-    """Figure 3: the audited values against their certified values (a), the values published too high (b) and the
-    modular hyperbolic codes whose distances their study could only bracket (c)."""
-    rows = audit_rows()
-    W, H = 183, 134
+    rows = {(r["paper"], r["object"]): r for r in audit_rows()}
+    bk = best_known()
+    q288 = closed("ours_pipeline__dp-2/wjh_qt_288_2_24__full__t32.json")
+    q324 = closed("ours_pipeline__dp-2/wjh_qt_324_4_25__full__t32.json")
+    q360 = closed("ours_pipeline__dp-2/wjh_qt_360_4_24__full__t32.json")
+    q396 = closed("ours_pipeline__dp-2/wjh_qt_396_4_26__full__t32.json", "ours_pipeline__dp-2__kmin-26__kmax-26/wjh_qt_396_4_26__full__t89.json",
+                  "isd__stop%5Fat-27/wjh_qt_396_4_26__full__t16.json")
+    b648 = closed("ours_pipeline__dp-2/wjh_bb_n648__full__t32.json", "ours_pipeline__dp-2__kmin-31__kmax-31/wjh_bb_n648__full__t57.json",
+                  "isd__stop%5Fat-32/wjh_bb_n648__full__t16.json")
+    # BB [[756,16]]: the threshold-33 run closes it at 34 when its record is here
+    b756 = closed("ours_pipeline__dp-2__kmax-32/wjh_bb_n756__full__t57.json", "isd/wjh_bb_n756__full__t16.json",
+                  "ours_pipeline__dp-2__kmin-33__kmax-33/wjh_bb_n756__full__t134.json")
+    assert q288 == (24, 24) and q324 == (25, 25) and q360 == (24, 24) and q396 == (27, 27) and b648 == (32, 32) and b756[1] == 34 and b756[0] >= 33
+    x288 = tanner_distance(q288[0], "tanner_x/wjh_qt_288_2_24_Xdist__full__t12.json", "tanner_x/wjh_qt_288_2_24_Xdist_isd.json")
+    x324 = tanner_distance(q324[0], "tanner_x/wjh_qt_324_4_25_Xdist_kmin24.json", "tanner_x/wjh_qt_324_4_25_Xdist_isd.json")
+    x360 = tanner_distance(q360[0], "tanner_x/wjh_qt_360_4_24_Xdist_kmax23.json", "tanner_x/wjh_qt_360_4_24_Xdist_isd.json")
+    x396 = tanner_distance(q396[0], "tanner_x/wjh_qt_396_4_26_Xdist_kmax25.json", "tanner_x/wjh_qt_396_4_26_Xdist_isd.json")
+    too_high_rows = [k for k, r in rows.items() if r["verdict"] == "too_high"]
+    settled_rows = [k for k, r in rows.items() if r["verdict"] == "settled" and r["paper"] != "Modular hyperbolic codes"]
+    used = []
+
+    W, H = 183, 149
     fig, ax = canvas(W, H)
-    top = H - 3.6
-    hyp = [r for r in rows if r["paper"] == "Modular hyperbolic codes"]
-    rest = [r for r in rows if r["paper"] != "Modular hyperbolic codes"]
-    hi = [r for r in rows if r["verdict"] == "too_high"]
-    npap = len({r["ref"] for r in hi})
-    panel(ax, 1.5, top, "a", "Published against certified distances")
-    panel(ax, 95.5, top, "b", "The %d values published too high, in %d papers" % (len(hi), npap))
+    top = H - 1.0
 
-    # ------------------------------------------------------------------ a: one point per value, no bars
-    axa = axes_mm(fig, 14.0, 66.0, 60.0, 60.0)
-    lo_, hi_ = 4.0, 38.5
-    axa.fill_between([lo_, hi_], [lo_, lo_], [lo_, hi_], color=ORANGE_PALE, alpha=0.6, lw=0, zorder=0)
-    axa.plot([lo_, hi_], [lo_, hi_], color=INK2, lw=0.6, zorder=1)
-    txt(axa, 37.6, 6.6, "published value\ntoo high", 5.4, ORANGE, ha="right", va="bottom", linespacing=1.1,
-        fontweight="bold")
-    seen = {}
-    pos = []
-    for r in rest:
-        x, y = float(r["pub_hi"]), float(r["cert_hi"])      # a range at its upper end; the lightest error found
-        seen[(x, y)] = seen.get((x, y), 0) + 1
-        pos.append((r, x, y, seen[(x, y)] - 1))
-    count = dict(seen)
-    for r, x, y, k in pos:
-        off = 0.45 * (k - (count[(x, y)] - 1) / 2)              # repeated points spread along the diagonal
-        col = VERDICT_COLOR[r["verdict"]]
-        closed = float(r["cert_lo"]) == y
-        mk = ("o" if r["kind"] == "circuit" else "s") if closed else "v"
-        axa.scatter([x + off], [y + off], s=13 if mk == "v" else (11 if mk == "o" else 9), marker=mk, color=col,
-                    edgecolors=WHITE, linewidths=0.45, zorder=4)
-    notes = [((16, 9), (20.5, 7.0), "mitten [[500,100,16]]"),
-             ((12, 7), (13.0, 4.9), "'hook-free' schedule, [[330,66,12]]"),
-             ((24, 17), (27.0, 14.2), "mitten [[975,195,24]]"),
-             ((24, 16), (26.0, 19.8), "IBM [[288,12,18]], best known 24"),
-             ((18, 16), (5.5, 22.0), "IBM [[288,12,18]], at most 18"),
-             ((14, 10), (5.0, 15.5), "routing [[200,24,14]]"),
-             ((37, 36), (24.0, 34.6), "planar [[259,2]]")]
-    for (px, py), (tx, ty), lab in notes:
-        axa.annotate(lab, (px, py), xytext=(tx, ty), fontsize=4.8, color=INK2, ha="left", va="center",
-                     arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.4, shrinkA=0.5, shrinkB=1.6))
-    axa.set_xlim(lo_, hi_)
-    axa.set_ylim(lo_, hi_)
-    ticks = [5, 10, 15, 20, 25, 30, 35]
-    axa.set_xticks(ticks)
-    axa.set_yticks(ticks)
-    axa.set_xlabel("published distance")
-    axa.set_ylabel("certified distance")
-    axa.set_aspect("equal", adjustable="box")
-    tidy(axa, "both")
-    hd = [Line2D([], [], ls="", marker="o", ms=3.4, color=GRAY, markeredgecolor=WHITE),
-          Line2D([], [], ls="", marker="s", ms=3.0, color=GRAY, markeredgecolor=WHITE),
-          Line2D([], [], ls="", marker="v", ms=3.6, color=GRAY, markeredgecolor=WHITE),
-          Line2D([], [], ls="", marker="o", ms=3.4, color=ORANGE, markeredgecolor=WHITE),
-          Line2D([], [], ls="", marker="o", ms=3.4, color=BLUE, markeredgecolor=WHITE)]
-    axa.legend(hd, ["circuit distance", "code distance", "certified at most (not closed)", "published too high",
-                    "settled, or certified higher"], loc="upper left", fontsize=4.8, ncol=1, handlelength=1.0,
-               borderaxespad=0.3, labelspacing=0.35, frameon=True, facecolor=WHITE, edgecolor="none", framealpha=0.9)
+    # legend, in two lines across the top
+    ly, ly2 = top - 1.5, top - 4.7
+    x = 1.5
+    ax.scatter([x + 0.8], [ly], s=11, facecolors=WHITE, edgecolors=INK2, linewidths=0.6)
+    txt(ax, x + 2.2, ly, "published value", 5.4)
+    ax.plot([x + 21.0, x + 25.0], [ly, ly], color=GRAY_LIGHT, lw=2.0, solid_capstyle="round")
+    txt(ax, x + 26.4, ly, "published range", 5.4)
+    ax.scatter([x + 46.0], [ly], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4)
+    txt(ax, x + 47.4, ly, "certified value", 5.4)
+    ax.plot([x + 66.0, x + 70.0], [ly, ly], color=BLUE, lw=2.0, solid_capstyle="round")
+    txt(ax, x + 71.4, ly, "certified interval, not closed", 5.4)
+    ax.plot([x + 104.0, x + 108.0], [ly, ly], color=ORANGE, lw=0.8)
+    txt(ax, x + 109.4, ly, "gap to the published value", 5.4)
+    ax.plot([x + 0.8, x + 0.8], [ly2 - 1.0, ly2 + 1.0], color=INK, lw=0.7, solid_capstyle="butt")
+    txt(ax, x + 2.2, ly2, "code distance", 5.4)
+    ax.scatter([x + 21.0], [ly2], s=9, marker="D", color=BLUE_LIGHT, edgecolors=WHITE, linewidths=0.3)
+    txt(ax, x + 22.4, ly2, "other valid schedule", 5.4)
+    txt(ax, x + 46.0, ly2, "≤ bound   ≈ estimate   ≥ lower bound   ? conjecture", 5.4)
 
-    # ------------------------------------------------------------------ b: the values published too high
-    def pick(paper, kind):
-        return [r for r in hi if r["paper"] == paper and r["kind"] == kind]
-    repo = lambda r: dict(r, object=r["object"].split(" ")[0] + ", repository")
-    groups = [("circuit distances", [
-        ("Mitten", pick("Mitten codes", "circuit") + [repo(r) for r in pick("Mitten codes (repository)", "circuit")]),
-        ("IBM [[288,12,18]]", [dict(r, object="as stated by IBM") for r in pick("IBM bivariate bicycle codes", "circuit")]
-         + [dict(r, object="distance benchmark") for r in pick("Distance-finding benchmark", "circuit")]),
-        ("Cornucopia", pick("Cornucopia codes", "circuit")), ("Routing", pick("Routing codes", "circuit")),
-        ("Shift", pick("Shift automorphism circuits", "circuit")), ("Walking Cat", pick("Walking Cat", "circuit"))]),
-        ("code distances", [
-        ("Tile", pick("Tile codes", "code")), ("Planar", pick("Nearest-neighbour planar codes", "code")),
-        ("Multicycle", pick("Multivariate multicycle codes", "code")),
-        ("Mitten", [repo(r) for r in pick("Mitten codes (repository)", "code")])])]
-    assert sum(len(g) for _, gs in groups for _, g in gs) == len(hi)
-    items = []
-    for sec, gs in groups:
-        items.append(("section", sec))
-        for name, sel in gs:
-            for k, r in enumerate(sel):
-                items.append(("row", name if k == 0 else None, r))
-            items.append(("gap",))
-    x_name, x_obj, x0, unit, x_val = 96.5, 137.5, 139.0, 1.6, 164.5
-    y = top - 6.0
-    ybot = 8.0                                                 # the bottom of panel c's axes
-    nrow = sum(1 for it in items if it[0] == "row")
-    pitch = (y - ybot - 0.4 - 3.0 * 2 - 1.0 * sum(1 for it in items if it[0] == "gap")) / nrow
-    for it in items:
-        if it[0] == "section":
-            txt(ax, x_name, y - 0.4, it[1], 5.3, MUTED, fontweight="bold")
-            y -= 3.0
-        elif it[0] == "gap":
-            y -= 1.0
-        else:
-            _, g, r = it
-            ym = y - pitch / 2
-            if g:
-                txt(ax, x_name, ym, g, 5.2, INK, fontweight="bold")
-            txt(ax, x_obj, ym, short_object(r["object"]), 5.0, INK2, ha="right")
-            p = float(r["pub_hi"])
-            clo, chi = float(r["cert_lo"]), float(r["cert_hi"])
-            sure, most = p - chi, p - clo
-            hgt = min(1.6, pitch * 0.62)
-            ax.add_patch(Rectangle((x0, ym - hgt / 2), unit * sure, hgt, facecolor=ORANGE, edgecolor="none", zorder=3))
-            if most > sure:
-                ax.add_patch(Rectangle((x0 + unit * sure, ym - hgt / 2), unit * (most - sure), hgt,
-                                       facecolor=ORANGE_PALE, edgecolor="none", zorder=3))
-            cert = "%d" % clo if chi == clo else "%d–%d" % (clo, chi)
-            txt(ax, x_val, ym, "%s → %s" % (stated_text(r), cert), 5.0, INK2)
-            y -= pitch
-    ybar = y - 0.4
-    for v in range(0, 16, 5):
-        xv = x0 + unit * v
-        ax.plot([xv, xv], [ybar, top - 6.6], color=GRID, lw=0.45, zorder=1)
-        txt(ax, xv, ybar - 1.6, str(v), 5.2, INK2, ha="center")
-    ax.plot([x0, x0 + unit * 15], [ybar, ybar], color=AXIS, lw=0.55, zorder=1)
-    txt(ax, x0 + unit * 7.5, ybar - 4.4, "published minus certified", 5.4, INK2, ha="center")
-    txt(ax, x_val, top - 6.4, "published → certified", 4.7, MUTED)
+    y0 = top - 10.5
+    gap, pr = 0.9, 3.0
+    # the right column fixes the height
+    SUB, SUBGAP = Column.SUB, Column.SUBGAP
+    nb_sub, nb, nc_sub, nc = 2, 13, 3, 23
+    y_end = y0 - 1.3 - (SUB * nb_sub + SUBGAP) - nb * pr - 3.8 - 1.0 - (SUB * nc_sub + SUBGAP * 2) - nc * pr
+    yb = y_end - 0.4
+    nrows_a, nsub_a, ngaps_a = 28, 4, 4
+    pa = (y0 - 1.3 - y_end - (SUB * nsub_a + SUBGAP * (nsub_a - 1)) - ngaps_a * gap) / nrows_a
+    print("pitch left %.2f right %.2f, axis at %.1f" % (pa, pr, yb))
 
-    # ------------------------------------------------------------------ c: modular hyperbolic codes
-    panel(ax, 1.5, 51.2, "c", "Modular hyperbolic codes: %d open distances settled" % len(hyp))
-    hyp = sorted(hyp, key=lambda r: (float(r["cert_hi"]), float(r["pub_lo"])))
-    axc = axes_mm(fig, 14.0, ybot, 60.0, 37.0)                     # the plot area of panel a
-    for i, r in enumerate(hyp):
-        plo, phi, c = float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_hi"])
-        axc.plot([plo, phi], [i, i], color=GRAY_LIGHT, lw=2.4, solid_capstyle="round", zorder=2)
-        axc.scatter([c], [i], s=12, color=BLUE, edgecolors=WHITE, linewidths=0.45, zorder=3)
-        txt(axc, -3.6, i, r["object"].split(" ")[0], 4.8, INK2, ha="left")
-    axc.set_ylim(len(hyp) - 0.4, -1.6)
-    axc.set_xlim(-4.0, 30)
-    axc.spines["bottom"].set_bounds(5, 30)
-    axc.set_yticks([])
-    axc.set_xticks([8, 12, 16, 20, 24, 28])
-    axc.set_xlabel("code distance")
-    axc.spines["left"].set_visible(False)
-    tidy(axc, "x")
-    hd = [Line2D([], [], color=GRAY_LIGHT, lw=2.4), Line2D([], [], ls="", marker="o", ms=3.4, color=BLUE)]
-    axc.legend(hd, ["bracket in the study", "exact distance, this method"], loc="upper left", ncol=2, fontsize=4.9,
-               handlelength=1.4, borderaxespad=0.1, columnspacing=1.0)
+    # ------------------------------------------------------------------ a: all values published too high
+    panel(ax, 1.5, y0, "a", "Published too high")
+    L = Column(ax, 1.5, 54.0, 56.0, 87.0, 6, 38, 94.0)
+    txt(ax, 100.5, y0 + 0.9, "published → certified", 5.2, MUTED, ha="right")
+    L.start(y0 - 1.3)
+
+    def too_high(paper, obj, name=None, label=None, tick=True):
+        r = rows[(paper, obj)]
+        assert r["verdict"] == "too_high", (paper, obj)
+        used.append((paper, obj))
+        s = label or obj.replace(" circuit", "").replace(" code", "")
+        L.row(pa, s, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name,
+              (tick if not isinstance(tick, bool) else code_distance(obj)) if tick else None)
+
+    M, MR = "Mitten codes", "Mitten codes (repository)"
+    L.sub("circuit distance, stated as the distance", first=True)
+    too_high(M, "[[200,40,12]] circuit", "Mitten codes")
+    too_high(M, "[[300,60,14]] circuit")
+    too_high(M, "[[500,100,16]] circuit")
+    too_high(M, "[[540,108,18]] circuit")
+    too_high(M, "[[630,126,20]] circuit")
+    too_high(M, "[[780,156,22]] circuit")
+    too_high(M, "[[975,195,24]] circuit")
+    L.y -= gap
+    too_high("Walking Cat", "[[102,22,9]] circuit", "Walking Cat trapped-ion circuits")
+    too_high("Walking Cat", "[[70,6,9]] circuit")
+    too_high("Walking Cat", "[[54,2,10]] circuit")
+    L.sub("circuit distance, implied by a schedule called hook-free")
+    too_high(MR, "[[330,66,12]] circuit", "Mitten codes, repository")
+    too_high(MR, "[[600,120,14]] circuit")
+    too_high(MR, "[[600,120,16]] circuit")
+    too_high(MR, "[[840,168,18]] circuit")
+    L.sub("circuit distance, stated as a bound or estimate")
+    too_high("IBM bivariate bicycle codes", "[[288,12,18]] circuit", "Two-gross bicycle code", label="[[288,12,18]], IBM's bound")
+    too_high("Distance-finding benchmark", "[[288,12,18]] circuit", label="[[288,12,18]], benchmark's best known", tick=18)
+    L.y -= gap
+    too_high("Cornucopia codes", "[[900,454,10]] circuit", "Cornucopia codes")
+    too_high("Cornucopia codes", "[[1044,526,12]] circuit")
+    too_high("Cornucopia codes", "[[2304,1156,16]] circuit", label="[[2304,1156,16]], Z basis")
+    too_high("Cornucopia codes", "[[2844,1426,18]] circuit", label="[[2844,1426,18]], Z basis")
+    L.y -= gap
+    too_high("Routing codes", "[[200,24,14]] circuit", "Routing codes")
+    too_high("Routing codes", "[[200,16,17]] circuit")
+    L.y -= gap
+    too_high("Shift automorphism circuits", "gross code, dynamic circuit", "Shift-automorphism circuit", label="gross code, dynamic", tick=12)
+    L.sub("code distance, from sampling or an estimate")
+    too_high("Tile codes", "[[512,18]] code", "Tile code", tick=False)
+    too_high("Nearest-neighbor planar codes", "[[259,2]] code, X distance", "Nearest-neighbor planar codes", label="[[259,2]], X distance", tick=False)
+    too_high("Nearest-neighbor planar codes", "[[537,14]] code, X distance", label="[[537,14]], X distance", tick=False)
+    too_high("Multivariate multicycle codes", "[[324,12]] code", "Multivariate multicycle code", tick=False)
+    too_high(MR, "[[840,168,18]] code", "Mitten code, repository", tick=False)
+    L.close()
+    assert abs(L.y - y_end) < 0.05, (L.y, y_end)
+    L.axis((10, 15, 20, 25, 30, 35), "distance", yb)
+    assert sorted(set(used)) == sorted(too_high_rows), set(too_high_rows) - set(used)
+
+    # ------------------------------------------------------------------ b: left open by other papers
+    panel(ax, 103.0, y0, "b", "Left open by other papers: settled or narrowed")
+    C = Column(ax, 103.0, 144.0, 146.0, 168.0, 5, 35, 175.4)
+    txt(ax, 182.8, y0 + 0.9, "published → certified", 5.2, MUTED, ha="right")
+    C.start(y0 - 1.3)
+    done = []
+
+    def settled(paper, obj, name, label, tick=None):
+        r = rows[(paper, obj)]
+        assert r["verdict"] == "settled" and r["cert_lo"] == r["cert_hi"], (paper, obj)
+        done.append((paper, obj))
+        C.row(pr, label, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name, tick)
+
+    def wjh(label, key, lo, hi, name=None):
+        C.row(pr, label, bk[key], bk[key], lo, hi, "best_known", name)
+
+    def tanner(label, key, x3, name=None):
+        wjh(label if x3[1] else label + ", Z distance", key, x3[0], x3[0], name)
+
+    C.sub("circuit distance", first=True)
+    settled("Distance-finding benchmark", "superdense circuit, d = 11", "Superdense color code", "d = 11", 11)
+    settled("Amplified qLDPC codes", "[[90,8,8]] level-1 circuit", "Amplified qLDPC code", "[[90,8,8]], level 1", 8)
+    settled("Left-right circuits", "gross code, three-color circuit", "Three-color gross circuit", "[[144,12,12]]", 12)
+    settled("Vine codes", "four patches of distance 10", "Vine planar-grid code", "four patches", 10)
+    C.sub("code distance")
+    tanner("[[288,2]]", "288_2_24", x288, "Quantum Tanner codes")
+    tanner("[[324,4]]", "324_4_25", x324)
+    tanner("[[360,4]]", "360_4_24", x360)
+    tanner("[[396,4]]", "396_4_26", x396)
+    wjh("[[648,4]]", "[[648,4,32]]", b648[0], b648[1], "Bivariate bicycle codes")
+    wjh("[[756,16]]", "[[756,16,34]]", b756[0], b756[1])
+    settled("Weight-8 bivariate bicycle codes", "[[144,10]] code", "Weight-8 bivariate bicycle", "[[144,10]]")
+    settled("Weight-8 bivariate bicycle codes", "[[144,6]] code", None, "[[144,6]]")
+    settled(MR, "[[300,60,9]] code", "Mitten code, repository", "[[300,60,9]]")
+    C.close()
+    assert sorted(done) == sorted(settled_rows), set(settled_rows) - set(done)
+
+    # ------------------------------------------------------------------ c: everything of Google's paper
+    y1 = C.y - 3.8
+    panel(ax, 103.0, y1, "c", "Google's modular hyperbolic codes")
+    C.start(y1 - 1.0)
+    hyp = sorted([r for r in rows.values() if r["paper"] == "Modular hyperbolic codes"], key=lambda r: (float(r["cert_hi"]), float(r["pub_lo"])))
+    assert len(hyp) == 15
+    C.sub("code distance of color codes: each range closes at its upper end", first=True)
+    for r in hyp:
+        C.row(pr, r["object"].split(" ")[0], float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"])
+    C.sub("circuit distance of surface codes (rebuilt circuits), NZ alternating")
+    for lab, pub, ex, also in (("[[150,4,10]]", 8, 8, 9), ("[[200,6,10]]", 8, 8, 9), ("[[250,8,10]]", 8, 8, None), ("[[300,10,10]]", 8, 8, None)):
+        C.row(pr, lab, pub, pub, ex, ex, "bound", None, 10, also)
+    C.sub("circuit distance of surface codes (rebuilt circuits), ZZ alternating")
+    for lab, pub, ex, also in (("[[150,4,10]]", 6, 6, 8), ("[[200,6,10]]", 8, 8, None), ("[[250,8,10]]", 6, 6, 8), ("[[300,10,10]]", 6, 6, 8)):
+        C.row(pr, lab, pub, pub, ex, ex, "bound", None, 10, also)
+    C.close()
+    assert abs(C.y - y_end) < 0.05, (C.y, y_end)
+    C.axis((10, 15, 20, 25, 30, 35), "distance", yb)
+
+    print("rows a", len(used), "rows b", nb)
     save(fig, "ncs_fig3")
 
 
@@ -858,8 +936,7 @@ def fig_hook():
     ex = hook_example()
     W, H = 183, 40
     fig, ax = canvas(W, H)
-    txt(ax, 2.0, 36.6, "structured mitten [[330,66,12]] circuit, published schedule; one row per Z check, its nine "
-        "gates in schedule order", 5.2, MUTED)
+    txt(ax, 2.0, 36.6, "one row per Z check, its nine gates in schedule order", 5.4, MUTED)
     gx, gy0, cw, rh = 16.0, 31.0, 3.15, 3.55
     faults = ex["faults"]
     for r, f in enumerate(faults):
@@ -881,13 +958,8 @@ def fig_hook():
     tx = gx_end + 12.0
     tw = (181.0 - tx) / len(tiles)
     for k, (big, lab, col) in enumerate(tiles):
-        rbox(ax, tx + k * tw + 0.6, 13.0, tw - 1.2, 17.5, fc=PANEL, r=1.4, z=0)
-        txt(ax, tx + k * tw + tw / 2, 23.6, big, 13.0, col, ha="center", fontweight="bold")
-        txt(ax, tx + k * tw + tw / 2, 16.6, lab, 5.3, INK2, ha="center")
-    txt(ax, tx + 0.6, 7.4, "Circuit distance %d against code distance 12. Each fault spreads to six or seven data "
-        "qubits, and sampling-based" % ex["distance"], 5.4, INK2)
-    txt(ax, tx + 0.6, 3.9, "searches rarely produce such combinations; the exact search excludes every set of six or "
-        "fewer and finds this one.", 5.4, INK2)
+        txt(ax, tx + k * tw + tw / 2, 22.5, big, 9.0, col, ha="center", fontweight="bold")
+        txt(ax, tx + k * tw + tw / 2, 17.5, lab.replace(" ", "\n", 1), 5.4, INK2, ha="center", va="top", linespacing=1.05)
     save(fig, "si_hook")
 
 
@@ -930,8 +1002,8 @@ def selfdual_rows():
     return sorted(out)
 
 
-def fig_design_ibm():
-    """Figure 4: certified design of syndrome-extraction circuits (a, b) and the memory instruction of IBM's bicycle
+def fig_design_si():
+    """Supplementary figure: certified design of syndrome-extraction circuits (a, b) and the memory instruction of IBM's bicycle
     architecture (c-e; papers/ibm_bicycle*.py, results/ibm)."""
     W, H = 183, 130
     fig, ax = canvas(W, H)
@@ -961,14 +1033,14 @@ def fig_design_ibm():
         for d, c in r["all"].items():
             axa.scatter([d], [y], s=area(c), color=GRAY_LIGHT, edgecolors="none", zorder=2)
         for d, c in r["std"].items():                       # the standard family, inside the bubble of all
-            axa.scatter([d], [y], s=0.45 * area(c), color=BLUE, edgecolors="none", zorder=3)
+            axa.scatter([d], [y], s=0.45 * area(c), color=INK2, edgecolors="none", zorder=3)
         axa.plot([r["dcode"]] * 2, [y - 0.36, y + 0.36], color=INK2, lw=0.8, zorder=4)
         best = max(r["all"])
-        axa.scatter([best], [y], s=area(r["all"][best]) + 14, facecolors="none", edgecolors=ORANGE, linewidths=0.9,
+        axa.scatter([best], [y], s=area(r["all"][best]) + 14, facecolors="none", edgecolors=BLUE, linewidths=0.9,
                     zorder=5)
-        txt(axa, best + 0.32, y - 0.02, "{:,}".format(r["all"][best]), 4.8, ORANGE, fontweight="bold")
+        txt(axa, best + 0.32, y - 0.02, "{:,}".format(r["all"][best]), 5.0, BLUE, fontweight="bold")
         if r["dstd"] is not None:
-            axa.scatter([r["dstd"]], [y - 0.47], marker="v", s=9, color=BLUE, edgecolors="none", zorder=5)
+            axa.scatter([r["dstd"]], [y - 0.47], marker="v", s=9, color=INK2, edgecolors="none", zorder=5)
         txt(axa, 1.2, y, r["name"], 5.3, INK, ha="right", fontweight="bold" if "gross" in r["name"] else "normal")
     txt(axa, -2.9, -0.95, "weight 6: all 8,496 depth-seven schedules each", 4.8, MUTED)
     txt(axa, -2.9, 3.85, "weight 8: all 3,456 mirror-symmetric depth-eight orders each ($Z$ basis)", 4.8, MUTED)
@@ -985,11 +1057,11 @@ def fig_design_ibm():
     for k, (c, lab) in enumerate(((10, "10"), (100, "100"), (1000, "1,000"))):
         ax.scatter([lx + 4.0 * k], [ly], s=area(c), color=GRAY_LIGHT, edgecolors="none")
     txt(ax, lx + 10.2, ly, "schedules (10, 100, 1,000)", 4.9, INK2)
-    ax.scatter([lx + 36.0], [ly], s=10, color=BLUE, edgecolors="none")
+    ax.scatter([lx + 36.0], [ly], s=10, color=INK2, edgecolors="none")
     txt(ax, lx + 37.6, ly, "standard family", 4.9, INK2)
-    ax.scatter([lx + 54.0], [ly], marker="v", s=9, color=BLUE, edgecolors="none")
+    ax.scatter([lx + 54.0], [ly], marker="v", s=9, color=INK2, edgecolors="none")
     txt(ax, lx + 55.4, ly, "standard schedule", 4.9, INK2)
-    ax.scatter([lx + 73.0], [ly], s=20, facecolors="none", edgecolors=ORANGE, linewidths=0.9)
+    ax.scatter([lx + 73.0], [ly], s=20, facecolors="none", edgecolors=BLUE, linewidths=0.9)
     txt(ax, lx + 74.6, ly, "best, with count", 4.9, INK2)
     ax.plot([lx + 91.0, lx + 91.0], [ly - 1.2, ly + 1.2], color=INK2, lw=0.8)
     txt(ax, lx + 92.4, ly, "code distance", 4.9, INK2)
@@ -1018,12 +1090,11 @@ def fig_design_ibm():
     tidy(axb)
     hd = [Rectangle((0, 0), 1, 1, facecolor=GRAY_LIGHT, edgecolor="none"),
           Rectangle((0, 0), 1, 1, facecolor=BLUE, edgecolor="none")]
-    axb.legend(hd, ["best sequential circuit", "parallel circuit, this work"], loc="upper right", fontsize=4.8,
+    axb.legend(hd, ["best sequential circuit", "parallel circuit, this work"], loc="upper right", fontsize=5.2,
                handlelength=1.1, borderaxespad=0.2, labelspacing=0.3)
 
     # ------------------------------------------------------------------ IBM's bicycle architecture
     cur = json.load(open(IBM_DIR / "curves.json"))
-    ps = cur["p"]
     ent = {(e["code"], "standard" if e["schedule"] == "standard" else "best"): e for e in cur["entries"]}
     d2 = ent[("bb288", "standard")]["distance"]
     row2 = 61.0
@@ -1050,7 +1121,7 @@ def fig_design_ibm():
              ("two-gross,\nstandard", 18, d2),
              ("gross, best\ndepth-7", None, ent[("gross", "best")]["distance"])]
     for x, (lab, assumed, cert) in enumerate(drows):
-        col = BLUE if (assumed is None or cert == assumed) else ORANGE
+        col = BLUE
         if assumed is not None:
             axc.scatter([x], [assumed], s=26, marker="s", facecolors=WHITE, edgecolors=INK2, linewidths=0.8, zorder=4)
         if assumed is not None and assumed != cert:
@@ -1059,7 +1130,7 @@ def fig_design_ibm():
         axc.scatter([x], [cert], s=24, color=col, edgecolors=WHITE, linewidths=0.5, zorder=5)
         txt(axc, x + 0.13, cert, "%d" % cert, 5.2, col, fontweight="bold")
     axc.set_xticks(range(3))
-    axc.set_xticklabels([r[0] for r in drows], fontsize=4.9, linespacing=1.0)
+    axc.set_xticklabels([r[0] for r in drows], fontsize=5.2, linespacing=1.0)
     axc.set_xlim(-0.5, 2.6)
     axc.set_ylim(8.0, 21.5)
     axc.set_yticks([8, 12, 16, 20])
@@ -1067,66 +1138,76 @@ def fig_design_ibm():
     tidy(axc)
     h = [Line2D([], [], ls="", marker="s", ms=3.4, markerfacecolor=WHITE, markeredgecolor=INK2),
          Line2D([], [], ls="", marker="o", ms=3.4, color=BLUE)]
-    axc.legend(h, ["assumed by IBM", "certified"], loc="upper left", fontsize=4.7, ncol=2, handletextpad=0.2,
+    axc.legend(h, ["assumed by IBM", "certified"], loc="upper left", fontsize=5.2, ncol=2, handletextpad=0.2,
                columnspacing=0.7, borderaxespad=0.2)
 
-    # ------------------------------------------------------------------ d: two-gross, bound against extrapolation
-    panel(ax, 63.5, row2, "d", "Two-gross code: below any decoder")
+    # ------------------------------------------------------------------ d: two-gross, bounds against the extrapolation
+    panel(ax, 63.5, row2, "d", "Two-gross code: bounds for every decoder")
     axd = axes_mm(fig, 75.0, 11.0, 46.0, 43.0)
-    e2 = ent[("bb288", "standard")]
-    lb2 = [max(v["rates"][str(p)]["log10_lower_bound"] for v in e2["bases"].values()) for p in ps]
-    axd.fill_between(ps, [1e-60] * len(ps), [10 ** v for v in lb2], color=BLUE, alpha=0.10, lw=0, zorder=1)
-    axd.plot(ps, [10 ** v for v in lb2], color=BLUE, lw=1.4, zorder=3)
-    ibm = {1e-3: -20.1, 1e-4: -38.3}
-    axd.plot(list(ibm), [10 ** v for v in ibm.values()], color=GRAY, lw=0.9, ls=(0, (3, 2)), zorder=2)
-    axd.scatter(list(ibm), [10 ** v for v in ibm.values()], s=20, marker="s", facecolors=WHITE, edgecolors=INK2,
-                linewidths=0.8, zorder=4)
-    i4 = ps.index(1e-4)
-    gap = lb2[i4] - ibm[1e-4]
-    axd.annotate("", (1e-4, 10 ** (lb2[i4] - 0.3)), xytext=(1e-4, 10 ** (ibm[1e-4] + 0.5)),
-                 arrowprops=dict(arrowstyle="<->", color=ORANGE, lw=0.8, mutation_scale=5))
-    txt(axd, 1.13e-4, 10 ** ((lb2[i4] + ibm[1e-4]) / 2), "%.0f orders" % gap, 5.0, ORANGE, fontweight="bold")
-    txt(axd, 1.9e-3, 10 ** (lb2[-1] - 4.6), "lower bound,\nany decoder", 4.9, BLUE, ha="right", va="top",
+    fit = json.load(open(MATCHED_DIR / "fit_tour_de_gross.json"))
+    bounds = fit["bounds"]
+    keep = [k for k, p in enumerate(bounds["16"]["p"]) if 4e-5 <= p <= 1.4e-3]
+    bp = [bounds["16"]["p"][k] for k in keep]
+    lb16, lb18 = ([bounds[w]["log10_per_cycle_two_bases"][k] for k in keep] for w in ("16", "18"))
+    top = [max(v) for v in zip(lb16, lb18)]
+    axd.fill_between(bp, [1e-60] * len(bp), [10 ** v for v in top], color=BLUE, alpha=0.10, lw=0, zorder=1)
+    axd.plot(bp, [10 ** v for v in lb18], color=BLUE, lw=1.4, zorder=3)
+    axd.plot(bp, [10 ** v for v in lb16], color=BLUE, lw=0.9, ls=(0, (1.2, 1.2)), zorder=3)
+    axd.plot(fit["curve"]["p"], [10 ** v for v in fit["curve"]["log10_rate"]], color=INK2, lw=0.9, ls=(0, (3, 2)),
+             zorder=2)
+    table2 = {float(k): v for k, v in fit["reproduced"]["two-gross idle"].items()}
+    for p, v in table2.items():
+        axd.plot([p, p], [10 ** (v["table_2"] - v["uncertainty"]), 10 ** (v["table_2"] + v["uncertainty"])],
+                 color=INK2, lw=0.6, zorder=4)
+    axd.scatter(list(table2), [10 ** v["table_2"] for v in table2.values()], s=20, marker="s", facecolors=WHITE,
+                edgecolors=INK2, linewidths=0.8, zorder=5)
+    b4, t4 = top[bp.index(1e-4)], table2[1e-4]["table_2"]
+    axd.annotate("", (1e-4, 10 ** (b4 - 0.15)), xytext=(1e-4, 10 ** (t4 + 0.5)),
+                 arrowprops=dict(arrowstyle="<->", color=ORANGE, lw=0.8, mutation_scale=5, shrinkA=0, shrinkB=0))
+    txt(axd, 9.2e-5, 10 ** ((b4 + t4) / 2), "%.0f\norders" % (b4 - t4), 5.0, ORANGE, ha="right", fontweight="bold",
         linespacing=1.05)
-    txt(axd, 1.15e-3, 10 ** (ibm[1e-3] + 0.8), "projected by IBM\n(assumes d = 18)", 4.7, INK2, ha="right",
-        va="bottom", linespacing=1.05)
-    txt(axd, 2.6e-4, 10 ** (ibm[1e-4] + 0.4), "excluded for every decoder", 4.6, BLUE, ha="left", va="center",
-        alpha=0.8)
+    txt(axd, 1.4e-3, 10 ** -41.3, "impossible for every decoder", 4.9, BLUE, ha="right", va="center", alpha=0.85)
+    hd = [Line2D([], [], color=BLUE, lw=1.4), Line2D([], [], color=BLUE, lw=0.9, ls=(0, (1.2, 1.2))),
+          Line2D([], [], color=INK2, lw=0.9, ls=(0, (3, 2)), marker="s", ms=3.2, markerfacecolor=WHITE,
+                 markeredgecolor=INK2, markeredgewidth=0.7)]
+    axd.legend(hd, ["bound, weight-18 code logicals", "bound, weight-16 fault sets", "extrapolated by IBM"],
+               loc="upper left", fontsize=5.2, handlelength=2.0, borderaxespad=0.2, labelspacing=0.35)
     axd.set_xscale("log")
     axd.set_yscale("log")
     axd.xaxis.set_minor_locator(NullLocator())
     axd.yaxis.set_minor_locator(NullLocator())
-    axd.set_xlim(ps[0] * 0.9, ps[-1] * 1.1)
-    axd.set_ylim(10 ** (min(ibm[1e-4], lb2[0]) - 3), 10 ** (max(ibm[1e-3], lb2[-1]) + 3))
+    axd.set_xlim(bp[0] * 0.9, bp[-1] * 1.1)
+    axd.set_ylim(1e-43, 1e-16)
     axd.set_yticks([1e-40, 1e-35, 1e-30, 1e-25, 1e-20])
     axd.set_xlabel("physical error rate p")
-    axd.set_ylabel("logical error rate per instruction")
+    axd.set_ylabel("logical error rate per cycle")
     tidy(axd)
 
     # ------------------------------------------------------------------ e: gross code, standard against best
     panel(ax, 124.5, row2, "e", "Gross code: what distance 11 gains")
     axe = axes_mm(fig, 136.0, 11.0, 45.0, 43.0)
     sims = {}
-    for f in sorted(IBM_DIR.glob("sim_gross_c1_*.jsonl")):
-        for line in open(f):
-            r = json.loads(line)
-            sims.setdefault(r["schedule"], {}).setdefault(r["p"], {})[r["basis"]] = r
-    mwd = json.load(open(IBM_DIR / "mwd_gross_c1.json"))
-    lp = [p for p in mwd["p"] if p <= 5e-4]
+    for line in open(MATCHED_DIR / "sim_gross_c10.jsonl"):
+        r = json.loads(line)
+        sims.setdefault(r["schedule"], {}).setdefault(r["p"], {})[r["basis"]] = r
+    mwd = json.load(open(MATCHED_DIR / "mwd_gross_c10.json"))
+    lp = [p for p in mwd["p"] if 4e-5 <= p <= 5e-4]
     tot = {}
     for e in mwd["entries"]:
         for p in lp:
             r = e["rates"][str(p)]
             t = tot.setdefault(e["schedule"], {}).setdefault(p, [0.0, 0.0])
-            t[0] += 10 ** r["log10_total"]
-            t[1] += 10 ** r["log10_w5"] if r["n_w5"] else 0.0
-    best_tag = ent[("gross", "best")]["schedule"]
-    for tag, col, lab in (("standard", GRAY, "standard, d = 10"), (best_tag, BLUE, "best depth-7, d = 11")):
-        axe.plot(lp, [tot[tag][p][0] for p in lp], color=col, lw=1.3, zorder=3)
+            t[0] += 10 ** r["log10_total_per_cycle"]
+            t[1] += 10 ** r["log10_w5"] / e["cycles"]
+    TAG8, TAG9 = "s561234_324015", ent[("gross", "best")]["schedule"]
+    for tag, col, lab, lw in (("standard", INK2, "standard, d = 10", 1.3), (TAG8, BLUE, "d = 11, 8 timesteps", 1.3),
+                              (TAG9, BLUE_LIGHT, "d = 11, 9 timesteps", 1.3)):
+        axe.plot(lp, [tot[tag][p][0] for p in lp], color=col, lw=lw, zorder=3)
         pts = sorted((p, v) for p, v in sims.get(tag, {}).items() if len(v) == 2)
         xs = [p for p, _ in pts]
-        ys2 = [sum(v[b]["rate"] for b in "ZX") for _, v in pts]
-        er = [math.sqrt(sum(v[b]["failures"] / v[b]["shots"] ** 2 for b in "ZX")) for _, v in pts]
+        cyc = [v["Z"]["cycles"] for _, v in pts]
+        ys2 = [sum(v[b]["rate"] for b in "ZX") / c for (_, v), c in zip(pts, cyc)]
+        er = [math.sqrt(sum(v[b]["failures"] / v[b]["shots"] ** 2 for b in "ZX")) / c for (_, v), c in zip(pts, cyc)]
         hollow = tag == "standard"
         axe.errorbar(xs, ys2, yerr=er, fmt="o", ms=3.0 if hollow else 2.2, color=col, mfc=WHITE if hollow else col,
                      mec=col, mew=0.6 if hollow else 0.3, elinewidth=0.5, capsize=0, zorder=4 if hollow else 5,
@@ -1137,10 +1218,10 @@ def fig_design_ibm():
     ibmg = {1e-4: -14.8, 1e-3: -8.8}
     axe.scatter(list(ibmg), [10 ** v for v in ibmg.values()], s=16, marker="s", facecolors=WHITE, edgecolors=INK2,
                 linewidths=0.7, zorder=5, label="projected by IBM")
-    ratio = tot["standard"][1e-4][0] / tot[best_tag][1e-4][0]
-    txt(axe, 1.5e-4, tot[best_tag][2e-4][0] / 400, "%.0f× lower\nat $p=10^{-4}$" % ratio, 4.9, BLUE, ha="left",
-        fontweight="bold", linespacing=1.05)
-    txt(axe, 4.5e-5, 2e-11, "exact to $p^{6}$,\nminimum-weight\ndecoder", 4.5, MUTED, ha="left", linespacing=1.05)
+    gain = [tot["standard"][1e-4][0] / tot[t][1e-4][0] for t in (TAG8, TAG9)]
+    txt(axe, 1.5e-4, tot[TAG8][2e-4][0] / 400, "at $p=10^{-4}$: %.0f× lower (8 timesteps),\n%.0f× lower (9 timesteps)" % tuple(gain), 4.9,
+        BLUE, ha="left", fontweight="bold", linespacing=1.05)
+    txt(axe, 4.5e-5, 2e-11, "expansion to $p^{6}$,\nminimum-weight\ndecoder", 4.5, MUTED, ha="left", linespacing=1.05)
     txt(axe, 4.6e-3, 1e-7, "BP-OSD\nsimulation", 4.5, MUTED, ha="center", linespacing=1.05)
     axe.set_xscale("log")
     axe.set_yscale("log")
@@ -1150,10 +1231,318 @@ def fig_design_ibm():
     axe.set_ylim(1e-20, 1)
     axe.set_yticks([1e-20, 1e-15, 1e-10, 1e-5, 1])
     axe.set_xlabel("physical error rate p")
-    axe.set_ylabel("logical error rate per instruction")
-    axe.legend(loc="upper left", fontsize=4.6, handlelength=1.0, borderaxespad=0.2, labelspacing=0.3)
+    axe.set_ylabel("logical error rate per cycle")
+    axe.legend(loc="upper left", fontsize=5.2, handlelength=1.0, borderaxespad=0.2, labelspacing=0.3)
     tidy(axe)
+    save(fig, "si_design")
+
+
+# ---------------------------------------------------------------------------------------------------- Fig. 4
+CAND = "046135_531620"       # the two-gross schedule with px = (0,4,6,1,3,5), pz = (5,3,1,6,2,0)
+
+
+def tint(hexcolor, f):
+    """The color mixed with white, f = 1 being the color itself."""
+    c = [int(hexcolor[k:k + 2], 16) for k in (1, 3, 5)]
+    return "#%02x%02x%02x" % tuple(round(255 + (x - 255) * f) for x in c)
+
+
+D11, D10, D9, DLOW = BLUE, tint(BLUE, 0.58), tint(BLUE, 0.24), ORANGE
+
+
+def f4_schedules(ax, top):
+    panel(ax, 1.5, top, "a", "The schedule sets the circuit distance")
+    rows = []
+    for key, name, dc in (("bb72", "[[72,12,6]]", 6), ("bb90", "[[90,8,10]]", 10), ("bb108", "[[108,8,10]]", 10),
+                          ("gross", "[[144,12,12]] gross", 12)):
+        allr = json.load(open(ROOT / ("results/papers3/bb6/%s_all.json" % key)))
+        s_ = allr["standard_schedule"]
+        rows.append(dict(name=name, dcode=dc, dstd=min(s_["X"][0], s_["Z"][0]),
+                         all={int(d): c for d, c in allr["circuit_distance_histogram"].items()}))
+    assert all(sum(r["all"].values()) == 8496 for r in rows)
+    # two-gross: the standard schedule exact in both bases; every other schedule at one cycle (results/bb288_scan/tally_scan.py)
+    two = [json.load(open(ROOT / ("results/ibm/pipe_bb288_standard_c1_%s.json" % b))) for b in "XZ"]
+    assert all(r["status"] == "exact" and r["lower_bound"] == r["upper_bound"] == 16 for r in two)
+    scan = json.load(open(ROOT / "results/bb288_scan/scan_table.json"))
+    assert scan["best"] == 18 and scan["worst"] == 12
+
+    x0, x1, dmin, dmax = 33.0, 93.0, 3, 18
+    Xd = lambda d: x0 + (d - dmin) * (x1 - x0) / (dmax - dmin)
+    xc1, xc2 = x1 + 7.0, x1 + 13.5
+    ly = top - 5.0
+    lx = 4.0
+    ax.plot([lx, lx + 5], [ly, ly], color=GRAY_LIGHT, lw=2.6, solid_capstyle="round")
+    txt(ax, lx + 6.4, ly, "all 8,496 schedules, worst to best", 5.0)
+    ax.scatter([lx + 37.5], [ly], s=13, facecolors=WHITE, edgecolors=INK2, linewidths=0.7)
+    txt(ax, lx + 38.9, ly, "standard schedule", 5.0)
+    ax.scatter([lx + 55.5], [ly], s=15, color=BLUE, edgecolors=WHITE, linewidths=0.4)
+    txt(ax, lx + 56.9, ly, "best schedule", 5.0)
+    ax.plot([lx + 70.5] * 2, [ly - 1.2, ly + 1.2], color=INK, lw=0.9)
+    txt(ax, lx + 71.9, ly, "code distance", 5.0)
+    txt(ax, xc1, ly, "standard\n→ best", 4.8, MUTED, fontweight="bold", ha="center", linespacing=1.0)
+    txt(ax, xc2, ly, "schedules reaching\nthe best", 5.0, MUTED, fontweight="bold", linespacing=1.0)
+    pitch = 5.5
+    y = top - 8.0
+    ytop = y
+    txt(ax, 4.0, y - 1.5, "memory circuits, six rounds", 5.4, MUTED, fontweight="bold")
+    y -= 3.0
+    for r in rows:
+        ym = y - pitch / 2
+        lo, best = min(r["all"]), max(r["all"])
+        gross = "gross" in r["name"]
+        txt(ax, x0 - 1.5, ym, r["name"], 5.4, INK, ha="right", fontweight="bold" if gross else "normal")
+        ax.plot([Xd(lo), Xd(best)], [ym, ym], color=GRAY_LIGHT, lw=2.6, solid_capstyle="round", zorder=2)
+        ax.plot([Xd(r["dcode"])] * 2, [ym - 1.5, ym + 1.5], color=INK, lw=0.9, zorder=3)
+        if r["dstd"] != best:
+            ax.plot([Xd(r["dstd"]), Xd(best)], [ym, ym], color=BLUE, lw=2.6, solid_capstyle="butt", zorder=3)
+            ax.scatter([Xd(r["dstd"])], [ym], s=13, facecolors=WHITE, edgecolors=INK2, linewidths=0.7, zorder=4)
+        ax.scatter([Xd(best)], [ym], s=16, color=BLUE, edgecolors=WHITE, linewidths=0.4, zorder=5)
+        if r["dstd"] == best:
+            ax.scatter([Xd(best)], [ym], s=26, facecolors="none", edgecolors=INK2, linewidths=0.7, zorder=6)
+        better = r["dstd"] != best
+        txt(ax, xc1, ym, "%d → %d" % (r["dstd"], best), 5.2, BLUE if better else INK2, ha="center", fontweight="bold" if better else "normal")
+        txt(ax, xc2, ym, "{:,} of 8,496".format(r["all"][best]), 4.9, INK2)
+        y -= pitch
+    txt(ax, 4.0, y - 1.5, "memory instruction, one noisy cycle", 5.4, MUTED, fontweight="bold", bbox=dict(facecolor=WHITE, edgecolor="none", pad=0.6), zorder=1)
+    y -= 3.0
+    ym = y - pitch / 2
+    txt(ax, x0 - 1.5, ym, "[[288,12,18]] two-gross", 5.4, INK, ha="right", fontweight="bold")
+    ax.plot([Xd(scan["worst"]), Xd(scan["best"])], [ym, ym], color=GRAY_LIGHT, lw=2.6, solid_capstyle="round", zorder=2)
+    ax.plot([Xd(18)] * 2, [ym - 1.5, ym + 1.5], color=INK, lw=0.9, zorder=3)
+    ax.plot([Xd(16), Xd(18)], [ym, ym], color=BLUE, lw=2.6, solid_capstyle="butt", zorder=3)
+    ax.scatter([Xd(16)], [ym], s=13, facecolors=WHITE, edgecolors=INK2, linewidths=0.7, zorder=4)
+    ax.scatter([Xd(18)], [ym], s=16, color=BLUE, edgecolors=WHITE, linewidths=0.4, zorder=5)
+    txt(ax, xc1, ym, "16 → 18", 5.2, BLUE, ha="center", fontweight="bold")
+    txt(ax, xc2, ym, "{:,}{} of 8,496".format(scan["n_best"], "+" if scan["open"] else ""), 4.9, INK2)
+    y -= pitch
+    yb = y - 0.2
+    for d in range(dmin, dmax + 1):
+        ax.plot([Xd(d)] * 2, [yb, ytop], color=GRID, lw=0.45, zorder=0)
+        txt(ax, Xd(d), yb - 1.6, str(d), 5.0, INK2, ha="center")
+    ax.plot([x0, x1], [yb, yb], color=AXIS, lw=0.55, zorder=1)
+    txt(ax, (x0 + x1) / 2, yb - 3.9, "circuit distance", 5.4, INK2, ha="center")
+    return yb - 3.9
+
+
+def f4_limit_line():
+    """The limit from the code's weight-18 logical operators on the new schedule's circuit, both bases (results/bb288_scan/limit)."""
+    rates = [json.load(open(ROOT / ("results/bb288_scan/limit/bb288_s%s_w18_c18_%s.json" % (CAND, b))))["C18"]["rates"] for b in "XZ"]
+    ps = sorted(rates[0], key=float)
+    return [float(x) for x in ps], [math.log10(sum(10 ** r[x]["log10_lower_bound_per_cycle"] for r in rates)) for x in ps]
+
+
+def f4_limit(fig, ax, top, ybottom):
+    panel(ax, 123.5, top, "b", "Two-gross code: a limit for every decoder")
+    axb = axes_mm(fig, 134.5, ybottom, 46.5, top - 5.5 - ybottom)
+    fit = json.load(open(MATCHED_DIR / "fit_tour_de_gross.json"))
+    ps, vals = f4_limit_line()
+    keep = [k for k, p in enumerate(ps) if 4e-5 <= p <= 1.4e-3]
+    bp = [ps[k] for k in keep]
+    lb = [vals[k] for k in keep]
+    axb.fill_between(bp, [1e-60] * len(bp), [10 ** v for v in lb], color=BLUE, alpha=0.10, lw=0, zorder=1)
+    axb.plot(bp, [10 ** v for v in lb], color=BLUE, lw=1.4, zorder=3)
+    axb.plot(fit["curve"]["p"], [10 ** v for v in fit["curve"]["log10_rate"]], color=INK2, lw=0.9, ls=(0, (3, 2)), zorder=2)
+    table2 = {float(k): v for k, v in fit["reproduced"]["two-gross idle"].items()}
+    for p, v in table2.items():
+        axb.plot([p, p], [10 ** (v["table_2"] - v["uncertainty"]), 10 ** (v["table_2"] + v["uncertainty"])], color=INK2, lw=0.6, zorder=4)
+    axb.scatter(list(table2), [10 ** v["table_2"] for v in table2.values()], s=18, marker="s", facecolors=WHITE, edgecolors=INK2,
+                linewidths=0.8, zorder=5)
+    b4, t4 = lb[bp.index(1e-4)], table2[1e-4]["table_2"]
+    print("limit at 1e-4 %.2f, IBM %.1f, gap %.2f, from the bar's edge %.2f" % (b4, t4, b4 - t4, b4 - (t4 + table2[1e-4]["uncertainty"])))
+    axb.annotate("", (1e-4, 10 ** (b4 - 0.15)), xytext=(1e-4, 10 ** (t4 + 0.6)),
+                 arrowprops=dict(arrowstyle="<->", color=ORANGE, lw=0.8, mutation_scale=5, shrinkA=0, shrinkB=0))
+    txt(axb, 9.2e-5, 10 ** ((b4 + t4) / 2), "%d\norders" % round(b4 - t4), 5.0, ORANGE, ha="right", fontweight="bold", linespacing=1.05)
+    k = bp.index(3e-4)
+    txt(axb, bp[k] * 0.86, 10 ** (lb[k] + 1.1), r"$\propto p^{9}$", 5.4, BLUE, ha="right", fontweight="bold")
+    txt(axb, 1.3e-3, 10 ** -40.6, "no decoder can reach this region", 4.9, BLUE, ha="right", va="center", alpha=0.9)
+    hd = [Line2D([], [], color=BLUE, lw=1.4),
+          Line2D([], [], color=INK2, lw=0.9, ls=(0, (3, 2)), marker="s", ms=3.0, markerfacecolor=WHITE, markeredgecolor=INK2, markeredgewidth=0.7)]
+    axb.legend(hd, ["limit from weight-18 logical operators", "IBM's extrapolation"], loc="upper left", fontsize=5.2, handlelength=1.9,
+               borderaxespad=0.15, labelspacing=0.3)
+    axb.set_xscale("log")
+    axb.set_yscale("log")
+    axb.xaxis.set_minor_locator(NullLocator())
+    axb.yaxis.set_minor_locator(NullLocator())
+    axb.set_xlim(bp[0] * 0.9, bp[-1] * 1.1)
+    axb.set_ylim(1e-43, 1e-14)
+    axb.set_yticks([1e-40, 1e-30, 1e-20])
+    axb.set_xlabel("physical error rate p")
+    axb.set_ylabel("logical error rate per cycle")
+    tidy(axb)
+
+
+def f4_chips(ax, top, tab, n, res, best8):
+    panel(ax, 1.5, top, "c", "Gross-code chips with dead checks")
+    S0, S1 = None, best8
+    # more dead checks are in the yields of panel d; chips with 5 or fewer cover 99.97% of chips at 99.98% junction yield
+    ms = [m for m in sorted(tab[S1]) if m in tab[S0] and m <= 5]
+    assert set(n.values()) == {200}
+    xa, xb, wbar = 26.0, 68.0, 38.0
+    xs = 118.5
+    # legend of the distances
+    ly = top - 5.0
+    txt(ax, 26.0, ly, "certified lower bound on the distance", 5.2, INK2)
+    lx = 62.0
+    for c, lab, step in ((D11, "11", 9.0), (D10, "10", 9.0), (D9, "9", 7.5), (DLOW, "8 or less", 0)):
+        ax.add_patch(Rectangle((lx, ly - 1.0), 2.4, 2.0, facecolor=c, edgecolor="none", zorder=3))
+        txt(ax, lx + 3.1, ly, lab, 5.0)
+        lx += step
+    hy = top - 9.0
+    txt(ax, xa, hy, "Standard schedule", 5.3, INK, fontweight="bold")
+    txt(ax, xb, hy, "Distance-11 schedule", 5.3, BLUE, fontweight="bold")
+    txt(ax, xs, hy, "chips at 99.98%\njunction yield", 4.6, MUTED, ha="right", fontweight="bold", linespacing=1.0)
+    pitch, hbar = 4.7, 3.3
+    y = hy - 2.2
+    share = res["yields"]["0.9998"]["share_by_m"]
+    names = {0: "no dead check", 1: "1 dead check"}
+    for m in ms:
+        ym = y - pitch / 2
+        txt(ax, xa - 1.5, ym, names.get(m, "%d dead checks" % m), 5.2, INK, ha="right")
+        for s, x in ((S0, xa), (S1, xb)):
+            cum = 0.0
+            t = tab[s][m]
+            parts = [(t.get(11, 0), D11, WHITE), (t.get(10, 0), D10, INK), (t.get(9, 0), D9, INK),
+                     (sum(v for d, v in t.items() if d <= 8), DLOW, WHITE)]
+            for v, c, tc in parts:
+                if v <= 0:
+                    continue
+                w = v * wbar
+                ax.add_patch(Rectangle((x + cum, ym - hbar / 2), max(w - 0.25, 0.2), hbar, facecolor=c, edgecolor="none", zorder=3))
+                if v >= 0.07:
+                    txt(ax, x + cum + w / 2, ym - 0.05, "%d%%" % round(100 * v), 4.8, tc, ha="center", zorder=4)
+                cum += w
+        pct = 100 * share[m]
+        txt(ax, xs, ym, ("%.0f%%" if pct >= 10 else "%.1f%%" if pct >= 1 else "%.2f%%") % pct, 5.0, INK2, ha="right")
+        y -= pitch
+
+
+def f4_yields(ax, top, res):
+    panel(ax, 123.5, top, "d", "Estimated share of chips at distance ≥10")
+    x0, x1 = 141.0, 179.0
+    Xp = lambda v: x0 + v * (x1 - x0)
+    ly = top - 5.0
+    ax.scatter([126.0], [ly], s=9, color=MUTED, edgecolors="none")
+    txt(ax, 127.3, ly, "perfect chips only", 4.7)
+    ax.scatter([126.0], [ly - 3.0], s=13, facecolors=WHITE, edgecolors=INK2, linewidths=0.7)
+    txt(ax, 127.3, ly - 3.0, "plus certified chips, standard schedule", 4.7)
+    ax.scatter([126.0], [ly - 6.0], s=15, color=BLUE, edgecolors=WHITE, linewidths=0.4)
+    txt(ax, 127.3, ly - 6.0, "plus certified chips, distance-11 schedule", 4.7)
+    ytop = top - 15.5
+    pitch = 6.8
+    txt(ax, x0 - 2.0, ytop + 1.0, "junction yield", 4.6, MUTED, ha="right", fontweight="bold", va="center")
+    y = ytop
+    for key, lab in (("0.9998", "99.98%"), ("0.9995", "99.95%"), ("0.999", "99.9%")):
+        ym = y - pitch / 2 - 0.5
+        row = res["yields"][key]
+        a, b, c = row["perfect"], row["standard_d10"], row["best8_d10"]
+        txt(ax, x0 - 2.0, ym, lab, 5.2, INK, ha="right")
+        ax.plot([Xp(a), Xp(b)], [ym, ym], color=GRAY_LIGHT, lw=2.6, solid_capstyle="butt", zorder=2)
+        ax.plot([Xp(b), Xp(c)], [ym, ym], color=BLUE, lw=2.6, solid_capstyle="butt", zorder=3)
+        ax.scatter([Xp(a)], [ym], s=9, color=MUTED, edgecolors="none", zorder=4)
+        ax.scatter([Xp(b)], [ym], s=13, facecolors=WHITE, edgecolors=INK2, linewidths=0.7, zorder=5)
+        ax.scatter([Xp(c)], [ym], s=16, color=BLUE, edgecolors=WHITE, linewidths=0.4, zorder=6)
+        for v, col, wt in ((a, MUTED, "normal"), (b, INK2, "normal"), (c, BLUE, "bold")):
+            txt(ax, Xp(v), ym + 2.0, "%d" % round(100 * v), 4.8, col, ha="center", fontweight=wt)
+        y -= pitch
+    yb = y - 0.5
+    for v in (0, 0.25, 0.5, 0.75, 1.0):
+        ax.plot([Xp(v)] * 2, [yb, ytop], color=GRID, lw=0.45, zorder=0)
+        txt(ax, Xp(v), yb - 1.6, "%d" % (100 * v), 5.0, INK2, ha="center")
+    ax.plot([x0, x1], [yb, yb], color=AXIS, lw=0.55, zorder=1)
+    txt(ax, (x0 + x1) / 2, yb - 3.9, "share of all chips (%)", 5.4, INK2, ha="center")
+
+
+def fig_design_ibm():
+    """Figure 4: the schedule sets the circuit distance (a); on the two-gross code a new schedule reaches the code distance, and even there every
+    decoder has a limit (b); on the gross code, each chip with dead checks is a new circuit, certified chip by chip (c, d)."""
+    sys.path[:0] = [str(ROOT / "papers"), str(ROOT / "results" / "defect_study")]
+    import chip_shares as CS
+    tab, n, res = CS.main()
+    W, H = 183, 100
+    fig, ax = canvas(W, H)
+    top = H - 3.8
+    ybot = f4_schedules(ax, top)
+    f4_limit(fig, ax, top, ybot + 3.3)
+    top2 = ybot - 5.5
+    f4_chips(ax, top2, tab, n, res, CS.BEST8)
+    f4_yields(ax, top2, res)
     save(fig, "ncs_fig4")
+
+
+def fig_ablation_si():
+    """Supplementary figure: what each part of the method contributes, one part switched off at a time."""
+    a, b32, b1, metas = MF.bench()
+    abl = T.load(ROOT / "results" / "bench_ablation_final", 1)
+    circ = [m["name"] for m in metas if m["track"] == "circuit" and "sector" in m["variants"]]
+    count = lambda recs, name: sum(MF.exact(recs, name, i, "sector") is not None for i in circ)
+    rows = [("full method", count(a, "ours")),
+            ("without the truncated Rank DP", count(abl, "ours + DP")),
+            ("without either Rank DP", count(abl, "ours, search only")),
+            ("without lifting", count(abl, "ours, lift off")),
+            ("without the covering bound", count(abl, "ours, cover off")),
+            ("without windows", count(abl, "ours, window off")),
+            ("without symmetry", count(abl, "ours, symmetry off")),
+            ("without time collapse", count(abl, "ours, collapse off")),
+            ("no collapse, lifting or windows", count(abl, "ours, collapse off lift off window off")),
+            ("plain search (also no symmetry or covering bound)", count(abl, "ours, symmetry off cover off collapse off lift off window off"))]
+    W, pitch = 140.0, 4.4
+    H = pitch * len(rows) + 13.0
+    fig, ax = canvas(W, H)
+    x0, x1, n = 68.0, 134.0, len(circ)
+    X = lambda v: x0 + (x1 - x0) * v / n
+    ytop = H - 2.0
+    for k, (lab, v) in enumerate(rows):
+        ym = ytop - (k + 0.5) * pitch
+        txt(ax, x0 - 1.5, ym, lab, 5.8, INK if k == 0 else INK2, ha="right", fontweight="bold" if k == 0 else "normal")
+        ax.add_patch(Rectangle((x0, ym - 1.5), X(v) - x0, 3.0, facecolor=BLUE if k == 0 else GRAY, edgecolor="none", zorder=2))
+        txt(ax, X(v) + 1.0, ym, str(v), 5.6, INK if k == 0 else INK2, fontweight="bold" if k == 0 else "normal")
+    yb = ytop - len(rows) * pitch
+    for v in (0, 10, 20, 30, 40):
+        ax.plot([X(v)] * 2, [yb, ytop], color=GRID, lw=0.4, zorder=0)
+        txt(ax, X(v), yb - 1.7, str(v), 5.5, INK2, ha="center")
+    ax.plot([x0, x1], [yb, yb], color=AXIS, lw=0.5, zorder=1)
+    txt(ax, (x0 + x1) / 2, yb - 4.3, "CSS circuits certified (of %d; one thread, 600 s)" % n, 5.8, INK2, ha="center")
+    save(fig, "si_ablation")
+
+
+def fig_hyperbolic_si():
+    """Supplementary figure: the ranges of the modular hyperbolic codes and their exact distances, with the marks of Fig. 3."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import summarize_hyperbolic as S
+    res = S.load_results()
+    rows = []
+    for name, label, stated in S.ROWS:
+        if "–" not in stated or name not in res or res[name].get("d") is None:
+            continue
+        lo, hi = map(int, stated.split("–"))
+        r = res[name]
+        short = re.sub(r" \(our entry \d+\)", "", label).replace(", class 1", "")
+        rows.append((r["d"], r["n"], "[[%d,%d]]  %s, L = %d" % (r["n"], r["k"], short, int(name.rsplit("_L", 1)[1])), lo, hi))
+    rows.sort(key=lambda t: (t[0], t[1]))
+    assert len(rows) == 15 and all(d == hi for d, _, _, _, hi in rows)
+    W, pitch = 140.0, 3.4
+    H = pitch * len(rows) + 15.0
+    fig, ax = canvas(W, H)
+    x0, x1, dmin, dmax = 76.0, 136.0, 4, 30
+    X = lambda d: x0 + (x1 - x0) * (d - dmin) / (dmax - dmin)
+    ly = H - 2.0
+    ax.plot([x0, x0 + 4.0], [ly, ly], color=GRAY_LIGHT, lw=2.0, solid_capstyle="round")
+    txt(ax, x0 + 5.4, ly, "range in the paper", 5.4)
+    ax.scatter([x0 + 30.0], [ly], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4)
+    txt(ax, x0 + 31.4, ly, "exact distance", 5.4)
+    ytop = H - 5.0
+    for k, (d, n, lab, lo, hi) in enumerate(rows):
+        ym = ytop - (k + 0.5) * pitch
+        txt(ax, x0 - 2.0, ym, lab, 5.6, INK2, ha="right")
+        ax.plot([X(lo), X(hi)], [ym, ym], color=GRAY_LIGHT, lw=2.0, solid_capstyle="round", zorder=2)
+        ax.scatter([X(d)], [ym], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4, zorder=5)
+    yb = ytop - len(rows) * pitch
+    for v in range(4, 31, 4):
+        ax.plot([X(v)] * 2, [yb, ytop], color=GRID, lw=0.4, zorder=0)
+        txt(ax, X(v), yb - 1.7, str(v), 5.5, INK2, ha="center")
+    ax.plot([x0, x1], [yb, yb], color=AXIS, lw=0.5, zorder=1)
+    txt(ax, (x0 + x1) / 2, yb - 4.3, "code distance", 5.8, INK2, ha="center")
+    save(fig, "si_hyperbolic")
 
 
 def sdbb_table(path):
@@ -1177,6 +1566,7 @@ def sdbb_table(path):
 
 # =============================================================================================== figure 5
 IBM_DIR = ROOT / "results" / "ibm"
+MATCHED_DIR = ROOT / "results" / "ibm_matched"
 
 
 def ibm_table(path):
@@ -1212,69 +1602,92 @@ def ibm_table(path):
     print("wrote", path)
 
 
+def ibm_fit_table(path):
+    """Supplementary table of the two-gross rates in the setting of Tour de gross: its Table 2, the sum of its eq. 87 with
+    its fit parameters (papers/ibm_bicycle_fit.py) and the per-cycle bounds of papers/ibm_bicycle_matched_bound.py."""
+    fit = json.load(open(MATCHED_DIR / "fit_tour_de_gross.json"))
+    t2 = fit["reproduced"]["two-gross idle"]
+    bnd = fit["bounds"]
+    out = [r"\begin{tabular}{@{}lrrrrr@{}}", r"\toprule",
+           r" & \multicolumn{2}{c}{ref.~\citenum{yoder_2025_tour}} & \multicolumn{2}{c}{bound per cycle, any decoder} & \\",
+           r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
+           r"$p$ & Table 2 & sum of its eq.~87 & weight 16 & weight 18 & higher bound minus sum \\", r"\midrule"]
+    for p, lab in ((1e-4, "$10^{-4}$"), (2e-4, r"$2\times10^{-4}$"), (5e-4, r"$5\times10^{-4}$"),
+                   (7.322e-4, r"$7.322\times10^{-4}$"), (1e-3, "$10^{-3}$")):
+        k = str(p)
+        b16, b18 = (bnd[w]["log10_per_cycle_two_bases"][bnd[w]["p"].index(p)] for w in ("16", "18"))
+        cell = r"$10^{%.1f\pm%.1f}$" % (t2[k]["table_2"], t2[k]["uncertainty"]) if k in t2 else ""
+        curve = b16 - bnd["16"]["orders_above_curve"][k]
+        out.append(" & ".join([lab, cell, r"$10^{%.2f}$" % curve, r"$10^{%.2f}$" % b16, r"$10^{%.2f}$" % b18,
+                               "$%+.2f$" % (max(b16, b18) - curve)]) + r" \\")
+    out += [r"\bottomrule", r"\end{tabular}"]
+    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/ibm_matched; do not edit\n" +
+                          "\n".join(out) + "\n")
+    print("wrote", path)
+
+
 def ibm_spectrum_table(path):
-    """Supplementary table of the logical fault sets of weight <= 12 of the gross code's instruction and the expansion
-    of a minimum-weight decoder's logical error rate to order p^6 at p = 1e-4 (results/ibm/mwd_gross_c1.json)."""
-    mwd = json.load(open(IBM_DIR / "mwd_gross_c1.json"))
+    """Supplementary table of the logical fault sets of weight <= 12 of the gross code's instruction in the setting of Tour
+    de gross (10 cycles) and the expansion of a minimum-weight decoder's logical error rate to order p^6 at p = 1e-4, per
+    cycle (results/ibm_matched/mwd_gross_c10.json)."""
+    mwd = json.load(open(MATCHED_DIR / "mwd_gross_c10.json"))
     e10 = lambda v: "--" if v is None or v == -math.inf else r"$10^{%.1f}$" % v
+    name = {"standard": "standard (8 timesteps)", "s561234_324015": "best of 8 timesteps", "s106432_342560": "best of 9 timesteps"}
     out = [r"\begin{tabular}{@{}lcrrrrrrrr@{}}", r"\toprule",
-           r" & & & \multicolumn{3}{c}{logical fault sets of weight} & \multicolumn{4}{c}{failures at $p=10^{-4}$} \\",
+           r" & & & \multicolumn{3}{c}{logical fault sets of weight} & \multicolumn{4}{c}{failures of weight, per cycle at $p=10^{-4}$} \\",
            r"\cmidrule(lr){4-6}\cmidrule(l){7-10}",
-           r"schedule & basis & $d$ & 10 & 11 & 12 & weight 5 & weight 6 (sets 10, 11) & weight 6 (sets 12) & total \\",
+           r"schedule & basis & $d$ & 10 & 11 & 12 & 5 & 6 (sets 10, 11) & 6 (sets 12) & total \\",
            r"\midrule"]
     for k, e in enumerate(mwd["entries"]):
         n = {int(w): c for w, c in e["sets_by_weight"].items()}
         r = e["rates"][str(1e-4)]
-        sched = "standard" if e["schedule"] == "standard" else "best"
+        per = -math.log10(e["cycles"])
         first = k == 0 or mwd["entries"][k - 1]["schedule"] != e["schedule"]
-        out.append(" & ".join([sched if first else "", "$%s$" % e["basis"], "%d" % e["distance"],
+        out.append(" & ".join([name[e["schedule"]] if first else "", "$%s$" % e["basis"], "%d" % e["distance"],
                                "{:,}".format(n.get(10, 0)), "{:,}".format(n.get(11, 0)), "{:,}".format(n.get(12, 0)),
-                               e10(r["log10_w5"] if r["n_w5"] else None), e10(r["log10_w6_from_10_11"]),
-                               e10(r["log10_w6_from_12"]), e10(r["log10_total"])]) + r" \\")
+                               e10(r["log10_w5"] + per if r["log10_w5"] != -math.inf else None),
+                               e10(r["log10_w6_from_10_11"] + per), e10(r["log10_w6_from_12"] + per),
+                               e10(r["log10_total_per_cycle"])]) + r" \\")
     out += [r"\bottomrule", r"\end{tabular}"]
-    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/ibm/mwd_gross_c1.json; do not edit\n" +
+    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/ibm_matched/mwd_gross_c10.json; do not edit\n" +
                           "\n".join(out) + "\n")
     print("wrote", path)
 
 
 def ibm_sim_table(path):
-    """Supplementary table of the BP-OSD simulations of the gross code's instruction (results/ibm/sim_gross_c1_*.jsonl):
-    rates with failures and shots per schedule and basis, and the ratio of the summed rates."""
+    """Supplementary table of the BP-OSD simulations of the gross code's instruction in the setting of Tour de gross
+    (results/ibm_matched/sim_gross_c10.jsonl): failure probabilities of the 10 cycles with failures, per schedule and
+    basis."""
     sims = {}
-    for f in sorted(IBM_DIR.glob("sim_gross_c1_*.jsonl")):
-        for line in open(f):
-            r = json.loads(line)
-            sims.setdefault(r["p"], {})[("standard" if r["schedule"] == "standard" else "best", r["basis"])] = r
-    def cell(r):
-        e = math.floor(math.log10(r["rate"]))
-        return r"$%.2f\times10^{%d}$ (%d)" % (r["rate"] / 10 ** e, e, r["failures"])
+    for line in open(MATCHED_DIR / "sim_gross_c10.jsonl"):
+        r = json.loads(line)
+        sims.setdefault(r["p"], {})[(r["schedule"], r["basis"])] = r
+    tags = ("standard", "s561234_324015", "s106432_342560")
 
-    out = [r"\begin{tabular}{@{}lccccc@{}}", r"\toprule",
-           r" & \multicolumn{2}{c}{standard schedule} & \multicolumn{2}{c}{best schedule} & \\",
-           r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-           r"$p$ & $Z$ basis & $X$ basis & $Z$ basis & $X$ basis & standard/best \\", r"\midrule"]
+    def cell(r, e):
+        x = r["rate"] / 10 ** e
+        return (r"%.2f (%d)" if x < 10 else r"%.1f (%d)") % (x, r["failures"])
+
+    out = [r"\begin{tabular}{@{}lccccccc@{}}", r"\toprule",
+           r" & & \multicolumn{2}{c}{standard} & \multicolumn{2}{c}{best of 8 timesteps} & \multicolumn{2}{c}{best of 9 timesteps} \\",
+           r"\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}",
+           r"$p$ & unit & $Z$ & $X$ & $Z$ & $X$ & $Z$ & $X$ \\", r"\midrule"]
     for p in sorted(sims, reverse=True):
         v = sims[p]
-        keys = [("standard", "Z"), ("standard", "X"), ("best", "Z"), ("best", "X")]
-        cells = [cell(v[k]) if k in v else "" for k in keys]
-        ratio = ""
-        if all(k in v for k in keys):
-            a = v[keys[0]]["rate"] + v[keys[1]]["rate"]
-            b = v[keys[2]]["rate"] + v[keys[3]]["rate"]
-            ratio = "%.2f" % (a / b)
-        out.append(" & ".join([r"$%g\times10^{-3}$" % (p * 1e3)] + cells + [ratio]) + r" \\")
+        e = math.floor(math.log10(min(r["rate"] for r in v.values())))
+        cells = [cell(v[(t, b)], e) if (t, b) in v else "" for t in tags for b in "ZX"]
+        out.append(" & ".join([r"$%g\times10^{-3}$" % (p * 1e3), r"$10^{%d}$" % e] + cells) + r" \\")
     out += [r"\bottomrule", r"\end{tabular}"]
-    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/ibm/sim_gross_c1_*.jsonl; do not edit\n" +
+    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/ibm_matched/sim_gross_c10.jsonl; do not edit\n" +
                           "\n".join(out) + "\n")
     print("wrote", path)
 
 
-# =============================================================================================== audit table
 def audit_table(path):
     """Supplementary table of every audited value (docs/audit_items.csv) as a LaTeX longtable, in the order of
     figure 3."""
-    stated = {"claim": "stated as the distance", "bound": "upper bound", "best_known": "best known value",
-              "estimate": "estimate", "expected": "expected", "conjecture": "conjecture", "range": "range",
+    stated = {"claim": "stated as the distance", "implied": "implied by the name hook-free", "bound": "upper bound", "best_known": "best known value",
+              "estimate": "estimate", "randomized": "randomized search", "expected": "expected", "conjecture": "conjecture", "range": "range",
               "open": "open", "lower_bound": "lower bound"}
     rows = audit_rows()
 
@@ -1284,7 +1697,7 @@ def audit_table(path):
     out = [r"\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.9cm}"
            r">{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{1.35cm}c"
            r">{\raggedright\arraybackslash}p{4.1cm}@{}}",
-           r"\caption{Every audited value of \cref{sec:audit}, in the order of Fig.~3 of the main text. Published: the value "
+           r"\caption{Every audited value of \cref{sec:audit}, by paper. Published: the value "
            r"and how the paper states it. Certified: the exact value (bold where it differs from the published one), or the "
            r"interval between the proved lower bound and the lightest error found. Prov.: A, the authors' circuit or data "
            r"files; R, rebuilt from the paper's text and checked against values it reports as exact.}\label{tab:audit}\\",
@@ -1317,19 +1730,194 @@ def audit_table(path):
     print("wrote", path)
 
 
+def scan_tables(out):
+    """Numbers and tables of the two-gross schedule scan (results/bb288_scan/tally_scan.py) and of the number of cycles (results/defect_study)."""
+    tally = json.load(open(ROOT / "results" / "bb288_scan" / "scan_table.json"))
+    by = tally["by_value"]
+    macros = {"scanNbest": tally["n_best"], "scanNseventeen": by.get("17", 0), "scanNsixteen": by.get("16", 0), "scanNfifteen": by.get("15", 0),
+              "scanNopen": sum(o[2] for o in tally["open"])}
+    head = "% generated by docs/make_ncs_figures.py from results/bb288_scan/scan_table.json; do not edit\n"
+    (out / "si_scan_numbers.tex").write_text(head + "".join("\\newcommand{\\%s}{%s}\n" % (k, "{:,}".format(v)) for k, v in macros.items()))
+    # one-round windows
+    types = json.load(open(ROOT / "results" / "bb288_scan" / "screen" / "window_types.json"))
+    transfer = [json.loads(x) for x in open(ROOT / "results" / "bb288_scan" / "screen" / "window_transfer.jsonl")]
+    assert all(r["verified"] for r in transfer)
+    count, cols = {}, {}
+    for e in types:
+        for w in e["windows"]:
+            count[w["id"]] = count.get(w["id"], 0) + 1
+            cols[w["id"]] = w["columns"]
+    weight = {r["id"]: r["weight"] for r in transfer}
+    lines = [r"\begin{tabular}{@{}lrrl@{}}", r"\toprule", r"one-round window & columns & occurrences & lightest fault set \\", r"\midrule"]
+    for k in sorted(count, key=lambda i: (cols[i], -count[i], -weight.get(i, 0))):
+        fault = "weight %d, replayed in every occurrence" % weight[k] if k in weight else "the code's own logical operators, weight 18"
+        lines.append(r"\texttt{%s} & %d & %d & %s \\" % (k[:4], cols[k], count[k], fault))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_scan_windows_table.tex").write_text(head + "\n".join(lines) + "\n")
+    # values of the schedules
+    lines = [r"\begin{tabular}{@{}lrr@{}}", r"\toprule", r"schedules & number & circuit distance at one cycle \\", r"\midrule",
+             r"with a family of hook columns in one round & %s & at most 16, of which %d exactly %d \\" % ("{:,}".format(tally["cap_16_schedules"]), tally["schedules_at_worst"], tally["worst"])]
+    classes = tally["classes_by_value"]
+    for v in sorted(by, key=int):
+        lines.append(r"without such a family, %d classes & %s & %s \\" % (len(classes[v]), "{:,}".format(by[v]), v))
+    if tally["open"]:
+        lines.append(r"without such a family, not yet decided, %d classes & %s & 17 or 18 \\" % (len(tally["open"]), "{:,}".format(macros["scanNopen"])))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_scan_values_table.tex").write_text(head + "\n".join(lines) + "\n")
+    # the classes at the best value
+    sys.path[:0] = [str(ROOT / "papers")]
+    import bb6_depth7 as B6
+    import ibm_bicycle_matched as IBM6
+    classes_all = json.load(open(ROOT / "results" / "bb288_scan" / "screen" / "classes.json"))
+    lines = [r"\begin{tabular}{@{}llrr@{}}", r"\toprule", r"$p_X$ & $p_Z$ & schedules & timesteps per cycle \\", r"\midrule"]
+    for i in tally["classes_at_best"]:
+        a, b = classes_all[i]["problems"][0]
+        sched = (tuple(map(int, a)), tuple(map(int, b)))
+        lines.append(r"(%s) & (%s) & %d & %d \\" % (",".join(a), ",".join(b), classes_all[i]["n"], IBM6.timing(B6.to_dicts(*sched))[1]))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_scan_best_table.tex").write_text(head + "\n".join(lines) + "\n")
+    # number of cycles
+    base = json.load(open(ROOT / "results" / "defect_study" / "cycles_base_rate.json"))
+    names = {"bb72": r"\qc{72,12,6}", "bb90": r"\qc{90,8,10}", "bb108": r"\qc{108,8,10}", "gross": r"\qc{144,12,12}"}
+    lines = [r"\begin{tabular}{@{}lrrrr@{}}", r"\toprule", r"code & problems & orbits run & one cycle equals six & two cycles equal six \\", r"\midrule"]
+    for k, n in names.items():
+        b = base[k]
+        lines.append(r"%s & %s & %s & %s & %s \\" % (n, "{:,}".format(b["problems"]), "{:,}".format(b["orbits"]), "{:,}".format(b["same_c1"]), "{:,}".format(b["same_c2"])))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_cycles_table.tex").write_text("% generated by docs/make_ncs_figures.py from results/defect_study/cycles_base_rate.json; do not edit\n" + "\n".join(lines) + "\n")
+
+
+def chips_tables(out):
+    """Tables of the chips with dead checks (results/defect_study)."""
+    sys.path[:0] = [str(ROOT / "papers"), str(ROOT / "results" / "defect_study")]
+    import chip_shares as CS
+    tab, n, res = CS.main()
+    head = "% generated by docs/make_ncs_figures.py from results/defect_study; do not edit\n"
+    S1 = CS.BEST8
+
+    def pct(v):
+        return ("%.1f" % (100 * v)) if v > 0 else ""
+
+    lines = [r"\begin{tabular}{@{}lrrrrrrr@{}}", r"\toprule", r" & \multicolumn{3}{c}{standard schedule} & \multicolumn{4}{c}{distance-11 schedule} \\",
+             r"dead checks & 10 & 9 & $\le$8 & 11 & 10 & 9 & $\le$8 \\", r"\midrule"]
+    for m in sorted(set(tab[None]) & set(tab[S1])):
+        a, b = tab[None][m], tab[S1][m]
+        low = lambda t: sum(v for d, v in t.items() if d <= 8)
+        lines.append(r"%d & %s & %s & %s & %s & %s & %s & %s \\" % (m, pct(a.get(10, 0)), pct(a.get(9, 0)), pct(low(a)), pct(b.get(11, 0)), pct(b.get(10, 0)), pct(b.get(9, 0)), pct(low(b))))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_chips_table.tex").write_text(head + "\n".join(lines) + "\n")
+    rank = json.load(open(ROOT / "results" / "defect_study" / "yield.json"))["yields"]
+    lines = [r"\begin{tabular}{@{}lrrrrrr@{}}", r"\toprule", r" & & \multicolumn{2}{c}{distance $\ge$10} & \multicolumn{2}{c}{distance $\ge$9} & \\",
+             r"junction yield & perfect & standard & distance-11 & standard & distance-11 & rank test accepts \\", r"\midrule"]
+    for key, lab in (("0.9998", "99.98\\%"), ("0.9995", "99.95\\%"), ("0.999", "99.9\\%")):
+        y = res["yields"][key]
+        lines.append(r"%s & %.0f & %.0f & %.0f & %.1f & %.1f & %.0f \\" % (lab, 100 * y["perfect"], 100 * y["standard_d10"], 100 * y["best8_d10"], 100 * y["standard_d9"], 100 * y["best8_d9"], 100 * rank[key]["accepted"]))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_chips_yield_table.tex").write_text(head + "\n".join(lines) + "\n")
+    # BP-OSD
+    sims = [json.loads(x) for x in open(ROOT / "results" / "defect_study" / "rec" / "sim_chip.jsonl")]
+    names = [("perfect", "perfect chip"), ("z0", "one dead $Z$ check"), ("x0", "one dead $X$ check"), ("x0_z5", "dead $X$ and $Z$ checks"), ("z0_z5", "two dead $Z$ checks"),
+             ("m3", "three dead checks"), ("m5", "five dead checks")]
+    ps = sorted({r["p"] for r in sims})
+    lines = [r"\begin{tabular}{@{}l" + "rr" * len(ps) + "@{}}", r"\toprule", " & ".join([""] + [r"\multicolumn{2}{c}{$p=%g\times10^{-3}$}" % (1e3 * p) for p in ps]) + r" \\",
+             " & ".join(["chip"] + ["$Z$", "$X$"] * len(ps)) + r" \\", r"\midrule"]
+    for key, lab in names:
+        row = [lab]
+        for p in ps:
+            for b in "ZX":
+                r = [x for x in sims if x["name"] == key and x["p"] == p and x["basis"] == b]
+                assert len(r) == 1, (key, p, b)
+                row.append("%.2f" % (1e3 * r[0]["rate"]))
+        lines.append(" & ".join(row) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_chips_sim_table.tex").write_text(head + "\n".join(lines) + "\n")
+
+
+def extended_table(path):
+    """Longer runs outside the benchmark (results/bench_extended): lower-bound runs and the explicit error, from the records."""
+    def run(p, thresholds=""):
+        r = json.load(open(EXT / p))
+        return r"%s%.1f h on %d threads" % (thresholds + ", " if thresholds else "", r["seconds"] / 3600, r["threads"]), r
+    rows = []
+
+    def add(name, value, *parts):
+        rows.append(" & ".join([name, value, "; ".join(parts)]) + r" \\")
+
+    a, r = run("ours_pipeline__dp-2/wjh_qt_288_2_24__full__t32.json")
+    assert r["lower_bound"] == r["upper_bound"] == 24
+    b, r = run("tanner_x/wjh_qt_288_2_24_Xdist__full__t12.json")
+    assert r["lower_bound"] == 24
+    add(r"Tanner \qc{288,2}", "24", "$Z$: " + a, "$X$: " + b + ", with a logical of weight 24")
+    a, r = run("ours_pipeline__dp-2/wjh_qt_324_4_25__full__t32.json")
+    assert r["lower_bound"] == r["upper_bound"] == 25
+    if (EXT / "tanner_x/wjh_qt_324_4_25_Xdist_kmin24.json").exists():
+        b, r2 = run("tanner_x/wjh_qt_324_4_25_Xdist_kmin24.json", "weight 24")
+        assert r2["lower_bound"] == 25
+        add(r"Tanner \qc{324,4}", "25", "$Z$: " + a, "$X$: " + b + ", with a logical of weight 25")
+    else:
+        add(r"Tanner \qc{324,4}", "$Z$: 25", "$Z$: " + a, "$X$: a logical of weight 25, search running")
+    a, r = run("ours_pipeline__dp-2/wjh_qt_360_4_24__full__t32.json")
+    assert r["lower_bound"] == r["upper_bound"] == 24
+    b, r = run("tanner_x/wjh_qt_360_4_24_Xdist_kmax23.json")
+    assert r["lower_bound"] == 24
+    add(r"Tanner \qc{360,4}", "24", "$Z$: " + a, "$X$: " + b + ", with a logical of weight 24")
+    a, r = run("ours_pipeline__dp-2/wjh_qt_396_4_26__full__t32.json", "up to weight 25")
+    assert r["lower_bound"] == 26
+    b, r = run("ours_pipeline__dp-2__kmin-26__kmax-26/wjh_qt_396_4_26__full__t89.json", "weight 26")
+    assert r["lower_bound"] == 27
+    if (EXT / "tanner_x/wjh_qt_396_4_26_Xdist_kmax25.json").exists():
+        c, r2 = run("tanner_x/wjh_qt_396_4_26_Xdist_kmax25.json")
+        assert r2["lower_bound"] == 26
+        add(r"Tanner \qc{396,4}", "26", "$Z$ distance 27: " + a + ", " + b + ", with a logical of weight 27", "$X$ distance 26: " + c + ", with a logical of weight 26")
+    else:
+        add(r"Tanner \qc{396,4}", "$Z$: 27", "$Z$: " + a + ", " + b + ", with a logical of weight 27", "$X$: a logical of weight 26, search running")
+    a, r = run("ours_pipeline__dp-2/wjh_bb_n648__full__t32.json", "up to weight 30")
+    assert r["lower_bound"] == 31
+    b, r = run("ours_pipeline__dp-2__kmin-31__kmax-31/wjh_bb_n648__full__t57.json", "weight 31")
+    assert r["lower_bound"] == 32
+    add(r"bivariate bicycle \qc{648,4}", "32", a, b, "a logical of weight 32")
+    a, r = run("ours_pipeline__dp-2__kmax-32/wjh_bb_n756__full__t57.json", "up to weight 32")
+    assert r["lower_bound"] == 33
+    rec = "ours_pipeline__dp-2__kmin-33__kmax-33/wjh_bb_n756__full__t134.json"
+    if (EXT / rec).exists():
+        b, r2 = run(rec, "weight 33")
+        assert r2["lower_bound"] == 34
+        add(r"bivariate bicycle \qc{756,16}", "34", a, b, "a logical of weight 34")
+    else:
+        add(r"bivariate bicycle \qc{756,16}", "33--34", a, "a logical of weight 34; weight 33 still running")
+    a, r = run("ours_pipeline__dp-2/hypercube_L4__full__t32.json")
+    assert r["lower_bound"] == r["upper_bound"] == 16
+    add(r"many-hypercube $L=4$", "16", a)
+    a, r = run("ours_pipeline__dp-2/mitten_300__sector__t32.json", "up to weight 11")
+    assert r["lower_bound"] == 12
+    add(r"mitten \qc{300,60,14} circuit", "12", a, "the 3-round fault set of weight 12 replayed in the 6-round circuit")
+    k13 = json.load(open(ROOT / "results" / "cornucopia" / "circ_q64_r8_Z_k13.json"))
+    assert k13["certified_lower_bound"] == 13
+    last = k13["collapsed"]["runs"][-1]
+    assert last["K"] == 12 and last["status"] == "exhausted" and last["best"] is None
+    add(r"Cornucopia \qc{2304,1156,16} circuit, $Z$ basis, 8 cycles", "13--14", "time-collapsed problem up to weight 12, last weight %.1f h on %d threads" % (last["seconds"] / 3600, k13["threads"]), "a fault set of weight 14")
+    Path(path).write_text("% generated by docs/make_ncs_figures.py from results/bench_extended; do not edit\n" + "\n".join(
+        [r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.0cm}l>{\raggedright\arraybackslash}p{9.0cm}@{}}", r"\toprule", r"instance & value & runs \\", r"\midrule"] + rows + [r"\bottomrule", r"\end{tabular}"]) + "\n")
+
+
 if __name__ == "__main__":
     OUT = Path(sys.argv[1]).resolve()
     OUT.mkdir(parents=True, exist_ok=True)
-    which = sys.argv[2:] or ["1", "2", "3", "4", "hook", "table"]
+    which = sys.argv[2:] or ["1", "2", "3", "4", "hook", "design", "ablation", "hyperbolic", "table"]
     for k in which:
         if k == "table":
             audit_table(OUT / "si_audit_table.tex")
+            scan_tables(OUT)
+            chips_tables(OUT)
+            extended_table(OUT / "si_extended_table.tex")
             sdbb_table(OUT / "si_sdbb_table.tex")
             if (IBM_DIR / "curves.json").exists():
                 ibm_table(OUT / "si_ibm_table.tex")
-            if (IBM_DIR / "mwd_gross_c1.json").exists():
+            if (MATCHED_DIR / "mwd_gross_c10.json").exists():
                 ibm_spectrum_table(OUT / "si_ibm_spectrum_table.tex")
-            if list(IBM_DIR.glob("sim_gross_c1_*.jsonl")):
+            if (MATCHED_DIR / "fit_tour_de_gross.json").exists():
+                ibm_fit_table(OUT / "si_ibm_fit_table.tex")
+            if (MATCHED_DIR / "sim_gross_c10.jsonl").exists():
                 ibm_sim_table(OUT / "si_ibm_sim_table.tex")
             continue
-        {"1": fig_schematic, "2": fig_capability, "3": fig_audit, "4": fig_design_ibm, "hook": fig_hook}[k]()
+        {"1": fig_schematic, "2": fig_capability, "3": fig_audit, "4": fig_design_ibm, "hook": fig_hook, "design": fig_design_si, "ablation": fig_ablation_si, "hyperbolic": fig_hyperbolic_si}[k]()
