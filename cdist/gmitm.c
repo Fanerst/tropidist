@@ -18,6 +18,7 @@
 //
 // Build: cc -O3 -march=native -fopenmp -shared -fPIC gmitm.c -o libgmitm.so
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -803,6 +804,56 @@ static void run_prefix(Ctx *c, const int *prefix, int len) {
 //   *best = smallest weight recorded, or -1.  At most sol_cap solutions are
 //   stored (*nsol); stats_out[7] counts all those found, so the stored list is
 //   complete iff the search was exhausted and stats_out[7] == *nsol.
+//
+// Task ledger for thresholds that take days, off unless gm_set_ledger is called (cdist/search.py, set_ledger).  Phase 2 appends
+// every finished task to path.K<K>.<fingerprint> and skips the tasks already listed there, so a run that was killed resumes where it
+// stopped.  The fingerprint covers the problem, its labels, order, anchors, exclusions and task list, so another problem gets another
+// file.  Each line carries a check value, so a line cut by a crash is ignored; a file whose header disagrees is refused (return 5).
+// With a slice (r, m) only the tasks i with i % m == r run, for sharing a threshold between machines, and the run returns 6, not 0,
+// because it has not exhausted the threshold.  Slices may have different m as long as they cover all tasks.  Concatenating the
+// ledgers of all slices and running once more without a slice gives the exhausted status: that run checks every task against the
+// ledger and searches any task that is missing.  Enumerations and restricted searches never use a ledger.
+static char g_ledger_path[4096] = "";
+static int g_slice_r = 0, g_slice_m = 1;
+
+void gm_set_ledger(const char *path, int slice_r, int slice_m) {
+    g_ledger_path[0] = 0;
+    if (path) snprintf(g_ledger_path, sizeof(g_ledger_path), "%s", path);
+    g_slice_r = slice_r;
+    g_slice_m = slice_m < 1 ? 1 : slice_m;
+}
+
+static uint64_t ledger_mix(uint64_t h, const void *data, size_t nbytes) {
+    const unsigned char *b = (const unsigned char *)data;
+    for (size_t i = 0; i < nbytes; i++) { h ^= b[i]; h *= 1099511628211ULL; }
+    return h;
+}
+
+// 0 on success with the finished tasks marked in done; 5 if the file belongs to another task list.
+static int ledger_read(const char *path, int K, int64_t ntask, uint64_t h, uint8_t *done, int *exists) {
+    FILE *f = fopen(path, "r");
+    *exists = f != NULL;
+    if (!f) return 0;
+    char line[128];
+    int64_t count = 0;
+    while (fgets(line, sizeof(line), f)) {
+        size_t n = strlen(line);
+        if (n == 0 || line[n - 1] != '\n') continue;           // cut by a crash
+        int k0;
+        long long a;
+        unsigned long long b;
+        if (sscanf(line, "gm_ledger K=%d tasks=%lld hash=%llx", &k0, &a, &b) == 3) {
+            if (k0 != K || a != ntask || b != h) { fclose(f); return 5; }
+        } else if (sscanf(line, "%lld %llx", &a, &b) == 2 && a >= 0 && a < ntask && b == (h ^ (uint64_t)a)) {
+            if (!done[a]) count++;
+            done[a] = 1;
+        }
+    }
+    fclose(f);
+    fprintf(stderr, "gm ledger %s: %lld of %lld tasks finished earlier\n", path, (long long)count, (long long)ntask);
+    return 0;
+}
+
 int gm_search(int W, int N, int M, int wmax,
               const uint64_t *col, const uint64_t *lg,
               const int *row_start, const int *row_cols,
@@ -882,6 +933,46 @@ int gm_search(int W, int N, int M, int wmax,
     if (ntask > task_cap) { free(task_buf); free(rc_bits); free(rc_rows); return 3; }   // too many tasks: lower task_depth
     stats_out[3] = ntask;
 
+    // the optional ledger of finished tasks
+    FILE *ledger = NULL;
+    uint8_t *done = NULL;
+    uint64_t lhash = 0;
+    int slice_r = 0, slice_m = 1;
+    int plain = !enum_all && !P.cls && !g_kernel_mode;
+    if (plain && g_slice_m > 1) { slice_r = g_slice_r; slice_m = g_slice_m; }
+    if (plain && g_ledger_path[0] && ntask > 0) {
+        char path[4200];
+        int exists, shape[5] = {W, N, M, K, td};
+        lhash = ledger_mix(1469598103934665603ULL, shape, sizeof(shape));
+        lhash = ledger_mix(lhash, col, (size_t)N * W * sizeof(uint64_t));
+        lhash = ledger_mix(lhash, lg, (size_t)N * sizeof(uint64_t));
+        if (P.full_lg) lhash = ledger_mix(lhash, P.full_lg, (size_t)N * P.lw * sizeof(uint64_t));
+        lhash = ledger_mix(lhash, rank, (size_t)N * sizeof(int));
+        lhash = ledger_mix(lhash, anchors, (size_t)n_anchor * sizeof(int));
+        if (ex_start) {
+            lhash = ledger_mix(lhash, ex_start, (size_t)(N + 1) * sizeof(int));
+            lhash = ledger_mix(lhash, ex_cols, (size_t)ex_start[N] * sizeof(int));
+        }
+        if (P.nks > 0) {
+            lhash = ledger_mix(lhash, P.ks_start, (size_t)(P.nks + 1) * sizeof(int));
+            lhash = ledger_mix(lhash, P.ks_cols, (size_t)P.ks_start[P.nks] * sizeof(int));
+            lhash = ledger_mix(lhash, P.kc_start, (size_t)(N + 1) * sizeof(int));
+            lhash = ledger_mix(lhash, P.kc_ids, (size_t)P.kc_start[N] * sizeof(int));
+        }
+        lhash = ledger_mix(lhash, task_buf, (size_t)ntask * td * sizeof(int));
+        snprintf(path, sizeof(path), "%s.K%d.%016llx", g_ledger_path, K, (unsigned long long)lhash);
+        done = (uint8_t *)calloc((size_t)ntask, 1);
+        if (ledger_read(path, K, ntask, lhash, done, &exists)) {
+            free(done); free(task_buf); free(rc_bits); free(rc_rows);
+            return 5;
+        }
+        ledger = fopen(path, "a");
+        if (!ledger) { free(done); free(task_buf); free(rc_bits); free(rc_rows); return 5; }
+        if (exists) fputc('\n', ledger);        // ends a line that a crash may have cut; an empty line is ignored
+        else fprintf(ledger, "gm_ledger K=%d tasks=%lld hash=%llx\n", K, (long long)ntask, (unsigned long long)lhash);
+        fflush(ledger);
+    }
+
     // phase 2: parallel search below each prefix
     #pragma omp parallel
     {
@@ -899,9 +990,18 @@ int gm_search(int W, int N, int M, int wmax,
         #pragma omp for schedule(dynamic, 1) nowait
         for (int64_t i = 0; i < ntask; i++) {
             if (stop) continue;
+            if (slice_m > 1 && i % slice_m != slice_r) continue;
+            if (done && done[i]) continue;
             const int *pre = task_buf + (size_t)i * td;
             if (P.rank[pre[0]] != last_rank) { set_rank_forbidden(&c, pre[0]); last_rank = P.rank[pre[0]]; }
             run_prefix(&c, pre, td);
+            if (ledger && !stop && !depth_cut) {        // stop may have cut this task short: then it is not finished
+                #pragma omp critical(gm_ledger)
+                {
+                    fprintf(ledger, "%lld %llx\n", (long long)i, (unsigned long long)(lhash ^ (uint64_t)i));
+                    fflush(ledger);
+                }
+            }
         }
         #pragma omp critical(gm_stats)
         {
@@ -911,12 +1011,15 @@ int gm_search(int W, int N, int M, int wmax,
         }
         free(c.forb); free(c.avail); free(c.used); free(c.kcnt); free(c.cv_load); free(c.cv_stamp);
     }
+    if (ledger) fclose(ledger);
+    free(done);
     free(task_buf);
     free(rc_bits); free(rc_rows);
     stats_out[7] = nfound;
     if (depth_cut) return 4;
     if (timed_out) return 2;
-    return stop ? 1 : 0;
+    if (stop) return 1;
+    return slice_m > 1 ? 6 : 0;
 }
 
 int gm_num_threads(void) {

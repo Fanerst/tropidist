@@ -37,10 +37,25 @@ def _build():
     raise RuntimeError(f"could not build gmitm: {err}")
 
 
+_LEDGER = (None, 0, 1)
+
+
+def set_ledger(path=None, part=(0, 1)):
+    """Keeps a ledger of finished tasks for the searches that follow, so that a threshold of many days survives a restart (see
+    cdist/gmitm.c); part = (r, m) runs only the tasks i with i % m == r, and such a run reports "slice_done", never "exhausted".
+    set_ledger() turns both off.  Off by default, and nothing but a direct call turns it on."""
+    global _LEDGER
+    r, m = part
+    if not (m >= 1 and 0 <= r < m):
+        raise ValueError(f"bad part {part}")
+    _LEDGER = (path, r, m)
+
+
 def lib():
     global _LIB
     if _LIB is None:
         L = ctypes.CDLL(_build())
+        L.gm_set_ledger.argtypes = [ctypes.c_char_p, ctypes.c_int, ctypes.c_int]
         L.tab_create.restype = ctypes.c_void_p
         L.tab_create.argtypes = [ctypes.c_int, ctypes.c_int]
         L.tab_free.argtypes = [ctypes.c_void_p]
@@ -277,6 +292,7 @@ class Searcher:
         stride = K + 2
         sol = np.zeros((sol_cap, stride), dtype=np.int32)
         t0 = time.time()
+        L.gm_set_ledger(_LEDGER[0].encode() if _LEDGER[0] else None, ctypes.c_int(_LEDGER[1]), ctypes.c_int(_LEDGER[2]))
         rc = L.gm_search(
             ctypes.c_int(self.W), ctypes.c_int(self.p.ncols), ctypes.c_int(self.p.nrows), ctypes.c_int(self.wmax),
             _ptr(self.col), _ptr(self.lg), _ptr(self.row_start), _ptr(self.row_cols),
@@ -290,12 +306,15 @@ class Searcher:
         L.gm_set_kernel_mode(ctypes.c_int(0))
         L.gm_set_kernel(ctypes.c_int(0), None, None, None, None)
         L.gm_set_cover(ctypes.c_int(0), ctypes.c_int(0))
+        L.gm_set_ledger(None, ctypes.c_int(0), ctypes.c_int(1))
         L.gm_set_full_labels(None, ctypes.c_int(0))
         dt = time.time() - t0
         if rc == 4:
             raise RuntimeError(f"the search kernel refused threshold {K} or cut a branch at its depth limit {DMAX}; "
                                "the run is not exhaustive")
-        status = {0: "exhausted", 1: "found", 2: "timeout", 3: "too_many_tasks"}[rc]
+        if rc == 5:
+            raise RuntimeError("the task ledger cannot be used: its header disagrees with this search or the file cannot be written; nothing was searched")
+        status = {0: "exhausted", 1: "found", 2: "timeout", 3: "too_many_tasks", 6: "slice_done"}[rc]
         sols = []
         for i in range(min(nsol.value, sol_cap)):
             w = int(sol[i, 0])
@@ -409,7 +428,7 @@ def distance(p: Problem, k_table=2, kmax=20, relaxed=None, rank=None, anchors=No
                     f"false_hits={r['false_hits']} {r['seconds']:.2f}s")
             if on_run:
                 on_run(rec)
-            if r["status"] in ("timeout", "too_many_tasks"):
+            if r["status"] in ("timeout", "too_many_tasks", "slice_done"):
                 break
             if r["best"] is not None:
                 out["distance"] = r["best"]

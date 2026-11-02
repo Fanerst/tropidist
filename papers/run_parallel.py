@@ -15,7 +15,10 @@ A paper module provides CODES[size] = (..., ..., (n, k, d), claimed circuit dist
 build(size, basis, rounds), and optionally translations(size) (check permutations that are
 symmetries of the circuit) and tag(size) (name used in file names).
 
-Usage: python papers/run_parallel.py cornucopia 7 Z out.json [rounds] [k_coll] [kmax] [seconds_per_threshold] [full: 0|1] [noise: full|cx] [cover: 0|1]
+Usage: python papers/run_parallel.py cornucopia 7 Z out.json [rounds] [k_coll] [kmax] [seconds_per_threshold] [full: 0|1] [noise: full|cx] [cover: 0|1] [start]
+
+start (default 1) is the first threshold of the collapsed search.  A larger value continues a run whose record
+already excludes the lighter thresholds; the lower bound of this record then holds only together with that one.
 
 cover = 1 adds the covering bound to every search (fewer nodes, more work per node; it pays off from a
 threshold of about 8 on these circuits).  The default 0 is the setting of the October 2026 records.
@@ -96,9 +99,10 @@ def lift_multi(sector, relaxed, classes, slack, time_limit, start=1):
     return r["distance"], tuple(cols[i] for i in r["solutions"][0])
 
 
-def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_full=1, noise="full", cover=0):
+def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_full=1, noise="full", cover=0, start=1):
     global COVER
     rounds, k_coll, kmax, time_limit, do_full = int(rounds), int(k_coll), int(kmax), float(time_limit), int(do_full)
+    start = int(start)
     COVER = bool(int(cover))
     mod = __import__(paper)
     size = int(size) if str(size).lstrip("-").isdigit() else size       # keys of mod.CODES are ints or strings
@@ -165,7 +169,15 @@ def main(paper, size, basis, out, rounds=6, k_coll=3, kmax=14, time_limit=0, do_
         save()
 
     # first pass stops at the first solution: enough for the lower bound
-    r = dist(coll, k_table=k_coll, kmax=kmax, time_limit=time_limit, enum_all=False, log=log, on_run=on_run, **kw)
+    if start > 1:
+        st["start"] = start
+        res["note"] = "thresholds below %d were searched in a separate run; the lower bound assumes them" % start
+    # a threshold of many days keeps a ledger of finished tasks, for this search only and never for the lifting that follows
+    if os.environ.get("GM_LEDGER"):
+        search.set_ledger(os.environ["GM_LEDGER"], tuple(map(int, os.environ.get("GM_SLICE", "0/1").split("/"))))
+    r = dist(coll, k_table=k_coll, kmax=kmax, time_limit=time_limit, enum_all=False, log=log, on_run=on_run,
+             start=start, **kw)
+    search.set_ledger()
     st["distance"] = r["distance"]
     res["certified_lower_bound"] = r["lower_bound"]
     log(f"[collapsed] distance={r['distance']} lower bound={r['lower_bound']}")
