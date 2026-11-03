@@ -1,6 +1,6 @@
 """Checks of the schedule px = 046135, pz = 531620 of the two-gross code that need no search:
   1. upper bound: a weight-18 logical of the code, put on the data qubits at one tick, is a fault set of the circuit in both bases;
-  2. X and Z: the chain of symmetries from (s, Z) to (s, X), each step checked on the two circuits (iso_check.py), at C = 1 and C = 2;
+  2. X and Z: the chain of symmetries from (s, Z) to (s, X), each step checked on the two circuits (iso_check.py), at C = 1, 2 and 3;
   3. IBM's timing: the sector columns of papers/ibm_bicycle_matched.py against those of papers/ibm_bicycle.py at C = 1."""
 import collections as C
 import json
