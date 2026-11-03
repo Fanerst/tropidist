@@ -172,7 +172,7 @@ The X-basis distance runs are the same with X.
 
 ## Fig. 4d: the published fit and the per-cycle bounds (2026-10-31)
 
-**The fit.** `papers/ibm_bicycle_fit.py` evaluates Tour de gross's eqs. 87-88 with its Table 6. It reproduces all eight idle and
+**The fit.** `papers/ibm_bicycle_fit.py` evaluates Tour de gross's eqs. 82-83 with its Table 6. It reproduces all eight idle and
 automorphism entries of Table 2 (record `fit_tour_de_gross.json`), with no further division by C. For the two-gross idle
 rate at p = 1e-4 the largest term has w = 19 (90% of the sum from w = 15-24) and w = 9 contributes 1.7e-5. Extending the same
 curve to w = 8 or w = 1 changes the rate by less than 1e-6 orders, so the assumed d* does not set it; gamma = 25.78 does.

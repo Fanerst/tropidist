@@ -93,15 +93,29 @@
   "records_missing": []
  },
  "Tanner [[324,4]] X": {
-  "lower_bound": 1,
+  "lower_bound": 25,
   "upper_bound": 25,
-  "closed": false,
-  "lower_bound_records": [],
+  "closed": true,
+  "lower_bound_records": [
+   {
+    "record": "tanner_x/wjh_qt_324_4_25_Xdist__full__t12.json",
+    "kmin": 1,
+    "lower_bound": 24,
+    "status": "error",
+    "threads": 12,
+    "seconds": 123345.036
+   },
+   {
+    "record": "tanner_x/wjh_qt_324_4_25_Xdist_kmin24.json",
+    "kmin": 24,
+    "lower_bound": 25,
+    "status": "bounds",
+    "threads": 40,
+    "seconds": 29942.573
+   }
+  ],
   "witness_record": "tanner_x/wjh_qt_324_4_25_Xdist_isd.json",
-  "records_missing": [
-   "tanner_x/wjh_qt_324_4_25_Xdist__full__t12.json",
-   "tanner_x/wjh_qt_324_4_25_Xdist_kmin24.json"
-  ]
+  "records_missing": []
  },
  "Tanner [[360,4]] X": {
   "lower_bound": 24,
@@ -156,9 +170,9 @@
   "records_missing": []
  },
  "BB [[756,16]]": {
-  "lower_bound": 33,
+  "lower_bound": 34,
   "upper_bound": 34,
-  "closed": false,
+  "closed": true,
   "lower_bound_records": [
    {
     "record": "ours_pipeline__dp-2__kmax-32/wjh_bb_n756__full__t57.json",
@@ -167,12 +181,18 @@
     "status": "bounds",
     "threads": 57,
     "seconds": 183110.644
+   },
+   {
+    "record": "ours_pipeline__dp-2__kmin-33__kmax-33/wjh_bb_n756__full__t134.json",
+    "kmin": 33,
+    "lower_bound": 34,
+    "status": "bounds",
+    "threads": 134,
+    "seconds": 345460.222
    }
   ],
   "witness_record": "isd/wjh_bb_n756__full__t16.json",
-  "records_missing": [
-   "ours_pipeline__dp-2__kmin-33__kmax-33/wjh_bb_n756__full__t134.json"
-  ]
+  "records_missing": []
  },
  "many-hypercube L = 4": {
   "lower_bound": 16,

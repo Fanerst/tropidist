@@ -1,0 +1,49 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 24,
+  "kmin": 24,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "wjh_qt_324_4_25_Xdist",
+ "variant": "full",
+ "rows": 162,
+ "cols": 324,
+ "obs": 4,
+ "threads": 40,
+ "time_limit": 172800.0,
+ "status": "bounds",
+ "lower_bound": 25,
+ "upper_bound": null,
+ "witness": null,
+ "witness_ok": null,
+ "seconds": 29942.573,
+ "trace": [
+  {
+   "t": 0.031,
+   "lb": 1
+  },
+  {
+   "t": 29942.558,
+   "lb": 25
+  }
+ ],
+ "peak_rss_mb": 76.7,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"main\": {\"columns\": 324, \"cut_rank\": 89, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.083, \"fits\": false, \"peak_bits\": 89, \"predicted_seconds\": null, \"queries\": 4, \"work\": null}}, \"kernel_threads\": 40, \"kmin\": \"thresholds below 24 were searched in a separate run; the lower bound assumes them\", \"mode\": \"code instance: plain weight-bounded search (as ours.py)\", \"stages\": {\"plain\": {\"cols\": 324, \"rows\": 162, \"runs\": [{\"K\": 24, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 29942.410873651505, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

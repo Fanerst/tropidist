@@ -2,8 +2,8 @@
 bounds of papers/ibm_bicycle_matched_bound.py.
 
 The paper's rates come from the failure spectrum f(w), the fraction of configurations of w faults that fail, through
-its eq. 87, P(q) = sum_{w >= w0} f(w) binom(N, w) q^w (1 - q)^(N - w) with q = p/15, and the two-parameter ansatz of its
-eq. 88, f(w) = a [1 - exp(-(f0/a) (w/w0)^gamma)], a = 1 - 2^-K, w0 = ceil(d*/2).  From the parameters of its Table 6 this
+its eq. 82, P(q) = sum_{w >= w0} f(w) binom(N, w) q^w (1 - q)^(N - w) with q = p/15, and the two-parameter ansatz of its
+eq. 83, f(w) = a [1 - exp(-(f0/a) (w/w0)^gamma)], a = 1 - 2^-K, w0 = ceil(d*/2).  From the parameters of its Table 6 this
 script
 
   1. reproduces the idle and automorphism entries of its Table 2;
@@ -39,7 +39,7 @@ def log_f(w, lnf0, gamma, w0, K):
 
 
 def terms(p, params, wmin=None):
-    """[(log of the term of eq. 87, w)] for w >= wmin (default: the published cut w0)."""
+    """[(log of the term of eq. 82, w)] for w >= wmin (default: the published cut w0)."""
     lnf0, gamma, w0, K, N = params
     q = p / 15
     wmax = min(N, int(N * q + 40 * math.sqrt(N * q + 1) + 600))
@@ -82,7 +82,7 @@ def crossing(ps, bound, params):
 
 
 def main(out, bound_files):
-    res = {"source": "Tour de gross (arXiv:2506.03094), eqs. 87-88, Tables 2 and 6", "reproduced": {}}
+    res = {"source": "Tour de gross (arXiv:2506.03094), eqs. 82-83, Tables 2 and 6", "reproduced": {}}
     for name, (params, table2) in SERIES.items():
         res["reproduced"][name] = {str(p): {"log10_sum": log10_rate(p, params), "table_2": v[0], "uncertainty": v[1]}
                                    for p, v in table2.items()}
