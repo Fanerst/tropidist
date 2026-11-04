@@ -237,8 +237,8 @@ with 32 threads and 90 GB for tools that use threads.
 | cornucopia_1044 | 1044 | 35496 | 10 |  | 927 s |  |  |
 | lrgross | 144 | 4464 | 11 | 22.3 s |  |  | 706 s (dist-m4ri CC+RW, model bound, 32 threads) |
 | mitten_150 | 150 | 9750 | 8 | 153 s |  |  | 21.0 s (dist-m4ri CC+RW, model bound, 32 threads) |
-| mitten_300 | 300 | 11820 | >=12 |  |  |  |  |
-| mitten_200 | 200 | 15560 | 9 |  | 185 s |  |  |
+| mitten_300 | 300 | 11820 | 12 |  |  |  |  |
+| mitten_200 | 200 | 15560 | 9 |  |  |  |  |
 | routing_54 | 54 | 1998 | 6 | 1.4 s |  | 0.1 s (dist-m4ri CC) | 206 s (Gurobi, 32 threads) |
 | routing_90 | 90 | 3330 | 9 | 6.1 s |  | 374 s (dist-m4ri CC, model bound) | 17.0 s (dist-m4ri CC+RW, model bound, 32 threads) |
 | routing_110 | 110 | 4070 | 10 | 41.0 s |  |  | 252 s (dist-m4ri CC, model bound, 32 threads) |
@@ -284,7 +284,7 @@ with 32 threads and 90 GB for tools that use threads.
 | dtc_w5_259_2_4 | 259 | 259 | 36 | 1.2 s |  | 2.5 s (CASHWMaxSAT, sparse L) | 2.3 s (CP-SAT, sparse L, 32 threads) |
 | dtc_w7_269_4_5 | 269 | 261 | 28 | 1.2 s |  | 507 s (CASHWMaxSAT) | 683 s (CASHWMaxSAT, 1 thread) |
 | dtc_w9_365_10_4 | 365 | 365 | 31 | 13.1 s |  |  | 816 s (SAT, 1 thread) |
-| dtc_w11_537_14_12 | 537 | 537 | >=19 |  |  |  |  |
+| dtc_w11_537_14_12 | 537 | 537 | >=20 |  |  |  |  |
 | code_w8bb_144_6 | 144 | 144 | 15 | 1.4 s |  | 86.5 s (dist-m4ri CC) | 419 s (Gurobi, sparse L, 32 threads) |
 | code_mm_324 | 324 | 324 | 18 | 2.9 s |  |  | 216 s (dist-m4ri CC+RW, 32 threads) |
 | code_llmbb_360 | 360 | 360 | 24 |  | 66.7 s |  |  |
@@ -297,7 +297,7 @@ with 32 threads and 90 GB for tools that use threads.
 | code_kasai_492 | 492 | 492 | 20 |  | 1054 s |  |  |
 | code_sdbb_200 | 200 | 200 | 12 | 0.3 s |  | 1.2 s (dist-m4ri CC) | 1204 s (CP-SAT, 32 threads) |
 
-Of 74 instances: ours solves 59 in the first tier and 71 over both tiers; some other exact method solves 38 in the first tier and 53 over both. 19 are solved by ours only; 1 is solved by another method and not by ours.
+Of 74 instances: ours solves 59 in the first tier and 70 over both tiers; some other exact method solves 38 in the first tier and 53 over both. 18 are solved by ours only; 1 is solved by another method and not by ours.
 <!-- TABLE:overall:END -->
 
 ## Results, first tier (1 thread, 600 s, 16 GB)
@@ -326,7 +326,7 @@ All first-tier records are mutually consistent and consistent with the ground tr
 | cornucopia_1044 | 1044 | 35496 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | t/o | t/o | mem | t/o |
 | lrgross | 144 | 4464 | 11 | 22.3 s | >=8 | 8..11 | >=9 | >=9 | t/o | t/o | 3..11 | >=3 | >=4 | >=1 | >=1 | - | - | - | <=11 ok | <=11 ok | mem | <=11 ok |
 | mitten_150 | 150 | 9750 | 8 | 153 s | >=7 | 7..8 | >=7 | >=7 | 1..10 | t/o | 2..10 | >=3 | >=3 | >=1 | >=1 | - | - | - | <=9 | <=8 ok | mem | <=8 ok |
-| mitten_300 | 300 | 11820 | >=12 | >=9 | >=6 | 6..14 | >=7 | >=7 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
+| mitten_300 | 300 | 11820 | 12 | >=9 | >=6 | 6..14 | >=7 | >=7 | t/o | t/o | 2..16 | >=3 | >=2 | >=1 | >=1 | - | - | - | <=14 | <=28 | mem | <=13 |
 | mitten_200 | 200 | 15560 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | <=12 | <=16 | mem | <=9 ok |
 | routing_54 | 54 | 1998 | 6 | 1.4 s | 0.1 s | 1.9 s | 0.6 s | 1.1 s | 2..6 | <=6 ok | 4..6 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
 | routing_90 | 90 | 3330 | 9 | 6.1 s | 477 s | 507 s | 374 s | 8..9 | 2..26 | t/o | 4..9 | >=4 | >=5 | >=1 | >=1 | - | - | - | <=9 ok | <=9 ok | mem | <=9 ok |
@@ -364,7 +364,7 @@ All first-tier records are mutually consistent and consistent with the ground tr
 | cornucopia_1044 | 1044 | 271440 | 10 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
 | lrgross | 144 | 31488 | 11 | 22.6 s | >=6 | 6..11 | >=8 | >=8 | >=9 | >=9 | t/o | t/o | 2..12 | >=2 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=11 ok | <=12 | mem | <=11 ok |
 | mitten_150 | 150 | 76395 | 8 | 154 s | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 2..10 | >=2 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=10 | <=67 | mem | t/o |
-| mitten_300 | 300 | 87780 | >=12 | >=9 | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
+| mitten_300 | 300 | 87780 | 12 | >=9 | >=5 | >=5 | >=7 | >=7 | >=7 | >=7 | t/o | t/o | 1..16 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | >=1 | - | - | - | <=15 | t/o | mem | t/o |
 | mitten_200 | 200 | 123792 | 9 | >=9 | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | skip | mem | t/o | mem | t/o |
 | routing_54 | 54 | 14958 | 6 | 1.5 s | 189 s | 343 s | 0.5 s | 2.0 s | 1.2 s | 2.1 s | t/o | t/o | 3..6 | >=3 | >=3 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=6 ok | <=6 ok | <=6 ok | <=6 ok |
 | routing_90 | 90 | 25020 | 9 | 6.5 s | >=6 | 6..9 | 398 s | 479 s | 345 s | 8..9 | t/o | t/o | 2..9 | >=3 | >=2 | >=1 | >=1 | >=2 | >=1 | >=1 | - | - | - | <=9 ok | <=38 | mem | <=9 ok |
@@ -541,8 +541,8 @@ All second-tier records are mutually consistent and consistent with the ground t
 | cornucopia_1044 | 1044 | 35496 | 10 | 927 s |  | skip | skip | skip | skip | skip | skip | skip | skip |
 | lrgross | 144 | 4464 | 11 |  | >=10 | 10..11 | 717 s | 706 s | 5..11 | 4..11 |  |  |  |
 | mitten_150 | 150 | 9750 | 8 |  |  | 1485 s | 77.1 s | 21.0 s | 3..9 | 4..9 |  |  |  |
-| mitten_300 | 300 | 11820 | >=12 | >=11 | >=8 | 8..14 | >=9 | 9..14 | skip | skip |  |  |  |
-| mitten_200 | 200 | 15560 | 9 | 185 s |  | skip | skip | skip | skip | skip | - | - | - |
+| mitten_300 | 300 | 11820 | 12 | >=11 | >=8 | 8..14 | >=9 | 9..14 | skip | skip |  |  |  |
+| mitten_200 | 200 | 15560 | 9 |  |  | skip | skip | skip | skip | skip | - | - | - |
 | routing_54 | 54 | 1998 | 6 |  |  |  |  |  | 2457 s | 206 s |  |  |  |
 | routing_90 | 90 | 3330 | 9 |  |  |  |  | 17.0 s | 1..9 | 5..9 |  |  |  |
 | routing_110 | 110 | 4070 | 10 |  |  | 408 s | 252 s | 291 s | skip | skip | - | - | - |
@@ -566,7 +566,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | surface_d23 | 529 | 34915 | 23 |  |  | skip | skip | skip | skip | skip | skip | skip | skip |
 | surface_d25 | 625 | 45001 | 25 |  |  | skip | skip | skip | skip | skip | skip | skip | skip |
 | walkingcat_54 | 54 | 2322 | 8 |  |  |  |  |  | 5..8 | 5..8 |  |  |  |
-| **solved exactly** (of 40) | | | | **8** | **0** | **6** | **9** | **10** | **3** | **5** | **0** | **0** | **0** |
+| **solved exactly** (of 40) | | | | **7** | **0** | **6** | **9** | **10** | **3** | **5** | **0** | **0** | **0** |
 <!-- TABLE:B32-circuit-sector:END -->
 
 ### 32 threads: Stim color-code circuits, raw detector error model
@@ -634,7 +634,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | cornucopia_1044 | 1044 | 35496 | 10 | skip | skip | skip | skip | skip |
 | lrgross | 144 | 4464 | 11 | 1..12 | >=5 | >=5 | >=1 | >=1 |
 | mitten_150 | 150 | 9750 | 8 | 1..10 | >=4 | >=4 | >=1 | >=1 |
-| mitten_300 | 300 | 11820 | >=12 | skip | skip | skip | skip | skip |
+| mitten_300 | 300 | 11820 | 12 | skip | skip | skip | skip | skip |
 | mitten_200 | 200 | 15560 | 9 | skip | skip | skip | skip | skip |
 | routing_54 | 54 | 1998 | 6 | 4..6 | 1458 s | >=5 | >=1 | >=1 |
 | routing_90 | 90 | 3330 | 9 | skip | >=5 | skip | skip | skip |
@@ -682,7 +682,7 @@ All second-tier records are mutually consistent and consistent with the ground t
 | cornucopia_1044 | 1044 | 271440 | 10 | skip | skip | skip |
 | lrgross | 144 | 31488 | 11 | >=2 | >=1 | >=1 |
 | mitten_150 | 150 | 76395 | 8 | >=2 | >=1 | >=1 |
-| mitten_300 | 300 | 87780 | >=12 | skip | skip | skip |
+| mitten_300 | 300 | 87780 | 12 | skip | skip | skip |
 | mitten_200 | 200 | 123792 | 9 | skip | skip | skip |
 | routing_54 | 54 | 14958 | 6 | >=3 | >=1 | >=1 |
 | routing_90 | 90 | 25020 | 9 | skip | skip | skip |
@@ -980,7 +980,7 @@ enumeration.
 | cornucopia_1044 | 1044 | 35496 | 10 | skip | skip | skip | skip | skip | skip |
 | lrgross | 144 | 4464 | 11 | >=6 | >=6 | >=8 | 8..11 | >=9 | >=9 |
 | mitten_150 | 150 | 9750 | 8 | >=5 | >=5 | >=7 | 7..8 | >=7 | >=7 |
-| mitten_300 | 300 | 11820 | >=12 | >=5 | >=5 | >=6 | 6..14 | >=7 | >=7 |
+| mitten_300 | 300 | 11820 | 12 | >=5 | >=5 | >=6 | 6..14 | >=7 | >=7 |
 | mitten_200 | 200 | 15560 | 9 | skip | skip | skip | skip | skip | skip |
 | routing_54 | 54 | 1998 | 6 | 9.3 s | 14.6 s | 0.1 s | 1.9 s | 0.6 s | 1.1 s |
 | routing_90 | 90 | 3330 | 9 | >=7 | >=7 | 477 s | 507 s | 374 s | 8..9 |
@@ -1065,7 +1065,7 @@ enumeration.
 | cornucopia_1044 | 1044 | 271440 | 10 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
 | lrgross | 144 | 31488 | 11 | >=5 | >=5 | >=6 | 6..11 |  |  | >=8 | >=8 | >=9 | >=9 |
 | mitten_150 | 150 | 76395 | 8 | >=4 | >=4 | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
-| mitten_300 | 300 | 87780 | >=12 | >=4 | >=4 | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
+| mitten_300 | 300 | 87780 | 12 | >=4 | >=4 | >=5 | >=5 |  |  | >=7 | >=7 | >=7 | >=7 |
 | mitten_200 | 200 | 123792 | 9 | skip | skip | skip | skip |  |  | skip | skip | skip | skip |
 | routing_54 | 54 | 14958 | 6 | >=4 | >=4 | 189 s | 343 s |  |  | 0.5 s | 2.0 s | 1.2 s | 2.1 s |
 | routing_90 | 90 | 25020 | 9 | >=4 | >=4 | >=6 | 6..9 |  |  | 398 s | 479 s | 345 s | 8..9 |
@@ -1170,7 +1170,7 @@ enumeration.
 | cornucopia_1044 | 1044 | 35496 | 10 | skip | skip |  | skip |
 | lrgross | 144 | 4464 | 11 | 8..12 | 10..11 | >=10 | 706 s |
 | mitten_150 | 150 | 9750 | 8 | 6..9 | 1485 s |  | 21.0 s |
-| mitten_300 | 300 | 11820 | >=12 | skip | 8..14 | >=8 | 9..14 |
+| mitten_300 | 300 | 11820 | 12 | skip | 8..14 | >=8 | 9..14 |
 | mitten_200 | 200 | 15560 | 9 | skip | skip |  | skip |
 | routing_54 | 54 | 1998 | 6 |  |  |  |  |
 | routing_90 | 90 | 3330 | 9 | 8..11 |  |  | 17.0 s |
@@ -1258,7 +1258,7 @@ of d = 9 from 458 s to 17 s.
 | cornucopia_1044 | 1044 | 35496 | 10 | >=9 | >=9 | skip | skip | skip | >=9 | skip | skip | skip |
 | lrgross | 144 | 4464 | 11 | 24.9 s | 23.9 s | 10..11 | >=10 | 8.8 s | 25.3 s | 332 s | >=9 | 23.9 s |
 | mitten_150 | 150 | 9750 | 8 | 163 s | 166 s | 7..8 | >=7 | 140 s | 407 s | 547 s | >=7 | 160 s |
-| mitten_300 | 300 | 11820 | >=12 | >=9 | >=9 | >=1 | >=7 | >=10 | >=9 | >=8 | >=6 | >=9 |
+| mitten_300 | 300 | 11820 | 12 | >=9 | >=9 | >=1 | >=7 | >=10 | >=9 | >=8 | >=6 | >=9 |
 | mitten_200 | 200 | 15560 | 9 | >=9 | >=9 | skip | skip | >=9 | >=9 | >=8 | skip | >=9 |
 | routing_54 | 54 | 1998 | 6 | 1.0 s | 1.0 s | 1.5 s | 1.4 s | 1.5 s | 1.5 s | 1.2 s | 1.3 s | 1.8 s |
 | routing_90 | 90 | 3330 | 9 | 6.4 s | 6.4 s | 6.6 s | 7.9 s | 4.3 s | 6.6 s | 151 s | 112 s | 8.0 s |
@@ -1333,15 +1333,16 @@ the same mechanisms as the plain circuits, only other probabilities.
 | colour-code circuits, midout | 5 | 5 | 5 | 5 | 5 | – | 5 | 5 | 5 | 5 | 5 | 5 / 4 / 5 / 5 / 4 | 5 |
 | colour-code circuits, superdense | 6 | 5 | 5 | 6 | 3 | – | 4 | 5 | 5 | 5 | 5 | 4 / 4 / 4 / 4 / 3 | 5 |
 | bivariate bicycle circuits | 7 | 4 | 5 | 5 | 0 | – | 1 | 3 | 4 | 3 | 4 | 1 / 0 / 0 / 1 / 0 | 1 |
-| hyperbolic surface codes | 21 | 21 | 21 | 21 | 15 | 17 | 21 | 21 | 21 | – | – | 21 / 21 / 21 / 21 / 14 | 21 |
-| hyperbolic colour codes | 21 | 21 | 21 | 21 | 15 | 16 | 20 | 21 | 21 | – | – | 20 / 17 / 20 / 21 / 9 | 21 |
+| hyperbolic surface codes | 21 | 21 | 21 | 21 | 17 | 17 | 21 | 21 | 21 | – | – | 21 / 21 / 21 / 21 / 14 | 21 |
+| hyperbolic colour codes | 21 | 21 | 21 | 21 | 16 | 16 | 20 | 21 | 21 | – | – | 20 / 17 / 20 / 21 / 9 | 21 |
 | lifted-product codes | 19 | 14 | 19 | 19 | 5 | 5 | 5 | 6 | 8 | – | – | 6 / 6 / 6 / 6 / 3 | 6 |
 | bivariate bicycle codes | 20 | 6 | 8 | 8 | 5 | 5 | 5 | 6 | 6 | – | – | 5 / 5 / 5 / 5 / 1 | 5 |
 | quantum Tanner codes | 22 | 5 | 6 | 7 | 4 | 4 | 3 | 4 | 5 | – | – | 5 / 4 / 4 / 4 / 3 | 5 |
-| **all** | 126 | **86** | **95** | **97** | 55 | 47 (codes) | 68 | 76 | 80 | 18 (circuits) | 19 (circuits) | 70 / 64 / 67 / 71 / 39 | 73 |
+| **all** | 126 | **86** | **95** | **97** | 58 | 47 (codes) | 68 | 76 | 80 | 18 (circuits) | 19 (circuits) | 70 / 64 / 67 / 71 / 39 | 73 |
 
 - Our exact values agree with all 73 values certified by their exact methods.
 - Below their best known value: wjh_bb288_circuit: 16 (their best 24)
+- ‡ Distance established outside these runs, and not counted in the tables: wjh_bb_n756 = 34 (results/bench_extended/certificates.json#BB [[756,16]]), wjh_bb_n648 = 32 (results/bench_extended/certificates.json#BB [[648,4]]), wjh_qt_288_2_24 = 24 (results/bench_extended/certificates.json#Tanner [[288,2]] Z), wjh_qt_324_4_25 = 25 (results/bench_extended/certificates.json#Tanner [[324,4]] Z), wjh_qt_360_4_24 = 24 (results/bench_extended/certificates.json#Tanner [[360,4]] Z), wjh_qt_396_4_26 = 27 (results/bench_extended/certificates.json#Tanner [[396,4]] Z).
 
 <details><summary>Surface-code circuits (5 instances)</summary>
 
@@ -1486,11 +1487,11 @@ the same mechanisms as the plain circuits, only other probabilities.
 | wjh_bb_n144 | 144 | 12 | 144 | 12 | 12 | 0.2 s | 0.2 s |  | 52.7 s | 69.1 s | 5.0 s | 0.1 s |  |  |  | m4riCC, 5.7 s |
 | wjh_bb_n288 | 288 | 12 | 288 | 18 | 18 | 1.9 s | 1.8 s |  | 9..18 | 7..18 | >=14 | 142 s |  |  |  | none |
 | wjh_bb_n360 | 360 | 12 | 360 | 24 | 24 | >=23 | 1293 s | 68.5 s | 7..26 | 7..26 | >=14 | >=18 | 23..24 |  |  | none |
-| wjh_bb_n756 | 756 | 16 | 756 | >=28 | 34 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n756 | 756 | 16 | 756 | 34‡ | 34 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_bb_n216 | 216 | 8 | 216 | 10 | 10 | 0.2 s | 0.2 s |  | 4.3 s | 6.6 s | 0.5 s | 0.1 s |  |  |  | m4riCC, 0.7 s |
 | wjh_bb_n576 | 576 | 8 | 576 | 24 | 24 | >=23 | 752 s | 47.5 s | skip | skip | skip | >=18 | skip |  |  | none |
 | wjh_bb_n864 | 864 | 4 | 864 | >=27 | 40 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
-| wjh_bb_n648 | 648 | 4 | 648 | >=28 | 32 | skip | >=27 | >=28 | skip | skip | skip | skip | skip |  |  | none |
+| wjh_bb_n648 | 648 | 4 | 648 | 32‡ | 32 | skip | >=27 | >=28 | skip | skip | skip | skip | skip |  |  | none |
 | wjh_bb_n1080 | 1080 | 4 | 1080 | >=27 | 54 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_bb_n1296 | 1296 | 4 | 1296 | >=28 | 46 | skip | >=28 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_bb_n1152 | 1152 | 4 | 1152 | >=27 | 36 | skip | >=27 | skip | skip | skip | skip | skip | skip |  |  | none |
@@ -1514,10 +1515,10 @@ the same mechanisms as the plain circuits, only other probabilities.
 | wjh_qt_180_2_17 | 180 | 2 | 180 | 17 | 17 | 276 s | 279 s |  | 10..17 | 10..17 | >=12 | >=14 | 1788 s |  |  | Gurobi, 12287 s |
 | wjh_qt_216_4_18 | 216 | 4 | 216 | 18 | 18 | >=17 | 711 s | 28.4 s | 10..18 | 10..19 | skip | >=14 | 17..18 |  |  | none |
 | wjh_qt_252_2_21 | 252 | 2 | 252 | 22 | 22 | >=18 | >=21 | 1934 s | skip | skip | skip | skip | skip |  |  | none |
-| wjh_qt_288_2_24 | 288 | 2 | 288 | >=22 | 24 | skip | >=21 | >=22 | skip | skip | skip | skip | skip |  |  | none |
-| wjh_qt_324_4_25 | 324 | 4 | 324 | >=21 | 25 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
-| wjh_qt_360_4_24 | 360 | 4 | 360 | >=21 | 24 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
-| wjh_qt_396_4_26 | 396 | 4 | 396 | >=22 | 27 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_288_2_24 | 288 | 2 | 288 | 24‡ | 24 | skip | >=21 | >=22 | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_324_4_25 | 324 | 4 | 324 | 25‡ | 25 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_360_4_24 | 360 | 4 | 360 | 24‡ | 24 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
+| wjh_qt_396_4_26 | 396 | 4 | 396 | 27‡ | 27 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_qt_432_8_33 | 432 | 8 | 432 | >=22 | 30 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_qt_468_4_31 | 468 | 4 | 468 | >=22 | 29 | skip | >=22 | skip | skip | skip | skip | skip | skip |  |  | none |
 | wjh_qt_496_2_32 | 496 | 2 | 496 | >=21 | 30 | skip | >=21 | skip | skip | skip | skip | skip | skip |  |  | none |
