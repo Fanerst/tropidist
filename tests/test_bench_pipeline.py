@@ -113,7 +113,7 @@ def adapter_command(instance, variant, out, threads, limit, config=""):
     return command
 
 
-def test_fixture(started, runs):
+def check_fixture(started, runs):
     instance = ROOT / "bench" / "instances" / "fx_sdbb16_r3"
     checked = 0
     for variant in ("sector", "full"):
@@ -184,7 +184,7 @@ def file_hash(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_comparisons(started, runs):
+def check_comparisons(started, runs):
     # The task's known distances are metadata supplied to the exporter.  All
     # result assertions use loaded metadata and the independently run reference.
     cases = (("cornucopia", 7, "cornucopia_q7_r6_Z", 5),
@@ -266,9 +266,9 @@ def main():
     started = time.monotonic()
     runs = []
     if not args.comparisons_only:
-        test_fixture(started, runs)
+        check_fixture(started, runs)
     if not args.fixtures_only:
-        test_comparisons(started, runs)
+        check_comparisons(started, runs)
     print("ok: pipeline tests passed in {:.3f}s".format(time.monotonic() - started), flush=True)
 
 

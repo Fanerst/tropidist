@@ -3,7 +3,7 @@ found by the numbering sweep of papers/shift_numberings.py (static Table II patt
 arXiv:2601.09911 with the monomials renumbered).
 
 For each numbering: (a) papers/run_parallel.py with 6 and 12 cycles, both bases;
-(b) the original pipeline run_bb.py on the six-cycle circuits without symmetry.
+(b) the original pipeline scripts/run_bb.py on the six-cycle circuits without symmetry.
 
 Usage: python papers/gross11_check.py [seconds per threshold]
 """
@@ -55,7 +55,7 @@ for pa, pb in NUMBERINGS:
             continue
         circ = os.path.join(ROOT, "circuits", "papers", f"gross11144s_{tagname}_r6_{basis}.stim")
         out = os.path.join(ROOT, "results", "papers3", "shift", f"gross11_{tagname}_run_bb_{basis}.json")
-        p = subprocess.run([sys.executable, os.path.join(ROOT, "run_bb.py"), circ, out, "--no-sym", "--kmax", "12",
+        p = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "run_bb.py"), circ, out, "--no-sym", "--kmax", "12",
                             "--time-limit", str(tl)], capture_output=True, text=True)
         if os.path.exists(out):
             r = json.load(open(out))

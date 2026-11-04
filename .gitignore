@@ -8,15 +8,12 @@ __pycache__/
 *.dSYM/
 *.tmp
 *.part
+*.lock
+.pytest_cache/
+.claude/
 
-# run logs (two are kept: scripts/summarize.py reads their wall times)
-logs/*
-!logs/server/
-logs/server/*
-!logs/server/enum_bb288_r18_X.log
-!logs/server/enum_bb288_r18_Z.log
-phase4/logs/
-phase4/cache/
+# run logs (the two that scripts/summarize.py reads are kept next to their records in results/)
+/logs/
 
 # third-party material: not redistributed here, see "External data" in README.md
 papers/downloads/

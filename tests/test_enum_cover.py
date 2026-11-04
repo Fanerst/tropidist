@@ -1,7 +1,6 @@
 """The covering bound must not change the set of enumerated solutions
 (minimum and non-minimum), here on the BB144 collapsed problem up to d + 2."""
 import os
-import pickle
 import sys
 import time
 
@@ -11,13 +10,9 @@ from cdist import lift, problem, symmetry
 
 
 def main(circuit="bb144_r12_Z", kmax=11):
-    cache = os.path.join(ROOT, "phase4", "cache", f"{circuit}__collapsed.pkl")
-    if os.path.exists(cache):
-        c, sym = pickle.load(open(cache, "rb"))
-    else:
-        full = problem.load_dem_problem(os.path.join(ROOT, "circuits", circuit + ".stim"))
-        c = problem.collapse_time(problem.sector_problem(full))
-        sym = symmetry.translations(c)
+    full = problem.load_dem_problem(os.path.join(ROOT, "circuits", circuit + ".stim"))
+    c = problem.collapse_time(problem.sector_problem(full))
+    sym = symmetry.translations(c)
     for K in range(8, kmax + 1):
         out = []
         for cover in (False, True):

@@ -256,7 +256,7 @@ def _prepare(spec):
                     and r["Z"][0] is not None and r["Z"][0] == r["Z"][1]
                     and r["X"][0] is not None and r["X"][0] == r["X"][1]]
             # The schedule study defines its distance as min(d_Z, d_X),
-            # as documented in docs/PAPERS.md and design_bb6_depth7.py.
+            # as documented in docs/notes/PAPERS.md and design_bb6_depth7.py.
             top = max(min(r["Z"][0], r["X"][0]) for _, r in rows)
             i, row = next((i, r) for i, r in rows if min(r["Z"][0], r["X"][0]) == top)
             spec.update(n=data["code"][0], k=data["code"][1], schedule=[row["px"], row["pz"]], schedule_row=i)
@@ -290,8 +290,8 @@ def _prepare(spec):
                     bound_path = "results/papers/mitten300_Z_K11.json"
                     truth["sector"] = _truth(_json(bound_path), bound_path)
                     truth["collapsed"] = truth["sector"]
-                    spec["extra_sources"] = [bound_path, "docs/PAPERS.md"]
-                    spec["truth_note"] = "Named result files certify only a lower bound; docs/PAPERS.md describes an additional weight-12 witness."
+                    spec["extra_sources"] = [bound_path, "docs/notes/PAPERS.md"]
+                    spec["truth_note"] = "Named result files certify only a lower bound; docs/notes/PAPERS.md describes an additional weight-12 witness."
             if typ == "amplified":
                 mod = importlib.import_module("amplified_circuit")
                 description = mod.theirs.description(key)
@@ -492,7 +492,7 @@ def _code(spec):
 
 
 def _lattice_perms(p):
-    """Use the same coordinate translation generators as run_bb.py (none if the detector coordinates
+    """Use the same coordinate translation generators as scripts/run_bb.py (none if the detector coordinates
     do not identify rows by (x, y, t), as for both detector types of a colour code)."""
     from cdist import symmetry
     try:

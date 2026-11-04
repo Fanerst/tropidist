@@ -20,7 +20,7 @@ def memory(value):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--out', type=Path, default=Path('results/rw_tree_audit_20261021'))
-    p.add_argument('--report', type=Path, default=Path('docs/TREE_DENSE_DP.md'))
+    p.add_argument('--report', type=Path, default=Path('docs/notes/TREE_DENSE_DP.md'))
     a = p.parse_args()
     grouped = defaultdict(list)
     for r in read(a.out / 'integration/profile_manifest.json'):

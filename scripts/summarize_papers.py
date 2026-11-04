@@ -249,7 +249,7 @@ for code, claimed in (("bb360_r24", "≤ 24"), ("bb756_r34", "≤ 34")):
             out.append(f"| {code}_{b} | {claimed} | {cap if b == 'Z' else '–'} | {col} | {win1} | {lb if lb else '–'} | {ub if ub else '–'} | {rng(lb, ub)} |")
 out.append("")
 
-open("docs/PAPERS_RESULTS.md", "w").write("\n".join(out) + "\n")
+open("docs/notes/PAPERS_RESULTS.md", "w").write("\n".join(out) + "\n")
 
 # ------------------------------------------------------------------ headline tables inside PAPERS.md
 h = ["**Mitten codes** (published \"hook-free\" schedules; paper's fault model). "
@@ -297,10 +297,10 @@ for k in sorted(BBH):
     claimed_d = 24 if "360" in k else 34
     cd = rng(lb, ub) if ub is not None and ub <= claimed_d else f"≥ {lb} (no informative upper bound)"
     h.append(f"| {k} | ≤ {claimed_d} | {cap if k.endswith('Z') else '–'} | {win1} | {cd} |")
-if os.path.exists("docs/PAPERS.md"):
-    t = open("docs/PAPERS.md").read()
+if os.path.exists("docs/notes/PAPERS.md"):
+    t = open("docs/notes/PAPERS.md").read()
     a, bmark = "<!-- RESULTS:BEGIN -->", "<!-- RESULTS:END -->"
     if a in t and bmark in t:
         t = t[:t.index(a) + len(a)] + "\n" + "\n".join(h) + "\n" + t[t.index(bmark):]
-        open("docs/PAPERS.md", "w").write(t)
+        open("docs/notes/PAPERS.md", "w").write(t)
 print("\n".join(out))

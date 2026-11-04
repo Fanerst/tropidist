@@ -1,7 +1,7 @@
 """Reproducible audit of the existing trellis and ordering implementations.
 
 No solver implementation is changed. Inputs, permutations and individual
-observable results are retained. See docs/DENSE_DP_AUDIT.md for the protocol.
+observable results are retained. See docs/notes/DENSE_DP_AUDIT.md for the protocol.
 """
 from __future__ import annotations
 

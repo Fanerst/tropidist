@@ -1,6 +1,6 @@
 """Fault-model check for the mitten circuits of arXiv:2607.28795 (docs/AUDIT.md).
 
-The circuit distances of the published hook-free schedules (docs/PAPERS.md) were computed with the noise of the
+The circuit distances of the published hook-free schedules (docs/notes/PAPERS.md) were computed with the noise of the
 paper's simulations: a two-qubit depolarizing fault after every CX, and preparation and measurement faults. The
 paper's distance estimator, sQetch, used single-qubit Pauli faults. This script builds every published circuit
 under three fault models and compares their memory-sector problems column by column:

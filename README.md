@@ -5,9 +5,9 @@ that flips a logical observable. This repository computes it exactly, as an inte
 lower bound proved by excluding every lighter fault set, and an upper bound given by an explicit
 fault set replayed in Stim. The same engine computes code distances.
 
-**Start with [docs/note.md](docs/note.md)**: five pages on the method and the numerical results.
+**Start with [docs/notes/note.md](docs/notes/note.md)**: five pages on the method and the numerical results.
 
-![Instances solved exactly by each method](docs/figs/fig2_benchmark.png)
+![Instances solved exactly by each method](docs/notes/figs/fig2_benchmark.png)
 
 ## What is here
 
@@ -75,22 +75,22 @@ certified bounds, the search log per weight threshold, and the fault set with it
 
 | document | content |
 |---|---|
-| [docs/note.md](docs/note.md) | method and results in five pages, with figures |
+| [docs/notes/note.md](docs/notes/note.md) | method and results in five pages, with figures |
 | [docs/BENCHMARK.md](docs/BENCHMARK.md) | the comparison with other exact methods: protocol, every table, limits |
-| [docs/PAPERS.md](docs/PAPERS.md) | published circuits and codes, in four batches, with how each number was obtained |
-| [docs/BB_CIRCUITS.md](docs/BB_CIRCUITS.md) | the first study, bivariate bicycle codes from [[72,12,6]] to [[288,12,18]]: method in detail, evidence |
-| [docs/PHASE4.md](docs/PHASE4.md) | bounds inside the search: what was tried, what helps |
-| [docs/TREE_DENSE_DP.md](docs/TREE_DENSE_DP.md) | exact dense tree realization, memory/work preflight, and local validation |
-| [docs/RANKWIDTH_SOLVER_REVIEW.md](docs/RANKWIDTH_SOLVER_REVIEW.md) | applied exact and heuristic rank-width solvers, verified trees, and limits |
+| [docs/notes/PAPERS.md](docs/notes/PAPERS.md) | published circuits and codes, in four batches, with how each number was obtained |
+| [docs/notes/BB_CIRCUITS.md](docs/notes/BB_CIRCUITS.md) | the first study, bivariate bicycle codes from [[72,12,6]] to [[288,12,18]]: method in detail, evidence |
+| [docs/notes/PHASE4.md](docs/notes/PHASE4.md) | bounds inside the search: what was tried, what helps |
+| [docs/notes/TREE_DENSE_DP.md](docs/notes/TREE_DENSE_DP.md) | exact dense tree realization, memory/work preflight, and local validation |
+| [docs/notes/RANKWIDTH_SOLVER_REVIEW.md](docs/notes/RANKWIDTH_SOLVER_REVIEW.md) | applied exact and heuristic rank-width solvers, verified trees, and limits |
 | [results/sparse_dp/README.md](results/sparse_dp/README.md) | the Rank DP truncated at a weight threshold, with a meet-in-the-middle split: against the dense DP and the search; superdense d11 decided |
-| [docs/SUMMARY.md](docs/SUMMARY.md) | one page of representative cases (4 October) |
-| [docs/RESULTS.md](docs/RESULTS.md), [docs/PAPERS_RESULTS.md](docs/PAPERS_RESULTS.md) | generated tables of the first study and of the first batch of papers |
+| [docs/notes/SUMMARY.md](docs/notes/SUMMARY.md) | one page of representative cases (4 October) |
+| [docs/notes/RESULTS.md](docs/notes/RESULTS.md), [docs/notes/PAPERS_RESULTS.md](docs/notes/PAPERS_RESULTS.md) | generated tables of the first study and of the first batch of papers |
 | [docs/next_step.md](docs/next_step.md) | what is parked |
 | [bench/METHODS.md](bench/METHODS.md), [bench/INSTANCES.md](bench/INSTANCES.md) | survey of distance-finding methods (its "catalog" links point to a separate literature catalogue that is not part of this repository); the benchmark instances |
 
 The tables in the reports are generated from `results/` and never typed by hand:
-`scripts/summarize*.py` fill `docs/RESULTS.md`, `docs/PAPERS_RESULTS.md` and the marked blocks of
-`docs/PAPERS.md`; `bench/make_benchmark_md.py` fills `docs/BENCHMARK.md`; `docs/make_figures.py`
+`scripts/summarize*.py` fill `docs/notes/RESULTS.md`, `docs/notes/PAPERS_RESULTS.md` and the marked blocks of
+`docs/notes/PAPERS.md`; `bench/make_benchmark_md.py` fills `docs/BENCHMARK.md`; `docs/notes/make_figures.py`
 draws the figures.
 
 ## External material that is not included
@@ -121,7 +121,7 @@ kept), the circuits of
 
 - Research code. The pipeline expects a CSS memory experiment whose detectors carry coordinates
   (check, 0, round, type), or a small builder module per code as in `papers/`; symmetries are
-  supplied by the builder. See "Limits" in docs/note.md and docs/BENCHMARK.md.
+  supplied by the builder. See "Limits" in docs/notes/note.md and docs/BENCHMARK.md.
 - "Circuit distance" always refers to the circuit as built here from a published description and
   the stated fault model. Where a paper's circuit files are not public, the choices made in
   rebuilding it are listed in the notes of `papers/new/`.

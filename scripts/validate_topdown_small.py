@@ -1,6 +1,6 @@
 """Cross-validation of the two exact routes on every small circuit:
 
-  direct   : exhaustive search of the real (sector) problem   [run_bb.py]
+  direct   : exhaustive search of the real (sector) problem   [scripts/run_bb.py]
   top-down : enumerate collapsed solutions, lift with slack   [scripts/enum_collapsed.py + scripts/run_topdown.py]
 
 For each circuit with direct distance d, the top-down route must report

@@ -1,5 +1,5 @@
 """Cross-checks of the best depth-7 schedule found by papers/design_bb6_depth7.py for a code:
-(a) papers/run_parallel.py with 12 cycles, both bases; (b) the original pipeline run_bb.py on the
+(a) papers/run_parallel.py with 12 cycles, both bases; (b) the original pipeline scripts/run_bb.py on the
 six-cycle circuits without symmetry; also the standard schedule through the same two paths.
 
 Usage: python papers/bb6_crosscheck.py key [family] [seconds per threshold]
@@ -50,7 +50,7 @@ for label, sched in (("best", (tuple(best["px"]), tuple(best["pz"]))), ("standar
     for basis in "ZX":
         circ = os.path.join(ROOT, "circuits", "papers", f"bb6cc{key}_{label}_r6_{basis}.stim")
         out = os.path.join(ROOT, "results", "papers3", "bb6", f"cc_{key}_{label}_run_bb_{basis}.json")
-        p = subprocess.run([sys.executable, os.path.join(ROOT, "run_bb.py"), circ, out, "--no-sym", "--kmax", str(d),
+        p = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "run_bb.py"), circ, out, "--no-sym", "--kmax", str(d),
                             "--time-limit", str(tl)], capture_output=True, text=True)
         if os.path.exists(out):
             r = json.load(open(out))

@@ -1,7 +1,7 @@
 """Cross-checks of a mirror circuit found by the full sweep (design_sdbb_parallel_all.py):
 the best order is written to the order file, then (a) the pipeline is re-run with 12 cycles in
 both bases, (b) the six-cycle Z circuit is given to the original pipeline of this project
-(run_bb.py: labelled search, no symmetry).
+(scripts/run_bb.py: labelled search, no symmetry).
 
 Usage: python papers/family_crosscheck.py n [module]
 """
@@ -34,7 +34,7 @@ for b in "ZX":
 circ = os.path.join(ROOT, "circuits", "papers", f"{prefix}{n}_family_r6_Z.stim")
 mod.build(n, "Z", 6).to_file(circ)
 out = os.path.join(ROOT, "results", "papers2", "design", f"{prefix}{n}_family_run_bb_Z.json")
-p = subprocess.run([sys.executable, os.path.join(ROOT, "run_bb.py"), circ, out, "--no-sym"], capture_output=True, text=True)
+p = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "run_bb.py"), circ, out, "--no-sym"], capture_output=True, text=True)
 res["run_bb_returncode"] = p.returncode
 if os.path.exists(out):
     r = json.load(open(out))

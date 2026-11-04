@@ -15,7 +15,7 @@ from the records in `results/bench/`, `results/bench_tierB/`, `results/bench_abl
 
 Is the method of this project, the tropical partition function method (certified relaxations, a
 weight-bounded search and two Rank DP evaluators of the same tropical partition function, see
-[BB_CIRCUITS.md](BB_CIRCUITS.md)), the best available way to compute the circuit distance exactly? The test:
+[BB_CIRCUITS.md](notes/BB_CIRCUITS.md)), the best available way to compute the circuit distance exactly? The test:
 every method gets the same problem, the same machine and the same limits, and every answer is
 checked.
 

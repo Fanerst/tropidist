@@ -1,5 +1,5 @@
 #!/bin/bash
-# Structured-mitten audit (docs/AUDIT.md, docs/PAPERS.md), first batch on 5090: information-set witness
+# Structured-mitten audit (docs/AUDIT.md, docs/notes/PAPERS.md), first batch on 5090: information-set witness
 # searches for all five hook-free circuits in both bases, and exact searches for the two smallest codes.
 # 10 x 8 + 4 x 32 = 208 threads. Every job is detached; logs go to logs/smitten/.
 # usage, from the repo root on the server: bash scripts/server/smitten_batch1.sh

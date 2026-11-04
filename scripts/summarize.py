@@ -45,7 +45,7 @@ for code, label, dcode in CODES:
         r = load(f"results/{name}.json")
         if r is None:
             continue
-        if "stages" in r:   # run_bb.py
+        if "stages" in r:   # scripts/run_bb.py
             st = r["stages"]
             lb, ub = r.get("certified_lower_bound"), r.get("certified_upper_bound")
             out.append(f"| {label} | {rounds} | {b} | {dcode} | {st['collapsed']['distance']} | {st['fold2']['distance']} | "
@@ -59,7 +59,7 @@ for code, label, dcode in CODES:
             if td and td.get("certified_lower_bound"):
                 lb = max(lb, td["certified_lower_bound"])
                 secs += td["seconds"]
-            secs += log_wall(f"logs/server/enum_{name}.log")
+            secs += log_wall(f"results/enum_{name}.log")
             out.append(f"| {label} | {rounds} | {b} | {dcode} | {r.get('collapsed', {}).get('distance')} | – | – | {lb} | {ub} | "
                        f"**{lb if lb == ub else f'{lb}–{ub}'}** | windows, collapsed search, enumeration, top-down lift | {secs:.0f} s ({r['threads']} thr) |")
 out.append("")
@@ -261,5 +261,5 @@ if ms:
         out.append(f"| {os.path.basename(r['circuit'])} | {r['maxsat_distance']} | {r['seconds']:.0f} |")
     out.append("")
 
-open("docs/RESULTS.md", "w").write("\n".join(out) + "\n")
+open("docs/notes/RESULTS.md", "w").write("\n".join(out) + "\n")
 print("\n".join(out[:40]))

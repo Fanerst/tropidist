@@ -11,7 +11,7 @@ export OMP_NUM_THREADS=$T
 } > logs/tests.log 2>&1
 for c in bb72_r6 bb90_r10 bb108_r10 bb144_r12; do
   for b in Z X; do
-    $PY run_bb.py circuits/${c}_${b}.stim results/${c}_${b}.json --enum-collapsed > logs/${c}_${b}.log 2>&1
+    $PY scripts/run_bb.py circuits/${c}_${b}.stim results/${c}_${b}.json --enum-collapsed > logs/${c}_${b}.log 2>&1
     $PY scripts/run_deep.py circuits/${c}_${b}.stim results/deep_${c}_${b}.json --kmax 14 --k-table 3 > logs/deep_${c}_${b}.log 2>&1
   done
 done

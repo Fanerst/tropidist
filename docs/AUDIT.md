@@ -2,7 +2,7 @@
 
 Every published code or circuit distance that this project has checked with its exact method, collected for the
 paper's "audit" figure. It is an inventory of results already obtained, not new runs. Sources:
-[PAPERS.md](PAPERS.md) (four batches of papers and the Cornucopia check),
+[PAPERS.md](notes/PAPERS.md) (four batches of papers and the Cornucopia check),
 [results/planar_dp/README.md](../results/planar_dp/README.md) (2026 planar codes),
 [BENCHMARK.md](BENCHMARK.md) (the instances of arXiv:2603.22532) and
 [results/sparse_dp/README.md](../results/sparse_dp/README.md). Every exact value here has a certified lower bound
@@ -76,7 +76,7 @@ in `results/papers/mitten_fault_models.json`):
   - Direct runs in this model (X basis, 3 rounds): exactly 8 for [[150,30,10]]. For [[200,40,12]], weight 8 is
     excluded; the 25-minute run stopped before it found the weight-9 fault set.
 - **Idle faults** can only lower a distance, so they cannot make a published value correct. For the three smallest
-  codes they leave the problem unchanged ([PAPERS.md](PAPERS.md)).
+  codes they leave the problem unchanged ([PAPERS.md](notes/PAPERS.md)).
 
 **Fault model of the structured-mitten rows.** The same comparison (`papers/smitten_check.py`, results in
 `results/papers/smitten_checks.json`) gives the same picture for all five circuits in both bases, at 3 rounds:

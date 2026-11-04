@@ -1,6 +1,6 @@
 # Check of the Cornucopia distances (arXiv:2608.02773, arXiv:2610.19073)
 
-Records of the check reported in docs/PAPERS.md, section "Check of the Cornucopia distances" (20 and 21 October
+Records of the check reported in docs/notes/PAPERS.md, section "Check of the Cornucopia distances" (20 and 21 October
 2026). The table there is printed by `python scripts/summarize_cornucopia_check.py`. Every upper bound below is a
 fault set checked in the detector error model and replayed in Stim. All runs used the kernel with sha256
 `e06fcfa4…` (`cdist/gmitm.c`).

@@ -7,7 +7,7 @@ Pipeline
   4. exact search on the real sector problem, pruned by the collapsed table
   5. witness: checked in the full DEM and replayed as physical circuit faults
 
-Usage: python run_bb.py circuits/bb144_r12_Z.stim results/bb144_r12_Z.json [options]
+Usage: python scripts/run_bb.py circuits/bb144_r12_Z.stim results/bb144_r12_Z.json [options]
 """
 import argparse
 import json
@@ -17,7 +17,7 @@ import time
 
 import stim
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from cdist import problem, replay, search, symmetry
 

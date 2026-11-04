@@ -1,7 +1,7 @@
 """Is a row of arXiv:2610.03682 identified by its printed distance range?
 
 LINS lists normal subgroups of equal index in an order that depends on the index bound of the run,
-so a position in the list does not fix a tiling by itself.  For every row used in docs/PAPERS.md
+so a position in the list does not fix a tiling by itself.  For every row used in docs/notes/PAPERS.md
 that lies in a group of tilings of equal order, this prints the classes of tilings up to renaming
 of the generators, with the paper's two bounds (papers/hyperbolic_bounds.py) for one representative
 of each class.  The row is identified if exactly one class has the printed range.

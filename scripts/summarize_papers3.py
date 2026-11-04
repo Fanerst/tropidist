@@ -334,14 +334,14 @@ if glob.glob(f"{B6}/*_ibm.json"):
                 cc.append(f"{name}: " + ("all " + str(len(vals)) + " re-runs give " + str(r["family_value"]) if same else str(vals)))
     q = f"{R}/shift/gross11_check.json"
     if cc:
-        out += ["Cross-checks of a best schedule (six and twelve cycles in both bases; the original pipeline `run_bb.py` "
+        out += ["Cross-checks of a best schedule (six and twelve cycles in both bases; the original pipeline `scripts/run_bb.py` "
                 "without symmetry in both bases): " + "; ".join(cc) + ".", ""]
 
 text = "\n".join(out)
 print(text)
-if os.path.exists("docs/PAPERS.md"):
-    t = open("docs/PAPERS.md").read()
+if os.path.exists("docs/notes/PAPERS.md"):
+    t = open("docs/notes/PAPERS.md").read()
     a, b = "<!-- RESULTS3:BEGIN -->", "<!-- RESULTS3:END -->"
     if a in t and b in t:
         t = t[:t.index(a) + len(a)] + "\n" + text + "\n" + t[t.index(b):]
-        open("docs/PAPERS.md", "w").write(t)
+        open("docs/notes/PAPERS.md", "w").write(t)

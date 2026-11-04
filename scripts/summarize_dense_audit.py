@@ -200,7 +200,7 @@ def main():
               '```sh',
               'python scripts/dense_audit.py widths --out results/dense_audit_20261021 --jobs 4',
               'python scripts/dense_audit.py run --out results/dense_audit_20261021 --max-bits 32 --seconds 1200',
-              'python scripts/summarize_dense_audit.py --out results/dense_audit_20261021 --report docs/DENSE_DP_AUDIT.md',
+              'python scripts/summarize_dense_audit.py --out results/dense_audit_20261021 --report docs/notes/DENSE_DP_AUDIT.md',
               '```', '',
               'Completed records are cached. To obtain a new independent run, use a new output directory with copies of '
               'the retained inputs and selected width/refinement files. The saved permutations permit exact DP replay '

@@ -224,9 +224,9 @@ if os.path.exists(p):
 
 text = "\n".join(out)
 print(text)
-if os.path.exists("docs/PAPERS.md"):
-    t = open("docs/PAPERS.md").read()
+if os.path.exists("docs/notes/PAPERS.md"):
+    t = open("docs/notes/PAPERS.md").read()
     a, b = "<!-- RESULTS2:BEGIN -->", "<!-- RESULTS2:END -->"
     if a in t and b in t:
         t = t[:t.index(a) + len(a)] + "\n" + text + "\n" + t[t.index(b):]
-        open("docs/PAPERS.md", "w").write(t)
+        open("docs/notes/PAPERS.md", "w").write(t)
