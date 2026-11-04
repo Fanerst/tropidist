@@ -29,7 +29,6 @@ def export_circuit(path, directory):
     """Export as bench/instances.py exports the stored circuits; returns a note if only the full problem is used."""
     import stim
     import common
-    import instances
     circ = stim.Circuit.from_file(path)
     root, name = os.path.split(directory)
     meta = {"family": "cli", "description": "python -m cdist", "source": os.path.abspath(path)}
@@ -41,7 +40,7 @@ def export_circuit(path, directory):
                 "(check, 0, round, type) [%s: %s]" % (type(exc).__name__, exc))
     for variant in out["variants"]:
         prob = common.to_cdist(common.load(directory, variant))
-        out["variants"][variant].update(common.export_problem(directory, variant, prob, instances._lattice_perms(prob)))
+        out["variants"][variant].update(common.export_problem(directory, variant, prob, common.lattice_perms(prob)))
     common.write_meta(directory, out)
     return None
 

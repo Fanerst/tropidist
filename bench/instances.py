@@ -491,91 +491,6 @@ def _code(spec):
     return (*mod.matrices(key), mod.translations(key))
 
 
-def _lattice_perms(p):
-    """Use the same coordinate translation generators as scripts/run_bb.py (none if the detector coordinates
-    do not identify rows by (x, y, t), as for both detector types of a colour code)."""
-    from cdist import symmetry
-    try:
-        found = symmetry.translations(p)
-    except AssertionError:
-        return []
-    if not found.get("ok"):
-        return []
-    x0, sx, nx = symmetry._axis(m[0] for m in p.row_meta)
-    y0, sy, ny = symmetry._axis(m[1] for m in p.row_meta)
-    index = {tuple(m[:3]): i for i, m in enumerate(p.row_meta)}
-    out = []
-    for dx, dy in found["generators"]:
-        out.append([index[(x0 + ((m[0] - x0) / sx + dx) % nx * sx,
-                           y0 + ((m[1] - y0) / sy + dy) % ny * sy) + tuple(m[2:3])]
-                    for m in p.row_meta])
-    return _fast_symmetries(p, out)
-
-
-def _fast_symmetries(p, candidates):
-    """Verify the same H/L condition as common.symmetric_subset, with one basis.
-
-    A mapped logical row must belong to rowspace([H; L]); this is exactly
-    l(g c) = M l(c) + B h(c), checked by cdist.symmetry._labels_consistent.
-    Eliminating rows over column positions avoids rebuilding the identical
-    column-space elimination for every candidate translation.
-    """
-    from cdist import symmetry
-    colindex = {h: j for j, h in enumerate(p.h)}
-    if len(colindex) != p.ncols:
-        return []  # same duplicate-syndrome restriction as from_row_perms
-    width = (p.ncols + 7) // 8
-    rows = [bytearray(width) for _ in range(p.nrows + p.nobs)]
-    for j, (h, l) in enumerate(zip(p.h, p.l)):
-        byte, bit = j // 8, 1 << (j % 8)
-        for i in common.bits(h):
-            rows[i][byte] |= bit
-        for i in common.bits(l):
-            rows[p.nrows + i][byte] |= bit
-    basis = {}
-    for packed in rows:
-        vector = int.from_bytes(packed, "little")
-        while vector:
-            pivot = vector.bit_length() - 1
-            if pivot not in basis:
-                basis[pivot] = vector
-                break
-            vector ^= basis[pivot]
-    seen, out = set(), []
-    for perm in candidates:
-        key = tuple(perm)
-        if key in seen or len(perm) != p.nrows or all(i == x for i, x in enumerate(perm)):
-            continue
-        seen.add(key)
-        if sorted(perm) != list(range(p.nrows)):
-            continue
-        cache, mapped_rows = {}, [bytearray(width) for _ in range(p.nobs)]
-        valid = True
-        for j, h in enumerate(p.h):
-            image = colindex.get(symmetry._apply(h, perm, cache))
-            if image is None:
-                valid = False
-                break
-            byte, bit = j // 8, 1 << (j % 8)
-            for i in common.bits(p.l[image]):
-                mapped_rows[i][byte] |= bit
-        if not valid:
-            continue
-        for packed in mapped_rows:
-            vector = int.from_bytes(packed, "little")
-            while vector:
-                row = basis.get(vector.bit_length() - 1)
-                if row is None:
-                    valid = False
-                    break
-                vector ^= row
-            if not valid:
-                break
-        if valid:
-            out.append(list(perm))
-    return out
-
-
 def build(name, root=None, max_cols=None):
     """Export one named instance; max_cols bounds raw DEM mechanisms (code: n).
 
@@ -632,8 +547,8 @@ def build(name, root=None, max_cols=None):
                     if spec["builder"] == "wjh_circuit" and variant == "full" and prob.ncols > 400000:
                         perms = []      # the check over all columns is too slow; our searches use sector/collapsed
                     else:
-                        perms = (_lattice_perms(prob) if spec["builder"] in ("stored_bb", "wjh_circuit")
-                                 else _fast_symmetries(prob, run_parallel.row_perms(prob, cp)))
+                        perms = (common.lattice_perms(prob) if spec["builder"] in ("stored_bb", "wjh_circuit")
+                                 else common.fast_symmetries(prob, run_parallel.row_perms(prob, cp)))
                     counts = common.export_problem(os.path.join(tmp, name), variant, prob, perms)
                     out["variants"][variant].update(counts)
                 common.write_meta(os.path.join(tmp, name), out)

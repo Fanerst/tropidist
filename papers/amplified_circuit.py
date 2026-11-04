@@ -18,6 +18,9 @@ import sys
 import stim
 
 REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "amplified", "repo", "simulation", "source")
+if not os.path.isfile(os.path.join(REPO, "circuits.py")):
+    raise ImportError("papers/amplified_circuit.py needs the authors' repository (github.com/zijian-liang/"
+                      "dp_certificates_github, commit 0772a00) in papers/amplified/repo/; see README.md")
 sys.path.insert(0, REPO)
 import circuits as theirs  # noqa: E402
 
