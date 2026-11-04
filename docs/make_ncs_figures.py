@@ -399,12 +399,11 @@ def wjh_cumulative():
     """Times to an exact value on the 126 instances of arXiv:2603.22532: ours under that study's limits (one core,
     8 GB, eight hours: the 600 s tier, else the eight-hour run) and each of its five exact methods (its sheets)."""
     import wjh_compare as W
-    import xlsx_lite
     ours = {r["name"]: r["ours_8h"] for r in W.per_instance()}
     ms = W.metas()
     theirs = {m: {} for m, _ in W.THEIR_EXACT}
     for family, sheet, _ in W.FAMILIES:
-        book = xlsx_lite.read(str(W.SHEETS / sheet))
+        book = W.read_sheet(sheet)
         for method, s in W.THEIR_EXACT:
             if s not in book:
                 continue
@@ -678,10 +677,10 @@ def closed(*records):
 
 
 def best_known():
-    import xlsx_lite
+    import wjh_compare as W
     out = {}
     for sheet in ("12 tanner_codes.xlsx", "07 bivariate_bicycle.xlsx"):
-        for r in xlsx_lite.read(str(SHEETS / sheet))["best"]:
+        for r in W.read_sheet(sheet)["best"]:
             if len(r) > 3 and r[1].strip().isdigit():
                 out[r[0]] = int(float(r[3]))
     return out

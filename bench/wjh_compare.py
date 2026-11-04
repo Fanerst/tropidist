@@ -44,6 +44,15 @@ OURS = [("ours", "ours"), ("Gurobi", "Gurobi"), ("dist-m4ri CC", "dist-m4ri"), (
 MODEL_BOUND = ("dist-m4ri CC, model bound", "dist-m4ri CC+RW, model bound")
 
 
+def read_sheet(name):
+    """One of their result sheets, which are not redistributed here (README.md, external material)."""
+    path = SHEETS / name
+    if not path.is_file():
+        raise SystemExit("needs the result sheets of github.com/m-webster/codeDistancePYPI (commit a4afe9c) in "
+                         "papers/downloads/codedistance/paper results; see README.md, external material")
+    return xlsx_lite.read(str(path))
+
+
 def best_of(recs, methods, name, variant):
     """The fastest exact record among methods, else the first record present (None if there is none)."""
     found = [r for r in (recs.get((m, name, variant)) for m in methods) if r is not None]
@@ -130,7 +139,7 @@ def per_instance():
     h8 = T.load(H8, 1) if H8.is_dir() else {}
     out = []
     for family, sheet, title in FAMILIES:
-        book = xlsx_lite.read(str(SHEETS / sheet))
+        book = read_sheet(sheet)
         fastest = {}
         for method, s in THEIR_EXACT:
             if s not in book:
@@ -170,7 +179,7 @@ def report():
     detail, notes, total, settled = [], [], {}, []
     for family, sheet, title in FAMILIES:
         path = SHEETS / sheet
-        book = xlsx_lite.read(str(path))
+        book = read_sheet(sheet)
         their = {name: sheet_rows(book[s]) for name, s in THEIR_EXACT if s in book}
         counts = {name: 0 for name, _ in THEIR_EXACT}
         names = [m["name"] for m in sorted((m for m in ms.values() if m["family"] == "wjh_" + family),
@@ -283,7 +292,7 @@ def agreement(ms, a1, b32, h8=None):
     same = differ = below = 0
     out, lower = [], []
     for family, sheet, title in FAMILIES:
-        book = xlsx_lite.read(str(SHEETS / sheet))
+        book = read_sheet(sheet)
         variant = "sector" if family.endswith("_circuit") else "full"
         exact = {}
         for method, s in THEIR_EXACT:

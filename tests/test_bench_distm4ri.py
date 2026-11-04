@@ -314,6 +314,12 @@ def test_parsers():
     # The source tree does not include saved process logs.  These literal
     # stdout expectations and the NZLIST heredoc are the shipped real-format
     # fixtures in its shell tests; do not claim these are captured local runs.
+    if not (EXTERNAL / "src" / "tests" / "test_run.sh").exists():
+        try:
+            import pytest
+        except ImportError:
+            return
+        pytest.skip("needs the dist-m4ri sources in bench/external/dist-m4ri (README, external material)")
     shell_tests = (EXTERNAL / "src" / "tests" / "test_run.sh").read_text()
     triples = re.findall(r'"\^([0-9]+ [0-9]+ [0-9]+)\$"', shell_tests)
     assert len(set(triples)) >= 3

@@ -90,8 +90,8 @@ Published circuits and codes are built by the modules in `papers/`, for example:
 | circuits of Bravyi et al.'s public code | `papers/bravyi_repo_circuit.py`, `papers/bravyi_repo_check.py` | `results/failfast` |
 | replay of every circuit witness | `bench/replay_witnesses.py` | `results/bench_replay` |
 
-[results/README.md](results/README.md) lists every folder of records. The figures also read third-party files that
-are not included (below), from the prior benchmark's result sheets and the mitten authors' repository.
+[results/README.md](results/README.md) lists every folder of records. The figures and the benchmark tables also read
+third-party files that are not included (below): the prior benchmark's result sheets and the mitten authors' repository.
 
 ## Layout
 
@@ -128,7 +128,7 @@ else runs without them.
 | SSIP's gross-code merges (`papers/ssip_exact.py`, `papers/ssip_gauge_fix.py`) | github.com/CQCL/SSIP, commit `8e4d771` | any folder, given on the command line |
 | circuits of Bravyi et al.'s public code (`papers/bravyi_repo_check.py`) | `decoder_setup.py` of github.com/sbravyi/BivariateBicycleCodes, commit `fa77e33` | any folder, given on the command line |
 | benchmark competitors (`bench/adapters/`) | dist-m4ri 0.9.0 and 0.14.7, CASHWMaxSAT-CorePlus, enMaxCDCL, Qubitserf 0.1.0, OR-Tools; Gurobi (license needed; `gurobipy`, or `gurobi_cl` from `$GUROBI_HOME/bin`) | `bench/external/`, or pass `binary=` to the adapter |
-| comparison with arXiv:2603.22532 (`bench/export_wjh.py`, `bench/wjh_compare.py`) and the figures | github.com/m-webster/codeDistancePYPI, commit `a4afe9c` (MIT license): its circuits, code constructions and result sheets | `papers/downloads/codedistance/` |
+| comparison with arXiv:2603.22532 (`bench/export_wjh.py`, `bench/wjh_compare.py`), the benchmark tables and the figures | github.com/m-webster/codeDistancePYPI, commit `a4afe9c` (MIT license): its circuits, code constructions and result sheets | `papers/downloads/codedistance/` |
 | new hyperbolic tilings (`papers/hyperbolic_lins.g`) | GAP 4.15 with the LINS package; the lists used for the reported results are in `results/papers4/hyperbolic/` | |
 
 Not included because they are regenerated on demand: the exported benchmark matrices (`python bench/export_all.py`

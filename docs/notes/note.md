@@ -8,7 +8,7 @@ evaluators, section 3.6; 14 instances added to the benchmark; dist-m4ri with its
 is evaluated by a weight-bounded search with certified relaxations (collapse, lift, meet in the middle,
 bound) and by two Rank DP evaluators of the same functions. Full tables are in
 [BENCHMARK.md](../BENCHMARK.md) and [PAPERS.md](PAPERS.md); the figures here are drawn from the result
-records by `docs/notes/make_figures.py`.
+records by `docs/make_figures.py`.
 
 ## 1. Summary
 

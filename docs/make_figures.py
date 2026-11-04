@@ -1,8 +1,8 @@
-"""Figures of docs/notes/note.md, drawn from the result records (nothing is typed in by hand except the
+"""Figures of docs/notes/note.md (and the palette and loaders of docs/make_ncs_figures.py), drawn from the result records (nothing is typed in by hand except the
 sizes of the BB288 problem in figure 1, which are in README.md).
 
-Usage: .venv/bin/python docs/notes/make_figures.py                 writes docs/notes/figs/*.png
-       .venv/bin/python docs/notes/make_figures.py --paper DIR     writes DIR/figs/*.pdf instead (vector, white background)
+Usage: .venv/bin/python docs/make_figures.py                 writes docs/notes/figs/*.png
+       .venv/bin/python docs/make_figures.py --paper DIR     writes DIR/figs/*.pdf instead (vector, white background)
 """
 import json
 import os
@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, PathPatch
 from matplotlib.path import Path as MPath
 
-ROOT = Path(__file__).resolve().parent.parent.parent
-FIGS = Path(__file__).resolve().parent / "figs"
+ROOT = Path(__file__).resolve().parent.parent
+FIGS = Path(__file__).resolve().parent / "notes" / "figs"
 sys.path.insert(0, str(ROOT / "bench"))
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
