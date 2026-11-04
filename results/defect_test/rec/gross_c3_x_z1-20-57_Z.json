@@ -1,0 +1,71 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z1-20-57_Z",
+ "variant": "sector",
+ "rows": 414,
+ "cols": 2241,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 5,
+ "upper_bound": 5,
+ "witness": [
+  21,
+  22,
+  198,
+  212,
+  355
+ ],
+ "witness_ok": true,
+ "seconds": 0.515,
+ "trace": [
+  {
+   "t": 0.084,
+   "lb": 1
+  },
+  {
+   "t": 0.487,
+   "lb": 2
+  },
+  {
+   "t": 0.487,
+   "lb": 3
+  },
+  {
+   "t": 0.489,
+   "lb": 4
+  },
+  {
+   "t": 0.5,
+   "lb": 5
+  },
+  {
+   "t": 0.504,
+   "ub": 5
+  }
+ ],
+ "peak_rss_mb": 196.3,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 53, \"decision\": \"search\", \"estimate_seconds\": 0.119, \"fits\": false, \"peak_bits\": 53, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2241, \"cut_rank\": 102, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.024, \"fits\": false, \"peak_bits\": 102, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 69, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00039505958557128906, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004930496215820312, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0013191699981689453, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.010963916778564453, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 0.003253936767578125, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 41, \"rows\": 414, \"runs\": [{\"K\": 5, \"best\": 5, \"nsol_recorded\": 1, \"seconds\": 6.127357482910156e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

@@ -127,7 +127,8 @@ def trivial_triples(p: Problem):
 def enumerate_solutions(p: Problem, K, k_table=3, rank=None, anchors=None, colmaps=None, sol_cap=2_000_000,
                         cover=False):
     """Every zero-syndrome, nonzero-logical column set of size <= K, provided
-    K <= d + 3 where d >= 4 is the distance of p.
+    K <= d + 3 and K < 2d, where d is the distance of p (for d >= 4 the first
+    condition implies the second).
 
     The search (without pair exclusions) yields every solution that has no
     proper zero-syndrome subset.  A solution with such a subset splits into two
@@ -157,9 +158,10 @@ def enumerate_solutions(p: Problem, K, k_table=3, rank=None, anchors=None, colma
     if sols:
         d = min(len(s) for s in sols)
         stats["distance"] = d
-        assert K <= d + 3, "enumeration is only complete up to d + 3"
+        # below 2d no two minimum solutions combine, and below d + 3 no minimum solution and trivial triple; d >= 4
+        # makes d + 3 the binding limit
+        assert K <= d + 3 and K < 2 * d, "enumeration is only complete up to min(d + 3, 2d - 1)"
         if K == d + 3:
-            assert d >= 4
             triples = trivial_triples(p)
             stats["trivial_triples"] = len(triples)
             before = len(sols)

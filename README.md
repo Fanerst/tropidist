@@ -1,4 +1,4 @@
-# Certified circuit distances of quantum memory circuits
+# tropidist: certified code and circuit distances
 
 The circuit distance of a quantum memory is the smallest number of faults that no detector sees and
 that flips a logical observable. This repository computes it exactly, as an interval that closes: a

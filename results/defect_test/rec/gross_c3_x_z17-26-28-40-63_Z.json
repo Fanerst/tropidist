@@ -1,0 +1,91 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z17-26-28-40-63_Z",
+ "variant": "sector",
+ "rows": 402,
+ "cols": 2199,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 9,
+ "upper_bound": 9,
+ "witness": [
+  638,
+  645,
+  652,
+  656,
+  764,
+  767,
+  796,
+  807,
+  896
+ ],
+ "witness_ok": true,
+ "seconds": 6.377,
+ "trace": [
+  {
+   "t": 0.09,
+   "lb": 1
+  },
+  {
+   "t": 0.518,
+   "lb": 2
+  },
+  {
+   "t": 0.519,
+   "lb": 3
+  },
+  {
+   "t": 0.521,
+   "lb": 4
+  },
+  {
+   "t": 0.534,
+   "lb": 5
+  },
+  {
+   "t": 0.584,
+   "lb": 6
+  },
+  {
+   "t": 0.819,
+   "lb": 7
+  },
+  {
+   "t": 1.021,
+   "lb": 8
+  },
+  {
+   "t": 1.836,
+   "lb": 9
+  },
+  {
+   "t": 6.364,
+   "ub": 9
+  }
+ ],
+ "peak_rss_mb": 201.8,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 54, \"decision\": \"search\", \"estimate_seconds\": 0.132, \"fits\": false, \"peak_bits\": 54, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2199, \"cut_rank\": 101, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.022, \"fits\": false, \"peak_bits\": 101, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 360, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 67, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00046896934509277344, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005459785461425781, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001583099365234375, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.013630151748657227, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.049292802810668945, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.23517584800720215, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.20142292976379395, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8152902126312256, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.329927921295166, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 360, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 383, \"seconds\": 3.9811289310455322, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002129077911376953, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018525123596191406, \"status\": \"exhausted\"}]}, \"orbit_lift_0_10\": {\"cols\": 62, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.392333984375e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_11\": {\"cols\": 66, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011920928955078125, \"status\": \"exhausted\"}]}, \"orbit_lift_0_12\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018978118896484375, \"status\": \"exhausted\"}]}, \"orbit_lift_0_13\": {\"cols\": 67, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.0001418590545654297, \"status\": \"found\"}]}, \"orbit_lift_0_2\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00014781951904296875, \"status\": \"exhausted\"}]}, \"orbit_lift_0_3\": {\"cols\": 66, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.322166442871094e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_4\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018787384033203125, \"status\": \"exhausted\"}]}, \"orbit_lift_0_5\": {\"cols\": 69, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.584426879882812e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_6\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018310546875, \"status\": \"exhausted\"}]}, \"orbit_lift_0_7\": {\"cols\": 62, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.177757263183594e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_8\": {\"cols\": 69, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.298324584960938e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_9\": {\"cols\": 69, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.274482727050781e-05, \"status\": \"exhausted\"}]}, \"quick_lift_0\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00022125244140625, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 0, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.814697265625e-05, \"status\": \"exhausted\"}]}, \"window_t1_at_d_coll\": {\"cols\": 144, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004386186599731445, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

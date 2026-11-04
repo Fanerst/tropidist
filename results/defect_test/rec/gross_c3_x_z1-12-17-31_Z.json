@@ -1,0 +1,91 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z1-12-17-31_Z",
+ "variant": "sector",
+ "rows": 408,
+ "cols": 2220,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 9,
+ "upper_bound": 9,
+ "witness": [
+  644,
+  658,
+  694,
+  768,
+  771,
+  793,
+  803,
+  884,
+  1376
+ ],
+ "witness_ok": true,
+ "seconds": 5.783,
+ "trace": [
+  {
+   "t": 0.085,
+   "lb": 1
+  },
+  {
+   "t": 0.507,
+   "lb": 2
+  },
+  {
+   "t": 0.508,
+   "lb": 3
+  },
+  {
+   "t": 0.509,
+   "lb": 4
+  },
+  {
+   "t": 0.521,
+   "lb": 5
+  },
+  {
+   "t": 0.564,
+   "lb": 6
+  },
+  {
+   "t": 0.765,
+   "lb": 7
+  },
+  {
+   "t": 0.942,
+   "lb": 8
+  },
+  {
+   "t": 1.674,
+   "lb": 9
+  },
+  {
+   "t": 5.77,
+   "ub": 9
+  }
+ ],
+ "peak_rss_mb": 201.6,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 54, \"decision\": \"search\", \"estimate_seconds\": 0.125, \"fits\": false, \"peak_bits\": 54, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2220, \"cut_rank\": 102, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.023, \"fits\": false, \"peak_bits\": 102, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 360, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 68, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004260540008544922, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005128383636474609, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.001544952392578125, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01191091537475586, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.04252910614013672, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.201552152633667, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.17668390274047852, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.7314541339874268, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.3076021671295166, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 360, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 400, \"seconds\": 3.575566053390503, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 69, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011706352233886719, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016117095947265625, \"status\": \"exhausted\"}]}, \"orbit_lift_0_2\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.00011181831359863281, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016617774963378906, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 0, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.2901763916015625e-05, \"status\": \"exhausted\"}]}, \"window_t1_at_d_coll\": {\"cols\": 144, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.003940105438232422, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

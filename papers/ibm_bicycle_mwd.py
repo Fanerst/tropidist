@@ -14,7 +14,9 @@ weight at most 2w, and the sets of weight <= 12 give every failing configuration
 
 Each configuration contributes P(C) = prod_{j in C} p_j, the probability that its mechanisms occur whatever else
 occurs; configurations of weight 6 from weight-10 and weight-11 sets are counted once, the halves of weight-12 sets
-(about 10^8) without that check, and overlaps of configurations enter at weight 7 and above.  A half that contains a
+(about 10^8) without that check.  Here the weight-5 configurations are counted once per split, so one that is the failing
+half of two sets counts twice, and two that share four mechanisms overlap at weight 6; papers/ibm_bicycle_matched_mwd.py,
+which gives the paper's rates, counts each once and subtracts that overlap.  A half that contains a
 reducible pair (two mechanisms whose joint effect is that of one mechanism of the model) has a lighter explanation in
 its own class; the decoder then fails on the other half, which lies in a weight-11 set and is counted there, so such
 splits of weight-12 sets are left out.  The remaining exceptions (a configuration of a weight-11 set whose own class

@@ -429,7 +429,7 @@ def ablation_rows():
             ("without time collapse", count(abl, "ours, collapse off")),
             ("without symmetry", count(abl, "ours, symmetry off")),
             ("without the two Rank DPs", count(abl, "ours, search only")),
-            ("plain search (all switched off)", count(abl, "ours, symmetry off cover off collapse off lift off window off")),
+            ("all switched off but the Rank DPs", count(abl, "ours, symmetry off cover off collapse off lift off window off")),
             ("dist-m4ri, without its model bound", dm)]
     return rows, len(circ)
 
@@ -598,8 +598,8 @@ CIRC_GROUPS = ["Mitten codes", "Mitten codes (repository)", "IBM bivariate bicyc
 CODE_GROUPS = ["Tile codes", "Nearest-neighbor planar codes", "Multivariate multicycle codes", "Mitten codes (repository)",
                "Weight-8 bivariate bicycle codes", "Modular hyperbolic codes", "IBM bivariate bicycle codes",
                "Balanced-product codes"]
-VERDICT_COLOR = {"too_high": ORANGE, "settled": BLUE, "confirmed": GRAY, "open": GRAY}
-VERDICT_ORDER = {"too_high": 0, "settled": 1, "open": 2, "confirmed": 3}
+VERDICT_COLOR = {"too_high": ORANGE, "settled": BLUE, "confirmed": GRAY, "open": GRAY, "not_counted": GRAY}
+VERDICT_ORDER = {"too_high": 0, "settled": 1, "open": 2, "confirmed": 3, "not_counted": 4}
 
 
 def audit_rows():
@@ -618,8 +618,8 @@ def stated_text(r):
     lo, hi, st = int(float(r["pub_lo"])), int(float(r["pub_hi"])), r["stated"]
     if lo != hi:
         return "%d–%d" % (lo, hi)
-    return {"bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d", "conjecture": "%d?",
-            "lower_bound": "≥%d", "claim": "%d"}.get(st, "%d") % hi
+    return {"bound": "≤%d", "estimated_bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d",
+            "conjecture": "%d?", "lower_bound": "≥%d", "claim": "%d"}.get(st, "%d") % hi
 
 
 def hook_example():
@@ -659,8 +659,8 @@ def code_distance(s):
 
 
 def signed(stated, v):
-    return {"bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d", "lower_bound": "≥%d",
-            "conjecture": "%d?"}.get(stated, "%d") % v
+    return {"bound": "≤%d", "estimated_bound": "≤%d", "best_known": "≤%d", "estimate": "≈%d", "expected": "≈%d", "randomized": "≈%d",
+            "lower_bound": "≥%d", "conjecture": "%d?"}.get(stated, "%d") % v
 
 
 def closed(*records):
@@ -780,39 +780,18 @@ def fig_audit():
     settled_rows = [k for k, r in rows.items() if r["verdict"] == "settled" and r["paper"] != "Modular hyperbolic codes"]
     used = []
 
-    W, H = 183, 149
-    fig, ax = canvas(W, H)
-    top = H - 1.0
-
-    # legend, in two lines across the top
-    ly, ly2 = top - 1.5, top - 4.7
-    x = 1.5
-    ax.scatter([x + 0.8], [ly], s=11, facecolors=WHITE, edgecolors=INK2, linewidths=0.6)
-    txt(ax, x + 2.2, ly, "published value", 5.4)
-    ax.plot([x + 21.0, x + 25.0], [ly, ly], color=GRAY_LIGHT, lw=2.0, solid_capstyle="round")
-    txt(ax, x + 26.4, ly, "published range", 5.4)
-    ax.scatter([x + 46.0], [ly], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4)
-    txt(ax, x + 47.4, ly, "certified value", 5.4)
-    ax.plot([x + 66.0, x + 70.0], [ly, ly], color=BLUE, lw=2.0, solid_capstyle="round")
-    txt(ax, x + 71.4, ly, "certified interval, not closed", 5.4)
-    ax.plot([x + 104.0, x + 108.0], [ly, ly], color=ORANGE, lw=0.8)
-    txt(ax, x + 109.4, ly, "gap to the published value", 5.4)
-    ax.plot([x + 0.8, x + 0.8], [ly2 - 1.0, ly2 + 1.0], color=INK, lw=0.7, solid_capstyle="butt")
-    txt(ax, x + 2.2, ly2, "code distance", 5.4)
-    ax.scatter([x + 21.0], [ly2], s=9, marker="D", color=BLUE_LIGHT, edgecolors=WHITE, linewidths=0.3)
-    txt(ax, x + 22.4, ly2, "other valid schedule", 5.4)
-    txt(ax, x + 46.0, ly2, "≤ bound   ≈ estimate   ≥ lower bound   ? conjecture", 5.4)
-
-    y0 = top - 10.5
-    gap, pr = 0.9, 3.0
-    # the right column fixes the height
+    # One row pitch in every panel. The left column holds a (22 rows) and d, Google's surface-code circuits (8 rows); the
+    # right column b (13 rows) and c, Google's color codes (15 rows), with the key under its axis, so the columns end together.
     SUB, SUBGAP = Column.SUB, Column.SUBGAP
-    nb_sub, nb, nc_sub, nc = 2, 13, 3, 23
-    y_end = y0 - 1.3 - (SUB * nb_sub + SUBGAP) - nb * pr - 3.8 - 1.0 - (SUB * nc_sub + SUBGAP * 2) - nc * pr
-    yb = y_end - 0.4
-    nrows_a, nsub_a, ngaps_a = 28, 4, 4
-    pa = (y0 - 1.3 - y_end - (SUB * nsub_a + SUBGAP * (nsub_a - 1)) - ngaps_a * gap) / nrows_a
-    print("pitch left %.2f right %.2f, axis at %.1f" % (pa, pr, yb))
+    p, gap, KEY = 3.0, 0.9, 2.9
+    h_left = 1.3 + (2 * SUB + SUBGAP) + 5 * gap + 22 * p + 3.8 + 1.0 + (2 * SUB + SUBGAP) + 8 * p
+    h_right = 1.3 + (2 * SUB + SUBGAP) + 13 * p + 3.8 + 1.0 + SUB + 15 * p
+    below_axis, key_top = 5.6, 8.0                       # axis labels; first line of the key below the axis
+    W = 183
+    H = round(1.0 + 3.0 + max(h_left + 0.4 + below_axis, h_right + 0.4 + key_top + 4 * KEY + 1.2) + 1.0, 1)
+    fig, ax = canvas(W, H)
+    y0 = H - 4.0
+    print("columns: left %.1f, right %.1f mm; figure height %.1f mm" % (h_left, h_right, H))
 
     # ------------------------------------------------------------------ a: all values published too high
     panel(ax, 1.5, y0, "a", "Published too high")
@@ -825,11 +804,14 @@ def fig_audit():
         assert r["verdict"] == "too_high", (paper, obj)
         used.append((paper, obj))
         s = label or obj.replace(" circuit", "").replace(" code", "")
-        L.row(pa, s, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name,
+        L.row(p, s, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name,
               (tick if not isinstance(tick, bool) else code_distance(obj)) if tick else None)
 
+    # rows not counted (verdict not_counted: a numbering the paper does not print, or no circuit distance printed) are only in
+    # the Supplementary table
     M, MR = "Mitten codes", "Mitten codes (repository)"
-    L.sub("circuit distance, stated as the distance", first=True)
+    # papers in the order of the Results, largest losses first
+    L.sub("circuit distance", first=True)
     too_high(M, "[[200,40,12]] circuit", "Mitten codes")
     too_high(M, "[[300,60,14]] circuit")
     too_high(M, "[[500,100,16]] circuit")
@@ -838,15 +820,6 @@ def fig_audit():
     too_high(M, "[[780,156,22]] circuit")
     too_high(M, "[[975,195,24]] circuit")
     L.y -= gap
-    too_high("Walking Cat", "[[102,22,9]] circuit", "Walking Cat trapped-ion circuits")
-    too_high("Walking Cat", "[[70,6,9]] circuit")
-    too_high("Walking Cat", "[[54,2,10]] circuit")
-    L.sub("circuit distance, implied by a schedule called hook-free")
-    too_high(MR, "[[330,66,12]] circuit", "Mitten codes, repository")
-    too_high(MR, "[[600,120,14]] circuit")
-    too_high(MR, "[[600,120,16]] circuit")
-    too_high(MR, "[[840,168,18]] circuit")
-    L.sub("circuit distance, stated as a bound or estimate")
     too_high("IBM bivariate bicycle codes", "[[288,12,18]] circuit", "Two-gross bicycle code", label="[[288,12,18]], IBM's bound")
     too_high("Distance-finding benchmark", "[[288,12,18]] circuit", label="[[288,12,18]], benchmark's best known", tick=18)
     L.y -= gap
@@ -859,16 +832,30 @@ def fig_audit():
     too_high("Routing codes", "[[200,16,17]] circuit")
     L.y -= gap
     too_high("Shift automorphism circuits", "gross code, dynamic circuit", "Shift-automorphism circuit", label="gross code, dynamic", tick=12)
-    L.sub("code distance, from sampling or an estimate")
+    L.y -= gap
+    too_high("Walking Cat", "[[70,6,9]] circuit", "Walking Cat trapped-ion circuit")
+    L.sub("code distance")
     too_high("Tile codes", "[[512,18]] code", "Tile code", tick=False)
     too_high("Nearest-neighbor planar codes", "[[259,2]] code, X distance", "Nearest-neighbor planar codes", label="[[259,2]], X distance", tick=False)
     too_high("Nearest-neighbor planar codes", "[[537,14]] code, X distance", label="[[537,14]], X distance", tick=False)
     too_high("Multivariate multicycle codes", "[[324,12]] code", "Multivariate multicycle code", tick=False)
     too_high(MR, "[[840,168,18]] code", "Mitten code, repository", tick=False)
     L.close()
-    assert abs(L.y - y_end) < 0.05, (L.y, y_end)
-    L.axis((10, 15, 20, 25, 30, 35), "distance", yb)
     assert sorted(set(used)) == sorted(too_high_rows), set(too_high_rows) - set(used)
+
+    # ------------------------------------------------------------------ d: Google's surface-code circuits, under a
+    yd = L.y - 3.8
+    panel(ax, 1.5, yd, "d", "Google's modular hyperbolic codes: surface-code circuits")
+    L.start(yd - 1.0)
+    L.sub("rebuilt circuits, NZ alternating", first=True)
+    for lab, pub, ex, also in (("[[150,4,10]]", 8, 8, 9), ("[[200,6,10]]", 8, 8, 9), ("[[250,8,10]]", 8, 8, None), ("[[300,10,10]]", 8, 8, None)):
+        L.row(p, lab, pub, pub, ex, ex, "bound", None, 10, also)
+    L.sub("rebuilt circuits, ZZ alternating")
+    for lab, pub, ex, also in (("[[150,4,10]]", 6, 6, 8), ("[[200,6,10]]", 8, 8, None), ("[[250,8,10]]", 6, 6, 8), ("[[300,10,10]]", 6, 6, 8)):
+        L.row(p, lab, pub, pub, ex, ex, "bound", None, 10, also)
+    L.close()
+    assert abs(L.y - (y0 - h_left)) < 0.05, (L.y, y0 - h_left)
+    L.axis((10, 15, 20, 25, 30, 35), "distance", L.y - 0.4)
 
     # ------------------------------------------------------------------ b: left open by other papers
     panel(ax, 103.0, y0, "b", "Left open by other papers: settled or narrowed")
@@ -881,10 +868,10 @@ def fig_audit():
         r = rows[(paper, obj)]
         assert r["verdict"] == "settled" and r["cert_lo"] == r["cert_hi"], (paper, obj)
         done.append((paper, obj))
-        C.row(pr, label, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name, tick)
+        C.row(p, label, float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"], name, tick)
 
     def wjh(label, key, lo, hi, name=None):
-        C.row(pr, label, bk[key], bk[key], lo, hi, "best_known", name)
+        C.row(p, label, bk[key], bk[key], lo, hi, "best_known", name)
 
     def tanner(label, key, x3, name=None):
         wjh(label if x3[1] else label + ", Z distance", key, x3[0], x3[0], name)
@@ -907,26 +894,47 @@ def fig_audit():
     C.close()
     assert sorted(done) == sorted(settled_rows), set(settled_rows) - set(done)
 
-    # ------------------------------------------------------------------ c: everything of Google's paper
-    y1 = C.y - 3.8
-    panel(ax, 103.0, y1, "c", "Google's modular hyperbolic codes")
-    C.start(y1 - 1.0)
+    # ------------------------------------------------------------------ c: Google's color codes, under b
+    yc = C.y - 3.8
+    panel(ax, 103.0, yc, "c", "Google's modular hyperbolic codes: color codes")
+    C.start(yc - 1.0)
     hyp = sorted([r for r in rows.values() if r["paper"] == "Modular hyperbolic codes"], key=lambda r: (float(r["cert_hi"]), float(r["pub_lo"])))
     assert len(hyp) == 15
-    C.sub("code distance of color codes: each range closes at its upper end", first=True)
+    C.sub("code distance", first=True)
     for r in hyp:
-        C.row(pr, r["object"].split(" ")[0], float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"])
-    C.sub("circuit distance of surface codes (rebuilt circuits), NZ alternating")
-    for lab, pub, ex, also in (("[[150,4,10]]", 8, 8, 9), ("[[200,6,10]]", 8, 8, 9), ("[[250,8,10]]", 8, 8, None), ("[[300,10,10]]", 8, 8, None)):
-        C.row(pr, lab, pub, pub, ex, ex, "bound", None, 10, also)
-    C.sub("circuit distance of surface codes (rebuilt circuits), ZZ alternating")
-    for lab, pub, ex, also in (("[[150,4,10]]", 6, 6, 8), ("[[200,6,10]]", 8, 8, None), ("[[250,8,10]]", 6, 6, 8), ("[[300,10,10]]", 6, 6, 8)):
-        C.row(pr, lab, pub, pub, ex, ex, "bound", None, 10, also)
+        C.row(p, r["object"].split(" ")[0], float(r["pub_lo"]), float(r["pub_hi"]), float(r["cert_lo"]), float(r["cert_hi"]), r["stated"])
     C.close()
-    assert abs(C.y - y_end) < 0.05, (C.y, y_end)
-    C.axis((10, 15, 20, 25, 30, 35), "distance", yb)
+    assert abs(C.y - (y0 - h_right)) < 0.05, (C.y, y0 - h_right)
+    ybr = C.y - 0.4
+    C.axis((10, 15, 20, 25, 30, 35), "distance", ybr)
 
-    print("rows a", len(used), "rows b", nb)
+    # key, in two columns under the right column's axis: symbol in a 4 mm slot, text after it
+    def key(x, y, kind, label):
+        if kind == "pub":
+            ax.scatter([x + 2.0], [y], s=11, facecolors=WHITE, edgecolors=INK2, linewidths=0.6)
+        elif kind == "cert":
+            ax.scatter([x + 2.0], [y], s=11, color=BLUE, edgecolors=WHITE, linewidths=0.4)
+        elif kind == "other":
+            ax.scatter([x + 2.0], [y], s=9, marker="D", color=BLUE_LIGHT, edgecolors=WHITE, linewidths=0.3)
+        elif kind == "tick":
+            ax.plot([x + 2.0] * 2, [y - 1.0, y + 1.0], color=INK, lw=0.7, solid_capstyle="butt")
+        elif kind in ("range", "interval"):
+            ax.plot([x, x + 4.0], [y, y], color=GRAY_LIGHT if kind == "range" else BLUE, lw=2.0, solid_capstyle="round")
+        elif kind == "gap":
+            ax.plot([x, x + 4.0], [y, y], color=ORANGE, lw=0.8)
+        txt(ax, x + 5.4 if kind else x, y, label, 5.4)
+
+    k1, k2 = 104.0, 144.0
+    for i, entries in enumerate(((("pub", "published value"), ("range", "published range")),
+                                 (("cert", "certified value"), ("interval", "certified interval, not closed")),
+                                 (("gap", "gap to the published value"), ("tick", "code distance")),
+                                 (("other", "other valid schedule"),),
+                                 ((None, "≤ bound   ≈ estimate   ≥ lower bound   ? conjecture"),))):
+        for kx, (kind, label) in zip((k1, k2), entries):
+            key(kx, ybr - key_top - i * KEY, kind, label)
+    assert ybr - key_top - 4 * KEY > 1.5 and y0 - h_left - 0.4 - below_axis > 0.5
+
+    print("rows a", len(used), "rows b", len(done) + 6)
     save(fig, "ncs_fig3")
 
 
@@ -1331,9 +1339,109 @@ def f4_limit_line():
     return [float(x) for x in ps], [math.log10(sum(10 ** r[x]["log10_lower_bound_per_cycle"] for r in rates)) for x in ps]
 
 
-def f4_limit(fig, ax, top, ybottom):
-    panel(ax, 123.5, top, "b", "Two-gross code: a limit for every decoder")
-    axb = axes_mm(fig, 134.5, ybottom, 46.5, top - 5.5 - ybottom)
+SURGERY_DIR = ROOT / "results" / "surgery"
+# rows of the logical-measurement panel: SSIP scripts (results/surgery/ssip_summary.json) and the size unit of their ancilla figure
+SSIP_ROWS = (("external merges", ["ext_merges"]), ("internal merges", ["int_merges"]), ("single-qubit", ["singleqs"]),
+             ("parallel", ["par_ext_merges", "par_singleqs"]))
+SSIP_UNIT = {"ext_merges": 288, "par_ext_merges": 288, "int_merges": 144, "singleqs": 144, "par_singleqs": 144}
+
+
+def surgery_rows():
+    """Adapter codes and SSIP's gross-code measurements: per row the measurements, how many keep dressed distance 12 at the
+    published depth, the least dressed distance there, and the ancilla qubits at the published and at the dressed depths."""
+    ad = json.load(open(SURGERY_DIR / "adapters.json"))
+    reported = {"BB98_original": 12, "LP200_original": 10, "BB98_Z1": 12, "BB98_Z3": 12, "BB98_Z1Z3_naive": 12, "LP200_Z2": 10,
+                "BB98_intracode_Z1Z3": 12, "BB98_LP200_intercode_Z1Z2": 10}
+    assert set(ad) == set(reported) and all(r["d"] == reported[k] for k, r in ad.items())
+    adapters = {"label": "adapter codes", "n": len(ad), "keep": len(ad), "least": min(r["d"] for r in ad.values()),
+                "anc": None, "codes": ad}
+    summ = json.load(open(SURGERY_DIR / "ssip_summary.json"))
+    rows = []
+    for label, scripts in SSIP_ROWS:
+        n = keep = 0
+        least, a0, a1, complete = 99, 0.0, 0.0, True
+        fixed, prep = 99, True
+        for s in scripts:
+            for f in summ[s]["files"].values():
+                assert f["bare_at_least_12"]
+                n += f["measurements"]
+                keep += f["measurements"] - f["dressed_below_12_at_ssip_depth"]
+                least = min(least, f["least_dressed_at_ssip_depth"])
+                # gauge logicals of the other basis fixed (by the preparation of the new qubits, papers/ssip_gauge_fix.py)
+                fixed = min(fixed, f["least_gauge_fixed_at_ssip_depth"])
+                prep = prep and f.get("fixed_by_preparation") == f["measurements"]
+                if "size_sum_dressed" in f:
+                    a0 += f["size_sum_ssip"] * SSIP_UNIT[s]
+                    a1 += f["size_sum_dressed"] * SSIP_UNIT[s]
+                else:
+                    complete = False
+        rows.append({"label": label, "n": n, "keep": keep, "least": least, "fixed": fixed, "prep": prep,
+                     "anc": (round(a0), round(a1)) if complete else None})
+    return adapters, rows
+
+
+def f4_surgery(ax, top, ybottom):
+    """Panel b: do the codes of published logical measurements keep the distance?  Adapter codes certified as published;
+    SSIP's merged gross-code blocks keep 12 with the gauge logicals of the other basis fixed, as the preparation of the
+    new qubits does, and fall below 12 with the gauge qubits free (the dressed distance of its Appendix A)."""
+    panel(ax, 123.5, top, "b", "Logical measurements: certified merged codes")
+    adapters, rows = surgery_rows()
+    assert all(r["prep"] and r["fixed"] >= 12 for r in rows)
+    x0, x1 = 146.0, 162.0
+    xl, xa, xf = 165.6, 174.6, 180.4               # columns: least and ancilla with the gauge free, distance with it fixed
+    ly = top - 5.0
+    for x, c, lab in ((126.0, BLUE, "distance kept"), (146.0, ORANGE, "distance below 12")):
+        ax.add_patch(Rectangle((x, ly - 1.0), 2.4, 2.0, facecolor=c, edgecolor="none", zorder=3))
+        txt(ax, x + 3.1, ly, lab, 4.8)
+    hy = ly - 5.2
+    txt(ax, (x0 + x1) / 2, hy + 2.1, "gauge qubits free", 4.5, MUTED, ha="center", fontweight="bold")
+    ax.plot([x0, xa + 0.4], [hy + 1.0, hy + 1.0], color=MUTED, lw=0.4)
+    txt(ax, xf, hy + 2.1, "gauge", 4.5, MUTED, ha="center", fontweight="bold")
+    txt(ax, xl, hy - 0.4, "least", 4.5, MUTED, ha="center", fontweight="bold")
+    txt(ax, xa, hy - 0.4, "ancilla", 4.5, MUTED, ha="right", fontweight="bold")
+    txt(ax, xf, hy - 0.4, "fixed", 4.5, MUTED, ha="center", fontweight="bold")
+    pitch, hbar = 5.0, 3.1
+    y = hy - 1.8
+
+    def row(lab, sub, r, right2, least=None, fixed=""):
+        nonlocal y
+        ym = y - pitch / 2
+        txt(ax, x0 - 1.4, ym + 0.75, lab, 5.0, INK, ha="right")
+        txt(ax, x0 - 1.4, ym - 1.35, sub, 4.3, MUTED, ha="right")
+        wk = (x1 - x0) * r["keep"] / r["n"]
+        if r["keep"]:
+            ax.add_patch(Rectangle((x0, ym - hbar / 2), max(wk - 0.25, 0.2), hbar, facecolor=BLUE, edgecolor="none", zorder=3))
+            if wk > 4.0:
+                txt(ax, x0 + wk / 2, ym - 0.05, str(r["keep"]), 4.6, WHITE, ha="center", zorder=4)
+        if r["keep"] < r["n"]:
+            ax.add_patch(Rectangle((x0 + wk, ym - hbar / 2), x1 - x0 - wk, hbar, facecolor=ORANGE, edgecolor="none", zorder=3))
+            if x1 - x0 - wk > 4.0:
+                txt(ax, x0 + wk + (x1 - x0 - wk) / 2, ym - 0.05, str(r["n"] - r["keep"]), 4.6, WHITE, ha="center", zorder=4)
+        if least is None:
+            txt(ax, xl, ym, str(r["least"]), 5.0, ORANGE if r["least"] < 12 else BLUE, ha="center", fontweight="bold")
+        else:
+            txt(ax, xl, ym, least, 4.8, BLUE, ha="center", fontweight="bold")
+        txt(ax, xa, ym, right2, 4.6, INK2, ha="right")
+        txt(ax, xf, ym, fixed, 5.0, BLUE, ha="center", fontweight="bold")
+        y -= pitch
+
+    ds = sorted({c["d"] for c in adapters["codes"].values()})
+    n_orig = sum(k.endswith("_original") for k in adapters["codes"])
+    row("adapter codes", "%d merged + %d original" % (adapters["n"] - n_orig, n_orig), adapters, "", "%d–%d" % (ds[0], ds[-1]))
+    txt(ax, x0 - 1.4, y - 1.2, "SSIP, gross-code surgery", 4.6, INK2, ha="right", fontweight="bold")
+    y -= 2.2
+    for r in rows:
+        anc = "×%.1f" % (r["anc"][1] / r["anc"][0]) if r["anc"] else "–"
+        row(r["label"], "%d measurements" % r["n"], r, anc, fixed=str(r["fixed"]))
+    yn = y - 2.1
+    assert yn - 2.2 > ybottom - 2.0, "notes run into the panel below"
+    txt(ax, 125.0, yn, "gauge fixed by preparing the new qubits", 4.5, MUTED, ha="left")
+    txt(ax, 125.0, yn - 2.2, "bare distance 12 in all, as SSIP reports", 4.5, MUTED, ha="left")
+
+
+def limit_axes(fig, x, y, w, h):
+    """The two-gross limit plot (formerly Fig. 4b, now a supplementary figure) on axes at (x, y, w, h) mm."""
+    axb = axes_mm(fig, x, y, w, h)
     fit = json.load(open(MATCHED_DIR / "fit_tour_de_gross.json"))
     ps, vals = f4_limit_line()
     keep = [k for k, p in enumerate(ps) if 4e-5 <= p <= 1.4e-3]
@@ -1369,6 +1477,70 @@ def f4_limit(fig, ax, top, ybottom):
     axb.set_xlabel("physical error rate p")
     axb.set_ylabel("logical error rate per cycle")
     tidy(axb)
+
+
+ADAPTER_NAMES = {"BB98_original": r"bivariate bicycle \qc{98,6,12}", "LP200_original": r"lifted product \qc{200,20,10}",
+                 "BB98_Z1": r"BB, auxiliary graph for $\bar Z_1$", "BB98_Z3": r"BB, auxiliary graph for $\bar Z_3$",
+                 "BB98_Z1Z3_naive": r"BB, joint $\bar Z_1\bar Z_3$, naive", "LP200_Z2": r"LP, auxiliary graph for $\bar Z_2$",
+                 "BB98_intracode_Z1Z3": r"BB, intracode adapter, $\bar Z_1\bar Z_3$",
+                 "BB98_LP200_intercode_Z1Z2": r"BB and LP, intercode adapter, $\bar Z_1\bar Z_2$"}
+SSIP_NAMES = {"ext_merges": "external merges", "int_merges": "internal merges", "singleqs": "single-qubit measurements",
+              "par_ext_merges": "parallel external merges", "par_singleqs": "parallel single-qubit measurements"}
+
+
+def surgery_tables(out):
+    """Supplementary tables of the logical-measurement codes and the macros \\surg* and \\ssip* for the text
+    (results/surgery/adapters.json, results/surgery/ssip_summary.json)."""
+    adapters, rows = surgery_rows()
+    head = "% generated by docs/make_ncs_figures.py from results/surgery; do not edit\n"
+    lines = [r"\begin{tabular}{@{}lrrcc@{}}", r"\toprule", r"code & $n$ & $k$ & $d_X$ & $d_Z$ \\", r"\midrule"]
+    for key, name in ADAPTER_NAMES.items():
+        r = adapters["codes"][key]
+        lines.append(r"%s & %d & %d & %d & %d \\" % (name, r["n"], r["k"], r["d_X"]["distance"], r["d_Z"]["distance"]))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_surgery_adapters_table.tex").write_text(head + "\n".join(lines) + "\n")
+    summ = json.load(open(SURGERY_DIR / "ssip_summary.json"))
+    lines = [r"\begin{tabular}{@{}llrcrrrrr@{}}", r"\toprule",
+             r" & & & published & \multicolumn{2}{c}{dressed at published depth} & deeper & ancilla qubits & gauge \\",
+             r"measurement & basis & number & depths & below 12 & least & with dressed & published $\to$ dressed & fixed \\",
+             r"\midrule"]
+    for s, name in SSIP_NAMES.items():
+        for fname, f in summ[s]["files"].items():
+            basis = "X" if "_X_" in fname else "Z"
+            depths = sorted({x["r_ssip"] for x in f["rows"]})
+            dep = "%d" % depths[0] if len(depths) == 1 else "%d--%d" % (depths[0], depths[-1])
+            if "size_sum_dressed" in f:
+                deeper = str(f["deeper_with_dressed"])
+                anc = r"{:,} $\to$ {:,}".format(round(f["size_sum_ssip"] * SSIP_UNIT[s]), round(f["size_sum_dressed"] * SSIP_UNIT[s]))
+            else:
+                deeper, anc = "--", r"{:,} $\to$ --".format(round(sum(x["size_ssip"] for x in f["rows"]) * SSIP_UNIT[s]))
+            assert f["fixed_by_preparation"] == f["measurements"]
+            lines.append(r"%s & $%s$ & %d & %s & %d & %d & %s & %s & %d \\" % (name, basis, f["measurements"], dep,
+                                                                              f["dressed_below_12_at_ssip_depth"],
+                                                                              f["least_dressed_at_ssip_depth"], deeper, anc,
+                                                                              f["least_gauge_fixed_at_ssip_depth"]))
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (out / "si_surgery_ssip_table.tex").write_text(head + "\n".join(lines) + "\n")
+    n = sum(r["n"] for r in rows)
+    below = sum(r["n"] - r["keep"] for r in rows)
+    comp = [r for r in rows if r["anc"]]
+    assert len(comp) == len(rows), "the paper gives the ancilla qubits in total, over all measurements"
+    assert all(r["prep"] and r["fixed"] >= 12 for r in rows), "the paper says every merged code keeps 12 with the gauge fixed"
+    a0, a1 = sum(r["anc"][0] for r in comp), sum(r["anc"][1] for r in comp)
+    macros = {"surgAdapters": adapters["n"], "ssipN": n, "ssipBelow": below, "ssipLeast": min(r["least"] for r in rows),
+              "ssipAncFrom": "{:,}".format(a0), "ssipAncTo": "{:,}".format(a1), "ssipAncN": sum(r["n"] for r in comp)}
+    (out / "si_surgery_numbers.tex").write_text(head + "".join(r"\newcommand{\%s}{%s}" % (k, v) + "\n" for k, v in macros.items()))
+    print("surgery: adapters %d; SSIP %d measurements, %d with dressed distance below 12, least %d; ancilla %d -> %d over %d" % (
+        adapters["n"], n, below, macros["ssipLeast"], a0, a1, macros["ssipAncN"]))
+
+
+def fig_limit_si():
+    """Supplementary figure: the decoder-independent limit on the two-gross code's logical error rate against the published
+    extrapolation (results/bb288_scan/limit, results/ibm_matched/fit_tour_de_gross.json)."""
+    W, H = 92, 62
+    fig, ax = canvas(W, H)
+    limit_axes(fig, 14.0, 10.0, 75.0, 49.0)
+    save(fig, "si_limit")
 
 
 def f4_chips(ax, top, tab, n, res, best8):
@@ -1453,8 +1625,8 @@ def f4_yields(ax, top, res):
 
 
 def fig_design_ibm():
-    """Figure 4: the schedule sets the circuit distance (a); on the two-gross code a new schedule reaches the code distance, and even there every
-    decoder has a limit (b); on the gross code, each chip with dead checks is a new circuit, certified chip by chip (c, d)."""
+    """Figure 4: the schedule sets the circuit distance (a); the merged codes of published logical measurements, certified (b); on the gross
+    code, each chip with dead checks is a new circuit, certified chip by chip (c, d)."""
     sys.path[:0] = [str(ROOT / "papers"), str(ROOT / "results" / "defect_study")]
     import chip_shares as CS
     tab, n, res = CS.main()
@@ -1462,7 +1634,7 @@ def fig_design_ibm():
     fig, ax = canvas(W, H)
     top = H - 3.8
     ybot = f4_schedules(ax, top)
-    f4_limit(fig, ax, top, ybot + 3.3)
+    f4_surgery(ax, top, ybot + 3.3)
     top2 = ybot - 5.5
     f4_chips(ax, top2, tab, n, res, CS.BEST8)
     f4_yields(ax, top2, res)
@@ -1484,7 +1656,7 @@ def fig_ablation_si():
             ("without symmetry", count(abl, "ours, symmetry off")),
             ("without time collapse", count(abl, "ours, collapse off")),
             ("no collapse, lifting or windows", count(abl, "ours, collapse off lift off window off")),
-            ("plain search (also no symmetry or covering bound)", count(abl, "ours, symmetry off cover off collapse off lift off window off"))]
+            ("also no symmetry or covering bound (Rank DPs kept)", count(abl, "ours, symmetry off cover off collapse off lift off window off"))]
     W, pitch = 140.0, 4.4
     H = pitch * len(rows) + 13.0
     fig, ax = canvas(W, H)
@@ -1587,11 +1759,11 @@ def ibm_table(path):
         for k, b in enumerate(x for x in "ZX" if x in e["bases"]):
             r = e["bases"][b]
             rate = lambda p, f: r["rates"][str(p)].get(f)
-            used = "%d" % r["n_minimum_fault_sets"] if r["source"] == "all minimum fault sets" else \
-                r"%d\textsuperscript{a}" % r["n_minimum_fault_sets"]
+            used = "{:,}".format(r["n_minimum_fault_sets"]) if r["source"] == "all minimum fault sets" else \
+                "{:,}".format(r["n_minimum_fault_sets"]) + r"\textsuperscript{a}"
             ref = [e10(ibm[e["code"]][p]) if k == 0 and e["schedule"] == "standard" else "" for p in (1e-4, 1e-3)]
             out.append(" & ".join([name[e["code"]] + ", " + sched if k == 0 else "", "$%s$" % b,
-                                   "%d" % r.get("distance", e["distance"]), used, "%d" % r["n_family"],
+                                   "%d" % r.get("distance", e["distance"]), used, "{:,}".format(r["n_family"]),
                                    e10(rate(1e-4, "log10_lower_bound")), e10(rate(1e-3, "log10_lower_bound"))]
                                   + ref) + r" \\")
         out.append(r"\addlinespace[2pt]")
@@ -1666,7 +1838,7 @@ def ibm_sim_table(path):
 
     def cell(r, e):
         x = r["rate"] / 10 ** e
-        return (r"%.2f (%d)" if x < 10 else r"%.1f (%d)") % (x, r["failures"])
+        return ("%.2f" if x < 10 else "%.1f") % x + " ({:,})".format(r["failures"])
 
     out = [r"\begin{tabular}{@{}lccccccc@{}}", r"\toprule",
            r" & & \multicolumn{2}{c}{standard} & \multicolumn{2}{c}{best of 8 timesteps} & \multicolumn{2}{c}{best of 9 timesteps} \\",
@@ -1686,9 +1858,9 @@ def ibm_sim_table(path):
 def audit_table(path):
     """Supplementary table of every audited value (docs/audit_items.csv) as a LaTeX longtable, in the order of
     figure 3."""
-    stated = {"claim": "stated as the distance", "implied": "implied by the name hook-free", "bound": "upper bound", "best_known": "best known value",
-              "estimate": "estimate", "randomized": "randomized search", "expected": "expected", "conjecture": "conjecture", "range": "range",
-              "open": "open", "lower_bound": "lower bound"}
+    stated = {"claim": "stated as the distance", "bound": "upper bound", "estimated_bound": "estimated upper bound",
+              "best_known": "best known value", "estimate": "estimate", "randomized": "randomized search", "expected": "expected",
+              "conjecture": "conjecture", "range": "range", "open": "open", "lower_bound": "lower bound"}
     rows = audit_rows()
 
     def tex(x):
@@ -1698,9 +1870,12 @@ def audit_table(path):
            r">{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{1.35cm}c"
            r">{\raggedright\arraybackslash}p{4.1cm}@{}}",
            r"\caption{Every audited value of \cref{sec:audit}, by paper. Published: the value "
-           r"and how the paper states it. Certified: the exact value (bold where it differs from the published one), or the "
-           r"interval between the proved lower bound and the lightest error found. Prov.: A, the authors' circuit or data "
-           r"files; R, rebuilt from the paper's text and checked against values it reports as exact.}\label{tab:audit}\\",
+           r"and how the paper states it. Certified: the exact value (bold where it corrects the published value or settles one "
+           r"left open), or the "
+           r"interval between the proved lower bound and the lightest error found. Values whose note begins with "
+           r"``not counted'' are listed but not counted as too high (\cref{subsec:audit-protocol}). Prov.: A, the authors' circuit or data "
+           r"files; P, public circuit files of the paper's schedule from another source; R, rebuilt from the paper's text "
+           r"and checked against values it reports as exact.}\label{tab:audit}\\",
            r"\toprule paper & object & published (how stated) & certified & prov. & note \\ \midrule \endfirsthead",
            r"\toprule paper & object & published (how stated) & certified & prov. & note \\ \midrule \endhead",
            r"\bottomrule \endlastfoot"]
@@ -1712,15 +1887,18 @@ def audit_table(path):
                          key=lambda r: VERDICT_ORDER[r["verdict"]])
             for k, r in enumerate(sel):
                 lo, hi = int(float(r["pub_lo"])), int(float(r["pub_hi"]))
-                pub = ("%d--%d" % (lo, hi) if lo != hi else {"bound": "$\\le$%d", "best_known": "$\\le$%d",
+                pub = ("%d--%d" % (lo, hi) if lo != hi else {"bound": "$\\le$%d", "estimated_bound": "$\\le$%d", "best_known": "$\\le$%d",
                                                             "lower_bound": "$\\ge$%d"}.get(r["stated"], "%d") % hi)
+                if r["stated"] == "hook_free":          # no circuit distance printed (pub_lo, pub_hi hold the code distance)
+                    how = "none (schedule called hook-free)"
+                else:
+                    how = "%s (%s)" % (pub, stated[r["stated"]])
                 clo, chi = int(float(r["cert_lo"])), int(float(r["cert_hi"]))
                 cert = "%d" % clo if clo == chi else "%d--%d" % (clo, chi)
                 if r["verdict"] in ("too_high", "settled") and clo == chi:
                     cert = r"\textbf{%s}" % cert
                 paper = (tex(g) + r"~\cite{%s}" % refs[g]) if k == 0 else ""
-                out.append(" & ".join([paper, tex(r["object"]), "%s (%s)" % (pub, stated[r["stated"]]), cert, r["prov"],
-                                       tex(r["note"])]) + r" \\")
+                out.append(" & ".join([paper, tex(r["object"]), how, cert, r["prov"], tex(r["note"])]) + r" \\")
             out.append(r"\addlinespace[2pt]")
         if kind == "circuit":
             out.append(r"\midrule")
@@ -1912,12 +2090,13 @@ def extended_table(path):
 if __name__ == "__main__":
     OUT = Path(sys.argv[1]).resolve()
     OUT.mkdir(parents=True, exist_ok=True)
-    which = sys.argv[2:] or ["1", "2", "3", "4", "hook", "design", "ablation", "hyperbolic", "table"]
+    which = sys.argv[2:] or ["1", "2", "3", "4", "hook", "design", "ablation", "hyperbolic", "limit", "table"]
     for k in which:
         if k == "table":
             audit_table(OUT / "si_audit_table.tex")
             scan_tables(OUT)
             chips_tables(OUT)
+            surgery_tables(OUT)
             extended_table(OUT / "si_extended_table.tex")
             sdbb_table(OUT / "si_sdbb_table.tex")
             if (IBM_DIR / "curves.json").exists():
@@ -1929,4 +2108,5 @@ if __name__ == "__main__":
             if (MATCHED_DIR / "sim_gross_c10.jsonl").exists():
                 ibm_sim_table(OUT / "si_ibm_sim_table.tex")
             continue
-        {"1": fig_schematic, "2": fig_capability, "3": fig_audit, "4": fig_design_ibm, "hook": fig_hook, "design": fig_design_si, "ablation": fig_ablation_si, "hyperbolic": fig_hyperbolic_si}[k]()
+        {"1": fig_schematic, "2": fig_capability, "3": fig_audit, "4": fig_design_ibm, "hook": fig_hook, "design": fig_design_si, "ablation": fig_ablation_si, "hyperbolic": fig_hyperbolic_si,
+         "limit": fig_limit_si}[k]()

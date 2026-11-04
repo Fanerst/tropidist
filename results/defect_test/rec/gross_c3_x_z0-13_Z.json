@@ -1,0 +1,91 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z0-13_Z",
+ "variant": "sector",
+ "rows": 420,
+ "cols": 2262,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 9,
+ "upper_bound": 9,
+ "witness": [
+  1,
+  6,
+  21,
+  183,
+  638,
+  671,
+  706,
+  716,
+  827
+ ],
+ "witness_ok": true,
+ "seconds": 5.224,
+ "trace": [
+  {
+   "t": 0.082,
+   "lb": 1
+  },
+  {
+   "t": 0.494,
+   "lb": 2
+  },
+  {
+   "t": 0.495,
+   "lb": 3
+  },
+  {
+   "t": 0.496,
+   "lb": 4
+  },
+  {
+   "t": 0.507,
+   "lb": 5
+  },
+  {
+   "t": 0.542,
+   "lb": 6
+  },
+  {
+   "t": 0.706,
+   "lb": 7
+  },
+  {
+   "t": 0.856,
+   "lb": 8
+  },
+  {
+   "t": 1.498,
+   "lb": 9
+  },
+  {
+   "t": 5.208,
+   "ub": 9
+  }
+ ],
+ "peak_rss_mb": 201.5,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 55, \"decision\": \"search\", \"estimate_seconds\": 0.12, \"fits\": false, \"peak_bits\": 55, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2262, \"cut_rank\": 103, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.025, \"fits\": false, \"peak_bits\": 103, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 360, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 70, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0004229545593261719, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005202293395996094, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0016047954559326172, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.01039886474609375, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.034750938415527344, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.1636340618133545, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.15036511421203613, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.641892671585083, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.30950117111206055, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 360, \"rows\": 70, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 376, \"seconds\": 3.189883232116699, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 73, \"rows\": 420, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001590251922607422, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 73, \"rows\": 420, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001888275146484375, \"status\": \"exhausted\"}]}, \"orbit_lift_0_2\": {\"cols\": 67, \"rows\": 420, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 7.891654968261719e-05, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 73, \"rows\": 420, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001571178436279297, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 0, \"rows\": 70, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.314018249511719e-05, \"status\": \"exhausted\"}]}, \"window_t1_at_d_coll\": {\"cols\": 144, \"rows\": 70, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0037789344787597656, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

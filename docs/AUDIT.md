@@ -15,12 +15,16 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 ## Summary
 
 - 26 papers (and one data page) with checked numbers.
-- **Published values that are too high:** in 10 papers at least one is above the exact or certified value. These
-  are counted where the paper states or implies a distance (a schedule called hook-free), or gives an estimate, an expectation or a bound that a reader takes as
-  the distance; a value not closed counts when the whole certified interval lies below it, as for planar [[537,14]] (≤ 35, certified 20–30); misprinted table rows are not counted. All 10 are circuit distances, or code distances
-  estimated by sampling. The mitten values were also checked under the fault model of that paper's
-  estimator: they hold. The mitten paper's count includes the structured-mitten schedules of its repository
-  (checked 25 October 2026).
+- **Published values that are too high:** 22 values in 10 papers (17 circuit distances in 7 papers, 5 code distances in 4)
+  are above the exact or certified value. These are counted where the paper states a distance, or gives an estimate, an
+  expectation or a bound that a reader takes as the distance; a value not closed counts when the whole certified interval
+  lies below it, as for planar [[537,14]] (≤ 35, certified 20–30); misprinted table rows are not counted. A value that
+  depends on a convention the paper does not print, such as the numbering of the terms of a check, counts only if every
+  choice gives a lower value, and a schedule's name, such as hook-free, is not a published value. Seven values below are
+  therefore listed but not counted: Walking Cat [[102,22,9]] and [[54,2,10]], shift [[120,8,12]] (section 2) and the four
+  structured-mitten circuits. All counted values are circuit distances, or code distances estimated by sampling. The
+  mitten values were also checked under the fault model of that paper's estimator: they hold. The structured-mitten
+  schedules of its repository were checked on 25 October 2026.
 - **Settled:** 2 conjectures confirmed. 15 open ranges of one paper closed, plus several single open values,
   among them the superdense color-code circuit of d = 11 that no method had certified.
 - **Confirmed:** hundreds of published values, among them every code distance that a paper states as exact.
@@ -36,9 +40,9 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | mitten codes | [[300,60,14]] circuit | 14 (same) | **12** | A | weight 11 excluded in 2.7 h (X) and 4.0 h (Z) on 64 threads |
 | mitten codes | [[500,100,16]] circuit | 16 (same) | **9** (X basis), 11–16 (Z) | A | |
 | mitten codes | [[540,108,18]] to [[975,195,24]] circuits | 18, 20, 22, 24 (same) | 10–13, 9–12, 9–16, 9–17 | A | intervals over both bases: certified lower bound and lightest fault set found; every upper bound is below the claim |
-| mitten codes, structured subfamily (the paper's repository) | [[330,66,12]] circuit, published schedule | 12: the code's named distance. No circuit distance is printed; the repository calls the schedule hook-free, the paper's word for schedules found to "likely preserve the circuit-level distance" | **7** (both bases) | A | code distance exactly 12. A minimum fault set is seven ancilla faults after the second or third of nine gates |
-| mitten codes, structured | [[600,120,14]], [[600,120,16]] circuits | 14, 16 (same) | **11** (Z) and **10** (X); **10** (Z) and **11** (X) | A | code distances exactly 14 and 16 |
-| mitten codes, structured | [[840,168,18]] circuit | 18 (same) | 11–14 (both bases) | A | weight 10 excluded; verified fault sets of weight 14 |
+| mitten codes, structured subfamily (the paper's repository) | [[330,66,12]] circuit, published schedule | 12: the code's named distance. No circuit distance is printed; the repository calls the schedule hook-free, the paper's word for schedules found to "likely preserve the circuit-level distance". Not counted: the repository gives the same name to all eight mitten schedules, including that of [[150,30,10]], whose circuit distance v2 gives as 8 | **7** (both bases) | A | code distance exactly 12. A minimum fault set is seven ancilla faults after the second or third of nine gates |
+| mitten codes, structured | [[600,120,14]], [[600,120,16]] circuits | 14, 16 (same; not counted) | **11** (Z) and **10** (X); **10** (Z) and **11** (X) | A | code distances exactly 14 and 16 |
+| mitten codes, structured | [[840,168,18]] circuit | 18 (same; not counted) | 11–14 (both bases) | A | weight 10 excluded; verified fault sets of weight 14 |
 | mitten codes, structured | [[840,168,18]] code | ≤ 18 (sampled: at least 50M rounds of sQetch and 50k of a BP+OSD estimator) | **17** (d_X = 17, d_Z 17–18) | A | a checked X-type logical operator of weight 17, weight 16 excluded in both types. dist-m4ri's benchmark (October 2026) has d_X 15–17 |
 | Cornucopia codes, 2608.02773 | [[900,454,10]] circuit | ≤ 10 (BP-OSD) | **9** | R | matrices and gate orders equal to the authors' repository; same value in their own one-cycle, CNOT-only setting |
 | Cornucopia codes | [[1044,526,12]] circuit | ≤ 11 (BP-OSD) | **10** | R | |
@@ -48,7 +52,7 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | routing codes, 2606.25330 | [[200,24,14]] circuit, weight-11 checks | ≤ 14 (BP-OSD) | **10** | R | rebuilt code has distance 14; the loss is in the circuit |
 | routing codes | [[200,16,17]] circuit | ≤ 17 (BP-OSD) | 11–14 | R | |
 | time-dynamic shift circuits, 2601.09911 | gross code [[144,12,12]], dynamic circuit (Table III) | ≤ 10 (estimate) | **8** under all 12 valid numberings | R | the static circuit with the same CNOT order also has 8: the cost is Table III's gate order, not the dynamics |
-| Walking Cat, 2604.19481 | [[102,22,9]], [[70,6,9]], [[54,2,10]] circuits | 9 | **8** with the terms numbered as printed | R | the numbering is not printed; the best numberings give 9 for two codes, and for [[70,6,9]] 9 only in the Z basis |
+| Walking Cat, 2604.19481 | [[102,22,9]], [[70,6,9]], [[54,2,10]] circuits | 9 | **8** with the terms numbered as printed | R | the numbering is not printed; 8 and 2 of the 576 numberings give 9 in both bases for [[102,22,9]] and [[54,2,10]], which are therefore not counted, and for [[70,6,9]] 4 of 144 give 9 only in the Z basis, so it counts |
 | tile codes, 2504.09171 | [[512,18,≤23]] code, weight 10 | ≤ 23, authors "strongly expect" 23 | **21** (d_X = 21; d_Z 22–23) | R | layout inferred (the only square layout with n = 512); the same layout reproduces their ILP-exact [[512,18,19]] |
 | nearest-neighbour planar codes, 2606.19482 | [[259,2]] thin tile code, X distance | ≤ 37 (QDistRnd) | **36** | R | reproduces all of Table III's n, routing counts and IP-exact d_Z; the paper's ranking value drops from 1.14 to 1.11 |
 | multivariate multicycle codes, 2601.18879 | [[324,12]] code | 20 (estimate) | **18** | R | 12 more table rows differ, several with visible misprints; only the distance of the printed code is established |

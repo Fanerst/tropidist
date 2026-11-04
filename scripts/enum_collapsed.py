@@ -1,11 +1,15 @@
 """Enumerate every solution of the time-collapsed problem up to weight K,
 one representative per translation orbit.
 
-Complete for K <= d_collapsed + 3 (see cdist.lift.enumerate_solutions): the
+Complete for K <= d_collapsed + 3 when d_collapsed >= 4 (see cdist.lift.enumerate_solutions): the
 search is run without pair exclusions, and solutions that contain a proper
 zero-syndrome subset (minimum solution + disjoint trivial triple) are added.
 
-Usage: python scripts/enum_collapsed.py circuits/bb288_r18_X.stim results/enum_bb288_r18_X.json K [k_table] [cover: 0 | 1]
+Usage: python scripts/enum_collapsed.py circuits/bb288_r18_X.stim results/enum_bb288_r18_X.json K [k_table] [cover: 0 | 1] [MODULE:KEY]
+
+MODULE:KEY takes the translations from the check permutations of a paper module of papers/run_parallel.py
+(e.g. bravyi_repo_circuit:bb288) instead of detecting them from the detector coordinates, which for some circuits
+show only part of the lattice.
 """
 import json
 import os
@@ -14,12 +18,24 @@ import time
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))    # repository root
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)                                                            # repository root
 from cdist import lift, problem, symmetry
 
 
 def log(*a):
     print(time.strftime("%H:%M:%S"), *a, flush=True)
+
+
+def symmetries(p, paper=None):
+    """The translations of p: detected from the detector coordinates, or those of a paper module (MODULE:KEY)."""
+    if not paper:
+        return symmetry.translations(p)
+    sys.path.insert(0, os.path.join(ROOT, "papers"))
+    import run_parallel as RP
+    name, key = paper.split(":")
+    sym, _ = RP.sym_of(p, __import__(name).translations(key))
+    return sym
 
 
 def group_maps(sym, ncols):
@@ -55,20 +71,21 @@ def canonical(sols, maps):
     return best
 
 
-def main(path, out, K, k_table=3, cover=0):
+def main(path, out, K, k_table=3, cover=0, paper=None):
     K, k_table, cover = int(K), int(k_table), bool(int(cover))
     full = problem.load_dem_problem(path)
     sector = problem.sector_problem(full)
     c = problem.collapse_time(sector)
-    sym = symmetry.translations(c)
+    sym = symmetries(c, paper)
+    assert sym["ok"], sym.get("reason")
     maps = group_maps(sym, c.ncols)
     log(f"collapsed {c.nrows}x{c.ncols}, |G|={len(maps)}")
     sols, st = lift.enumerate_solutions(c, K, k_table=k_table, rank=sym["rank"], anchors=sym["anchors"],
                                         colmaps=sym["colmaps"], sol_cap=20_000_000, cover=cover)
     log(f"K={K}: {len(sols)} solutions; search nodes={st['nodes']} ({st['seconds']:.1f}s); "
         f"decomposable added={st['decomposable_added']}")
-    res = {"circuit": path, "K": K, "group_order": len(maps), "collapsed_distance": st.get("distance"),
-           "stats": st, "weights": {}, "representatives": {}}
+    res = {"circuit": path, "K": K, "group_order": len(maps), "symmetry": paper or "detector coordinates",
+           "collapsed_distance": st.get("distance"), "stats": st, "weights": {}, "representatives": {}}
     by_w = {}
     for s in sols:
         by_w.setdefault(len(s), []).append(s)

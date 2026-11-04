@@ -1,0 +1,91 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z11-17-46-57_Z",
+ "variant": "sector",
+ "rows": 408,
+ "cols": 2220,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 9,
+ "upper_bound": 9,
+ "witness": [
+  643,
+  655,
+  691,
+  770,
+  773,
+  803,
+  813,
+  895,
+  1373
+ ],
+ "witness_ok": true,
+ "seconds": 6.253,
+ "trace": [
+  {
+   "t": 0.092,
+   "lb": 1
+  },
+  {
+   "t": 0.533,
+   "lb": 2
+  },
+  {
+   "t": 0.534,
+   "lb": 3
+  },
+  {
+   "t": 0.536,
+   "lb": 4
+  },
+  {
+   "t": 0.549,
+   "lb": 5
+  },
+  {
+   "t": 0.596,
+   "lb": 6
+  },
+  {
+   "t": 0.808,
+   "lb": 7
+  },
+  {
+   "t": 0.997,
+   "lb": 8
+  },
+  {
+   "t": 1.799,
+   "lb": 9
+  },
+  {
+   "t": 6.242,
+   "ub": 9
+  }
+ ],
+ "peak_rss_mb": 201.6,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 56, \"decision\": \"search\", \"estimate_seconds\": 0.139, \"fits\": false, \"peak_bits\": 56, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2220, \"cut_rank\": 102, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.026, \"fits\": false, \"peak_bits\": 102, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 360, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 68, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005390644073486328, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005850791931152344, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0016579627990722656, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.013503074645996094, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.046315908432006836, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.2126460075378418, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.18839597702026367, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8022661209106445, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.3415532112121582, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 360, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 383, \"seconds\": 3.8848021030426025, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002129077911376953, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00020313262939453125, \"status\": \"exhausted\"}]}, \"orbit_lift_0_10\": {\"cols\": 62, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.106231689453125e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_11\": {\"cols\": 69, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010585784912109375, \"status\": \"exhausted\"}]}, \"orbit_lift_0_12\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017309188842773438, \"status\": \"exhausted\"}]}, \"orbit_lift_0_13\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.00012421607971191406, \"status\": \"found\"}]}, \"orbit_lift_0_2\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001900196075439453, \"status\": \"exhausted\"}]}, \"orbit_lift_0_3\": {\"cols\": 66, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.417533874511719e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_4\": {\"cols\": 76, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00018787384033203125, \"status\": \"exhausted\"}]}, \"orbit_lift_0_5\": {\"cols\": 66, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 8.916854858398438e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_6\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00019788742065429688, \"status\": \"exhausted\"}]}, \"orbit_lift_0_7\": {\"cols\": 59, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.772445678710938e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_8\": {\"cols\": 69, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.584426879882812e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_9\": {\"cols\": 69, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00010013580322265625, \"status\": \"exhausted\"}]}, \"quick_lift_0\": {\"cols\": 73, \"rows\": 408, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00021910667419433594, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 0, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.910064697265625e-05, \"status\": \"exhausted\"}]}, \"window_t1_at_d_coll\": {\"cols\": 144, \"rows\": 68, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004465341567993164, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

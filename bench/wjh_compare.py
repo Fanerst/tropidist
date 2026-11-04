@@ -198,10 +198,12 @@ def report():
         variant = "sector" if family.endswith("_circuit") else "full"
         c = {}
         for key, method in (("o", "ours"), ("g", "Gurobi"), ("m", "dist-m4ri CC")):
+            # Gurobi is credited with either logical basis, as in the protocol of the main suite
+            tier1 = (method, "Gurobi, sparse L") if method == "Gurobi" else (method,)
             # dist-m4ri's second tier: the bracketing mode, and pure cluster mode where that stopped early
-            tier2 = ("dist-m4ri CC+RW", "dist-m4ri CC") if method == "dist-m4ri CC" else (method,)
-            c[key + "1"] = sum(solved(a1, method, n, variant) for n in names)
-            c[key] = sum(solved(a1, method, n, variant) or any(solved(b32, m2, n, variant) for m2 in tier2)
+            tier2 = ("dist-m4ri CC+RW", "dist-m4ri CC") if method == "dist-m4ri CC" else tier1
+            c[key + "1"] = sum(any(solved(a1, m1, n, variant) for m1 in tier1) for n in names)
+            c[key] = sum(any(solved(a1, m1, n, variant) for m1 in tier1) or any(solved(b32, m2, n, variant) for m2 in tier2)
                          for n in names)
         c["o8"] = sum(solved(a1, "ours", n, variant) or solved(h8, "ours", n, variant) for n in names)
         # dist-m4ri with the model lower bound of --model-lb (circuits only): either mode in the first tier

@@ -1,0 +1,91 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c3_x_z3-17-24-51-58_Z",
+ "variant": "sector",
+ "rows": 402,
+ "cols": 2199,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1200.0,
+ "status": "exact",
+ "lower_bound": 9,
+ "upper_bound": 9,
+ "witness": [
+  3,
+  7,
+  43,
+  56,
+  173,
+  636,
+  670,
+  675,
+  685
+ ],
+ "witness_ok": true,
+ "seconds": 6.224,
+ "trace": [
+  {
+   "t": 0.09,
+   "lb": 1
+  },
+  {
+   "t": 0.511,
+   "lb": 2
+  },
+  {
+   "t": 0.512,
+   "lb": 3
+  },
+  {
+   "t": 0.514,
+   "lb": 4
+  },
+  {
+   "t": 0.527,
+   "lb": 5
+  },
+  {
+   "t": 0.576,
+   "lb": 6
+  },
+  {
+   "t": 0.808,
+   "lb": 7
+  },
+  {
+   "t": 1.008,
+   "lb": 8
+  },
+  {
+   "t": 1.81,
+   "lb": 9
+  },
+  {
+   "t": 6.213,
+   "ub": 9
+  }
+ ],
+ "peak_rss_mb": 201.7,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 53, \"decision\": \"search\", \"estimate_seconds\": 0.138, \"fits\": false, \"peak_bits\": 53, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 2199, \"cut_rank\": 102, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.022, \"fits\": false, \"peak_bits\": 102, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"minimum_enumeration_complete\": true, \"minimum_orbits\": 360, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 67, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00044417381286621094, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0005471706390380859, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0015633106231689453, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.013559103012084961, \"status\": \"exhausted\"}, {\"K\": 5, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.04909205436706543, \"status\": \"exhausted\"}, {\"K\": 6, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.23166298866271973, \"status\": \"exhausted\"}, {\"K\": 7, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.19931507110595703, \"status\": \"exhausted\"}, {\"K\": 8, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.8024919033050537, \"status\": \"exhausted\"}, {\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 0.3253498077392578, \"status\": \"found\"}]}, \"collapsed_minimum_enumeration\": {\"cols\": 360, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 383, \"seconds\": 3.863340139389038, \"status\": \"exhausted\"}]}, \"orbit_lift_0_0\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00021600723266601562, \"status\": \"exhausted\"}]}, \"orbit_lift_0_1\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017714500427246094, \"status\": \"exhausted\"}]}, \"orbit_lift_0_10\": {\"cols\": 59, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.486343383789062e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_11\": {\"cols\": 66, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00011110305786132812, \"status\": \"exhausted\"}]}, \"orbit_lift_0_12\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017213821411132812, \"status\": \"exhausted\"}]}, \"orbit_lift_0_13\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": 9, \"nsol_recorded\": 1, \"seconds\": 9.179115295410156e-05, \"status\": \"found\"}]}, \"orbit_lift_0_2\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001590251922607422, \"status\": \"exhausted\"}]}, \"orbit_lift_0_3\": {\"cols\": 69, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.107589721679688e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_4\": {\"cols\": 73, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00017881393432617188, \"status\": \"exhausted\"}]}, \"orbit_lift_0_5\": {\"cols\": 69, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.012222290039062e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_6\": {\"cols\": 76, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00016999244689941406, \"status\": \"exhausted\"}]}, \"orbit_lift_0_7\": {\"cols\": 62, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 7.677078247070312e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_8\": {\"cols\": 66, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 9.703636169433594e-05, \"status\": \"exhausted\"}]}, \"orbit_lift_0_9\": {\"cols\": 63, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0001289844512939453, \"status\": \"exhausted\"}]}, \"quick_lift_0\": {\"cols\": 70, \"rows\": 402, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0002181529998779297, \"status\": \"exhausted\"}]}, \"window_t0_at_d_coll\": {\"cols\": 0, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 3.600120544433594e-05, \"status\": \"exhausted\"}]}, \"window_t1_at_d_coll\": {\"cols\": 144, \"rows\": 67, \"runs\": [{\"K\": 9, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.004230976104736328, \"status\": \"exhausted\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}

@@ -218,8 +218,16 @@ basis, a direct enumeration with 10 cycles (2-column table, 89 threads, 44 min; 
 the translated sets at weights 10, 11 and 12: 1,440, 141,912 and 7,497,120. The enumerations of 3 and 4 cycles are in `spectrum_c34/`.
 
 **Expansion.** `papers/ibm_bicycle_matched_mwd.py`, record `mwd_gross_c10.json`. Per cycle at p = 1e-4, summed over the bases: standard
--16.47, 8 timesteps -17.24 (6.0x), 9 timesteps -16.74 (1.9x). At 1e-5: -21.60, -23.24 (44x), -22.74 (14x). C = 1 gave -16.9 and,
+-16.48, 8 timesteps -17.24 (5.9x), 9 timesteps -16.74 (1.8x). At 1e-5: -21.61, -23.24 (43x), -22.74 (13x). C = 1 gave -16.9 and,
 for the nine-timestep schedule, -18.0 (12x): the noise-free boundaries of C = 1 understate the bulk, most for weight 12.
+Rerun 2026-11-04 after the review, three changes to the weight-5 term. Each failing configuration is counted once (3,240 of the
+181,440 in the Z basis and 11,880 of the 362,880 in the X basis are the failing half of two sets). The order-p^6 overlap of two
+that share four mechanisms is subtracted (about 3e-4 of the weight-5 term at 1e-4). Whether a configuration A fails is decided
+exactly: its own-class explanations are G' - B for the sets G' of weight 10 through a wrong-class complement B with the class of
+A + B, and A fails when the likeliest explanation is of the other class (log-probabilities within 1e-9 are equal; ties fail).
+Own-class explanations rescue 720 of 178,200 configurations (Z) and 12,456 of 351,000 (X). The standard schedule's rate falls by
+2.2 % at 1e-4 and 3.0 % at 1e-5, smoothly in p; the distance-11 schedules are unchanged. Previous record: -16.47, 6.0x, 1.9x;
+at 1e-5 -21.60, 44x, 14x.
 
 **Simulations.** `papers/ibm_bicycle_sim.py` with `IBM_SIM_MATCHED=1 IBM_SIM_SECTOR=1` on 5090 (record `sim_gross_c10.jsonl`): BP-OSD on the
 detectors of the memory basis only. At C = 1 that decoder is better than the one on the full model (3.2e-4 against 1.9e-3 at

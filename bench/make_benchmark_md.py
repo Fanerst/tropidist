@@ -81,7 +81,10 @@ def overall_rows(config="ours"):
         if v.get("distance_kind") != "exact":
             closed = [r["upper_bound"] for recs in (a, b32) for o in ours for r in [recs.get((o, name, variant))]
                       if r is not None and r.get("status") == "exact"]
-            d = ("%d†" % closed[0]) if closed else (">=%s" % d if d is not None else "?")
+            # an open instance shows the strongest certified lower bound: the metadata's or one of our runs
+            lbs = [r["lower_bound"] for recs in (a, b32) for o in ours for r in [recs.get((o, name, variant))]
+                   if r is not None and r.get("lower_bound")]
+            d = ("%d†" % closed[0]) if closed else (">=%s" % max([d] + lbs) if d is not None else "?")
         rows.append((m["track"] != "circuit", m.get("family", ""), v["cols"], name, m.get("n", ""), d, oa, ob, ca, cb))
     rows.sort()
     return rows

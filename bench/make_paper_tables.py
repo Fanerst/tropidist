@@ -129,6 +129,13 @@ def numbers(R):
                    ("Highs", "HiGHS"), ("Sat", "SAT"), ("Rc", "RC2"), ("Cashw", "CASHWMaxSAT"), ("Enmax", "enMaxCDCL"),
                    ("QserfCC", "Qubitserf CC"), ("QserfBZ", "Qubitserf BZ")):
         N[key + "First"], N[key + "Both"] = per.get(t, [0, 0])
+    # the current dist-m4ri without its model lower bound (its configurations without ", model bound")
+    def dm_nobound(i, v, tiers):
+        return any(tool(m) == "dist-m4ri" and "model bound" not in m and r.get("status") == "exact"
+                   for name, recs in (("t1", R.a), ("t2", R.b32), ("t2", R.b1)) if name in tiers
+                   for (m, ii, vv), r in recs.items() if ii == i and vv == v)
+    N["DmNoBoundFirst"] = sum(dm_nobound(n, R.main[n], ("t1",)) for n in names)
+    N["DmNoBoundBoth"] = sum(dm_nobound(n, R.main[n], ("t1", "t2")) for n in names)
     # where dist-m4ri is faster (first tier, both exact)
     new = ["dist-m4ri CC", "dist-m4ri CC+RW", "dist-m4ri CC, DEM input", "dist-m4ri CC+RW, DEM input"]
     new += [m + ", model bound" for m in new]          # with its model lower bound (25 October 2026)
@@ -205,7 +212,7 @@ def numbers(R):
 
 # ----------------------------------------------------------------------------------------------- tables
 def sec(t):
-    return "" if t is None else (r"%.1f\,s" % t if t < 100 else r"%.0f\,s" % t)
+    return "" if t is None else (r"%.1f\,s" % t if t < 100 else "{:,.0f}".format(t) + r"\,s")
 
 
 def other(x, tier):
@@ -224,7 +231,7 @@ def overall_table(R):
         m = R.m[name]
         dd = str(d).replace("†", r"$^\dagger$").replace(">=", r"$\geq$")
         out["code" if is_code else "circuit"].append(" & ".join(
-            [label(m), str(cols), dd, sec(oa), sec(ob), other(ca, 1), other(cb, 2)]) + r" \\")
+            [label(m), "{:,}".format(cols), dd, sec(oa), sec(ob), other(ca, 1), other(cb, 2)]) + r" \\")
     head = (r"\begin{tabular}{@{}lrrllll@{}}" "\n" r"\toprule" "\n"
             r"instance & columns & $d$ & ours, tier 1 & ours, tier 2 & best other, tier 1 & best other, tier 2 \\"
             "\n" r"\midrule")
@@ -245,7 +252,7 @@ def representative_table(R):
         tier2 = ca is None and cb is not None
         o = "none" if best is None else "%s, %s%s" % (best[1].split(" (")[0].replace(" CC+RW", "").replace(" CC", "").split(",")[0],
                                                      sec(best[0]), ", 32 threads" if tier2 else "")
-        lines.append(" & ".join([label(R.m[n]), str(cols), str(d).replace("†", ""), ours, o]) + r" \\")
+        lines.append(" & ".join([label(R.m[n]), "{:,}".format(cols), str(d).replace("†", ""), ours, o]) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     (PAPER / "tables" / "representative.tex").write_text("\n".join(lines) + "\n")
 
@@ -271,7 +278,7 @@ FAMILY_LABEL = {"surface-code circuits": "surface-code circuits", "colour-code c
 
 def wjh_table():
     lines = [r"\begin{tabular}{@{}lrrrrrrll@{}}", r"\toprule",
-             r" & & \multicolumn{3}{c}{this method} & dist-m4ri & Gurobi & \multicolumn{2}{c}{arXiv:2603.22532} \\",
+             r" & & \multicolumn{3}{c}{this method} & dist-m4ri & Gurobi & \multicolumn{2}{c}{ref.~\citenum{webster_2026_distance}} \\",
              r"\cmidrule(lr){3-5}\cmidrule(lr){8-9}",
              r"family & inst. & 600\,s & 8\,h & +32 thr. & 600\,s & 600\,s & per method & any \\", r"\midrule"]
     for c in wjh_summary_rows():
@@ -295,7 +302,9 @@ def codes_table(R):
             continue
         r = ob.get(name)
         v = m["variants"]["full"]
-        bench = (r"$\geq%d$" % v["distance"]) if v.get("distance_kind") == "lower_bound" else v["distance"]
+        # an open instance shows the strongest certified lower bound: the metadata's or one of our runs
+        lbs = [r.get("lower_bound") or 0 for recs in (R.a, R.b32) for r in [recs.get(("ours", name, "full"))] if r]
+        bench = (r"$\geq%d$" % max([v["distance"]] + lbs)) if v.get("distance_kind") == "lower_bound" else v["distance"]
         if r is None:
             vals = {"d_X": str(bench) if m["basis"] == "Z" else "", "d_Z": str(bench) if m["basis"] == "X" else ""}
         else:

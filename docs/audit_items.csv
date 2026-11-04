@@ -1,16 +1,16 @@
 kind,paper,ref,object,pub_lo,pub_hi,stated,cert_lo,cert_hi,verdict,prov,note
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[200,40,12]] circuit",12,12,claim,9,9,too_high,A,presented as distance-preserving; version 2 of the paper; values hold under the estimator's single-qubit fault model
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[300,60,14]] circuit",14,14,claim,12,12,too_high,A,
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[500,100,16]] circuit",16,16,claim,9,9,too_high,A,9 in the X basis; Z basis 11–16
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[540,108,18]] circuit",18,18,claim,10,13,too_high,A,interval over both bases
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[630,126,20]] circuit",20,20,claim,9,12,too_high,A,interval over both bases
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[780,156,22]] circuit",22,22,claim,9,16,too_high,A,interval over both bases
-circuit,Mitten codes,bhardwaj_2026_mitten,"[[975,195,24]] circuit",24,24,claim,9,17,too_high,A,interval over both bases
-circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[330,66,12]] circuit",12,12,implied,7,7,too_high,A,no circuit distance printed; the repository calls the schedule hook-free; code distance exactly 12
-circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[600,120,14]] circuit",14,14,implied,10,10,too_high,A,"Z basis 11, X basis 10; code distance exactly 14"
-circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[600,120,16]] circuit",16,16,implied,10,10,too_high,A,"Z basis 10, X basis 11; code distance exactly 16"
-circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[840,168,18]] circuit",18,18,implied,11,14,too_high,A,weight 10 excluded; fault sets of weight 14 in both bases
-circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[288,12,18]] circuit",18,18,bound,16,16,too_high,A,standard depth-seven schedule; 16 in both bases; the authors call the bound unlikely to be tight and the architecture study assumes 18
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[200,40,12]] circuit",12,12,estimated_bound,9,9,too_high,A,"version 2 of the paper, whose Table 8 gives the circuit values as upper bounds estimated with single-qubit faults and whose text presents the schedules as distance-preserving; the certified values hold under that fault model too"
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[300,60,14]] circuit",14,14,estimated_bound,12,12,too_high,A,
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[500,100,16]] circuit",16,16,estimated_bound,9,9,too_high,A,9 in the X basis; Z basis 11–16
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[540,108,18]] circuit",18,18,estimated_bound,10,13,too_high,A,interval over both bases
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[630,126,20]] circuit",20,20,estimated_bound,9,12,too_high,A,interval over both bases
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[780,156,22]] circuit",22,22,estimated_bound,9,16,too_high,A,interval over both bases
+circuit,Mitten codes,bhardwaj_2026_mitten,"[[975,195,24]] circuit",24,24,estimated_bound,9,17,too_high,A,interval over both bases
+circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[330,66,12]] circuit",12,12,hook_free,7,7,not_counted,A,"not counted: no circuit distance printed; the repository calls the schedule hook-free, as it does for all eight mitten schedules, including that of [[150,30,10]], whose circuit distance the paper gives as 8; code distance exactly 12"
+circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[600,120,14]] circuit",14,14,hook_free,10,10,not_counted,A,"not counted: no circuit distance printed; Z basis 11, X basis 10; code distance exactly 14"
+circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[600,120,16]] circuit",16,16,hook_free,10,10,not_counted,A,"not counted: no circuit distance printed; Z basis 10, X basis 11; code distance exactly 16; 16 rounds, 501,960 fault mechanisms in the Z basis"
+circuit,Mitten codes (repository),bhardwaj_2026_mitten,"[[840,168,18]] circuit",18,18,hook_free,11,14,not_counted,A,not counted: no circuit distance printed; weight 10 excluded; fault sets of weight 14 in both bases
+circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[288,12,18]] circuit",18,18,bound,16,16,too_high,P,"standard depth-seven schedule; 16 in both bases in the public Stim files of the schedule (tesseract-decoder; CZ gates, SI1000 noise) and in the memory instruction of the architecture study; with the authors' public code and noise at 18 cycles, exactly 16 in both bases; the authors call the bound unlikely to be tight and the architecture study assumes 18"
 circuit,Distance-finding benchmark,webster_2026_distance,"[[288,12,18]] circuit",24,24,best_known,16,16,too_high,A,the study's own circuit file; best known value from heuristics; the same circuit as the row above
 circuit,Cornucopia codes,lu_2026_cornucopia,"[[900,454,10]] circuit",10,10,bound,9,9,too_high,R,matrices and gate orders equal to the authors' repository; same value in their one-cycle setting
 circuit,Cornucopia codes,lu_2026_cornucopia,"[[1044,526,12]] circuit",11,11,bound,10,10,too_high,R,
@@ -19,24 +19,25 @@ circuit,Cornucopia codes,lu_2026_cornucopia,"[[2844,1426,18]] circuit",18,18,bou
 circuit,Routing codes,zhang_2026_routing,"[[200,24,14]] circuit",14,14,bound,10,10,too_high,R,weight-11 checks; the rebuilt code has distance 14
 circuit,Routing codes,zhang_2026_routing,"[[200,16,17]] circuit",17,17,bound,11,14,too_high,R,
 circuit,Shift automorphism circuits,kim_2026_shift,"gross code, dynamic circuit",10,10,estimate,8,8,too_high,R,8 under all 12 valid numberings; the static circuit with the same gate order also has 8
-circuit,Walking Cat,tripier_2026_walkingcat,"[[102,22,9]] circuit",9,9,claim,8,8,too_high,R,terms numbered as printed; the paper does not give the numbering
-circuit,Walking Cat,tripier_2026_walkingcat,"[[70,6,9]] circuit",9,9,claim,8,8,too_high,R,terms numbered as printed
-circuit,Walking Cat,tripier_2026_walkingcat,"[[54,2,10]] circuit",9,9,claim,8,8,too_high,R,terms numbered as printed
+circuit,Shift automorphism circuits,kim_2026_shift,"[[120,8,12]] code, dynamic circuit",10,10,estimate,8,8,not_counted,R,"not counted: terms numbered as printed (the paper does not give the numbering): Z basis 8, X basis 10; 7 of the 12 valid numberings give 10 in both bases"
+circuit,Walking Cat,tripier_2026_walkingcat,"[[102,22,9]] circuit",9,9,claim,8,8,not_counted,R,not counted: terms numbered as printed (the paper does not give the numbering); 8 of the 576 numberings give 9 in both bases
+circuit,Walking Cat,tripier_2026_walkingcat,"[[70,6,9]] circuit",9,9,claim,8,8,too_high,R,"terms numbered as printed; 4 of the 144 numberings give 9 in the Z basis, none in both bases"
+circuit,Walking Cat,tripier_2026_walkingcat,"[[54,2,10]] circuit",9,9,claim,8,8,not_counted,R,not counted: terms numbered as printed; 2 of the 576 numberings give 9 in both bases
 circuit,Left-right circuits,strikis_2026_leftright,"gross code, three-color circuit",11,11,conjecture,11,11,settled,R,conjectured; 11 in both bases
 circuit,Vine codes,nixon_2026_vine,four patches of distance 10,10,10,conjecture,10,10,settled,A,conjectured and stated as unverified; the authors' Stim files
 circuit,Distance-finding benchmark,webster_2026_distance,"superdense circuit, d = 11",8,11,open,11,11,settled,A,open for every method; settled by the truncated Rank DP
 circuit,Amplified qLDPC codes,liang_2026_amplified,"[[90,8,8]] level-1 circuit",6,8,range,8,8,settled,A,certified at least 6 in the paper; the authors' builder
-circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[72,12,6]] circuit",6,6,bound,6,6,confirmed,A,the published upper bound is exact
-circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[90,8,10]] circuit",8,8,bound,8,8,confirmed,A,the published upper bound is exact
-circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[108,8,10]] circuit",8,8,bound,8,8,confirmed,A,the published upper bound is exact
-circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[144,12,12]] circuit",10,10,bound,10,10,confirmed,A,the published upper bound is exact
+circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[72,12,6]] circuit",6,6,bound,6,6,confirmed,P,the published upper bound is exact
+circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[90,8,10]] circuit",8,8,bound,8,8,confirmed,P,the published upper bound is exact
+circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[108,8,10]] circuit",8,8,bound,8,8,confirmed,P,the published upper bound is exact
+circuit,IBM bivariate bicycle codes,bravyi_2024_bb,"[[144,12,12]] circuit",10,10,bound,10,10,confirmed,P,the published upper bound is exact
 circuit,Cornucopia codes,lu_2026_cornucopia,"[[252,130,6]] circuit",5,5,bound,5,5,confirmed,R,the published upper bound is exact
 circuit,Cornucopia codes,lu_2026_cornucopia,"[[576,292,8]] circuit",8,8,bound,8,8,confirmed,R,the published upper bound is exact
 circuit,Mitten codes,bhardwaj_2026_mitten,"[[150,30,10]] circuit",8,8,claim,8,8,confirmed,A,value of version 2 (version 1 implied 10)
 code,Tile codes,steffan_2025_tile,"[[512,18]] code",23,23,expected,21,21,too_high,R,"weight-10 code, upper bound 23 expected to be exact; layout inferred as the only square layout with n = 512, which reproduces the authors' exact [[512,18,19]]"
 code,Nearest-neighbor planar codes,gu_2026_planar,"[[259,2]] code, X distance",37,37,bound,36,36,too_high,R,one below the published upper bound; the rebuild reproduces the paper's integer-programming distances
 code,Multivariate multicycle codes,mian_2026_multicycle,"[[324,12]] code",20,20,randomized,18,18,too_high,R,the code as printed; distance from a randomized method; several other table rows have visible misprints
-code,Mitten codes (repository),bhardwaj_2026_mitten,"[[840,168,18]] code",18,18,estimate,17,17,too_high,A,"sampled estimate; d_X = 17, d_Z 17–18"
+code,Mitten codes (repository),bhardwaj_2026_mitten,"[[840,168,18]] code",18,18,estimate,17,17,too_high,A,"sampled estimate; X distance 17, Z distance 17–18"
 code,Mitten codes (repository),bhardwaj_2026_mitten,"[[300,60,9]] code",9,9,estimate,10,10,settled,A,the certified value is higher; 9 is the circuit distance of its schedule
 code,Modular hyperbolic codes,higgott_2026_hyperbolic,"[[1600,104]] code",14,16,range,16,16,settled,R,rebuilt; the paper's range closes at its upper end
 code,Modular hyperbolic codes,higgott_2026_hyperbolic,"[[2048,36]] code",20,24,range,24,24,settled,R,rebuilt; the paper's range closes at its upper end

@@ -7,7 +7,9 @@ translation orbit) from scripts/enum_collapsed.py.  For each solution O the real
 O, plus W - |O| further columns".  If no search succeeds, W + 1 is a
 certified lower bound on the circuit distance.
 
-Usage: python scripts/run_topdown.py circuits/bb288_r18_X.stim results/enum_bb288_r18_X.json 15 results/topdown_bb288_r18_X.json
+Usage: python scripts/run_topdown.py circuits/bb288_r18_X.stim results/enum_bb288_r18_X.json 15 results/topdown_bb288_r18_X.json [MODULE:KEY]
+
+MODULE:KEY: the translations of the enumeration, taken from a paper module (scripts/enum_collapsed.py).
 """
 import hashlib
 import json
@@ -18,14 +20,16 @@ import time
 import stim
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))    # repository root
-from cdist import lift, problem, replay, search, symmetry
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cdist import lift, problem, replay, search
+from enum_collapsed import symmetries
 
 
 def log(*a):
     print(time.strftime("%H:%M:%S"), *a, flush=True)
 
 
-def main(path, enum_path, W, out):
+def main(path, enum_path, W, out, paper=None):
     W = int(W)
     t0 = time.time()
     circ = stim.Circuit.from_file(path)
@@ -35,12 +39,16 @@ def main(path, enum_path, W, out):
     collapsed = problem.collapse_time(sector)
     # lifting one representative per translation orbit is enough only if the
     # real problem has the same translations
-    s_sec = symmetry.translations(sector)
-    s_col = symmetry.translations(collapsed)
+    s_sec = symmetries(sector, paper)
+    s_col = symmetries(collapsed, paper)
     assert s_sec["ok"] and s_col["ok"] and s_sec["generators"] == s_col["generators"], \
         "sector problem lacks the translation symmetry of the collapsed one"
     enum = json.load(open(enum_path))
     assert enum["K"] >= W, "enumeration does not reach W"
+    assert enum.get("symmetry", "detector coordinates") == (paper or "detector coordinates"), \
+        "the enumeration used other symmetries"
+    log(f"symmetries kept: sector {s_sec.get('n_symmetries_kept', len(s_sec['generators']))}, "
+        f"collapsed {s_col.get('n_symmetries_kept', len(s_col['generators']))}")
     td = lift.TopDown(sector, collapsed, k_main=2)
     log(f"sector {sector.nrows}x{sector.ncols}; main table {td.table.entries} entries ({td.table.build_seconds:.1f}s)")
     with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cdist", "gmitm.c"), "rb") as f:

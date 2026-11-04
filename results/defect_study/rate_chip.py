@@ -2,7 +2,14 @@
 sets of weight <= 10 (chip_spectrum.py).  The leading term is of order p^5 for circuit distances 9 and 10:
 
     a set of weight 9 fails on each of its C(9,5) subsets of five faults (the other four are the lighter explanation);
-    a set of weight 10 fails on the less likely half of each of its 126 splits into five and five.
+    a set of weight 10 fails on the less likely half of each of its 126 splits into five and five, unless an explanation
+    of that half's own logical class is lighter, or of equal weight and likelier than every one of the other class.
+
+With distance 9 or 10, the explanations of the syndrome of five faults A, other than A, have weight 4 or 5: of the other class,
+G - A for the logical sets G of weight 9 or 10 that contain A; of A's own class, G' - B for one explanation B of the other class
+of weight 5 and the logical sets G' of weight 9 or 10 that contain B and have the logical class of A + B (E + B is logical of
+weight at most 10 for an own-class explanation E, so E and B are disjoint and E | B is one of these sets).  The decoder takes the
+lightest explanation, ties towards the more likely one, and fails on A when that one is of the other class.
 
 Failing configurations are counted once.  Each contributes the product of its mechanisms' probabilities (as in
 papers/ibm_bicycle_matched_mwd.py: a sector column stands for the full-model mechanism with exactly its detectors).  The rate of C
@@ -11,12 +18,14 @@ cycles is linear in C, since the sets are local in time, so two enumerations giv
 Usage: python rate_chip.py P SPEC_C1.npz SPEC_C2.npz ...      (the meta of each file gives basis, cycles, dead checks, schedule)
 Prints one line per file, and for each pair with equal chip the extrapolation to C = 10.
 """
+import functools
 import itertools
 import json
 import math
 import os
 import sys
 import tempfile
+from collections import defaultdict
 
 import numpy as np
 
@@ -25,6 +34,7 @@ sys.path.insert(0, HERE)
 import chip
 from cdist import problem
 
+TIE = 1e-9      # log-probabilities closer than this are equal (sums of the same terms in another order)
 R5 = np.array(list(itertools.combinations(range(9), 5)))
 C5 = np.array([c for c in itertools.combinations(range(10), 5) if 0 in c])
 N5 = np.array([[x for x in range(10) if x not in c] for c in C5])
@@ -48,7 +58,8 @@ def merged(circ):
     return out
 
 
-def priors(meta, p):
+def priors(meta, p, labels=False):
+    """Log-probabilities of the sector columns (with labels=True also their logical labels)."""
     s = None if meta["schedule"] == "standard" else chip.B.to_dicts(*(tuple(map(int, x)) for x in meta["schedule"].split("_")))
     c = chip.build_chip("gross", meta["basis"], meta["cycles"], p, s, tuple(meta["dead_x"]), tuple(meta["dead_z"]))
     with tempfile.TemporaryDirectory() as tmp:
@@ -65,31 +76,40 @@ def priors(meta, p):
             lifted ^= 1 << rows[low.bit_length() - 1]
             m ^= low
         out.append(probs[(lifted, sector.l[j])])
-    return np.log(np.array(out))
+    return (np.log(np.array(out)), list(sector.l)) if labels else np.log(np.array(out))
 
 
 def rate(path, p):
     z = np.load(path)
     meta = json.loads(str(z["meta"]))
     assert all(r["complete"] for r in meta["runs"]) and meta["runs"][-1]["K"] >= 10
-    logr = priors(meta, p)
-    fail = {}
-    n9 = n10 = 0
-    if "sets_9" in z:
-        for G in z["sets_9"].astype(np.int64):
-            n9 += 1
-            for c in G[R5]:
-                fail[tuple(sorted(c.tolist()))] = logr[c].sum()
-    if "sets_10" in z:
-        G = z["sets_10"].astype(np.int64)
-        n10 = len(G)
-        a, b = logr[G[:, C5]].sum(axis=2), logr[G[:, N5]].sum(axis=2)
-        worse = np.where((a <= b)[:, :, None], G[:, C5], G[:, N5]).reshape(-1, 5)
-        val = np.minimum(a, b).ravel()
-        for c, v in zip(worse.tolist(), val.tolist()):
-            fail[tuple(sorted(c))] = v
+    logr, lab = priors(meta, p, labels=True)
+    sets = {w: [tuple(sorted(g)) for g in z["sets_%d" % w].astype(np.int64).tolist()] if "sets_%d" % w in z else []
+            for w in (9, 10)}
+    cls = {g: functools.reduce(lambda x, j: x ^ lab[j], g, 0) for w in (9, 10) for g in sets[w]}
+    within = {w: defaultdict(list) for w in (9, 10)}            # five faults -> the logical sets that contain them
+    for w in (9, 10):
+        for g in sets[w]:
+            for c in itertools.combinations(g, 5):
+                within[w][c].append(g)
+    P = lambda s: logr[list(s)].sum()
+    # every 5-subset of a weight-9 set has an explanation of the other class of weight 4, so it fails
+    fail = {c: P(c) for c in within[9]}
+    for g in sets[10]:
+        for k in range(len(C5)):
+            a, b = tuple(g[i] for i in C5[k]), tuple(g[i] for i in N5[k])
+            a = a if P(a) <= P(b) + TIE else b
+            if a in fail:
+                continue
+            wrong = [tuple(sorted(set(h) - set(a))) for h in within[10][a]]
+            c = cls[tuple(sorted(a + wrong[0]))]
+            if any(cls[h] == c for h in within[9].get(wrong[0], [])):        # a lighter explanation of its own class
+                continue
+            own = [tuple(sorted(set(h) - set(wrong[0]))) for h in within[10][wrong[0]] if cls[h] == c]     # a among them
+            if max(P(e) for e in wrong) >= max(P(e) for e in own) - TIE:       # ties fail
+                fail[a] = P(a)
     total = sum(math.exp(v) for v in fail.values())
-    return meta, n9, n10, len(fail), total, set(meta["runs"][-1]["sets"].keys())
+    return meta, len(sets[9]), len(sets[10]), len(fail), total, set(meta["runs"][-1]["sets"].keys())
 
 
 def main():

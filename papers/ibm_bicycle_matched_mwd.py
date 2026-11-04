@@ -4,19 +4,30 @@
 
 The rule is that of papers/ibm_bicycle_mwd.py:
 
-    weight 5 (d = 10):   the less likely half of each split of a weight-10 set into halves;
+    weight 5 (d = 10):   the less likely half of each split of a weight-10 set into halves, unless an explanation of
+                         its own logical class is likelier than every one of the other class (below);
     weight 6:            the subsets of weight 6 of weight-10 sets (d = 10) and of weight-11 sets, without those that
                          contain a failing configuration of weight 5, and the less likely half of each split of a
                          weight-12 set in which no half contains a reducible pair.
 
-Each configuration contributes the product of its mechanisms' probabilities.  The configurations of weight 6 from
-weight-10 and weight-11 sets are counted once, the halves of weight-12 sets without that check.  All probabilities are
-invariant under the lattice translations, so each orbit counts with its size.  Rates are failure probabilities of the
-C cycles; the record also gives them divided by C, as Tour de gross reports them.
+With d = 10 every explanation of the syndrome of a configuration A of weight 5 other than A has weight 5 (a lighter one
+would make a logical set of weight 9 or less): those of the other class are G - A for the weight-10 sets G containing A,
+and those of A's own class are G' - B for a fixed one B of the other class and the weight-10 sets G' containing B with
+the logical class of A + B.  The decoder, ties broken towards the more likely set, fails on A when the likeliest of these
+is of the other class; this decides each weight-5 configuration exactly.
+
+Each configuration contributes the product of its mechanisms' probabilities, the probability that they occur whatever
+else occurs.  The configurations of weight 5 are counted once each (one can be the failing half of two weight-10 sets),
+and so are those of weight 6 from weight-10 and weight-11 sets; the halves of weight-12 sets are counted without that
+check.  Two failing configurations of weight 5 that share four mechanisms both occur when their union of weight 6 does,
+so for each such 6-set S, holding m failing configurations, inclusion-exclusion subtracts (m - 1) P(S).  All
+probabilities are invariant under the lattice translations, so each orbit counts with its size.  Rates are failure
+probabilities of the C cycles; the record also gives them divided by C, as Tour de gross reports them.
 
 Usage: python papers/ibm_bicycle_matched_mwd.py OUT.json SPECTRUM.npz [SPECTRUM.npz ...] [-- p ...]
        (code, basis, cycles and schedule of each spectrum from its metadata)
 """
+import functools
 import itertools
 import json
 import math
@@ -40,6 +51,7 @@ import run_parallel as RP
 from cdist import problem
 
 PS = (1e-5, 2e-5, 5e-5, 7e-5, 1e-4, 1.4e-4, 2e-4, 3e-4, 5e-4)
+TIE = 1e-9      # log-probabilities closer than this are equal (sums of the same terms in another order)
 
 
 def model(key, basis, cycles, sched):
@@ -137,17 +149,49 @@ def analyse(spectrum, ps):
         logr = np.log(pj)
         r = {}
         terms5, fail5 = [], np.zeros(0, dtype=np.uint64)
+        over = -math.inf
         if pairs5 is not None:
             a, b = logr[pairs5[0]].sum(axis=2), logr[pairs5[1]].sum(axis=2)     # (sets, splits)
-            v = np.minimum(a, b).ravel()
-            terms5 = v + np.log(pairs5[2])
-            r["log10_w5"] = logsum(terms5) / math.log(10)
-            # the failing configurations, in all translates, by hash
-            worse = np.where((a <= b)[:, :, None], pairs5[0], pairs5[1]).reshape(-1, 5)
+            # the failing configurations in all translates, each counted once; equally likely halves are exact ties,
+            # which the tolerance keeps from being decided by rounding (the first half then counts)
+            worse = np.where((a <= b + TIE)[:, :, None], pairs5[0], pairs5[1]).reshape(-1, 5)
             maps = np.vstack([np.arange(sector.ncols)[None, :], np.array(colmaps)])
-            hashes = [np.bitwise_xor.reduce(code[maps[:, worse[lo:lo + 4096]]], axis=2).ravel()
-                      for lo in range(0, len(worse), 4096)]
-            fail5 = np.unique(np.concatenate(hashes))
+            fail = np.unique(np.sort(maps[:, worse].reshape(-1, 5), axis=1), axis=0)
+            # keep those whose likeliest explanation is of the other class (module docstring)
+            allg = np.unique(np.sort(maps[:, sets[10]].reshape(-1, 10), axis=1), axis=0).tolist()
+            lab = {tuple(g): functools.reduce(lambda x, j: x ^ sector.l[j], g, 0) for g in allg}
+            within = {}
+            for g in lab:
+                for c in itertools.combinations(g, 5):
+                    within.setdefault(c, []).append(g)
+            prob = lambda s: logr[list(s)].sum()
+            kept = []
+            for a in map(tuple, fail.tolist()):
+                wrong = [tuple(sorted(set(g) - set(a))) for g in within[a]]
+                cls = lab[tuple(sorted(a + wrong[0]))]
+                own = [tuple(sorted(set(g) - set(wrong[0]))) for g in within[wrong[0]] if lab[g] == cls]
+                if max(prob(e) for e in wrong) >= max(prob(e) for e in own) - TIE:     # own includes a; ties fail
+                    kept.append(a)
+            r["n_w5_rescued_by_own_class"] = len(fail) - len(kept)
+            fail = np.array(kept, dtype=np.int64).reshape(-1, 5)
+            r["log10_w5"] = logsum(logr[fail].sum(axis=1)) / math.log(10)
+            r["n_w5"] = len(fail)
+            fail5 = np.unique(np.bitwise_xor.reduce(code[fail], axis=1))
+            # 6-sets holding m >= 2 failing configurations: their probability was counted m times
+            fset = set(map(tuple, fail.tolist()))
+            by4 = {}
+            for c in fset:
+                for k in range(5):
+                    by4.setdefault(c[:k] + c[k + 1:], []).append(c)
+            six6 = set()
+            for cs in by4.values():
+                for c1, c2 in itertools.combinations(cs, 2):
+                    six6.add(tuple(sorted(set(c1) | set(c2))))
+            terms = [math.log(sum((s[:k] + s[k + 1:]) in fset for k in range(6)) - 1) + logr[list(s)].sum()
+                     for s in six6]
+            over = logsum(terms)
+            r["log10_w5_overlap"] = over / math.log(10)
+            r["n_w5_overlap_sets"] = len(six6)
         else:
             r["log10_w5"] = -math.inf
         keep = np.ones(len(six), dtype=bool)
@@ -176,6 +220,8 @@ def analyse(spectrum, ps):
         r["n_w6_from_12"] = n
         total = logsum([x * math.log(10) for x in (r["log10_w5"], r["log10_w6_from_10_11"], r["log10_w6_from_12"])
                         if x != -math.inf])
+        if over != -math.inf:
+            total += math.log1p(-math.exp(over - total))
         r["log10_total"] = total / math.log(10)
         r["log10_total_per_cycle"] = (total - math.log(cycles)) / math.log(10)
         res["rates"][str(p)] = r

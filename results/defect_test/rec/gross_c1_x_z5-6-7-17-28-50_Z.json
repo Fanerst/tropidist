@@ -1,0 +1,66 @@
+{
+ "method": "ours_pipeline",
+ "version": null,
+ "config": {
+  "symmetry": 1,
+  "cover": 1,
+  "collapse": 1,
+  "lift": 1,
+  "window": 1,
+  "k_coll": 3,
+  "k_table": 2,
+  "kmax": 40,
+  "kmin": 1,
+  "table_gb": 0,
+  "dp": 2,
+  "dp_fast": 10,
+  "dp_head": -1,
+  "deepen": 1
+ },
+ "instance": "gross_c1_x_z5-6-7-17-28-50_Z",
+ "variant": "sector",
+ "rows": 264,
+ "cols": 822,
+ "obs": 12,
+ "threads": 2,
+ "time_limit": 1500.0,
+ "status": "exact",
+ "lower_bound": 4,
+ "upper_bound": 4,
+ "witness": [
+  603,
+  654,
+  687,
+  754
+ ],
+ "witness_ok": true,
+ "seconds": 0.455,
+ "trace": [
+  {
+   "t": 0.075,
+   "lb": 1
+  },
+  {
+   "t": 0.442,
+   "lb": 2
+  },
+  {
+   "t": 0.442,
+   "lb": 3
+  },
+  {
+   "t": 0.444,
+   "lb": 4
+  },
+  {
+   "t": 0.445,
+   "ub": 4
+  }
+ ],
+ "peak_rss_mb": 194.9,
+ "truth": null,
+ "truth_kind": "unknown",
+ "notes": "{\"dp\": {\"collapsed\": {\"columns\": 360, \"cut_rank\": 52, \"decision\": \"search\", \"estimate_seconds\": 0.116, \"fits\": false, \"peak_bits\": 52, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}, \"main\": {\"columns\": 822, \"cut_rank\": 99, \"decision\": \"search (the DP does not fit or is too slow)\", \"estimate_seconds\": 0.005, \"fits\": false, \"peak_bits\": 99, \"predicted_seconds\": null, \"queries\": 12, \"work\": null}}, \"kernel_threads\": 1, \"mode\": \"circuit collapsed/lift/window/sector pipeline\", \"sector_symmetries_used\": 0, \"stages\": {\"collapsed\": {\"cols\": 360, \"rows\": 66, \"runs\": [{\"K\": 1, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00039196014404296875, \"status\": \"exhausted\"}, {\"K\": 2, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.00048613548278808594, \"status\": \"exhausted\"}, {\"K\": 3, \"best\": null, \"nsol_recorded\": 0, \"seconds\": 0.0014281272888183594, \"status\": \"exhausted\"}, {\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 0.0007181167602539062, \"status\": \"found\"}]}, \"quick_lift_0\": {\"cols\": 10, \"rows\": 264, \"runs\": [{\"K\": 4, \"best\": 4, \"nsol_recorded\": 1, \"seconds\": 4.2438507080078125e-05, \"status\": \"found\"}]}}, \"table_budget_gib\": 1.0, \"threads_note\": \"kernel uses 1 threads; requested 2 (build ignores the request)\"}",
+ "value_only": false,
+ "agrees_with_truth": null
+}
