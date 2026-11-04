@@ -498,6 +498,14 @@ def test_instance_read_deadline():
     print("OK instance-read deadline preserves metadata dimensions", flush=True)
 
 
+def setup_module(module=None):
+    """Under pytest, the setup that main() does before the tests that need it."""
+    OUT.mkdir(parents=True, exist_ok=True)
+    CALLS.touch()
+    fixture_payload()
+    write_fake()
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     test_parsers()
