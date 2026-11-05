@@ -440,7 +440,7 @@ def fig_capability():
     main = {m["name"]: ("full" if (m["track"] == "code" or "sector" not in m["variants"]) else "sector") for m in metas}
 
     # ------------------------------------------------------------------ a: instances certified by each tool
-    panel(ax, 1.5, 118.6, "a", "Our hardware-scale suite: 74 codes and circuits")
+    panel(ax, 1.5, 118.6, "a", "Our benchmark suite: 74 codes and circuits")
     both = lambda name: [name, name + ", sparse L"]
     groups = [("this method", ["ours"]), ("dist-m4ri", DM4RI()),
               ("Gurobi", both("Gurobi")), ("SAT (CaDiCaL)", both("SAT")), ("RC2", both("RC2")),
@@ -779,8 +779,9 @@ def fig_audit():
     settled_rows = [k for k, r in rows.items() if r["verdict"] == "settled" and r["paper"] != "Modular hyperbolic codes"]
     used = []
 
-    # One row pitch in every panel. The left column holds a (22 rows) and d, Google's surface-code circuits (8 rows); the
-    # right column b (13 rows) and c, Google's color codes (15 rows), with the key under its axis, so the columns end together.
+    # One row pitch in every panel. The left column holds a (22 rows) and c, Google's surface-code circuits (8 rows); the
+    # right column b (13 rows) and d, Google's color codes (15 rows), with the key under its axis, so the columns end together.
+    # The letters run a, b along the top and c, d along the bottom, although d starts higher than c.
     SUB, SUBGAP = Column.SUB, Column.SUBGAP
     p, gap, KEY = 3.0, 0.9, 2.9
     h_left = 1.3 + (2 * SUB + SUBGAP) + 5 * gap + 22 * p + 3.8 + 1.0 + (2 * SUB + SUBGAP) + 8 * p
@@ -793,7 +794,7 @@ def fig_audit():
     print("columns: left %.1f, right %.1f mm; figure height %.1f mm" % (h_left, h_right, H))
 
     # ------------------------------------------------------------------ a: all values published too high
-    panel(ax, 1.5, y0, "a", "Published too high")
+    panel(ax, 1.5, y0, "a", "Published distance overestimates")
     L = Column(ax, 1.5, 54.0, 56.0, 87.0, 6, 38, 94.0)
     txt(ax, 100.5, y0 + 0.9, "published → certified", 5.2, MUTED, ha="right")
     L.start(y0 - 1.3)
@@ -842,10 +843,10 @@ def fig_audit():
     L.close()
     assert sorted(set(used)) == sorted(too_high_rows), set(too_high_rows) - set(used)
 
-    # ------------------------------------------------------------------ d: Google's surface-code circuits, under a
-    yd = L.y - 3.8
-    panel(ax, 1.5, yd, "d", "Google's modular hyperbolic codes: surface-code circuits")
-    L.start(yd - 1.0)
+    # ------------------------------------------------------------------ c: Google's surface-code circuits, under a
+    y_circ = L.y - 3.8
+    panel(ax, 1.5, y_circ, "c", "Google's modular hyperbolic codes: surface-code circuits")
+    L.start(y_circ - 1.0)
     L.sub("rebuilt circuits, NZ alternating", first=True)
     for lab, pub, ex, also in (("[[150,4,10]]", 8, 8, 9), ("[[200,6,10]]", 8, 8, 9), ("[[250,8,10]]", 8, 8, None), ("[[300,10,10]]", 8, 8, None)):
         L.row(p, lab, pub, pub, ex, ex, "bound", None, 10, also)
@@ -893,10 +894,10 @@ def fig_audit():
     C.close()
     assert sorted(done) == sorted(settled_rows), set(settled_rows) - set(done)
 
-    # ------------------------------------------------------------------ c: Google's color codes, under b
-    yc = C.y - 3.8
-    panel(ax, 103.0, yc, "c", "Google's modular hyperbolic codes: color codes")
-    C.start(yc - 1.0)
+    # ------------------------------------------------------------------ d: Google's color codes, under b
+    y_color = C.y - 3.8
+    panel(ax, 103.0, y_color, "d", "Google's modular hyperbolic codes: color codes")
+    C.start(y_color - 1.0)
     hyp = sorted([r for r in rows.values() if r["paper"] == "Modular hyperbolic codes"], key=lambda r: (float(r["cert_hi"]), float(r["pub_lo"])))
     assert len(hyp) == 15
     C.sub("code distance", first=True)
