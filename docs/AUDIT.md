@@ -46,7 +46,7 @@ cross-checks named in the notes). Fault models are the papers' own unless a note
 | mitten codes, structured | [[840,168,18]] code | ≤ 18 (sampled: at least 50M rounds of sQetch and 50k of a BP+OSD estimator) | **17** (d_X = 17, d_Z 17–18) | A | a checked X-type logical operator of weight 17, weight 16 excluded in both types. dist-m4ri's benchmark (October 2026) has d_X 15–17 |
 | Cornucopia codes, 2608.02773 | [[900,454,10]] circuit | ≤ 10 (BP-OSD) | **9** | R | matrices and gate orders equal to the authors' repository; same value in their own one-cycle, CNOT-only setting |
 | Cornucopia codes | [[1044,526,12]] circuit | ≤ 11 (BP-OSD) | **10** | R | |
-| Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | 13–14 | R | Z basis, 8 cycles; a weight-14 fault set, also in the authors' one-cycle setting |
+| Cornucopia codes | [[2304,1156,16]] circuit | ≤ 16 (BP-OSD) | **14** | R | Z basis, 8 cycles; weight 13 excluded in the time-collapsed problem (split over four servers, 2.4 days, `results/cornucopia/README.md`); a weight-14 fault set, also in the authors' one-cycle setting |
 | Cornucopia codes | [[2844,1426,18]] circuit | ≤ 18 (BP-OSD) | 12–16 (8 cycles), 12–17 (1 cycle) | R | |
 | a modular architecture on Cornucopia, 2610.19073 | [[2844,1426,18]] logical error rate | 2.6e-16 per qubit and cycle, from a fit with exponent d/2 | optimistic | – | consequence of the row above: the leading order is at most p^8, not p^9 |
 | routing codes, 2606.25330 | [[200,24,14]] circuit, weight-11 checks | ≤ 14 (BP-OSD) | **10** | R | rebuilt code has distance 14; the loss is in the circuit |

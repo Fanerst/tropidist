@@ -27,7 +27,7 @@ The method and the results are described in the paper *Certifying quantum code a
   limits (one core, 8 GB, eight hours) the method certifies 95, against 73 for its five exact methods together. Every
   value they certify agrees with ours.
 - **Scale.** The largest certified cases are a code distance of 24 for the modular hyperbolic code
-  [[31200,1954]], and memory circuits with up to 5×10^5 fault mechanisms.
+  [[31200,1954]], and memory circuits with up to 8×10^5 fault mechanisms.
 - **Audit of 26 recent papers.** In ten of them, published code or circuit distances are higher than the certified
   values, by at least eight in the worst case: [docs/AUDIT.md](docs/AUDIT.md), with every value in
   [docs/audit_items.csv](docs/audit_items.csv).
