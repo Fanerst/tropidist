@@ -142,9 +142,9 @@ Setup:
 
 ### Time (seconds, one thread)
 
-Sparse: the sweep at K = d − 1 for every observable, plus the one at K = d that stops at its first solution and returns the witness; the split probes are included. Search: every threshold from K = 1, and in brackets its last two (d − 1 and d). Dense DP: one untruncated sweep per observable. Bold: the fastest method.
+Sparse: the sweep at K = d − 1 for every observable, plus the one at K = d that stops at its first solution and returns the witness; the split probes are included. Search: every threshold from K = 1, and in brackets its last two (d − 1 and d). Dense DP: one untruncated sweep per observable. Bold: the fastest method. Width: the rows of the trellis active at its widest cut, counting the reduced logical row; the dense table there has 2^width entries. It exceeds the cut rank by one on every color code except d25 and on the concatenated Steane and hypercube codes, where the reduced logical row is active at the widest cut without adding to the rank, and equals the cut rank on the bivariate bicycle codes and the circuits.
 
-| instance | regime | columns | cut rank | d | dense DP | search | MITM sched | MITM | MITM+h | fwd+h | fwd |
+| instance | regime | columns | width | d | dense DP | search | MITM sched | MITM | MITM+h | fwd+h | fwd |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | color d7 | narrow | 37 | 8 | 7 | **0.001** | 0.003 (0.000) | 0.008 | 0.008 | 0.01 | 0.008 | 0.004 |
 | color d9 | narrow | 61 | 9 | 9 | **0.001** | 0.005 (0.000) | 0.01 | 0.01 | 0.02 | 0.01 | 0.006 |

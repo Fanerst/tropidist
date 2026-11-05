@@ -15,6 +15,10 @@ STREAMS = ("narrow", "lowwidth", "bb", "circuits", "d11", "schedule", "surface11
 # records of scripts/sparse_dp_query.py for the superdense d11 circuit
 D11 = (("d11_K10_a5", "K = 10, a = 5"), ("d11_K10_schedule", "K = 10, schedule"), ("d11_K11_a6", "K = 11, a = 6"),
        ("d11_K11_schedule", "K = 11, schedule + 1"))
+WIDTH_NOTE = ('Width: the rows of the trellis active at its widest cut, counting the reduced logical row; the dense '
+              'table there has 2^width entries. It exceeds the cut rank by one on every color code except d25 and on '
+              'the concatenated Steane and hypercube codes, where the reduced logical row is active at the widest cut '
+              'without adding to the rank, and equals the cut rank on the bivariate bicycle codes and the circuits.')
 REGIME = {"color": "narrow", "lowwidth": "narrow", "bb": "expanding", "wjh": "local circuit"}
 SPARSE = ("sparse:mitm:c:0:schedule", "sparse:mitm:c:0:auto", "sparse:mitm:c:1:auto", "sparse:forward:c:1",
           "sparse:forward:c:0")
@@ -194,8 +198,8 @@ def tables(res, d11):
     out.append("Sparse: the sweep at K = d − 1 for every observable, plus the one at K = d that stops at its first "
                "solution and returns the witness; the split probes are included. Search: every threshold from "
                "K = 1, and in brackets its last two (d − 1 and d). Dense DP: one untruncated sweep per observable. "
-               "Bold: the fastest method.\n")
-    out.append("| instance | regime | columns | cut rank | d | dense DP | search | " +
+               "Bold: the fastest method. " + WIDTH_NOTE + "\n")
+    out.append("| instance | regime | columns | width | d | dense DP | search | " +
                " | ".join(SHORT[c] for c in SPARSE) + " |")
     out.append("|---|---|---|---|---|---|---|" + "---|" * len(SPARSE))
     for t in toks:

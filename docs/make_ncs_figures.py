@@ -839,7 +839,7 @@ def fig_audit():
     too_high("Nearest-neighbor planar codes", "[[259,2]] code, X distance", "Nearest-neighbor planar codes", label="[[259,2]], X distance", tick=False)
     too_high("Nearest-neighbor planar codes", "[[537,14]] code, X distance", label="[[537,14]], X distance", tick=False)
     too_high("Multivariate multicycle codes", "[[324,12]] code", "Multivariate multicycle code", tick=False)
-    too_high(MR, "[[840,168,18]] code", "Mitten code, repository", tick=False)
+    too_high(MR, "[[840,168,18]] code", "Mitten code, repository", label="[[840,168]]", tick=False)
     L.close()
     assert sorted(set(used)) == sorted(too_high_rows), set(too_high_rows) - set(used)
 
@@ -873,8 +873,12 @@ def fig_audit():
     def wjh(label, key, lo, hi, name=None):
         C.row(p, label, bk[key], bk[key], lo, hi, "best_known", name)
 
-    def tanner(label, key, x3, name=None):
-        wjh(label if x3[1] else label + ", Z distance", key, x3[0], x3[0], name)
+    def tanner(label, key, z, x3, name=None):
+        # The benchmark's Tanner values are Z distances, so the row compares Z distances; a tick marks the code distance
+        # where the X distance is lower ([[396,4]]: Z distance 27, X distance 26).
+        code_d, both = x3
+        C.row(p, label if both else label + ", Z distance", bk[key], bk[key], z, z, "best_known", name,
+              code_d if both and code_d < z else None)
 
     C.sub("circuit distance", first=True)
     settled("Distance-finding benchmark", "superdense circuit, d = 11", "Superdense color code", "d = 11", 11)
@@ -882,15 +886,15 @@ def fig_audit():
     settled("Left-right circuits", "gross code, three-color circuit", "Three-color gross circuit", "[[144,12,12]]", 12)
     settled("Vine codes", "four patches of distance 10", "Vine planar-grid code", "four patches", 10)
     C.sub("code distance")
-    tanner("[[288,2]]", "288_2_24", x288, "Quantum Tanner codes")
-    tanner("[[324,4]]", "324_4_25", x324)
-    tanner("[[360,4]]", "360_4_24", x360)
-    tanner("[[396,4]]", "396_4_26", x396)
+    tanner("[[288,2]]", "288_2_24", q288[0], x288, "Quantum Tanner codes")
+    tanner("[[324,4]]", "324_4_25", q324[0], x324)
+    tanner("[[360,4]]", "360_4_24", q360[0], x360)
+    tanner("[[396,4]]", "396_4_26", q396[0], x396)
     wjh("[[648,4]]", "[[648,4,32]]", b648[0], b648[1], "Bivariate bicycle codes")
     wjh("[[756,16]]", "[[756,16,34]]", b756[0], b756[1])
     settled("Weight-8 bivariate bicycle codes", "[[144,10]] code", "Weight-8 bivariate bicycle", "[[144,10]]")
     settled("Weight-8 bivariate bicycle codes", "[[144,6]] code", None, "[[144,6]]")
-    settled(MR, "[[300,60,9]] code", "Mitten code, repository", "[[300,60,9]]")
+    settled(MR, "[[300,60,9]] code", "Mitten code, repository", "[[300,60]]")
     C.close()
     assert sorted(done) == sorted(settled_rows), set(settled_rows) - set(done)
 
