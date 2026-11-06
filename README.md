@@ -15,8 +15,8 @@ For circuits, certified relaxations first shrink the problem: an exact reduction
 a collapse of all rounds into one that bounds the distance from below, and lifting of the collapsed solutions back to
 the circuit.
 
-The method and the results are described in the paper *Certifying quantum code and circuit distances at scale*
-(2026; arXiv link to follow).
+The method and the results are described in the paper *Certifying quantum code and circuit distances at scale* by
+Bin Cheng, Naixu Guo and Feng Pan, [arXiv:2611.08247](https://arxiv.org/abs/2611.08247) (2026).
 
 ## Results in brief
 
@@ -146,5 +146,16 @@ kernels, and run logs.
 ## License and citation
 
 MIT; see [LICENSE](LICENSE). The third-party files in `circuits/` are under the Apache License 2.0
-([circuits/NOTICE.md](circuits/NOTICE.md)). If you use this software, please cite the paper above; a BibTeX entry will
-follow with the arXiv identifier.
+([circuits/NOTICE.md](circuits/NOTICE.md)). If you use this software, please cite the paper:
+
+```bibtex
+@misc{cheng2026certifying,
+  title         = {Certifying quantum code and circuit distances at scale},
+  author        = {Cheng, Bin and Guo, Naixu and Pan, Feng},
+  year          = {2026},
+  eprint        = {2611.08247},
+  archivePrefix = {arXiv},
+  primaryClass  = {quant-ph},
+  url           = {https://arxiv.org/abs/2611.08247}
+}
+```
